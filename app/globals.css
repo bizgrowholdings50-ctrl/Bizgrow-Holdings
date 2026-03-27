@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff; /* Forced White */
+  --foreground: #111827;
+}
+
+/* Is poore block ko hata dein */
+/* @media (prefers-color-scheme: dark) { ... } */
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  /* Font ko geist sans par set karein */
+  font-family: var(--font-geist-sans), ui-sans-serif, system-ui;
+}
+
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+  touch-action: pan-y; 
+  -webkit-overflow-scrolling: touch;
+}
+
+/* global.css ya aapki module file mein */
+
+.blog-content-flow {
+  word-break: break-word;
+}
+
+/* Specificity barhane ke liye parent class ko repeat karein */
+.blog-content-flow h1 {
+  font-size: 3.5rem !important;
+  font-weight: 900 !important;
+  font-style: italic !important;
+  color: #12066a !important;
+  line-height: 1.1 !important;
+  margin-bottom: 2.5rem !important;
+}
+
+.blog-content-flow h2 {
+  font-size: 1.8rem !important; 
+  line-height: 1.4 !important;
+  border-left: 5px solid #997819 !important;
+  padding-left: 1.5rem !important;
+  margin-top: 3rem !important;
+  margin-bottom: 1.5rem !important;
+  color: #12066a !important;
+  font-weight: 800 !important;
+  text-transform: none !important;
+}
+
+.blog-content-flow p {
+  font-size: 1.15rem !important;
+  line-height: 1.8 !important;
+  margin-bottom: 2rem !important;
+  color: #374151 !important;
+}
+
+/* Bullets styling fix */
+.blog-content-flow ul li {
+  position: relative !important;
+  padding-left: 2rem !important;
+  list-style: none !important; /* Default dots hatane ke liye */
+  margin-bottom: 1.2rem !important;
+}
+
+.blog-content-flow ul li::before {
+  content: "•" !important;
+  color: #997819 !important;
+  font-size: 2rem !important;
+  position: absolute !important;
+  left: 0 !important;
+  top: -13px !important;
+}
