@@ -1,73 +1,108 @@
 "use client";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useTransition, useState } from "react";
+import { useRouter, useParams } from "next/navigation";
+import { useTransition, useState, useRef, useEffect } from "react";
 
 export default function FilterBar({ categories }) {
   const router = useRouter();
-  const searchParams = useSearchParams();
+  const params = useParams();
   const [isPending, startTransition] = useTransition();
-  const [clickedId, setClickedId] = useState(null); // ID track karein ge specific effect k liye
-  
-  const activeCatSlug = searchParams.get("category");
+  const [clickedId, setClickedId] = useState(null);
+  const scrollRef = useRef(null);
+
+  const slugArray = params?.slug || [];
+  const activeCatSlug = slugArray[0] === "category" ? slugArray[1] : null;
+
+  // Active category ko focus mein lane ke liye
+  useEffect(() => {
+    if (activeCatSlug && scrollRef.current) {
+      const activeBtn = scrollRef.current.querySelector(".active-cat");
+      if (activeBtn) {
+        activeBtn.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "center",
+        });
+      }
+    }
+  }, [activeCatSlug]);
 
   const handleFilter = (slug, id) => {
-    setClickedId(id); // Set specific ID for animation
+    if (isPending) return;
+    setClickedId(id);
     startTransition(() => {
-      const url = slug ? `/blogs?category=${slug}` : "/blogs";
-      router.push(url);
+      const url = slug ? `/blogs/category/${slug}/` : "/blogs/";
+      router.push(url, { scroll: false });
     });
   };
 
   return (
-    <div className="flex flex-wrap justify-center gap-3 mb-12">
-      {/* --- ALL BUTTON --- */}
-      <button
-        onClick={() => handleFilter(null, 'all')}
-        disabled={isPending}
-        className={`px-6 py-2 rounded-full text-[11px] font-black uppercase border-2 transition-all duration-300 relative overflow-hidden
-          ${!activeCatSlug ? 'bg-[#12066a] text-white border-[#12066a] shadow-lg scale-105' : 'bg-white border-gray-200 text-black hover:border-[#997819]'}
-          ${isPending && clickedId === 'all' ? "scale-110 ring-4 ring-[#997819]/20" : "active:scale-90"}
-        `}
+    <div className="relative w-full overflow-hidden">
+      {/* 🌫️ Left Side Gradient Fade (Only Mobile) */}
+      <div className="md:hidden absolute left-0 top-0 bottom-0 w-10 bg-gradient-to-r from-[#FDFCF9] to-transparent z-10 pointer-events-none" />
+
+      {/* 🚀 Scrollable Container with "Peeking" Padding */}
+      <div 
+        ref={scrollRef}
+        className="flex overflow-x-auto md:flex-wrap md:justify-center gap-3 px-6 md:px-0 pb-5 no-scrollbar items-center scroll-smooth"
       >
-        {isPending && clickedId === 'all' && (
-          <span className="absolute inset-0 bg-[#997819] animate-pulse opacity-20"></span>
-        )}
-        All
-      </button>
+        {/* ALL Button */}
+        <button
+          onClick={() => handleFilter(null, 'all')}
+          disabled={isPending}
+          className={`flex-shrink-0 px-6 py-2.5 rounded-full text-[10px] md:text-[11px] font-black uppercase border-2 transition-all 
+            ${!activeCatSlug 
+              ? 'active-cat bg-[#12066a] text-white border-[#12066a] shadow-md' 
+              : 'bg-white border-gray-200 text-black active:scale-95'}`}
+        >
+          All
+        </button>
 
-      {/* --- CATEGORY BUTTONS --- */}
-      {categories.map((cat) => {
-        const isThisLoading = isPending && clickedId === cat.id;
-        const isActive = activeCatSlug === cat.slug;
+        {/* Categories */}
+        {categories.map((cat) => {
+          const isActive = activeCatSlug === cat.slug;
+          const isThisLoading = isPending && clickedId === cat.id;
 
-        return (
-          <button
-            key={cat.id}
-            onClick={() => handleFilter(cat.slug, cat.id)}
-            disabled={isPending}
-            className={`px-6 py-2 rounded-full text-[11px] font-black uppercase border-2 transition-all duration-300 relative flex items-center justify-center
-              ${isActive ? 'bg-[#12066a] text-white border-[#12066a] shadow-md' : 'bg-white border-gray-200 text-black hover:border-[#997819] hover:text-[#12066a]'}
-              ${isThisLoading ? "scale-110 border-[#997819] ring-4 ring-[#997819]/30 z-10" : "active:scale-95"}
-            `}
-          >
-            {/* Attention Grabber: Pulse Ring Effect */}
-            {isThisLoading && (
-              <span className="absolute inset-0 rounded-full border-2 border-[#997819]  opacity-75"></span>
-            )}
+          return (
+            <button
+              key={cat.id}
+              onClick={() => handleFilter(cat.slug, cat.id)}
+              disabled={isPending}
+              className={`flex-shrink-0 px-6 py-2.5 rounded-full text-[10px] md:text-[11px] font-black uppercase border-2 transition-all relative
+                ${isActive 
+                  ? 'active-cat bg-[#12066a] text-white border-[#12066a] shadow-md' 
+                  : 'bg-white border-gray-200 text-black hover:border-[#12066a]/30 active:scale-95'}`}
+            >
+              <span className={isThisLoading ? "opacity-0" : "opacity-100"}>
+                <span dangerouslySetInnerHTML={{ __html: cat.name }} />
+              </span>
+              {isThisLoading && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="w-4 h-4 border-2 border-[#997819] border-t-transparent rounded-full animate-spin"></div>
+                </div>
+              )}
+            </button>
+          );
+        })}
+      </div>
 
-            <span className={isThisLoading ? "opacity-60" : "opacity-100"}>
-              <span dangerouslySetInnerHTML={{ __html: cat.name }} />
-            </span>
+      {/* 🌫️ Right Side Gradient Fade (Only Mobile) */}
+      {/* Is fade ki wajah se aakhri button "cut-off" nazar aayega jo scroll ka signal hai */}
+      <div className="md:hidden absolute right-0 top-0 bottom-0 w-14 bg-gradient-to-l from-[#FDFCF9] via-[#FDFCF9]/70 to-transparent z-10 pointer-events-none" />
 
-            {/* Spinner Overlay */}
-            {isThisLoading && (
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-4 h-4 border-2 border-[#997819] border-t-transparent rounded-full animate-spin"></div>
-              </div>
-            )}
-          </button>
-        );
-      })}
+      {/* Custom Scrollbar Styling (Minimalist) */}
+      <style jsx>{`
+        .no-scrollbar::-webkit-scrollbar {
+          height: 2px;
+        }
+        .no-scrollbar::-webkit-scrollbar-thumb {
+          background-color: rgba(153, 120, 25, 0.2);
+          border-radius: 10px;
+        }
+        .no-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+      `}</style>
     </div>
   );
 }
