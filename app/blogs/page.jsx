@@ -2,19 +2,26 @@ import Link from "next/link";
 import Image from "next/image";
 import FilterBar from "@/components/FilterBar";
 
+// 1. Optimized: Sirf zaroori fields mangwana taake response fast ho
+const WP_FIELDS = "_fields=id,slug,title,yoast_head_json";
+
 async function getCategoryIdBySlug(slug) {
   if (!slug) return null;
   try {
-    const res = await fetch(`https://bizgrow-holdings.com/wp-json/wp/v2/categories?slug=${slug}`, { next: { revalidate: 3600 } });
+    const res = await fetch(
+      `https://bizgrow-holdings.com/wp-json/wp/v2/categories?slug=${slug}&${WP_FIELDS}`,
+      { next: { revalidate: 3600 } }
+    );
     const categories = await res.json();
     return categories.length > 0 ? categories[0].id : null;
   } catch { return null; }
 }
 
 async function getPosts(page = 1, categoryId = null) {
-  // Agar category select hai to 100 posts, warna pagination k liye 9 posts
+  // Performance Tip: 100 posts load karna browser ko slow karta hai. 
+  // Isay 12 ya 15 par rakhna behtar hai, lekin maine aapka logic (100 if category) barkarar rakha hai.
   const perPage = categoryId ? 100 : 9; 
-  let url = `https://bizgrow-holdings.com/wp-json/wp/v2/posts?_embed&per_page=${perPage}&page=${page}`;
+  let url = `https://bizgrow-holdings.com/wp-json/wp/v2/posts?_embed&per_page=${perPage}&page=${page}&${WP_FIELDS}`;
   
   if (categoryId) url += `&categories=${categoryId}`;
   
@@ -28,7 +35,8 @@ async function getPosts(page = 1, categoryId = null) {
 
 async function getCategories() {
   try {
-    const res = await fetch("https://bizgrow-holdings.com/wp-json/wp/v2/categories?per_page=30");
+    // Categories mein bhi sirf id, name aur slug mangwayein
+    const res = await fetch("https://bizgrow-holdings.com/wp-json/wp/v2/categories?per_page=30&_fields=id,name,slug", { next: { revalidate: 3600 } });
     return await res.json();
   } catch { return []; }
 }
@@ -38,9 +46,16 @@ export default async function BlogPage({ searchParams }) {
   const catSlug = sParams?.category || null;
   const currentPage = parseInt(sParams?.page) || 1;
   
+  // Pehle Category ID nikaalni hogi kyunki Posts is par depend karti hain
   const activeCatId = await getCategoryIdBySlug(catSlug);
-  const { posts, totalPages } = await getPosts(currentPage, activeCatId);
-  const categories = await getCategories();
+
+  // 🚀 OPTIMIZATION: Posts aur Categories ab PARALLEL fetch hongi
+  const [postsData, categories] = await Promise.all([
+    getPosts(currentPage, activeCatId),
+    getCategories()
+  ]);
+
+  const { posts, totalPages } = postsData;
 
   return (
     <section className="w-full bg-[#FDFCF9]">
@@ -57,7 +72,13 @@ export default async function BlogPage({ searchParams }) {
           {posts.map((post) => (
             <article key={post.id} className="bg-white rounded-2xl shadow-sm border border-[#997819] flex flex-col overflow-hidden hover:-translate-y-2 hover:shadow-xl transition-all duration-300">
               <div className="relative h-56 w-full overflow-hidden">
-                <Image src={post.yoast_head_json?.og_image?.[0]?.url || "/placeholder.jpg"} alt={post.title.rendered} unoptimized fill className="object-cover transition-transform duration-500 hover:scale-110" />
+                <Image 
+                  src={post.yoast_head_json?.og_image?.[0]?.url || "/placeholder.jpg"} 
+                  alt={post.title.rendered} 
+                  unoptimized // Filhaal unoptimized rakha hai jaisa aapka pehle tha
+                  fill 
+                  className="object-cover transition-transform duration-500 hover:scale-110" 
+                />
               </div>
               <div className="p-8 flex flex-col flex-grow">
                 <h2 className="text-xl font-extrabold text-[#12066a] mb-4" dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
@@ -67,7 +88,6 @@ export default async function BlogPage({ searchParams }) {
           ))}
         </div>
 
-        {/* Pagination sirf tab dikhay jab "All" active ho (yaani koi category slug na ho) */}
         {!catSlug && totalPages > 1 && (
           <nav className="flex justify-center items-center gap-4 mt-16 pt-10 border-t border-gray-100">
             <div className="flex gap-2">
