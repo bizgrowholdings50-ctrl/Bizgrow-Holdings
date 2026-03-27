@@ -7,7 +7,6 @@ const HorizontalProcess = () => {
   const targetRef = useRef(null);
   const [isVertical, setIsVertical] = useState(false);
 
-  // Tablet (1024px) aur mobile dono ke liye vertical layout activate karega
   useEffect(() => {
     const handleResize = () => setIsVertical(window.innerWidth < 1024);
     handleResize();
@@ -21,12 +20,12 @@ const HorizontalProcess = () => {
   });
 
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 70,
+    stiffness: 70, // Aapka original stiffness
     damping: 30,
     restDelta: 0.001,
   });
 
-  // Desktop horizontal movement logic
+  // 🚀 Aapka Original Step-by-Step Flow
   const x = useTransform(
     smoothProgress,
     [0, 0.05, 0.2, 0.4, 0.55, 0.75, 0.85, 1],
@@ -34,58 +33,26 @@ const HorizontalProcess = () => {
   );
 
   const sections = [
-    {
-      id: "Support",
-      title: "SIA ACS",
-   
-      img: "sia-home.jpg",
-      altText: "BizGrow Digital Planning strategy process", // <-- Added this
-      description:
-        "Achieve and maintain Approved Contractor Scheme status with expert guidance.",
-    },
-    {
-      id: "Certification",
-      title: "ISO",
-      
-      img: "/iso-home.jpg",
-      altText: "BizGrow Digital marketing digital process", // <-- Added this
-      description:
-        "Streamline your business with ISO 9001, 14001, and 45001 certifications.",
-    },
-    {
-      id: "Consultancy",
-      title: "Business",
-    
-      img: "/consultancy-home.jpg",
-      altText: "BizGrow Digital creative design process", // <-- Added this
-      description:
-        "Strategic planning to help your company scale and improve efficiency.",
-    },
-    {
-      id: "Development",
-      title: "Training ",
-     
-      img: "/business.jpg",
-      altText: "BizGrow Digital web development process", // <-- Added this
-      description:
-        "Equipping your team with professional, industry-approved training for lasting performance.",
-    },
+    { id: "01", tag: "Support", title: "SIA ACS", img: "/sia-home.jpg", description: "Achieve and maintain Approved Contractor Scheme status with expert guidance." },
+    { id: "02", tag: "Certification", title: "ISO", img: "/iso-home.jpg", description: "Streamline your business with ISO 9001, 14001, and 45001 certifications." },
+    { id: "03", tag: "Consultancy", title: "Business", img: "/consultancy-home.jpg", description: "Strategic planning to help your company scale and improve efficiency." },
+    { id: "04", tag: "Development", title: "Training", img: "/business.jpg", description: "Equipping your team with professional, industry-approved training for lasting performance." },
   ];
 
+  // Height logic to ensure smooth pinning
   const sectionHeightVh = isVertical ? "auto" : (sections.length + 1) * 100;
 
   return (
     <section
       ref={targetRef}
       style={{ height: isVertical ? "auto" : `${sectionHeightVh}vh` }}
-      className="relative bg-white  overflow-visible py-16 lg:py-0"
+      className="relative bg-white overflow-visible py-16 lg:py-0"
     >
-      {/* Sticky sirf Laptop (lg: 1024px+) screens par chalega */}
       <div
         className={`${
           isVertical
             ? "relative"
-            : "sticky top-0 h-screen w-full flex items-center  overflow-hidden"
+            : "sticky top-10 h-screen w-full flex items-center overflow-hidden"
         }`}
       >
         {/* --- MAIN HEADING --- */}
@@ -98,13 +65,12 @@ const HorizontalProcess = () => {
         >
           <div className="text-center px-4">
             <FadeIn direction="up">
-              <h3 className="text-[#997819] font-extrabold tracking-[0.2em] text-xs md:text-lg mb-2">
+              <h3 className="text-[#997819] font-extrabold tracking-[0.2em] text-xs md:text-lg mb-2 uppercase">
                 Comprehensive Solutions
               </h3>
             </FadeIn>
-
             <FadeIn direction="up" delay={0.2}>
-              <h2 className="text-3xl md:text-5xl lg:text-5xl font-black text-[#12066a] uppercase">
+              <h2 className="text-3xl md:text-5xl lg:text-5xl font-black text-[#12066a] uppercase italic">
                 Tailored consultancy services
               </h2>
             </FadeIn>
@@ -124,46 +90,40 @@ const HorizontalProcess = () => {
           {sections.map((item) => (
             <div
               key={item.id}
-              className={`relative flex-shrink-0 mt-20 flex flex-col lg:flex-row items-center justify-between 
+              className={`relative flex-shrink-0 flex flex-col lg:flex-row items-center justify-between 
               ${
                 isVertical
                   ? "w-full max-w-4xl mx-auto"
-                  : "h-screen w-screen p-10 lg:pt-40"
+                  : "h-screen w-screen px-20 lg:pt-32"
               }`}
             >
               {/* Text Side */}
               <div className="z-10 w-full lg:w-1/2 mb-10 lg:mb-0 text-center lg:text-left">
                 <FadeIn direction={isVertical ? "up" : "right"}>
-                  <span
-                    className="text-[#997819] font-bold tracking-[0.3em] uppercase
-                   text-sm md:text-base"
-                  >
-                    {item.id} {item.tag}
+                  <span className="text-[#997819] font-bold tracking-[0.3em] uppercase text-sm">
+                    {item.tag}
                   </span>
                 </FadeIn>
                 <FadeIn direction={isVertical ? "up" : "right"} delay={0.2}>
-                  {/* Font sizes optimized for all screens */}
-                  <h3 className="text-5xl sm:text-7xl lg:text-[6.5rem]  font-black  text-[#12066a] leading-none mt-4">
+                  <h3 className="text-5xl sm:text-7xl lg:text-[7rem] font-black text-[#12066a] leading-none mt-4 uppercase italic">
                     {item.title}
                   </h3>
                 </FadeIn>
-                {/* Naya Paragraph Section yahan aayega */}
                 <FadeIn direction={isVertical ? "up" : "right"} delay={0.4}>
-                  <p className="mt-6 text-lg md:text-lg  text-black max-w-md mx-auto lg:mx-0 leading-relaxed">
+                  <p className="mt-6 text-lg text-zinc-600 max-w-md mx-auto lg:mx-0 leading-relaxed font-medium">
                     {item.description}
                   </p>
                 </FadeIn>
               </div>
 
               {/* Image Side */}
-              <div className="w-full lg:w-1/2 h-[35vh] sm:h-[45vh] lg:h-[60vh]  relative group">
+              <div className="w-full lg:w-[45%] h-[40vh] lg:h-[55vh] relative">
                 <img
                   src={item.img}
-                  alt={item.altText}
-                  className="w-full h-full object-cover rounded-[2rem] shadow-2xl relative z-10  transition-all duration-500"
+                  alt={item.title}
+                  className="w-full h-full object-cover rounded-[3rem] shadow-2xl relative z-10 border-2 border-zinc-50"
                 />
-                {/* Background Shadow Number */}
-                <div className="absolute -bottom-6 -left-4 sm:-bottom-10 sm:-left-10 text-[6rem] sm:text-[9rem] lg:text-[11rem] font-black text-slate-200 dark:text-white/5 z-0 opacity-50">
+                <div className="absolute -bottom-10 -left-10 text-[10rem] lg:text-[14rem] font-black text-[#12066a]/5 z-0 select-none italic">
                   {item.id}
                 </div>
               </div>

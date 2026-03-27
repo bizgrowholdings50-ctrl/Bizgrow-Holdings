@@ -48,7 +48,7 @@ export default function HeroCarousel() {
   }, [currentSlide]);
 
   return (
-    <div className="relative w-full h-[600px] md:h-[700px] lg:h-[800px] overflow-hidden">
+    <div className="relative w-full h-screen  overflow-hidden">
       {slides.map((slide, index) => (
         <div
           key={index}

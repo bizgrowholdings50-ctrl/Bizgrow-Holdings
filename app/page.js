@@ -1,4 +1,3 @@
-// app/page.jsx
 import HeroCarousel from "@components/HeroCarousel";
 import FadeIn from "@components/MotionWrapper";
 import Image from "next/image";
@@ -8,11 +7,8 @@ import {
   Users,
   BarChart3,
   CheckCircle2,
-  Quote,
-  Star,
   Trophy,
   Globe2,
-  Briefcase,
   PhoneCall,
   ArrowRight,
 } from "lucide-react";
@@ -46,62 +42,26 @@ const reviews = [
   {
     name: "John Smith",
     role: "Director, Shield Security",
-    text: (
-      <>
-        <b>
-          "BizGrow Holdings made our ISO 9001 certification process
-          straightforward and structured.”
-        </b>
-        <br />
-        We were unsure where to start, but their team guided us step by step
-        from gap analysis to final audit. Their documentation support and
-        internal audit preparation were exceptional. We passed our certification
-        with confidence and now operate with far better process control and
-        accountability. "
-      </>
-    ),
+    text: "BizGrow Holdings made our ISO 9001 certification process straightforward and structured. Their team guided us step by step from gap analysis to final audit.",
   },
   {
     name: "Sarah Ahmed",
     role: "Operations Manager",
-    text: (
-      <>
-        <b>
-          "Their compliance expertise helped us secure contracts we were
-          previously losing”
-        </b>
-        <br />
-        As a UK security company, tender requirements can be demanding. BizGrow
-        helped us strengthen our policies, workforce verification systems, and
-        audit documentation. The difference was immediate. We now approach bids
-        fully prepared and compliant."
-      </>
-    ),
+    text: "Their compliance expertise helped us secure contracts we were previously losing. BizGrow helped us strengthen our policies and audit documentation.",
   },
   {
     name: "David Warner",
     role: "CEO, TechLogix",
-    text: (
-      <>
-        <b>"Professional, practical, and results-driven consultancy.”</b>
-        <br />
-        BizGrow Holdings didn’t just give us templates; they built a system that
-        actually works in our daily operations. From environmental compliance to
-        health & safety alignment, the process was structured and clear. Our
-        team feels more confident and audit-ready than ever before."
-      </>
-    ),
+    text: "Professional, practical, and results-driven consultancy. BizGrow Holdings built a system that actually works in our daily operations.",
   },
 ];
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen">
-      {/* 1 Hero Section  */}
-      {/* <section className="bg-white">
-        <HeroCarousel />
-      </section> */}
-      <HeroSection />
+    <main className="min-h-screen bg-white selection:bg-[#997819] selection:text-white">
+      {/* 1. HERO SECTION */}
+      <HeroCarousel />
+
       {/* 2 About Us  */}
       <section className="relative mt-10 z-30 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
@@ -157,7 +117,7 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      {/* 4. THE VISION - Image + Text Content */}
+
       <section className="py-14 px-6">
         {/* Yahan changes kiye hain: flex-col-reverse se mobile par content upar aur image niche ho jayegi */}
         <div className="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row gap-16 items-center">
@@ -220,10 +180,10 @@ export default function HomePage() {
           </FadeIn>
         </div>
       </section>
-      {/* 3 Our Services  */}
+
+      {/* 4. HORIZONTAL SERVICES (GSAP PINNED SECTION) */}
       <HorizontalServices />
 
-      {/* 5 How we work */}
       <section className="py-24 min-h-screen lg:h-auto bg-[#12066a] relative overflow-hidden">
         {/* Decorative Background Text */}
         <Image
@@ -272,50 +232,19 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      {/* 6 Testimonials  */}
-      <section className="py-14 bg-white px-6">
+
+      {/* 6. TESTIMONIALS */}
+      <section className="py-32 bg-zinc-50 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="flex flex-col items-center text-center mb-20">
-            <FadeIn direction="none">
-              <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs">
-                Success Stories
-              </span>
-              <h2 className="text-[32px] md:text-6xl font-black text-[#12066a] mt-4 leading-tight">
-                Trusted by Leading <br />
-                <span className="text-[#997819]">Organisations</span>
-              </h2>
-              {/* Stars ki jagah ek elegant small bar */}
-              <div className="mt-6 w-20 h-1.5 bg-[#997819] mx-auto rounded-full" />
-            </FadeIn>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
-            {" "}
-            {/* 🔹 items-stretch added */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {reviews.map((rev, i) => (
-              <FadeIn
-                key={i}
-                delay={i * 0.2}
-                direction="up"
-                className="h-full transition-transform hover:scale-105 duration-300"
-              >
-                {" "}
-                {/* 🔹 className h-full passes to wrapper */}
-                <div className="p-10 rounded-[3rem] bg-zinc-50 border border-[#12066a] relative hover:shadow-xl transition-all duration-500 group h-full flex flex-col justify-between">
-                  {/* 🔹 h-full and flex-col added to the card */}
-
-                  <div className="relative">
-                    <Quote
-                      className="absolute -top-2 -right-2 text-zinc-200 group-hover:text-[#997819]/20 transition-colors"
-                      size={40}
-                    />
-                    <p className="text-black font-medium leading-relaxed mb-10 italic">
-                      "{rev.text}"
-                    </p>
-                  </div>
-
+              <FadeIn key={i} delay={i * 0.2}>
+                <div className="p-12 rounded-[3.5rem] bg-white shadow-xl border border-zinc-100 flex flex-col justify-between h-full hover:border-[#997819] transition-all group">
+                  <p className="text-[#12066a] font-medium leading-relaxed italic mb-10 text-lg">
+                    "{rev.text}"
+                  </p>
                   <div>
-                    <h4 className="font-black text-[#12066a] text-lg">
+                    <h4 className="font-black text-[#12066a] text-xl uppercase italic">
                       {rev.name}
                     </h4>
                     <p className="text-[#997819] text-xs font-bold uppercase tracking-widest mt-1">
@@ -331,57 +260,55 @@ export default function HomePage() {
 
       {/* 7 CTA Section with Background Parallax & Watermark */}
       <section className="py-20 px-6 bg-white overflow-hidden">
-        
-          <div className="max-w-7xl mx-auto bg-[#12066a] rounded-[3rem] p-7 md:p-20 relative overflow-hidden shadow-2xl group">
-            {/* 🖼️ 1. Parallax Background Layer (Added) */}
-            <div
-              className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat bg-fixed opacity-20 transition-transform duration-1000"
-              style={{
-                backgroundImage: "url('/home-cta.jpg')", // Replace with your image path
-                backgroundAttachment: "fixed", // 👈 Magic for parallax
-              }}
-            />
+        <div className="max-w-7xl mx-auto bg-[#12066a] rounded-[3rem] p-7 md:p-20 relative overflow-hidden shadow-2xl group">
+          {/* 🖼️ 1. Parallax Background Layer (Added) */}
+          <div
+            className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat bg-fixed opacity-20 transition-transform duration-1000"
+            style={{
+              backgroundImage: "url('/home-cta.jpg')", // Replace with your image path
+              backgroundAttachment: "fixed", // 👈 Magic for parallax
+            }}
+          />
 
-            {/* 🔹 2. Background Large Text (Watermark) - Kept Same */}
-            <div className="absolute top-0 right-0 text-[10rem] md:text-[15rem] font-black text-white/[0.03] select-none leading-none -translate-x-7 translate-y-6 pointer-events-none uppercase z-10">
-              BIZGROW
+          {/* 🔹 2. Background Large Text (Watermark) - Kept Same */}
+          <div className="absolute top-0 right-0 text-[10rem] md:text-[15rem] font-black text-white/[0.03] select-none leading-none -translate-x-7 translate-y-6 pointer-events-none uppercase z-10">
+            BIZGROW
+          </div>
+
+          {/* Background Decor Circles - Kept Same */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#997819]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 z-10" />
+          <div className="absolute bottom-0 left-0 w-40 h-40 bg-blue-400/5 rounded-full blur-2xl z-10" />
+
+          {/* Content Layer - Added z-20 to stay above parallax image */}
+          <div className="relative z-20 flex flex-col items-center justify-between gap-12">
+            <div className="text-center lg:text-left max-w-2xl">
+              <h2 className="text-[32px] md:text-6xl text-center font-black text-white leading-tight">
+                Ready to Secure Your
+                <span className="text-[#997819]"> Business Future?</span>
+              </h2>
+              <p className="text-blue-100/80 text-center mt-6 text-sm md:text-lg font-medium">
+                Our compliance experts support UK organisations with SIA ACS
+                approval, ISO certifications, and structured growth strategies
+                designed to deliver measurable results. Build audit-ready
+                systems. Win contracts. Operate with confidence.
+              </p>
             </div>
 
-            {/* Background Decor Circles - Kept Same */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-[#997819]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 z-10" />
-            <div className="absolute bottom-0 left-0 w-40 h-40 bg-blue-400/5 rounded-full blur-2xl z-10" />
+            <div className="flex flex-col sm:flex-row gap-6 w-full lg:w-auto">
+              <button className="bg-[#997819] text-white px-8 py-5 rounded-2xl font-black uppercase tracking-widest text-xs flex items-center justify-center gap-3 hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-lg group/btn">
+                Book Free Consultation{" "}
+                <ArrowRight className="group-hover/btn:translate-x-2 transition-transform" />
+              </button>
 
-            {/* Content Layer - Added z-20 to stay above parallax image */}
-            <div className="relative z-20 flex flex-col items-center justify-between gap-12">
-              <div className="text-center lg:text-left max-w-2xl">
-                <h2 className="text-[32px] md:text-6xl text-center font-black text-white leading-tight">
-                  Ready to Secure Your
-                  <span className="text-[#997819]"> Business Future?</span>
-                </h2>
-                <p className="text-blue-100/80 text-center mt-6 text-sm md:text-lg font-medium">
-                  Our compliance experts support UK organisations with SIA ACS
-                  approval, ISO certifications, and structured growth strategies
-                  designed to deliver measurable results. Build audit-ready
-                  systems. Win contracts. Operate with confidence.
-                </p>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-6 w-full lg:w-auto">
-                <button className="bg-[#997819] text-white px-8 py-5 rounded-2xl font-black uppercase tracking-widest text-xs flex items-center justify-center gap-3 hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-lg group/btn">
-                  Book Free Consultation{" "}
-                  <ArrowRight className="group-hover/btn:translate-x-2 transition-transform" />
-                </button>
-
-                <a
-                  href="tel:+447898205035"
-                  className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-8 py-5 rounded-2xl font-black uppercase tracking-widest text-xs flex items-center justify-center gap-3 hover:bg-white/20 transition-all"
-                >
-                  <PhoneCall size={18} /> +44 7898205035
-                </a>
-              </div>
+              <a
+                href="tel:+447898205035"
+                className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-8 py-5 rounded-2xl font-black uppercase tracking-widest text-xs flex items-center justify-center gap-3 hover:bg-white/20 transition-all"
+              >
+                <PhoneCall size={18} /> +44 7898205035
+              </a>
             </div>
           </div>
-        
+        </div>
       </section>
     </main>
   );
