@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 
-// className prop add kiya taake grid isey stretch kar sakay
 export default function FadeIn({ children, delay = 0, direction = "up", duration = 0.5, className = "" }) {
   const directions = {
     up: { y: 40, x: 0 },
@@ -13,10 +12,8 @@ export default function FadeIn({ children, delay = 0, direction = "up", duration
   };
 
   return (
-    /* 🔹 FIX: className={className} add kiya aur h-full taake wrapper stretch ho */
     <div className={`w-full overflow-x-clip ${className}`}> 
       <motion.div
-        // 🔹 FIX: motion.div ko bhi h-full diya taake card poori height le
         className="h-full w-full"
         initial={{ 
           opacity: 0, 
@@ -28,7 +25,9 @@ export default function FadeIn({ children, delay = 0, direction = "up", duration
           x: 0, 
           y: 0 
         }}
-        viewport={{ once: true, margin: "-50px" }}
+        // 🔹 CHANGE: once ko false kar diya taake har baar view hone par trigger ho
+        // 🔹 TIP: amount: 0.2 add kiya hai taake jab card 20% nazar aaye tabhi animation start ho (ziyada smooth lagta hai)
+        viewport={{ once: false, margin: "-50px", amount: 0.2 }}
         transition={{ 
           duration: duration, 
           delay: delay, 

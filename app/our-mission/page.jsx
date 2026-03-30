@@ -12,9 +12,9 @@ import {
 import Link from "next/link";
 
 export const metadata = {
-  title: "Our Mission to Grow Security Businesses | BizGrow Holdings ",
+  title: "Our Mission | Supporting Compliance & Business Growth UK",
   description:
-    "We empower UK Security Businesses with Compliance Consultancy, ISO & ACS support, Digital Strategies, and Long-term Business Success. ",
+    "Helping businesses achieve compliance, certifications & sustainable growth with expert guidance from BizGrow Holdings.",
 };
 
 const MissionPage = () => {
