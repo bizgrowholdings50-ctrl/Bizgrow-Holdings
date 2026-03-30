@@ -27,6 +27,11 @@ async function getData(page = 1, catSlug = null) {
   };
 }
 
+export const metadata = {
+  title: "BizGrow Blogs | Compliance, Certification & Growth Tips",
+  description: "Learn how to achieve compliance, secure certifications & scale your business with expert advice from BizGrow Holdings.",
+};
+
 export default async function BlogPage({ params }) {
   const { slug: slugArray = [] } = await params;
 
