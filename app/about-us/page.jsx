@@ -10,6 +10,7 @@ import {
   ArrowRight,
   PhoneCall,
 } from "lucide-react";
+import Link from "next/link";
 
 export const metadata = {
   title: "About Us | BizGrow Holdings Ltd, UK Experts",
@@ -37,9 +38,9 @@ export default function AboutUs() {
 
         {/* 🔹 Step 2: Large Watermark Text (Middle Layer) */}
         <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none select-none z-10">
-          <h2 className="text-[12rem] md:text-[20rem] font-black text-white/[0.08] leading-none uppercase tracking-tighter">
+          <span className="text-[12rem] md:text-[20rem] font-black text-white/[0.08] leading-none uppercase tracking-tighter">
             ABOUT
-          </h2>
+          </span>
         </div>
 
         {/* 🔹 Step 3: Actual Content (Top Layer) */}
@@ -61,9 +62,15 @@ export default function AboutUs() {
             <FadeIn direction="right" duration="0.8">
               <p className="mt-8 text-blue-100/80 text-lg md:text-2xl max-w-2xl leading-relaxed font-medium">
                 BizGrow Holdings is a UK-based compliance consultancy business
-                helping organisations achieve ISO certification, security
-                accreditation, and construction compliance standards, while
-                offering governance and growth systems.
+                helping organisations achieve{" "}
+                <Link
+                  href="https://bizgrow-holdings.com/difference-between-iso-9001-iso-14001-and-iso45001/"
+                  className="text-[#997819] font-bold"
+                >
+                  ISO certification
+                </Link>
+                , security accreditation, and construction compliance standards,
+                while offering governance and growth systems.
               </p>
             </FadeIn>
 
@@ -108,17 +115,47 @@ export default function AboutUs() {
               <p>
                 BizGrow Holdings is a trusted UK compliance consultancy
                 supporting security companies and construction businesses
-                pursuing SIA ACS accreditation and ISO certifications. We don’t
-                offer generic checklists. We build structured, audit-ready
-                management systems that embed compliance into your core
-                operations, turning regulatory requirements into a strategic
-                advantage for sustainable growth.
+                pursuing{" "}
+                <Link
+                  href="https://bizgrow-holdings.vercel.app/our-services/sia-acs/"
+                  className="text-[#997819] font-bold"
+                >
+                  SIA ACS
+                </Link>
+                accreditation and ISO certifications. We don’t offer generic
+                checklists. We build structured, audit-ready management systems
+                that embed compliance into your core operations, turning
+                regulatory requirements into a strategic advantage for
+                sustainable growth.
               </p>
 
               <ul className="space-y-4 pt-1">
                 {[
                   "Specialist SIA ACS audit preparation & advisory",
-                  "ISO 9001, 14001 & 45001 implementation support",
+                  <>
+                    ISO{" "}
+                    <Link
+                      href="https://bizgrow-holdings.vercel.app/our-services/iso-9001/"
+                      className="text-[#997819] font-bold"
+                    >
+                      9001
+                    </Link>
+                    ,{" "}
+                    <Link
+                      href="https://bizgrow-holdings.vercel.app/our-services/iso-14001/"
+                      className="text-[#997819] font-bold"
+                    >
+                      14001
+                    </Link>{" "}
+                    &{" "}
+                    <Link
+                      href="https://bizgrow-holdings.vercel.app/our-services/iso-45001/"
+                      className="text-[#997819] font-bold"
+                    >
+                      45001
+                    </Link>{" "}
+                    implementation support
+                  </>,
                   "Structured compliance systems & documentation",
                   "Ongoing governance, training & audit readiness",
                 ].map((item, i) => (
@@ -144,53 +181,53 @@ export default function AboutUs() {
               <span className="text-[#997819]">Define Us</span>
             </h2>
           </div>
-   <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-  {[
-    {
-      title: "Transparency and Trust",
-      desc: "We function with transparency and integrity to create strong relationships with clients based on trust and reliability.",
-      icon: <ShieldCheck size={28} />,
-    },
-    {
-      title: "Strategic Planning",
-      desc: "We implement customised management systems for operational excellence and sustainable growth.",
-      icon: <Target size={28} />,
-    },
-    {
-      title: "Client Centric",
-      desc: "We tailor our approach to meet your business needs, ensuring satisfaction and evidence-based results.",
-      icon: <Award size={28} />,
-    },
-  ].map((val, i) => (
-    <FadeIn
-      key={i}
-      delay={i * 0.2}
-      className="relative group p-10 rounded-[2rem] shadow-sm border border-zinc-100 overflow-hidden transition-all duration-500 cursor-pointer"
-    >
-      {/* 🟦 Background Sliding Layer (Left to Right) */}
-     {/* 🟦 Background Sliding Layer (Old logic replaced with Scale) */}
-<div className="absolute inset-0 bg-[#12066a] scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out origin-left z-0" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Transparency and Trust",
+                desc: "We function with transparency and integrity to create strong relationships with clients based on trust and reliability.",
+                icon: <ShieldCheck size={28} />,
+              },
+              {
+                title: "Strategic Planning",
+                desc: "We implement customised management systems for operational excellence and sustainable growth.",
+                icon: <Target size={28} />,
+              },
+              {
+                title: "Client Centric",
+                desc: "We tailor our approach to meet your business needs, ensuring satisfaction and evidence-based results.",
+                icon: <Award size={28} />,
+              },
+            ].map((val, i) => (
+              <FadeIn
+                key={i}
+                delay={i * 0.2}
+                className="relative group p-10 rounded-[2rem] shadow-sm border border-zinc-100 overflow-hidden transition-all duration-500 cursor-pointer"
+              >
+                {/* 🟦 Background Sliding Layer (Left to Right) */}
+                {/* 🟦 Background Sliding Layer (Old logic replaced with Scale) */}
+                <div className="absolute inset-0 bg-[#12066a] scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out origin-left z-0" />
 
-      {/* Card Content (z-10 to stay above the sliding bg) */}
-      <div className="relative z-10">
-        {/* Icon Container - Turns Gold on Hover */}
-        <div className="w-14 h-14 bg-[#12066a] group-hover:bg-[#997819] text-white rounded-2xl flex items-center justify-center mb-6 transition-colors duration-500">
-          {val.icon}
-        </div>
+                {/* Card Content (z-10 to stay above the sliding bg) */}
+                <div className="relative z-10">
+                  {/* Icon Container - Turns Gold on Hover */}
+                  <div className="w-14 h-14 bg-[#12066a] group-hover:bg-[#997819] text-white rounded-2xl flex items-center justify-center mb-6 transition-colors duration-500">
+                    {val.icon}
+                  </div>
 
-        {/* Title - Turns White on Hover */}
-        <h3 className="text-xl font-black text-zinc-900 group-hover:text-white mb-4 transition-colors duration-500 uppercase tracking-tight">
-          {val.title}
-        </h3>
+                  {/* Title - Turns White on Hover */}
+                  <h3 className="text-xl font-black text-zinc-900 group-hover:text-white mb-4 transition-colors duration-500 uppercase tracking-tight">
+                    {val.title}
+                  </h3>
 
-        {/* Description - Turns Light Blue/White on Hover */}
-        <p className="text-zinc-500 group-hover:text-blue-100/70 text-sm leading-relaxed transition-colors duration-500 font-medium">
-          {val.desc}
-        </p>
-      </div>
-    </FadeIn>
-  ))}
-</div>
+                  {/* Description - Turns Light Blue/White on Hover */}
+                  <p className="text-zinc-500 group-hover:text-blue-100/70 text-sm leading-relaxed transition-colors duration-500 font-medium">
+                    {val.desc}
+                  </p>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -206,11 +243,16 @@ export default function AboutUs() {
                 Our Mission
               </h3>
               <p className="text-md md:text-2xl font-bold leading-relaxed">
-                "To deliver clear, structured, and practical compliance
-                consultancy that enables UK businesses to achieve ISO
-                certifications, industry accreditations, and long-term
-                regulatory confidence, turning complex standards into
-                sustainable growth systems."
+                "To deliver clear, structured, and practical
+                <Link
+                  href="https://bizgrow-holdings.vercel.app/compliance-consultancies/"
+                  className="text-[#997819] font:bold ml-1"
+                >
+                  compliance consultancy
+                </Link>{" "}
+                that enables UK businesses to achieve ISO certifications,
+                industry accreditations, and long-term regulatory confidence,
+                turning complex standards into sustainable growth systems."
               </p>
             </div>
             <div className="absolute -bottom-10 -right-10 text-[10rem] font-black text-white/[0.03]">
@@ -241,63 +283,62 @@ export default function AboutUs() {
 
       {/* 🔹 5 CTA Section with Fixed Background Attachment */}
       <section className="py-14 px-6 relative overflow-hidden group">
-        
-          <div className="max-w-7xl mx-auto relative rounded-[3rem] overflow-hidden shadow-2xl ">
-            {/* --- FIXED BACKGROUND IMAGE --- */}
-            <div
-              className="absolute inset-0 z-0 bg-cover bg-center bg-fixed"
-              style={{
-                backgroundImage: "url('/about-cta.jpg')", // Aapki background image ka path
-              }}
-            >
-              {/* Dark Overlay to make text pop */}
-              <div className="absolute inset-0 bg-[#12066a]/65 mix-blend-multiply" />
-              <div className="absolute inset-0 bg-linear-to-br from-[#12066a] via-transparent to-[#997819]/20" />
+        <div className="max-w-7xl mx-auto relative rounded-[3rem] overflow-hidden shadow-2xl ">
+          {/* --- FIXED BACKGROUND IMAGE --- */}
+          <div
+            className="absolute inset-0 z-0 bg-cover bg-center bg-fixed"
+            style={{
+              backgroundImage: "url('/about-cta.jpg')", // Aapki background image ka path
+            }}
+          >
+            {/* Dark Overlay to make text pop */}
+            <div className="absolute inset-0 bg-[#12066a]/65 mix-blend-multiply" />
+            <div className="absolute inset-0 bg-linear-to-br from-[#12066a] via-transparent to-[#997819]/20" />
+          </div>
+
+          <div className="relative z-10 p-10 md:p-20">
+            {/* 🔹 Large Watermark Text */}
+            <div className="absolute top-0 -right-6 md:right-0 text-[4rem] md:text-[15rem] font-black text-white/[0.05] select-none leading-none -translate-x-7 translate-y-6 pointer-events-none uppercase">
+              BIZGROW
             </div>
 
-            <div className="relative z-10 p-10 md:p-20">
-              {/* 🔹 Large Watermark Text */}
-              <div className="absolute top-0 -right-6 md:right-0 text-[4rem] md:text-[15rem] font-black text-white/[0.05] select-none leading-none -translate-x-7 translate-y-6 pointer-events-none uppercase">
-                BIZGROW
+            {/* Floating Decor Circles */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-[#997819]/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+
+            <div className="relative z-20 flex flex-col  items-center justify-between gap-12">
+              <div className="text-center lg:text-left max-w-3xl">
+                <h2 className="text-4xl md:text-6xl text-center font-black text-white leading-tight uppercase tracking-tighter">
+                  Ready to Secure Your
+                  <span className="text-[#997819] block">
+                    {" "}
+                    Business Standards?
+                  </span>
+                </h2>
+                <p className="text-blue-100/70 text-center mt-8 text-md md:text-xl font-medium leading-relaxed italic">
+                  "Our experts deliver structured compliance solutions tailored
+                  to UK regulatory requirements. Partner with BizGrow Holdings
+                  to turn compliance into lasting strength."
+                </p>
               </div>
 
-              {/* Floating Decor Circles */}
-              <div className="absolute top-0 right-0 w-64 h-64 bg-[#997819]/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2" />
+              <div className="flex flex-col sm:flex-row gap-6 w-full lg:w-auto shrink-0">
+                <button className="bg-[#997819] text-white px-10 py-6 rounded-2xl font-black uppercase tracking-[0.2em] text-[10px] flex items-center justify-center gap-4 hover:bg-white hover:text-[#12066a] transition-all duration-700 shadow-2xl group">
+                 <Link href="https://bizgrow-holdings.vercel.app/contact-us/">Book Free Consultation</Link>
+                  
+                  <ArrowRight className="group-hover:translate-x-2 transition-transform" />
+                </button>
 
-              <div className="relative z-20 flex flex-col  items-center justify-between gap-12">
-                <div className="text-center lg:text-left max-w-3xl">
-                  <h2 className="text-4xl md:text-6xl text-center font-black text-white leading-tight uppercase tracking-tighter">
-                    Ready to Secure Your
-                    <span className="text-[#997819] block">
-                      {" "}
-                      Business Standards?
-                    </span>
-                  </h2>
-                  <p className="text-blue-100/70 text-center mt-8 text-md md:text-xl font-medium leading-relaxed italic">
-                    "Our experts deliver structured compliance solutions
-                    tailored to UK regulatory requirements. Partner with BizGrow
-                    Holdings to turn compliance into lasting strength."
-                  </p>
-                </div>
-
-                <div className="flex flex-col sm:flex-row gap-6 w-full lg:w-auto shrink-0">
-                  <button className="bg-[#997819] text-white px-10 py-6 rounded-2xl font-black uppercase tracking-[0.2em] text-[10px] flex items-center justify-center gap-4 hover:bg-white hover:text-[#12066a] transition-all duration-700 shadow-2xl group">
-                    Book Free Consultation
-                    <ArrowRight className="group-hover:translate-x-2 transition-transform" />
-                  </button>
-
-                  <a
-                    href="tel:+447898205035"
-                    className="bg-white/5 backdrop-blur-xl text-white border border-white/10 px-10 py-6 rounded-2xl font-black uppercase tracking-[0.2em] text-[10px] flex items-center justify-center gap-4 hover:bg-white/20 transition-all duration-500"
-                  >
-                    <PhoneCall size={18} className="text-[#997819]" /> +44
-                    7898205035
-                  </a>
-                </div>
+                <a
+                  href="tel:+447898205035"
+                  className="bg-white/5 backdrop-blur-xl text-white border border-white/10 px-10 py-6 rounded-2xl font-black uppercase tracking-[0.2em] text-[10px] flex items-center justify-center gap-4 hover:bg-white/20 transition-all duration-500"
+                >
+                  <PhoneCall size={18} className="text-[#997819]" /> +44
+                  7898205035
+                </a>
               </div>
             </div>
           </div>
-       
+        </div>
       </section>
     </main>
   );

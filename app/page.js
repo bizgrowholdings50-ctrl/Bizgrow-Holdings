@@ -30,12 +30,12 @@ const steps = [
   {
     num: "03",
     title: "Implementation",
-    desc: "System Development, Training & Operational Alignment",
+    desc: <>System Development, <Link href="http://localhost:3001/corporate-training-and-coaching/" className="text-[#997819] font-bold">Training</Link> & Operational Alignment</>,
   },
   {
     num: "04",
     title: "Certification",
-    desc: "Final Audit Support & Long-Term Compliance Success",
+    desc: <>Final <Link href="http://localhost:3001/internal-audit/" className="text-[#997819] font-bold">Audit</Link> Support & Long-Term Compliance Success</>,
   },
 ];
 
@@ -156,7 +156,7 @@ export default function HomePage() {
               <p>
                 We follow a structured approach with clients, i.e. We start by
                 meeting with your management team to fully understand your
-                goals, challenges, and compliance needs. Then, we work
+                goals, challenges, and <Link href="https://bizgrow-holdings.vercel.app/compliance-consultancies/" className="text-[#997819] font-bold">compliance</Link> needs. Then, we work
                 side-by-side to design and implement the most effective,
                 tailored solution through every phase:
               </p>
