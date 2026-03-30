@@ -132,7 +132,7 @@ export default function HomePage() {
             <div className="aspect-square relative rounded-[3rem] overflow-hidden shadow-2xl">
               <Image
                 src="/our-approach-home.jpg"
-                alt="BizGrow Consultancy Team"
+                alt="Our Approach - BizGrow Holdings Ltd"
                 fill
                 className="object-cover"
               />
@@ -194,6 +194,7 @@ export default function HomePage() {
         {/* Decorative Background Text */}
         <Image
           src="/experts-home.jpg"
+          alt="BizGrow operational excellence roadmap"
           fill
           className="object-cover hidden md:block"
         />

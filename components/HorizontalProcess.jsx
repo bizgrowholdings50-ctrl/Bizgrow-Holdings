@@ -33,41 +33,44 @@ const HorizontalProcess = () => {
     ["0vw", "0vw", "-100vw", "-100vw", "-200vw", "-200vw", "-300vw", "-300vw"]
   );
 
-  const sections = [
-    {
-      id: "01",
-      tag: "Support",
-      title: "SIA ACS",
-      img: "/sia-home.jpg",
-      description:
-        <>Achieve and maintain <Link href="https://bizgrow-holdings.vercel.app/our-services/sia-acs/" className="text-[#997819] font-bold">Approved Contractor Scheme</Link> status with expert guidance.</>
-    },
-    {
-      id: "02",
-      tag: "Certification",
-      title: "ISO",
-      img: "/iso-home.jpg",
-      description:
-        <>Streamline your business with <Link href="https://bizgrow-holdings.vercel.app/our-services/iso-9001/" className="text-[#997819] font-bold">ISO 9001</Link>, <Link href="https://bizgrow-holdings.vercel.app/our-services/iso-14001/" className="text-[#997819] font-bold">14001</Link>, and <Link href="https://bizgrow-holdings.vercel.app/our-services/iso-45001/" className="text-[#997819] font-bold">45001 </Link>certifications.</>,
-    },
-    {
-      id: "03",
-      tag: "Consultancy",
-      title: "Business",
-      img: "/consultancy-home.jpg",
-      description:
-        "Strategic planning to help your company scale and improve efficiency.",
-    },
-    {
-      id: "04",
-      tag: "Development",
-      title: "Training",
-      img: "/business.jpg",
-      description:
-        "Equipping your team with professional, industry-approved training for lasting performance.",
-    },
-  ];
-
+ const sections = [
+  {
+    id: "01",
+    tag: "Support",
+    title: "SIA ACS",
+    img: "/sia-home.jpg",
+    alt: "SIA ACS - BizGrow Holdings Ltd", // 👈 SEO Friendly Alt
+    description:
+      <>Achieve and maintain <Link href="https://bizgrow-holdings.vercel.app/our-services/sia-acs/" className="text-[#997819] font-bold">Approved Contractor Scheme</Link> status with expert guidance.</>
+  },
+  {
+    id: "02",
+    tag: "Certification",
+    title: "ISO",
+    img: "/iso-home.jpg",
+    alt: "ISO Certification - BizGrow Holdings Ltd", // 👈 Key-words include kiye
+    description:
+      <>Streamline your business with <Link href="https://bizgrow-holdings.vercel.app/our-services/iso-9001/" className="text-[#997819] font-bold">ISO 9001</Link>, <Link href="https://bizgrow-holdings.vercel.app/our-services/iso-14001/" className="text-[#997819] font-bold">14001</Link>, and <Link href="https://bizgrow-holdings.vercel.app/our-services/iso-45001/" className="text-[#997819] font-bold">45001 </Link>certifications.</>,
+  },
+  {
+    id: "03",
+    tag: "Consultancy",
+    title: "Business",
+    img: "/consultancy-home.jpg",
+    alt: "Business Consultancy - BizGrow Holdings Ltd",
+    description:
+      "Strategic planning to help your company scale and improve efficiency.",
+  },
+  {
+    id: "04",
+    tag: "Development",
+    title: "Training",
+    img: "/business.jpg",
+    alt: "Development Training - BizGrow Holdings Ltd",
+    description:
+      "Equipping your team with professional, industry-approved training for lasting performance.",
+  },
+];
   // Height logic to ensure smooth pinning
   const sectionHeightVh = isVertical ? "auto" : (sections.length + 1) * 100;
 
@@ -149,7 +152,7 @@ const HorizontalProcess = () => {
               <div className="w-full lg:w-[45%] h-[40vh] lg:h-[55vh] relative">
                 <img
                   src={item.img}
-                  alt={item.title}
+                  alt={item.alt}
                   className="w-full h-full object-cover rounded-[3rem] shadow-2xl relative z-10 border-2 border-zinc-50"
                 />
                 <div className="absolute -bottom-10 -left-10 text-[10rem] lg:text-[14rem] font-black text-[#12066a]/5 z-0 select-none italic">

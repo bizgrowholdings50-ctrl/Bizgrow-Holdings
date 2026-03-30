@@ -201,7 +201,7 @@ export default function AboutUs() {
             ].map((val, i) => (
               <FadeIn
                 key={i}
-                delay={i * 0.2}
+                delay={i * 0.4}
                 className="relative group p-10 rounded-[2rem] shadow-sm border border-zinc-100 overflow-hidden transition-all duration-500 cursor-pointer"
               >
                 {/* 🟦 Background Sliding Layer (Left to Right) */}
@@ -211,7 +211,7 @@ export default function AboutUs() {
                 {/* Card Content (z-10 to stay above the sliding bg) */}
                 <div className="relative z-10">
                   {/* Icon Container - Turns Gold on Hover */}
-                  <div className="w-14 h-14 bg-[#12066a] group-hover:bg-[#997819] text-white rounded-2xl flex items-center justify-center mb-6 transition-colors duration-500">
+                  <div className="w-14 h-14 bg-[#12066a] group-hover:bg-[#997819] text-white rounded-2xl flex items-center justify-center mb-6 transition-colors duration-700">
                     {val.icon}
                   </div>
 

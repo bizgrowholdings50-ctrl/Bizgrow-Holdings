@@ -24,7 +24,7 @@ const MissionPage = () => {
       <section className="relative h-screen w-full flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
-            src="/our-mission-hero.jpg"
+            src="/our-mission.webp"
             alt="Our Mission - BizGrow Holdings ltd uk "
             fill
             className="object-cover"
