@@ -93,6 +93,7 @@ export default function Footer() {
                 { name: "Internal Audit", link: "/internal-audit" },
                 { name: "Discount Offers", link: "/discount-offers" },
                 { name: "Customer Services", link: "/customer-services" },
+                {name:"Certificate Verification", link: "/certificate-verification-validate-bizgrow-certification"},
                 { name: "Corporate Training and Coaching", link: "/corporate-training-and-coaching" },
                 { name: "Testimonials & Reviews", link: "/testimonials-reviews" },
               ].map((item) => (

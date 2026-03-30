@@ -168,7 +168,8 @@ export default function AboutUs() {
       className="relative group p-10 rounded-[2rem] shadow-sm border border-zinc-100 overflow-hidden transition-all duration-500 cursor-pointer"
     >
       {/* 🟦 Background Sliding Layer (Left to Right) */}
-      <div className="absolute inset-0 bg-[#12066a] translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-500 ease-out z-0" />
+     {/* 🟦 Background Sliding Layer (Old logic replaced with Scale) */}
+<div className="absolute inset-0 bg-[#12066a] scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out origin-left z-0" />
 
       {/* Card Content (z-10 to stay above the sliding bg) */}
       <div className="relative z-10">
