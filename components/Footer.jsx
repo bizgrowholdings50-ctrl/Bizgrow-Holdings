@@ -82,6 +82,7 @@ export default function Footer() {
                 "Our Services",
                 "Blogs",
                 "Contact Us",
+                "FAQs",
               ].map((item) => (
                 <li key={item}>
                   <Link
@@ -127,10 +128,7 @@ export default function Footer() {
                   name: "Corporate Training and Coaching",
                   link: "/corporate-training-and-coaching",
                 },
-                {
-                  name: "Testimonials & Reviews",
-                  link: "/testimonials-reviews",
-                },
+               
               ].map((item) => (
                 <li key={item.name}>
                   <Link

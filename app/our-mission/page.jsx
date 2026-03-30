@@ -9,6 +9,7 @@ import {
   FileCheck,
   Scale,
 } from "lucide-react";
+import Link from "next/link";
 
 export const metadata = {
   title: "Our Mission to Grow Security Businesses | BizGrow Holdings ",
@@ -35,9 +36,9 @@ const MissionPage = () => {
 
         <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none select-none z-10">
           <FadeIn direction="up" duration={1}>
-            <h2 className="text-[12rem] md:text-[18rem] font-black text-white/[0.05] leading-none uppercase">
+            <span className="text-[12rem] md:text-[18rem] font-black text-white/5 leading-none uppercase">
               Mission
-            </h2>
+            </span>
           </FadeIn>
         </div>
 
@@ -50,7 +51,7 @@ const MissionPage = () => {
             </FadeIn>
 
             <FadeIn direction="right" delay={0.4}>
-              <h1 className="text-4xl md:text-7xl font-black text-white mt-6 leading-[1.1]">
+              <h1 className="text-4xl md:text-6xl font-black text-white mt-6 leading-[1.1]">
                 Our Commitment to <br />
                 <span className="text-[#997819]">Strengthen</span> UK Standards
               </h1>
@@ -58,10 +59,22 @@ const MissionPage = () => {
 
             <FadeIn direction="right" delay={0.6}>
               <p className="mt-8 text-blue-100/90 text-lg md:text-2xl max-w-2xl leading-relaxed font-medium">
-                BizGrow Holdings empowers UK businesses to meet ISO standards,
-                achieve SIA ACS accreditation, and implement audit-ready
-                management systems, turning regulations into strategic
-                advantages.
+                BizGrow Holdings empowers UK businesses to meet{" "}
+                <Link
+                  href="https://bizgrow-holdings.com/our-services/iso-9001/"
+                  className="text-[#997819] font-bold"
+                >
+                  ISO standards
+                </Link>
+                , achieve{" "}
+                <Link
+                  href="https://bizgrow-holdings.com/our-services/sia-acs"
+                  className="text-[#997819] font-bold mr-1"
+                >
+                  SIA ACS
+                </Link>
+                accreditation, and implement audit-ready management systems,
+                turning regulations into strategic advantages.
               </p>
             </FadeIn>
 
@@ -118,14 +131,29 @@ const MissionPage = () => {
             <FadeIn direction="right" delay={0.2}>
               <div className="text-black text-lg leading-relaxed font-medium space-y-4">
                 <p>
-                  BizGrow Holdings is simply focused on your security business
-                  getting its targets and growing with confidence. Whether it’s
-                  quality management systems, compliance strategies, staff
-                  development, or digital solutions, we ensure every step
-                  supports your business success.
+                  <Link
+                    href="https://bizgrow-holdings.com/about-us/"
+                    className="text-[#997819] font-bold"
+                  >
+                    BizGrow Holdings
+                  </Link>{" "}
+                  is simply focused on your security business getting its
+                  targets and growing with confidence. Whether it’s quality
+                  management systems, compliance strategies, staff development,
+                  or digital solutions, we ensure every step supports your
+                  business success.
                 </p>
                 <p>
-                  <b>We help security businesses to:</b>
+                  <b>
+                    We help{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/how-to-start-a-security-company-in-the-uk/"
+                      className="text-[#997819] font-bold"
+                    >
+                      security businesses
+                    </Link>{" "}
+                    to:
+                  </b>
                 </p>
               </div>
             </FadeIn>
@@ -133,9 +161,26 @@ const MissionPage = () => {
             <FadeIn direction="up" delay={0.4}>
               <ul className="space-y-4">
                 {[
-                  "Build and implement Quality Management Systems",
+                  <>
+                    Build and implement{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/qms-software/"
+                      className="text-[#997819] font-bold"
+                    >
+                      Quality Management Systems
+                    </Link>
+                  </>,
                   "Increase operational efficiency and cut wasted resources",
-                  "Secure more contracts by meeting compliance standards",
+                  <>
+                    Secure more contracts by meeting
+                    <Link
+                      href="https://bizgrow-holdings.com/compliance-consultancies/"
+                      className="text-[#997819] font-bold -mx-1"
+                    >
+                      compliance
+                    </Link>{" "}
+                    standards
+                  </>,
                   "Train leadership to be strategic in their growth and compliance",
                   "Stay competitive with systems designed for future requirements",
                 ].map((item, i) => (
@@ -156,7 +201,7 @@ const MissionPage = () => {
             <FadeIn direction="up" delay={0.5}>
               <p className="text-zinc-700 font-medium">
                 Your success is our success. With{" "}
-                <b className="text-[#12066a]">BizGrow Holdings</b>, your
+                <b className="text-[#12066a]"><Link href="https://bizgrow-holdings.com/">BizGrow Holdings</Link></b>, your
                 business is always on the right path, compliant, efficient, and
                 ready to grow.
               </p>
@@ -194,7 +239,7 @@ const MissionPage = () => {
               {
                 icon: <Cpu size={40} strokeWidth={1.5} />,
                 title: "Innovation in Certification",
-                desc: "Modernising the ISO and accreditation journey through structured processes that drive efficiency, clarity, and measurable results.",
+                desc: <>Modernising the <Link href="https://bizgrow-holdings.com/our-services/iso-14001/" className="text-[#997819] font-bold">ISO</Link> and accreditation journey through structured processes that drive efficiency, clarity, and measurable results.</>,
               },
             ].map((item, i) => (
               <FadeIn key={i} direction="up" delay={i * 0.2}>
@@ -220,7 +265,7 @@ const MissionPage = () => {
       {/* 🔹 4. IMPACT STATEMENT (Call to Action) */}
       <section className="py-22 text-center relative bg-white overflow-hidden">
         {/* Large Background Watermark Text */}
-        <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none select-none">
+        <div className="absolute inset-0 flex items-center justify-center opacity-[0.05] pointer-events-none select-none">
           <h2 className="text-[10rem] md:text-[16rem] font-black uppercase">
             BizGrow
           </h2>
@@ -238,7 +283,7 @@ const MissionPage = () => {
               governance support tailored for UK markets.
             </p>
             <button className="px-12 py-5 bg-[#12066a] text-white font-black uppercase tracking-widest hover:bg-[#997819] hover:scale-105 duration-500 transition-all rounded-2xl flex items-center gap-3 mx-auto shadow-xl">
-              Connect With Our Team <ArrowRight size={20} />
+              <Link href="https://bizgrow-holdings.com/contact-us/">Connect With Our Team</Link> <ArrowRight size={20} />
             </button>
           </div>
         </FadeIn>

@@ -239,10 +239,10 @@ export default function Navbar() {
               Contact
             </Link>
             <Link
-              href="/faqs"
+              href="/testimonials-reviews"
               className="hover:text-[#997819]  transition"
             >
-              FAQs
+             Testimonials
             </Link>
           </div>
 
