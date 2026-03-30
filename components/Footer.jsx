@@ -8,6 +8,8 @@ import {
   FaPhoneAlt,
   FaEnvelope,
   FaMapMarkerAlt,
+  FaInstagram,
+  FaTiktok,
 } from "react-icons/fa";
 
 export default function Footer() {
@@ -33,14 +35,32 @@ export default function Footer() {
             </p>
             <div className="flex gap-4">
               {[
-                { icon: <FaLinkedinIn />, href: "#" },
-                { icon: <FaFacebookF />, href: "#" },
-                { icon: <FaTwitter />, href: "#" },
-                { icon: <FaYoutube />, href: "#" },
+                {
+                  icon: <FaFacebookF />,
+                  href: "https://www.facebook.com/bizgrowholdings",
+                },
+                {
+                  icon: <FaInstagram />,
+                  href: "https://www.instagram.com/bizgrowholdingltd/",
+                },
+                {
+                  icon: <FaLinkedinIn />,
+                  href: "https://www.linkedin.com/company/bizgrowholdings/",
+                },
+                {
+                  icon: <FaYoutube />,
+                  href: "https://www.youtube.com/@bizgrowholdings",
+                },
+                {
+                  icon: <FaTiktok />,
+                  href: "https://www.tiktok.com/@bizgrowholdings?lang=en",
+                },
               ].map((social, i) => (
                 <a
                   key={i}
                   href={social.href}
+                  target="_blank" // 👈 New tab ke liye
+                  rel="noopener noreferrer" // 👈 Security ke liye
                   className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center hover:bg-[#997819] hover:scale-110 transition-all duration-300"
                 >
                   {social.icon}
@@ -87,15 +107,30 @@ export default function Footer() {
                   name: "UK’s Private Security Directory",
                   link: "/uks-private-security-directory",
                 },
-                { name: "Compliance Consultancies", link: "/compliance-consultancies" },
-                { name: "Private Security Startup", link: "/private-security-startup" },
+                {
+                  name: "Compliance Consultancies",
+                  link: "/compliance-consultancies",
+                },
+                {
+                  name: "Private Security Startup",
+                  link: "/private-security-startup",
+                },
                 { name: "QMS Software", link: "/qms-software" },
                 { name: "Internal Audit", link: "/internal-audit" },
                 { name: "Discount Offers", link: "/discount-offers" },
                 { name: "Customer Services", link: "/customer-services" },
-                {name:"Certificate Verification", link: "/certificate-verification-validate-bizgrow-certification"},
-                { name: "Corporate Training and Coaching", link: "/corporate-training-and-coaching" },
-                { name: "Testimonials & Reviews", link: "/testimonials-reviews" },
+                {
+                  name: "Certificate Verification",
+                  link: "/certificate-verification-validate-bizgrow-certification",
+                },
+                {
+                  name: "Corporate Training and Coaching",
+                  link: "/corporate-training-and-coaching",
+                },
+                {
+                  name: "Testimonials & Reviews",
+                  link: "/testimonials-reviews",
+                },
               ].map((item) => (
                 <li key={item.name}>
                   <Link
@@ -164,7 +199,10 @@ export default function Footer() {
             >
               Privacy Policy
             </Link>
-            <Link href="/terms-and-conditions" className="hover:text-white transition-colors">
+            <Link
+              href="/terms-and-conditions"
+              className="hover:text-white transition-colors"
+            >
               Terms & Conditions
             </Link>
           </div>

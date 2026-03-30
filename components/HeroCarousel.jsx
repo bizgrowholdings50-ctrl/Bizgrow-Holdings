@@ -10,7 +10,7 @@ const slides = [
     heading: 'Smarter Strategy. Stronger Systems. Real Results.',
     subheading: 'BizGrow Holdings delivers compliance-driven consultancy that helps UK businesses pass audits, win contracts, and grow with certainty.',
     buttonText: 'Start Your Growth Journey',
-    buttonLink: '/services'
+    buttonLink: 'https://bizgrow-holdings.vercel.app/contact-us/'
   },
   {
     image: '/home-compliance.jpg',
@@ -18,7 +18,7 @@ const slides = [
     heading: 'Compliance Clear. Certification Achievable.',
     subheading: 'Helping UK businesses achieve ISO certification, regulatory approval, and audit-ready systems with clarity, confidence, and control.',
     buttonText: 'Explore Our Certification',
-    buttonLink: '/certifications'
+    buttonLink: 'https://bizgrow-holdings.vercel.app/our-services/'
   },
   {
     image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
@@ -26,7 +26,7 @@ const slides = [
     heading: 'Clarity in Strategy. Confidence in Compliance.',
     subheading: 'Supporting UK organisations with innovative yet practical solutions that improve performance and future-proof operations.',
     buttonText: 'Explore Our Insights',
-    buttonLink: '/blog'
+    buttonLink: '/blogs'
   }
 ];
 
@@ -66,9 +66,9 @@ export default function HeroCarousel() {
 
           {/* Content */}
           <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-6 md:px-12">
-            <h1 className="text-3xl md:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight mb-4 drop-shadow-lg max-w-5xl">
+            <span className="text-3xl md:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight mb-4 drop-shadow-lg max-w-5xl">
               {slide.heading}
-            </h1>
+            </span>
             <p className="text-lg md:text-xl lg:text-2xl font-medium mb-8 max-w-3xl leading-relaxed drop-shadow-md">
               {slide.subheading}
             </p>

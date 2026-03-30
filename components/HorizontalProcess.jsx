@@ -2,6 +2,7 @@
 import { motion, useTransform, useScroll, useSpring } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import FadeIn from "./MotionWrapper";
+import Link from "@node_modules/next/link";
 
 const HorizontalProcess = () => {
   const targetRef = useRef(null);
@@ -33,10 +34,38 @@ const HorizontalProcess = () => {
   );
 
   const sections = [
-    { id: "01", tag: "Support", title: "SIA ACS", img: "/sia-home.jpg", description: "Achieve and maintain Approved Contractor Scheme status with expert guidance." },
-    { id: "02", tag: "Certification", title: "ISO", img: "/iso-home.jpg", description: "Streamline your business with ISO 9001, 14001, and 45001 certifications." },
-    { id: "03", tag: "Consultancy", title: "Business", img: "/consultancy-home.jpg", description: "Strategic planning to help your company scale and improve efficiency." },
-    { id: "04", tag: "Development", title: "Training", img: "/business.jpg", description: "Equipping your team with professional, industry-approved training for lasting performance." },
+    {
+      id: "01",
+      tag: "Support",
+      title: "SIA ACS",
+      img: "/sia-home.jpg",
+      description:
+        <>Achieve and maintain <Link href="https://bizgrow-holdings.vercel.app/our-services/sia-acs/" className="text-[#997819] font-bold">Approved Contractor Scheme</Link> status with expert guidance.</>
+    },
+    {
+      id: "02",
+      tag: "Certification",
+      title: "ISO",
+      img: "/iso-home.jpg",
+      description:
+        <>Streamline your business with <Link href="https://bizgrow-holdings.vercel.app/our-services/iso-9001/" className="text-[#997819] font-bold">ISO 9001</Link>, <Link href="https://bizgrow-holdings.vercel.app/our-services/iso-14001/" className="text-[#997819] font-bold">14001</Link>, and <Link href="https://bizgrow-holdings.vercel.app/our-services/iso-45001/" className="text-[#997819] font-bold">45001 </Link>certifications.</>,
+    },
+    {
+      id: "03",
+      tag: "Consultancy",
+      title: "Business",
+      img: "/consultancy-home.jpg",
+      description:
+        "Strategic planning to help your company scale and improve efficiency.",
+    },
+    {
+      id: "04",
+      tag: "Development",
+      title: "Training",
+      img: "/business.jpg",
+      description:
+        "Equipping your team with professional, industry-approved training for lasting performance.",
+    },
   ];
 
   // Height logic to ensure smooth pinning
@@ -65,9 +94,9 @@ const HorizontalProcess = () => {
         >
           <div className="text-center px-4">
             <FadeIn direction="up">
-              <h3 className="text-[#997819] font-extrabold tracking-[0.2em] text-xs md:text-lg mb-2 uppercase">
+              <h2 className="text-[#997819] font-extrabold tracking-[0.2em] text-xs md:text-lg mb-2 uppercase">
                 Comprehensive Solutions
-              </h3>
+              </h2>
             </FadeIn>
             <FadeIn direction="up" delay={0.2}>
               <h2 className="text-3xl md:text-5xl lg:text-5xl font-black text-[#12066a] uppercase italic">

@@ -1,6 +1,7 @@
 import HeroCarousel from "@components/HeroCarousel";
 import FadeIn from "@components/MotionWrapper";
 import Image from "next/image";
+import Link from "next/link";
 import {
   Shield,
   Award,
@@ -56,6 +57,10 @@ const reviews = [
   },
 ];
 
+export const metadata = {
+  title: "BizGrow Holdings | Security Business Growth & Compliance",
+  description: "BizGrow Holdings helps UK security businesses achieve ISO & ACS compliance, win contracts, and grow with expert guidance and strategies.",
+};
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-white selection:bg-[#997819] selection:text-white">
@@ -72,9 +77,9 @@ export default function HomePage() {
                 <Trophy className="text-white w-8 h-8" />
               </div>
               <div>
-                <h4 className="text-white text-3xl font-black leading-none">
+                <span className="text-white text-3xl font-black leading-none">
                   100+
-                </h4>
+                </span>
                 <p className="text-blue-200 text-xs font-bold uppercase tracking-widest mt-1">
                   Successful Audits
                 </p>
@@ -87,9 +92,9 @@ export default function HomePage() {
                 <CheckCircle2 className="text-white w-8 h-8" />
               </div>
               <div>
-                <h4 className="text-white text-3xl font-black  leading-none">
+                <span className="text-white text-3xl font-black  leading-none">
                   99%
-                </h4>
+                </span>
                 <p className="text-blue-200 text-xs font-bold uppercase tracking-widest mt-1">
                   Pass Rate
                 </p>
@@ -102,18 +107,19 @@ export default function HomePage() {
                 <Globe2 className="text-white w-8 h-8" />
               </div>
               <div>
-                <h4 className="text-white text-3xl font-black  leading-none">
+                <span className="text-white text-3xl font-black  leading-none">
                   UK Wide
-                </h4>
+                </span>
                 <p className="text-blue-200 text-xs font-bold uppercase tracking-widest mt-1">
                   Coverage
                 </p>
               </div>
             </div>
-
+           <Link href="/contact-us">
             <button className="bg-white text-[#12066a] px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-blue-50 transition-all shadow-lg active:scale-95">
               Book a Consultation
             </button>
+            </Link>
           </div>
         </div>
       </section>
@@ -142,10 +148,10 @@ export default function HomePage() {
 
           {/* Content Section (Ab ye mobile par upar dikhega) */}
           <FadeIn direction="right" className="w-full lg:w-1/2">
-            <h2 className="text-4xl md:text-5xl font-black text-[#12066a] leading-tight">
+            <h1 className="text-4xl md:text-5xl font-black text-[#12066a] leading-tight">
               Our
               <span className="text-[#997819]"> Approach</span>
-            </h2>
+            </h1>
             <div className="mt-8 space-y-6 text-zinc-600 leading-relaxed font-medium">
               <p>
                 We follow a structured approach with clients, i.e. We start by
@@ -184,7 +190,7 @@ export default function HomePage() {
       {/* 4. HORIZONTAL SERVICES (GSAP PINNED SECTION) */}
       <HorizontalServices />
 
-      <section className="py-24 min-h-screen lg:h-auto bg-[#12066a] relative overflow-hidden">
+       <section className="py-24 min-h-screen lg:h-auto bg-[#12066a] relative overflow-hidden">
         {/* Decorative Background Text */}
         <Image
           src="/experts-home.jpg"
@@ -296,7 +302,7 @@ export default function HomePage() {
 
             <div className="flex flex-col sm:flex-row gap-6 w-full lg:w-auto">
               <button className="bg-[#997819] text-white px-8 py-5 rounded-2xl font-black uppercase tracking-widest text-xs flex items-center justify-center gap-3 hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-lg group/btn">
-                Book Free Consultation{" "}
+                <Link href="https://bizgrow-holdings.vercel.app/contact-us/">Book Free Consultation</Link>
                 <ArrowRight className="group-hover/btn:translate-x-2 transition-transform" />
               </button>
 
