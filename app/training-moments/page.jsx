@@ -7,6 +7,7 @@ import {
   MapPin,
   ShieldCheck,
 } from "lucide-react";
+import Image from "next/image";
 import FadeIn from "@/components/MotionWrapper";
 const galleryItems = [
   {
@@ -127,23 +128,29 @@ const TrainingMoments = () => {
             </div>
           </div>
 
-          {/* Testimonial Quote */}
-          <div className="bg-[#12066a] p-8 md:p-10 rounded-[2.5rem] text-white shadow-2xl relative overflow-hidden flex flex-col justify-between">
-            <div className="relative z-10">
-              <ShieldCheck className="text-[#997819] mb-6" size={40} />
-              <p className="text-lg font-bold italic leading-relaxed mb-8">
-                "Dr. Javed's 13-year track record is evident in every session.
-                His ability to simplify complex ISO and SIA ACS standards is
-                what makes BizGrow stand out."
-              </p>
+          {/* 🔹 3. TESTIMONIAL BLOCK - Just Image with Gradient Effect */}
+          <div className="lg:col-span-1 relative group p-10 rounded-[2.5rem] shadow-2xl border border-[#12066a]/10 overflow-hidden flex flex-col justify-end min-h-[450px] transition-all duration-700 bg-gradient-to-t from-[#12066a] via-[#12066a]/60 to-[#12066a]">
+            {/* 📸 Background Image Layer */}
+            <div className="absolute inset-0 z-0">
+              <Image
+                src="/sir.jpg"
+                alt="Dr. Javed Iqbal"
+                fill // 👈 Iske liye parent (div) 'relative' hona chahiye
+                className="object-cover object-top opacity-50 group-hover:grayscale-0 group-hover:opacity-60 transition-all duration-1000 group-hover:scale-105"
+                priority // 👈 Ye add kar dein taake image foran load ho
+              />
             </div>
-            <div className="relative z-10 border-t border-white/10 pt-6">
-              <p className="text-[#997819] font-black text-[10px] uppercase tracking-[0.2em]">
-                Strategic Partner Feedback
-              </p>
-              <p className="text-white/60 text-[10px] font-medium uppercase mt-1">
-                UK Compliance Sector
-              </p>
+
+            {/* 🔹 Gradient Color Overlay Effect (Premium) */}
+            <div className="absolute inset-0 z-10 bg-linear-to-t from-[#12066a] via-[#12066a]/20 to-transparent transition-opacity duration-700 opacity-90 group-hover:opacity-80" />
+
+            {/* Content Layer (Optional: Just for a subtle Interactive effect at bottom) */}
+            <div className="relative z-20 space-y-2 pointer-events-none translate-y-4 group-hover:translate-y-0 transition-transform duration-700">
+              {/* Minimalist interactive detail (Optional, can be removed) */}
+              <div className="w-12 h-1 bg-[#997819] opacity-0 group-hover:opacity-100 transition-opacity" />
+              <span className="text-white font-black text-sm uppercase tracking-wider block opacity-0 group-hover:opacity-100 transition-opacity">
+                Our Ceo
+              </span>
             </div>
           </div>
         </div>
@@ -165,8 +172,6 @@ const TrainingMoments = () => {
               Inside Our{" "}
               <span className="text-[#997819] italic">Sessions.</span>
             </h3>
-
-           
           </FadeIn>
         </div>
 
