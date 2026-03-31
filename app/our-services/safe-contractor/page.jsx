@@ -33,9 +33,9 @@ const SafeContractorPage = () => {
 
         {/* Step 2: Large Watermark Text (Middle Layer) */}
         <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none select-none z-10">
-          <h2 className="text-[10rem] md:text-[12rem] font-black text-white/[0.05] leading-none uppercase tracking-tighter text-center">
+          <span className="text-[10rem] md:text-[12rem] font-black text-white/[0.05] leading-none uppercase tracking-tighter text-center">
             SAFE <br className="md:hidden" /> CONTRACTOR
-          </h2>
+          </span>
         </div>
 
         {/* Step 3: Actual Content (Top Layer) */}
@@ -57,8 +57,11 @@ const SafeContractorPage = () => {
             <FadeIn direction="right" duration="0.8">
               <p className="mt-2 text-blue-100/80 text-lg md:text-2xl max-w-2xl leading-relaxed font-medium">
                 Achieve SafeContractor accreditation with expert support from
-                <Link href="/">BizGrow Holdings</Link>. We help UK businesses meet health and safety
-                standards and win more contracts with confidence.
+                <Link href="/" className="text-[#997819] font-bold ml-1">
+                  BizGrow Holdings
+                </Link>
+                . We help UK businesses meet health and safety standards and win
+                more contracts with confidence.
               </p>
             </FadeIn>
 
@@ -82,21 +85,40 @@ const SafeContractorPage = () => {
               <div className="space-y-6 text-zinc-500 text-md leading-relaxed font-medium">
                 <p>
                   The SafeContractor Scheme is one of the UK’s most trusted
-                  health and safety accreditation programs, designed to help
-                  businesses show their commitment to safe and compliant
-                  workplaces. It is especially valuable for industries that work
-                  in high-risk environments, such as construction,
-                  manufacturing, facilities management, and private security
+                  <Link
+                    href="https://bizgrow-holdings.com/key-components-of-health-and-safety-policy/"
+                    className="text-[#997819] font-bold ml-1"
+                  >
+                    health and safety
+                  </Link>{" "}
+                  accreditation programs, designed to help businesses show their
+                  commitment to safe and compliant workplaces. It is especially
+                  valuable for industries that work in high-risk environments,
+                  such as construction, manufacturing, facilities management,
+                  and{" "}
+                  <Link
+                    href="https://bizgrow-holdings.com/our-services/private-security-startup/"
+                    className="text-[#997819] font-bold mr-1"
+                  >
+                    private security
+                  </Link>
                   services.
                 </p>
                 <p>
-                  With SafeContractor accreditation, a business proves it has
-                  strong health and safety policies, procedures, and systems to
-                  protect employees, subcontractors, and clients. When
-                  businesses meet these standards, they can comply with UK
-                  safety legislation, inspire confidence in their clients and
-                  partners, and present themselves as professional, trustworthy,
-                  and safety-focused businesses in the UK.
+                  With{" "}
+                  <Link
+                    href="https://bizgrow-holdings.com/safecontractor-what-your-uk-business-needs-to-know/"
+                    className="text-[#997819] font-bold"
+                  >
+                    SafeContractor
+                  </Link>{" "}
+                  accreditation, a business proves it has strong health and
+                  safety policies, procedures, and systems to protect employees,
+                  subcontractors, and clients. When businesses meet these
+                  standards, they can comply with UK safety legislation, inspire
+                  confidence in their clients and partners, and present
+                  themselves as professional, trustworthy, and safety-focused
+                  businesses in the UK.
                 </p>
               </div>
             </FadeIn>
@@ -109,9 +131,19 @@ const SafeContractorPage = () => {
                 <h3 className="text-xl font-black text-white mb-6">
                   Accreditation Benefits:
                 </h3>
-                <ul className="space-y-4 ">
+                <ul className="space-y-4">
                   {[
-                    "Win more contracts by proving your business meets recognised UK health and safety standards.",
+                    <>
+                      Win more contracts by proving your business meets
+                      recognised{" "}
+                      <Link
+                        href="https://bizgrow-holdings.com/8-tips-to-secure-safecontractor-accreditation/"
+                        className="text-[#997819] font-bold inline hover:underline"
+                      >
+                        UK health and safety
+                      </Link>{" "}
+                      standards.
+                    </>,
                     "Build stronger credibility with clients and contractors across the UK.",
                     "Improve health & safety compliance through structured risk management.",
                     "Speed up tender approvals, as many buyers require SafeContractor accreditation.",
@@ -119,13 +151,14 @@ const SafeContractorPage = () => {
                   ].map((item, idx) => (
                     <li
                       key={idx}
-                      className="flex items-start gap-3 text-zinc-400 font-bold"
+                      className="flex items-start gap-3 text-zinc-400 font-bold leading-relaxed"
                     >
                       <CheckCircle
                         size={18}
                         className="text-[#997819] mt-1 shrink-0"
-                      />{" "}
-                      {item}
+                      />
+                      {/* 🔹 Span add karne se text flow natural rahega */}
+                      <span className="block text-left">{item}</span>
                     </li>
                   ))}
                 </ul>
@@ -156,9 +189,22 @@ const SafeContractorPage = () => {
                 Services that SafeContractor Provides
               </h2>
               <p className="text-zinc-300 max-w-2xl mx-auto font-medium">
-                Our SafeContractor Services address the highest-risk sectors in
-                the UK and assist businesses in obtaining safety compliance with
-                confidence.
+                Our{" "}
+                <Link
+                  href="https://bizgrow-holdings.com/check-if-a-contractor-has-safecontractor-accreditation/"
+                  className="text-[#997819] font-bold"
+                >
+                  SafeContractor
+                </Link>{" "}
+                Services address the highest-risk sectors in the UK and assist
+                businesses in obtaining safety{" "}
+                <Link
+                  href="https://bizgrow-holdings.com/compliance-consultancies/"
+                  className="text-[#997819] font-bold"
+                >
+                  compliance
+                </Link>{" "}
+                with confidence.
               </p>
             </FadeIn>
           </div>
@@ -172,7 +218,19 @@ const SafeContractorPage = () => {
               },
               {
                 t: "Facilities Management Safety",
-                d: "Assist facility service providers in establishing effective health and safety systems in a range of workspaces, including offices, warehouses, and construction sites",
+                d: (
+                  <>
+                    Assist facility service providers in establishing effective{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/why-safe-contractor-certification-is-essential-for-uk-contractors-and-suppliers/"
+                      className="text-[#997819] font-bold"
+                    >
+                      health and safety
+                    </Link>{" "}
+                    systems in a range of workspaces, including offices,
+                    warehouses, and construction sites
+                  </>
+                ),
                 icon: <HardHat className="w-10 h-10" />,
               },
               {
@@ -298,9 +356,16 @@ const SafeContractorPage = () => {
                   <span className="text-[#997819]">Accreditation.</span>
                 </h2>
                 <p className="text-blue-100/70 text-lg font-medium mb-10 leading-relaxed">
-                  Choosing SafeContractor shows your commitment to professional
-                  standards and client confidence. It helps your business stand
-                  out in the competitive UK market.
+                  Choosing{" "}
+                  <Link
+                    href="https://bizgrow-holdings.com/what-is-safe-contractor-accreditation-and-why-is-it-important/"
+                    className="text-[#997819] font-bold"
+                  >
+                    SafeContractor
+                  </Link>{" "}
+                  shows your commitment to professional standards and client
+                  confidence. It helps your business stand out in the
+                  competitive UK market.
                 </p>
 
                 {/* Feature List */}
@@ -380,12 +445,16 @@ const SafeContractorPage = () => {
                 Get Your SafeContractor Seal This Month
               </h3>
               <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-                <button className="px-12 py-6 bg-[#997819] text-white font-black uppercase tracking-widest text-[10px] rounded-2xl hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-2xl">
-                  Start My Assessment
-                </button>
-                <button className="px-12 py-6 bg-transparent border border-white/20 text-white font-black uppercase tracking-widest text-[10px] rounded-2xl hover:bg-white/10 transition-all">
-                  View H&S Checklist
-                </button>
+                <Link href="/contact-us">
+                  <button className="px-12 py-6 bg-[#997819] text-white font-black uppercase tracking-widest text-[10px] rounded-2xl hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-2xl">
+                    Start My Assessment
+                  </button>
+                </Link>
+                <Link href="https://bizgrow-holdings.com/safe-contractor-checklist/">
+                  <button className="px-12 py-6 bg-transparent border border-white/20 text-white font-black uppercase tracking-widest text-[10px] rounded-2xl hover:bg-white/10 transition-all">
+                    View H&S Checklist
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
