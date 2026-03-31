@@ -4,7 +4,7 @@ import {
   Award,
   GraduationCap,
   MapPin,
-  ShieldCheck,
+
 } from "lucide-react";
 import Image from "next/image";
 import FadeIn from "@/components/MotionWrapper";
