@@ -229,6 +229,18 @@ export default function Navbar() {
               </AnimatePresence>
             </div>
 
+            <Link
+              href="/testimonials-reviews"
+              className="hover:text-[#997819]  transition"
+            >
+              Testimonials
+            </Link>
+            <Link
+              href="/training-moments"
+              className="hover:text-[#997819]  transition"
+            >
+              Training Moments
+            </Link>
             <Link href="/blogs" className="hover:text-[#997819] transition">
               Blogs
             </Link>
@@ -237,18 +249,6 @@ export default function Navbar() {
               className="hover:text-[#997819]  transition"
             >
               Contact
-            </Link>
-            <Link
-              href="/testimonials-reviews"
-              className="hover:text-[#997819]  transition"
-            >
-             Testimonials
-            </Link>
-            <Link
-              href="/training-moments"
-              className="hover:text-[#997819]  transition"
-            >
-             Training Moments
             </Link>
           </div>
 
