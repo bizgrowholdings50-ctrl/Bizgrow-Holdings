@@ -16,6 +16,7 @@ import {
   Briefcase,
   Zap,
 } from "lucide-react";
+import Link from "next/link";
 
 export const metadata = {
   title: "SIA ACS Certification | BizGrow Holdings Ltd ",
@@ -43,9 +44,9 @@ const SIAACSPage = () => {
 
         {/* 🔹 Step 3: Large Watermark Text (Middle Layer) */}
         <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none select-none z-10">
-          <h2 className="text-[12rem] md:text-[25rem] font-black text-white/[0.12] leading-none uppercase tracking-tighter">
+          <span className="text-[12rem] md:text-[25rem] font-black text-white/[0.12] leading-none uppercase tracking-tighter">
             ACS
-          </h2>
+          </span>
         </div>
 
         {/* 🔹 Step 4: Actual Content (Top Layer) */}
@@ -66,10 +67,16 @@ const SIAACSPage = () => {
 
             <FadeIn direction="right" duration="0.8">
               <p className="mt-8 text-blue-100/80 text-lg md:text-2xl max-w-2xl leading-relaxed font-medium">
-                BizGrow Holdings provides specialist SIA ACS consultancy
-                services designed to help UK security businesses meet assessment
-                criteria, improve operational performance, and achieve
-                successful accreditation.
+                BizGrow Holdings provides specialist{" "}
+                <Link
+                  href="https://bizgrow-holdings.com/top-sia-security-recruitment-agencies-in-the-uk/"
+                  className="text-[#997819] font-bold"
+                >
+                  SIA ACS
+                </Link>{" "}
+                consultancy services designed to help UK security businesses
+                meet assessment criteria, improve operational performance, and
+                achieve successful accreditation.
               </p>
             </FadeIn>
 
@@ -95,39 +102,76 @@ const SIAACSPage = () => {
                 </h2>
                 <div className="space-y-6 text-zinc-600 text-lg leading-relaxed font-medium">
                   <p>
-                    The Security Industry Authority (SIA) Approved Contractor
-                    Scheme (ACS) represents the highest standard of operational
-                    competence for UK security providers. At BizGrow Holdings,
-                    we guide security companies through every stage of the ACS
-                    accreditation process, ensuring full alignment with the SIA
-                    Self-Assessment Workbook (SAW) and performance indicators.
+                    The Security Industry Authority{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/business-benefits-of-becoming-an-sia-approved-contractor/"
+                      className="text-[#997819] font-bold"
+                    >
+                      (SIA)
+                    </Link>{" "}
+                    Approved Contractor Scheme (ACS) represents the highest
+                    standard of operational competence for UK security
+                    providers. At BizGrow Holdings, we guide security companies
+                    through every stage of the ACS accreditation process,
+                    ensuring full alignment with the SIA Self-Assessment
+                    Workbook (SAW) and performance indicators.
+                    <br />
+                    <br />
                     Our consultancy is built on structured compliance
                     implementation, not generic templates. We integrate robust
                     management systems across recruitment, vetting, training,
                     supervision, and financial governance to help you meet all
-                    88 ACS assessment indicators and achieve strong, audit-ready
-                    outcomes.
+                    88{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/get-acs-accreditation-fast/"
+                      className="text-[#997819] font-bold"
+                    >
+                      ACS assessment
+                    </Link>{" "}
+                    indicators and achieve strong, audit-ready outcomes.
                   </p>
                 </div>
               </FadeIn>
             </div>
             <div className="lg:col-span-4 bg-[#12066a] p-10 rounded-[3rem] border border-zinc-100 shadow-sm ">
-              <h4 className="text-white font-black uppercase tracking-widest text-md mb-6">
+              <h3 className="text-white font-black uppercase tracking-widest text-md mb-6">
                 ACS Compliance Focus Areas:
-              </h4>
+              </h3>
               <ul className="space-y-4">
                 {[
-                  "Self-Assessment Workbook (SAW) preparation ",
-                  "Performance Indicator alignment (88 criteria) ",
+                  "Self-Assessment Workbook (SAW) preparation",
+                  "Performance Indicator alignment (88 criteria)",
                   "Workforce screening compliance",
-                  "Risk management systems ",
-                  "Internal audit & improvement planning ",
+                  <>
+                    <Link
+                      href="https://bizgrow-holdings.com/what-does-rams-stand-for/"
+                      className="text-[#997819] font-bold"
+                    >
+                      Risk management
+                    </Link>{" "}
+                    systems
+                  </>,
+                  <>
+                    <Link
+                      href="https://bizgrow-holdings.com/our-services/internal-audit/"
+                      className="text-[#997819] font-bold"
+                    >
+                      Internal audit
+                    </Link>
+                  </>,
                 ].map((item, idx) => (
                   <li
                     key={idx}
-                    className="flex items-center gap-3 text-white font-bold"
+                    className="flex items-start gap-4 text-white font-bold leading-tight"
                   >
-                    <CheckCircle2 size={18} className="text-[#997819]" /> {item}
+                    {/* flex-shrink-0: Icon ko pichakne se rokta hai
+          mt-1: Text ki pehli line ke sath align karta hai
+      */}
+                    <CheckCircle2
+                      size={22}
+                      className="text-[#997819] flex-shrink-0 mt-1"
+                    />
+                    <span className="text-lg ">{item}</span>
                   </li>
                 ))}
               </ul>
@@ -155,7 +199,7 @@ const SIAACSPage = () => {
             {[
               {
                 t: "Strategic Direction",
-                d: "Clear governance, defined objectives, and structured policies aligned with ACS requirements.",
+                d: <>Clear governance, defined objectives, and structured policies aligned with <Link href="https://bizgrow-holdings.com/acs-accreditation-for-security-businesses/" className="text-[#997819] font-bold">ACS</Link> requirements.</>,
               },
               {
                 t: "Service Delivery ",
@@ -167,15 +211,15 @@ const SIAACSPage = () => {
               },
               {
                 t: "Financial Stability",
-                d: "Proven financial control, tax compliance, and business continuity planning. ",
+                d: <>Proven financial control, tax <Link href="https://bizgrow-holdings.com/compliance-consultancies/" className="text-[#997819] font-bold">compliance</Link>, and business continuity planning.</>,
               },
               {
                 t: "Operational Resource Management",
-                d: "Ensuring effective deployment of personnel, equipment control, and structured risk management systems. ",
+                d: <>Ensuring effective deployment of personnel, equipment control, and structured <Link href="https://bizgrow-holdings.com/site-specific-risk-assessment/" className="text-[#997819] font-bold">risk management systems</Link>. </>,
               },
               {
                 t: "Workforce Compliance ",
-                d: "Embedding BS 7858 vetting, structured training programmes, and competency monitoring across all operational roles.",
+                d: <>Embedding <Link href="https://bizgrow-holdings.com/bs-7858-screening-and-vetting-standards-requirements-process/" className="text-[#997819] font-bold">BS 7858</Link> vetting, structured training programmes, and competency monitoring across all operational roles.</>,
               },
               {
                 t: "Leadership & Accountability ",
@@ -196,9 +240,9 @@ const SIAACSPage = () => {
                 {/* Content Layer (z-10) */}
                 <div className="relative z-10 h-full flex flex-col">
                   {/* Title - Turns Gold on Hover */}
-                  <h4 className="text-xl font-black text-[#12066a] mb-3 group-hover:text-[#997819] transition-colors duration-500 uppercase tracking-tighter leading-tight">
+                  <h3 className="text-xl font-black text-[#12066a] mb-3 group-hover:text-[#997819] transition-colors duration-500 uppercase tracking-tighter leading-tight">
                     {pillar.t}
-                  </h4>
+                  </h3>
 
                   {/* Description - Turns White on Hover */}
                   <p className="text-sm text-zinc-500 font-medium leading-relaxed group-hover:text-blue-100/70 transition-colors duration-500">
@@ -228,7 +272,7 @@ const SIAACSPage = () => {
                 <span className="text-[#997819]">SIA ACS Approved</span>
               </h2>
               <p className="text-zinc-600 text-lg font-medium leading-relaxed">
-                Accreditation under the SIA ACS provides security companies with
+                Accreditation under the SIA ACS provides <Link href="https://bizgrow-holdings.com/top-security-companies-trusted-protection-for-every-business/" className="text-[#997819] font-bold">security companies</Link> with
                 a powerful benchmark for credibility, building lasting
                 confidence among high-tier clients and stakeholders across the
                 UK.
@@ -241,51 +285,59 @@ const SIAACSPage = () => {
             {[
               {
                 title: "Legal Compliance",
-                desc: "Demonstrate full alignment with UK laws, ensuring professional accountability and regulatory adherence.",
-                icon: <ShieldCheck className="text-[#997819]" size={28} />,
+                desc: <>Demonstrate full alignment with <Link href="https://bizgrow-holdings.com/key-environmental-laws-in-the-uk/" className="text-[#997819] font-bold">UK laws</Link>, ensuring professional accountability and regulatory adherence.</>,
+                icon: <ShieldCheck size={28} />,
               },
               {
                 title: "Operational Excellence",
                 desc: "Leverage industry best practices to streamline operations, maintain consistency, and deliver top-tier results.",
-                icon: <TrendingUp className="text-[#997819]" size={28} />,
+                icon: <TrendingUp size={28} />,
               },
               {
                 title: "Access to Contracts",
-                desc: "Unlock premium government and private sector tenders that strictly require SIA ACS approval.",
-                icon: <Briefcase className="text-[#997819]" size={28} />,
+                desc: <>Unlock premium government and <Link href="https://bizgrow-holdings.com/uks-private-security-directory/" className="text-[#997819] font-bold">private sector</Link> tenders that strictly require SIA ACS approval.</>,
+                icon: <Briefcase size={28} />,
               },
               {
                 title: "Reduction in Risk",
                 desc: "Mitigate legal and operational liabilities by embedding audited compliance into your core business model.",
-                icon: <ShieldAlert className="text-[#997819]" size={28} />,
+                icon: <ShieldAlert size={28} />,
               },
               {
                 title: "Credibility & Trust",
                 desc: "Provide tangible proof of quality, giving clients complete confidence in your security services.",
-                icon: <Award className="text-[#997819]" size={28} />,
+                icon: <Award size={28} />,
               },
               {
                 title: "Improved Credibility",
-                desc: "Public recognition as an SIA ACS-approved service demonstrates credibility as a respected and trusted UK security service provider. ",
-                icon: <CheckCircle2 className="text-[#997819]" size={28} />,
+                desc: <>Public recognition as an SIA ACS-approved service demonstrates credibility as a respected and trusted UK <Link href="https://bizgrow-holdings.com/how-to-start-a-security-company-in-the-uk/" className="text-[#997819] font-bold">security service</Link> provider.</>,
+                icon: <CheckCircle2 size={28} />,
               },
             ].map((adv, idx) => (
               <FadeIn key={idx} direction="up" delay={idx * 0.1}>
-                <div className="group p-10 rounded-[3rem] bg-zinc-50 border border-zinc-100 transition-all duration-500 hover:bg-[#12066a] hover:shadow-[0_40px_80px_-15px_rgba(18,6,106,0.3)] hover:-translate-y-3 h-full flex flex-col items-center text-center">
-                  {/* Icon Container with subtle animation */}
-                  <div className="w-16 h-16 rounded-2xl bg-white shadow-sm flex items-center justify-center mb-8  group-hover:rotate-[10deg] transition-all duration-500">
-                    <div className="group-hover:text-white transition-colors duration-500">
-                      {adv.icon}
+                <div className="relative group p-10 rounded-[3rem] bg-zinc-50 border border-zinc-100 overflow-hidden transition-all duration-500 cursor-pointer h-full flex flex-col items-center text-center shadow-sm hover:shadow-2xl">
+                  {/* 🟦 Sliding Background Layer (Left to Right) */}
+                  <div className="absolute inset-0 bg-[#12066a] translate-x-[-101%] group-hover:translate-x-0 transition-transform duration-500 ease-out z-0" />
+
+                  {/* Content Layer (z-10) */}
+                  <div className="relative z-10 flex flex-col items-center">
+                    {/* Icon Container */}
+                    <div className="w-16 h-16 rounded-2xl bg-white shadow-sm flex items-center justify-center mb-8 group-hover:rotate-[10deg] group-hover:scale-110 transition-all duration-500">
+                      <div className="text-[#997819] transition-colors duration-500">
+                        {adv.icon}
+                      </div>
                     </div>
+
+                    {/* Title - Turns Gold/White on Hover */}
+                    <h3 className="text-2xl font-black text-[#12066a] mb-4 group-hover:text-[#997819] transition-colors duration-500 tracking-tight uppercase">
+                      {adv.title}
+                    </h3>
+
+                    {/* Description - Turns White on Hover */}
+                    <p className="text-zinc-500 font-medium leading-relaxed group-hover:text-blue-100/70 transition-colors duration-500">
+                      {adv.desc}
+                    </p>
                   </div>
-
-                  <h4 className="text-2xl font-black text-[#12066a] mb-4 group-hover:text-white transition-colors tracking-tight">
-                    {adv.title}
-                  </h4>
-
-                  <p className="text-zinc-500 font-medium leading-relaxed group-hover:text-blue-100/70 transition-colors">
-                    {adv.desc}
-                  </p>
                 </div>
               </FadeIn>
             ))}
@@ -330,9 +382,9 @@ const SIAACSPage = () => {
                       {step.n}
                     </span>
                     <div>
-                      <h4 className="text-xl font-bold mb-2 tracking-tight">
+                      <h3 className="text-xl font-bold mb-2 tracking-tight">
                         {step.t}
-                      </h4>
+                      </h3>
                       <p className="text-white/80 text-sm leading-relaxed">
                         {step.d}
                       </p>
@@ -404,7 +456,7 @@ const SIAACSPage = () => {
               </h3>
               <div className="flex flex-col md:flex-row items-center justify-center gap-6">
                 <button className="px-12 py-6 bg-[#997819] text-white font-black uppercase tracking-widest text-sm rounded-2xl hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-2xl active:scale-95">
-                  Book ACS Consultation
+                 <Link href="/contact-us">Book ACS Consultation</Link> 
                 </button>
               </div>
             </div>

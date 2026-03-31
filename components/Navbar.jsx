@@ -228,34 +228,28 @@ export default function Navbar() {
                 )}
               </AnimatePresence>
             </div>
-
+            <Link
+              href="/training-moments"
+              className="hover:text-[#997819]  transition"
+            >
+              Workshop Training 
+            </Link>
             <Link
               href="/testimonials-reviews"
               className="hover:text-[#997819]  transition"
             >
               Testimonials
             </Link>
-            <Link
-              href="/training-moments"
-              className="hover:text-[#997819]  transition"
-            >
-              Training Moments
-            </Link>
+
             <Link href="/blogs" className="hover:text-[#997819] transition">
               Blogs
-            </Link>
-            <Link
-              href="/contact-us"
-              className="hover:text-[#997819]  transition"
-            >
-              Contact
             </Link>
           </div>
 
           {/* THEME & MOBILE BUTTON */}
           <div className="flex items-center gap-4">
             <button className="hidden md:block text-white font-semibold border border-[#997819] bg-[#12066a] px-3 py-1.5 rounded-2xl">
-              Contact Us
+              <Link href="/contact-us">Contact Us</Link>
             </button>
             <button
               aria-label={mobileOpen ? "Close Menu" : "Open Menu"}
@@ -363,13 +357,6 @@ export default function Navbar() {
                 className="text-xl font-medium text-black"
               >
                 Blogs
-              </Link>
-              <Link
-                href="/contact-us"
-                onClick={() => setMobileOpen(false)}
-                className="text-xl font-medium text-black"
-              >
-                Contact
               </Link>
             </div>
           </motion.div>

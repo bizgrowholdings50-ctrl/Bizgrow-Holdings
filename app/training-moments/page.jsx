@@ -43,7 +43,7 @@ const galleryItems = [
   {
     id: 6,
     src: "/w6.jpg",
-    title: "Dr. Javed in Action",
+    title: "CHAS Training",
     location: "UK HQ",
   },
 ];
