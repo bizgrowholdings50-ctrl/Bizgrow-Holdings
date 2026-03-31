@@ -57,7 +57,7 @@ const SafeContractorPage = () => {
             <FadeIn direction="right" duration="0.8">
               <p className="mt-2 text-blue-100/80 text-lg md:text-2xl max-w-2xl leading-relaxed font-medium">
                 Achieve SafeContractor accreditation with expert support from
-                <Link>BizGrow Holdings</Link>. We help UK businesses meet health and safety
+                <Link href="/">BizGrow Holdings</Link>. We help UK businesses meet health and safety
                 standards and win more contracts with confidence.
               </p>
             </FadeIn>
