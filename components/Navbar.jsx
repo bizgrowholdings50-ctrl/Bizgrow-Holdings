@@ -51,7 +51,7 @@ export default function Navbar() {
     {
       title: "COP 119",
       description: "Code of Practice for labour provision in security sectors.",
-      href: "/cop-119-labour-provision",
+      href: "/our-services/cop-119-labour-provision",
       icon: <Users />,
     },
     {

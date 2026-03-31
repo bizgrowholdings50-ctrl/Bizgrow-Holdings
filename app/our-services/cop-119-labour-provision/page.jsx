@@ -9,6 +9,7 @@ import {
   CheckCircle2,
   ArrowRight,
 } from "lucide-react";
+import Link from "next/link";
 
 export const metadata = {
   title: "COP119 Compliance | BizGrow Holdings Ltd UK Experts",
@@ -35,9 +36,9 @@ const COP119Page = () => {
 
         {/* Step 2: Large Watermark Text (Middle Layer) */}
         <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none select-none z-10">
-          <h2 className="text-[12rem] md:text-[20rem] font-black text-white/[0.05] leading-none uppercase tracking-tighter">
+          <span className="text-[12rem] md:text-[20rem] font-black text-white/[0.05] leading-none uppercase tracking-tighter">
             COP119
-          </h2>
+          </span>
         </div>
 
         {/* Step 3: Actual Content (Top Layer) */}
@@ -58,7 +59,13 @@ const COP119Page = () => {
 
             <FadeIn direction="right" duration="0.8">
               <p className="mt-8 text-blue-100/80 text-lg md:text-2xl max-w-2xl leading-relaxed font-medium">
-                The essential Code of Practice for UK security companies
+                The essential Code of Practice for{" "}
+                <Link
+                  href="https://bizgrow-holdings.com/security-companies-are-considered-the-safest-choice/"
+                  className="text-[#997819] font-bold mr-1"
+                >
+                  UK security companies
+                </Link>
                 supplying labour, ensuring transparency, ethical recruitment,
                 and full regulatory compliance.
               </p>
@@ -86,15 +93,27 @@ const COP119Page = () => {
                   COP119 compliance is essential for UK security companies that
                   provide manned guarding services, including static guarding,
                   mobile patrols, key holding, and site security. Any
-                  organisation applying for or maintaining ACS (Approved
-                  Contractor Scheme) status is expected to align with COP119
-                  operational standards. It ensures your business meets
-                  structured requirements for recruitment, screening, training,
-                  deployment, and supervision of security personnel.
+                  organisation applying for or maintaining{" "}
+                  <Link
+                    href="https://bizgrow-holdings.com/get-acs-accreditation-fast/"
+                    className="text-[#997819] font-bold"
+                  >
+                    ACS (Approved Contractor Scheme)
+                  </Link>{" "}
+                  status is expected to align with COP119 operational standards.
+                  It ensures your business meets structured requirements for
+                  recruitment, screening, training, deployment, and supervision
+                  of security personnel.
                 </p>
                 <p>
-                  COP119 is especially important for security companies bidding
-                  for commercial and public-sector contracts where operational
+                  <Link
+                    href="https://bizgrow-holdings.com/cop119-compliance-guide-for-uk-security-businesses-requirements-and-benefits/"
+                    className="text-[#997819] font-bold"
+                  >
+                    COP119
+                  </Link>{" "}
+                  is especially important for security companies bidding for
+                  commercial and public-sector contracts where operational
                   standards are closely reviewed. It strengthens audit
                   performance and builds client confidence. For a growing
                   business, it provides a clear structure to support credibility
@@ -108,9 +127,9 @@ const COP119Page = () => {
                 <div className="absolute top-0 right-0 p-8 text-[#997819] opacity-10">
                   <Gavel size={120} />
                 </div>
-                <h4 className="text-2xl font-black text-white mb-6">
+                <h3 className="text-2xl font-black text-white mb-6">
                   COP 119 Key Requirements:
-                </h4>
+                </h3>
                 <ul className="space-y-4">
                   {[
                     "Structured recruitment and vetting procedures for security personnel",
@@ -121,11 +140,11 @@ const COP119Page = () => {
                   ].map((item, idx) => (
                     <li
                       key={idx}
-                      className="flex items-center gap-3 text-white font-bold"
+                      className="flex items-start gap-3 text-white font-bold"
                     >
                       <CheckCircle2
                         size={18}
-                        className="text-[#997819] shrink-0"
+                        className="text-[#997819] mt-1 shrink-0"
                       />{" "}
                       {item}
                     </li>
@@ -159,8 +178,13 @@ const COP119Page = () => {
               </h2>
               <p className="text-zinc-300 max-w-2xl mx-auto font-medium">
                 Operational standards that ensure professionalism,
-                accountability, and service quality within UK security
-                companies.
+                accountability, and service quality within{" "}
+                <Link
+                  href="https://bizgrow-holdings.com/how-to-start-a-security-company-in-the-uk/"
+                  className="text-[#997819] font-bold"
+                >
+                  UK security companies.
+                </Link>
               </p>
             </FadeIn>
           </div>
@@ -233,10 +257,16 @@ const COP119Page = () => {
                 </h2>
                 <div className="space-y-6 text-zinc-600 font-medium text-lg leading-relaxed">
                   <p>
-                    COP119 provides a structured operational framework that
-                    strengthens professionalism across UK security businesses.
-                    It aligns recruitment, supervision, and service delivery
-                    with recognised industry standards.
+                    <Link
+                      href="https://bizgrow-holdings.com/cop-119-helps-security-businesses-maintain-high-standards/"
+                      className="text-[#997819] font-bold"
+                    >
+                      COP119
+                    </Link>{" "}
+                    provides a structured operational framework that strengthens
+                    professionalism across UK security businesses. It aligns
+                    recruitment, supervision, and service delivery with
+                    recognised industry standards.
                   </p>
                   <p className="border-l-4 border-[#997819] pl-6 italic bg-white py-4 rounded-r-2xl shadow-sm">
                     "For growing security companies, COP119 is not just a
@@ -250,16 +280,27 @@ const COP119Page = () => {
             {/* Right Side: Key Benefits List */}
             <FadeIn direction="left" delay={0.2}>
               <div className="bg-white p-8 md:p-12 rounded-[3.5rem] shadow-xl border border-zinc-100">
-                <h4 className="text-xl font-black text-[#12066a] uppercase tracking-widest mb-10 flex items-center gap-3">
+                <h3 className="text-xl font-black text-[#12066a] uppercase tracking-widest mb-10 flex items-center gap-3">
                   <div className="w-8 h-1 bg-[#997819] rounded-full" />
                   Key Advantages
-                </h4>
+                </h3>
 
                 <ul className="grid gap-6">
                   {[
                     {
                       t: "Audit Performance",
-                      d: "Improved audit performance and ACS scoring.",
+                      d: (
+                        <>
+                          Improved audit performance and{" "}
+                          <Link
+                            href="https://bizgrow-holdings.com/acs-accreditation-for-security-businesses/"
+                            className="text-[#997819] font-bold"
+                          >
+                            ACS
+                          </Link>{" "}
+                          scoring.
+                        </>
+                      ),
                     },
                     {
                       t: "Client Confidence",
@@ -332,13 +373,16 @@ const COP119Page = () => {
               </h3>
 
               <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-                <button className="px-12 py-6 bg-[#997819] text-white font-black uppercase tracking-widest text-[10px] rounded-2xl hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-2xl active:scale-95">
-                  Get Started Today
-                </button>
-
-                <button className="px-12 py-6 bg-transparent border border-white/20 text-white font-black uppercase tracking-widest text-[10px] rounded-2xl hover:bg-white/10 transition-all active:scale-95">
-                  Learn More
-                </button>
+                <Link href="/contact-us">
+                  <button className="px-12 py-6 bg-[#997819] text-white font-black uppercase tracking-widest text-[10px] rounded-2xl hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-2xl active:scale-95">
+                    Get Started Today
+                  </button>
+                </Link>
+                <Link href="https://bizgrow-holdings.com/category/cop-119/">
+                  <button className="px-12 py-6 bg-transparent border border-white/20 text-white font-black uppercase tracking-widest text-[10px] rounded-2xl hover:bg-white/10 transition-all active:scale-95">
+                    Learn More
+                  </button>
+                </Link>
               </div>
             </div>
           </div>
