@@ -13,40 +13,51 @@ const galleryItems = [
   {
     id: 1,
     src: "/w1.jpg",
-    title: "SIA ACS Training",
-    location: "London",
+    title: "Business growth workshop",
+    location: "BizGrow Holdings Ltd",
+    alt: "Business growth workshop - BizGrow Holdings Ltd",
   },
   {
     id: 2,
     src: "/w2.jpeg",
-    title: "ISO 9001 Audit",
-    location: "Manchester",
+    title: "Management systems training",
+    location: "BizGrow Holdings Ltd",
+    alt: "Management systems training - BizGrow Holdings Ltd",
   },
   {
     id: 3,
     src: "/w3.png",
-    title: "Security Seminar",
-    location: "Birmingham",
+    title: "Certification training session",
+    location: "BizGrow Holdings Ltd",
+    alt: "Certification training session - BizGrow Holdings Ltd",
   },
   {
     id: 4,
     src: "/w4.jpeg",
-    title: "Team Briefing",
-    location: "Leeds",
+    title: "Professional development session",
+    location: "BizGrow Holdings Ltd",
+    alt: "Professional development session - BizGrow Holdings Ltd",
   },
   {
     id: 5,
     src: "/w5.jpeg",
-    title: "Compliance Workshop",
-    location: "London",
+    title: "Security business training",
+    location: "BizGrow Holdings Ltd",
+    alt: "Security business training - BizGrow Holdings Ltd",
   },
   {
     id: 6,
     src: "/w6.jpg",
-    title: "CHAS Training",
-    location: "UK HQ",
+    title: "Compliance workshop",
+    location: "BizGrow Holdings Ltd",
+    alt: "Compliance workshop - BizGrow Holdings Ltd",
   },
 ];
+
+export const metadata = {
+  title: "BizGrow Training Moments: Compliance & Growth Simplified",
+  description: "BizGrow’s expert-led training helps business owners achieve compliance, streamline systems & scale for real growth.",
+};
 const TrainingMoments = () => {
   return (
     <main className="bg-white min-h-screen">
@@ -108,8 +119,13 @@ const TrainingMoments = () => {
               <span className="text-[#12066a] font-bold underline decoration-[#997819] decoration-2 underline-offset-4">
                 13 years of dedicated experience
               </span>{" "}
-              in security compliance and consultancy, Dr. Javed Iqbal has become
-              a cornerstone of industry standards in the UK.
+              in compliance and
+              consultancy, <span className="text-[#997819] font-black">Dr. Javed Iqbal</span> has earned a reputation as a trusted
+              advisor for businesses aiming to meet and exceed industry
+              standards. He partners with both security companies and
+              construction businesses to simplify complex compliance
+              requirements and transform them into practical, easy-to-implement
+              systems that drive measurable results..
             </p>
 
             <div className="grid grid-cols-2 gap-6 pt-6 border-t border-zinc-100">
@@ -183,7 +199,7 @@ const TrainingMoments = () => {
                 {/* Main Image */}
                 <img
                   src={item.src}
-                  alt={item.title}
+                  alt={item.alt}
                   className="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-1000"
                 />
 
