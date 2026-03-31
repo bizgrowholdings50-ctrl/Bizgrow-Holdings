@@ -26,6 +26,27 @@ const videoData = [
     company: "BizGrow Holdings",
     videoUrl: "/video/Workshop-video-2.mp4",
   },
+   {
+    id: 4,
+    name: "Workshop Review",
+    role: "Attendees",
+    company: "BizGrow Holdings",
+    videoUrl: "/video/ts-2.mp4",
+  },
+   {
+    id: 5,
+    name: "Usman Attique",
+    role: "Operational Manager",
+    company: "Zam Fm ltd",
+    videoUrl: "/video/usman-attique.mp4",
+  },
+   {
+    id: 6,
+    name: "Shehzad Qureshi",
+    role: "Director",
+    company: "Blue Nine ltd",
+    videoUrl: "/video/Sehzad Qureshi.mp4",
+  },
 ];
 
 const VideoTestimonials = () => {

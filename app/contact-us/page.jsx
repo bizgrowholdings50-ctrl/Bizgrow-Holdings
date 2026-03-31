@@ -3,6 +3,10 @@ import FadeIn from "@/components/MotionWrapper";
 import { Mail, Phone, MapPin, Globe, Sparkles } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
 
+export const metadata = {
+  title: "Contact Us | Security Business UK | BizGrow Holdings Ltd",
+  description: "Contact Us with BizGrow Holdings for Expert Support in Compliance, ACS, ISO, and Business Growth Services for UK Security Businesses.",
+};
 const ContactPage = () => {
   return (
     <main className="bg-[#f8fafc] text-zinc-900 overflow-x-hidden w-full relative min-h-screen">
@@ -55,7 +59,7 @@ const ContactPage = () => {
                 <FadeIn direction="up" delay={0.6}>
                   <p className="text-zinc-500 text-lg md:text-xl font-medium leading-relaxed">
                     Our expert team is dedicated to accelerating your business
-                    growth within the UK market. Please utilize the form below
+                    growth within the UK market. Please utilise the form below
                     or our contact details to initiate your strategic
                     consultation.
                   </p>

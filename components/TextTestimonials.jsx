@@ -39,7 +39,7 @@ const reviews = [
     role: "Director | Patriots Security UK",
     initials: "JO",
     tag: "SafeContractor Audit",
-    imgUrl: "/testimonials/jude.png" 
+    imgUrl: "/patriots.jpg" 
   },
   { 
     id: 5, 
@@ -57,7 +57,7 @@ const reviews = [
     role: "Client",
     initials: "MS",
     tag: "Strong Communication",
-    imgUrl: "/testimonials/saqib.png" 
+    imgUrl: "" 
   },
   { 
     id: 7, 
@@ -66,7 +66,7 @@ const reviews = [
     role: "Local Guide",
     initials: "GA",
     tag: "Highly Professional",
-    imgUrl: "/testimonials/gulfam.png" 
+    imgUrl: "" 
   },
   { 
     id: 8, 
@@ -75,7 +75,7 @@ const reviews = [
     role: "Inventory Solutions",
     initials: "PI",
     tag: "Business Compliance",
-    imgUrl: "/testimonials/pristine.png" 
+    imgUrl: "/pristine.jpeg" 
   },
     { 
     id: 9, 

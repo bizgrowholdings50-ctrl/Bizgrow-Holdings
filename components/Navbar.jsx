@@ -244,6 +244,12 @@ export default function Navbar() {
             >
              Testimonials
             </Link>
+            <Link
+              href="/training-moments"
+              className="hover:text-[#997819]  transition"
+            >
+             Training Moments
+            </Link>
           </div>
 
           {/* THEME & MOBILE BUTTON */}
