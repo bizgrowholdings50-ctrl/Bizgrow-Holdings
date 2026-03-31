@@ -1,52 +1,14 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Play, ChevronLeft, ChevronRight, X } from "lucide-react";
 
 const videoData = [
-  {
-    id: 1,
-    name: "James Dalton",
-    role: "CEO",
-    company: "SafeGuard Logistics",
-    videoUrl: "/video/ts-1.mp4",
-  },
-
-  {
-    id: 2,
-    name: "Alaiba",
-    role: "Speaker",
-    company: "BizGrow Partner",
-    videoUrl: "/video/Alaiba.mp4",
-  },
-  {
-    id: 3,
-    name: "Workshop Team",
-    role: "Strategic Team",
-    company: "BizGrow Holdings",
-    videoUrl: "/video/Workshop-video-2.mp4",
-  },
-   {
-    id: 4,
-    name: "Workshop Review",
-    role: "Attendees",
-    company: "BizGrow Holdings",
-    videoUrl: "/video/ts-2.mp4",
-  },
-   {
-    id: 5,
-    name: "Usman Attique",
-    role: "Operational Manager",
-    company: "Zam Fm ltd",
-    videoUrl: "/video/usman-attique.mp4",
-  },
-   {
-    id: 6,
-    name: "Shehzad Qureshi",
-    role: "Director",
-    company: "Blue Nine ltd",
-    videoUrl: "/video/Sehzad Qureshi.mp4",
-  },
+  { id: 1, name: "James Dalton", role: "CEO", company: "SafeGuard Logistics", videoUrl: "/video/ts-2.mp4" },
+  { id: 2, name: "Alaiba", role: "Speaker", company: "BizGrow Partner", videoUrl: "/video/Alaiba.mp4" },
+  { id: 3, name: "Workshop Team", role: "Strategic Team", company: "BizGrow Holdings", videoUrl: "/video/Workshop-video-2.mp4" },
+  { id: 4, name: "Usman Attique", role: "Operational Manager", company: "Zam Fm ltd", videoUrl: "/video/usman-attique.mp4" },
+  { id: 5, name: "Shehzad Qureshi", role: "Director", company: "Blue Nine ltd", videoUrl: "/video/Sehzad Qureshi.mp4" },
 ];
 
 const VideoTestimonials = () => {
@@ -54,157 +16,112 @@ const VideoTestimonials = () => {
   const [playingVideo, setPlayingVideo] = useState(null);
 
   const next = () => setIndex((prev) => (prev + 1) % videoData.length);
-  const prev = () =>
-    setIndex((prev) => (prev - 1 + videoData.length) % videoData.length);
+  const prev = () => setIndex((prev) => (prev - 1 + videoData.length) % videoData.length);
 
   return (
     <section className="py-12 md:py-24 bg-white overflow-hidden">
-      {/* 🚀 PERFORMANCE TRICK: Preload all videos in background */}
-      <div className="hidden">
-        {videoData.map((vid) => (
-          <video key={`preload-${vid.id}`} preload="auto" muted playsInline>
-            <source src={vid.videoUrl} type="video/mp4" />
-          </video>
-        ))}
-      </div>
-
       <div className="max-w-7xl mx-auto px-4">
-        {/* --- HEADING SECTION --- */}
-        <div className="text-center mb-16 max-w-3xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-7xl font-black uppercase tracking-tighter text-[#0c054e] mb-4"
-          >
-            Real <span className="text-[#997819]">Results</span>, Real Stories
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="text-gray-500 text-lg md:text-xl font-medium"
-          >
-            Watch how BizGrow Holdings is transforming industries through
-            innovation and dedicated partnership.
-          </motion.p>
+        {/* --- HEADING --- */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-7xl font-black uppercase tracking-tighter text-[#0c054e]">
+            Real <span className="text-[#997819]">Results</span>
+          </h2>
         </div>
 
-        {/* --- MAIN CONTAINER --- */}
-        <div className="relative w-full aspect-video min-h-[450px] md:min-h-[650px] rounded-[2.5rem] md:rounded-[4rem] overflow-hidden bg-[#0c054e] shadow-2xl isolate">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={index}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }} // Fastened for better feel
-              className="absolute inset-0 w-full h-full"
-            >
-              {/* 1. BACKDROP VIDEO (Optimized with preload) */}
-              <video
-                key={`bg-${videoData[index].videoUrl}`}
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
-                className="absolute inset-0 w-full h-full object-cover opacity-40 blur-[50px] scale-110 pointer-events-none"
-              >
-                <source src={videoData[index].videoUrl} type="video/mp4" />
-              </video>
+        {/* --- CYLINDER CAROUSEL CONTAINER --- */}
+        {/* Perspective yahan bht zaroori hai 3D look k liye */}
+        <div className="relative h-[450px] md:h-[550px] w-full flex items-center justify-center perspective-[2000px] isolate">
+          
+          <div className="relative w-full h-full flex items-center justify-center transform-style-3d">
+            <AnimatePresence mode="popLayout">
+              {videoData.map((vid, i) => {
+                const offset = (i - index + videoData.length) % videoData.length;
+                
+                // Hum 3 se zyada videos dikhayenge taake curve fill ho
+                if (offset > 2 && offset < videoData.length - 2) return null;
 
-              {/* 2. CENTER PORTRAIT VIDEO (Optimized with preload) */}
-              <div className="relative z-10 h-full w-full flex items-center justify-center">
-                <video
-                  key={`main-${videoData[index].videoUrl}`}
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  preload="auto"
-                  className="h-full w-auto max-w-full object-contain shadow-[0_0_50px_rgba(0,0,0,0.5)]"
-                >
-                  <source src={videoData[index].videoUrl} type="video/mp4" />
-                </video>
-              </div>
+                const isCenter = offset === 0;
+                
+                // Precise positioning for Cylinder effect
+                const xPos = isCenter ? "0%" : offset === 1 ? "80%" : offset === 2 ? "130%" : offset === videoData.length - 1 ? "-80%" : "-130%";
+                const rotation = isCenter ? 0 : offset === 1 ? -45 : offset === 2 ? -60 : offset === videoData.length - 1 ? 45 : 60;
+                const zPos = isCenter ? 100 : -200;
 
-              {/* 3. GRADIENT OVERLAY */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-20 pointer-events-none" />
-
-              {/* 4. CONTENT LAYER */}
-              <div className="absolute inset-0 p-6 md:p-16 flex flex-col justify-between z-30 pointer-events-none">
-                <div className="bg-white/10 backdrop-blur-md self-start px-4 py-1 rounded-full border border-white/20 pointer-events-auto">
-                  <span className="text-white text-[10px] font-bold uppercase tracking-widest">
-                    Success Story
-                  </span>
-                </div>
-
-                <div className="flex flex-col md:flex-row items-end justify-between gap-6 pointer-events-auto">
-                  <div className="text-white drop-shadow-lg">
-                    <h3 className="text-4xl md:text-8xl font-black uppercase leading-[0.9] mb-3">
-                      {videoData[index].name}
-                    </h3>
-                    <p className="text-[#997819] font-bold text-xs md:text-xl uppercase tracking-wider">
-                      {videoData[index].role}{" "}
-                      <span className="mx-2 opacity-50">|</span>{" "}
-                      {videoData[index].company}
-                    </p>
-                  </div>
-
-                  <button
-                    onClick={() => setPlayingVideo(videoData[index].videoUrl)}
-                    className="w-16 h-16 md:w-28 md:h-28 bg-[#997819] rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-2xl shrink-0"
+                return (
+                  <motion.div
+                    key={vid.id}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{
+                      opacity: isCenter ? 1 : 0.3,
+                      scale: isCenter ? 1 : 0.85,
+                      x: xPos,
+                      rotateY: rotation,
+                      z: zPos,
+                      filter: isCenter ? "blur(0px)" : "blur(2px)",
+                    }}
+                    transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                    className="absolute w-[260px] md:w-[320px] h-[400px] md:h-[500px] bg-[#0c054e] rounded-[3rem] overflow-hidden shadow-[0_20px_50px_rgba(12,5,78,0.3)] cursor-pointer border border-white/10"
+                    onClick={() => !isCenter && setIndex(i)}
                   >
-                    <Play className="text-white fill-white w-6 h-6 md:w-10 md:h-10 ml-1" />
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+                    <video
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="w-full h-full object-cover opacity-50"
+                    >
+                      <source src={vid.videoUrl} type="video/mp4" />
+                    </video>
+
+                    {/* Content Overlay */}
+                    <AnimatePresence>
+                      {isCenter && (
+                        <motion.div 
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          className="absolute inset-0 p-8 flex flex-col justify-end bg-gradient-to-t from-[#0c054e] via-transparent to-transparent"
+                        >
+                          <h3 className="text-white text-3xl font-black uppercase leading-[0.9] mb-1">{vid.name}</h3>
+                          <p className="text-[#997819] text-[10px] font-bold uppercase tracking-[0.2em] mb-6">{vid.role}</p>
+                          <button 
+                            onClick={(e) => { e.stopPropagation(); setPlayingVideo(vid.videoUrl); }}
+                            className="w-16 h-16 bg-[#997819] rounded-full flex items-center justify-center hover:scale-110 transition-transform shadow-xl active:scale-95"
+                          >
+                            <Play className="text-white fill-white w-6 h-6 ml-1" />
+                          </button>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
+          </div>
 
           {/* Nav Controls */}
-          <div className="absolute top-1/2 -translate-y-1/2 w-full flex justify-between px-4 md:px-8 z-40 pointer-events-none">
-            <button
-              onClick={prev}
-              className="w-10 h-10 md:w-14 md:h-14 rounded-full bg-white/10 backdrop-blur-md text-white flex items-center justify-center hover:bg-[#997819] transition-all pointer-events-auto border border-white/10 group"
-            >
-              <ChevronLeft className="group-hover:scale-110 transition-transform" />
+          <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between px-4 md:px-12 z-50 pointer-events-none">
+            <button onClick={prev} className="w-12 h-12 rounded-full bg-white shadow-xl text-[#0c054e] flex items-center justify-center hover:bg-[#997819] hover:text-white transition-all pointer-events-auto border border-zinc-100 group">
+              <ChevronLeft size={24} className="group-hover:-translate-x-0.5 transition-transform" />
             </button>
-            <button
-              onClick={next}
-              className="w-10 h-10 md:w-14 md:h-14 rounded-full bg-white/10 backdrop-blur-md text-white flex items-center justify-center hover:bg-[#997819] transition-all pointer-events-auto border border-white/10 group"
-            >
-              <ChevronRight className="group-hover:scale-110 transition-transform" />
+            <button onClick={next} className="w-12 h-12 rounded-full bg-white shadow-xl text-[#0c054e] flex items-center justify-center hover:bg-[#997819] hover:text-white transition-all pointer-events-auto border border-zinc-100 group">
+              <ChevronRight size={24} className="group-hover:translate-x-0.5 transition-transform" />
             </button>
           </div>
         </div>
       </div>
 
-      {/* Full Screen Video Modal */}
+      {/* Video Modal */}
       <AnimatePresence>
         {playingVideo && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-black flex items-center justify-center p-4"
+          <motion.div 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            exit={{ opacity: 0 }} 
+            className="fixed inset-0 z-[100] bg-[#0c054e]/95 backdrop-blur-xl flex items-center justify-center p-4"
           >
-            <button
-              onClick={() => setPlayingVideo(null)}
-              className="absolute top-6 right-6 text-white hover:text-[#997819] transition-colors z-[110]"
-            >
-              <X size={40} />
-            </button>
-            <div className="w-full max-w-5xl aspect-video">
-              <video
-                autoPlay
-                controls
-                className="w-full h-full object-contain shadow-2xl"
-              >
-                <source src={playingVideo} type="video/mp4" />
-              </video>
+            <button onClick={() => setPlayingVideo(null)} className="absolute top-8 right-8 text-white/50 hover:text-white transition-colors"><X size={40} /></button>
+            <div className="w-full max-w-4xl aspect-video rounded-3xl overflow-hidden shadow-2xl border border-white/10">
+               <video autoPlay controls className="w-full h-full bg-black"><source src={playingVideo} type="video/mp4" /></video>
             </div>
           </motion.div>
         )}

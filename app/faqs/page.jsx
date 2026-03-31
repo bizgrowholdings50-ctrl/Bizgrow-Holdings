@@ -165,7 +165,7 @@ const FAQPage = () => {
                 </p>
 
                 <button className="px-12 py-6 bg-[#997819] text-white font-black uppercase tracking-[0.2em] text-[11px] rounded-2xl hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-2xl transform hover:-translate-y-1">
-                  Speak to our experts
+                  <Link href="/contact-us">Speak to our experts</Link> 
                 </button>
               </FadeIn>
             </div>
