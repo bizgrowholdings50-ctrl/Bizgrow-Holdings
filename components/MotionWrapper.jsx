@@ -25,13 +25,14 @@ export default function FadeIn({ children, delay = 0, direction = "up", duration
           x: 0, 
           y: 0 
         }}
-        // 🔹 CHANGE: once ko false kar diya taake har baar view hone par trigger ho
-        // 🔹 TIP: amount: 0.2 add kiya hai taake jab card 20% nazar aaye tabhi animation start ho (ziyada smooth lagta hai)
-        viewport={{ once: false, margin: "-50px", amount: 0.2 }}
+        // 🔹 once: false (Reverse scroll par bhi chalega)
+        // 🔹 margin: "-10%" (Screen ke 10% andar aate hi trigger hoga)
+        // 🔹 amount: "some" (Ye sab se best hai bade contents ke liye)
+        viewport={{ once: false, margin: "-10%", amount: "some" }}
         transition={{ 
           duration: duration, 
           delay: delay, 
-          ease: "easeOut" 
+          ease: [0.25, 0.1, 0.25, 1.0], // Custom cubic-bezier for smoother feel
         }}
       >
         {children}

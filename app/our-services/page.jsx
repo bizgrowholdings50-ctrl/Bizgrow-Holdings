@@ -212,7 +212,7 @@ const ServicesPage = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service, i) => (
-              <FadeIn key={i} direction="up" delay={i * 0.1}>
+              <FadeIn key={i} direction="up" delay={0} duration={0.6}>
                 <Link href={service.href || "#"}>
                   <div className="group relative h-[450px] md:h-[420px] rounded-[3rem] overflow-hidden bg-[#12066a] transition-all duration-700 lg:hover:-translate-y-3 lg:hover:shadow-[0_40px_80px_-20px_rgba(18,6,106,0.4)] active:scale-[0.98]">
                     {/* 1. Background Image */}

@@ -4,6 +4,11 @@ import FadeIn from "@components/MotionWrapper";
 import VideoTestimonials from "@components/VideoTestimonials";
 import TextTestimonials from "@components/TextTestimonials";
 
+
+export const metadata = {
+  title: "BizGrow Holdings Reviews | Client Testimonials & Success Stories",
+  description: "Read BizGrow Holdings client testimonials and reviews. Explore real success stories, results, and trusted compliance services.",
+};
 const TestimonialsPage = () => {
   return (
     // 'overflow-x-hidden' ensures ke koi b element width se bahar na nikal sakay
@@ -42,7 +47,7 @@ const TestimonialsPage = () => {
             </h1>
 
             <p className="text-blue-100/70 max-w-2xl mx-auto text-lg md:text-xl font-medium leading-relaxed drop-shadow-lg">
-              Real stories from our partners at BizGrow Holdings and ICCS. We
+              Real stories from our partners at BizGrow Holdings. We
               don't just deliver results; we build legacies.
             </p>
 

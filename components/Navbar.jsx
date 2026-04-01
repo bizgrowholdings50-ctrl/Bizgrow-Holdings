@@ -142,7 +142,7 @@ export default function Navbar() {
           <Link href="/">
             <Image
               src="/bizgrow_logo.png"
-              alt="BizGrow Digital Logo"
+              alt="BizGrow Holdings Logo"
               width={110}
               height={40}
               priority

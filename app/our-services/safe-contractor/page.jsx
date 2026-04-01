@@ -14,6 +14,11 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
+
+export const metadata = { 
+  title: "Get SafeContractor Certified: Health & Safety UK Standards", 
+  description: "Get SafeContractor certified and ensure your UK business meets top health & safety standards, boosting credibility and opportunities.",
+};
 const SafeContractorPage = () => {
   return (
     <main className="bg-white text-zinc-900 overflow-hidden">
