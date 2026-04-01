@@ -4,8 +4,8 @@ import FadeIn from "@/components/MotionWrapper";
 import { Mail, Phone, MapPin, ChevronRight, ShieldCheck } from "lucide-react";
 
 export const metadata = {
-  title: "Terms & Conditions | BizGrow Holdings Ltd",
-  description: "Official Terms and Conditions for BizGrow Holdings Ltd. Review our legal framework, service engagement protocols, and compliance standards.",
+  title: "Terms and Conditions | BizGrow Holdings Ltd",
+  description: "Read the Terms and Conditions of BizGrow Holdings Ltd covering website use, consultancy services, data protection, and UK legal compliance.",
   alternates: {
     canonical: "https://bizgrow-holdings.com/terms/",
   },

@@ -5,7 +5,7 @@ import { Mail, Phone, MapPin, ChevronRight, ShieldCheck, Lock } from "lucide-rea
 
 export const metadata = {
   title: "Privacy Policy | BizGrow Holdings Ltd",
-  description: "Official Privacy Policy for BizGrow Holdings Ltd. Learn how we collect, use, store, and protect your personal data.",
+  description: "Learn how BizGrow Holdings Ltd protects your data. Our Privacy Policy explains data collection and protection for UK security businesses.",
   alternates: {
     canonical: "https://bizgrow-holdings.com/privacy-policy/",
   },
