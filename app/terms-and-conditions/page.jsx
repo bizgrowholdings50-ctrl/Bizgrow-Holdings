@@ -104,7 +104,7 @@ const TermsConditions = () => {
 
               {/* 03-05. Other Sections */}
               {[
-                { title: "Intellectual Property", content: "All content, graphics, logos, images, text, and designs on this website are the intellectual property of BizGrow Holdings Ltd. Unauthorized reproduction is strictly prohibited." },
+                { title: "Intellectual Property", content: "All content, graphics, logos, images, text, and designs on this website are the intellectual property of BizGrow Holdings Ltd. Unauthorised reproduction is strictly prohibited." },
                 { title: "User Conduct", content: "Users shall not transmit harmful material or interfere with website security. Violations result in legal action or termination of access." },
                 { title: "Privacy & Data Protection", content: "We do not share personal information without consent. Data is used solely for service delivery and compliance as per our Privacy Policy." }
               ].map((item, idx) => (

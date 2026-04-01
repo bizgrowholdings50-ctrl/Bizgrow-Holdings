@@ -10,6 +10,7 @@ import {
   ClipboardCheck,
   HeartPulse,
 } from "lucide-react";
+import Link from "next/link";
 
 export const metadata = {
   title: "ISO 45001 Certification UK | Health & Safety Compliance",
@@ -50,7 +51,7 @@ const ISO45001Page = () => {
               <p className="mt-10 text-blue-100/60 text-xl md:text-2xl leading-relaxed font-medium">
                 ISO 45001 is the Occupational Health & Safety Management Systems
                 standard recognised throughout the UK. Businesses across the UK
-                can fully comply with UK Health and Safety legislation with its
+                can fully comply with <Link href="https://bizgrow-holdings.com/key-components-of-health-and-safety-policy/" className="text-[#997819] font-bold">UK Health and Safety</Link> legislation with its
                 help.
               </p>
             </FadeIn>
@@ -144,7 +145,7 @@ const ISO45001Page = () => {
                 Safety is Essential.
               </h2>
               <p className="text-zinc-500 font-medium text-lg leading-relaxed">
-                ISO 45001 helps organisations build a structured Occupational
+                <Link href="https://bizgrow-holdings.com/is-iso-45001-the-essential-solution-for-safety-and-compliance/" className="text-[#997819] font-bold">ISO 45001</Link> helps organisations build a structured Occupational
                 Health & Safety Management System, reducing workplace hazards
                 and protecting employees across high-risk environments.
               </p>
@@ -158,7 +159,7 @@ const ISO45001Page = () => {
               },
               {
                 t: "REGULATORY COMPLIANCE",
-                d: "Ensure UK health and safety compliance to enhance credibility in tenders and audits.",
+                d: <>Ensure UK health and safety <Link href="https://bizgrow-holdings.com/compliance-consultancies/" className="text-[#997819] font-bold">compliance</Link> to enhance credibility in tenders and audits.</>,
                 icon: <ShieldAlert />,
                 bg: "bg-white border border-zinc-100",
               },
@@ -223,8 +224,8 @@ const ISO45001Page = () => {
                 Culture.
               </h2>
               <p className="text-zinc-500 font-medium text-lg leading-relaxed mb-10">
-                ISO 45001 helps organisations create a safer working environment
-                through structured risk management, clear responsibilities, and
+                <Link href="https://bizgrow-holdings.com/could-iso-45001-enhance-workplace-safety-and-compliance/" className="text-[#997819] font-bold">ISO 45001</Link> helps organisations create a safer working environment
+                through structured <Link href="https://bizgrow-holdings.com/what-does-rams-stand-for/" className="text-[#997819] font-bold">risk management</Link>, clear responsibilities, and
                 continuous health and safety improvement.
               </p>
               <div className="flex gap-4">
@@ -254,7 +255,7 @@ const ISO45001Page = () => {
             <br /> Certification Process:
           </h2>
           <p className="text-center mb-10 mt-2 ">
-            BizGrow Holdings delivers a step-by-step avenue for UK organisations
+            <Link href="https://bizgrow-holdings.com/" className="text-[#997819] font-bold">BizGrow Holdings</Link> delivers a step-by-step avenue for UK organisations
             wishing to achieve ISO 45001 certification:
           </p>
           <div className="relative">
@@ -419,12 +420,14 @@ const ISO45001Page = () => {
 
               <div className="flex flex-col sm:flex-row gap-4 w-full justify-center items-center mt-4">
                 <FadeIn direction="up" delay={0.2}>
+                  <Link href="/contact-us">
                   <button className="relative group/btn overflow-hidden w-full sm:w-64 bg-[#997819] text-white px-8 py-5 rounded-2xl font-black uppercase tracking-[0.25em] text-[10px] transition-all duration-500 hover:shadow-[0_20px_40px_rgba(153,120,25,0.4)]">
                     <span className="relative z-10 group-hover/btn:text-[#12066a] transition-colors duration-500">
                       Contact Us
                     </span>
                     <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-0" />
                   </button>
+                  </Link>
                 </FadeIn>
               </div>
             </div>
