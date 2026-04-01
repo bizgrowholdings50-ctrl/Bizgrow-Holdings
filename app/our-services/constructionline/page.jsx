@@ -12,6 +12,7 @@ import {
   Award,
   Briefcase,
 } from "lucide-react";
+import Link from "next/link";
 
 export const metadata = {
   title: "ConstructionLine Certification Consultant | BizGrow Holdings",
@@ -80,12 +81,12 @@ const ConstructionlinePage = () => {
             {[
               {
                 level: "Silver",
-                desc: "PAS91 Compliance & Basic PQQ Support",
+                desc: <>PAS91 <Link href="compliance-consultancies/" className="text-[#997819] font-bold">Compliance</Link> & Basic PQQ Support</>,
                 icon: <Construction />,
               },
               {
                 level: "Gold",
-                desc: "Full Health & Safety, Quality & Environmental Compliance",
+                desc: <>Full <Link href="https://bizgrow-holdings.com/key-components-of-health-and-safety-policy/" className="text-[#997819] font-bold">Health & Safety</Link>, Quality & Environmental Compliance</>,
                 icon: <Trophy />,
               },
               {
@@ -136,7 +137,7 @@ const ConstructionlinePage = () => {
                   <span className="text-[#997819]">Levels Explained</span>
                 </h2>
                 <p className="text-zinc-600 md:mx-30 text-lg  font-medium leading-relaxed">
-                  Constructionline offers different levels to match your
+                  <Link href="https://bizgrow-holdings.com/get-constructionline-accreditation-its-requirements/" className="text-[#997819] font-bold">Constructionline</Link> offers different levels to match your
                   business size, risk profile, and buyer requirements. Choosing
                   the right level helps you qualify for the right contracts,
                   without overcomplicating compliance.
@@ -165,7 +166,7 @@ const ConstructionlinePage = () => {
               {
                 level: "Platinum",
                 subtitle: "Maximum Audit & Supply Chain Trust",
-                desc: "Designed for established companies working with major buyers who require enhanced audits and highest level of assurance.",
+                desc: <>Designed for established companies working with major buyers who require enhanced <Link href="/interal-audit" className="text-[#997819] font-bold">audits</Link> and highest level of assurance.</>,
                 icon: <Briefcase size={24} />,
                 accent: "border-[#12066a]/30",
               },
@@ -220,7 +221,7 @@ const ConstructionlinePage = () => {
                   src="/blueprint-work.jpg"
                   width={600}
                   height={700}
-                  alt="Blueprint"
+                  alt="Reasons to Choose Constructionline - BizGrow Holdings Ltd"
                   className="object-cover w-full h-[500px] md:h-[700px]"
                 />
               </div>
@@ -239,7 +240,7 @@ const ConstructionlinePage = () => {
                 </span>
               </h2>
               <p className="py-6 text-zinc-600 leading-relaxed">
-                Constructionline is a trusted prequalification platform that
+                <Link href="https://bizgrow-holdings.com/9-construction-safety-certifications-every-workplace-needs/" className="text-[#997819] font-bold">Constructionline</Link> is a trusted prequalification platform that
                 helps construction businesses prove their compliance,
                 credibility, and capability to buyers across the UK. It
                 simplifies the tendering process and increases your visibility
@@ -262,7 +263,7 @@ const ConstructionlinePage = () => {
                   },
                   {
                     t: "Compliance Made Simple",
-                    d: "Covers key areas like PAS91, Health & Safety, and financial checks.",
+                    d: <>Covers key areas like PAS91, <Link href="https://bizgrow-holdings.com/is-your-security-business-losing-work-without-constructionline/" className="text-[#997819] font-bold">Health & Safety</Link>, and financial checks.</>,
                   },
                   {
                     t: "Boosts Business Credibility",
@@ -332,7 +333,7 @@ const ConstructionlinePage = () => {
               <FadeIn direction="right">
                 <p>
                   Whether you’re a contractor, subcontractor, or client, you
-                  will all benefit from ConstructionLine certification:
+                  will all benefit from <Link href="https://bizgrow-holdings.com/constructionline-rejections-uk-contractors-repeat/" className="text-[#997819] font-bold">ConstructionLine certification</Link>:
                 </p>
               </FadeIn>
               <div className="space-y-10 relative">
@@ -412,7 +413,7 @@ const ConstructionlinePage = () => {
                     src="/construction-process.jpg"
                     fill
                     className="object-cover opacity-50 group-hover:scale-110 transition-transform  duration-[2s]"
-                    alt="Construction Process"
+                    alt="Benefits for Constructionline - BizGrow Holdings Ltd"
                   />
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="relative">
@@ -499,12 +500,14 @@ const ConstructionlinePage = () => {
 
               <div className="flex flex-col sm:flex-row gap-4 w-full justify-center items-center mt-4">
                 <FadeIn direction="up" delay={0.2}>
+                  <Link href="/contact-us">
                   <button className="relative group/btn overflow-hidden w-full sm:w-64 bg-[#997819] text-white px-8 py-5 rounded-2xl font-black uppercase tracking-[0.25em] text-[10px] transition-all duration-500 hover:shadow-[0_20px_40px_rgba(153,120,25,0.4)]">
                     <span className="relative z-40 group-hover/btn:text-[#12066a] transition-colors duration-500">
                       Contact US Now
                     </span>
                     <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
                   </button>
+                  </Link>
                 </FadeIn>
               </div>
             </div>
