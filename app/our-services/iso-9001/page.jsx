@@ -11,6 +11,7 @@ import {
   Users,
   Briefcase,
 } from "lucide-react";
+import Link from "next/link";
 
 export const metadata = {
   title: "ISO 9001 Certification UK | BizGrow Holdings",
@@ -81,7 +82,7 @@ const ISO9001Page = () => {
                 <span className="text-[#997819]">Certification.</span>
               </h2>
               <p className="mt-8 text-zinc-500 font-medium text-lg leading-relaxed">
-                ISO 9001 Certification represents your commitment to high
+                <Link href="https://bizgrow-holdings.com/iso-9001-for-small-businesses/" className="text-[#997819] font-bold">ISO 9001 Certification</Link> represents your commitment to high
                 standards for your organisation, providing a strong platform for
                 improvement, confidence, and efficiency.
               </p>
@@ -101,7 +102,7 @@ const ISO9001Page = () => {
                 },
                 {
                   t: "Increased Efficiency",
-                  d: "More streamlined internal processes and fewer errors in the process.",
+                  d: <>More streamlined <Link href="https://bizgrow-holdings.com/our-services/internal-audit/" className="text-[#997819] font-bold">internal processes</Link> and fewer errors in the process.</>,
                   icon: <Activity size={28} strokeWidth={1.5} />, // Activity or Gauge for smooth flow/efficiency
                 },
                 {
@@ -161,7 +162,7 @@ const ISO9001Page = () => {
                     </h3>
                     <p className="text-zinc-500 font-medium leading-relaxed">
                       Leading UK construction and security clients prioritise
-                      suppliers with certified ISO 9001 systems. It is often a
+                      suppliers with certified <Link href="https://bizgrow-holdings.com/iso-9001-guide/" className="text-[#997819] font-bold">ISO 9001</Link> systems. It is often a
                       baseline requirement for tender eligibility and framework
                       approvals..
                     </p>
@@ -177,7 +178,7 @@ const ISO9001Page = () => {
                       IMPROVED CLIENT CONFIDENCE
                     </h3>
                     <p className="text-zinc-500 font-medium leading-relaxed">
-                      A certified Quality Management System demonstrates
+                      A certified <Link href="https://bizgrow-holdings.com/qms-software/" className="text-[#997819] font-bold">Quality Management System</Link> demonstrates
                       reliability, accountability, and commitment to continuous
                       improvement, key factors for long-term client
                       relationships.
@@ -200,7 +201,7 @@ const ISO9001Page = () => {
                       "Accelerated certification guidance with minimal disruption",
                       "Tailored QMS documentation aligned to real operations",
                       "End-to-end audit coordination and assessor support",
-                      "Practical staff awareness and compliance training",
+                      <>Practical staff awareness and <Link href="https://bizgrow-holdings.com/compliance-consultancies/" className="text-[#997819] font-bold">compliance</Link> training</>,
                     ].map((item, idx) => (
                       <div
                         key={idx}
@@ -244,7 +245,7 @@ const ISO9001Page = () => {
               {
                 n: "02",
                 t: "Process & System Alignment",
-                d: "Core processes are refined to improve efficiency and meet ISO 9001 standards without operational disruption.",
+                d: <>Core processes are refined to improve efficiency and meet <Link href="https://bizgrow-holdings.com/why-iso-9001-matters-for-uk-business-quality-and-growth/" className="text-[#997819] font-bold">ISO 9001</Link> standards without operational disruption.</>,
               },
               {
                 n: "03",
@@ -287,7 +288,7 @@ const ISO9001Page = () => {
                   <span className="text-[#997819]">Documentation</span>
                 </h2>
                 <p className="text-zinc-500 font-medium mb-10 max-w-md">
-                  We design and implement a structured ISO 9001 Quality
+                  We design and implement a structured <Link href="https://bizgrow-holdings.com/is-iso-9001-the-secret-to-consistent-quality-and-client-trust/" className="text-[#997819] font-bold">ISO 9001</Link> Quality
                   Management System tailored to your UK business operations,
                   covering all mandatory documentation required for
                   certification:
@@ -322,7 +323,7 @@ const ISO9001Page = () => {
                 <div className="relative rounded-[3rem] overflow-hidden shadow-2xl border-[12px] border-zinc-50">
                   <Image
                     src="/QMS.jpg"
-                    alt="ISO 9001 Documentation"
+                    alt="ISO 9001 QMS - BizGrow Holdings Ltd"
                     width={600}
                     height={700}
                     className="object-cover hover:scale-105 h-90 md:h-150 transition-transform duration-700"
@@ -422,9 +423,11 @@ const ISO9001Page = () => {
                 Ready for the <br />{" "}
                 <span className="text-[#997819]">Next Level?</span>
               </h2>
+              <Link href="/contact">
               <button className="bg-[#997819] text-white  px-6 md:px-16 py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-3xl">
                 Get ISO 9001 Certified
               </button>
+              </Link>
             </div>
           </div>
         </div>
