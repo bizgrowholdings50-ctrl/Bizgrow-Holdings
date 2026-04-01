@@ -10,6 +10,7 @@ import {
   Recycle,
   Wind,
 } from "lucide-react";
+import Link from "next/link";
 
 export const metadata = {
   title: "ISO 14001 Certification UK | Environmental Management System",
@@ -34,9 +35,9 @@ const ISO14001Page = () => {
         </div>
 
         <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none select-none z-10">
-          <h2 className="text-[10rem] md:text-[15rem] font-black text-white/[0.04] leading-none uppercase tracking-tighter">
+          <span className="text-[10rem] md:text-[15rem] font-black text-white/[0.04] leading-none uppercase tracking-tighter">
             ISO-14001
-          </h2>
+          </span>
         </div>
 
         <div className="max-w-7xl mx-auto px-6 relative z-20 w-full pt-20">
@@ -58,9 +59,15 @@ const ISO14001Page = () => {
 
             <FadeIn direction="right" duration="0.8">
               <p className="mt-10 text-blue-100/60 text-xl md:text-2xl max-w-2xl leading-relaxed font-medium">
-                "ISO 14001 certification with BizGrow Holdings enhances
-                credibility, supports tender opportunities, and shows commitment
-                to environmental responsibility."
+                "ISO 14001 certification with{" "}
+                <Link
+                  href="https://bizgrow-holdings.com/"
+                  className="text-[#997819] font-bold"
+                >
+                  BizGrow Holdings
+                </Link>{" "}
+                enhances credibility, supports tender opportunities, and shows
+                commitment to environmental responsibility."
               </p>
             </FadeIn>
 
@@ -83,9 +90,14 @@ const ISO14001Page = () => {
                 </span>
               </h2>
               <p className="text-zinc-500 font-medium">
-                ISO 14001 helps UK businesses reduce their environmental impact,
-                improve operational efficiency, and strengthen regulatory
-                compliance.
+                <Link
+                  href="https://bizgrow-holdings.com/iso-14001-consulting-services/"
+                  className="text-[#997819] font-bold"
+                >
+                  ISO 14001
+                </Link>{" "}
+                helps UK businesses reduce their environmental impact, improve
+                operational efficiency, and strengthen regulatory compliance.
               </p>
               <div className="h-64 bg-[#12066a] rounded-[3rem] p-10 flex flex-col justify-between overflow-hidden relative">
                 <Wind
@@ -112,7 +124,19 @@ const ISO14001Page = () => {
                 },
                 {
                   t: "Legal Protection",
-                  d: "Ensure compliance with UK environmental legislation to minimise penalties, enforcement, and reputational risks.",
+                  d: (
+                    <>
+                      Ensure{" "}
+                      <Link
+                        href="https://bizgrow-holdings.com/compliance-consultancies/"
+                        className="text-[#997819] font-bold"
+                      >
+                        compliance
+                      </Link>{" "}
+                      with UK environmental legislation to minimise penalties,
+                      enforcement, and reputational risks.
+                    </>
+                  ),
                   icon: <ShieldCheck />,
                   bg: "bg-white",
                 },
@@ -140,9 +164,9 @@ const ISO14001Page = () => {
                   >
                     {item.icon}
                   </div>
-                  <h4 className="text-2xl font-black mb-4 tracking-tight uppercase">
+                  <h3 className="text-2xl font-black mb-4 tracking-tight uppercase">
                     {item.t}
-                  </h4>
+                  </h3>
                   <p className="opacity-70 font-medium">{item.d}</p>
                 </div>
               ))}
@@ -166,10 +190,16 @@ const ISO14001Page = () => {
                   <span className="text-[#997819]">Certification Process.</span>
                 </h2>
                 <p className="text-zinc-600 text-lg font-medium leading-relaxed mb-8">
-                  At BizGrow Holdings, we have streamlined the ISO 14001
-                  certification process, making it structured, easy to
-                  understand, and totally aligned with UK environmental
-                  standards.
+                  At{" "}
+                  <Link
+                    href="https://bizgrow-holdings.com/about-us/"
+                    className="text-[#997819] font-bold"
+                  >
+                    BizGrow Holdings
+                  </Link>
+                  , we have streamlined the ISO 14001 certification process,
+                  making it structured, easy to understand, and totally aligned
+                  with UK environmental standards.
                 </p>
                 <div className="bg-[#12066a]/5 border-l-4 border-[#997819] p-6 rounded-r-2xl">
                   <p className="text-[#12066a] font-bold italic">
@@ -186,13 +216,13 @@ const ISO14001Page = () => {
                 {
                   step: "01",
                   title: "Gap Analysis",
-                  desc: "Our experts assess your existing environmental activity and compare this against the ISO 14001 standard to identify improvements.",
+                  desc: <>Our experts assess your existing environmental activity and compare this against the <Link href="https://bizgrow-holdings.com/why-clients-trust-iso-14001-certified-suppliers-in-the-uk/" className="text-[#997819] font-bold">ISO 14001</Link> standard to identify improvements.</>,
                   icon: <BarChart3 size={24} />,
                 },
                 {
                   step: "02",
                   title: "Development & Implementation",
-                  desc: "We create all necessary documents and policies using the intuitive BizGrow QMS System and embed them into your culture.",
+                  desc: <>We create all necessary documents and policies using the intuitive <Link href="https://bizgrow-holdings.com/qms-software/" className="text-[#997819] font-bold">BizGrow QMS</Link> System and embed them into your culture.</>,
                   icon: <ShieldCheck size={24} />,
                 },
                 {
@@ -245,11 +275,11 @@ const ISO14001Page = () => {
               </h2>
               <div className="border-l-8 border-[#997819] pl-8 py-4">
                 <p className="text-xl text-zinc-600 font-bold italic leading-relaxed">
-                  "Many UK contractors now require ISO 14001 certification as a
+                  "Many UK contractors now require <Link href="https://bizgrow-holdings.com/understanding-iso-14001-standard-structure-principles-requirements/" className="text-[#997819] font-bold">ISO 14001</Link> certification as a
                   condition for tender eligibility. Environmental compliance has
                   become a key supply chain requirement. ISO 14001 positions
                   your business as a responsible, audit-ready partner with
-                  structured environmental controls and risk management systems.
+                  structured environmental controls and <Link href="https://bizgrow-holdings.com/what-does-rams-stand-for/" className="text-[#997819] font-bold">risk management systems</Link>.
                   "
                 </p>
               </div>
@@ -264,7 +294,7 @@ const ISO14001Page = () => {
                   src="/supply-chain.jpg"
                   fill
                   className="object-cover opacity-60 scale-110"
-                  alt="ISO 14001 supply chain compliance system"
+                  alt="Enhance your supply chain with ISO 14001 certification."
                 />
               </div>
             </div>
@@ -299,9 +329,9 @@ const ISO14001Page = () => {
                   0{idx + 1}
                 </span>
                 <div className="h-px bg-white/10 w-full mb-6 group-hover:bg-[#997819] transition-colors" />
-                <h4 className="text-xl font-bold uppercase tracking-tight group-hover:translate-x-2 transition-transform">
+                <h3 className="text-xl font-bold uppercase tracking-tight group-hover:translate-x-2 transition-transform">
                   {doc}
-                </h4>
+                </h3>
               </div>
             ))}
           </div>
@@ -352,12 +382,14 @@ const ISO14001Page = () => {
               {/* 🔘 COMPACT BUTTONS GRID */}
               <div className="flex flex-col sm:flex-row gap-4 w-full justify-center items-center">
                 <FadeIn direction="up" delay={0.2}>
+                  <Link href="/contact">
                   <button className="relative group/btn overflow-hidden w-full sm:w-64 bg-[#997819] text-white px-8 py-5 rounded-2xl font-black uppercase tracking-[0.25em] text-[10px] transition-all duration-500 hover:shadow-[0_20px_40px_rgba(153,120,25,0.4)]">
                     <span className="relative z-10 group-hover/btn:text-[#12066a] transition-colors duration-500">
                       Start your ISO 14001 journey today
                     </span>
                     <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-0" />
                   </button>
+                  </Link>
                 </FadeIn>
               </div>
             </div>
