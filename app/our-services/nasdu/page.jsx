@@ -12,13 +12,13 @@ import {
   TrendingUp,
   TrendingUpIcon,
 } from "lucide-react";
-
+import Link from "next/link";
 
 export const metadata = {
   title: "NASDU Certification for UK Security Dog Companies",
   description:
     "Get NASDU certified with BizGrow Holdings. Meet UK security dog standards, improve credibility, win contracts & stay compliant.",
-};  
+};
 
 const NASDUPage = () => {
   return (
@@ -56,10 +56,13 @@ const NASDUPage = () => {
               </h1>
 
               <p className="mt-10 text-blue-100/60 text-xl md:text-1xl max-w-2xl font-medium leading-relaxed">
-                BizGrow Holdings supports security companies in achieving NASDU
-                accreditation for professional dog handling and K9 operations.
-                We help implement the policies and procedures required for
-                recognised industry compliance.
+                <Link href="/" className="text-[#997819] font-bold">
+                  BizGrow Holdings
+                </Link>{" "}
+                supports security companies in achieving NASDU accreditation for
+                professional dog handling and K9 operations. We help implement
+                the policies and procedures required for recognised industry
+                compliance.
               </p>
             </FadeIn>
           </div>
@@ -77,9 +80,15 @@ const NASDUPage = () => {
                   <span className="text-[#997819]">Human Limits.</span>
                 </h2>
                 <p className="max-w-xl text-zinc-400 font-medium text-lg leading-relaxed">
-                  NASDU accreditation confirms that security dog handlers and K9
-                  units operate in line with recognised UK standards for
-                  detection, patrol, and operational safety.
+                  <Link
+                    href="https://bizgrow-holdings.com/accredited-dog-trainer-in-the-uk/"
+                    className="text-[#997819] font-bold"
+                  >
+                    NASDU accreditation
+                  </Link>{" "}
+                  confirms that security dog handlers and K9 units operate in
+                  line with recognised UK standards for detection, patrol, and
+                  operational safety.
                 </p>
               </div>
               <Dog
@@ -103,7 +112,7 @@ const NASDUPage = () => {
         </div>
       </section>
 
-{/* 🚀 NEW SECTION: Why NASDU Certification is Essential */}
+      {/* 🚀 NEW SECTION: Why NASDU Certification is Essential */}
       <section className="py-14 bg-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
@@ -122,7 +131,20 @@ const NASDUPage = () => {
             {[
               {
                 title: "Trusted Industry Standards",
-                desc: "NASDU sets strict codes of practice covering training, handling, and welfare. These ensure dogs are safely deployed and handlers meet UK security compliance.",
+                desc: (
+                  <>
+                    NASDU sets strict codes of practice covering training,
+                    handling, and welfare. These ensure dogs are safely deployed
+                    and handlers meet UK{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/compliance-consultancies/"
+                      className="text-[#997819] font-bold"
+                    >
+                      security compliance
+                    </Link>
+                    .
+                  </>
+                ),
                 icon: <Award size={32} />,
               },
               {
@@ -153,7 +175,6 @@ const NASDUPage = () => {
           </div>
         </div>
       </section>
-
 
       {/* 🔹 3. CORE DISCIPLINES (Industrial List) */}
       <section className="py-24 bg-zinc-50">
@@ -221,7 +242,13 @@ const NASDUPage = () => {
                   01
                 </div>
                 <p className="text-zinc-500 font-medium pt-2 italic">
-                  SIA Licences & ACS Accreditation are mandatory for security
+                  <Link
+                    href="https://bizgrow-holdings.com/top-sia-security-recruitment-agencies-in-the-uk/"
+                    className="text-[#997819] font-bold"
+                  >
+                    SIA
+                  </Link>{" "}
+                  Licences & <Link href="https://bizgrow-holdings.com/get-acs-accreditation-fast/" className="text-[#997819] font-bold">ACS Accreditation</Link> are mandatory for security
                   companies and staff.
                 </p>
               </div>
@@ -230,7 +257,7 @@ const NASDUPage = () => {
                   02
                 </div>
                 <p className="text-zinc-500 font-medium pt-2 italic">
-                  BS10800 Standards vetting, screening, and operational best
+                  <Link href="https://bizgrow-holdings.com/what-is-bs-10800-in-the-uk-2026/" className="text-[#997819] font-bold">BS10800 Standards</Link> vetting, screening, and operational best
                   practices.
                 </p>
               </div>
@@ -239,7 +266,7 @@ const NASDUPage = () => {
                   03
                 </div>
                 <p className="text-zinc-500 font-medium pt-2 italic">
-                  ISO Standards quality, environmental, and occupational health
+                  <Link href="https://bizgrow-holdings.com/difference-between-iso-9001-iso-14001-and-iso45001/" className="text-[#997819] font-bold">ISO Standards</Link> quality, environmental, and occupational health
                   and safety management.
                 </p>
               </div>
@@ -316,8 +343,8 @@ const NASDUPage = () => {
                   Official Accreditation Support
                 </h4>
                 <p className="text-zinc-500 text-sm leading-relaxed mb-8 italic">
-                  BizGrow Holdings assists security companies with NASDU
-                  accreditation by implementing the necessary documentation,
+                  BizGrow Holdings assists security companies with <Link href="https://bizgrow-holdings.com/main-requirements-for-nasdu-security-certification/" className="text-[#997819] font-bold">NASDU
+                  accreditation</Link> by implementing the necessary documentation,
                   procedures, and compliance frameworks.
                 </p>
                 <div className="flex gap-2">
@@ -373,7 +400,7 @@ const NASDUPage = () => {
                   Command Authority
                 </span>
                 <h2 className="text-5xl md:text-6xl font-black text-white tracking-tighter leading-[0.85] mb-8 uppercase italic">
-                 Get NASDU Certified with  <br />
+                  Get NASDU Certified with <br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#997819] to-[#d4af37] inline-block mt-2 not-italic">
                     BizGrow Holdings
                   </span>
@@ -382,12 +409,14 @@ const NASDUPage = () => {
 
               <div className="flex flex-col sm:flex-row gap-4 w-full justify-center items-center mt-4">
                 <FadeIn direction="up" delay={0.2}>
+                  <Link href="/contact-us">
                   <button className="relative group/btn overflow-hidden w-full sm:w-64 bg-[#997819] text-white px-8 py-5 rounded-lg font-black uppercase tracking-[0.25em] text-[10px] transition-all duration-500">
                     <span className="relative z-40 group-hover/btn:text-[#12066a] transition-colors duration-500">
                       Contact Us
                     </span>
                     <div className="absolute inset-0 bg-white translate-x-full group-hover/btn:translate-x-0 transition-transform duration-500 ease-out z-30" />
                   </button>
+                  </Link>
                 </FadeIn>
               </div>
             </div>
