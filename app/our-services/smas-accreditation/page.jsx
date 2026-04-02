@@ -12,7 +12,13 @@ import {
   Building2,
   Wrench,
 } from "lucide-react";
+import Link from "next/link";
 
+export const metadata = {
+  title: "SMAS Accreditation UK | Fast SSIP Approval – BizGrow Holdings",
+  description:
+    "Get SMAS accreditation in the UK fast. BizGrow handles SSIP compliance, audits, and policies so you can win more contracts easily.",
+};
 const SMASPage = () => {
   return (
     <main className="bg-white text-zinc-900 overflow-hidden font-sans">
@@ -45,9 +51,16 @@ const SMASPage = () => {
               </h1>
 
               <p className="mt-10 text-blue-100/60 text-xl  q max-w-2xl font-medium leading-relaxed italic">
-                Achieve SSIP recognition with SMAS Worksafe faster. BizGrow
-                Holdings handles your full Health & Safety assessment while you
-                focus on winning contracts in Uk.
+                Achieve{" "}
+                <Link
+                  href="https://bizgrow-holdings.com/rules-requirements-for-ssip/"
+                  className="text-[#997819] font-bold"
+                >
+                  SSIP recognition
+                </Link>{" "}
+                with SMAS Worksafe faster. <Link href="/">BizGrow Holdings</Link> handles your full
+                Health & Safety assessment while you focus on winning contracts
+                in Uk.
               </p>
             </FadeIn>
           </div>
@@ -101,7 +114,7 @@ const SMASPage = () => {
                   src="/blueprint-work.jpg"
                   width={600}
                   height={700}
-                  alt="Blueprint"
+                  alt="SMAS Accreditation - BizGrow Holdings Ltd"
                   className="object-cover h-[500px]"
                 />
               </div>
@@ -116,7 +129,7 @@ const SMASPage = () => {
                 Need It
               </h2>
               <p className="py-4">
-                SMAS (Safety Management Advisory Services) Accreditation is a
+                SMAS <Link href="https://bizgrow-holdings.com/how-to-get-smas-accreditation/" className="text-[#997819] font-bold" >(Safety Management Advisory Services)</Link> Accreditation is a
                 UK-recognised health and safety certification designed to assess
                 whether a contractor meets required H&S standards. It is widely
                 accepted across the construction, facilities management,
@@ -125,9 +138,9 @@ const SMASPage = () => {
               <p className="py-4">
                 UK contractors need SMAS accreditation because many main
                 contractors, developers, and site managers require proof of
-                health and safety compliance before allowing suppliers or
+                health and safety <Link href="https://bizgrow-holdings.com/compliance-consultancies/" className="text-[#997819] font-bold">compliance</Link> before allowing suppliers or
                 subcontractors onto the site. SMAS helps demonstrate that a
-                business has the correct policies, risk assessments, and safety
+                business has the correct policies, <Link href="https://bizgrow-holdings.com/site-specific-risk-assessment/" className="text-[#997819] font-bold">risk assessments</Link>, and safety
                 procedures in place, reducing risk and improving credibility.
               </p>
             </div>
@@ -145,7 +158,7 @@ const SMASPage = () => {
             </h2>
             {/* max-w-md ko hata kar margin top add kiya hai balance ke liye */}
             <p className="text-zinc-400 max-w-2xl font-medium mt-6 italic">
-              We ensure your business meets all 12 core elements of the SSIP
+              We ensure your business meets all 12 core elements of the <Link href="https://bizgrow-holdings.com/what-is-ssip-accreditation/" className="text-[#997819] font-bold mr-1">SSIP</Link>
               threshold standard.
             </p>
           </div>
@@ -189,13 +202,13 @@ const SMASPage = () => {
               </h2>
               <p className="py-4">
                 SMAS accreditation strengthens pre-qualification submissions for
-                tenders by proving compliance with recognised UK health and
-                safety standards. Many tender portals and procurement teams
+                tenders by proving compliance with recognised <Link href="https://bizgrow-holdings.com/key-components-of-health-and-safety-policy/" className="text-[#997819] font-bold">UK health and
+                safety</Link> standards. Many tender portals and procurement teams
                 accept SMAS as evidence of competence, reducing the need to
                 complete multiple safety questionnaires.
               </p>
               <p className="py-4">
-                For site approvals, SMAS speeds up onboarding by showing that
+                For site approvals, <Link href="https://bizgrow-holdings.com/smas-accreditation-requirements-in-the-uk/" className="text-[#997819] font-bold">SMAS</Link> speeds up onboarding by showing that
                 your business already meets baseline safety requirements. This
                 makes it easier to gain approval from principal contractors,
                 local authorities, and commercial clients, improving access to
@@ -209,7 +222,7 @@ const SMASPage = () => {
                   src="/site-approvals.jpg"
                   width={600}
                   height={700}
-                  alt="Blueprint"
+                  alt="SMAS Helps You Win More Tenders - BizGrow "
                   className="object-cover h-[500px]"
                 />
               </div>
@@ -291,7 +304,7 @@ const SMASPage = () => {
                 src="/smas-process.jpg"
                 fill
                 className="object-cover opacity-60 group-hover:scale-105 transition-transform duration-[2s]"
-                alt="Audit Process"
+                alt="Key Benefits of SMAS - BizGrow Holdings Ltd"
               />
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="p-10 bg-white shadow-2xl rounded-[2.5rem] flex flex-col items-center">
@@ -338,8 +351,8 @@ const SMASPage = () => {
             </h2>
             <p className="text-zinc-400 max-w-2xl font-medium mt-8 italic leading-relaxed">
               Any organisation required to show health and safety compliance
-              during tendering or site access can benefit from SMAS
-              accreditation, especially those working under principal
+              during tendering or site access can benefit from <Link href="https://bizgrow-holdings.com/what-is-smas-accreditation/" className="text-[#997819] font-bold">SMAS
+              accreditation</Link>, especially those working under principal
               contractors.
             </p>
           </div>
@@ -349,7 +362,7 @@ const SMASPage = () => {
             {[
               {
                 title: "Construction",
-                desc: "Main contractors and specialized subcontractors.",
+                desc: "Main contractors and specialised subcontractors.",
                 icon: <Building2 size={32} />,
               },
               {
@@ -443,7 +456,7 @@ const SMASPage = () => {
               {[
                 {
                   title: "Document Review",
-                  desc: "Full audit of your existing health and safety documents to identify missing links.",
+                  desc: <>Full <Link href="https://bizgrow-holdings.com/our-services/internal-audit/" className="text-[#997819] font-bold">audit</Link> of your existing health and safety documents to identify missing links.</>,
                   icon: <ClipboardList className="text-[#997819]" />,
                 },
                 {
@@ -515,12 +528,14 @@ const SMASPage = () => {
 
               <div className="flex flex-col sm:flex-row gap-4 w-full justify-center items-center mt-4">
                 <FadeIn direction="up" delay={0.2}>
+                  <Link href="/contact-us">
                   <button className="relative group/btn overflow-hidden w-full sm:w-64 bg-[#997819] text-white px-8 py-5 rounded-2xl font-black uppercase tracking-[0.25em] text-[10px] transition-all duration-500">
                     <span className="relative z-40 group-hover/btn:text-[#12066a] transition-colors duration-500">
                       Get Your SMAS Badge
                     </span>
                     <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
                   </button>
+                  </Link>
                 </FadeIn>
               </div>
             </div>
