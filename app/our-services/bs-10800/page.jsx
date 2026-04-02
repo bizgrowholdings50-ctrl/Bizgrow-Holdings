@@ -16,6 +16,7 @@ import {
   ClipboardList,
   PhoneCall,
 } from "lucide-react";
+import Link from "next/link";
 
 export const metadata = {
   title: "BS 10800 Certification Services | Business Continuity Support UK",
@@ -41,9 +42,9 @@ const BS10800Page = () => {
 
         {/* Prominent Watermark */}
         <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none select-none z-10">
-          <h2 className="text-[10rem] md:text-[15rem] font-black text-white/10 leading-none uppercase tracking-tighter">
+          <span className="text-[10rem] md:text-[15rem] font-black text-white/10 leading-none uppercase tracking-tighter">
             SAFETY
-          </h2>
+          </span>
         </div>
 
         <div className="max-w-7xl mx-auto px-6 relative z-20 w-full pt-20">
@@ -63,7 +64,7 @@ const BS10800Page = () => {
 
             <FadeIn direction="right" duration="0.8">
               <p className="mt-10 text-blue-100/60 text-xl md:text-2xl max-w-2xl leading-relaxed font-medium italic">
-                "Get BS 10800 implemented properly, policies, processes,
+                "Get <Link href="https://bizgrow-holdings.com/what-is-bs-10800-in-the-uk-2026/" className="text-[#997819] font-bold">BS 10800</Link> implemented properly, policies, processes,
                 evidence, and staff readiness with expert guidance from start to
                 sign-off."
               </p>
@@ -92,9 +93,9 @@ const BS10800Page = () => {
           </h3>
           <p className="mb-16 mt-4 text-center max-w-7xl md:mx-30">
             Professional security services require structured systems,
-            documented procedures, and full regulatory alignment. We help UK
-            security companies implement practical compliance frameworks that
-            meet British Standards and SIA requirements.
+            documented procedures, and full regulatory alignment. We help <Link href="https://bizgrow-holdings.com/how-to-start-a-security-company-in-the-uk/" className="text-[#997819] font-bold">UK
+            security companies</Link> implement practical compliance frameworks that
+            meet British Standards and <Link href="https://bizgrow-holdings.com/top-sia-security-recruitment-agencies-in-the-uk/" className="text-[#997819] font-bold">SIA requirements</Link>.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
@@ -108,7 +109,7 @@ const BS10800Page = () => {
               },
               {
                 t: "3.	SIA Licence Verification",
-                d: "Clear internal processes to monitor and maintain valid SIA licensing.",
+                d: <>Clear internal processes to monitor and maintain valid <Link href="https://bizgrow-holdings.com/business-benefits-of-becoming-an-sia-approved-contractor/" className="text-[#997819] font-bold">SIA licensing</Link></>,
               },
               {
                 t: "4.	Command & Control",
@@ -116,7 +117,7 @@ const BS10800Page = () => {
               },
               {
                 t: "5.	Tactical PPE & Equipment",
-                d: "Audit-ready systems covering uniforms, radios, and protective equipment",
+                d: <><Link href="https://bizgrow-holdings.com/our-services/internal-audit/" className="text-[#997819] font-bold">Audit-ready</Link> systems covering uniforms, radios, and protective equipment</>,
               },
               {
                 t: "6.	Incident Reporting & Logs",
@@ -149,7 +150,7 @@ const BS10800Page = () => {
               <span className="text-[#997819]"> We Provide.</span>
             </h3>
             <p className="mb-4 mt-4">
-              At BizGrow Holdings, we help UK businesses implement BS 10800
+              At <Link href="/" className="text-[#997819] font-bold">BizGrow Holdings</Link>, we help UK businesses implement BS 10800
               simply and effectively. Our services include
             </p>
             <div className="space-y-3">
@@ -209,9 +210,9 @@ const BS10800Page = () => {
           </h2>
           <div className="grid md:grid-cols-2 gap-8">
             <div className="p-10 bg-white/5 border border-white/10 rounded-[3rem] backdrop-blur-sm">
-              <h4 className="text-[#997819] font-black text-2xl mb-4">
+              <h3 className="text-[#997819] font-black text-2xl mb-4">
                 Without BS 10800
-              </h4>
+              </h3>
               <p className="text-blue-100/60 text-sm font-medium">
                 ● Audit-ready business continuity <br />
                 ● Stronger client trust and contract wins <br />
@@ -220,9 +221,9 @@ const BS10800Page = () => {
               </p>
             </div>
             <div className="p-10 bg-[#997819] rounded-[3rem] shadow-2xl">
-              <h4 className="text-white font-black text-2xl mb-4 uppercase">
+              <h3 className="text-white font-black text-2xl mb-4 uppercase">
                 Without BS 10800
-              </h4>
+              </h3>
               <p className="text-white/90 text-sm font-black italic">
                 ● No formal continuity framework <br />
                 ● Higher downtime risk <br />
@@ -262,7 +263,7 @@ const BS10800Page = () => {
               {
                 n: "04",
                 t: "Audit Readiness",
-                d: "We guide you through internal audits and help you stay compliant with the standard.",
+                d: <>We guide you through <Link href="https://bizgrow-holdings.com/how-do-internal-audits-enhance-compliance-efficiency/" className="text-[#997819] font-bold">internal audits</Link> and help you stay compliant with the standard.</>,
               },
             ].map((step, i) => (
               <div
@@ -272,9 +273,9 @@ const BS10800Page = () => {
                 <span className="text-5xl font-black text-[#997819]/50 mb-6">
                   {step.n}
                 </span>
-                <h5 className="font-black text-[#12066a] uppercase mb-3 tracking-tighter text-lg">
+                <h3 className="font-black text-[#12066a] uppercase mb-3 tracking-tighter text-lg">
                   {step.t}
-                </h5>
+                </h3>
                 <p className="text-zinc-500 text-xs font-medium leading-relaxed">
                   {step.d}
                 </p>
@@ -309,9 +310,9 @@ const BS10800Page = () => {
                 key={i}
                 className="p-8 bg-zinc-50 rounded-[2.5rem] border border-zinc-100 hover:border-[#997819] transition-all group"
               >
-                <h4 className="font-black text-[#12066a] uppercase text-sm mb-4 flex gap-3">
+                <h3 className="font-black text-[#12066a] uppercase text-sm mb-4 flex gap-3">
                   <HelpCircle className="text-[#997819]" size={18} /> {faq.q}
-                </h4>
+                </h3>
                 <p className="text-zinc-500 text-sm font-medium leading-relaxed pl-7">
                   {faq.a}
                 </p>
@@ -365,10 +366,12 @@ const BS10800Page = () => {
 
               <FadeIn direction="up" delay={0.6}>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-6 relative z-10 ">
+                  <Link href="/contact">
                   <button className="bg-[#997819] text-white px-16 py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-700 shadow-2xl group flex items-center gap-3">
                     Get Expert Consultancy
                     <ArrowRight className="group-hover:translate-x-2 transition-transform" />
                   </button>
+                  </Link>
                 </div>
               </FadeIn>
             </div>
