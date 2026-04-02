@@ -11,6 +11,7 @@ import {
   Lock,
   Globe,
 } from "lucide-react";
+import Link from "@node_modules/next/link";
 
 export const metadata = {
   title: "Cyber Essentials Plus Certification UK | BizGrow Holdings ltd",
@@ -59,15 +60,17 @@ const CyberEssentialsPlusPage = () => {
             <FadeIn direction="right" duration="0.8">
               <p className="mt-10 text-blue-100/70 text-xl md:text-2xl max-w-2xl leading-relaxed font-medium italic">
                 "We help UK businesses prepare for Cyber Essentials Plus from
-                gap analysis and remediation to audit readiness and evidence
+                gap analysis and remediation to <Link href="https://bizgrow-holdings.com/our-services/internal-audit/" className="text-[#997819] font-bold">audit readiness</Link> and evidence
                 support."
               </p>
             </FadeIn>
 
             <FadeIn direction="right" duration="1.0">
+              <Link href="/contact-us">
               <button className="relative z-10 bg-[#997819] text-white px-16 py-6 my-4 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-3xl">
                 Book a Consultation
               </button>
+              </Link>
             </FadeIn>
           </div>
         </div>
@@ -100,7 +103,7 @@ const CyberEssentialsPlusPage = () => {
                 },
                 {
                   t: "Vulnerability Scanning",
-                  d: "Internal and external scans identify potential weaknesses that could expose your organisation to cyber threats.",
+                  d: <><Link href="https://bizgrow-holdings.com/difference-between-internal-audit-and-external-audit/" className="text-[#997819] font-bold">Internal and external</Link> scans identify potential weaknesses that could expose your organisation to cyber threats.</>,
                   icon: <Fingerprint />,
                 },
                 {
@@ -181,7 +184,7 @@ const CyberEssentialsPlusPage = () => {
               {
                 step: "Step 5",
                 title: "Annual Renewal",
-                desc: "Review and renew annually to maintain compliance and ensure ongoing cybersecurity assurance.",
+                desc: <>Review and renew annually to maintain <Link href="https://bizgrow-holdings.com/compliance-consultancies/" className="text-[#997819] font-bold">compliance</Link> and ensure ongoing cybersecurity assurance.</>,
               },
             ].map((item, i) => (
               <FadeIn key={i} direction="up" delay={i * 0.1}>
@@ -280,7 +283,7 @@ const CyberEssentialsPlusPage = () => {
               {
                 n: "03",
                 t: "Proven Client Trust: ",
-                d: "Trusted by UK security and contracting businesses for reliable advice and consistent results.",
+                d: <>Trusted by <Link href="https://bizgrow-holdings.com/top-security-companies-trusted-protection-for-every-business/" className="text-white font-bold ">UK security</Link> and contracting businesses for reliable advice and consistent results.</>,
               },
               {
                 n: "04",
@@ -369,9 +372,11 @@ const CyberEssentialsPlusPage = () => {
               Strengthen your organisation’s security posture, build client
               trust, and demonstrate verified cyber resilience.
             </p>
+            <Link href="/contact-us">
             <button className="relative z-10 bg-[#997819] text-white md:px-16 py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-3xl">
               Book Your Audit today
             </button>
+            </Link>
           </div>
         </div>
       </section>
