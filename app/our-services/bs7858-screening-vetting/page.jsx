@@ -13,6 +13,7 @@ import {
   PhoneCall,
   ArrowRight,
 } from "lucide-react";
+import Link from "next/link";
 
 
 export const metadata = {
@@ -60,15 +61,17 @@ const BS7858Page = () => {
 
             <FadeIn direction="right" delay={0.4}>
               <p className="mt-10 text-blue-100/60 text-lg md:text-xl max-w-2xl leading-relaxed font-medium italic">
-                "Compliant employee screening for UK security companies helps
+                "Compliant employee screening for <Link href="https://bizgrow-holdings.com/top-security-companies-trusted-protection-for-every-business/" className="text-[#997819] font-bold">UK security companies</Link> helps
                 you meet BS 7858 requirements, reduce hiring risk, and stay
-                audit-ready for contracts, ACS, and client checks."
+                audit-ready for contracts, <Link href="https://bizgrow-holdings.com/get-acs-accreditation-fast/" className="text-[#997819] font-bold">ACS</Link>, and client checks."
               </p>
             </FadeIn>
             <FadeIn direction="right" duration="1.0">
+             <Link href="/contact-us">
               <button className="relative z-10 bg-[#997819] text-white px-16 py-6 my-4 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-3xl">
                 Book a Screening Consultation
               </button>
+              </Link>
             </FadeIn>
           </div>
         </div>
@@ -82,7 +85,7 @@ const BS7858Page = () => {
             <span className="text-[#997819]"> PROTOCOL.</span>
           </h2>
           <p className="pb-6 md:mx-28 text-center">
-            BS 7858 sets the recognised UK standard for screening individuals
+            <Link href="https://bizgrow-holdings.com/bs-7858-screening-and-vetting-standards-requirements-process/" className="text-[#997819] font-bold">BS 7858</Link> sets the recognised UK standard for screening individuals
             working in secure environments. The vetting process ensures
             personnel are trustworthy, verified, and suitable for
             security-sensitive roles.
@@ -106,7 +109,7 @@ const BS7858Page = () => {
               },
               {
                 t: "Criminal Record Screening",
-                d: "DBS or Basic Disclosure checks comply with UK security industry requirements.",
+                d: <>DBS or Basic Disclosure checks comply with <Link href="https://bizgrow-holdings.com/how-bizgrow-holdings-helps-security-companies-win-contracts-in-the-uk/" className="text-[#997819] font-bold">UK security industry</Link> requirements.</>,
                 icon: <UserCheck />,
               },
               {
@@ -160,11 +163,11 @@ const BS7858Page = () => {
                 },
                 {
                   t: "Compliance with Regulations",
-                  d: "Ensures your hiring practices meet SIA requirements and recognised industry standards.",
+                  d: <>Ensures your hiring practices meet <Link href="https://bizgrow-holdings.com/top-sia-security-recruitment-agencies-in-the-uk/" className="text-[#997819] font-bold">SIA requirements</Link> and recognised industry standards.</>,
                 },
                 {
                   t: "Improved Tender Success",
-                  d: "BS7858 accreditation strengthens credibility and increases the likelihood of winning competitive contracts.",
+                  d: <><Link href="https://bizgrow-holdings.com/why-is-bs-7858-screening-crucial-for-uk-security-businesses/" className="text-[#997819] font-bold"></Link>BS7858 accreditation strengthens credibility and increases the likelihood of winning competitive contracts.</>,
                 },
               ].map((item, i) => (
                 <div
@@ -191,7 +194,7 @@ const BS7858Page = () => {
             <div className="rounded-[4rem] overflow-hidden border-[15px] border-zinc-50 shadow-2xl">
               <Image
                 src="/vetting-check.jpg"
-                alt="Vetting Process"
+                alt="Benefits of BS7858 Screening and Vetting - BizGrow"
                 width={600}
                 height={600}
                 className="object-cover md:h-175"
@@ -314,7 +317,7 @@ const BS7858Page = () => {
           </h2>
           <p className="text-black MD:mx-28 my-10 text-center">
             Not all background checks provide the same level of security. Basic
-            screening only verifies limited information, while BS 7858 vetting
+            screening only verifies limited information, while <Link href="https://bizgrow-holdings.com/bs-7858-the-complete-guide/" className="text-[#997819] mr-1 font-bold">BS 7858 vetting</Link>
             provides a thorough background check for those in security-sensitive
             roles.
           </p>
@@ -377,7 +380,7 @@ const BS7858Page = () => {
               {
                 n: "04",
                 t: "Vetting Report",
-                d: "A complete screening record prepared to demonstrate compliance during SIA or client audits",
+                d: <>A complete screening record prepared to demonstrate <Link href="https://bizgrow-holdings.com/compliance-consultancies/" className="text-[#997819] font-bold">compliance</Link> during SIA or client audits</>,
               },
             ].map((step, i) => (
               <div
@@ -458,10 +461,12 @@ const BS7858Page = () => {
                 security-sensitive roles.
               </p>
               <div className="flex flex-col sm:flex-row gap-6">
+                <Link href="/contact-us">
                 <button className="bg-[#997819] text-white px-16 py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-[10px] hover:bg-white hover:text-[#12066a] transition-all duration-700 shadow-2xl group flex items-center gap-3">
                   Start Vetting Now
                   <ArrowRight className="group-hover:translate-x-2 transition-transform" />
                 </button>
+                </Link>
                 <a
                   href="tel:+447898205035"
                   className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-10 py-6 rounded-2xl font-black uppercase tracking-[0.2em] text-[10px] flex items-center gap-3"
