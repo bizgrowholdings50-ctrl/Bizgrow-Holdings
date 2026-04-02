@@ -11,6 +11,7 @@ import {
   TriangleAlert, // SafetyCone ki jagah TriangleAlert (Construction vibe ke liye best hai)
   Users, // Users2 ki jagah Users
 } from "lucide-react";
+import Link from "@node_modules/next/link";
 
 export const metadata = {
   title: "CHAS Scheme | BizGrow Holdings | Health & Safety Approval",
@@ -49,7 +50,7 @@ const CHASSchemePage = () => {
             </FadeIn>
 
             <FadeIn direction="right" duration="0.6">
-              <h1 className="text-5xl md:text-7xl font-black text-white mt-6 leading-[1.1] tracking-tighter uppercase">
+              <h1 className="text-5xl md:text-6xl font-black text-white mt-6 leading-[1.1] tracking-tighter uppercase">
                 CHAS <br />
                 <span className="text-[#997819]"> Accreditation</span>{" "}
                 CONSULTANCY.
@@ -58,7 +59,7 @@ const CHASSchemePage = () => {
 
             <FadeIn direction="right" duration="0.8">
               <p className="mt-10 text-blue-100/60 text-xl md:text-xl max-w-2xl leading-relaxed font-medium italic">
-                “Helping UK contractors and security businesses achieve CHAS
+                “Helping UK contractors and <Link href="https://bizgrow-holdings.com/how-to-start-a-security-company-in-the-uk/" className="text-[#997819] font-bold">security businesses</Link> achieve CHAS
                 accreditation through structured health and safety compliance,
                 documentation, and audit preparation.”
               </p>
@@ -85,7 +86,7 @@ const CHASSchemePage = () => {
               </h2>
               <p className="mt-8 text-zinc-500 font-medium text-lg leading-relaxed">
                 CHAS accreditation demonstrates that your organisation meets
-                recognised UK health and safety compliance standards,
+                recognised <Link href="https://bizgrow-holdings.com/key-components-of-health-and-safety-policy/" className="text-[#997819] font-bold">UK health and safety</Link> compliance standards,
                 strengthening trust with contractors, clients, and procurement
                 teams.
               </p>
@@ -95,17 +96,17 @@ const CHASSchemePage = () => {
               {[
                 {
                   t: "SSIP Recognition",
-                  d: "CHAS is part of the SSIP (Safety Schemes in Procurement) framework, helping businesses demonstrate verified health and safety compliance across the UK supply chain.",
+                  d: <>CHAS is part of the SSIP <Link href="https://bizgrow-holdings.com/rules-requirements-for-ssip/" className="text-[#997819] font-bold">(Safety Schemes in Procurement)</Link> framework, helping businesses demonstrate verified health and safety compliance across the UK supply chain.</>,
                   icon: <ShieldCheck />,
                 },
                 {
                   t: "HEALTH & SAFETY DOCUMENTATION",
-                  d: "Develop compliant policies, risk assessments, and safety procedures required to meet CHAS assessment standards.",
+                  d: <>Develop compliant policies, <Link href="https://bizgrow-holdings.com/site-specific-risk-assessment/"  className="text-[#997819]">risk assessments</Link>, and safety procedures required to meet CHAS assessment standards.</>,
                   icon: <Search />,
                 },
                 {
                   t: "CONTRACT OPPORTUNITIES",
-                  d: "CHAS certification helps businesses qualify for tenders, contracts, and supplier frameworks requiring verified health and safety standards.",
+                  d: <><Link href="https://bizgrow-holdings.com/chas-assessment-criteria-registration-renewal/" className="text-[#997819] font-bold">CHAS</Link> certification helps businesses qualify for tenders, contracts, and supplier frameworks requiring verified health and safety standards.</>,
                   icon: <ClipboardCheck />,
                 },
                 {
@@ -185,7 +186,7 @@ const CHASSchemePage = () => {
               </h2>
               <div className="space-y-6">
                 <p className="text-zinc-500 font-medium">
-                  Achieving CHAS Certification UK proves an organisation’s
+                  Achieving <Link href="https://bizgrow-holdings.com/what-is-chas-certification/" className="text-[#997819] font-bold">CHAS Certification</Link> UK proves an organisation’s
                   commitment to working conditions that are safe, compliant, and
                   sustainable. There are several primary benefits to that
                   accreditation:
@@ -212,7 +213,7 @@ const CHASSchemePage = () => {
               <div className="p-2 bg-zinc-100 rounded-[3.5rem]">
                 <Image
                   src="/safety-onsite.jpg"
-                  alt="Construction Safety"
+                  alt="Benefits of CHAS Certification - BizGrow Holdings Ltd"
                   width={600}
                   height={500}
                   className="rounded-[3rem] object-cover h-[400px]"
@@ -237,12 +238,12 @@ const CHASSchemePage = () => {
               {
                 n: "01",
                 t: "COMPLIANCE REVIEW",
-                d: "Assess your existing health & safety policies and documentation to identify gaps against **CHAS accreditation requirements**.",
+                d: <>Assess your existing health & safety policies and documentation to identify gaps against <Link href="https://bizgrow-holdings.com/common-chas-assessment-standards/" className="text-[#997819] font-bold">CHAS accreditation requirements</Link>.</>,
               },
               {
                 n: "02",
                 t: "H&S DOCUMENTATION PREPARATION",
-                d: "Develop and update required policies, risk assessments, and safety procedures needed for CHAS compliance.",
+                d: <>Develop and update required policies, <Link href="https://bizgrow-holdings.com/what-does-rams-stand-for/" className="text-[#997819] font-bold">risk assessments</Link>, and safety procedures needed for CHAS compliance.</>,
               },
               {
                 n: "03",
@@ -252,7 +253,7 @@ const CHASSchemePage = () => {
               {
                 n: "04",
                 t: "CERTIFICATION APPROVAL",
-                d: "Support you through the final review process until your organisation successfully achieves **CHAS accreditation**.",
+                d: <>Support you through the final review process until your organisation successfully achieves <Link href="https://bizgrow-holdings.com/chas-accreditation-a-smart-way-to-safer-business-operations/" className="text-[#997819] font-bold"></Link>CHAS accreditation.</>,
               },
             ].map((step, i) => (
               <div
@@ -283,7 +284,7 @@ const CHASSchemePage = () => {
             Build with <span className="text-[#997819]">Confidence.</span>
           </h3>
           <p className="max-w-2xl mx-auto text-blue-100/60 font-medium text-lg italic">
-            “CHAS accreditation demonstrates your commitment to health and
+            “<Link href="https://bizgrow-holdings.com/benefits-of-achieving-chas-accreditation/" className="text-[#997819] font-black]">CHAS accreditation</Link> demonstrates your commitment to health and
             safety compliance, helping UK contractors strengthen credibility and
             secure more business opportunities.”
           </p>
@@ -298,9 +299,11 @@ const CHASSchemePage = () => {
             <h2 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-none mb-10 uppercase relative z-10">
               Get Your <br /> <span className="text-[#997819]">CHAS ACCREDITATION.</span>
             </h2>
+            <Link href="/contact-us">
             <button className="relative z-10 bg-[#997819] text-white px-16 py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-3xl">
               START YOUR CHAS APPLICATION
             </button>
+            </Link>
           </div>
         </div>
       </section>
