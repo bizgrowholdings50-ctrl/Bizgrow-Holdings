@@ -2,7 +2,7 @@
 import { motion, useTransform, useScroll, useSpring } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import FadeIn from "./MotionWrapper";
-import Link from "@node_modules/next/link";
+import Link from "next/link";
 
 const HorizontalProcess = () => {
   const targetRef = useRef(null);

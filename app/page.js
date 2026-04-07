@@ -1,5 +1,5 @@
-import HeroCarousel from "@components/HeroCarousel";
-import FadeIn from "@components/MotionWrapper";
+import HeroCarousel from "@/components/HeroCarousel";
+import FadeIn from "@/components/MotionWrapper";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -13,8 +13,8 @@ import {
   PhoneCall,
   ArrowRight,
 } from "lucide-react";
-import HorizontalServices from "@components/HorizontalProcess";
-import HeroSection from "@components/Hero";
+import HorizontalServices from "@/components/HorizontalProcess";
+import HeroSection from "@/components/Hero";
 
 const steps = [
   {

@@ -15,7 +15,7 @@ import {
   ShieldAlert,
   ArrowUpRight,
 } from "lucide-react";
-import Link from "@node_modules/next/link";
+import Link from "next/link";
 
 export const metadata = {
   title: "BS 7499 Certification for Static Guarding | BizGrow Holdings",
