@@ -15,6 +15,7 @@ import {
   ShieldAlert,
   ArrowUpRight,
 } from "lucide-react";
+import Link from "@node_modules/next/link";
 
 export const metadata = {
   title: "BS 7499 Certification for Static Guarding | BizGrow Holdings",
@@ -137,22 +138,35 @@ const BS7499Page = () => {
               Matters
             </h2>
             <p className="text-zinc-500 font-medium mb-2 mt-0 text-md">
-              BS 7499 certification is an essential standard for security
-              companies delivering static guarding services in the UK. It
-              establishes recognised best practices for the management,
-              deployment, and supervision of security personnel, ensuring that
-              guarding operations are carried out professionally and
-              consistently. For organisations providing manned guarding
-              services, achieving BS 7499 certification demonstrates a clear
-              commitment to quality, operational control, and compliance with
-              established UK security industry standards.
+              BS 7499 certification is an essential standard for{" "}
+              <Link
+                href="https://bizgrow-holdings.com/security-companies-are-considered-the-safest-choice/"
+                className="text-[#997819] font-bold"
+              >
+                security companies
+              </Link>{" "}
+              delivering static guarding services in the UK. It establishes
+              recognised best practices for the management, deployment, and
+              supervision of security personnel, ensuring that guarding
+              operations are carried out professionally and consistently. For
+              organisations providing manned guarding services, achieving BS
+              7499 certification demonstrates a clear commitment to quality,
+              operational control, and compliance with established UK security
+              industry standards.
             </p>
             <p className="text-zinc-500 font-medium  text-sm">
               For clients, BS 7499 compliance assures that security operations
               follow structured procedures, meet qualified personnel
               requirements, and are supported by clearly documented assignment
               instructions. Certification also strengthens credibility and
-              competitiveness within the UK security services market.
+              competitiveness within the{" "}
+              <Link
+                href="https://bizgrow-holdings.com/how-bizgrow-holdings-helps-security-companies-win-contracts-in-the-uk/"
+                className="text-[#997819] font-bold"
+              >
+                UK security
+              </Link>{" "}
+              services market.
             </p>
           </div>
           <div className="md:w-1/2 relative rounded-[4rem] overflow-hidden shadow-2xl">
@@ -167,29 +181,48 @@ const BS7499Page = () => {
         </div>
       </section>
 
-      {/* 🔹 4. BS 7499 vs BS 10800 (Comparison) */}
-      <section className="py-24 bg-[#12066a] text-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-12">
-            THE SCOPE <span className="text-[#997819]">DIFFERENCE.</span>
-          </h2>
+      {/* 🔹 4. BS 7499 vs BS 10800 (Comparison) WITH PARALLAX */}
+      <section
+        className="py-24 relative overflow-hidden min-h-[600px] flex items-center bg-fixed bg-cover bg-center text-white"
+        style={{ backgroundImage: "url('/comparison.png')" }} // 👈 Apni image ka path yahan dalein
+      >
+        {/* Overlay: Image ke upar dark layer taaki text saaf nazar aaye */}
+        {/* 'bg-[#12066a]/90' opacity control karega, z-0 par */}
+        <div className="absolute inset-0 bg-[#12066a]/70 backdrop-blur-[1px] z-0"></div>
+
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <FadeIn direction="up">
+            <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-12">
+              THE SCOPE <span className="text-[#997819]">DIFFERENCE.</span>
+            </h2>
+          </FadeIn>
+
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="p-12 bg-white/5 border border-white/10 rounded-[3rem]">
-              <h3 className="text-white font-black text-2xl mb-6">BS 10800</h3>
-              <p className="text-blue-100/60 text-sm font-medium leading-relaxed">
-                Top-level management framework that oversees all security
-                services provided by an organization.
-              </p>
-            </div>
-            <div className="p-12 bg-[#997819] rounded-[3rem] text-white shadow-2xl">
-              <h3 className="font-black text-2xl mb-6 uppercase tracking-tighter">
-                BS 7499
-              </h3>
-              <p className="font-black text-sm leading-relaxed italic">
-                Specific "On-Ground" operational code of practice specifically
-                for static and mobile guarding activities.
-              </p>
-            </div>
+            {/* BS 10800 Card */}
+            <FadeIn direction="left" delay={0.2}>
+              <div className="p-12 bg-white/5 border border-white/10 rounded-[3rem] backdrop-blur-md h-full">
+                <h3 className="text-white font-black text-2xl mb-6 tracking-tighter uppercase">
+                  BS 10800
+                </h3>
+                <p className="text-blue-100/70 text-sm font-medium leading-relaxed">
+                  Top-level management framework that oversees all security
+                  services provided by an organisation.
+                </p>
+              </div>
+            </FadeIn>
+
+            {/* BS 7499 Card (Highlighted) */}
+            <FadeIn direction="right" delay={0.4}>
+              <div className="p-12 bg-[#997819] rounded-[3rem] text-white shadow-2xl h-full flex flex-col justify-center">
+                <h3 className="font-black text-2xl mb-6 uppercase tracking-tighter">
+                  BS 7499
+                </h3>
+                <p className="font-bold text-sm leading-relaxed italic">
+                  Specific "On-Ground" operational code of practice specifically
+                  for static and mobile guarding activities.
+                </p>
+              </div>
+            </FadeIn>
           </div>
         </div>
       </section>
@@ -212,9 +245,12 @@ const BS7499Page = () => {
                   consistently delivered.
                 </p>
                 <div className="p-6 border-l-4 border-[#997819] bg-zinc-50 italic text-zinc-500 font-medium">
-                  "BizGrow Holdings supports security companies in implementing
-                  these standards to achieve effective and compliant manned
-                  guarding operations."
+                  "
+                  <Link href="/about-us" className="text-[#997819] font-bold">
+                    BizGrow Holdings
+                  </Link>{" "}
+                  supports security companies in implementing these standards to
+                  achieve effective and compliant manned guarding operations."
                 </div>
               </div>
             </FadeIn>
@@ -224,12 +260,33 @@ const BS7499Page = () => {
               {[
                 {
                   title: "Assignment Instructions",
-                  desc: "Site-specific instructions defining security duties and procedures.",
+                  desc: (
+                    <>
+                      <Link
+                        href="https://bizgrow-holdings.com/site-specific-risk-assessment/"
+                        className="text-[#997819] font-bold"
+                      >
+                        Site-specific
+                      </Link>{" "}
+                      instructions defining security duties and procedures.
+                    </>
+                  ),
                   icon: <FileText className="w-6 h-6" />,
                 },
                 {
                   title: "Personnel Management",
-                  desc: "Proper recruitment, vetting, training, and supervision of guards.",
+                  desc: (
+                    <>
+                      Proper recruitment,{" "}
+                      <Link
+                        href="https://bizgrow-holdings.com/bs-7858-screening-and-vetting-standards-requirements-process/"
+                        className="text-[#997819] font-bold"
+                      >
+                        vetting
+                      </Link>
+                      , training, and supervision of guards.
+                    </>
+                  ),
                   icon: <UserCheck className="w-6 h-6" />,
                 },
                 {
@@ -239,7 +296,18 @@ const BS7499Page = () => {
                 },
                 {
                   title: "Compliance Monitoring",
-                  desc: "Maintaining records and monitoring compliance with BS 7499.",
+                  desc: (
+                    <>
+                      Maintaining records and monitoring{" "}
+                      <Link
+                        href="https://bizgrow-holdings.com/compliance-consultancies/"
+                        className="text-[#997819] font-bold"
+                      >
+                        compliance
+                      </Link>{" "}
+                      with BS 7499.
+                    </>
+                  ),
                   icon: <CheckCircle2 className="w-6 h-6" />,
                 },
               ].map((item, index) => (
@@ -290,7 +358,18 @@ const BS7499Page = () => {
               {
                 n: "04",
                 t: "Compliance",
-                d: "Final audit to ensure every site meets British Standards.",
+                d: (
+                  <>
+                    Final{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/difference-between-internal-audit-and-external-audit/"
+                      className="text-[#997810] font-bold"
+                    >
+                      audit
+                    </Link>{" "}
+                    to ensure every site meets British Standards.
+                  </>
+                ),
               },
             ].map((step, i) => (
               <div
@@ -312,29 +391,43 @@ const BS7499Page = () => {
         </div>
       </section>
 
-      {/* 🔹 NEW SECTION: BENEFITS OF BS 7499 */}
-      <section className="py-32 bg-[#12066a] relative overflow-hidden">
+      {/* 🔹 NEW SECTION: BENEFITS OF BS 7499 WITH PARALLAX */}
+      <section
+        className="py-32 relative overflow-hidden min-h-[800px] flex items-center bg-fixed bg-cover bg-center"
+        style={{ backgroundImage: "url('/detail-post.webp')" }}
+      >
+        {/* Overlay: Image ke upar dark layer taaki text chamke */}
+        {/* 'backdrop-blur' parallax ke saath milkar bahut premium lagta hai */}
+        <div className="absolute inset-0 bg-[#12066a]/85 backdrop-blur-[1px] z-0"></div>
+
         {/* Decorative Background Text */}
-        <div className="absolute top-0 right-0 pointer-events-none select-none">
-          <h2 className="text-[12rem] font-black text-white/[0.03] leading-none uppercase tracking-tighter -mr-20">
+        <div className="absolute top-0 right-80 pointer-events-none select-none z-10">
+          <h2 className="text-[12rem] font-black text-white/[0.07] leading-none uppercase tracking-tighter -mr-20">
             Benefits
           </h2>
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="max-w-7xl mx-auto px-6 relative z-20">
           <div className="text-center mb-20">
             <FadeIn direction="up">
               <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs">
                 Strategic Advantage
               </span>
               <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter uppercase mt-4">
-                Benefits of  <span className="text-[#997819]">BS 7499</span> Certification
+                Benefits of <span className="text-[#997819]">BS 7499</span>{" "}
+                Certification
               </h2>
-              <p className="mt-8 text-blue-100/60 text-lg max-w-3xl mx-auto font-medium leading-relaxed">
+              <p className="mt-8 text-blue-100/80 text-lg max-w-3xl mx-auto font-medium leading-relaxed">
                 Achieving BS 7499 certification demonstrates that a security
                 company operates in line with recognised UK industry standards.
-                With expert guidance from **BizGrow Holdings**, you build a
-                reputation of authority.
+                With expert guidance from{" "}
+                <Link
+                  href="https://bizgrow-holdings.com/our-mission/"
+                  className="text-[#997819] font-bold"
+                >
+                  BizGrow Holdings
+                </Link>
+                , you build a reputation of authority.
               </p>
             </FadeIn>
           </div>
@@ -353,7 +446,19 @@ const BS7499Page = () => {
               },
               {
                 title: "Competitive Advantage",
-                desc: "Helps security companies stand out with an elite edge when bidding for high-value contracts and tenders.",
+                desc: (
+                  <>
+                    Helps{" "}
+                    <Link
+                      href="/how-bizgrow-holdings-helps-security-companies-win-contracts-in-the-uk/"
+                      className="text-[#997819] font-bold"
+                    >
+                      security companies
+                    </Link>{" "}
+                    stand out with an elite edge when bidding for high-value
+                    contracts and tenders.
+                  </>
+                ),
                 icon: <ArrowUpRight className="w-8 h-8" />,
               },
               {
@@ -363,7 +468,7 @@ const BS7499Page = () => {
               },
             ].map((benefit, idx) => (
               <FadeIn key={idx} direction="up" delay={idx * 0.1}>
-                <div className="group bg-white/5 border border-white/10 p-10 rounded-[3rem] hover:bg-white hover:shadow-2xl transition-all duration-500">
+                <div className="group bg-white/5 border border-white/10 p-10 rounded-[3rem] hover:bg-white hover:shadow-2xl transition-all duration-500 backdrop-blur-md">
                   <div className="flex items-start gap-8">
                     <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-[#997819]/20 flex items-center justify-center text-[#997819] group-hover:bg-[#12066a] group-hover:text-white transition-all duration-500">
                       {benefit.icon}
@@ -372,7 +477,7 @@ const BS7499Page = () => {
                       <h3 className="text-xl font-black text-white group-hover:text-[#12066a] uppercase tracking-tighter mb-4 transition-colors">
                         {benefit.title}
                       </h3>
-                      <p className="text-blue-100/50 group-hover:text-zinc-500 font-medium text-sm leading-relaxed transition-colors">
+                      <p className="text-blue-100/60 group-hover:text-zinc-500 font-medium text-sm leading-relaxed transition-colors">
                         {benefit.desc}
                       </p>
                     </div>
@@ -383,12 +488,11 @@ const BS7499Page = () => {
           </div>
         </div>
       </section>
- 
+
       {/* 🔹 FINAL SECTION: CERTIFICATION JOURNEY */}
       <section className="py-32 bg-zinc-50 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col lg:flex-row gap-20 items-center">
-            
             {/* Left Content Column */}
             <div className="lg:w-1/2">
               <FadeIn direction="right">
@@ -397,22 +501,33 @@ const BS7499Page = () => {
                   <span className="text-[#997819]">With BizGrow.</span>
                 </h2>
                 <p className="text-zinc-600 font-medium text-lg leading-relaxed mb-8">
-                  Achieving BS 7499 certification strengthens the credibility and operational standards of your security company. We provide expert guidance to help organisations implement the necessary processes for compliant static guarding operations.
+                  Achieving BS 7499 certification strengthens the credibility
+                  and operational standards of your security company. We provide
+                  expert guidance to help organisations implement the necessary
+                  processes for compliant static guarding operations.
                 </p>
                 <p className="text-zinc-500 font-medium text-md leading-relaxed mb-10 border-l-2 border-[#997819] pl-6 italic">
-                  "Our team supports security companies throughout the journey—from gap analysis to final audit preparation—ensuring you meet recognised UK security standards with confidence."
+                  "Our team supports security companies throughout the journey
+                  from gap analysis to final audit preparation ensuring you meet
+                  recognised UK security standards with confidence."
                 </p>
-                
+
                 {/* Micro-Stats or Highlights */}
                 <div className="flex gap-10">
                   <div>
                     <h3 className="text-3xl font-black text-[#12066a]">100%</h3>
-                    <p className="text-xs uppercase tracking-widest font-bold text-[#997819]">Compliance</p>
+                    <p className="text-xs uppercase tracking-widest font-bold text-[#997819]">
+                      Compliance
+                    </p>
                   </div>
                   <div className="w-[1px] bg-zinc-200" />
                   <div>
-                    <h3 className="text-3xl font-black text-[#12066a]">Expert</h3>
-                    <p className="text-xs uppercase tracking-widest font-bold text-[#997819]">Gap Analysis</p>
+                    <h3 className="text-3xl font-black text-[#12066a]">
+                      Expert
+                    </h3>
+                    <p className="text-xs uppercase tracking-widest font-bold text-[#997819]">
+                      Gap Analysis
+                    </p>
                   </div>
                 </div>
               </FadeIn>
@@ -422,30 +537,41 @@ const BS7499Page = () => {
             <div className="lg:w-1/2 w-full">
               <div className="space-y-4">
                 {[
-                  { 
-                    step: "Phase 01", 
-                    title: "Gap Analysis", 
-                    desc: "Identifying shortcomings in your current static guarding protocols." 
+                  {
+                    step: "Phase 01",
+                    title: "Gap Analysis",
+                    desc: "Identifying shortcomings in your current static guarding protocols.",
                   },
-                  { 
-                    step: "Phase 02", 
-                    title: "Documentation", 
-                    desc: "Developing site-specific Assignment Instructions and core policies." 
+                  {
+                    step: "Phase 02",
+                    title: "Documentation",
+                    desc: "Developing site-specific Assignment Instructions and core policies.",
                   },
-                  { 
-                    step: "Phase 03", 
-                    title: "Operational Readiness", 
-                    desc: "Training personnel and aligning on-ground activities with BS 7499." 
+                  {
+                    step: "Phase 03",
+                    title: "Operational Readiness",
+                    desc: (
+                      <>
+                        <Link
+                          href="/training-moments"
+                          className="text-[#997819] font-bold"
+                        >
+                          Training
+                        </Link>{" "}
+                        personnel and aligning on-ground activities with BS
+                        7499.
+                      </>
+                    ),
                   },
-                  { 
-                    step: "Phase 04", 
-                    title: "Audit Preparation", 
-                    desc: "Final review to ensure your business is ready for UK certification." 
-                  }
+                  {
+                    step: "Phase 04",
+                    title: "Audit Preparation",
+                    desc: "Final review to ensure your business is ready for UK certification.",
+                  },
                 ].map((item, idx) => (
                   <FadeIn key={idx} direction="left" delay={idx * 0.1}>
                     <div className="group bg-white p-8 rounded-[2rem] border border-zinc-200 hover:border-[#997819] transition-all duration-500 flex items-center gap-8">
-                      <div className="text-4xl font-black text-zinc-100 group-hover:text-[#997819]/20 transition-colors">
+                      <div className="text-4xl font-black text-zinc-400 group-hover:text-[#997819] transition-colors">
                         {idx + 1}
                       </div>
                       <div>
@@ -464,7 +590,6 @@ const BS7499Page = () => {
                 ))}
               </div>
             </div>
-
           </div>
         </div>
       </section>
@@ -489,7 +614,7 @@ const BS7499Page = () => {
                 q: "3. What does BS 7499 cover?",
                 a: "The standard covers key areas such as security personnel management, assignment instructions, operational procedures, and incident reporting for guarding services.",
               },
-               {
+              {
                 q: "4. How can a company achieve BS 7499 certification?",
                 a: "A company can achieve BS 7499 certification by implementing the required operational procedures and passing an audit from an approved certification body, often with guidance from compliance consultants like BizGrow Holdings.",
               },
@@ -512,7 +637,7 @@ const BS7499Page = () => {
 
       {/* 🔹 7. CALL TO ACTION (Fixed Parallax Style) */}
       <section className="py-24 px-6 bg-white relative">
-        <FadeIn direction="up">
+        
           <div className="max-w-7xl mx-auto relative rounded-[4rem] overflow-hidden shadow-3xl group">
             <div
               className="absolute inset-0 z-0 bg-cover bg-center bg-fixed"
@@ -522,15 +647,17 @@ const BS7499Page = () => {
             </div>
 
             <div className="relative z-10 p-12 md:p-24 text-center flex flex-col items-center">
-              <h2 className="text-4xl md:text-8xl font-black text-white tracking-tighter mb-10 uppercase leading-[0.9]">
-                STANDARDIZE YOUR <br />
+              <h2 className="text-4xl md:text-7xl font-black text-white tracking-tighter mb-10 uppercase leading-[0.9]">
+                STANDARDISE YOUR <br />
                 <span className="text-[#997819]">GUARDING OPERATIONS.</span>
               </h2>
               <div className="flex flex-col sm:flex-row gap-6">
-                <button className="bg-[#997819] text-white px-16 py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-[10px] hover:bg-white hover:text-[#12066a] transition-all duration-700 shadow-2xl group flex items-center gap-3">
-                  Audit My Operations
-                  <ArrowRight className="group-hover:translate-x-2 transition-transform" />
-                </button>
+                <Link href="/comtact-us">
+                  <button className="bg-[#997819] text-white px-16 py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-[10px] hover:bg-white hover:text-[#12066a] transition-all duration-700 shadow-2xl group flex items-center gap-3">
+                    Audit My Operations
+                    <ArrowRight className="group-hover:translate-x-2 transition-transform" />
+                  </button>
+                </Link>
                 <a
                   href="tel:+447898205035"
                   className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-10 py-6 rounded-2xl font-black uppercase tracking-[0.2em] text-[10px] flex items-center gap-3 transition-all duration-500"
@@ -540,7 +667,7 @@ const BS7499Page = () => {
               </div>
             </div>
           </div>
-        </FadeIn>
+        
       </section>
     </main>
   );
