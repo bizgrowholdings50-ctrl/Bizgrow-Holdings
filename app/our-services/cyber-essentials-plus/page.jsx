@@ -11,7 +11,7 @@ import {
   Lock,
   Globe,
 } from "lucide-react";
-import Link from "@node_modules/next/link";
+import Link from "next/link";
 
 export const metadata = {
   title: "Cyber Essentials Plus Certification UK | BizGrow Holdings ltd",
