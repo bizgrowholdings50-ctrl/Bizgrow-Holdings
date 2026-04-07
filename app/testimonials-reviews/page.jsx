@@ -1,8 +1,8 @@
 import Image from "next/image";
-import FadeIn from "@components/MotionWrapper";
+import FadeIn from "@/components/MotionWrapper";
 // Dono components ko alag alag import karein
-import VideoTestimonials from "@components/VideoTestimonials";
-import TextTestimonials from "@components/TextTestimonials";
+import VideoTestimonials from "@/components/VideoTestimonials";
+import TextTestimonials from "@/components/TextTestimonials";
 
 
 export const metadata = {

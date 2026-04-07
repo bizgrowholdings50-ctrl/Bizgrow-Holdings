@@ -1,7 +1,7 @@
 
 import { HelpCircle } from "lucide-react";
 import FadeIn from "@/components/MotionWrapper";
-import FaqAccordion from "@components/FaqAccordion";
+import FaqAccordion from "@/components/FaqAccordion";
 import Link from "next/link";
 
 export const metadata = {

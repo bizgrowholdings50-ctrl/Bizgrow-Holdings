@@ -10,7 +10,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import Image from "next/image";
-import FadeIn from "@components/MotionWrapper";
+import FadeIn from "@/components/MotionWrapper";
 
 // 📝 ON-PAGE SEO DATA
 export const metadata = {

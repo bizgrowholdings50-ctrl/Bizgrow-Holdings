@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import FadeIn from "@components/MotionWrapper";
+import FadeIn from "@/components/MotionWrapper";
 
 export const metadata = {
   title: "Compliance Consultancies UK | BizGrow Holdings Ltd",

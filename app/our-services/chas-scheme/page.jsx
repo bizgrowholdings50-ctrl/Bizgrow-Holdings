@@ -11,7 +11,7 @@ import {
   TriangleAlert, // SafetyCone ki jagah TriangleAlert (Construction vibe ke liye best hai)
   Users, // Users2 ki jagah Users
 } from "lucide-react";
-import Link from "@node_modules/next/link";
+import Link from "next/link";
 
 export const metadata = {
   title: "CHAS Scheme | BizGrow Holdings | Health & Safety Approval",
