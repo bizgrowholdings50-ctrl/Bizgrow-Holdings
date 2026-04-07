@@ -172,7 +172,7 @@ const BS7499Page = () => {
           <div className="md:w-1/2 relative rounded-[4rem] overflow-hidden shadow-2xl">
             <Image
               src="/t.jpg"
-              alt="Security Patrol"
+              alt="Why BS 7499 Certification Matters"
               width={600}
               height={600}
               className="object-cover h-137.5"
