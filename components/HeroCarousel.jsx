@@ -10,7 +10,7 @@ const slides = [
     heading: 'Smarter Strategy. Stronger Systems. Real Results.',
     subheading: 'BizGrow Holdings delivers compliance-driven consultancy that helps UK businesses pass audits, win contracts, and grow with certainty.',
     buttonText: 'Start Your Growth Journey',
-    buttonLink: 'https://bizgrow-holdings.vercel.app/contact-us/'
+    buttonLink: '/contact-us/'
   },
   {
     image: '/home-compliance.jpg',
@@ -18,7 +18,7 @@ const slides = [
     heading: 'Compliance Clear. Certification Achievable.',
     subheading: 'Helping UK businesses achieve ISO certification, regulatory approval, and audit-ready systems with clarity, confidence, and control.',
     buttonText: 'Explore Our Certification',
-    buttonLink: 'https://bizgrow-holdings.vercel.app/our-services/'
+    buttonLink: '/our-services/'
   },
   {
     image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',

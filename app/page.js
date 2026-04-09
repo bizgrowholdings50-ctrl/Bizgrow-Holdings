@@ -30,12 +30,31 @@ const steps = [
   {
     num: "03",
     title: "Implementation",
-    desc: <>System Development, <Link href="http://localhost:3001/corporate-training-and-coaching/" className="text-[#997819] font-bold">Training</Link> & Operational Alignment</>,
+    desc: (
+      <>
+        System Development,{" "}
+        <Link
+          href="/corporate-training-and-coaching/"
+          className="text-[#997819] font-bold"
+        >
+          Training
+        </Link>{" "}
+        & Operational Alignment
+      </>
+    ),
   },
   {
     num: "04",
     title: "Certification",
-    desc: <>Final <Link href="http://localhost:3001/internal-audit/" className="text-[#997819] font-bold">Audit</Link> Support & Long-Term Compliance Success</>,
+    desc: (
+      <>
+        Final{" "}
+        <Link href="/internal-audit/" className="text-[#997819] font-bold">
+          Audit
+        </Link>{" "}
+        Support & Long-Term Compliance Success
+      </>
+    ),
   },
 ];
 
@@ -59,7 +78,8 @@ const reviews = [
 
 export const metadata = {
   title: "BizGrow Holdings | Security Business Growth & Compliance",
-  description: "BizGrow Holdings helps UK security businesses achieve ISO & ACS compliance, win contracts, and grow with expert guidance and strategies.",
+  description:
+    "BizGrow Holdings helps UK security businesses achieve ISO & ACS compliance, win contracts, and grow with expert guidance and strategies.",
 };
 export default function HomePage() {
   return (
@@ -115,10 +135,10 @@ export default function HomePage() {
                 </p>
               </div>
             </div>
-           <Link href="/contact-us">
-            <button className="bg-white text-[#12066a] px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-blue-50 transition-all shadow-lg active:scale-95">
-              Book a Consultation
-            </button>
+            <Link href="/contact-us">
+              <button className="bg-white text-[#12066a] px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-blue-50 transition-all shadow-lg active:scale-95">
+                Book a Consultation
+              </button>
             </Link>
           </div>
         </div>
@@ -156,9 +176,15 @@ export default function HomePage() {
               <p>
                 We follow a structured approach with clients, i.e. We start by
                 meeting with your management team to fully understand your
-                goals, challenges, and <Link href="https://bizgrow-holdings.vercel.app/compliance-consultancies/" className="text-[#997819] font-bold">compliance</Link> needs. Then, we work
-                side-by-side to design and implement the most effective,
-                tailored solution through every phase:
+                goals, challenges, and{" "}
+                <Link
+                  href="/compliance-consultancies/"
+                  className="text-[#997819] font-bold"
+                >
+                  compliance
+                </Link>{" "}
+                needs. Then, we work side-by-side to design and implement the
+                most effective, tailored solution through every phase:
               </p>
 
               <ul className="space-y-4 pt-4">
@@ -180,7 +206,8 @@ export default function HomePage() {
                 ))}
               </ul>
               <p className="font-bold text-black">
-                Your growth is our goal, and compliance is just the beginning.{" "}
+                Your growth is our goal, and compliance is just the
+                beginning.{" "}
               </p>
             </div>
           </FadeIn>
@@ -190,7 +217,7 @@ export default function HomePage() {
       {/* 4. HORIZONTAL SERVICES (GSAP PINNED SECTION) */}
       <HorizontalServices />
 
-       <section className="py-24 min-h-screen lg:h-auto bg-[#12066a] relative overflow-hidden">
+      <section className="py-24 min-h-screen lg:h-auto bg-[#12066a] relative overflow-hidden">
         {/* Decorative Background Text */}
         <Image
           src="/experts-home.jpg"
@@ -303,7 +330,7 @@ export default function HomePage() {
 
             <div className="flex flex-col sm:flex-row gap-6 w-full lg:w-auto">
               <button className="bg-[#997819] text-white px-8 py-5 rounded-2xl font-black uppercase tracking-widest text-xs flex items-center justify-center gap-3 hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-lg group/btn">
-                <Link href="https://bizgrow-holdings.vercel.app/contact-us/">Book Free Consultation</Link>
+                <Link href="/contact-us">Book Free Consultation</Link>
                 <ArrowRight className="group-hover/btn:translate-x-2 transition-transform" />
               </button>
 

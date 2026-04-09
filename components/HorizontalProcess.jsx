@@ -41,7 +41,7 @@ const HorizontalProcess = () => {
     img: "/sia-home.jpg",
     alt: "SIA ACS - BizGrow Holdings Ltd", // 👈 SEO Friendly Alt
     description:
-      <>Achieve and maintain <Link href="https://bizgrow-holdings.vercel.app/our-services/sia-acs/" className="text-[#997819] font-bold">Approved Contractor Scheme</Link> status with expert guidance.</>
+      <>Achieve and maintain <Link href="/our-services/sia-acs/" className="text-[#997819] font-bold">Approved Contractor Scheme</Link> status with expert guidance.</>
   },
   {
     id: "02",
@@ -50,7 +50,7 @@ const HorizontalProcess = () => {
     img: "/iso-home.jpg",
     alt: "ISO Certification - BizGrow Holdings Ltd", // 👈 Key-words include kiye
     description:
-      <>Streamline your business with <Link href="https://bizgrow-holdings.vercel.app/our-services/iso-9001/" className="text-[#997819] font-bold">ISO 9001</Link>, <Link href="https://bizgrow-holdings.vercel.app/our-services/iso-14001/" className="text-[#997819] font-bold">14001</Link>, and <Link href="https://bizgrow-holdings.vercel.app/our-services/iso-45001/" className="text-[#997819] font-bold">45001 </Link>certifications.</>,
+      <>Streamline your business with <Link href="/our-services/iso-9001/" className="text-[#997819] font-bold">ISO 9001</Link>, <Link href="/our-services/iso-14001/" className="text-[#997819] font-bold">14001</Link>, and <Link href="/our-services/iso-45001/" className="text-[#997819] font-bold">45001 </Link>certifications.</>,
   },
   {
     id: "03",

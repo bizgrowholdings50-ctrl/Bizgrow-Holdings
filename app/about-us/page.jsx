@@ -118,7 +118,7 @@ export default function AboutUs() {
                 pursuing{" "}
                 <Link
                   href="https://bizgrow-holdings.vercel.app/our-services/sia-acs/"
-                  className="text-[#997819] font-bold"
+                  className="text-[#997819] mr-1 font-bold"
                 >
                   SIA ACS
                 </Link>
@@ -131,39 +131,57 @@ export default function AboutUs() {
 
               <ul className="space-y-4 pt-1">
                 {[
-                  "Specialist SIA ACS audit preparation & advisory",
-                  <>
-                    ISO{" "}
-                    <Link
-                      href="https://bizgrow-holdings.vercel.app/our-services/iso-9001/"
-                      className="text-[#997819] font-bold"
-                    >
-                      9001
-                    </Link>
-                    ,{" "}
-                    <Link
-                      href="https://bizgrow-holdings.vercel.app/our-services/iso-14001/"
-                      className="text-[#997819] font-bold"
-                    >
-                      14001
-                    </Link>{" "}
-                    &{" "}
-                    <Link
-                      href="https://bizgrow-holdings.vercel.app/our-services/iso-45001/"
-                      className="text-[#997819] font-bold"
-                    >
-                      45001
-                    </Link>{" "}
-                    implementation support
-                  </>,
-                  "Structured compliance systems & documentation",
-                  "Ongoing governance, training & audit readiness",
-                ].map((item, i) => (
+                  {
+                    id: 1,
+                    content: "Specialist SIA ACS audit preparation & advisory",
+                  },
+                  {
+                    id: 2,
+                    content: (
+                      <span>
+                        ISO{" "}
+                        <Link
+                          href="/our-services/iso-9001/"
+                          className="text-[#997819] font-bold hover:underline"
+                        >
+                          9001
+                        </Link>
+                        ,{" "}
+                        <Link
+                          href="/our-services/iso-14001/"
+                          className="text-[#997819] font-bold hover:underline"
+                        >
+                          14001
+                        </Link>{" "}
+                        &{" "}
+                        <Link
+                          href="/our-services/iso-45001/"
+                          className="text-[#997819] font-bold hover:underline"
+                        >
+                          45001
+                        </Link>{" "}
+                        implementation support
+                      </span>
+                    ),
+                  },
+                  {
+                    id: 3,
+                    content: "Structured compliance systems & documentation",
+                  },
+                  {
+                    id: 4,
+                    content: "Ongoing governance, training & audit readiness",
+                  },
+                ].map((item) => (
                   <li
-                    key={i}
-                    className="flex items-start gap-3 text-[#12066a] font-bold"
+                    key={item.id}
+                    className="flex items-start gap-3 text-[#12066a] font-bold leading-tight"
                   >
-                    <CheckCircle2 className="text-[#997819]" size={20} /> {item}
+                    <CheckCircle2
+                      className="text-[#997819] shrink-0 mt-0.5"
+                      size={20}
+                    />
+                    <span>{item.content}</span>
                   </li>
                 ))}
               </ul>
@@ -322,11 +340,12 @@ export default function AboutUs() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-6 w-full lg:w-auto shrink-0">
-                <button className="bg-[#997819] text-white px-10 py-6 rounded-2xl font-black uppercase tracking-[0.2em] text-[10px] flex items-center justify-center gap-4 hover:bg-white hover:text-[#12066a] transition-all duration-700 shadow-2xl group">
-                 <Link href="https://bizgrow-holdings.vercel.app/contact-us/">Book Free Consultation</Link>
-                  
-                  <ArrowRight className="group-hover:translate-x-2 transition-transform" />
-                </button>
+                <Link href="/contact-us/">
+                  <button className="bg-[#997819] text-white px-10 py-6 rounded-2xl font-black uppercase tracking-[0.2em] text-[10px] flex items-center justify-center gap-4 hover:bg-white hover:text-[#12066a] transition-all duration-700 shadow-2xl group">
+                    Book Free Consultation
+                    <ArrowRight className="group-hover:translate-x-2 transition-transform" />
+                  </button>
+                </Link>
 
                 <a
                   href="tel:+447898205035"
