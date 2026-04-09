@@ -9,8 +9,9 @@ import {
   Settings2,
   ArrowRight,
 } from "lucide-react";
+import Link from "next/link";
 export const metadata = {
-  title: "UK QMS Software by BizGrow | ISO Compliance Made Easy",
+  title: "QMS Software by BizGrow Holdings Ltd, UK",
   description:
     "Simplify ISO compliance with BizGrow QMS software. Manage audits, documents, and quality systems for UK businesses.",
 };
@@ -34,13 +35,21 @@ const QMSPage = () => {
             </h1>
             <p className="text-blue-100/70 text-lg md:text-xl max-w-2xl font-medium leading-relaxed mb-10">
               Empowering UK businesses with a smart, centralised QMS solution to
-              streamline compliance, manage documentation, and stay fully
-              audit-ready with ease.
+              streamline{" "}
+              <Link
+                href="https://bizgrow-holdings.com/compliance-consultancies/"
+                className="text-[#997819] font-bold"
+              >
+                compliance
+              </Link>
+              , manage documentation, and stay fully audit-ready with ease.
             </p>
-            <button className="bg-[#997819] hover:bg-white text-white hover:text-[#12066a] font-black uppercase tracking-widest px-10 py-5 rounded-full transition-all duration-500 shadow-xl shadow-[#997819]/20 flex items-center gap-4 group">
-              Book a Free Consultation
-              <ArrowRight className="group-hover:translate-x-2 transition-transform" />
-            </button>
+            <Link href="/contact-us">
+              <button className="bg-[#997819] hover:bg-white text-white hover:text-[#12066a] font-black uppercase tracking-widest px-10 py-5 rounded-full transition-all duration-500 shadow-xl shadow-[#997819]/20 flex items-center gap-4 group">
+                Book a Free Consultation
+                <ArrowRight className="group-hover:translate-x-2 transition-transform" />
+              </button>
+            </Link>
           </FadeIn>
         </div>
       </section>
@@ -55,7 +64,7 @@ const QMSPage = () => {
                 <div className="relative rounded-[3rem] md:rounded-[4.5rem] overflow-hidden shadow-2xl shadow-blue-900/10 border-[12px] border-slate-50">
                   <img
                     src="/qms-strategic.jpg"
-                    alt="BizGrow QMS Consultation"
+                    alt="QMS Software BizGrow Holdings Ltd"
                     className="w-full h-125 md:h-165 object-cover group-hover:scale-105 transition-transform duration-1000"
                   />
                   <div className="absolute bottom-10 right-10 bg-[#997819] text-white px-8 py-4 rounded-2xl shadow-xl transform rotate-[-3deg] group-hover:rotate-0 transition-all">
@@ -95,7 +104,28 @@ const QMSPage = () => {
                   <p>
                     It enables organisations to maintain consistent standards,
                     improve operational efficiency, and meet recognised
-                    frameworks such as ISO 9001, ISO 14001, and ISO 45001.
+                    frameworks such as{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/iso-9001-guide/"
+                      className="text-[#997819] font-bold"
+                    >
+                      ISO 9001
+                    </Link>
+                    ,{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/iso-14001-consulting-services/"
+                      className="text-[#997819] font-bold"
+                    >
+                      ISO 14001
+                    </Link>
+                    , and{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/is-iso-45001-the-essential-solution-for-safety-and-compliance/"
+                      className="text-[#997819] font-bold"
+                    >
+                      ISO 45001
+                    </Link>
+                    .
                   </p>
                   <p>
                     For UK businesses, especially in regulated sectors, QMS
@@ -141,13 +171,38 @@ const QMSPage = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              "Managing compliance through manual processes and spreadsheets",
+              <>
+                Managing{" "}
+                <Link
+                  href="https://bizgrow-holdings.com/benefits-of-supply-chain-management-for-compliance/"
+                  className="text-[#997819] font-bold"
+                >
+                  compliance
+                </Link>{" "}
+                through manual processes and spreadsheets
+              </>,
               "Scattered documentation with no centralised system",
-              "Difficulty in meeting ISO standards and regulatory requirements",
+              <>
+                Difficulty in meeting{" "}
+                <Link
+                  href="https://bizgrow-holdings.com/difference-between-iso-9001-iso-14001-and-iso45001/"
+                  className="text-[#997819] font-bold"
+                >
+                  ISO standards
+                </Link>{" "}
+                and regulatory requirements
+              </>,
               "Lack of visibility over audits and compliance status",
               "Poor tracking of non-conformities and corrective actions",
-              "Increased risk of errors, missed deadlines, and failed audits",
-             
+              <>
+                Increased risk of errors, missed deadlines, and failed{" "}
+                <Link
+                  href="https://bizgrow-holdings.com/difference-between-internal-audit-and-external-audit/"
+                  className="text-[#997819] font-bold"
+                >
+                  audits
+                </Link>
+              </>,
             ].map((challenge, i) => (
               <FadeIn key={i} direction="up" delay={i * 0.1}>
                 <div className="p-10 bg-white/5 backdrop-blur-md border border-white/10 rounded-[2.5rem] hover:bg-[#997819]/10 hover:border-[#997819]/30 transition-all duration-500 group relative overflow-hidden h-full">
@@ -250,16 +305,28 @@ const QMSPage = () => {
                   QMS software is essential for UK businesses that need to
                   maintain consistent quality standards, manage compliance
                   requirements, and streamline their internal processes. It is
-                  particularly valuable for organisations working towards ISO
-                  certifications or operating in regulated industries where
-                  accuracy and documentation are critical.
+                  particularly valuable for organisations working towards{" "}
+                  <Link
+                    href="https://bizgrow-holdings.com/is-iso-45001-the-essential-solution-for-safety-and-compliance/"
+                    className="text-[#997819] font-bold"
+                  >
+                    ISO certifications
+                  </Link>{" "}
+                  or operating in regulated industries where accuracy and
+                  documentation are critical.
                 </p>
                 <div className="space-y-4 text-blue-100/80 font-medium">
                   <p>
-                    From security companies seeking ACS approval to
-                    construction, facilities management, and growing businesses,
-                    a QMS system helps ensure audit readiness, reduce risks, and
-                    improve overall efficiency.
+                    From security companies seeking{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/get-acs-accreditation-fast/"
+                      className="text-[#997819] font-bold"
+                    >
+                      ACS
+                    </Link>{" "}
+                    approval to construction, facilities management, and growing
+                    businesses, a QMS system helps ensure audit readiness,
+                    reduce risks, and improve overall efficiency.
                   </p>
                   <p>
                     It enables organisations to build credibility, meet client
@@ -278,7 +345,10 @@ const QMSPage = () => {
                 </h2>
                 <div className="space-y-6 text-zinc-500 text-lg leading-relaxed mb-8">
                   <p>
-                    BizGrow offers a tailored QMS software solution designed
+                    <Link href="/about-us" className="text-[#997819] font-bold">
+                      BizGrow
+                    </Link>{" "}
+                    offers a tailored QMS software solution designed
                     specifically to meet the needs of UK businesses operating in
                     compliance-driven industries. With a deep understanding of
                     ISO standards, ACS requirements, and UK regulations, we
@@ -288,10 +358,16 @@ const QMSPage = () => {
                   <p>
                     Our approach goes beyond just software, we offer expert
                     guidance, ongoing support, and a solution that integrates
-                    seamlessly into your operations. By choosing BizGrow, you
-                    gain a trusted partner committed to helping you achieve
-                    compliance, improve efficiency, and grow your business with
-                    confidence in the UK market.
+                    seamlessly into your operations. By choosing{" "}
+                    <Link
+                      href="/our-mission"
+                      className="text-[#997819] font-bold"
+                    >
+                      BizGrow
+                    </Link>
+                    , you gain a trusted partner committed to helping you
+                    achieve compliance, improve efficiency, and grow your
+                    business with confidence in the UK market.
                   </p>
                 </div>
                 <div className="pt-8 border-t border-slate-100 flex items-center gap-4 text-[#12066a] font-black uppercase tracking-widest text-xs">
@@ -336,10 +412,11 @@ const QMSPage = () => {
                     stay audit-ready, and grow with confidence.
                   </p>
                 </div>
-
+                <Link href="https://bizgrow-holdings.com/contact-us/">
                 <button className="bg-[#997819] text-white px-16 py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-3xl">
                   Book a Free Consultation
                 </button>
+                </Link>
               </FadeIn>
             </div>
 
