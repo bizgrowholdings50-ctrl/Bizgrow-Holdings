@@ -16,11 +16,12 @@ import {
   ArrowUpRight,
   Rocket,
 } from "lucide-react";
+import Link from "next/link";
 
 export const metadata = {
-  title: "Digital Marketing & Web Solutions UK | BizGrow Digital",
+  title: "UK Private Security Directory | Trusted & Verified Companies",
   description:
-    "Enterprise-grade web development and ROI-driven digital marketing. Specialized in Next.js, Technical SEO, and Paid Media for the UK market.",
+    "UK Private Security Directory to find trusted, compliant companies offering guarding, patrols, events & CCTV services..",
 };
 
 const MarketingSolutionsPage = () => {
@@ -50,9 +51,16 @@ const MarketingSolutionsPage = () => {
               <span className="text-[#997819]">SECURITY DIRECTORY.</span>
             </h1>
             <p className="mt-10 text-blue-100/60 text-xl md:text-2xl max-w-2xl font-medium leading-relaxed">
-              Find trusted and compliant private security companies across the
-              UK. Connect with professional providers offering manned guarding,
-              event security, and specialised security services.
+              Find trusted and compliant{" "}
+              <Link
+                href="https://bizgrow-holdings.com/our-services/private-security-startup/"
+                className="text-[#997819] font-bold"
+              >
+                private security
+              </Link>{" "}
+              companies across the UK. Connect with professional providers
+              offering manned guarding, event security, and specialised security
+              services.
             </p>
           </FadeIn>
         </div>
@@ -69,7 +77,7 @@ const MarketingSolutionsPage = () => {
                   src="/strategy-meeting.webp"
                   width={600}
                   height={750}
-                  alt="Strategy"
+                  alt="UK’s Private Security Directory - BizGrow Holdings Ltd"
                   className="object-cover h-[650px]"
                 />
               </div>
@@ -88,10 +96,10 @@ const MarketingSolutionsPage = () => {
               <div className="space-y-8">
                 {[
                   {
-                    d: "The UK’s Private Security Directory by BizGrow Holdings is a dedicated platform designed to connect businesses, organisations, and individuals with trusted and compliant private security companies across the United Kingdom.",
+                    d: <>The UK’s Private Security Directory by <Link href="/" className="text-[#997819] font-bold">BizGrow Holdings</Link> is a dedicated platform designed to connect businesses, organisations, and individuals with trusted and compliant private security companies across the United Kingdom.</>,
                   },
                   {
-                    d: "Our directory features security companies that are committed to maintaining professional standards, regulatory compliance, and operational excellence within the private security industry.",
+                    d: <>Our directory features <Link href="https://bizgrow-holdings.com/security-companies-are-considered-the-safest-choice/" className="text-[#997819] font-bold">security companies</Link> that are committed to maintaining professional standards, regulatory compliance, and operational excellence within the private security industry.</>,
                   },
                   {
                     d: "Whether you are looking for manned guarding, event security, mobile patrols, CCTV monitoring, or specialised security services, our directory helps you easily find reliable providers.",
@@ -154,7 +162,7 @@ const MarketingSolutionsPage = () => {
               <p className="mb-3">
                 Finding the right security provider can be challenging. Our
                 directory simplifies this process by bringing together verified
-                and professional security companies in one place.
+                and professional <Link href="https://bizgrow-holdings.com/how-to-start-a-security-company-in-the-uk/" className="text-[#997819] font-bold">security companies</Link> in one place.
               </p>
               <p className="text-black mb-3 text-xl font-bold">
                 Key benefits include:
@@ -168,7 +176,7 @@ const MarketingSolutionsPage = () => {
                     d: "View company services, expertise, and capabilities",
                   },
                   {
-                    d: "Discover businesses working towards industry compliance",
+                    d: <>Discover businesses working towards industry <Link href="https://bizgrow-holdings.com/compliance-consultancies/" className="text-[#997819] font-bold">compliance</Link></>
                   },
                   {
                     d: "Save time when searching for reliable security providers",
@@ -195,7 +203,7 @@ const MarketingSolutionsPage = () => {
                     src="/private-directory.jpg"
                     fill
                     className="object-cover opacity-60"
-                    alt="Technology"
+                    alt="Why Use the UK’s Private Security Directory - BizGrow"
                   />
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="w-32 h-32 bg-[#997819]/90 rounded-full flex items-center justify-center border-4 border-white/20 animate-pulse">
@@ -221,7 +229,7 @@ const MarketingSolutionsPage = () => {
             {[
               {
                 t: "VERIFIED COMPANIES",
-                d: "We showcase private security companies that are committed to professional standards, industry compliance, and reliable security services across the UK.",
+                d: <>We showcase private <Link href="https://bizgrow-holdings.com/top-security-companies-trusted-protection-for-every-business/" className="text-[#997819] font-bold">security companies</Link> that are committed to professional standards, industry compliance, and reliable security services across the UK.</>,
                 icon: <Globe />,
               },
               {
@@ -272,7 +280,7 @@ const MarketingSolutionsPage = () => {
                   individuals easily find reliable and professional security
                   service providers across the United Kingdom. It connects
                   clients with companies that are committed to industry
-                  standards, compliance, and high-quality security services.
+                  standards, <Link href="https://bizgrow-holdings.com/benefits-of-supply-chain-management-for-compliance/" className="text-[#997819] font-bold">compliance</Link>, and high-quality security services.
                 </p>
               </div>
             </FadeIn>
@@ -330,8 +338,8 @@ const MarketingSolutionsPage = () => {
               <span className="text-[#997819]">SERVE.</span>
             </h2>
             <p className="text-blue-100/50 max-w-xl  text-center text-lg">
-              Connecting businesses with trusted and compliant private security
-              companies across the UK to ensure safety, reliability, and
+              Connecting businesses with trusted and compliant private <Link href="https://bizgrow-holdings.com/how-bizgrow-holdings-helps-security-companies-win-contracts-in-the-uk/" className="text-[#997819] font-bold">security
+              companies</Link> across the UK to ensure safety, reliability, and
               professional protection services.
             </p>
           </div>
@@ -397,12 +405,14 @@ const MarketingSolutionsPage = () => {
 
               <div className="flex flex-col sm:flex-row gap-6 w-full justify-center items-center">
                 <FadeIn direction="up" delay={0.2}>
-                  <button className="relative group/btn overflow-hidden w-full sm:w-72 bg-[#997819] text-white px-10 py-6 rounded-2xl font-black uppercase tracking-[0.2em] text-[11px] transition-all duration-500 shadow-lg">
+                  <Link href="/contact-us"><button className="relative group/btn overflow-hidden w-full sm:w-72 bg-[#997819] text-white px-10 py-6 rounded-2xl font-black uppercase tracking-[0.2em] text-[11px] transition-all duration-500 shadow-lg">
                     <span className="relative z-40 group-hover/btn:text-[#12066a] transition-colors duration-500">
                       Contact us today
                     </span>
                     <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
                   </button>
+                  </Link>
+                  
                 </FadeIn>
               </div>
             </div>
