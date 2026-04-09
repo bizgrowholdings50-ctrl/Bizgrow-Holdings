@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import FadeIn from "@/components/MotionWrapper";
+import Link from "next/link";
 
 // 📝 ON-PAGE SEO DATA
 export const metadata = {
@@ -47,15 +48,26 @@ const CustomerServicePage = () => {
               </span>
             </h1>
             <p className="text-blue-100/80 max-w-2xl text-lg md:text-xl mb-10 leading-relaxed">
-              At BizGrow Holdings, customer service isn’t just a department;
-              it’s the foundation of everything we do. We deliver expert
-              compliance guidance and business growth solutions, ensuring every
-              client experience is seamless, professional, and genuinely
-              supportive.
+              At{" "}
+              <Link href="/" className="text-[#997819] font-bold">
+                BizGrow Holdings
+              </Link>
+              , customer service isn’t just a department; it’s the foundation of
+              everything we do. We deliver expert{" "}
+              <Link
+                href="https://bizgrow-holdings.com/compliance-consultancies/"
+                className="text-[#997819] font-bold"
+              >
+                compliance
+              </Link>{" "}
+              guidance and business growth solutions, ensuring every client
+              experience is seamless, professional, and genuinely supportive.
             </p>
-            <button className="bg-[#997819] text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-2xl">
-              Get a Free Consultation
-            </button>
+            <Link href="/contact-us">
+              <button className="bg-[#997819] text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-2xl">
+                Get a Free Consultation
+              </button>
+            </Link>
           </FadeIn>
         </div>
       </section>
@@ -70,12 +82,29 @@ const CustomerServicePage = () => {
                 <span className="text-[#997819]"> Customer Care</span>
               </h2>
               <p className="text-zinc-500  text-lg leading-relaxed mb-8">
-                At BizGrow Holdings, we deliver customer service that is
-                personal, responsive, and reliable.
+                At{" "}
+                <Link href="/about-us" className="text-[#997819] font-bold">
+                  BizGrow Holdings
+                </Link>
+                , we deliver customer service that is personal, responsive, and
+                reliable.
               </p>
               <div className="p-8 bg-[#12066a] rounded-[3rem] text-white shadow-2xl relative overflow-hidden">
                 <p className="relative z-10 font-medium italic opacity-90">
-                  Whether you are a new UK business seeking ISO or ACS
+                  Whether you are a new UK business seeking{" "}
+                  <Link
+                    href="https://bizgrow-holdings.com/our-services/iso-9001/"
+                    className="text-[#997819] font-bold"
+                  >
+                    ISO
+                  </Link>{" "}
+                  or{" "}
+                  <Link
+                    href="https://bizgrow-holdings.com/our-services/sia-acs/"
+                    className="text-[#997819] font-bold"
+                  >
+                    ACS
+                  </Link>{" "}
                   certification or an established company aiming for growth, our
                   dedicated team ensures a smooth, supportive experience every
                   step of the way.
@@ -88,17 +117,70 @@ const CustomerServicePage = () => {
               {[
                 {
                   t: "Friendly & Professional Support",
-                  d: "Every enquiry is handled with care and respect, providing fast, accurate responses to all your questions. Our goal is to make your journey with us as stress-free and straightforward as possible.",
+                  d: (
+                    <>
+                      Every enquiry is handled with care and respect, providing
+                      fast, accurate responses to all your questions.{" "}
+                      <Link
+                        href="https://bizgrow-holdings.com/our-mission/"
+                        className="text-[#997819] font-bold"
+                      >
+                        Our goal
+                      </Link>{" "}
+                      is to make your journey with us as stress-free and
+                      straightforward as possible.
+                    </>
+                  ),
                   icon: <Headphones className="w-8 h-8" />,
                 },
                 {
                   t: "Expert UK Security Consultants",
-                  d: "Our team consists of industry-certified security consultants who understand the unique challenges of the UK security and compliance sector. From ISO certification to ACS accreditation, we provide guidance you can trust.",
+                  d: (
+                    <>
+                      Our team consists of industry-certified security
+                      consultants who understand the unique challenges of the{" "}
+                      <Link
+                        href="https://bizgrow-holdings.com/how-to-start-a-security-company-in-the-uk/"
+                        className="text-[#997819] font-bold"
+                      >
+                        UK security
+                      </Link>{" "}
+                      and compliance sector. From{" "}
+                      <Link
+                        href="https://bizgrow-holdings.com/our-services/iso-14001/"
+                        className="text-[#997819] font-bold"
+                      >
+                        ISO
+                      </Link>{" "}
+                      certification to{" "}
+                      <Link
+                        href="https://bizgrow-holdings.com/get-acs-accreditation-fast/"
+                        className="text-[#997819] font-bold"
+                      >
+                        ACS
+                      </Link>{" "}
+                      accreditation, we provide guidance you can trust.
+                    </>
+                  ),
                   icon: <ShieldCheck className="w-8 h-8" />,
                 },
                 {
                   t: "Tailored Solutions for Your Business",
-                  d: "We listen first, understanding your business needs, and then deliver customised solutions designed to meet your specific requirements. Every strategy is aligned with UK regulations and focused on maximising growth and compliance success.",
+                  d: (
+                    <>
+                      We listen first, understanding your business needs, and
+                      then deliver customised solutions designed to meet your
+                      specific requirements. Every strategy is aligned with UK
+                      regulations and focused on maximising growth and{" "}
+                      <Link
+                        href="https://bizgrow-holdings.com/benefits-of-supply-chain-management-for-compliance/"
+                        className="text-[#997819] font-bold"
+                      >
+                        compliance
+                      </Link>{" "}
+                      success.
+                    </>
+                  ),
                   icon: <Target className="w-8 h-8" />,
                 },
               ].map((item, idx) => (
@@ -150,11 +232,46 @@ const CustomerServicePage = () => {
             {[
               {
                 t: "Compliance & Certification",
-                d: "ISO, ACS, and UK security training queries.",
+                d: (
+                  <>
+                    <Link
+                      href="https://bizgrow-holdings.com/our-services/iso-45001/"
+                      className="text-[#997819] font-bold"
+                    >
+                      ISO
+                    </Link>
+                    ,{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/acs-accreditation-for-security-businesses/"
+                      className="text-[#997819] font-bold"
+                    >
+                      ACS
+                    </Link>
+                    , and{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/security-companies-are-considered-the-safest-choice/"
+                      className="text-[#997819] font-bold"
+                    >
+                      UK security
+                    </Link>{" "}
+                    training queries.
+                  </>
+                ),
               },
               {
                 t: "Project Updates",
-                d: "Status on consultancy services and audits.",
+                d: (
+                  <>
+                    Status on consultancy services and{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/our-services/internal-audit/"
+                      className="text-[#997819] font-bold"
+                    >
+                      audits
+                    </Link>
+                    .
+                  </>
+                ),
               },
               {
                 t: "Tender & Pre-Qualification Advice",
@@ -162,16 +279,27 @@ const CustomerServicePage = () => {
               },
               {
                 t: "Documentation Guidance",
-                d: "Preparing evidence for audits or certification renewals.",
+                d: (
+                  <>
+                    Preparing evidence for audits or{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/chas-assessment-criteria-registration-renewal/"
+                      className="text-[#997819] font-bold"
+                    >
+                      certification renewals
+                    </Link>
+                    .
+                  </>
+                ),
               },
             ].map((help, i) => (
               <div
                 key={i}
                 className="p-10 bg-white/5 border border-white/10 rounded-[3rem] backdrop-blur-md transition-all duration-700 hover:bg-white group cursor-pointer h-full"
               >
-                <h4 className="text-[#997819] font-black mb-6 uppercase text-xs tracking-[0.2em]">
+                <h3 className="text-[#997819] font-black mb-6 uppercase text-xs tracking-[0.2em]">
                   Service {i + 1}
-                </h4>
+                </h3>
                 <p className="text-xl font-bold text-white group-hover:text-[#12066a] leading-tight mb-4 transition-colors duration-500">
                   {help.t}
                 </p>
@@ -280,10 +408,12 @@ const CustomerServicePage = () => {
               <span className="text-[#997819]">compliance support</span> <br />
               <span className="text-white">today</span>
             </h2>
+            <Link href="/contact-us">
             <button className="group/btn relative overflow-hidden bg-[#997819] text-white px-16 py-7 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-2xl flex items-center gap-4 mx-auto">
               Contact Us Now{" "}
               <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-2 transition-transform" />
             </button>
+            </Link>
           </div>
         </div>
       </section>

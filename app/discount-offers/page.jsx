@@ -2,6 +2,11 @@ import React from 'react';
 import DiscountCard from "@/components/DiscountCard";
 import FadeIn from "@/components/MotionWrapper";
 
+export const metadata = {
+  title: "Discount Offers - BizGrow Holdings Ltd, UK",
+  description:
+    "Unlock exclusive business discount offers with BizGrow Holdings. Save on certifications, compliance, and growth services for UK companies.",
+};
 const offersData = [
   {
     id: "core-40",
