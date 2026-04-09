@@ -10,7 +10,13 @@ import {
   ShieldAlert,
 } from "lucide-react";
 import FadeIn from "@/components/MotionWrapper";
+import Link from "next/link";
 
+export const metadata = {
+  title: "Internal Audit Services UK – BizGrow Holdings Ltd",
+  description:
+    "Enhance compliance, reduce risk, and improve controls with expert internal audit services tailored to UK businesses across all sectors.",
+};
 const InternalAuditPage = () => {
   return (
     <main className="bg-white">
@@ -40,12 +46,21 @@ const InternalAuditPage = () => {
             </h1>
             <p className="text-blue-100/80 max-w-2xl text-lg md:text-xl mb-10 leading-relaxed">
               Ensure your business complies with UK regulatory standards with
-              expert internal audits. Identify risks, improve processes, and
-              stay audit-ready with confidence.
+              expert{" "}
+              <Link
+                href="https://bizgrow-holdings.com/how-do-internal-audits-enhance-compliance-efficiency/"
+                className="text-[#997819] font-bold"
+              >
+                internal audits
+              </Link>
+              . Identify risks, improve processes, and stay audit-ready with
+              confidence.
             </p>
-            <button className="bg-[#997819] text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-2xl">
-              Get a Free Consultation
-            </button>
+            <Link href="/contact-us">
+              <button className="bg-[#997819] text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-2xl">
+                Get a Free Consultation
+              </button>
+            </Link>
           </FadeIn>
         </div>
       </section>
@@ -56,9 +71,9 @@ const InternalAuditPage = () => {
           <div className="flex flex-col lg:flex-row items-center gap-20">
             <div className="lg:w-1/2">
               <FadeIn direction="left">
-                <h3 className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs mb-6">
+                <h2 className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs mb-6">
                   Introduction
-                </h3>
+                </h2>
                 <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-none mb-8">
                   What is Internal Audit &
                   <span className="text-[#997819]"> Why It Matters</span>
@@ -66,15 +81,40 @@ const InternalAuditPage = () => {
                 <div className="space-y-6 text-zinc-700 text-lg leading-relaxed">
                   <p>
                     Internal audit is a structured process used to review and
-                    evaluate an organisation’s internal controls, risk
-                    management, and compliance systems, ensuring operations run
-                    effectively.
+                    evaluate an organisation’s internal controls,{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/site-specific-risk-assessment/"
+                      className="text-[#997819] font-bold"
+                    >
+                      risk management
+                    </Link>
+                    , and{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/compliance-consultancies/"
+                      className="text-[#997819] font-bold"
+                    >
+                      compliance systems
+                    </Link>
+                    , ensuring operations run effectively.
                   </p>
                   <p className="font-medium text-[#12066a]">
                     It plays a vital role in helping businesses stay compliant
-                    with ISO standards, ACS requirements, and UK regulations
-                    while identifying risks and improving performance and
-                    keeping your organisation audit-ready.
+                    with{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/difference-between-iso-9001-iso-14001-and-iso45001/"
+                      className="text-[#997819] font-bold"
+                    >
+                      ISO standards
+                    </Link>
+                    ,{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/get-acs-accreditation-fast/"
+                      className="text-[#997819] font-bold"
+                    >
+                      ACS requirements
+                    </Link>
+                    , and UK regulations while identifying risks and improving
+                    performance and keeping your organisation audit-ready.
                   </p>
                 </div>
               </FadeIn>
@@ -86,7 +126,7 @@ const InternalAuditPage = () => {
                   src="/audit-works.jpg"
                   width={600}
                   height={500}
-                  alt="Audit Process"
+                  alt="Internal Audit UK – BizGrow Holdings Ltd"
                   className="object-cover h-[500px]"
                 />
               </div>
@@ -105,9 +145,9 @@ const InternalAuditPage = () => {
             {/* ⬅️ Left: Content & Heading */}
             <div className="lg:col-span-5">
               <FadeIn direction="left">
-                <h3 className="text-[#997819] font-black uppercase tracking-[0.4em] text-[10px] mb-4">
+                <h2 className="text-[#997819] font-black uppercase tracking-[0.4em] text-[10px] mb-4">
                   Strategic Assurance
-                </h3>
+                </h2>
                 <h2 className="text-5xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-[0.9] mb-8 uppercase">
                   Why Internal Audit
                   <span className="text-[#997819]"> is Important</span>
@@ -137,8 +177,14 @@ const InternalAuditPage = () => {
                     <p className="text-zinc-600 group-hover:text-blue-100/70 leading-relaxed font-medium">
                       They help identify potential risks before they become
                       serious issues, ensure compliance with HSE regulations and
-                      ISO standards, and highlight opportunities to improve
-                      processes and efficiency.
+                      <Link
+                        href="https://bizgrow-holdings.com/iso-9001-guide/"
+                        className="text-[#997819] font-bold ml-1"
+                      >
+                        ISO standards
+                      </Link>
+                      , and highlight opportunities to improve processes and
+                      efficiency.
                     </p>
                   </div>
                   <div className="mt-8 pt-6 border-t border-zinc-200 group-hover:border-white/10">
@@ -160,9 +206,22 @@ const InternalAuditPage = () => {
                       />
                     </div>
                     <p className="text-[#12066a] group-hover:text-white leading-relaxed font-bold text-lg">
-                      By conducting regular internal audits, businesses can also
-                      avoid costly penalties, maintain regulatory compliance,
-                      and operate with greater confidence and control.
+                      By conducting regular{" "}
+                      <Link
+                        href="https://bizgrow-holdings.com/difference-between-internal-audit-and-external-audit/"
+                        className="text-[#997819] font-bold"
+                      >
+                        internal audits
+                      </Link>
+                      , businesses can also avoid costly penalties, maintain
+                      regulatory{" "}
+                      <Link
+                        href="https://bizgrow-holdings.com/benefits-of-supply-chain-management-for-compliance/"
+                        className="text-[#997819] font-bold"
+                      >
+                        compliance
+                      </Link>
+                      , and operate with greater confidence and control.
                     </p>
                   </div>
                   <div className="mt-8 pt-6 border-t border-zinc-100 group-hover:border-white/20">
@@ -217,7 +276,18 @@ const InternalAuditPage = () => {
               },
               {
                 t: "Regulatory Compliance",
-                d: "Ensure compliance with UK laws, industry standards, and ISO requirements.",
+                d: (
+                  <>
+                    Ensure compliance with{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/key-environmental-laws-in-the-uk/"
+                      className="text-[#997819] font-bold"
+                    >
+                      UK laws
+                    </Link>
+                    , industry standards, and ISO requirements.
+                  </>
+                ),
                 icon: <CheckCircle2 size={32} />,
               },
               {
@@ -275,8 +345,12 @@ const InternalAuditPage = () => {
                 Audit Procedure
               </h2>
               <p className="text-zinc-600 mb-8">
-                At BizGrow Holdings, we follow a structured and standards-driven
-                internal audit approach designed to deliver clear insights.
+                At{" "}
+                <Link href="/about-us" className="text-[#997819] font-bold">
+                  BizGrow Holdings
+                </Link>
+                , we follow a structured and standards-driven internal audit
+                approach designed to deliver clear insights.
               </p>
               <div className="space-y-4">
                 {[
@@ -310,7 +384,18 @@ const InternalAuditPage = () => {
                   {[
                     {
                       t: "Experience",
-                      d: "In-depth knowledge of UK compliance and ISO standards.",
+                      d: (
+                        <>
+                          In-depth knowledge of UK compliance and{" "}
+                          <Link
+                            href="https://bizgrow-holdings.com/iso-9001-for-small-businesses/"
+                            className="text-[#997819] font-bold"
+                          >
+                            ISO standards
+                          </Link>
+                          .
+                        </>
+                      ),
                     },
                     {
                       t: "Proven Results",
@@ -328,9 +413,9 @@ const InternalAuditPage = () => {
                     <div key={i} className="flex gap-6 group">
                       <ArrowRight className="text-[#997819] shrink-0 group-hover:translate-x-2 transition-transform" />
                       <div>
-                        <h4 className="font-black uppercase tracking-widest text-sm mb-1">
+                        <h3 className="font-black uppercase tracking-widest text-sm mb-1">
                           {item.t}
-                        </h4>
+                        </h3>
                         <p className="text-blue-100/50 text-sm">{item.d}</p>
                       </div>
                     </div>
@@ -375,6 +460,7 @@ const InternalAuditPage = () => {
               </FadeIn>
 
               <FadeIn direction="up" delay={0.2}>
+                <Link href="https://bizgrow-holdings.com/contact-us/">
                 <button className="relative overflow-hidden group/btn bg-[#997819] text-white px-16 py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-2xl active:scale-95">
                   <span className="relative z-10">
                     Book Your Technical Audit today
@@ -383,6 +469,7 @@ const InternalAuditPage = () => {
                   {/* Subtle Shine Effect on Button */}
                   <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000" />
                 </button>
+                </Link>
               </FadeIn>
             </div>
 
