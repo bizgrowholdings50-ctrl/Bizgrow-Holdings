@@ -150,9 +150,9 @@ const ServicesPage = () => {
 
         <div className="absolute inset-0 flex items-center justify-center z-10">
           <FadeIn direction="up" duration={1}>
-            <h2 className="text-[10rem] md:text-[16rem] font-black text-white/[0.05] leading-none uppercase select-none">
+            <span className="text-[10rem] md:text-[16rem] font-black text-white/[0.05] leading-none uppercase select-none">
               Services
-            </h2>
+            </span>
           </FadeIn>
         </div>
 
@@ -227,9 +227,9 @@ const ServicesPage = () => {
 
                     {/* 2. Watermark */}
                     <div className="absolute top-8 left-8 pointer-events-none z-10 overflow-hidden">
-                      <h4 className="text-[4rem] font-black text-white/[0.05] uppercase leading-none tracking-tighter transition-transform duration-1000 lg:group-hover:-translate-y-2 lg:group-hover:text-[#997819]/30">
+                      <h3 className="text-[4rem] font-black text-white/[0.05] uppercase leading-none tracking-tighter transition-transform duration-1000 lg:group-hover:-translate-y-2 lg:group-hover:text-[#997819]/30">
                         {service.title.split(" ")[0]}
-                      </h4>
+                      </h3>
                     </div>
 
                     {/* 3. Gradient */}
@@ -337,7 +337,7 @@ const ServicesPage = () => {
                       {item.step}
                     </span>
                     <div>
-                      <h4 className="font-bold text-xl mb-1">{item.t}</h4>
+                      <h3 className="font-bold text-xl mb-1">{item.t}</h3>
                       <p className="text-black text-sm">{item.d}</p>
                     </div>
                   </div>

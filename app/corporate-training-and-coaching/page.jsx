@@ -12,7 +12,12 @@ import {
   Award,
 } from "lucide-react";
 import FadeIn from "@/components/MotionWrapper"; // Assuming you have this component
-
+import Link from "next/link";
+export const metadata = {
+  title: "Corporate Training & Coaching Services | BizGrow Holdings UK",
+  description:
+    "BizGrow Holdings offers expert corporate training & coaching services, empowering UK security businesses with growth and compliance success.",
+};
 const TrainingCoachingPage = () => {
   return (
     <main className="bg-white">
@@ -26,9 +31,9 @@ const TrainingCoachingPage = () => {
 
         {/* 🔹 Background Watermark "TRAINING" (Image 2 Style) */}
         <div className="absolute inset-0 flex items-center justify-center z-0 select-none pointer-events-none">
-          <h2 className="text-[22vw] font-black text-white/[0.03] uppercase leading-none tracking-tighter -rotate-3">
+          <span className="text-[22vw] font-black text-white/[0.03] uppercase leading-none tracking-tighter -rotate-3">
             TRAINING
-          </h2>
+          </span>
         </div>
 
         <div className="max-w-7xl mx-auto px-6 relative z-10 w-full pt-20">
@@ -52,14 +57,36 @@ const TrainingCoachingPage = () => {
 
                 <p className="text-zinc-300 text-lg font-medium max-w-xl leading-relaxed border-l-4 border-[#997819] pl-6">
                   At BizGrow Holdings, we provide tailored programs to help UK
-                  security companies meet SIA regulations, ACS standards, and
-                  ISO compliance.
+                  security companies meet{" "}
+                  <Link
+                    href="https://bizgrow-holdings.com/top-sia-security-recruitment-agencies-in-the-uk/"
+                    className="text-[#997819] font-bold"
+                  >
+                    SIA
+                  </Link>{" "}
+                  regulations,{" "}
+                  <Link
+                    href="https://bizgrow-holdings.com/acs-accreditation-for-security-businesses/"
+                    className="text-[#997819] font-bold"
+                  >
+                    ACS
+                  </Link>{" "}
+                  standards, and{" "}
+                  <Link
+                    href="https://bizgrow-holdings.com/iso-9001-guide/"
+                    className="text-[#997819] font-bold"
+                  >
+                    ISO
+                  </Link>{" "}
+                  compliance.
                 </p>
 
                 <div className="pt-6">
-                  <button className="px-10 py-5 bg-[#997819] text-white font-black uppercase tracking-widest text-[10px] rounded-2xl hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-2xl active:scale-95">
-                    Book Free Consultation
-                  </button>
+                  <Link href="/contact-us">
+                    <button className="px-10 py-5 bg-[#997819] text-white font-black uppercase tracking-widest text-[10px] rounded-2xl hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-2xl active:scale-95">
+                      Book Free Consultation
+                    </button>
+                  </Link>
                 </div>
               </div>
             </FadeIn>
@@ -79,8 +106,14 @@ const TrainingCoachingPage = () => {
             </h2>
             <p className="text-zinc-500 text-lg font-medium leading-relaxed mb-16 max-w-3xl mx-auto">
               In today’s competitive UK security industry, businesses must meet
-              strict compliance standards, client expectations, and regulatory
-              requirements.
+              strict{" "}
+              <Link
+                href="https://bizgrow-holdings.com/compliance-consultancies/"
+                className="text-[#997819] font-bold"
+              >
+                compliance
+              </Link>{" "}
+              standards, client expectations, and regulatory requirements.
             </p>
 
             <div className="grid md:grid-cols-2 gap-8 text-left">
@@ -154,7 +187,18 @@ const TrainingCoachingPage = () => {
               },
               {
                 t: "ACS & SIA Training",
-                d: "Prepare your business for ACS accreditation and SIA compliance audits",
+                d: (
+                  <>
+                    Prepare your business for ACS accreditation and SIA
+                    compliance{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/difference-between-internal-audit-and-external-audit/"
+                      className="text-[#997819] font-bold"
+                    >
+                      audits
+                    </Link>
+                  </>
+                ),
               },
               {
                 t: "Staff Performance Training",
@@ -171,9 +215,9 @@ const TrainingCoachingPage = () => {
               >
                 <div className="absolute inset-0 bg-[#12066a] translate-y-[101%] group-hover:translate-y-0 transition-transform duration-500 ease-out z-0" />
                 <div className="relative z-10">
-                  <h4 className="text-xl font-black text-[#12066a] mb-4 group-hover:text-[#997819] transition-colors uppercase leading-tight">
+                  <h3 className="text-xl font-black text-[#12066a] mb-4 group-hover:text-[#997819] transition-colors uppercase leading-tight">
                     {card.t}
-                  </h4>
+                  </h3>
                   <p className="text-xs text-zinc-500 group-hover:text-blue-100/70 transition-colors font-medium leading-relaxed">
                     {card.d}
                   </p>
@@ -224,8 +268,14 @@ const TrainingCoachingPage = () => {
                   <span className="text-[#997819]">Methodology</span>
                 </h2>
                 <p className="text-blue-100/70 text-lg font-medium max-w-3xl mx-auto">
-                  Our business coaching for security companies focuses on real
-                  growth and measurable results.
+                  Our business coaching for{" "}
+                  <Link
+                    href="https://bizgrow-holdings.com/how-to-start-a-security-company-in-the-uk/"
+                    className="text-[#997819] font-bold"
+                  >
+                    security companies
+                  </Link>{" "}
+                  focuses on real growth and measurable results.
                 </p>
               </FadeIn>
             </div>
@@ -316,7 +366,16 @@ const TrainingCoachingPage = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
             {[
               "Improved compliance with UK security regulations",
-              "Higher chances of achieving ISO certification and ACS approval",
+              <>
+                Higher chances of achieving{" "}
+                <Link
+                  href="https://bizgrow-holdings.com/why-clients-trust-iso-14001-certified-suppliers-in-the-uk/"
+                  className="text-[#997819] font-bold"
+                >
+                  ISO certification
+                </Link>{" "}
+                and ACS approval
+              </>,
               "Increased staff productivity and performance",
               "Better client satisfaction and retention",
               "Stronger positioning to win security contracts in the UK",
@@ -339,9 +398,9 @@ const TrainingCoachingPage = () => {
 
           {/* Bottom Simple Goal Statement */}
           <div className="max-w-4xl mx-auto text-center p-12 bg-zinc-50 rounded-[3rem] border-2 border-[#997819]/20">
-            <h4 className="text-[#12066a] font-black uppercase tracking-widest text-xs mb-4">
+            <h3 className="text-[#12066a] font-black uppercase tracking-widest text-xs mb-4">
               Our goal is simple:
-            </h4>
+            </h3>
             <p className="text-2xl md:text-4xl font-black text-[#12066a] tracking-tight leading-none">
               Help your business grow while <br />
               <span className="text-[#997819]">staying fully compliant.</span>
@@ -410,9 +469,9 @@ const TrainingCoachingPage = () => {
                 <span className="text-5xl font-black text-white/10 group-hover/card:text-[#997819] block mb-6 transition-colors duration-500">
                   {step.n}
                 </span>
-                <h5 className="font-black uppercase mb-3 text-white group-hover/card:text-[#12066a] text-xs tracking-wider transition-colors duration-500">
+                <h3 className="font-black uppercase mb-3 text-white group-hover/card:text-[#12066a] text-xs tracking-wider transition-colors duration-500">
                   {step.t}
-                </h5>
+                </h3>
                 <p className="text-[10px] text-zinc-300 group-hover/card:text-zinc-600 font-medium leading-relaxed transition-colors duration-500">
                   {step.d}
                 </p>
@@ -453,11 +512,40 @@ const TrainingCoachingPage = () => {
               {[
                 {
                   t: "Industry Expertise",
-                  d: "Industry-specific expertise in security compliance and certification",
+                  d: (
+                    <>
+                      Industry-specific expertise in security{" "}
+                      <Link
+                        href="https://bizgrow-holdings.com/benefits-of-supply-chain-management-for-compliance/"
+                        className="text-[#997819] font-bold"
+                      >
+                        compliance
+                      </Link>{" "}
+                      and certification
+                    </>
+                  ),
                 },
                 {
                   t: "Proven Track Record",
-                  d: "Helping businesses achieve ISO & ACS accreditation",
+                  d: (
+                    <>
+                      Helping businesses achieve{" "}
+                      <Link
+                        href="https://bizgrow-holdings.com/could-iso-45001-enhance-workplace-safety-and-compliance/"
+                        className="text-[#997819] font-bold"
+                      >
+                        ISO
+                      </Link>{" "}
+                      &{" "}
+                      <Link
+                        href="https://bizgrow-holdings.com/business-benefits-of-becoming-an-sia-approved-contractor/"
+                        className="text-[#997819] font-bold"
+                      >
+                        ACS
+                      </Link>{" "}
+                      accreditation
+                    </>
+                  ),
                 },
                 {
                   t: "End-to-End Support",
@@ -478,9 +566,9 @@ const TrainingCoachingPage = () => {
                       size={20}
                     />
                   </div>
-                  <h4 className="text-[#12066a] font-black uppercase text-xs tracking-widest mb-3">
+                  <h3 className="text-[#12066a] font-black uppercase text-xs tracking-widest mb-3">
                     {item.t}
-                  </h4>
+                  </h3>
                   <p className="text-zinc-500 text-[11px] font-bold leading-relaxed">
                     {item.d}
                   </p>
@@ -517,14 +605,16 @@ const TrainingCoachingPage = () => {
                   </span>
                 </h3>
                 <p className="mb-10 text-blue-100/70 font-medium text-lg max-w-2xl mx-auto">
-                  Partner with BizGrow Holdings and give your team the skills,
+                  Partner with <Link href="/">BizGrow Holdings</Link> and give your team the skills,
                   knowledge, and confidence to succeed in the UK market.
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
+                 <Link href="/contact-us">
                   <button className="px-12 py-6 bg-[#997819] text-white font-black uppercase tracking-widest text-[10px] rounded-2xl hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-[0_20px_50px_rgba(153,120,25,0.3)] w-full sm:w-auto transform hover:-translate-y-1">
                     Book Free Consultation
                   </button>
+                  </Link>
                   <a
                     href="mailto:info@bizgrow-holdings.com"
                     className="text-white font-black uppercase tracking-widest text-[10px] hover:text-[#997819] transition-colors flex items-center gap-2 group/link"
