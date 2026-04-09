@@ -61,13 +61,22 @@ const ComplianceConsultancyPage = () => {
               Expert Guidance for <br />{" "}
               <span className="text-[#997819]">Regulated Excellence.</span>
             </h2>
-            <p className="text-zinc-600 text-lg mb-6 leading-relaxed font-medium">
-              BizGrow Holdings delivers expert compliance consultancy to help
-              organisations navigate UK security standards, understand
+            <p className="text-zinc-600 text-lg mb-6 leading-relaxed ">
+              <Link href="/" className="text-[#997819] font-bold">
+                BizGrow Holdings
+              </Link>{" "}
+              delivers expert{" "}
+              <Link
+                href="https://bizgrow-holdings.com/compliance-consultancies/"
+                className="text-[#997819] font-bold"
+              >
+                compliance consultancy
+              </Link>{" "}
+              to help organisations navigate UK security standards, understand
               regulatory requirements, and implement structured processes for
               fully compliant operations.
             </p>
-            <p className="text-zinc-500 mb-10 leading-relaxed">
+            <p className="text-zinc-600 mb-10 leading-relaxed">
               Our consultancy services are designed to elevate operational
               performance, strengthen client confidence, and give you a
               competitive edge when bidding for high-value contracts and
@@ -75,14 +84,14 @@ const ComplianceConsultancyPage = () => {
             </p>
             <div className="flex gap-8">
               <div className="text-center">
-                <h4 className="text-3xl font-black text-[#12066a]">100%</h4>
+                <h3 className="text-3xl font-black text-[#12066a]">100%</h3>
                 <p className="text-[10px] font-bold uppercase text-[#997819]">
                   Audit Ready
                 </p>
               </div>
               <div className="w-[1px] bg-zinc-200" />
               <div className="text-center">
-                <h4 className="text-3xl font-black text-[#12066a]">UK</h4>
+                <h3 className="text-3xl font-black text-[#12066a]">UK</h3>
                 <p className="text-[10px] font-bold uppercase text-[#997819]">
                   Standard Aligned
                 </p>
@@ -96,7 +105,7 @@ const ComplianceConsultancyPage = () => {
                 src="/compliance-consultancy.png"
                 width={600}
                 height={700}
-                alt="Security Audit"
+                alt="Compliance Consultancies - BizGrow Holdings Ltd"
                 className="object-cover"
               />
             </div>
@@ -130,18 +139,43 @@ const ComplianceConsultancyPage = () => {
               <FadeIn direction="left" delay={0.2}>
                 <div className="space-y-8">
                   <p className="text-blue-100/90 text-xl md:text-2xl font-bold leading-relaxed italic border-l-8 border-[#997819] pl-8">
-                    Compliance with UK security industry standards is essential
-                    for operating legally, maintaining credibility, and securing
-                    high-value contracts. Without proper compliance, businesses
-                    risk failed audits, financial penalties, and loss of client
-                    trust.
+                    Compliance with{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/security-companies-are-considered-the-safest-choice/"
+                      className="text-[#997819] font-bold"
+                    >
+                      UK security
+                    </Link>{" "}
+                    industry standards is essential for operating legally,
+                    maintaining credibility, and securing high-value contracts.
+                    Without proper compliance, businesses risk failed{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/our-services/internal-audit/"
+                      className="text-[#997819] font-bold"
+                    >
+                      audits
+                    </Link>
+                    , financial penalties, and loss of client trust.
                   </p>
 
                   <p className="text-white/70 text-lg md:text-xl leading-relaxed font-medium">
-                    By meeting recognised standards such as ISO certifications
-                    and ACS requirements, organisations not only protect their
-                    operations but also position themselves as reliable and
-                    professional service providers in a competitive market.
+                    By meeting recognised standards such as{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/difference-between-iso-9001-iso-14001-and-iso45001/"
+                      className="text-[#997819] font-bold"
+                    >
+                      ISO certifications
+                    </Link>
+                    and{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/get-acs-accreditation-fast/"
+                      className="text-[#997819 font-bold]"
+                    >
+                      ACS requirements
+                    </Link>
+                    , organisations not only protect their operations but also
+                    position themselves as reliable and professional service
+                    providers in a competitive market.
                   </p>
                 </div>
 
@@ -169,7 +203,19 @@ const ComplianceConsultancyPage = () => {
             {[
               {
                 title: "Gap Analysis",
-                desc: "Comprehensive assessment of your current operations against UK security industry standards to identify compliance gaps and improvement opportunities.",
+                desc: (
+                  <>
+                    Comprehensive assessment of your current operations against{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/how-to-start-a-security-company-in-the-uk/"
+                      className="text-[#997819] font-bold"
+                    >
+                      UK security
+                    </Link>{" "}
+                    industry standards to identify compliance gaps and
+                    improvement opportunities.
+                  </>
+                ),
                 icon: <Search className="w-8 h-8" />,
               },
               {
@@ -218,10 +264,14 @@ const ComplianceConsultancyPage = () => {
             </FadeIn>
             <FadeIn direction="left" delay={0.2}>
               <p className="text-zinc-500 text-lg md:text-xl font-medium leading-relaxed border-l-4 border-zinc-100 pl-6">
-                Partnering with BizGrow Holdings ensures a smooth and efficient
-                compliance journey tailored to UK security industry standards.
-                We help you achieve certification faster while strengthening
-                your operational performance and market position.
+                Partnering with{" "}
+                <Link href="/" className="text-[#997819] font-bold">
+                  BizGrow Holdings
+                </Link>{" "}
+                ensures a smooth and efficient compliance journey tailored to UK
+                security industry standards. We help you achieve certification
+                faster while strengthening your operational performance and
+                market position.
               </p>
             </FadeIn>
           </div>
@@ -231,12 +281,41 @@ const ComplianceConsultancyPage = () => {
             {[
               {
                 title: "Expert-Led Compliance Support",
-                desc: "Work with specialists who understand UK security regulations and certification requirements.",
+                desc: (
+                  <>
+                    Work with specialists who understand{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/top-security-companies-trusted-protection-for-every-business/"
+                      className="text-[#997819] font-bold"
+                    >
+                      UK security
+                    </Link>{" "}
+                    regulations and certification requirements.
+                  </>
+                ),
                 icon: <Users className="w-6 h-6" />,
               },
               {
                 title: "Faster Certification Process",
-                desc: "Streamlined approach to help you achieve ISO and ACS approvals efficiently.",
+                desc: (
+                  <>
+                    Streamlined approach to help you achieve{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/iso-9001-for-small-businesses/"
+                      className="text-[#997819] font-bold"
+                    >
+                      ISO
+                    </Link>{" "}
+                    and{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/acs-accreditation-for-security-businesses/"
+                      className="text-[#997819] font-bold"
+                    >
+                      ACS
+                    </Link>{" "}
+                    approvals efficiently.
+                  </>
+                ),
                 icon: <Zap className="w-6 h-6" />,
               },
               {
@@ -285,7 +364,19 @@ const ComplianceConsultancyPage = () => {
                   },
                   {
                     t: "Enhanced Reliability",
-                    d: "Demonstrate full compliance with recognised UK security standards to build trust and confidence with your clients.",
+                    d: (
+                      <>
+                        Demonstrate full compliance with recognised{" "}
+                        <Link
+                          href="https://bizgrow-holdings.com/how-bizgrow-holdings-helps-security-companies-win-contracts-in-the-uk/"
+                          className="text-[#997819] font-bold"
+                        >
+                          UK security
+                        </Link>{" "}
+                        standards to build trust and confidence with your
+                        clients.
+                      </>
+                    ),
                   },
                   {
                     t: "Competitive Edge",
@@ -395,8 +486,14 @@ const ComplianceConsultancyPage = () => {
                     <p className="text-zinc-600 text-lg leading-relaxed relative z-10 font-medium">
                       Our client-focused methodology, proven track record, and
                       commitment to ongoing support ensure your business not
-                      only achieves compliance but also gains a competitive
-                      advantage in the market.
+                      only achieves{" "}
+                      <Link
+                        href="https://bizgrow-holdings.com/benefits-of-supply-chain-management-for-compliance/"
+                        className="text-[#997819] font-bold"
+                      >
+                        compliance
+                      </Link>{" "}
+                      but also gains a competitive advantage in the market.
                     </p>
                     {/* Hover Effect Line */}
                     <div className="absolute bottom-0 left-10 right-10 h-1 bg-[#997819] scale-x-0 group-hover:scale-x-100 transition-transform duration-500 rounded-full" />
