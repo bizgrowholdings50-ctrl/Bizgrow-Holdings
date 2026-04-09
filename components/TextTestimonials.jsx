@@ -196,9 +196,9 @@ const TestimonialGrid = () => {
                   </div>
 
                   <div>
-                    <h4 className="text-[#12066a] font-black uppercase tracking-tighter text-lg md:text-xl leading-none">
+                    <h3 className="text-[#12066a] font-black uppercase tracking-tighter text-lg md:text-xl leading-none">
                       {reviews[index].name}
-                    </h4>
+                    </h3>
                     <p className="text-[#997819] font-bold text-xs uppercase tracking-widest mt-1.5">
                       {reviews[index].role}
                     </p>

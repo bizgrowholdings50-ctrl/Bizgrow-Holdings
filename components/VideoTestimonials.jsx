@@ -4,9 +4,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Play, ChevronLeft, ChevronRight, X } from "lucide-react";
 
 const videoData = [
-  { id: 1, name: "James Dalton", role: "CEO", company: "SafeGuard Logistics", videoUrl: "/video/ts-2.mp4" },
-  { id: 2, name: "Alaiba", role: "Speaker", company: "BizGrow Partner", videoUrl: "/video/Alaiba.mp4" },
-  { id: 3, name: "Workshop Team", role: "Strategic Team", company: "BizGrow Holdings", videoUrl: "/video/Workshop-video-2.mp4" },
+  { id: 1, name: "Workshop Review", role: "", company: "SafeGuard Logistics", videoUrl: "/video/ts-2.mp4" },
+  { id: 2, name: "Alaiba", role: "Compliance Mnager", company: "BizGrow Partner", videoUrl: "/video/Alaiba.mp4" },
+  { id: 3, name: "Workshop Review", role: "", company: "BizGrow Holdings", videoUrl: "/video/Workshop-video-2.mp4" },
   { id: 4, name: "Usman Attique", role: "Operational Manager", company: "Zam Fm ltd", videoUrl: "/video/usman-attique.mp4" },
   { id: 5, name: "Shehzad Qureshi", role: "Director", company: "Blue Nine ltd", videoUrl: "/video/Sehzad Qureshi.mp4" },
 ];

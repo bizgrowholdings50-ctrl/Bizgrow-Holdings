@@ -423,7 +423,7 @@ const ISO9001Page = () => {
                 Ready for the <br />{" "}
                 <span className="text-[#997819]">Next Level?</span>
               </h2>
-              <Link href="/contact">
+              <Link href="/contact-us">
               <button className="bg-[#997819] text-white  px-6 md:px-16 py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-3xl">
                 Get ISO 9001 Certified
               </button>

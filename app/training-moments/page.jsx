@@ -183,10 +183,10 @@ const TrainingMoments = () => {
               </span>
             </div>
 
-            <h3 className="text-4xl text-center md:text-6xl font-black text-[#12066a] uppercase tracking-tighter leading-none mb-8">
+            <h2 className="text-4xl text-center md:text-6xl font-black text-[#12066a] uppercase tracking-tighter leading-none mb-8">
               Inside Our{" "}
               <span className="text-[#997819] italic">Sessions.</span>
-            </h3>
+            </h2>
           </FadeIn>
         </div>
 
@@ -208,9 +208,9 @@ const TrainingMoments = () => {
                     <span className="text-[#997819] text-[10px] font-black uppercase tracking-widest mb-2 flex items-center gap-2">
                       <MapPin size={10} /> {item.location}
                     </span>
-                    <h4 className="text-white font-black text-2xl uppercase tracking-tighter leading-none">
+                    <h3 className="text-white font-black text-2xl uppercase tracking-tighter leading-none">
                       {item.title}
-                    </h4>
+                    </h3>
                   </div>
                 </div>
 
