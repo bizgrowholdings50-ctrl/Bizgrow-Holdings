@@ -19,7 +19,7 @@ import {
 import Link from "next/link";
 
 export const metadata = {
-  title: "BS 10800 Certification Services | Business Continuity Support UK",
+  title: "BS 10800 Certification Services | Business Support UK",
   description:
     "BizGrow Holdings helps UK businesses achieve BS 10800 certification to strengthen business continuity and improve audit readiness.",
 };  

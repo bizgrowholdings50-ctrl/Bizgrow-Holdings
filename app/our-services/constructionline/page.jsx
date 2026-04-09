@@ -306,9 +306,9 @@ const ConstructionlinePage = () => {
                 key={i}
                 className="text-center md:text-left border-l border-white/10 pl-8"
               >
-                <h5 className="text-5xl font-black text-white tracking-tighter mb-2">
+                <h4 className="text-5xl font-black text-white tracking-tighter mb-2">
                   {stat.n}
-                </h5>
+                </h4>
                 <p className="text-[#997819] font-black uppercase tracking-widest text-[10px]">
                   {stat.t}
                 </p>

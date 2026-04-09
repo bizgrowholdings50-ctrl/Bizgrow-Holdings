@@ -122,9 +122,9 @@ const FAQPage = () => {
       <section className="py-24 bg-zinc-50/50">
         <div className="max-w-4xl mx-auto px-6">
           <div className="flex flex-col gap-4">
-            <h1 className="text-6xl text-center font-bold text-[#12066a] pb-10">
+            <h2 className="text-6xl text-center font-bold text-[#12066a] pb-10">
               Frequently Asked Questions
-            </h1>
+            </h2>
             <FaqAccordion faqData={faqData} />
           </div>
         </div>

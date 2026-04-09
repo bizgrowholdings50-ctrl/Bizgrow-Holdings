@@ -37,9 +37,9 @@ const CyberEssentialsPlusPage = () => {
 
         {/* Watermark */}
         <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none select-none z-10">
-          <h2 className="text-[5rem] md:text-[15rem] font-black text-white/[0.13] leading-none uppercase tracking-tighter">
+          <span className="text-[5rem] md:text-[15rem] font-black text-white/[0.13] leading-none uppercase tracking-tighter">
             VERIFIED
-          </h2>
+          </span>
         </div>
 
         <div className="max-w-7xl mx-auto px-6 relative z-20 w-full pt-20">
@@ -316,10 +316,10 @@ const CyberEssentialsPlusPage = () => {
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid md:grid-cols-2 gap-20 items-center">
             <div>
-              <h3 className="text-4xl md:text-6xl font-black text-white tracking-tighter mb-8 leading-[0.9] uppercase">
+              <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter mb-8 leading-[0.9] uppercase">
                 Strengthen Your <br />{" "}
                 <span className="text-[#997819]">Cyber Security.</span>
-              </h3>
+              </h2>
               <p className="text-blue-100/60 font-medium text-lg italic mb-10 border-l-4 border-[#997819] pl-6">
                 "Cyber Essentials sets the standard. Cyber Essentials Plus
                 proves your defences are working."

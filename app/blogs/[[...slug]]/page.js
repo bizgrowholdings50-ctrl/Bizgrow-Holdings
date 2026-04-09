@@ -3,21 +3,22 @@ import Image from "next/image";
 import FilterBar from "@/components/FilterBar";
 import { notFound } from "next/navigation";
 
-const WP_FIELDS = "_fields=id,slug,title,yoast_head_json";
+// FIX: Humne _embedded aur featured_media ko fields mein add kiya hai taakay images ka data miss na ho
+const WP_FIELDS = "_fields=id,slug,title,yoast_head_json,featured_media,_links,_embedded";
 
 async function getData(page = 1, catSlug = null) {
   let catId = null;
   if (catSlug) {
-    const catRes = await fetch(`https://bizgrow-holdings.com/wp-json/wp/v2/categories?slug=${catSlug}`, { next: { revalidate: 3600 } });
+    const catRes = await fetch(`https://cms.bizgrow-holdings.com/wp-json/wp/v2/categories?slug=${catSlug}`, { next: { revalidate: 3600 } });
     const cats = await catRes.json();
     catId = cats.length > 0 ? cats[0].id : null;
     if (!catId) return { posts: [], totalPages: 0, categories: [] };
   }
 
-  const postsUrl = `https://bizgrow-holdings.com/wp-json/wp/v2/posts?_embed&per_page=9&page=${page}&${WP_FIELDS}${catId ? `&categories=${catId}` : ""}`;
+  const postsUrl = `https://cms.bizgrow-holdings.com/wp-json/wp/v2/posts?_embed&per_page=9&page=${page}&${WP_FIELDS}${catId ? `&categories=${catId}` : ""}`;
   const [postsRes, catsRes] = await Promise.all([
     fetch(postsUrl, { next: { revalidate: 3600 } }),
-    fetch("https://bizgrow-holdings.com/wp-json/wp/v2/categories?per_page=30&_fields=id,name,slug", { next: { revalidate: 3600 } })
+    fetch("https://cms.bizgrow-holdings.com/wp-json/wp/v2/categories?per_page=30&_fields=id,name,slug", { next: { revalidate: 3600 } })
   ]);
 
   return { 
@@ -35,7 +36,6 @@ export const metadata = {
 export default async function BlogPage({ params }) {
   const { slug: slugArray = [] } = await params;
 
-  // 🚀 CRITICAL VALIDATION: Agar slug category ya page nahi hai, toh rasta chor do
   if (slugArray.length > 0 && slugArray[0] !== "category" && slugArray[0] !== "page") {
     return notFound(); 
   }
@@ -64,20 +64,31 @@ export default async function BlogPage({ params }) {
         <div className="w-full mb-12"><FilterBar categories={categories} /></div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {Array.isArray(posts) && posts.map((post) => (
-            <article key={post.id} className="bg-white border border-[#997819]/20 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col h-full group">
-              <div className="relative aspect-video w-full overflow-hidden">
-                <Image 
-                  src={post.yoast_head_json?.og_image?.[0]?.url || "/placeholder.jpg"} 
-                  alt="img" fill unoptimized className="object-cover group-hover:scale-110 transition-transform duration-700" 
-                />
-              </div>
-              <div className="p-6 flex flex-col flex-grow">
-                <h2 className="text-base font-bold text-[#12066a] mb-4 line-clamp-2 min-h-[3rem]" dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
-                <Link href={`/${post.slug}/`} className="mt-auto text-[#997819] font-black text-[10px] uppercase tracking-widest hover:translate-x-2 transition-transform duration-300 inline-block">Read More →</Link>
-              </div>
-            </article>
-          ))}
+          {Array.isArray(posts) && posts.map((post) => {
+            // FIX: Image nikalne ka fallback logic (Pehle WP embedded image, phir Yoast OG, phir placeholder)
+            const postImage = 
+              post._embedded?.['wp:featuredmedia']?.[0]?.source_url || 
+              post.yoast_head_json?.og_image?.[0]?.url || 
+              "/placeholder.jpg";
+
+            return (
+              <article key={post.id} className="bg-white border border-[#997819]/20 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col h-full group">
+                <div className="relative aspect-video w-full overflow-hidden">
+                  <Image 
+                    src={postImage} 
+                    alt={post.title.rendered || "Blog Image"} 
+                    fill 
+                    unoptimized 
+                    className="object-cover group-hover:scale-110 transition-transform duration-700" 
+                  />
+                </div>
+                <div className="p-6 flex flex-col flex-grow">
+                  <h2 className="text-base font-bold text-[#12066a] mb-4 line-clamp-2 min-h-[3rem]" dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
+                  <Link href={`/${post.slug}/`} className="mt-auto text-[#997819] font-black text-[10px] uppercase tracking-widest hover:translate-x-2 transition-transform duration-300 inline-block">Read More →</Link>
+                </div>
+              </article>
+            );
+          })}
         </div>
 
         {totalPages > 1 && (

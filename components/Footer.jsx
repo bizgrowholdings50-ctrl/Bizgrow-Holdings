@@ -99,9 +99,9 @@ export default function Footer() {
 
           {/* Column 3: Top Services / Pages */}
           <div>
-            <h3 className="text-[#997819] font-black uppercase tracking-widest text-sm mb-8">
+            <h4 className="text-[#997819] font-black uppercase tracking-widest text-sm mb-8">
               Certifications & Solutions
-            </h3>
+            </h4>
             <ul className="space-y-4 text-sm">
               {[
                 {
