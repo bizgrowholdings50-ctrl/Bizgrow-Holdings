@@ -36,7 +36,7 @@ export const metadata = {
     siteName: "BizGrow Holdings",
     images: [
       {
-        url: "/og-image.jpg", // Jab link share karen to ye bari image dikhe
+        url: "/site-icon.png", // Jab link share karen to ye bari image dikhe
         width: 1200,
         height: 630,
         alt: "BizGrow Holdings - Business Excellence",
