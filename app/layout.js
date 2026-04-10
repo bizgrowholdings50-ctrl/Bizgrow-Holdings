@@ -51,6 +51,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Analytics/>
+        <SpeedInsights/>
         <Navbar/>
        <SmoothScroll>
           {children}
