@@ -42,7 +42,7 @@ export default function NotFound() {
             </Link>
 
             <Link 
-              href="/contact"
+              href="/contact-us"
               className="w-full sm:w-auto bg-zinc-50 text-[#12066a] px-12 py-6 rounded-2xl font-black uppercase tracking-widest text-[10px] flex items-center justify-center gap-3 hover:bg-zinc-100 transition-all active:scale-95 border border-zinc-200"
             >
               <PhoneCall size={16} /> Contact Support

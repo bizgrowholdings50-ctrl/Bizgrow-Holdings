@@ -29,7 +29,7 @@ export async function generateMetadata({ params }) {
   return {
     title: post.yoast_head_json?.title || post.title?.rendered,
     description: post.yoast_head_json?.description || "",
-    alternates: { canonical: `https://bizgrow-digital.co.uk/${slug}/` },
+    alternates: { canonical: `https://bizgrow-holdings.com/${slug}/` },
     openGraph: {
       images: [featuredImage],
     },
