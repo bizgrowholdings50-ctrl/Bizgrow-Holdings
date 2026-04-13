@@ -70,10 +70,17 @@ const SecurityStartupPage = () => {
               </Link>{" "}
               support.
             </p>
-            <Link href="/contact-us">
-              <button className="bg-[#997819] text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-white hover:text-[#12066a] transition-all duration-300 shadow-2xl">
+            <Link
+              href="/contact-us"
+              className="relative group/btn overflow-hidden inline-flex items-center justify-center bg-[#997819] text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-xs transition-all duration-500 shadow-2xl active:scale-95"
+            >
+              {/* Layer 1: The Text (Top Layer) */}
+              <span className="relative z-40 transition-colors duration-500 group-hover/btn:text-[#12066a]">
                 Book a Free Consultation →
-              </button>
+              </span>
+
+              {/* Layer 2: The Animated White Background (Middle Layer) */}
+              <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
             </Link>
           </FadeIn>
         </div>
@@ -389,10 +396,17 @@ const SecurityStartupPage = () => {
                   Join a network of professional security companies that started
                   their journey with expert compliance and structural support.
                 </p>
-                <Link href="/contact-us">
-                  <button className="w-full bg-[#997819] py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-white text-[10px] hover:bg-white hover:text-[#12066a] transition-all duration-500">
+                <Link
+                  href="/contact-us"
+                  className="relative group/btn overflow-hidden inline-flex items-center justify-center w-full bg-[#997819] py-5 rounded-2xl font-black uppercase tracking-[0.2em] text-white text-[10px] transition-all duration-500 active:scale-95 shadow-lg"
+                >
+                  {/* Layer 1: The Text (Top Layer) */}
+                  <span className="relative z-40 transition-colors duration-500 group-hover/btn:text-[#12066a]">
                     Book a Consultation
-                  </button>
+                  </span>
+
+                  {/* Layer 2: The Animated Background (Middle Layer) */}
+                  <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
                 </Link>
               </div>
             </div>

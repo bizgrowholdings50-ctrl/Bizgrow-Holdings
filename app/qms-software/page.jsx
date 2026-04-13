@@ -44,11 +44,18 @@ const QMSPage = () => {
               </Link>
               , manage documentation, and stay fully audit-ready with ease.
             </p>
-            <Link href="/contact-us">
-              <button className="bg-[#997819] hover:bg-white text-white hover:text-[#12066a] font-black uppercase tracking-widest px-10 py-5 rounded-full transition-all duration-500 shadow-xl shadow-[#997819]/20 flex items-center gap-4 group">
+            <Link
+              href="/contact-us"
+              className="relative group/btn overflow-hidden inline-flex items-center justify-center gap-4 bg-[#997819] text-white px-10 py-5 rounded-full font-black uppercase tracking-widest text-xs transition-all duration-500 shadow-xl shadow-[#997819]/20 active:scale-95"
+            >
+              {/* Layer 1: Text & Icon (Top Layer) */}
+              <span className="relative z-40 flex items-center gap-4 transition-colors duration-500 group-hover/btn:text-[#12066a]">
                 Book a Free Consultation
-                <ArrowRight className="group-hover:translate-x-2 transition-transform" />
-              </button>
+                <ArrowRight className="group-hover/btn:translate-x-2 transition-transform duration-500" />
+              </span>
+
+              {/* Layer 2: The Sliding Background (Middle Layer) */}
+              <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
             </Link>
           </FadeIn>
         </div>
@@ -412,10 +419,17 @@ const QMSPage = () => {
                     stay audit-ready, and grow with confidence.
                   </p>
                 </div>
-                <Link href="https://bizgrow-holdings.com/contact-us/">
-                <button className="bg-[#997819] text-white px-16 py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-3xl">
-                  Book a Free Consultation
-                </button>
+                <Link
+                  href="https://bizgrow-holdings.com/contact-us/"
+                  className="relative group/btn overflow-hidden inline-flex items-center justify-center bg-[#997819] text-white px-16 py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-xs transition-all duration-500 shadow-3xl active:scale-95"
+                >
+                  {/* Layer 1: The Text (Top Layer) */}
+                  <span className="relative z-40 transition-colors duration-500 group-hover/btn:text-[#12066a]">
+                    Book a Free Consultation
+                  </span>
+
+                  {/* Layer 2: The Animated Background (Middle Layer) */}
+                  <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
                 </Link>
               </FadeIn>
             </div>

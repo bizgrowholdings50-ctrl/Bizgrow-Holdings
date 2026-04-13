@@ -185,14 +185,27 @@ export default function CertificateVerifier() {
                 <div className="flex items-end">
                   <button
                     disabled={isLoading}
-                    className="w-full md:w-auto bg-[#12066a] text-white font-black uppercase tracking-widest px-10 py-5 rounded-2xl hover:bg-[#997819] transition-all h-[62px] flex items-center justify-center gap-3 disabled:opacity-50"
+                    className="relative group/btn overflow-hidden w-full md:w-auto bg-[#12066a] text-white font-black uppercase tracking-widest px-10 py-5 rounded-2xl h-[62px] flex items-center justify-center gap-3 transition-all duration-500 shadow-xl active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    {isLoading ? (
-                      "Checking..."
-                    ) : (
-                      <>
-                        <Search size={20} /> Verify
-                      </>
+                    {/* Layer 1: Text & Icon (Top Layer) */}
+                    <span className="relative z-40 flex items-center gap-3 transition-colors duration-500 group-hover/btn:text-white">
+                      {isLoading ? (
+                        "Checking..."
+                      ) : (
+                        <>
+                          <Search
+                            size={20}
+                            className="transition-transform duration-500 group-hover/btn:scale-110"
+                          />
+                          Verify
+                        </>
+                      )}
+                    </span>
+
+                    {/* Layer 2: Gold Animated Background (Middle Layer) */}
+                    {/* !isLoading check ensures background doesn't slide when disabled */}
+                    {!isLoading && (
+                      <div className="absolute inset-0 bg-[#997819] translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
                     )}
                   </button>
                 </div>
@@ -270,7 +283,14 @@ export default function CertificateVerifier() {
               >
                 BS7858 standards
               </Link>{" "}
-              and <Link href="https://bizgrow-holdings.com/difference-between-iso-9001-iso-14001-and-iso45001/" className="text-[#997819] font-bold">ISO</Link> requirements.
+              and{" "}
+              <Link
+                href="https://bizgrow-holdings.com/difference-between-iso-9001-iso-14001-and-iso45001/"
+                className="text-[#997819] font-bold"
+              >
+                ISO
+              </Link>{" "}
+              requirements.
             </p>
             <div className="mt-8 space-y-4">
               {[
@@ -292,10 +312,17 @@ export default function CertificateVerifier() {
             <h3 className="text-white text-2xl font-black uppercase mb-4">
               Request New Audit
             </h3>
-            <Link href="/contact-us">
-            <button className="w-full bg-[#997819] text-white py-5 rounded-2xl font-black uppercase tracking-widest hover:scale-105 transition-transform shadow-xl">
-              Get Certified
-            </button>
+            <Link
+              href="/contact-us"
+              className="relative group/btn overflow-hidden inline-flex items-center justify-center w-full bg-[#997819] text-white py-5 rounded-2xl font-black uppercase tracking-widest text-xs transition-all duration-500 shadow-xl active:scale-95"
+            >
+              {/* Layer 1: The Text (Top Layer) */}
+              <span className="relative z-40 transition-colors duration-500 group-hover/btn:text-[#12066a]">
+                Get Certified
+              </span>
+
+              {/* Layer 2: The Animated Background (Middle Layer) */}
+              <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
             </Link>
           </div>
         </div>

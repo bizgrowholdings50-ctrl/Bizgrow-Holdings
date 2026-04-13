@@ -63,10 +63,17 @@ const CustomerServicePage = () => {
               guidance and business growth solutions, ensuring every client
               experience is seamless, professional, and genuinely supportive.
             </p>
-            <Link href="/contact-us">
-              <button className="bg-[#997819] text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-2xl">
+            <Link
+              href="/contact-us"
+              className="relative group/btn overflow-hidden inline-flex items-center justify-center bg-[#997819] text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-xs transition-all duration-500 shadow-2xl active:scale-95"
+            >
+              {/* Layer 1: The Text (Top Layer) */}
+              <span className="relative z-40 transition-colors duration-500 group-hover/btn:text-[#12066a]">
                 Get a Free Consultation
-              </button>
+              </span>
+
+              {/* Layer 2: The Animated Background (Middle Layer) */}
+              <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
             </Link>
           </FadeIn>
         </div>
@@ -408,11 +415,18 @@ const CustomerServicePage = () => {
               <span className="text-[#997819]">compliance support</span> <br />
               <span className="text-white">today</span>
             </h2>
-            <Link href="/contact-us">
-            <button className="group/btn relative overflow-hidden bg-[#997819] text-white px-16 py-7 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-2xl flex items-center gap-4 mx-auto">
-              Contact Us Now{" "}
-              <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-2 transition-transform" />
-            </button>
+            <Link
+              href="/contact-us"
+              className="relative group/btn overflow-hidden inline-flex items-center justify-center gap-4 bg-[#997819] text-white px-16 py-7 rounded-2xl font-black uppercase tracking-[0.3em] text-xs transition-all duration-500 shadow-2xl active:scale-95 mx-auto"
+            >
+              {/* Layer 1: Text & Icon (Top Layer) */}
+              <span className="relative z-40 flex items-center gap-4 transition-colors duration-500 group-hover/btn:text-[#12066a]">
+                Contact Us Now
+                <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-2 transition-transform duration-500" />
+              </span>
+
+              {/* Layer 2: The Animated Background (Middle Layer) */}
+              <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
             </Link>
           </div>
         </div>

@@ -372,11 +372,18 @@ const CyberEssentialsPlusPage = () => {
               Strengthen your organisation’s security posture, build client
               trust, and demonstrate verified cyber resilience.
             </p>
-            <Link href="/contact-us">
-            <button className="relative z-10 bg-[#997819] text-white md:px-16 py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-3xl">
-              Book Your Audit today
-            </button>
-            </Link>
+          <Link 
+  href="/contact-us" 
+  className="relative group/btn overflow-hidden inline-flex items-center justify-center bg-[#997819] text-white md:px-16 px-8 py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-xs transition-all duration-500 shadow-3xl active:scale-95"
+>
+  {/* Layer 1: Text jo animation ke upar rahega */}
+  <span className="relative z-40 transition-colors duration-500 group-hover/btn:text-[#12066a]">
+    Book Your Audit today
+  </span>
+
+  {/* Layer 2: White Background jo niche se slide hokar aayega */}
+  <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
+</Link>
           </div>
         </div>
       </section>

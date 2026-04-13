@@ -14,10 +14,10 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-
-export const metadata = { 
-  title: "Get SafeContractor Certified: Health & Safety UK Standards", 
-  description: "Get SafeContractor certified and ensure your UK business meets top health & safety standards, boosting credibility and opportunities.",
+export const metadata = {
+  title: "Get SafeContractor Certified: Health & Safety UK Standards",
+  description:
+    "Get SafeContractor certified and ensure your UK business meets top health & safety standards, boosting credibility and opportunities.",
 };
 const SafeContractorPage = () => {
   return (
@@ -450,10 +450,17 @@ const SafeContractorPage = () => {
                 Get Your SafeContractor Seal This Month
               </h3>
               <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-                <Link href="/contact-us">
-                  <button className="px-12 py-6 bg-[#997819] text-white font-black uppercase tracking-widest text-[10px] rounded-2xl hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-2xl">
+                <Link
+                  href="/contact-us"
+                  className="relative group/btn overflow-hidden inline-flex items-center justify-center px-12 py-6 bg-[#997819] text-white font-black uppercase tracking-widest text-[10px] rounded-2xl transition-all duration-500 shadow-2xl active:scale-95"
+                >
+                  {/* Layer 1: The Text (Top Layer) */}
+                  <span className="relative z-40 transition-colors duration-500 group-hover/btn:text-[#12066a]">
                     Start My Assessment
-                  </button>
+                  </span>
+
+                  {/* Layer 2: The Animated Background (Middle Layer) */}
+                  <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
                 </Link>
                 <Link href="https://bizgrow-holdings.com/safe-contractor-checklist/">
                   <button className="px-12 py-6 bg-transparent border border-white/20 text-white font-black uppercase tracking-widest text-[10px] rounded-2xl hover:bg-white/10 transition-all">

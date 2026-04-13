@@ -59,9 +59,15 @@ const CHASSchemePage = () => {
 
             <FadeIn direction="right" duration="0.8">
               <p className="mt-10 text-blue-100/60 text-xl md:text-xl max-w-2xl leading-relaxed font-medium italic">
-                “Helping UK contractors and <Link href="https://bizgrow-holdings.com/how-to-start-a-security-company-in-the-uk/" className="text-[#997819] font-bold">security businesses</Link> achieve CHAS
-                accreditation through structured health and safety compliance,
-                documentation, and audit preparation.”
+                “Helping UK contractors and{" "}
+                <Link
+                  href="https://bizgrow-holdings.com/how-to-start-a-security-company-in-the-uk/"
+                  className="text-[#997819] font-bold"
+                >
+                  security businesses
+                </Link>{" "}
+                achieve CHAS accreditation through structured health and safety
+                compliance, documentation, and audit preparation.”
               </p>
             </FadeIn>
 
@@ -86,9 +92,15 @@ const CHASSchemePage = () => {
               </h2>
               <p className="mt-8 text-zinc-500 font-medium text-lg leading-relaxed">
                 CHAS accreditation demonstrates that your organisation meets
-                recognised <Link href="https://bizgrow-holdings.com/key-components-of-health-and-safety-policy/" className="text-[#997819] font-bold">UK health and safety</Link> compliance standards,
-                strengthening trust with contractors, clients, and procurement
-                teams.
+                recognised{" "}
+                <Link
+                  href="https://bizgrow-holdings.com/key-components-of-health-and-safety-policy/"
+                  className="text-[#997819] font-bold"
+                >
+                  UK health and safety
+                </Link>{" "}
+                compliance standards, strengthening trust with contractors,
+                clients, and procurement teams.
               </p>
             </div>
 
@@ -96,17 +108,53 @@ const CHASSchemePage = () => {
               {[
                 {
                   t: "SSIP Recognition",
-                  d: <>CHAS is part of the SSIP <Link href="https://bizgrow-holdings.com/rules-requirements-for-ssip/" className="text-[#997819] font-bold">(Safety Schemes in Procurement)</Link> framework, helping businesses demonstrate verified health and safety compliance across the UK supply chain.</>,
+                  d: (
+                    <>
+                      CHAS is part of the SSIP{" "}
+                      <Link
+                        href="https://bizgrow-holdings.com/rules-requirements-for-ssip/"
+                        className="text-[#997819] font-bold"
+                      >
+                        (Safety Schemes in Procurement)
+                      </Link>{" "}
+                      framework, helping businesses demonstrate verified health
+                      and safety compliance across the UK supply chain.
+                    </>
+                  ),
                   icon: <ShieldCheck />,
                 },
                 {
                   t: "HEALTH & SAFETY DOCUMENTATION",
-                  d: <>Develop compliant policies, <Link href="https://bizgrow-holdings.com/site-specific-risk-assessment/"  className="text-[#997819]">risk assessments</Link>, and safety procedures required to meet CHAS assessment standards.</>,
+                  d: (
+                    <>
+                      Develop compliant policies,{" "}
+                      <Link
+                        href="https://bizgrow-holdings.com/site-specific-risk-assessment/"
+                        className="text-[#997819]"
+                      >
+                        risk assessments
+                      </Link>
+                      , and safety procedures required to meet CHAS assessment
+                      standards.
+                    </>
+                  ),
                   icon: <Search />,
                 },
                 {
                   t: "CONTRACT OPPORTUNITIES",
-                  d: <><Link href="https://bizgrow-holdings.com/chas-assessment-criteria-registration-renewal/" className="text-[#997819] font-bold">CHAS</Link> certification helps businesses qualify for tenders, contracts, and supplier frameworks requiring verified health and safety standards.</>,
+                  d: (
+                    <>
+                      <Link
+                        href="https://bizgrow-holdings.com/chas-assessment-criteria-registration-renewal/"
+                        className="text-[#997819] font-bold"
+                      >
+                        CHAS
+                      </Link>{" "}
+                      certification helps businesses qualify for tenders,
+                      contracts, and supplier frameworks requiring verified
+                      health and safety standards.
+                    </>
+                  ),
                   icon: <ClipboardCheck />,
                 },
                 {
@@ -186,10 +234,16 @@ const CHASSchemePage = () => {
               </h2>
               <div className="space-y-6">
                 <p className="text-zinc-500 font-medium">
-                  Achieving <Link href="https://bizgrow-holdings.com/what-is-chas-certification/" className="text-[#997819] font-bold">CHAS Certification</Link> UK proves an organisation’s
-                  commitment to working conditions that are safe, compliant, and
-                  sustainable. There are several primary benefits to that
-                  accreditation:
+                  Achieving{" "}
+                  <Link
+                    href="https://bizgrow-holdings.com/what-is-chas-certification/"
+                    className="text-[#997819] font-bold"
+                  >
+                    CHAS Certification
+                  </Link>{" "}
+                  UK proves an organisation’s commitment to working conditions
+                  that are safe, compliant, and sustainable. There are several
+                  primary benefits to that accreditation:
                 </p>
                 <ul className="space-y-4">
                   {[
@@ -219,7 +273,7 @@ const CHASSchemePage = () => {
                   className="rounded-[3rem] object-cover h-[400px]"
                 />
               </div>
-              <div className="absolute -top-10 -right-10 bg-[#997819] p-8 rounded-[2rem] text-white shadow-2xl hidden md:block">
+              <div className="absolute -bottom-10 left-10 bg-[#997819] p-8 rounded-[2rem] text-white shadow-2xl hidden md:block">
                 <p className="text-5xl font-black">100%</p>
                 <p className="text-xs font-bold uppercase tracking-widest">
                   Audit Pass Rate
@@ -238,12 +292,35 @@ const CHASSchemePage = () => {
               {
                 n: "01",
                 t: "COMPLIANCE REVIEW",
-                d: <>Assess your existing health & safety policies and documentation to identify gaps against <Link href="https://bizgrow-holdings.com/common-chas-assessment-standards/" className="text-[#997819] font-bold">CHAS accreditation requirements</Link>.</>,
+                d: (
+                  <>
+                    Assess your existing health & safety policies and
+                    documentation to identify gaps against{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/common-chas-assessment-standards/"
+                      className="text-[#997819] font-bold"
+                    >
+                      CHAS accreditation requirements
+                    </Link>
+                    .
+                  </>
+                ),
               },
               {
                 n: "02",
                 t: "H&S DOCUMENTATION PREPARATION",
-                d: <>Develop and update required policies, <Link href="https://bizgrow-holdings.com/what-does-rams-stand-for/" className="text-[#997819] font-bold">risk assessments</Link>, and safety procedures needed for CHAS compliance.</>,
+                d: (
+                  <>
+                    Develop and update required policies,{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/what-does-rams-stand-for/"
+                      className="text-[#997819] font-bold"
+                    >
+                      risk assessments
+                    </Link>
+                    , and safety procedures needed for CHAS compliance.
+                  </>
+                ),
               },
               {
                 n: "03",
@@ -253,12 +330,22 @@ const CHASSchemePage = () => {
               {
                 n: "04",
                 t: "CERTIFICATION APPROVAL",
-                d: <>Support you through the final review process until your organisation successfully achieves <Link href="https://bizgrow-holdings.com/chas-accreditation-a-smart-way-to-safer-business-operations/" className="text-[#997819] font-bold"></Link>CHAS accreditation.</>,
+                d: (
+                  <>
+                    Support you through the final review process until your
+                    organisation successfully achieves{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/chas-accreditation-a-smart-way-to-safer-business-operations/"
+                      className="text-[#997819] font-bold"
+                    ></Link>
+                    CHAS accreditation.
+                  </>
+                ),
               },
             ].map((step, i) => (
               <div
                 key={i}
-                className="p-8 bg-white rounded-[2rem] border border-zinc-100 hover:bg-[#12066a] group transition-all duration-500"
+                className="p-8 bg-white flex flex-col rounded-[2rem] border border-zinc-100 hover:bg-[#12066a] group transition-all duration-500"
               >
                 <span className="text-5xl font-black text-[#997819]/20 group-hover:text-[#997819] transition-colors">
                   {step.n}
@@ -284,9 +371,16 @@ const CHASSchemePage = () => {
             Build with <span className="text-[#997819]">Confidence.</span>
           </h3>
           <p className="max-w-2xl mx-auto text-blue-100/60 font-medium text-lg italic">
-            “<Link href="https://bizgrow-holdings.com/benefits-of-achieving-chas-accreditation/" className="text-[#997819] font-black]">CHAS accreditation</Link> demonstrates your commitment to health and
-            safety compliance, helping UK contractors strengthen credibility and
-            secure more business opportunities.”
+            “
+            <Link
+              href="https://bizgrow-holdings.com/benefits-of-achieving-chas-accreditation/"
+              className="text-[#997819] font-black]"
+            >
+              CHAS accreditation
+            </Link>{" "}
+            demonstrates your commitment to health and safety compliance,
+            helping UK contractors strengthen credibility and secure more
+            business opportunities.”
           </p>
         </div>
       </section>
@@ -297,12 +391,20 @@ const CHASSchemePage = () => {
           <div className="p-12 md:p-24 rounded-[4rem] bg-[#12066a] relative overflow-hidden group shadow-2xl text-center flex flex-col items-center">
             <div className="absolute inset-0 bg-[url('/chas-cta.png')] bg-no-repeat bg-cover bg-fixed opacity-40 pointer-events-none" />
             <h2 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-none mb-10 uppercase relative z-10">
-              Get Your <br /> <span className="text-[#997819]">CHAS ACCREDITATION.</span>
+              Get Your <br />{" "}
+              <span className="text-[#997819]">CHAS ACCREDITATION.</span>
             </h2>
-            <Link href="/contact-us">
-            <button className="relative z-10 bg-[#997819] text-white px-16 py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-3xl">
-              START YOUR CHAS APPLICATION
-            </button>
+            <Link
+              href="/contact-us"
+              className="relative group/btn overflow-hidden inline-flex items-center justify-center bg-[#997819] text-white px-16 py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-xs transition-all duration-500 shadow-3xl active:scale-95"
+            >
+              {/* Layer 1: Text Layer */}
+              <span className="relative z-40 transition-colors duration-500 group-hover/btn:text-[#12066a]">
+                START YOUR CHAS APPLICATION
+              </span>
+
+              {/* Layer 2: Sliding Background */}
+              <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
             </Link>
           </div>
         </div>

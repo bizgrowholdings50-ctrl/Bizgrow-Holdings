@@ -199,7 +199,19 @@ const SIAACSPage = () => {
             {[
               {
                 t: "Strategic Direction",
-                d: <>Clear governance, defined objectives, and structured policies aligned with <Link href="https://bizgrow-holdings.com/acs-accreditation-for-security-businesses/" className="text-[#997819] font-bold">ACS</Link> requirements.</>,
+                d: (
+                  <>
+                    Clear governance, defined objectives, and structured
+                    policies aligned with{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/acs-accreditation-for-security-businesses/"
+                      className="text-[#997819] font-bold"
+                    >
+                      ACS
+                    </Link>{" "}
+                    requirements.
+                  </>
+                ),
               },
               {
                 t: "Service Delivery ",
@@ -211,15 +223,50 @@ const SIAACSPage = () => {
               },
               {
                 t: "Financial Stability",
-                d: <>Proven financial control, tax <Link href="https://bizgrow-holdings.com/compliance-consultancies/" className="text-[#997819] font-bold">compliance</Link>, and business continuity planning.</>,
+                d: (
+                  <>
+                    Proven financial control, tax{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/compliance-consultancies/"
+                      className="text-[#997819] font-bold"
+                    >
+                      compliance
+                    </Link>
+                    , and business continuity planning.
+                  </>
+                ),
               },
               {
                 t: "Operational Resource Management",
-                d: <>Ensuring effective deployment of personnel, equipment control, and structured <Link href="https://bizgrow-holdings.com/site-specific-risk-assessment/" className="text-[#997819] font-bold">risk management systems</Link>. </>,
+                d: (
+                  <>
+                    Ensuring effective deployment of personnel, equipment
+                    control, and structured{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/site-specific-risk-assessment/"
+                      className="text-[#997819] font-bold"
+                    >
+                      risk management systems
+                    </Link>
+                    .{" "}
+                  </>
+                ),
               },
               {
                 t: "Workforce Compliance ",
-                d: <>Embedding <Link href="https://bizgrow-holdings.com/bs-7858-screening-and-vetting-standards-requirements-process/" className="text-[#997819] font-bold">BS 7858</Link> vetting, structured training programmes, and competency monitoring across all operational roles.</>,
+                d: (
+                  <>
+                    Embedding{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/bs-7858-screening-and-vetting-standards-requirements-process/"
+                      className="text-[#997819] font-bold"
+                    >
+                      BS 7858
+                    </Link>{" "}
+                    vetting, structured training programmes, and competency
+                    monitoring across all operational roles.
+                  </>
+                ),
               },
               {
                 t: "Leadership & Accountability ",
@@ -272,8 +319,14 @@ const SIAACSPage = () => {
                 <span className="text-[#997819]">SIA ACS Approved</span>
               </h2>
               <p className="text-zinc-600 text-lg font-medium leading-relaxed">
-                Accreditation under the SIA ACS provides <Link href="https://bizgrow-holdings.com/top-security-companies-trusted-protection-for-every-business/" className="text-[#997819] font-bold">security companies</Link> with
-                a powerful benchmark for credibility, building lasting
+                Accreditation under the SIA ACS provides{" "}
+                <Link
+                  href="https://bizgrow-holdings.com/top-security-companies-trusted-protection-for-every-business/"
+                  className="text-[#997819] font-bold"
+                >
+                  security companies
+                </Link>{" "}
+                with a powerful benchmark for credibility, building lasting
                 confidence among high-tier clients and stakeholders across the
                 UK.
               </p>
@@ -285,7 +338,19 @@ const SIAACSPage = () => {
             {[
               {
                 title: "Legal Compliance",
-                desc: <>Demonstrate full alignment with <Link href="https://bizgrow-holdings.com/key-environmental-laws-in-the-uk/" className="text-[#997819] font-bold">UK laws</Link>, ensuring professional accountability and regulatory adherence.</>,
+                desc: (
+                  <>
+                    Demonstrate full alignment with{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/key-environmental-laws-in-the-uk/"
+                      className="text-[#997819] font-bold"
+                    >
+                      UK laws
+                    </Link>
+                    , ensuring professional accountability and regulatory
+                    adherence.
+                  </>
+                ),
                 icon: <ShieldCheck size={28} />,
               },
               {
@@ -295,7 +360,18 @@ const SIAACSPage = () => {
               },
               {
                 title: "Access to Contracts",
-                desc: <>Unlock premium government and <Link href="https://bizgrow-holdings.com/uks-private-security-directory/" className="text-[#997819] font-bold">private sector</Link> tenders that strictly require SIA ACS approval.</>,
+                desc: (
+                  <>
+                    Unlock premium government and{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/uks-private-security-directory/"
+                      className="text-[#997819] font-bold"
+                    >
+                      private sector
+                    </Link>{" "}
+                    tenders that strictly require SIA ACS approval.
+                  </>
+                ),
                 icon: <Briefcase size={28} />,
               },
               {
@@ -310,7 +386,19 @@ const SIAACSPage = () => {
               },
               {
                 title: "Improved Credibility",
-                desc: <>Public recognition as an SIA ACS-approved service demonstrates credibility as a respected and trusted UK <Link href="https://bizgrow-holdings.com/how-to-start-a-security-company-in-the-uk/" className="text-[#997819] font-bold">security service</Link> provider.</>,
+                desc: (
+                  <>
+                    Public recognition as an SIA ACS-approved service
+                    demonstrates credibility as a respected and trusted UK{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/how-to-start-a-security-company-in-the-uk/"
+                      className="text-[#997819] font-bold"
+                    >
+                      security service
+                    </Link>{" "}
+                    provider.
+                  </>
+                ),
                 icon: <CheckCircle2 size={28} />,
               },
             ].map((adv, idx) => (
@@ -455,9 +543,18 @@ const SIAACSPage = () => {
                 Achieve SIA ACS Accreditation with Confidence
               </h3>
               <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-                <button className="px-12 py-6 bg-[#997819] text-white font-black uppercase tracking-widest text-sm rounded-2xl hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-2xl active:scale-95">
-                 <Link href="/contact-us">Book ACS Consultation</Link> 
-                </button>
+                <Link
+                  href="/contact-us"
+                  className="relative group/btn overflow-hidden w-full sm:w-64 bg-[#997819] text-white px-8 py-5 rounded-2xl font-black uppercase tracking-[0.25em] text-[10px] transition-all duration-500 inline-flex items-center justify-center text-center"
+                >
+                  {/* Text Layer */}
+                  <span className="relative z-40 transition-colors duration-500 group-hover/btn:text-[#12066a]">
+                    Book ACS Consultation
+                  </span>
+
+                  {/* Hover Background Layer */}
+                  <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
+                </Link>
               </div>
             </div>
           </div>

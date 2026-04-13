@@ -56,10 +56,17 @@ const InternalAuditPage = () => {
               . Identify risks, improve processes, and stay audit-ready with
               confidence.
             </p>
-            <Link href="/contact-us">
-              <button className="bg-[#997819] text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-2xl">
+            <Link
+              href="/contact-us"
+              className="relative group/btn overflow-hidden inline-flex items-center justify-center bg-[#997819] text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-xs transition-all duration-500 shadow-2xl active:scale-95"
+            >
+              {/* Layer 1: The Text (Top Layer) */}
+              <span className="relative z-40 transition-colors duration-500 group-hover/btn:text-[#12066a]">
                 Get a Free Consultation
-              </button>
+              </span>
+
+              {/* Layer 2: The Sliding White Background (Middle Layer) */}
+              <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
             </Link>
           </FadeIn>
         </div>
@@ -460,15 +467,20 @@ const InternalAuditPage = () => {
               </FadeIn>
 
               <FadeIn direction="up" delay={0.2}>
-                <Link href="https://bizgrow-holdings.com/contact-us/">
-                <button className="relative overflow-hidden group/btn bg-[#997819] text-white px-16 py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-2xl active:scale-95">
-                  <span className="relative z-10">
+                <Link
+                  href="https://bizgrow-holdings.com/contact-us/"
+                  className="group/btn relative overflow-hidden inline-flex items-center justify-center bg-[#997819] text-white px-16 py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-xs transition-all duration-500 shadow-2xl active:scale-95"
+                >
+                  {/* Layer 1: The Text (Top Layer) */}
+                  <span className="relative z-40 transition-colors duration-500 group-hover/btn:text-[#12066a]">
                     Book Your Technical Audit today
                   </span>
 
-                  {/* Subtle Shine Effect on Button */}
-                  <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000" />
-                </button>
+                  {/* Layer 2: The Solid White Slide (Middle Layer) */}
+                  <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
+
+                  {/* Layer 3: Your Subtle Shine Effect (Animated on Hover) */}
+                  <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent -translate-x-full group-hover/btn:animate-[shimmer_1.5s_infinite] z-50 pointer-events-none" />
                 </Link>
               </FadeIn>
             </div>

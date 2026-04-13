@@ -340,11 +340,18 @@ export default function AboutUs() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-6 w-full lg:w-auto shrink-0">
-                <Link href="/contact-us/">
-                  <button className="bg-[#997819] text-white px-10 py-6 rounded-2xl font-black uppercase tracking-[0.2em] text-[10px] flex items-center justify-center gap-4 hover:bg-white hover:text-[#12066a] transition-all duration-700 shadow-2xl group">
+                <Link
+                  href="/contact-us/"
+                  className="relative group/btn overflow-hidden inline-flex items-center justify-center gap-4 bg-[#997819] text-white px-10 py-6 rounded-2xl font-black uppercase tracking-[0.2em] text-[10px] transition-all duration-700 shadow-2xl active:scale-95"
+                >
+                  {/* Layer 1: Text & Icon (Top Layer) */}
+                  <span className="relative z-40 flex items-center gap-4 transition-colors duration-700 group-hover/btn:text-[#12066a]">
                     Book Free Consultation
-                    <ArrowRight className="group-hover:translate-x-2 transition-transform" />
-                  </button>
+                    <ArrowRight className="group-hover/btn:translate-x-2 transition-transform duration-500" />
+                  </span>
+
+                  {/* Layer 2: The Sliding White Background (Middle Layer) */}
+                  <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-700 ease-out z-30" />
                 </Link>
 
                 <a

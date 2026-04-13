@@ -21,9 +21,10 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
-export const metadata = { 
+export const metadata = {
   title: "Our Services - BizGrow Holdings ltd",
-  description: "BizGrow Holdings helps UK businesses achieve ISO, ACS, & compliance certifications with expert guidance for sustainable growth and success.",
+  description:
+    "BizGrow Holdings helps UK businesses achieve ISO, ACS, & compliance certifications with expert guidance for sustainable growth and success.",
 };
 const ServicesPage = () => {
   const services = [
@@ -384,12 +385,22 @@ const ServicesPage = () => {
               organisation. Our mission is your growth, and our vision is your
               success.
             </p>
-            <button className="px-12 py-5 bg-[#12066a] text-white font-black uppercase tracking-widest hover:bg-[#997819] hover:scale-105 duration-500 transition-all rounded-2xl flex items-center gap-3 mx-auto shadow-xl">
-              <Link href="https://bizgrow-holdings.com/contact-us/">
+            <Link
+              href="https://bizgrow-holdings.com/contact-us/"
+              className="relative group/btn overflow-hidden inline-flex items-center justify-center gap-3 mx-auto bg-[#12066a] text-white px-12 py-5 rounded-2xl font-black uppercase tracking-widest text-xs transition-all duration-500 shadow-xl active:scale-95 hover:-translate-y-1"
+            >
+              {/* Layer 1: Text & Icon (Top Layer) */}
+              <span className="relative z-40 flex items-center gap-3 transition-colors duration-500 group-hover/btn:text-white">
                 Connect With Our Team
-              </Link>{" "}
-              <ArrowRight size={20} />
-            </button>
+                <ArrowRight
+                  size={20}
+                  className="group-hover/btn:translate-x-2 transition-transform duration-500"
+                />
+              </span>
+
+              {/* Layer 2: The Gold Sliding Background (Middle Layer) */}
+              <div className="absolute inset-0 bg-[#997819] translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
+            </Link>
           </div>
         </FadeIn>
       </section>

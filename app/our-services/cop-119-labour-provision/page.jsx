@@ -373,10 +373,17 @@ const COP119Page = () => {
               </h3>
 
               <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-                <Link href="/contact-us">
-                  <button className="px-12 py-6 bg-[#997819] text-white font-black uppercase tracking-widest text-[10px] rounded-2xl hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-2xl active:scale-95">
+                <Link
+                  href="/contact-us"
+                  className="relative group/btn overflow-hidden inline-flex items-center justify-center px-12 py-6 bg-[#997819] text-white font-black uppercase tracking-widest text-[10px] rounded-2xl transition-all duration-500 shadow-2xl active:scale-95"
+                >
+                  {/* Layer 1: The Text (Top Layer) */}
+                  <span className="relative z-40 transition-colors duration-500 group-hover/btn:text-[#12066a]">
                     Get Started Today
-                  </button>
+                  </span>
+
+                  {/* Layer 2: The Animated Background (Middle Layer) */}
+                  <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
                 </Link>
                 <Link href="https://bizgrow-holdings.com/category/cop-119/">
                   <button className="px-12 py-6 bg-transparent border border-white/20 text-white font-black uppercase tracking-widest text-[10px] rounded-2xl hover:bg-white/10 transition-all active:scale-95">

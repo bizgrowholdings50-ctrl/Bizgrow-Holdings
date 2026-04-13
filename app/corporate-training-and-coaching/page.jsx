@@ -82,10 +82,17 @@ const TrainingCoachingPage = () => {
                 </p>
 
                 <div className="pt-6">
-                  <Link href="/contact-us">
-                    <button className="px-10 py-5 bg-[#997819] text-white font-black uppercase tracking-widest text-[10px] rounded-2xl hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-2xl active:scale-95">
+                  <Link
+                    href="/contact-us"
+                    className="relative group/btn overflow-hidden inline-flex items-center justify-center px-10 py-5 bg-[#997819] text-white font-black uppercase tracking-widest text-[10px] rounded-2xl transition-all duration-500 shadow-2xl active:scale-95"
+                  >
+                    {/* Layer 1: The Text (Top Layer) */}
+                    <span className="relative z-40 transition-colors duration-500 group-hover/btn:text-[#12066a]">
                       Book Free Consultation
-                    </button>
+                    </span>
+
+                    {/* Layer 2: The Animated White Background (Middle Layer) */}
+                    <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
                   </Link>
                 </div>
               </div>
@@ -605,15 +612,23 @@ const TrainingCoachingPage = () => {
                   </span>
                 </h3>
                 <p className="mb-10 text-blue-100/70 font-medium text-lg max-w-2xl mx-auto">
-                  Partner with <Link href="/">BizGrow Holdings</Link> and give your team the skills,
-                  knowledge, and confidence to succeed in the UK market.
+                  Partner with <Link href="/">BizGrow Holdings</Link> and give
+                  your team the skills, knowledge, and confidence to succeed in
+                  the UK market.
                 </p>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-                 <Link href="/contact-us">
-                  <button className="px-12 py-6 bg-[#997819] text-white font-black uppercase tracking-widest text-[10px] rounded-2xl hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-[0_20px_50px_rgba(153,120,25,0.3)] w-full sm:w-auto transform hover:-translate-y-1">
-                    Book Free Consultation
-                  </button>
+                  <Link
+                    href="/contact-us"
+                    className="relative group/btn overflow-hidden inline-flex items-center justify-center px-12 py-6 bg-[#997819] text-white font-black uppercase tracking-widest text-[10px] rounded-2xl transition-all duration-500 shadow-[0_20px_50px_rgba(153,120,25,0.3)] w-full sm:w-auto transform hover:-translate-y-1 active:scale-95"
+                  >
+                    {/* Layer 1: The Text (Top Layer) */}
+                    <span className="relative z-40 transition-colors duration-500 group-hover/btn:text-[#12066a]">
+                      Book Free Consultation
+                    </span>
+
+                    {/* Layer 2: The Sliding White Background (Middle Layer) */}
+                    <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
                   </Link>
                   <a
                     href="mailto:info@bizgrow-holdings.com"

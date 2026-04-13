@@ -201,9 +201,13 @@ const MissionPage = () => {
             <FadeIn direction="up" delay={0.5}>
               <p className="text-zinc-700 font-medium">
                 Your success is our success. With{" "}
-                <b className="text-[#12066a]"><Link href="https://bizgrow-holdings.com/">BizGrow Holdings</Link></b>, your
-                business is always on the right path, compliant, efficient, and
-                ready to grow.
+                <b className="text-[#997819]">
+                  <Link href="https://bizgrow-holdings.com/">
+                    BizGrow Holdings
+                  </Link>
+                </b>
+                , your business is always on the right path, compliant,
+                efficient, and ready to grow.
               </p>
             </FadeIn>
           </div>
@@ -239,7 +243,19 @@ const MissionPage = () => {
               {
                 icon: <Cpu size={40} strokeWidth={1.5} />,
                 title: "Innovation in Certification",
-                desc: <>Modernising the <Link href="https://bizgrow-holdings.com/our-services/iso-14001/" className="text-[#997819] font-bold">ISO</Link> and accreditation journey through structured processes that drive efficiency, clarity, and measurable results.</>,
+                desc: (
+                  <>
+                    Modernising the{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/our-services/iso-14001/"
+                      className="text-[#997819] font-bold"
+                    >
+                      ISO
+                    </Link>{" "}
+                    and accreditation journey through structured processes that
+                    drive efficiency, clarity, and measurable results.
+                  </>
+                ),
               },
             ].map((item, i) => (
               <FadeIn key={i} direction="up" delay={i * 0.2}>
@@ -282,9 +298,22 @@ const MissionPage = () => {
               expert ISO implementation, industry accreditation, and structured
               governance support tailored for UK markets.
             </p>
-            <button className="px-12 py-5 bg-[#12066a] text-white font-black uppercase tracking-widest hover:bg-[#997819] hover:scale-105 duration-500 transition-all rounded-2xl flex items-center gap-3 mx-auto shadow-xl">
-              <Link href="https://bizgrow-holdings.com/contact-us/">Connect With Our Team</Link> <ArrowRight size={20} />
-            </button>
+            <Link
+              href="https://bizgrow-holdings.com/contact-us/"
+              className="relative group/btn overflow-hidden inline-flex items-center justify-center gap-3 mx-auto bg-[#12066a] text-white px-12 py-5 rounded-2xl font-black uppercase tracking-widest text-xs transition-all duration-500 shadow-xl active:scale-95 hover:-translate-y-1"
+            >
+              {/* Layer 1: Text & Icon (Top Layer) */}
+              <span className="relative z-40 flex items-center gap-3 transition-colors duration-500 group-hover/btn:text-white">
+                Connect With Our Team
+                <ArrowRight
+                  size={20}
+                  className="group-hover/btn:translate-x-2 transition-transform duration-500"
+                />
+              </span>
+
+              {/* Layer 2: The Gold Sliding Background (Middle Layer) */}
+              <div className="absolute inset-0 bg-[#997819] translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
+            </Link>
           </div>
         </FadeIn>
       </section>

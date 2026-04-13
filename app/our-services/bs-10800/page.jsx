@@ -22,7 +22,7 @@ export const metadata = {
   title: "BS 10800 Certification Services | Business Support UK",
   description:
     "BizGrow Holdings helps UK businesses achieve BS 10800 certification to strengthen business continuity and improve audit readiness.",
-};  
+};
 
 const BS10800Page = () => {
   return (
@@ -64,9 +64,15 @@ const BS10800Page = () => {
 
             <FadeIn direction="right" duration="0.8">
               <p className="mt-10 text-blue-100/60 text-xl md:text-2xl max-w-2xl leading-relaxed font-medium italic">
-                "Get <Link href="https://bizgrow-holdings.com/what-is-bs-10800-in-the-uk-2026/" className="text-[#997819] font-bold">BS 10800</Link> implemented properly, policies, processes,
-                evidence, and staff readiness with expert guidance from start to
-                sign-off."
+                "Get{" "}
+                <Link
+                  href="https://bizgrow-holdings.com/what-is-bs-10800-in-the-uk-2026/"
+                  className="text-[#997819] font-bold"
+                >
+                  BS 10800
+                </Link>{" "}
+                implemented properly, policies, processes, evidence, and staff
+                readiness with expert guidance from start to sign-off."
               </p>
             </FadeIn>
 
@@ -93,9 +99,22 @@ const BS10800Page = () => {
           </h3>
           <p className="mb-16 mt-4 text-center max-w-7xl md:mx-30">
             Professional security services require structured systems,
-            documented procedures, and full regulatory alignment. We help <Link href="https://bizgrow-holdings.com/how-to-start-a-security-company-in-the-uk/" className="text-[#997819] font-bold">UK
-            security companies</Link> implement practical compliance frameworks that
-            meet British Standards and <Link href="https://bizgrow-holdings.com/top-sia-security-recruitment-agencies-in-the-uk/" className="text-[#997819] font-bold">SIA requirements</Link>.
+            documented procedures, and full regulatory alignment. We help{" "}
+            <Link
+              href="https://bizgrow-holdings.com/how-to-start-a-security-company-in-the-uk/"
+              className="text-[#997819] font-bold"
+            >
+              UK security companies
+            </Link>{" "}
+            implement practical compliance frameworks that meet British
+            Standards and{" "}
+            <Link
+              href="https://bizgrow-holdings.com/top-sia-security-recruitment-agencies-in-the-uk/"
+              className="text-[#997819] font-bold"
+            >
+              SIA requirements
+            </Link>
+            .
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
@@ -109,7 +128,17 @@ const BS10800Page = () => {
               },
               {
                 t: "3.	SIA Licence Verification",
-                d: <>Clear internal processes to monitor and maintain valid <Link href="https://bizgrow-holdings.com/business-benefits-of-becoming-an-sia-approved-contractor/" className="text-[#997819] font-bold">SIA licensing</Link></>,
+                d: (
+                  <>
+                    Clear internal processes to monitor and maintain valid{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/business-benefits-of-becoming-an-sia-approved-contractor/"
+                      className="text-[#997819] font-bold"
+                    >
+                      SIA licensing
+                    </Link>
+                  </>
+                ),
               },
               {
                 t: "4.	Command & Control",
@@ -117,7 +146,17 @@ const BS10800Page = () => {
               },
               {
                 t: "5.	Tactical PPE & Equipment",
-                d: <><Link href="https://bizgrow-holdings.com/our-services/internal-audit/" className="text-[#997819] font-bold">Audit-ready</Link> systems covering uniforms, radios, and protective equipment</>,
+                d: (
+                  <>
+                    <Link
+                      href="https://bizgrow-holdings.com/our-services/internal-audit/"
+                      className="text-[#997819] font-bold"
+                    >
+                      Audit-ready
+                    </Link>{" "}
+                    systems covering uniforms, radios, and protective equipment
+                  </>
+                ),
               },
               {
                 t: "6.	Incident Reporting & Logs",
@@ -150,8 +189,12 @@ const BS10800Page = () => {
               <span className="text-[#997819]"> We Provide.</span>
             </h3>
             <p className="mb-4 mt-4">
-              At <Link href="/" className="text-[#997819] font-bold">BizGrow Holdings</Link>, we help UK businesses implement BS 10800
-              simply and effectively. Our services include
+              At{" "}
+              <Link href="/" className="text-[#997819] font-bold">
+                BizGrow Holdings
+              </Link>
+              , we help UK businesses implement BS 10800 simply and effectively.
+              Our services include
             </p>
             <div className="space-y-3">
               {[
@@ -263,7 +306,18 @@ const BS10800Page = () => {
               {
                 n: "04",
                 t: "Audit Readiness",
-                d: <>We guide you through <Link href="https://bizgrow-holdings.com/how-do-internal-audits-enhance-compliance-efficiency/" className="text-[#997819] font-bold">internal audits</Link> and help you stay compliant with the standard.</>,
+                d: (
+                  <>
+                    We guide you through{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/how-do-internal-audits-enhance-compliance-efficiency/"
+                      className="text-[#997819] font-bold"
+                    >
+                      internal audits
+                    </Link>{" "}
+                    and help you stay compliant with the standard.
+                  </>
+                ),
               },
             ].map((step, i) => (
               <div
@@ -324,59 +378,61 @@ const BS10800Page = () => {
 
       {/* 🔹 7. CALL TO ACTION (Fixed Background / Parallax Style) */}
       <section className="py-24 px-6 bg-white relative">
-       
-          <div className="max-w-7xl mx-auto relative rounded-[4rem] overflow-hidden shadow-3xl group">
-            {/* --- FIXED BACKGROUND LAYER --- */}
-            <div
-              className="absolute inset-0 z-0 bg-cover bg-center bg-fixed"
-              style={{
-                backgroundImage: "url('/bs10800-cta.jpg')",
-              }}
-            >
-              {/* Deep Overlay: Text readability ke liye zaroori hai */}
-              <div className="absolute inset-0 bg-[#12066a]/80 mix-blend-multiply" />
-              <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-[#12066a]/40" />
-            </div>
-
-            {/* --- CONTENT LAYER --- */}
-            <div className="relative z-10 p-12 md:p-24 text-center flex flex-col items-center">
-              {/* Background Watermark Text */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[12rem] md:text-[20rem] font-black text-white/[0.03] select-none pointer-events-none uppercase tracking-tighter whitespace-nowrap">
-                BIZGROW
-              </div>
-
-              <FadeIn direction="up" delay={0.2}>
-                <h2 className="text-3xl md:text-5xl font-black text-white tracking-tighter mb-10 uppercase relative z-10 leading-[1]">
-                  Get
-                  <span className="text-[#997819]">
-                    {" "}
-                    BS 10800 Support{" "}
-                  </span>{" "}
-                  with BizGrow Holdings
-                </h2>
-              </FadeIn>
-
-              <FadeIn direction="up" delay={0.4}>
-                <p className="text-blue-100/70 mb-12 font-medium max-w-2xl mx-auto text-lg md:text-xl italic">
-                  "If your business wants to protect itself from disruption,
-                  build resilience, and demonstrate professional continuity
-                  planning, BS 10800 is the right choice."
-                </p>
-              </FadeIn>
-
-              <FadeIn direction="up" delay={0.6}>
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-6 relative z-10 ">
-                  <Link href="/contact">
-                  <button className="bg-[#997819] text-white px-16 py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-700 shadow-2xl group flex items-center gap-3">
-                    Get Expert Consultancy
-                    <ArrowRight className="group-hover:translate-x-2 transition-transform" />
-                  </button>
-                  </Link>
-                </div>
-              </FadeIn>
-            </div>
+        <div className="max-w-7xl mx-auto relative rounded-[4rem] overflow-hidden shadow-3xl group">
+          {/* --- FIXED BACKGROUND LAYER --- */}
+          <div
+            className="absolute inset-0 z-0 bg-cover bg-center bg-fixed"
+            style={{
+              backgroundImage: "url('/bs10800-cta.jpg')",
+            }}
+          >
+            {/* Deep Overlay: Text readability ke liye zaroori hai */}
+            <div className="absolute inset-0 bg-[#12066a]/80 mix-blend-multiply" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-[#12066a]/40" />
           </div>
-       
+
+          {/* --- CONTENT LAYER --- */}
+          <div className="relative z-10 p-12 md:p-24 text-center flex flex-col items-center">
+            {/* Background Watermark Text */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[12rem] md:text-[20rem] font-black text-white/[0.03] select-none pointer-events-none uppercase tracking-tighter whitespace-nowrap">
+              BIZGROW
+            </div>
+
+            <FadeIn direction="up" delay={0.2}>
+              <h2 className="text-3xl md:text-5xl font-black text-white tracking-tighter mb-10 uppercase relative z-10 leading-[1]">
+                Get
+                <span className="text-[#997819]"> BS 10800 Support </span> with
+                BizGrow Holdings
+              </h2>
+            </FadeIn>
+
+            <FadeIn direction="up" delay={0.4}>
+              <p className="text-blue-100/70 mb-12 font-medium max-w-2xl mx-auto text-lg md:text-xl italic">
+                "If your business wants to protect itself from disruption, build
+                resilience, and demonstrate professional continuity planning, BS
+                10800 is the right choice."
+              </p>
+            </FadeIn>
+
+            <FadeIn direction="up" delay={0.6}>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-6 relative z-10 ">
+                <Link
+                  href="/contact"
+                  className="relative group/btn overflow-hidden inline-flex items-center justify-center gap-3 bg-[#997819] text-white px-16 py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-xs transition-all duration-700 shadow-2xl active:scale-95"
+                >
+                  {/* Layer 1: Text & Icon (Top Layer) */}
+                  <span className="relative z-40 flex items-center gap-3 transition-colors duration-700 group-hover/btn:text-[#12066a]">
+                    Get Expert Consultancy
+                    <ArrowRight className="group-hover/btn:translate-x-2 transition-transform duration-500" />
+                  </span>
+
+                  {/* Layer 2: Sliding Background (Middle Layer) */}
+                  <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-700 ease-out z-30" />
+                </Link>
+              </div>
+            </FadeIn>
+          </div>
+        </div>
       </section>
     </main>
   );

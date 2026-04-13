@@ -637,37 +637,42 @@ const BS7499Page = () => {
 
       {/* 🔹 7. CALL TO ACTION (Fixed Parallax Style) */}
       <section className="py-24 px-6 bg-white relative">
-        
-          <div className="max-w-7xl mx-auto relative rounded-[4rem] overflow-hidden shadow-3xl group">
-            <div
-              className="absolute inset-0 z-0 bg-cover bg-center bg-fixed"
-              style={{ backgroundImage: "url('/guarding-cta.jpg')" }}
-            >
-              <div className="absolute inset-0 bg-[#12066a]/85 mix-blend-multiply" />
-            </div>
+        <div className="max-w-7xl mx-auto relative rounded-[4rem] overflow-hidden shadow-3xl group">
+          <div
+            className="absolute inset-0 z-0 bg-cover bg-center bg-fixed"
+            style={{ backgroundImage: "url('/guarding-cta.jpg')" }}
+          >
+            <div className="absolute inset-0 bg-[#12066a]/85 mix-blend-multiply" />
+          </div>
 
-            <div className="relative z-10 p-12 md:p-24 text-center flex flex-col items-center">
-              <h2 className="text-4xl md:text-7xl font-black text-white tracking-tighter mb-10 uppercase leading-[0.9]">
-                STANDARDISE YOUR <br />
-                <span className="text-[#997819]">GUARDING OPERATIONS.</span>
-              </h2>
-              <div className="flex flex-col sm:flex-row gap-6">
-                <Link href="/comtact-us">
-                  <button className="bg-[#997819] text-white px-16 py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-[10px] hover:bg-white hover:text-[#12066a] transition-all duration-700 shadow-2xl group flex items-center gap-3">
-                    Audit My Operations
-                    <ArrowRight className="group-hover:translate-x-2 transition-transform" />
-                  </button>
-                </Link>
-                <a
-                  href="tel:+447898205035"
-                  className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-10 py-6 rounded-2xl font-black uppercase tracking-[0.2em] text-[10px] flex items-center gap-3 transition-all duration-500"
-                >
-                  <PhoneCall size={18} /> Call Consultant
-                </a>
-              </div>
+          <div className="relative z-10 p-12 md:p-24 text-center flex flex-col items-center">
+            <h2 className="text-4xl md:text-7xl font-black text-white tracking-tighter mb-10 uppercase leading-[0.9]">
+              STANDARDISE YOUR <br />
+              <span className="text-[#997819]">GUARDING OPERATIONS.</span>
+            </h2>
+            <div className="flex flex-col sm:flex-row gap-6">
+              <Link
+                href="/contact-us"
+                className="relative group/btn overflow-hidden inline-flex items-center justify-center gap-3 bg-[#997819] text-white px-16 py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-[10px] transition-all duration-700 shadow-2xl active:scale-95"
+              >
+                {/* Layer 1: Text & Icon (Top Layer) */}
+                <span className="relative z-40 flex items-center gap-3 transition-colors duration-700 group-hover/btn:text-[#12066a]">
+                  Audit My Operations
+                  <ArrowRight className="group-hover/btn:translate-x-2 transition-transform duration-500" />
+                </span>
+
+                {/* Layer 2: Sliding Background (Middle Layer) */}
+                <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-700 ease-out z-30" />
+              </Link>
+              <a
+                href="tel:+447898205035"
+                className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-10 py-6 rounded-2xl font-black uppercase tracking-[0.2em] text-[10px] flex items-center gap-3 transition-all duration-500"
+              >
+                <PhoneCall size={18} /> Call Consultant
+              </a>
             </div>
           </div>
-        
+        </div>
       </section>
     </main>
   );

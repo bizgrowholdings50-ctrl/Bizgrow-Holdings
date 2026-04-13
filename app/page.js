@@ -329,10 +329,19 @@ export default function HomePage() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-6 w-full lg:w-auto">
-              <button className="bg-[#997819] text-white px-8 py-5 rounded-2xl font-black uppercase tracking-widest text-xs flex items-center justify-center gap-3 hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-lg group/btn">
-                <Link href="/contact-us">Book Free Consultation</Link>
-                <ArrowRight className="group-hover/btn:translate-x-2 transition-transform" />
-              </button>
+              <Link
+                href="/contact-us"
+                className="relative group/btn overflow-hidden inline-flex items-center justify-center gap-3 bg-[#997819] text-white px-8 py-5 rounded-2xl font-black uppercase tracking-widest text-xs transition-all duration-500 shadow-lg active:scale-95"
+              >
+                {/* Layer 1: Text & Icon (Top Layer) */}
+                <span className="relative z-40 flex items-center gap-3 transition-colors duration-500 group-hover/btn:text-[#12066a]">
+                  Book Free Consultation
+                  <ArrowRight className="group-hover/btn:translate-x-2 transition-transform duration-500" />
+                </span>
+
+                {/* Layer 2: The Animated Background (Middle Layer) */}
+                <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
+              </Link>
 
               <a
                 href="tel:+447898205035"

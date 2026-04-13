@@ -512,10 +512,17 @@ const ComplianceConsultancyPage = () => {
             Ready to Achieve <br />{" "}
             <span className="text-[#997819]">Excellence?</span>
           </h2>
-          <Link href="/contact-us">
-            <button className="bg-[#12066a] text-white px-12 py-6 rounded-2xl font-black uppercase tracking-widest hover:bg-[#997819] transition-all duration-300 shadow-2xl">
+          <Link
+            href="/contact-us"
+            className="relative group/btn overflow-hidden inline-flex items-center justify-center bg-[#12066a] text-white px-12 py-6 rounded-2xl font-black uppercase tracking-widest text-xs transition-all duration-500 shadow-2xl active:scale-95"
+          >
+            {/* Layer 1: The Text (Top Layer) */}
+            <span className="relative z-40 transition-colors duration-500 group-hover/btn:text-white">
               Partner with BizGrow Holdings →
-            </button>
+            </span>
+
+            {/* Layer 2: The Gold Animated Background (Middle Layer) */}
+            <div className="absolute inset-0 bg-[#997819] translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
           </Link>
         </div>
       </section>
