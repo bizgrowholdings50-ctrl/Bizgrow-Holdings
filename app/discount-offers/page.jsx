@@ -9,24 +9,28 @@ export const metadata = {
 };
 const offersData = [
   {
-    id: "core-40",
-    title: "Core Services Package",
-    image: "/images/promo-1.jpg",
-    discount: "40",
-    shortDesc: "Experience savings of up to 40% on our essential compliance services.",
-    fullDetail: `This exclusive offer is designed for UK businesses looking to streamline their compliance. 
-    It covers full ISO certification (9001, 14001, 45001) from start to finish. 
-    Our team will handle the documentation, gap analysis, and internal audits. 
-    *Note: This offer is valid for new contracts signed before the end of the month.*`,
+    id: "EASTER-2026",
+    title: "𝐁𝐈𝐙𝐆𝐑𝐎𝐖 𝐄𝐀𝐒𝐓𝐄𝐑 𝐌𝐄𝐆𝐀 𝐎𝐅𝐅𝐄𝐑",
+    image: "/discount_offer1.jpg", // Aapki flyer image ka path
+    discount: "",
+    price: "350", // Flyer ke mutabiq starting price
+    shortDesc: "Get certified 𝐬𝐭𝐚𝐫𝐭𝐢𝐧𝐠 𝐟𝐫𝐨𝐦 £𝟑𝟓𝟎 𝐩𝐞𝐫 𝐦𝐨𝐧𝐭𝐡, a limited-time offer on 𝐀𝐂𝐒, 𝐈𝐒𝐎, 𝐂𝐎𝐏 𝟏𝟏𝟗",
+    fullDetail: `This Easter, BizGrow Holdings is offering the 'Deal of the Year' specifically for Security Companies. 
+
+    In an industry where 'No Accreditation = No Contracts', we provide a seamless path to compliance:
+    • Full ACS (Approved Contractor Scheme) Implementation.
+    • ISO 9001, 14001, and 45001 Certifications.
+    • COP 119 (Code of Practice for Provision of Labour) Compliance.
+
+    Our experts handle the entire technical audit and documentation process from start to finish.`,
     sections: [
       {
         heading: "What's Included",
-        items: ["ISO 9001, 14001, 45001", "Full Documentation Support", "Internal Audit Preparation"]
+        items: ["ACS Support", "ISO Certification", "COP 119 Compliance"]
       }
     ]
   },
-
-  // ... more offers
+ 
 ];
 
 const DiscountPage = () => {
