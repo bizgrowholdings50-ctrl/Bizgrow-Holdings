@@ -17,19 +17,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
+  // 🔹 MetadataBase zaroori hai taake absolute URLs sahi banain
+  metadataBase: new URL("https://bizgrow-holdings.com"),
+  
   title: {
     default: "BizGrow Holdings | UK's Leading Compliance & ISO Consultancy",
-       },
+  },
   description: "Premier consultancy for SIA ACS, ISO Certifications (9001, 14001, 45001), and Cyber Essentials in the UK. Empowering business growth through compliance.",
   
   // 🔹 Icons & Favicon
   icons: {
-    icon: "/site-icon.png", // Browser tab icon
+    icon: "/site-icon.png", 
     shortcut: "/favicon.ico",
-    apple: "/apple-touch-icon.png", // iPhone home screen icon
+    apple: "/apple-touch-icon.png",
   },
 
-  // 🔹 Social Media Preview
+  // 🔹 Social Media Preview (Updated with about-hero.webp)
   openGraph: {
     type: "website",
     locale: "en_GB",
@@ -37,12 +40,20 @@ export const metadata = {
     siteName: "BizGrow Holdings",
     images: [
       {
-        url: "/site-icon.png", // Jab link share karen to ye bari image dikhe
+        url: "/about-hero.webp", // Ab share karne par ye image dikhegi
         width: 1200,
         height: 630,
         alt: "BizGrow Holdings - Business Excellence",
       },
     ],
+  },
+  
+  // 🔹 Twitter card for better reach
+  twitter: {
+    card: "summary_large_image",
+    title: "BizGrow Holdings | UK's Leading Compliance & ISO Consultancy",
+    description: "Premier consultancy for SIA ACS, ISO Certifications and Cyber Essentials.",
+    images: ["/about-hero.webp"],
   },
 };
 export default function RootLayout({ children }) {
