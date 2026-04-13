@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from 'react';
-import { Send, ArrowDown, CheckCircle2, Loader2 } from 'lucide-react';
+import { Send, ArrowDown, CheckCircle2, Loader2, Phone } from 'lucide-react';
 
 const inputClasses = `
   peer w-full bg-transparent border-b-2 border-slate-100 
@@ -27,6 +27,7 @@ const ContactForm = () => {
     const formData = {
       name: e.target.name.value,
       email: e.target.email.value,
+      number: e.target.number.value, // Ye fetch ho raha hai
       service: e.target.service.value,
       message: e.target.msg.value,
     };
@@ -41,7 +42,6 @@ const ContactForm = () => {
       if (res.ok) {
         setSent(true);
         e.target.reset();
-        // 3 second baad button ko wapas normal karne ke liye
         setTimeout(() => setSent(false), 5000);
       }
     } catch (err) {
@@ -74,8 +74,14 @@ const ContactForm = () => {
           <label htmlFor="email" className={labelClasses}>Email Address</label>
         </div>
 
+        {/* Phone Number - NEW FIELD */}
+        <div className="relative group col-span-1">
+          <input type="tel" name="number" id="number" placeholder=" " className={inputClasses} required />
+          <label htmlFor="number" className={labelClasses}>Phone Number</label>
+        </div>
+
         {/* Interested Service */}
-        <div className="relative group md:col-span-2">
+        <div className="relative group col-span-1">
           <select 
             name="service" 
             id="service" 
@@ -118,11 +124,9 @@ const ContactForm = () => {
             <Send size={18} className="relative z-10 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
           )}
 
-          {/* Luxury Hover Shine Effect */}
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
         </button>
 
-        {/* Verification Status */}
         <div className="flex items-center gap-3">
           <div className={`w-2 h-2 rounded-full animate-pulse ${sent ? 'bg-emerald-500' : 'bg-[#997819]'}`} />
           <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">

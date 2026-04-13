@@ -5,14 +5,12 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req) {
   try {
-    const { name, email, service, message } = await req.json();
+    // 1. number ko yahan add kiya
+    const { name, email, number, service, message } = await req.json();
 
     const { data, error } = await resend.emails.send({
-      // 🔹 Ab verified domain se email jayegi
       from: 'BizGrow Sales <sales@bizgrow-holdings.net>', 
-      // 🔹 Lead aapko is email par milay gi
       to: ['sales@bizgrow-holdings.net'],
-      // 🔹 Customer ka email reply-to mein taake aap direct baat kar sakein
       reply_to: email, 
       subject: `New Inquiry: ${service} from ${name}`,
       html: `
@@ -24,12 +22,17 @@ export async function POST(req) {
           
           <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
             <tr>
-              <td style="padding: 8px 0; font-weight: bold; color: #666; width: 120px;">Client Name:</td>
+              <td style="padding: 8px 0; font-weight: bold; color: #666; width: 140px;">Client Name:</td>
               <td style="padding: 8px 0;">${name}</td>
             </tr>
             <tr>
               <td style="padding: 8px 0; font-weight: bold; color: #666;">Client Email:</td>
               <td style="padding: 8px 0;"><a href="mailto:${email}" style="color: #12066a;">${email}</a></td>
+            </tr>
+           
+            <tr>
+              <td style="padding: 8px 0; font-weight: bold; color: #666;">Phone Number:</td>
+              <td style="padding: 8px 0;"><a href="tel:${number}" style="color: #12066a; text-decoration: none;">${number}</a></td>
             </tr>
             <tr>
               <td style="padding: 8px 0; font-weight: bold; color: #666;">Service:</td>
