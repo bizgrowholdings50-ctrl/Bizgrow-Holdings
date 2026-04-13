@@ -76,3 +76,11 @@ html, body {
   left: 0 !important;
   top: -13px !important;
 }
+
+/* Mazeed strong selector */
+div.blog-content-flow a, 
+.blog-content-flow p a, 
+.blog-content-flow li a {
+    color: #997819 !important;
+    text-decoration: underline !important;
+}
