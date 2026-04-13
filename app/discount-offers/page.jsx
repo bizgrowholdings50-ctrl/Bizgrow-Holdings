@@ -8,36 +8,36 @@ export const metadata = {
     "Unlock exclusive business discount offers with BizGrow Holdings. Save on certifications, compliance, and growth services for UK companies.",
 };
 const offersData = [
-  {
-    id: "EASTER-2026",
-    title: "𝐁𝐈𝐙𝐆𝐑𝐎𝐖 𝟒𝐓𝐇 𝐀𝐍𝐍𝐈𝐕𝐄𝐑𝐒𝐀𝐑𝐘 𝐎𝐅𝐅𝐄𝐑",
-    image: "/discount_offer1.jpg", // Aapki flyer image ka path
-    discount: "",
-    price: "350", // Flyer ke mutabiq starting price
-    shortDesc: "To celebrate our 4th Anniversary, Bizgrow Holdings Ltd is offering certifications 𝐬𝐭𝐚𝐫𝐭𝐢𝐧𝐠 𝐟𝐫𝐨𝐦 £𝟑𝟓𝟎 𝐩𝐞𝐫 𝐦𝐨𝐧𝐭𝐡 on",
-    fullDetail: `𝐋𝐚𝐬𝐭 𝐅𝐞𝐰 𝐒𝐥𝐨𝐭𝐬 𝐑𝐞𝐦𝐚𝐢𝐧𝐢𝐧𝐠
-Attention UK Security & Construction Companies!
-To celebrate our 4th Anniversary, Bizgrow Holdings Ltd is offering certifications 𝐬𝐭𝐚𝐫𝐭𝐢𝐧𝐠 𝐟𝐫𝐨𝐦 £𝟑𝟓𝟎 𝐩𝐞𝐫 𝐦𝐨𝐧𝐭𝐡 on:
-⚫ 𝐀𝐂𝐒
-⚫ 𝐂𝐎𝐏 𝟏𝟏𝟗
-⚫ 𝐈𝐒𝐎
-⚫ 𝐂𝐨𝐧𝐬𝐭𝐫𝐮𝐜𝐭𝐢𝐨𝐧𝐥𝐢𝐧𝐞
-⚫ 𝐒𝐚𝐟𝐞𝐂𝐨𝐧𝐭𝐫𝐚𝐜𝐭𝐨𝐫, 𝐍𝐀𝐒𝐃𝐔
-No accreditation = no contracts. 
-Don’t risk losing business, get compliant and contract-ready today!
-𝐖𝐡𝐲 𝐂𝐡𝐨𝐨𝐬𝐞 𝐔𝐬?
-◾ Expert UK-based consultants
-◾ Step-by-step accreditation support
-◾ Proven track record with UK businesses
-𝐃𝐨𝐧’𝐭 𝐦𝐢𝐬𝐬 𝐨𝐮𝐭, 𝐬𝐭𝐚𝐫𝐭 𝐲𝐨𝐮𝐫 𝐜𝐞𝐫𝐭𝐢𝐟𝐢𝐜𝐚𝐭𝐢𝐨𝐧 𝐩𝐫𝐨𝐜𝐞𝐬𝐬 𝐭𝐨𝐝𝐚𝐲.
-`,
-    sections: [
-      {
-        heading: "What's Included",
-        items: ["ACS Support", "ISO Certification", "COP 119 Compliance" ,"ConstructionLine" , "SafeContractor + Nasdu"]
-      }
-    ]
-  },
+//   {
+//     id: "EASTER-2026",
+//     title: "𝐁𝐈𝐙𝐆𝐑𝐎𝐖 𝟒𝐓𝐇 𝐀𝐍𝐍𝐈𝐕𝐄𝐑𝐒𝐀𝐑𝐘 𝐎𝐅𝐅𝐄𝐑",
+//     image: "/discount_offer1.jpg", // Aapki flyer image ka path
+//     discount: "",
+//     price: "350", // Flyer ke mutabiq starting price
+//     shortDesc: "To celebrate our 4th Anniversary, Bizgrow Holdings Ltd is offering certifications 𝐬𝐭𝐚𝐫𝐭𝐢𝐧𝐠 𝐟𝐫𝐨𝐦 £𝟑𝟓𝟎 𝐩𝐞𝐫 𝐦𝐨𝐧𝐭𝐡 on",
+//     fullDetail: `𝐋𝐚𝐬𝐭 𝐅𝐞𝐰 𝐒𝐥𝐨𝐭𝐬 𝐑𝐞𝐦𝐚𝐢𝐧𝐢𝐧𝐠
+// Attention UK Security & Construction Companies!
+// To celebrate our 4th Anniversary, Bizgrow Holdings Ltd is offering certifications 𝐬𝐭𝐚𝐫𝐭𝐢𝐧𝐠 𝐟𝐫𝐨𝐦 £𝟑𝟓𝟎 𝐩𝐞𝐫 𝐦𝐨𝐧𝐭𝐡 on:
+// ⚫ 𝐀𝐂𝐒
+// ⚫ 𝐂𝐎𝐏 𝟏𝟏𝟗
+// ⚫ 𝐈𝐒𝐎
+// ⚫ 𝐂𝐨𝐧𝐬𝐭𝐫𝐮𝐜𝐭𝐢𝐨𝐧𝐥𝐢𝐧𝐞
+// ⚫ 𝐒𝐚𝐟𝐞𝐂𝐨𝐧𝐭𝐫𝐚𝐜𝐭𝐨𝐫, 𝐍𝐀𝐒𝐃𝐔
+// No accreditation = no contracts. 
+// Don’t risk losing business, get compliant and contract-ready today!
+// 𝐖𝐡𝐲 𝐂𝐡𝐨𝐨𝐬𝐞 𝐔𝐬?
+// ◾ Expert UK-based consultants
+// ◾ Step-by-step accreditation support
+// ◾ Proven track record with UK businesses
+// 𝐃𝐨𝐧’𝐭 𝐦𝐢𝐬𝐬 𝐨𝐮𝐭, 𝐬𝐭𝐚𝐫𝐭 𝐲𝐨𝐮𝐫 𝐜𝐞𝐫𝐭𝐢𝐟𝐢𝐜𝐚𝐭𝐢𝐨𝐧 𝐩𝐫𝐨𝐜𝐞𝐬𝐬 𝐭𝐨𝐝𝐚𝐲.
+// `,
+//     sections: [
+//       {
+//         heading: "What's Included",
+//         items: ["ACS Support", "ISO Certification", "COP 119 Compliance" ,"ConstructionLine" , "SafeContractor + Nasdu"]
+//       }
+//     ]
+//   },
  
 ];
 
