@@ -91,7 +91,7 @@ const ContactPage = () => {
                   {
                     icon: <Mail size={22} />,
                     label: "Email",
-                    val: "info@bizgrow.co.uk",
+                    val: "info@bizgrow-holdings.co.uk",
                   },
                   {
                     icon: <MapPin size={22} />,
