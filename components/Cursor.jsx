@@ -78,13 +78,13 @@ export default function CustomCursor() {
       {/* Small Core Dot */}
       <div
         ref={dotRef}
-        className="fixed top-0 left-0 w-2 h-2 bg-[#997819] rounded-full pointer-events-none z-[10000] mix-blend-difference"
+        className="fixed top-0 left-0 w-2 h-2 bg-[#997819] rounded-full pointer-events-none z-[10000] "
         style={{ transform: "translate(-50%, -50%)" }}
       />
       {/* Main Interactive Ring */}
       <div
         ref={ringRef}
-        className="fixed top-0 left-0 w-7 h-7 border-2 border-[#997819] rounded-full pointer-events-none z-[9999] flex items-center justify-center mix-blend-difference"
+        className="fixed top-0 left-0 w-7 h-7 border-2 border-[#997819] rounded-full pointer-events-none z-[9999] flex items-center justify-center "
         style={{ transform: "translate(-50%, -50%)" }}
       >
         {/* Ring ke andar agar text dikhana ho (e.g. View) */}
