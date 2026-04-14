@@ -162,7 +162,7 @@ const PrivacyPolicy = () => {
                   <div className="space-y-4">
                     <p className="font-black text-3xl uppercase tracking-tighter text-[#997819]">BizGrow Holdings Ltd</p>
                     <a href="mailto:info@bizgrow-holdings.com" className="flex items-center gap-3 text-lg font-bold hover:text-[#997819] transition-colors duration-300">
-                      <Mail size={20} className="text-[#997819]" /> info@bizgrow-holdings.com
+                      <Mail size={20} className="text-[#997819]" /> info@bizgrow-holdings.co.uk
                     </a>
                   </div>
                   <div className="space-y-4 font-bold text-blue-100/80">
