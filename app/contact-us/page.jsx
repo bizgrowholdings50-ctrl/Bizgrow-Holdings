@@ -5,7 +5,8 @@ import ContactForm from "@/components/ContactForm";
 
 export const metadata = {
   title: "Contact Us | Security Business UK | BizGrow Holdings Ltd",
-  description: "Contact Us with BizGrow Holdings for Expert Support in Compliance, ACS, ISO, and Business Growth Services for UK Security Businesses.",
+  description:
+    "Contact Us with BizGrow Holdings for Expert Support in Compliance, ACS, ISO, and Business Growth Services for UK Security Businesses.",
 };
 const ContactPage = () => {
   return (
@@ -95,7 +96,7 @@ const ContactPage = () => {
                   {
                     icon: <MapPin size={22} />,
                     label: "Location",
-                    val: "London, UK HQ",
+                    val: "London, UK ",
                   },
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-6 group">
@@ -131,12 +132,13 @@ const ContactPage = () => {
       <section className="max-w-7xl h-135 mx-auto px-4 sm:px-6 mb-24">
         <div className="w-full h-full relative bg-slate-100 rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl shadow-[#12066a]/5 grayscale hover:grayscale-0 transition-all duration-1000 border border-white">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2483.546467503417!2d-0.12775829999999999!3d51.5073509!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604c320d3f667%3A0x265558832c3f9a7d!2sLondon%2C%20UK!5e0!3m2!1sen!2s!4v1711234567890!5m2!1sen!2s"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2482.7206945283365!2d0.17185!3d51.518339999999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a559375c3235%3A0xd4e3f499e51befee!2sCEME%20Campus!5e0!3m2!1sen!2suk!4v1776180633370!5m2!1sen!2suk"
             width="100%"
             height="100%"
-            style={{ border: 0 }}
+            style={{ border: 0 }} // Corrected: Ab ye string nahi, object hai
             allowFullScreen=""
             loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
             title="BizGrow Location"
             className="rounded-[2rem] md:rounded-[3rem]"
           />
@@ -145,10 +147,10 @@ const ContactPage = () => {
           <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white/20 to-transparent pointer-events-none" />
 
           {/* Map Overlay Badge (Optional: Matches your premium UI) */}
-          <div className="absolute top-8 left-8 bg-white/90 backdrop-blur-md px-6 py-3 rounded-2xl shadow-lg border border-slate-100 flex items-center gap-3">
+          <div className="absolute top-18 left-18 bg-white/90 backdrop-blur-md px-6 py-3 rounded-2xl shadow-lg border border-slate-100 flex items-center gap-3">
             <div className="w-2 h-2 bg-[#997819] rounded-full animate-ping" />
             <span className="text-[10px] font-black uppercase tracking-widest text-[#12066a]">
-              Our Headquarters
+              Our Office
             </span>
           </div>
         </div>

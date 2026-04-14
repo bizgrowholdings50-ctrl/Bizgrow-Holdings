@@ -17,7 +17,7 @@ const offersData = [
     shortDesc: "To celebrate our 15 years in industry, Bizgrow Holdings Ltd is offering certifications 𝐬𝐭𝐚𝐫𝐭𝐢𝐧𝐠 𝐟𝐫𝐨𝐦 £𝟑𝟓𝟎 𝐩𝐞𝐫 𝐦𝐨𝐧𝐭𝐡 on",
     fullDetail: `Attention UK Security & Construction Companies!
 
-To celebrate our 15 years in industry, Bizgrow Holdings Ltd is offering certifications 𝐬𝐭𝐚𝐫𝐭𝐢𝐧𝐠 𝐟𝐫𝐨𝐦 £𝟑𝟓𝟎 𝐩𝐞𝐫 𝐦𝐨𝐧𝐭𝐡 on:
+To celebrate our 15 years in industry, we are offering certifications 𝐬𝐭𝐚𝐫𝐭𝐢𝐧𝐠 𝐟𝐫𝐨𝐦 £𝟑𝟓𝟎 𝐩𝐞𝐫 𝐦𝐨𝐧𝐭𝐡 on:
 
 ⚫ 𝐀𝐂𝐒
 ⚫ 𝐂𝐎𝐏 𝟏𝟏𝟗
