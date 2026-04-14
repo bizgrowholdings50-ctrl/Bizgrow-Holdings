@@ -84,12 +84,12 @@ export default function CustomCursor() {
       {/* Main Interactive Ring */}
       <div
         ref={ringRef}
-        className="fixed top-0 left-0 w-10 h-10 border-2 border-[#997819] rounded-full pointer-events-none z-[9999] flex items-center justify-center mix-blend-difference"
+        className="fixed top-0 left-0 w-7 h-7 border-2 border-[#997819] rounded-full pointer-events-none z-[9999] flex items-center justify-center mix-blend-difference"
         style={{ transform: "translate(-50%, -50%)" }}
       >
         {/* Ring ke andar agar text dikhana ho (e.g. View) */}
         {isHovering && (
-           <span className="text-[6px] font-black text-white uppercase tracking-tighter">View</span>
+           <span className="text-[4px] font-black text-white uppercase tracking-tighter">View</span>
         )}
       </div>
     </>
