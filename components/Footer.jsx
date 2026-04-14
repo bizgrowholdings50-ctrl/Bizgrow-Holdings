@@ -165,9 +165,10 @@ export default function Footer() {
                 </div>
                 <div>
                   <p className="text-xs text-[#997819] font-bold uppercase">
-                    Email
+                    Emails
                   </p>
-                  <p className="text-sm">info@bizgrow-holdings.com</p>
+                  <p className="text-sm">info@bizgrow-holdings.co.uk</p>
+                    <p className="text-sm">sales@bizgrow-holdings.net</p>
                 </div>
               </div>
               <div className="flex gap-4 items-start">

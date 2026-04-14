@@ -86,7 +86,7 @@ const ContactPage = () => {
                   {
                     icon: <Phone size={22} />,
                     label: "Call Us",
-                    val: "+44 20 1234 5678",
+                    val: "07898 205035",
                   },
                   {
                     icon: <Mail size={22} />,
