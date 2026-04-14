@@ -30,7 +30,7 @@ const DiscountCard = ({ offer }) => {
         <div className="group bg-white rounded-[2.5rem] p-3 border border-zinc-100 shadow-[0_10px_40px_-15px_rgba(0,0,0,0.05)] hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] transition-all duration-700 flex flex-col h-full">
           
           <div onClick={() => setIsDetailOpen(true)} className="relative h-[400px] w-full rounded-[2rem] overflow-hidden cursor-pointer">
-            <img src={offer.image} alt={offer.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110" />
+            <img src={offer.image} alt={offer.title} className="absolute inset-0 w-full h-[550px] object-cover object-fill transition-transform duration-1000 group-hover:scale-110" />
             
             {/* 🔹 FIX: Agar discount empty ya 0 hai toh kuch b show nahi hoga */}
             {offer.discount && parseInt(offer.discount) > 0 && (
