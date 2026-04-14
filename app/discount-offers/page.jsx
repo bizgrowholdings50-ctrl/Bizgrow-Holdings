@@ -87,12 +87,12 @@ const DiscountPage = () => {
             <p className="text-zinc-400 font-bold uppercase tracking-[0.3em] text-[10px] mb-6 text-center">Contact our team to claim</p>
             <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
                <div className="text-center">
-                  <p className="text-[#12066a] font-black text-lg">07868 764218</p>
+                  <p className="text-[#12066a] font-black text-lg">07898 205035 </p>
                   <p className="text-zinc-500 text-xs font-medium uppercase">Call Us Now</p>
                </div>
                <div className="w-px h-12 bg-zinc-200 hidden md:block" />
                <div className="text-center">
-                  <p className="text-[#12066a] font-black text-lg text-lowercase">info@bizgrow-holdings.com</p>
+                  <p className="text-[#12066a] font-black text-lg text-lowercase">info@bizgrow-holdings.co.uk</p>
                   <p className="text-zinc-500 text-xs font-medium uppercase">Email Support</p>
                </div>
             </div>
