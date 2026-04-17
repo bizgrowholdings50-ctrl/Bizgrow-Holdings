@@ -53,7 +53,7 @@ export default function Footer() {
                 },
                 {
                   icon: <FaTiktok />,
-                  href: "https://www.tiktok.com/@bizgrowholdings?lang=en",
+                  href: "https://www.tiktok.com/@bizgrow.holdings.ltd",
                 },
               ].map((social, i) => (
                 <a

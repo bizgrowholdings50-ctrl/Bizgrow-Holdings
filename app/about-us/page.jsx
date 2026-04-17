@@ -273,8 +273,8 @@ export default function AboutUs() {
                 turning complex standards into sustainable growth systems."
               </p>
             </div>
-            <div className="absolute -bottom-10 -right-10 text-[10rem] font-black text-white/[0.03]">
-              M
+            <div className="absolute -bottom-10 -right-2 text-[9rem] font-black text-white/5">
+              Mission
             </div>
           </FadeIn>
           <FadeIn
@@ -311,7 +311,7 @@ export default function AboutUs() {
           >
             {/* Dark Overlay to make text pop */}
             <div className="absolute inset-0 bg-[#12066a]/65 mix-blend-multiply" />
-            <div className="absolute inset-0 bg-linear-to-br from-[#12066a] via-transparent to-[#997819]/20" />
+            <div className="absolute inset-0 bg-linear-to-br from-[#12066a] via-transparent to-[#997819]/30" />
           </div>
 
           <div className="relative z-10 p-10 md:p-20">

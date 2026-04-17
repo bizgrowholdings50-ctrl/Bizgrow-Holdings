@@ -3,10 +3,6 @@ import FadeIn from "@/components/MotionWrapper";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  Shield,
-  Award,
-  Users,
-  BarChart3,
   CheckCircle2,
   Trophy,
   Globe2,
@@ -14,7 +10,6 @@ import {
   ArrowRight,
 } from "lucide-react";
 import HorizontalServices from "@/components/HorizontalProcess";
-import HeroSection from "@/components/Hero";
 
 const steps = [
   {
@@ -81,6 +76,7 @@ export const metadata = {
   description:
     "BizGrow Holdings helps UK security businesses achieve ISO & ACS compliance, win contracts, and grow with expert guidance and strategies.",
 };
+
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-white selection:bg-[#997819] selection:text-white">
@@ -144,6 +140,7 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* 3 Stats  */}
       <section className="py-14 px-6">
         {/* Yahan changes kiye hain: flex-col-reverse se mobile par content upar aur image niche ho jayegi */}
         <div className="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row gap-16 items-center">
@@ -273,7 +270,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {reviews.map((rev, i) => (
               <FadeIn key={i} delay={i * 0.2}>
-                <div className="p-12 rounded-[3.5rem] bg-white shadow-xl border border-zinc-100 flex flex-col justify-between h-full hover:border-[#997819] transition-all group">
+                <div className="p-12 rounded-[3.5rem] bg-white shadow-xl border border-zinc-300 flex flex-col justify-between h-full hover:border-[#997819] transition-transform  group">
                   <p className="text-[#12066a] font-medium leading-relaxed italic mb-10 text-lg">
                     "{rev.text}"
                   </p>
@@ -305,7 +302,7 @@ export default function HomePage() {
           />
 
           {/* 🔹 2. Background Large Text (Watermark) - Kept Same */}
-          <div className="absolute top-0 right-0 text-[10rem] md:text-[15rem] font-black text-white/[0.03] select-none leading-none -translate-x-7 translate-y-6 pointer-events-none uppercase z-10">
+          <div className="absolute top-0 right-0 text-[10rem] md:text-[15rem] font-black text-white/5 select-none leading-none -translate-x-7 translate-y-6 pointer-events-none uppercase z-10">
             BIZGROW
           </div>
 
@@ -345,9 +342,15 @@ export default function HomePage() {
 
               <a
                 href="tel:+447898205035"
-                className="bg-white/10 backdrop-blur-md text-white border border-white/20 px-8 py-5 rounded-2xl font-black uppercase tracking-widest text-xs flex items-center justify-center gap-3 hover:bg-white/20 transition-all"
+                className="relative group/phone overflow-hidden inline-flex items-center justify-center gap-3 bg-white/10 backdrop-blur-md text-white border border-white/20 px-8 py-5 rounded-2xl font-black uppercase tracking-widest text-xs transition-all duration-500 shadow-lg active:scale-95"
               >
-                <PhoneCall size={18} /> +44 7898205035
+                {/* Content Layer (z-50 taake gold layer ke upar rahe) */}
+                <span className="relative z-50 flex items-center gap-3 transition-colors duration-500 group-hover:text-[#12066a]">
+                  <PhoneCall size={18} /> +44 7898205035
+                </span>
+
+                {/* Slide-in Layer (Gold color sirf yahan hoga) */}
+                <div className="absolute inset-0 bg-white -translate-x-full group-hover/phone:translate-x-0 transition-transform duration-500 ease-out z-40" />
               </a>
             </div>
           </div>
