@@ -292,27 +292,29 @@ export default function HomePage() {
       {/* 7 CTA Section with Background Parallax & Watermark */}
       <section className="py-20 px-6 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto bg-[#12066a] rounded-[3rem] p-7 md:p-20 relative overflow-hidden shadow-2xl group">
-          {/* 🖼️ 1. Parallax Background Layer (Added) */}
+          {/* 🖼️ 1. Parallax Background Layer */}
+          {/* FIXED: Added 'md:bg-fixed' because 'bg-fixed' breaks on many mobile browsers/iOS */}
           <div
-            className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat bg-fixed opacity-20 transition-transform duration-1000"
+            className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat md:bg-fixed opacity-20 transition-transform duration-1000"
             style={{
-              backgroundImage: "url('/home-cta.jpg')", // Replace with your image path
-              backgroundAttachment: "fixed", // 👈 Magic for parallax
+              backgroundImage: "url('/home-cta.jpg')",
             }}
+            aria-hidden="true" // Hide decorative background from screen readers
           />
 
-          {/* 🔹 2. Background Large Text (Watermark) - Kept Same */}
+          {/* 🔹 2. Background Large Text (Watermark) */}
           <div className="absolute top-0 right-0 text-[10rem] md:text-[15rem] font-black text-white/5 select-none leading-none -translate-x-7 translate-y-6 pointer-events-none uppercase z-10">
             BIZGROW
           </div>
 
-          {/* Background Decor Circles - Kept Same */}
+          {/* Background Decor Circles */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-[#997819]/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 z-10" />
           <div className="absolute bottom-0 left-0 w-40 h-40 bg-blue-400/5 rounded-full blur-2xl z-10" />
 
-          {/* Content Layer - Added z-20 to stay above parallax image */}
+          {/* Content Layer */}
           <div className="relative z-20 flex flex-col items-center justify-between gap-12">
             <div className="text-center lg:text-left max-w-2xl">
+              {/* SEO FIX: Use <h2> if <h1> is already used in Hero, or keep <h2> for hierarchy */}
               <h2 className="text-[32px] md:text-6xl text-center font-black text-white leading-tight">
                 Ready to Secure Your
                 <span className="text-[#997819]"> Business Future?</span>
@@ -326,30 +328,28 @@ export default function HomePage() {
             </div>
 
             <div className="flex flex-col sm:flex-row gap-6 w-full lg:w-auto">
+              {/* ACCESSIBILITY FIX: Added aria-label for clear context */}
               <Link
                 href="/contact-us"
+                aria-label="Book a free consultation with our compliance experts"
                 className="relative group/btn overflow-hidden inline-flex items-center justify-center gap-3 bg-[#997819] text-white px-8 py-5 rounded-2xl font-black uppercase tracking-widest text-xs transition-all duration-500 shadow-lg active:scale-95"
               >
-                {/* Layer 1: Text & Icon (Top Layer) */}
                 <span className="relative z-40 flex items-center gap-3 transition-colors duration-500 group-hover/btn:text-[#12066a]">
                   Book Free Consultation
                   <ArrowRight className="group-hover/btn:translate-x-2 transition-transform duration-500" />
                 </span>
-
-                {/* Layer 2: The Animated Background (Middle Layer) */}
                 <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
               </Link>
 
+              {/* ACCESSIBILITY FIX: Added aria-label and descriptive text */}
               <a
                 href="tel:+447898205035"
+                aria-label="Call BizGrow Holdings at +44 7898205035"
                 className="relative group/phone overflow-hidden inline-flex items-center justify-center gap-3 bg-white/10 backdrop-blur-md text-white border border-white/20 px-8 py-5 rounded-2xl font-black uppercase tracking-widest text-xs transition-all duration-500 shadow-lg active:scale-95"
               >
-                {/* Content Layer (z-50 taake gold layer ke upar rahe) */}
-                <span className="relative z-50 flex items-center gap-3 transition-colors duration-500 group-hover:text-[#12066a]">
+                <span className="relative z-50 flex items-center gap-3 transition-colors duration-500 group-hover/phone:text-[#12066a]">
                   <PhoneCall size={18} /> +44 7898205035
                 </span>
-
-                {/* Slide-in Layer (Gold color sirf yahan hoga) */}
                 <div className="absolute inset-0 bg-white -translate-x-full group-hover/phone:translate-x-0 transition-transform duration-500 ease-out z-40" />
               </a>
             </div>
