@@ -332,13 +332,16 @@ export default function HomePage() {
               <Link
                 href="/contact-us"
                 aria-label="Book a free consultation with our compliance experts"
-                className="relative group/btn overflow-hidden inline-flex items-center justify-center gap-3 bg-[#997819] text-white px-8 py-5 rounded-2xl font-black uppercase tracking-widest text-xs transition-all duration-500 shadow-lg active:scale-95"
+                className="relative group/btn overflow-hidden inline-flex items-center justify-center gap-3 bg-white text-[#12066a] px-8 py-5 rounded-2xl font-black uppercase tracking-widest text-xs transition-all duration-500 shadow-lg active:scale-95"
               >
-                <span className="relative z-40 flex items-center gap-3 transition-colors duration-500 group-hover/btn:text-[#12066a]">
+                {/* Yahan humne text color ko hover par dark blue rakha hai taake contrast hamesha high rahe */}
+                <span className="relative z-40 flex items-center gap-3 transition-colors duration-500 group-hover/btn:text-white">
                   Book Free Consultation
                   <ArrowRight className="group-hover/btn:translate-x-2 transition-transform duration-500" />
                 </span>
-                <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
+
+                {/* Hover background color white hi rakha hai kyunke wo dark blue text ke sath perfect dikhta hai */}
+                <div className="absolute inset-0 bg-[#997819] translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
               </Link>
 
               {/* ACCESSIBILITY FIX: Added aria-label and descriptive text */}
