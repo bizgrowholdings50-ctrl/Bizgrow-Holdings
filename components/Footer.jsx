@@ -38,22 +38,27 @@ export default function Footer() {
                 {
                   icon: <FaFacebookF />,
                   href: "https://www.facebook.com/bizgrowholdings",
+                  label: "Facebook",
                 },
                 {
                   icon: <FaInstagram />,
                   href: "https://www.instagram.com/bizgrowholdingltd/",
+                  label: "Instagram",
                 },
                 {
                   icon: <FaLinkedinIn />,
                   href: "https://www.linkedin.com/company/bizgrowholdings/",
+                  label: "LinkedIn",
                 },
                 {
                   icon: <FaYoutube />,
                   href: "https://www.youtube.com/@bizgrowholdings",
+                  label: "YouTube",
                 },
                 {
                   icon: <FaTiktok />,
                   href: "https://www.tiktok.com/@bizgrow.holdings.ltd",
+                  label: "TikTok",
                 },
               ].map((social, i) => (
                 <a
@@ -61,6 +66,7 @@ export default function Footer() {
                   href={social.href}
                   target="_blank" // 👈 New tab ke liye
                   rel="noopener noreferrer" // 👈 Security ke liye
+                  aria-label={social.label} // 👈 Report Accessibility Fix
                   className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center hover:bg-[#997819] hover:scale-110 transition-all duration-300"
                 >
                   {social.icon}
@@ -86,7 +92,7 @@ export default function Footer() {
               ].map((item) => (
                 <li key={item}>
                   <Link
-                    href={`/${item.toLowerCase().replace(" ", "-")}`}
+                    href={item === "Home" ? "/" : `/${item.toLowerCase().replace(" ", "-")}`} // 👈 Home fix
                     className="text-blue-100/70 hover:text-white hover:pl-2 transition-all duration-300 flex items-center gap-2"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-[#997819]" />{" "}
@@ -128,7 +134,7 @@ export default function Footer() {
                   name: "Corporate Training and Coaching",
                   link: "/corporate-training-and-coaching",
                 },
-               
+                
               ].map((item) => (
                 <li key={item.name}>
                   <Link
