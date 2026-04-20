@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  ArrowRight,
-  Award,
-  GraduationCap,
-  MapPin,
-
-} from "lucide-react";
+import { ArrowRight, Award, GraduationCap, MapPin } from "lucide-react";
 import Image from "next/image";
 import FadeIn from "@/components/MotionWrapper";
 const galleryItems = [
@@ -32,7 +26,7 @@ const galleryItems = [
   },
   {
     id: 4,
-    src: "/w4.webp",
+    src: "/w4 og.webp",
     title: "Professional development session",
     location: "BizGrow Holdings Ltd",
     alt: "Professional development session - BizGrow Holdings Ltd",
@@ -55,7 +49,8 @@ const galleryItems = [
 
 export const metadata = {
   title: "BizGrow Training Moments: Compliance & Growth Simplified",
-  description: "BizGrow’s expert-led training helps business owners achieve compliance, streamline systems & scale for real growth.",
+  description:
+    "BizGrow’s expert-led training helps business owners achieve compliance, streamline systems & scale for real growth.",
 };
 const TrainingMoments = () => {
   return (
@@ -70,7 +65,7 @@ const TrainingMoments = () => {
             playsInline
             className="w-full h-full object-cover opacity-50 lg:opacity-60"
           >
-            <source src="/video/workshop.mp4" type="video/mp4" />
+            <source src="/video/workshop-optimized.mp4" type="video/mp4" />
           </video>
           {/* Rich Overlay for better contrast */}
           <div className="absolute inset-0 bg-gradient-to-b from-[#12066a]/60 via-[#12066a]/20 to-[#12066a]" />
@@ -118,13 +113,13 @@ const TrainingMoments = () => {
               <span className="text-[#12066a] font-bold underline decoration-[#997819] decoration-2 underline-offset-4">
                 13 years of dedicated experience
               </span>{" "}
-              in compliance and
-              consultancy, <span className="text-[#997819] font-black">Dr. Javed Iqbal</span> has earned a reputation as a trusted
-              advisor for businesses aiming to meet and exceed industry
-              standards. He partners with both security companies and
-              construction businesses to simplify complex compliance
-              requirements and transform them into practical, easy-to-implement
-              systems that drive measurable results..
+              in compliance and consultancy,{" "}
+              <span className="text-[#997819] font-black">Dr. Javed Iqbal</span>{" "}
+              has earned a reputation as a trusted advisor for businesses aiming
+              to meet and exceed industry standards. He partners with both
+              security companies and construction businesses to simplify complex
+              compliance requirements and transform them into practical,
+              easy-to-implement systems that drive measurable results..
             </p>
 
             <div className="grid grid-cols-2 gap-6 pt-6 border-t border-zinc-100">
@@ -196,9 +191,14 @@ const TrainingMoments = () => {
             <FadeIn key={item.id} delay={idx * 0.1}>
               <div className="relative group rounded-[2.5rem] overflow-hidden bg-zinc-100 break-inside-avoid shadow-xl hover:shadow-[#12066a]/20 transition-all duration-700 active:scale-95 cursor-pointer">
                 {/* Main Image */}
-                <img
+                {/* // <img> ki jagah ye use karein: */}
+                <Image
                   src={item.src}
                   alt={item.alt}
+                  width={600} // Masonry grid ke liye itna kaafi hai
+                  height={800}
+                  placeholder="blur" // Optional: blur effect jab tak load ho
+                  blurDataURL="data:..." // Optional
                   className="w-full h-auto object-cover group-hover:scale-110 transition-transform duration-1000"
                 />
 
