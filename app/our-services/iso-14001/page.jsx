@@ -216,13 +216,37 @@ const ISO14001Page = () => {
                 {
                   step: "01",
                   title: "Gap Analysis",
-                  desc: <>Our experts assess your existing environmental activity and compare this against the <Link href="https://bizgrow-holdings.com/why-clients-trust-iso-14001-certified-suppliers-in-the-uk/" className="text-[#997819] font-bold">ISO 14001</Link> standard to identify improvements.</>,
+                  desc: (
+                    <>
+                      Our experts assess your existing environmental activity
+                      and compare this against the{" "}
+                      <Link
+                        href="https://bizgrow-holdings.com/why-clients-trust-iso-14001-certified-suppliers-in-the-uk/"
+                        className="text-[#997819] font-bold"
+                      >
+                        ISO 14001
+                      </Link>{" "}
+                      standard to identify improvements.
+                    </>
+                  ),
                   icon: <BarChart3 size={24} />,
                 },
                 {
                   step: "02",
                   title: "Development & Implementation",
-                  desc: <>We create all necessary documents and policies using the intuitive <Link href="https://bizgrow-holdings.com/qms-software/" className="text-[#997819] font-bold">BizGrow QMS</Link> System and embed them into your culture.</>,
+                  desc: (
+                    <>
+                      We create all necessary documents and policies using the
+                      intuitive{" "}
+                      <Link
+                        href="https://bizgrow-holdings.com/qms-software/"
+                        className="text-[#997819] font-bold"
+                      >
+                        BizGrow QMS
+                      </Link>{" "}
+                      System and embed them into your culture.
+                    </>
+                  ),
                   icon: <ShieldCheck size={24} />,
                 },
                 {
@@ -261,7 +285,7 @@ const ISO14001Page = () => {
           </div>
         </div>
       </section>
-      {/* 🔹 3. FEATURE SPLIT (Visual Change: Image on Left, Content on Right) */}
+      {/* 🔹 3. FEATURE SPLIT (Refined) */}
       <section className="py-24 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col lg:flex-row-reverse gap-20 items-center">
@@ -275,26 +299,39 @@ const ISO14001Page = () => {
               </h2>
               <div className="border-l-8 border-[#997819] pl-8 py-4">
                 <p className="text-xl text-zinc-600 font-bold italic leading-relaxed">
-                  "Many UK contractors now require <Link href="https://bizgrow-holdings.com/understanding-iso-14001-standard-structure-principles-requirements/" className="text-[#997819] font-bold">ISO 14001</Link> certification as a
-                  condition for tender eligibility. Environmental compliance has
-                  become a key supply chain requirement. ISO 14001 positions
-                  your business as a responsible, audit-ready partner with
-                  structured environmental controls and <Link href="https://bizgrow-holdings.com/what-does-rams-stand-for/" className="text-[#997819] font-bold">risk management systems</Link>.
-                  "
+                  "Many UK contractors now require{" "}
+                  <Link
+                    href="/iso-14001-requirements"
+                    className="text-[#997819] hover:underline"
+                  >
+                    ISO 14001
+                  </Link>{" "}
+                  certification as a condition for tender eligibility.
+                  Environmental compliance has become a key supply chain
+                  requirement."
                 </p>
               </div>
-              <button className="mt-10 bg-[] flex items-center gap-4 font-black uppercase tracking-widest text-sm text-[#12066a] hover:text-[#997819] transition-colors">
-                Enhance your supply chain with ISO 14001 certification.{" "}
-                <CheckCircle2 size={20} />
-              </button>
+              {/* Fixed empty bg class and added Link wrapper */}
+              <Link
+                href="/contact"
+                className="mt-10 inline-flex items-center gap-4 font-black uppercase tracking-widest text-sm text-[#12066a] hover:text-[#997819] transition-colors group"
+              >
+                Enhance your supply chain today
+                <CheckCircle2
+                  size={20}
+                  className="group-hover:scale-110 transition-transform"
+                />
+              </Link>
             </div>
+
             <div className="lg:w-1/2 relative">
-              <div className="w-full relative aspect-square bg-[#12066a] rounded-[4rem] overflow-hidden rotate-3 hover:rotate-0 transition-transform duration-700">
+              <div className="w-full relative aspect-square bg-[#12066a] rounded-[4rem] overflow-hidden rotate-3 hover:rotate-0 transition-transform duration-700 shadow-2xl">
                 <Image
                   src="/supply-chain.jpg"
                   fill
-                  className="object-cover opacity-60 scale-110"
-                  alt="Enhance your supply chain with ISO 14001 certification."
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover opacity-80 scale-110"
+                  alt="UK business professionals discussing environmental supply chain compliance"
                 />
               </div>
             </div>
@@ -302,17 +339,17 @@ const ISO14001Page = () => {
         </div>
       </section>
 
-      {/* 🔹 4. DOCUMENTATION (Now in a Modern List Layout) */}
-      <section className="py-32 bg-[#12066a] text-white rounded-[5rem] mx-4 my-10">
+      {/* 🔹 4. DOCUMENTATION (Corrected Heading Hierarchy) */}
+      <section className="py-32 bg-[#12066a] text-white rounded-[5rem] mx-4 my-10 shadow-inner">
         <div className="max-w-7xl mx-auto px-10">
           <div className="mb-16 text-center lg:text-left">
-            <h3 className="text-4xl md:text-6xl font-black tracking-tighter">
+            <h2 className="text-4xl md:text-6xl font-black tracking-tighter">
               What’s Included in{" "}
-              <span className="text-[#997819]">ISO 14001?.</span>
-            </h3>
-            <p className="my-4 text-md">
-              ISO 14001 outlines the key components that enable UK businesses to
-              manage and improve environmental performance effectively:
+              <span className="text-[#997819]">ISO 14001?</span>
+            </h2>
+            <p className="my-4 text-blue-100/60 max-w-2xl">
+              The framework enables UK businesses to manage and improve
+              environmental performance through these core pillars:
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
@@ -325,13 +362,13 @@ const ISO14001Page = () => {
               "Management Review",
             ].map((doc, idx) => (
               <div key={idx} className="group cursor-default">
-                <span className="text-[#997819] font-black text-xs block mb-2 opacity-50">
+                <span className="text-[#997819] font-black text-xs block mb-2 opacity-80">
                   0{idx + 1}
                 </span>
-                <div className="h-px bg-white/10 w-full mb-6 group-hover:bg-[#997819] transition-colors" />
-                <h3 className="text-xl font-bold uppercase tracking-tight group-hover:translate-x-2 transition-transform">
+                <div className="h-px bg-white/20 w-full mb-6 group-hover:bg-[#997819] group-hover:w-full transition-all duration-500" />
+                <h4 className="text-xl font-bold uppercase tracking-tight group-hover:translate-x-2 transition-transform duration-300">
                   {doc}
-                </h3>
+                </h4>
               </div>
             ))}
           </div>
@@ -383,12 +420,12 @@ const ISO14001Page = () => {
               <div className="flex flex-col sm:flex-row gap-4 w-full justify-center items-center">
                 <FadeIn direction="up" delay={0.2}>
                   <Link href="/contact">
-                  <button className="relative group/btn overflow-hidden w-full sm:w-64 bg-[#997819] text-white px-8 py-5 rounded-2xl font-black uppercase tracking-[0.25em] text-[10px] transition-all duration-500 hover:shadow-[0_20px_40px_rgba(153,120,25,0.4)]">
-                    <span className="relative z-10 group-hover/btn:text-[#12066a] transition-colors duration-500">
-                      Start your ISO 14001 journey today
-                    </span>
-                    <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-0" />
-                  </button>
+                    <button className="relative group/btn overflow-hidden w-full sm:w-64 bg-[#997819] text-white px-8 py-5 rounded-2xl font-black uppercase tracking-[0.25em] text-[10px] transition-all duration-500 hover:shadow-[0_20px_40px_rgba(153,120,25,0.4)]">
+                      <span className="relative z-10 group-hover/btn:text-[#12066a] transition-colors duration-500">
+                        Start your ISO 14001 journey today
+                      </span>
+                      <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-0" />
+                    </button>
                   </Link>
                 </FadeIn>
               </div>

@@ -99,12 +99,12 @@ const ISO9001Page = () => {
                 {
                   t: "Higher Quality Control",
                   d: " Consistent products and services that meet UK standards.",
-                  icon: <Settings2Icon size={28} strokeWidth={1.5} />, // Settings2 for control/mechanisms
+                  icon: <Settings2Icon size={28} strokeWidth={1.5} />,
                 },
                 {
                   t: "More Market Opportunities",
                   d: "Increased potential for gaining higher-value contracts and tenders.",
-                  icon: <TrendingUp size={28} strokeWidth={1.5} />, // TrendingUp for growth and market potential
+                  icon: <TrendingUp size={28} strokeWidth={1.5} />,
                 },
                 {
                   t: "Increased Efficiency",
@@ -120,12 +120,12 @@ const ISO9001Page = () => {
                       and fewer errors in the process.
                     </>
                   ),
-                  icon: <Activity size={28} strokeWidth={1.5} />, // Activity or Gauge for smooth flow/efficiency
+                  icon: <Activity size={28} strokeWidth={1.5} />,
                 },
                 {
                   t: "Continuous improvement cycle",
                   d: "Fostering a culture of regular service delivery and innovation.",
-                  icon: <RefreshCw size={28} strokeWidth={1.5} />, // RefreshCw for the "cycle" and continuous nature
+                  icon: <RefreshCw size={28} strokeWidth={1.5} />,
                 },
               ].map((item, i) => (
                 <div
@@ -152,7 +152,7 @@ const ISO9001Page = () => {
         </div>
       </section>
 
-      {/* 🔹 3 NEW SECTION: MARKET AUTHORITY & GROWTH */}
+      {/* 🔹 3. MARKET AUTHORITY & GROWTH */}
       <section className="py-12 bg-white relative overflow-hidden">
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#12066a]/5 rounded-full blur-[120px] -z-10" />
 
@@ -187,7 +187,7 @@ const ISO9001Page = () => {
                         ISO 9001
                       </Link>{" "}
                       systems. It is often a baseline requirement for tender
-                      eligibility and framework approvals..
+                      eligibility and framework approvals.
                     </p>
                   </div>
                 </div>
@@ -245,10 +245,7 @@ const ISO9001Page = () => {
                         key={idx}
                         className="py-4 border-b border-white/10 text-blue-100/80 font-bold flex justify-between items-start gap-4 group cursor-default"
                       >
-                        {/* text-left ensure karega ke multi-line text bhi left se shuru ho */}
                         <span className="text-left leading-tight">{item}</span>
-
-                        {/* shrink-0 isliye taake icon text ke dabao mein chota na ho */}
                         <CheckCircle2
                           className="text-[#997819] shrink-0 mt-1"
                           size={20}
@@ -263,7 +260,7 @@ const ISO9001Page = () => {
         </div>
       </section>
 
-      {/* 🔹 4 NEW SECTION: OUR IMPLEMENTATION JOURNEY */}
+      {/* 🔹 4. OUR IMPLEMENTATION JOURNEY */}
       <section className="py-12 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
@@ -326,7 +323,7 @@ const ISO9001Page = () => {
         </div>
       </section>
 
-      {/* 🔹 5 NEW SECTION: DETAILED DOCUMENTATION CHECKLIST */}
+      {/* 🔹 5. DETAILED DOCUMENTATION CHECKLIST */}
       <section className="py-4 md:py-12 bg-white">
         <div className="max-w-7xl mx-auto px-6 border-t border-zinc-100 pt-24">
           <div className="flex flex-col lg:flex-row gap-16 items-center">
@@ -398,27 +395,25 @@ const ISO9001Page = () => {
         </div>
       </section>
 
-      {/* 🔹 6. TECHNICAL METRICS SECTION (With Background Image) */}
+      {/* 🔹 6. TECHNICAL METRICS SECTION */}
       <section className="py-22 bg-[#12066a] relative overflow-hidden">
-        {/* Background Image Container */}
         <div
-          className="absolute inset-0 z-0 opacity-20" // Opacity kam rakhi hai taake content focus mein rahe
+          className="absolute inset-0 z-0 opacity-20"
           style={{
-            backgroundImage: 'url("/compliance.jpg")', // Yahan apni image ka path dein
+            backgroundImage: 'url("/compliance.jpg")',
             backgroundSize: "cover",
             backgroundPosition: "center",
-            backgroundAttachment: "fixed", // Parallax effect ke liye
+            backgroundAttachment: "fixed",
           }}
         />
 
-        {/* Dark Gradient Overlay for Text Readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-[#12066a] via-[#12066a]/60 to-transparent z-10" />
 
         <div className="max-w-7xl mx-auto px-6 relative z-20">
           <div className="grid md:grid-cols-2 gap-20 items-center">
             <div className="relative order-2 md:order-1">
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-[#997819]  h-64 rounded-[3rem] p-8 flex flex-col justify-end shadow-2xl">
+                <div className="bg-[#997819] h-64 rounded-[3rem] p-8 flex flex-col justify-end shadow-2xl">
                   <span className="text-4xl font-black text-white">98%</span>
                   <p className="text-white text-xs font-bold uppercase tracking-widest mt-2">
                     Success Rate
@@ -482,12 +477,9 @@ const ISO9001Page = () => {
                 href="/contact-us"
                 className="relative group/btn overflow-hidden inline-flex items-center justify-center bg-[#997819] text-white px-6 md:px-16 py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-xs transition-all duration-500 shadow-3xl active:scale-95"
               >
-                {/* Layer 1: The Text (Top Layer) */}
                 <span className="relative z-40 transition-colors duration-500 group-hover/btn:text-[#12066a]">
                   Get ISO 9001 Certified
                 </span>
-
-                {/* Layer 2: The Animated Background (Middle Layer) */}
                 <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
               </Link>
             </div>
