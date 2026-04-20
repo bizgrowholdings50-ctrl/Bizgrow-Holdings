@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const slides = [
   {
-    image: 'https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    image: '/crousel1.jpg',
     alt: 'Business meeting in a modern office',
     heading: 'Smarter Strategy. Stronger Systems. Real Results.',
     subheading: 'BizGrow Holdings delivers compliance-driven consultancy that helps UK businesses pass audits, win contracts, and grow with certainty.',
@@ -20,7 +20,7 @@ const slides = [
     buttonLink: '/our-services/'
   },
   {
-    image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    image: '/crousel2.webp',
     alt: 'Laptop showing business analytics',
     heading: 'Clarity in Strategy. Confidence in Compliance.',
     subheading: 'Supporting UK organisations with innovative yet practical solutions that improve performance and future-proof operations.',
