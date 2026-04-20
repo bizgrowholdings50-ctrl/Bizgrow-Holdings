@@ -77,9 +77,9 @@ export default function Footer() {
 
           {/* Column 2: Quick Links */}
           <div>
-            <h4 className="text-[#997819] font-black uppercase tracking-widest text-sm mb-8">
+            <h3 className="text-[#EAB308] font-black uppercase tracking-widest text-sm mb-8">
               Navigation
-            </h4>
+            </h3>
             <ul className="space-y-4">
               {[
                 "Home",
@@ -95,7 +95,7 @@ export default function Footer() {
                     href={item === "Home" ? "/" : `/${item.toLowerCase().replace(" ", "-")}`} // 👈 Home fix
                     className="text-blue-100/70 hover:text-white hover:pl-2 transition-all duration-300 flex items-center gap-2"
                   >
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#997819]" />{" "}
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#EAB308]" />{" "}
                     {item}
                   </Link>
                 </li>
@@ -105,9 +105,9 @@ export default function Footer() {
 
           {/* Column 3: Top Services / Pages */}
           <div>
-            <h4 className="text-[#997819] font-black uppercase tracking-widest text-sm mb-8">
+            <h3 className="text-[#EAB308] font-black uppercase tracking-widest text-sm mb-8">
               Certifications & Solutions
-            </h4>
+            </h3>
             <ul className="space-y-4 text-sm">
               {[
                 {
@@ -150,27 +150,27 @@ export default function Footer() {
 
           {/* Column 4: Contact Info */}
           <div>
-            <h4 className="text-[#997819] font-black uppercase tracking-widest text-sm mb-8">
+            <h3 className="text-[#EAB308] font-black uppercase tracking-widest text-sm mb-8">
               Get In Touch
-            </h4>
+            </h3>
             <div className="space-y-6">
               <div className="flex gap-4 items-start">
-                <div className="mt-1 bg-[#997819]/20 p-2 rounded-lg text-[#997819]">
+                <div className="mt-1 bg-[#997819]/20 p-2 rounded-lg text-[#EAB308]">
                   <FaPhoneAlt size={14} />
                 </div>
                 <div>
-                  <p className="text-xs text-[#997819] font-bold uppercase">
+                  <p className="text-xs text-[#EAB308] font-bold uppercase">
                     Call Us
                   </p>
                   <p className="text-sm">07898 205035 / 02080904209</p>
                 </div>
               </div>
               <div className="flex gap-4 items-start">
-                <div className="mt-1 bg-[#997819]/20 p-2 rounded-lg text-[#997819]">
+                <div className="mt-1 bg-[#997819]/20 p-2 rounded-lg text-[#EAB308]">
                   <FaEnvelope size={14} />
                 </div>
                 <div>
-                  <p className="text-xs text-[#997819] font-bold uppercase">
+                  <p className="text-xs text-[#EAB308] font-bold uppercase">
                     Emails
                   </p>
                   <p className="text-sm">info@bizgrow-holdings.co.uk</p>
@@ -178,11 +178,11 @@ export default function Footer() {
                 </div>
               </div>
               <div className="flex gap-4 items-start">
-                <div className="mt-1 bg-[#997819]/20 p-2 rounded-lg text-[#997819]">
+                <div className="mt-1 bg-[#997819]/20 p-2 rounded-lg text-[#EAB308]">
                   <FaMapMarkerAlt size={14} />
                 </div>
                 <div>
-                  <p className="text-xs text-[#997819] font-bold uppercase">
+                  <p className="text-xs text-[#EAB308] font-bold uppercase">
                     Location
                   </p>
                   <p className="text-sm italic">
