@@ -195,7 +195,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-10 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-blue-100/50 font-medium">
+        <div className="pt-10 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-white font-medium">
           <p>© {currentYear} BizGrow Holdings. All Rights Reserved.</p>
           <div className="flex gap-8">
             <Link
