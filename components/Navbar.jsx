@@ -232,7 +232,7 @@ export default function Navbar() {
               href="/training-moments"
               className="hover:text-[#997819]  transition"
             >
-              Workshop Training 
+              Workshop Training
             </Link>
             <Link
               href="/testimonials-reviews"
@@ -248,9 +248,11 @@ export default function Navbar() {
 
           {/* THEME & MOBILE BUTTON */}
           <div className="flex items-center gap-4">
-            <button className="hidden md:block text-white font-semibold border border-[#997819] bg-[#12066a] px-3 py-1.5 rounded-2xl">
-              <Link href="/contact-us">Contact Us</Link>
-            </button>
+            <Link href="/contact-us" className="hidden md:block">
+              <button className="text-white font-semibold border border-[#997819] bg-[#12066a] px-6 py-2.5 rounded-2xl hover:bg-[#1a0a8a] transition-all">
+                Contact Us
+              </button>
+            </Link>
             <button
               aria-label={mobileOpen ? "Close Menu" : "Open Menu"}
               aria-expanded={mobileOpen}
