@@ -1,8 +1,8 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import Image from 'next/image'; // 👈 Next.js Image import kiya
-import Link from 'next/link';   // 👈 Performance ke liye Link use karein
+import Image from 'next/image';
+import Link from 'next/link';
 
 const slides = [
   {
@@ -22,7 +22,7 @@ const slides = [
     buttonLink: '/our-services/'
   },
   {
-    image: '/coursel2 og.webp',
+    image: '/coursel2-og.webp',
     alt: 'Laptop showing business analytics',
     heading: 'Clarity in Strategy. Confidence in Compliance.',
     subheading: 'Supporting UK organisations with innovative yet practical solutions that improve performance and future-proof operations.',
@@ -38,10 +38,6 @@ export default function HeroCarousel() {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
   };
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-  };
-
   useEffect(() => {
     const interval = setInterval(nextSlide, 7000);
     return () => clearInterval(interval);
@@ -52,46 +48,53 @@ export default function HeroCarousel() {
       {slides.map((slide, index) => (
         <div
           key={index}
-          className={`absolute inset-0 transition-opacity duration-1000 ease-in-out
+          className={`absolute inset-0 transition-opacity duration-700 ease-in-out
             ${index === currentSlide ? 'opacity-100 z-10' : 'opacity-0 invisible z-0'}`}
           aria-hidden={index !== currentSlide}
         >
-          {/* FIX 1: Next.js Image for LCP Optimization */}
+          {/* Background Image Optimization */}
           <div className="absolute inset-0">
             <Image
               src={slide.image}
               alt={slide.alt}
               fill
-              priority={index === 0} // 👈 Sabse pehli image foran load hogi
-              quality={85}
+              priority={index === 0} // LCP optimization for 1st slide
+              quality={75} // Reduced for faster load
               sizes="100vw"
               className="object-cover"
-              loading={index === 0 ? "eager" : "lazy"} // 👈 Critical for LCP
             />
             {/* Overlay */}
             <div className="absolute inset-0 bg-black/60 z-10"></div>
           </div>
 
-          {/* Content */}
+          {/* Content Section */}
           <div className="relative z-20 flex flex-col items-center justify-center h-full text-center text-white px-6 md:px-12">
-            {/* SEO Optimization: H1 hamesha DOM mein rahe lekin transition smooth ho */}
-            <h1 className={`text-3xl md:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight mb-4 drop-shadow-lg max-w-5xl transition-transform duration-700 ${index === currentSlide ? 'translate-y-0' : 'translate-y-4'}`}>
+            <h1 
+              className={`text-3xl md:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight mb-4 drop-shadow-lg max-w-5xl transition-all duration-500 will-change-transform
+              ${index === currentSlide ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'}`}
+            >
               {slide.heading}
             </h1>
-            <p className="text-lg md:text-xl lg:text-2xl font-medium mb-8 max-w-3xl leading-relaxed drop-shadow-md">
+            
+            <p className={`text-lg md:text-xl lg:text-2xl font-medium mb-8 max-w-3xl leading-relaxed drop-shadow-md transition-all duration-700 delay-100
+              ${index === currentSlide ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'}`}
+            >
               {slide.subheading}
             </p>
-            <Link
-              href={slide.buttonLink}
-              className="bg-[#12066a] hover:bg-[#D4AF37] text-white font-bold py-3 px-8 rounded-full text-lg md:text-xl transition-all duration-300 shadow-xl active:scale-95"
-            >
-              {slide.buttonText}
-            </Link>
+
+            <div className={`transition-all duration-700 delay-200 ${index === currentSlide ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'}`}>
+              <Link
+                href={slide.buttonLink}
+                className="bg-[#12066a] hover:bg-[#D4AF37] text-white font-bold py-3 px-8 rounded-full text-lg md:text-xl transition-all duration-300 shadow-xl active:scale-95"
+              >
+                {slide.buttonText}
+              </Link>
+            </div>
           </div>
         </div>
       ))}
 
-      {/* Navigation & Dots Logic (No change needed here) */}
+      {/* Navigation Dots */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex space-x-3 z-30">
         {slides.map((_, index) => (
           <button
