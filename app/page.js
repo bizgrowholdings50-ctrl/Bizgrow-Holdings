@@ -224,7 +224,7 @@ export default function HomePage() {
         />
         {/* Black Overlay Effect */}
         <div className="hidden md:block absolute inset-0 bg-black/70 backdrop-blur-[1px]" />
-        <div aria-hidden="true" className="absolute top-10 right-0 text-[4rem] md:text-[15rem] font-black text-white/10 select-none leading-none -translate-y-1/4">
+        <div aria-hidden="true" className="absolute top-10 right-0 text-[4rem] md:text-[15rem] font-black text-white/5 select-none leading-none -translate-y-1/4">
           BIZGROW
         </div>
 
