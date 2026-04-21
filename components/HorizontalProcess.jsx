@@ -3,6 +3,7 @@ import { motion, useTransform, useScroll, useSpring } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import FadeIn from "./MotionWrapper";
 import Link from "next/link";
+import Image from "next/image"; // 👈 Import Image
 
 const HorizontalProcess = () => {
   const targetRef = useRef(null);
@@ -21,57 +22,56 @@ const HorizontalProcess = () => {
   });
 
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 70, // Aapka original stiffness
+    stiffness: 70,
     damping: 30,
     restDelta: 0.001,
   });
 
-  // 🚀 Aapka Original Step-by-Step Flow
   const x = useTransform(
     smoothProgress,
     [0, 0.05, 0.2, 0.4, 0.55, 0.75, 0.85, 1],
     ["0vw", "0vw", "-100vw", "-100vw", "-200vw", "-200vw", "-300vw", "-300vw"]
   );
 
- const sections = [
-  {
-    id: "01",
-    tag: "Support",
-    title: "SIA ACS",
-    img: "/sia-home.jpg",
-    alt: "SIA ACS - BizGrow Holdings Ltd", // 👈 SEO Friendly Alt
-    description:
-      <>Achieve and maintain <Link href="/our-services/sia-acs/" className="text-[#997819] font-bold">Approved Contractor Scheme</Link> status with expert guidance.</>
-  },
-  {
-    id: "02",
-    tag: "Certification",
-    title: "ISO",
-    img: "/iso-home.jpg",
-    alt: "ISO Certification - BizGrow Holdings Ltd", // 👈 Key-words include kiye
-    description:
-      <>Streamline your business with <Link href="/our-services/iso-9001/" className="text-[#997819] font-bold">ISO 9001</Link>, <Link href="/our-services/iso-14001/" className="text-[#997819] font-bold">14001</Link>, and <Link href="/our-services/iso-45001/" className="text-[#997819] font-bold">45001 </Link>certifications.</>,
-  },
-  {
-    id: "03",
-    tag: "Consultancy",
-    title: "Business",
-    img: "/consultancy-home.jpg",
-    alt: "Business Consultancy - BizGrow Holdings Ltd",
-    description:
-      "Strategic planning to help your company scale and improve efficiency.",
-  },
-  {
-    id: "04",
-    tag: "Development",
-    title: "Training",
-    img: "/business.jpg",
-    alt: "Development Training - BizGrow Holdings Ltd",
-    description:
-      "Equipping your team with professional, industry-approved training for lasting performance.",
-  },
-];
-  // Height logic to ensure smooth pinning
+  const sections = [
+    {
+      id: "01",
+      tag: "Support",
+      title: "SIA ACS",
+      img: "/sia-home.jpg",
+      alt: "SIA ACS Consultancy Services - BizGrow Holdings",
+      description:
+        <>Achieve and maintain <Link href="/our-services/sia-acs/" className="text-[#997819] font-bold">Approved Contractor Scheme</Link> status with expert guidance.</>
+    },
+    {
+      id: "02",
+      tag: "Certification",
+      title: "ISO",
+      img: "/iso-home.webp", // 👈 Aapne jo change kiya
+      alt: "ISO 9001 14001 45001 Certification - BizGrow Holdings",
+      description:
+        <>Streamline your business with <Link href="/our-services/iso-9001/" className="text-[#997819] font-bold">ISO 9001</Link>, <Link href="/our-services/iso-14001/" className="text-[#997819] font-bold">14001</Link>, and <Link href="/our-services/iso-45001/" className="text-[#997819] font-bold">45001 </Link>certifications.</>,
+    },
+    {
+      id: "03",
+      tag: "Consultancy",
+      title: "Business",
+      img: "/consultancy-home.jpg",
+      alt: "Business Strategic Planning Consultancy - BizGrow Holdings",
+      description:
+        "Strategic planning to help your company scale and improve efficiency.",
+    },
+    {
+      id: "04",
+      tag: "Development",
+      title: "Training",
+      img: "/business.jpg",
+      alt: "Professional Development Training - BizGrow Holdings",
+      description:
+        "Equipping your team with professional, industry-approved training for lasting performance.",
+    },
+  ];
+
   const sectionHeightVh = isVertical ? "auto" : (sections.length + 1) * 100;
 
   return (
@@ -87,7 +87,6 @@ const HorizontalProcess = () => {
             : "sticky top-10 h-screen w-full flex items-center overflow-hidden"
         }`}
       >
-        {/* --- MAIN HEADING --- */}
         <div
           className={`${
             isVertical
@@ -110,7 +109,6 @@ const HorizontalProcess = () => {
           </div>
         </div>
 
-        {/* --- CONTENT WRAPPER --- */}
         <motion.div
           style={{ x: isVertical ? 0 : x }}
           className={`flex ${
@@ -119,7 +117,7 @@ const HorizontalProcess = () => {
               : "will-change-transform"
           }`}
         >
-          {sections.map((item) => (
+          {sections.map((item, index) => (
             <div
               key={item.id}
               className={`relative flex-shrink-0 flex flex-col lg:flex-row items-center justify-between 
@@ -129,7 +127,6 @@ const HorizontalProcess = () => {
                   : "h-screen w-screen px-20 lg:pt-32"
               }`}
             >
-              {/* Text Side */}
               <div className="z-10 w-full lg:w-1/2 mb-10 lg:mb-0 text-center lg:text-left">
                 <FadeIn direction={isVertical ? "up" : "right"}>
                   <span className="text-[#997819] font-bold tracking-[0.3em] uppercase text-sm">
@@ -148,12 +145,15 @@ const HorizontalProcess = () => {
                 </FadeIn>
               </div>
 
-              {/* Image Side */}
+              {/* --- FIXED IMAGE SECTION --- */}
               <div className="w-full lg:w-[45%] h-[40vh] lg:h-[55vh] relative">
-                <img
+                <Image
                   src={item.img}
                   alt={item.alt}
-                  className="w-full h-full object-cover rounded-[3rem] shadow-2xl relative z-10 border-2 border-zinc-50"
+                  fill // Container ke mutabiq khud ko set karega
+                  sizes="(max-width: 1024px) 100vw, 45vw"
+                  priority={index === 0} // Pehli image foran load hogi
+                  className="object-cover rounded-[3rem] shadow-2xl relative z-10 border-2 border-zinc-50"
                 />
                 <div className="absolute -bottom-10 -left-10 text-[10rem] lg:text-[14rem] font-black text-[#12066a]/5 z-0 select-none italic">
                   {item.id}
