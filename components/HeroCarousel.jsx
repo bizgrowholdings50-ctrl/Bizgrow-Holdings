@@ -22,7 +22,7 @@ const slides = [
     buttonLink: '/our-services/'
   },
   {
-    image: '/crousel2.webp',
+    image: '/coursel2 og.webp',
     alt: 'Laptop showing business analytics',
     heading: 'Clarity in Strategy. Confidence in Compliance.',
     subheading: 'Supporting UK organisations with innovative yet practical solutions that improve performance and future-proof operations.',
