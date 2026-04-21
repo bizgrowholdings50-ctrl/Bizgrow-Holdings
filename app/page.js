@@ -303,7 +303,7 @@ export default function HomePage() {
           />
 
           {/* 🔹 2. Background Large Text (Watermark) */}
-          <div className="absolute top-0 right-0 text-[10rem] md:text-[15rem] font-black text-white/5 select-none leading-none -translate-x-7 translate-y-6 pointer-events-none uppercase z-10">
+          <div aria-hidden="true" className="absolute top-0 right-0 text-[10rem] md:text-[15rem] font-black text-white/5 select-none leading-none -translate-x-7 translate-y-6 pointer-events-none uppercase z-10">
             BIZGROW
           </div>
 
@@ -317,7 +317,7 @@ export default function HomePage() {
               {/* SEO FIX: Use <h2> if <h1> is already used in Hero, or keep <h2> for hierarchy */}
               <h2 className="text-[32px] md:text-6xl text-center font-black text-white leading-tight">
                 Ready to Secure Your
-                <span className="text-[#997819]"> Business Future?</span>
+                <span className="text-[#D4AF37]"> Business Future?</span>
               </h2>
               <p className="text-blue-100/80 text-center mt-6 text-sm md:text-lg font-medium">
                 Our compliance experts support UK organisations with SIA ACS

@@ -6,7 +6,7 @@ import Link from 'next/link';   // 👈 Performance ke liye Link use karein
 
 const slides = [
   {
-    image: '/crousel1.jpg',
+    image: '/crousel1.webp',
     alt: 'Business meeting in a modern office',
     heading: 'Smarter Strategy. Stronger Systems. Real Results.',
     subheading: 'BizGrow Holdings delivers compliance-driven consultancy that helps UK businesses pass audits, win contracts, and grow with certainty.',

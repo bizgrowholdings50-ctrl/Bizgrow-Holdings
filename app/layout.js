@@ -60,6 +60,16 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        {/* 🚀 LCP Optimization: Pehli image ko foran load karwane ke liye */}
+        <link
+          rel="preload"
+          href="/crousel1.webp"
+          as="image"
+          type="image/webp"
+          fetchPriority="high"
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
@@ -67,7 +77,7 @@ export default function RootLayout({ children }) {
         <SpeedInsights/>
         <CustomCursor />
         <Navbar/>
-       <SmoothScroll>
+        <SmoothScroll>
           {children}
         </SmoothScroll>
         <Footer/>
