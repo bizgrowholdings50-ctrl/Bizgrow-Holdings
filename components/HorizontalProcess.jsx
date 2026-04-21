@@ -3,11 +3,13 @@ import { motion, useTransform, useScroll, useSpring } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
 import FadeIn from "./MotionWrapper";
 import Link from "next/link";
-import Image from "next/image"; // 👈 Import Image
+import Image from "next/image";
 
 const HorizontalProcess = () => {
   const targetRef = useRef(null);
-  const [isVertical, setIsVertical] = useState(false);
+  
+  // FIX 1: Initial state 'null' rakhi hai taake server aur client ka layout match kare (CLS Fix)
+  const [isVertical, setIsVertical] = useState(null);
 
   useEffect(() => {
     const handleResize = () => setIsVertical(window.innerWidth < 1024);
@@ -41,16 +43,16 @@ const HorizontalProcess = () => {
       img: "/sia-home.jpg",
       alt: "SIA ACS Consultancy Services - BizGrow Holdings",
       description:
-        <>Achieve and maintain <Link href="/our-services/sia-acs/" className="text-[#997819] font-bold">Approved Contractor Scheme</Link> status with expert guidance.</>
+        <>Achieve and maintain <Link href="/our-services/sia-acs/" className="text-[#D4AF37] font-bold">Approved Contractor Scheme</Link> status with expert guidance.</>
     },
     {
       id: "02",
       tag: "Certification",
       title: "ISO",
-      img: "/iso-home.webp", // 👈 Aapne jo change kiya
+      img: "/iso-home.webp",
       alt: "ISO 9001 14001 45001 Certification - BizGrow Holdings",
       description:
-        <>Streamline your business with <Link href="/our-services/iso-9001/" className="text-[#997819] font-bold">ISO 9001</Link>, <Link href="/our-services/iso-14001/" className="text-[#997819] font-bold">14001</Link>, and <Link href="/our-services/iso-45001/" className="text-[#997819] font-bold">45001 </Link>certifications.</>,
+        <>Streamline your business with <Link href="/our-services/iso-9001/" className="text-[#D4AF37] font-bold">ISO 9001</Link>, <Link href="/our-services/iso-14001/" className="text-[#D4AF37] font-bold">14001</Link>, and <Link href="/our-services/iso-45001/" className="text-[#D4AF37] font-bold">45001 </Link>certifications.</>,
     },
     {
       id: "03",
@@ -72,21 +74,23 @@ const HorizontalProcess = () => {
     },
   ];
 
-  const sectionHeightVh = isVertical ? "auto" : (sections.length + 1) * 100;
+  // FIX 2: Dynamic height logic with a fallback to prevent layout jumping
+  const sectionHeightVh = isVertical === false ? (sections.length + 1) * 100 : "auto";
 
   return (
     <section
       ref={targetRef}
-      style={{ height: isVertical ? "auto" : `${sectionHeightVh}vh` }}
-      className="relative bg-white overflow-visible py-16 lg:py-0"
+      style={{ height: isVertical === null ? "100vh" : (isVertical ? "auto" : `${sectionHeightVh}vh`) }}
+      className="relative bg-white overflow-visible py-16 lg:py-0 min-h-screen"
     >
       <div
         className={`${
-          isVertical
-            ? "relative"
-            : "sticky top-10 h-screen w-full flex items-center overflow-hidden"
+          isVertical === false
+            ? "sticky top-10 h-screen w-full flex items-center overflow-hidden"
+            : "relative"
         }`}
       >
+        {/* Header Section */}
         <div
           className={`${
             isVertical
@@ -96,7 +100,8 @@ const HorizontalProcess = () => {
         >
           <div className="text-center px-4">
             <FadeIn direction="up">
-              <h2 className="text-[#997819] font-extrabold tracking-[0.2em] text-xs md:text-lg mb-2 uppercase">
+              {/* FIX 3: Brightened Golden color (#D4AF37) for better contrast/accessibility */}
+              <h2 className="text-[#D4AF37] font-extrabold tracking-[0.2em] text-xs md:text-lg mb-2 uppercase">
                 Comprehensive Solutions
               </h2>
             </FadeIn>
@@ -105,10 +110,11 @@ const HorizontalProcess = () => {
                 Tailored consultancy services
               </h2>
             </FadeIn>
-            <div className="w-12 h-1 bg-[#997819] mx-auto mt-4 rounded-full" />
+            <div className="w-12 h-1 bg-[#D4AF37] mx-auto mt-4 rounded-full" />
           </div>
         </div>
 
+        {/* Horizontal/Vertical Scrolling Content */}
         <motion.div
           style={{ x: isVertical ? 0 : x }}
           className={`flex ${
@@ -129,7 +135,7 @@ const HorizontalProcess = () => {
             >
               <div className="z-10 w-full lg:w-1/2 mb-10 lg:mb-0 text-center lg:text-left">
                 <FadeIn direction={isVertical ? "up" : "right"}>
-                  <span className="text-[#997819] font-bold tracking-[0.3em] uppercase text-sm">
+                  <span className="text-[#D4AF37] font-bold tracking-[0.3em] uppercase text-sm">
                     {item.tag}
                   </span>
                 </FadeIn>
@@ -145,14 +151,15 @@ const HorizontalProcess = () => {
                 </FadeIn>
               </div>
 
-              {/* --- FIXED IMAGE SECTION --- */}
+              {/* FIX 4: Optimized Image component with quality control */}
               <div className="w-full lg:w-[45%] h-[40vh] lg:h-[55vh] relative">
                 <Image
                   src={item.img}
                   alt={item.alt}
-                  fill // Container ke mutabiq khud ko set karega
+                  fill
+                  quality={75} // Better compression without visible loss
                   sizes="(max-width: 1024px) 100vw, 45vw"
-                  priority={index === 0} // Pehli image foran load hogi
+                  priority={index === 0} // Loads the first image immediately (LCP Fix)
                   className="object-cover rounded-[3rem] shadow-2xl relative z-10 border-2 border-zinc-50"
                 />
                 <div className="absolute -bottom-10 -left-10 text-[10rem] lg:text-[14rem] font-black text-[#12066a]/5 z-0 select-none italic">
