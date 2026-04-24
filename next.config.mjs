@@ -19,8 +19,8 @@ const securityHeaders = [
   },
   {
     key: 'Content-Security-Policy',
-    // Is line mein connect-src ko update kiya hai
-    value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.endorsal.io; style-src 'self' 'unsafe-inline' https://cdn.endorsal.io https://fonts.googleapis.com; img-src 'self' https://cms.bizgrow-holdings.com https://cdn.endorsal.io data: blob:; font-src 'self' https://fonts.gstatic.com data:; connect-src 'self' https://cdn.endorsal.io https://*.endorsal.io;"
+    // Ismein script, images (CloudFront), aur connection domains sab allowed hain
+    value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.endorsal.io; style-src 'self' 'unsafe-inline' https://cdn.endorsal.io https://fonts.googleapis.com; img-src 'self' https://cms.bizgrow-holdings.com https://cdn.endorsal.io https://*.cloudfront.net data: blob:; font-src 'self' https://fonts.gstatic.com data:; connect-src 'self' https://cdn.endorsal.io https://*.endorsal.io;"
   }
 ];
 
@@ -36,8 +36,13 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'cdn.endorsal.io',
       },
+      {
+        protocol: 'https',
+        hostname: '*.cloudfront.net',
+      },
     ],
   },
+  // Ye function security headers ko apply karega
   async headers() {
     return [
       {
