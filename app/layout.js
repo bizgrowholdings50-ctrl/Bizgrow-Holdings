@@ -77,13 +77,7 @@ export default function RootLayout({ children }) {
         <SmoothScroll>{children}</SmoothScroll>
         <Footer />
 
-        {/* --- Endorsal Script Start --- */}
-        <Script id="endorsal-init" strategy="afterInteractive">
-          {`
-            window.NDRSL_CONFIG = { id: "5df2ab9a4264b34634388ca3" };
-            !function(){var e,t=document;e=function(){var e=t.createElement("script");e.defer=!0,e.src="https://cdn.endorsal.io/widgets/widget.min.js";var n=t.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n),e.onload=function(){NDRSL.init("5df2ab9a4264b34634388ca3")}},"interactive"===t.readyState||"complete"===t.readyState?e():t.addEventListener("DOMContentLoaded",e)}();
-          `}
-        </Script>
+        
         {/* --- Endorsal Script Start --- */}
         <EndorsalScript />
         {/* --- Endorsal Script End --- */}
