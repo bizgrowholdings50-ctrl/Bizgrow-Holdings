@@ -19,8 +19,8 @@ const securityHeaders = [
   },
   {
     key: 'Content-Security-Policy',
-    // Endorsal ke liye cdn aur connect-src add kiya gaya hai
-    value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.endorsal.io; style-src 'self' 'unsafe-inline' https://cdn.endorsal.io https://fonts.googleapis.com; img-src 'self' https://cms.bizgrow-holdings.com https://cdn.endorsal.io data: blob:; font-src 'self' https://fonts.gstatic.com data:; connect-src 'self' https://cdn.endorsal.io;"
+    // Is line mein connect-src ko update kiya hai
+    value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.endorsal.io; style-src 'self' 'unsafe-inline' https://cdn.endorsal.io https://fonts.googleapis.com; img-src 'self' https://cms.bizgrow-holdings.com https://cdn.endorsal.io data: blob:; font-src 'self' https://fonts.gstatic.com data:; connect-src 'self' https://cdn.endorsal.io https://*.endorsal.io;"
   }
 ];
 
