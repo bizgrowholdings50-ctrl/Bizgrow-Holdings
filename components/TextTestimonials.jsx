@@ -8,14 +8,14 @@ const TestimonialGrid = () => {
         
         {/* --- Heading Section --- */}
         <div className="mb-12 text-center lg:text-left">
-          <div className="flex items-center justify-center lg:justify-start gap-3 mb-4">
+          <div className="flex items-center justify-center gap-3 mb-4">
             <span className="h-[2px] w-12 bg-[#997819]" />
-            <span className="text-[#997819] font-bold text-xs uppercase tracking-[0.4em]">
+            <span className="text-[#997819] font-bold text-xs  uppercase tracking-[0.4em]">
               Testimonials
             </span>
           </div>
 
-          <h2 className="text-5xl md:text-7xl font-black text-[#12066a] uppercase tracking-tighter leading-tight">
+          <h2 className="text-5xl md:text-7xl text-center font-black text-[#12066a] uppercase tracking-tighter leading-tight">
             Trusted <span className="text-[#997819]">Partnerships</span>
           </h2>
         </div>
