@@ -19,8 +19,8 @@ const securityHeaders = [
   },
   {
     key: 'Content-Security-Policy',
-    // Ye line aapki site ko XSS attacks se bachati hai
-    value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' https://cms.bizgrow-holdings.com data: blob:; font-src 'self' data:;"
+    // Endorsal ke liye cdn aur connect-src add kiya gaya hai
+    value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.endorsal.io; style-src 'self' 'unsafe-inline' https://cdn.endorsal.io https://fonts.googleapis.com; img-src 'self' https://cms.bizgrow-holdings.com https://cdn.endorsal.io data: blob:; font-src 'self' https://fonts.gstatic.com data:; connect-src 'self' https://cdn.endorsal.io;"
   }
 ];
 
@@ -32,9 +32,12 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'cms.bizgrow-holdings.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn.endorsal.io',
+      },
     ],
   },
-  // Ye function security headers ko apply karega
   async headers() {
     return [
       {
