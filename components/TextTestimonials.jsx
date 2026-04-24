@@ -192,6 +192,7 @@ const TestimonialGrid = () => {
                       <div className="w-full h-full bg-gradient-to-br from-[#12066a] to-[#0c054e] flex items-center justify-center text-white font-black text-xl md:text-2xl tracking-tighter">
                         {reviews[index].initials}
                       </div>
+                      
                     )}
                   </div>
 
@@ -202,14 +203,28 @@ const TestimonialGrid = () => {
                     <p className="text-[#997819] font-bold text-xs uppercase tracking-widest mt-1.5">
                       {reviews[index].role}
                     </p>
+                    
                   </div>
+                
                 </div>
               </motion.div>
             </AnimatePresence>
           </div>
         </div>
       </div>
+
+    
+      {/* Testing Area: Ise section ke bahar rakhein taake overlap na ho */}
+    <div className="bg-white py-10 border-t">
+       <p className="text-center text-xs text-gray-400 mb-4">--- Endorsal Widget Test Area ---</p>
+      <div 
+  id="ndrsl-69ea3a3db6d2e62a3435f8b3" 
+  className="ndrsl-widget"
+  style={{ minHeight: '200px' }} // Taake render hone se pehle space nazar aaye
+></div>
+    </div>
     </section>
+    
   );
 };
 
