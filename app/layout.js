@@ -1,12 +1,13 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Script from "next/script";
+
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import SmoothScroll from "@/components/SmoothScroll";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import CustomCursor from "@/components/Cursor";
+import EndorsalScript from "@/components/EndorsalScript";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -77,16 +78,7 @@ export default function RootLayout({ children }) {
 
   {/* --- Endorsal Script Start --- */}
 {/* --- Endorsal Script Start --- */}
-<Script
-  id="endorsal-setup"
-  src="https://cdn.endorsal.io/widgets/widget.min.js"
-  strategy="afterInteractive"
-  onLoad={() => {
-    if (window.NDRSL) {
-      window.NDRSL.init("5df2ab9a4264b34634388ca3");
-    }
-  }}
-/>
+<EndorsalScript />
 {/* --- Endorsal Script End --- */}
       </body>
     </html>
