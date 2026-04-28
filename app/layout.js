@@ -10,6 +10,8 @@ import CustomCursor from "@/components/Cursor";
 import EndorsalScript from "@/components/EndorsalScript";
 import Script from "next/script";
 
+const isProduction = process.env.NODE_ENV === "production";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -58,29 +60,17 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head>
-        <link
-          rel="preload"
-          href="/crousel1.webp"
-          as="image"
-          type="image/webp"
-          fetchPriority="high"
-        />
-      </head>
+      <head />
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Analytics />
-        <SpeedInsights />
+        {isProduction && <Analytics />}
+        {isProduction && <SpeedInsights />}
+        {isProduction && <EndorsalScript />}
         <CustomCursor />
         <Navbar />
         <SmoothScroll>{children}</SmoothScroll>
         <Footer />
-
-        
-        {/* --- Endorsal Script Start --- */}
-        <EndorsalScript />
-        {/* --- Endorsal Script End --- */}
       </body>
     </html>
   );

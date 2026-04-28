@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@marsidev/react-turnstile": "^1.5.1",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "gsap": "^3.14.2",
@@ -18,7 +19,8 @@
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-icons": "^5.5.0",
-    "resend": "^6.10.0"
+    "resend": "^6.10.0",
+    "sonner": "^2.0.7"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

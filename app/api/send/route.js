@@ -5,9 +5,52 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(req) {
   try {
-    // 1. number ko yahan add kiya
-    const { name, email, number, service, message } = await req.json();
+    const { name, email, number, service, message, captchaToken } = await req.json();
 
+    // --- CAPTCHA VALIDATION ---
+    if (!captchaToken) {
+      return NextResponse.json({ error: "Verification required. Please complete the captcha." }, { status: 400 });
+    }
+
+    const verifyRes = await fetch(
+      'https://challenges.cloudflare.com/turnstile/v0/siteverify',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: `secret=${process.env.CLOUDFLARE_TURNSTILE_SECRET_KEY}&response=${captchaToken}`,
+      }
+    );
+
+    const verification = await verifyRes.json();
+    if (!verification.success) {
+      return NextResponse.json({ error: "Captcha verification failed. Please try again." }, { status: 403 });
+    }
+
+    // --- YOUR EXISTING VALIDATIONS ---
+    if (!name || !email || !number || !service || !message) {
+      return NextResponse.json(
+        { error: "All fields are required. Please fill the complete form." }, 
+        { status: 400 }
+      );
+    }
+
+    const phoneRegex = /^\+?[0-9]{10,15}$/;
+    if (!phoneRegex.test(number.replace(/\s/g, ""))) {
+      return NextResponse.json(
+        { error: "Invalid phone number format. Please provide a valid contact number." }, 
+        { status: 400 }
+      );
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return NextResponse.json(
+        { error: "Invalid email address." }, 
+        { status: 400 }
+      );
+    }
+
+    // --- EMAIL SENDING (Your Template Kept Intact) ---
     const { data, error } = await resend.emails.send({
       from: 'BizGrow Sales <sales@bizgrow-holdings.net>', 
       to: ['sales@bizgrow-holdings.net'],

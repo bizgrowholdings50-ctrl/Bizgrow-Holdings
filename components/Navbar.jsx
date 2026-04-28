@@ -146,6 +146,7 @@ export default function Navbar() {
               width={110}
               height={40}
               priority
+              style={{ width: "auto", height: "auto" }}
             />
           </Link>
 
@@ -281,6 +282,7 @@ export default function Navbar() {
                 alt="BizGrow Digital Logo"
                 width={100}
                 height={35}
+                style={{ width: "auto", height: "auto" }}
               />
               <button
                 aria-label="Close menu"
