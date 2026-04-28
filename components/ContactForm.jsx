@@ -170,12 +170,12 @@ const ContactForm = () => {
 
         <div className="mt-20 flex flex-col md:flex-row items-center justify-between gap-10">
           <button
-            disabled={loading || sent}
+            disabled={loading || sent || !captchaToken}
             type="submit"
             className="w-full md:w-auto bg-[#12066a] hover:bg-[#997819] text-white font-black uppercase tracking-[0.2em] px-14 py-6 rounded-full transition-all duration-700 flex items-center justify-center gap-4 group relative overflow-hidden shadow-2xl disabled:opacity-70 disabled:cursor-not-allowed active:scale-95"
           >
             <span className="relative z-10 text-sm">
-              {loading ? "Processing..." : sent ? "Inquiry Sent" : "Initialize Consultation"}
+              {loading ? "Processing..." : sent ? "Inquiry Sent" : !captchaToken ? "Verify Captcha First" : "Initialize Consultation"}
             </span>
 
             {loading ? (
@@ -189,9 +189,9 @@ const ContactForm = () => {
           </button>
 
           <div className="flex items-center gap-3">
-            <div className={`w-2 h-2 rounded-full animate-pulse ${sent ? "bg-emerald-500" : "bg-[#997819]"}`} />
+            <div className={`w-2 h-2 rounded-full animate-pulse ${sent ? "bg-emerald-500" : captchaToken ? "bg-[#997819]" : "bg-red-500"}`} />
             <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
-              {sent ? "Message Received Successfully" : "Verified Professional Inquiry"}
+              {sent ? "Message Received Successfully" : captchaToken ? "Verified Professional Inquiry" : "Complete Verification"}
             </span>
           </div>
         </div>
