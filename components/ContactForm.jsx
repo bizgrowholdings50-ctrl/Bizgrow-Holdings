@@ -138,10 +138,14 @@ const ContactForm = () => {
               required
             >
               <option value="" disabled hidden>What are you looking for?</option>
-              <option value="ISO Certification">ISO Certification Strategy</option>
-              <option value="SIA ACS Support">ACS Compliance Support</option>
-              <option value="Cyber Essentials">Cyber Essentials</option>
-              <option value="General Inquiry">General Strategy Inquiry</option>
+              <option value="ISO Certification">ISO certifications Support</option>
+              <option value="SIA ACS Support">ACS compliance and support</option>
+              <option value="Cyber Essentials">COP-119 Certification</option>
+              <option value="General Inquiry">Safecontractor and CHAS support</option>
+              <option value="General Inquiry">Constructionline accreditation</option>
+              <option value="General Inquiry">SMAS and NASDU</option>
+              <option value="General Inquiry">Business Growth</option>
+              <option value="General Inquiry">Cyber essential and Cyber essential plus</option>
             </select>
             <label htmlFor="service" className={labelClasses}>Interested Service</label>
             <ArrowDown className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300 pointer-events-none group-focus-within:rotate-180 transition-transform" />
@@ -164,6 +168,8 @@ const ContactForm = () => {
           <Turnstile 
             siteKey={process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY} 
             onSuccess={(token) => setCaptchaToken(token)} 
+            onExpire={() => setCaptchaToken(null)}
+            onError={() => setCaptchaToken(null)}
             theme="dark" 
           />
         </div>
