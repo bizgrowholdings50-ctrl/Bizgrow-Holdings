@@ -41,7 +41,7 @@ const DiscountCard = ({ offer }) => {
           </div>
 
           <div className="p-6 flex flex-col flex-grow">
-            <h3 className="text-[#12066a] text-xl font-black uppercase tracking-tighter mb-2 leading-none">{offer.title}</h3>
+            <h2 className="text-[#12066a] text-xl font-black uppercase tracking-tighter mb-2 leading-none">{offer.title}</h2>
             <p className="text-zinc-500 text-xs font-medium mb-6 line-clamp-2">{offer.shortDesc}</p>
 
             <div className="mt-auto flex gap-2">

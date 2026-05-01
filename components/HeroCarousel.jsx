@@ -76,13 +76,13 @@ export default function HeroCarousel() {
 
           {/* Content Section */}
           <div className="relative z-20 flex flex-col items-center justify-center h-full text-center text-white px-6 md:px-12">
-            <h1
+            <span
               className={`text-3xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-4 drop-shadow-lg max-w-5xl 
   transition-[transform,opacity] duration-300 ease-out will-change-[transform,opacity]
   ${index === currentSlide ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
             >
               {slide.heading}
-            </h1>
+            </span>
 
             <p
               className={`text-lg md:text-xl lg:text-2xl font-medium mb-8 max-w-3xl leading-relaxed 
