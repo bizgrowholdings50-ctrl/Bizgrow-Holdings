@@ -58,7 +58,7 @@ export default async function BlogPage({ params }) {
     <section className="w-full bg-[#FDFCF9] py-8 md:py-20 overflow-x-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 mt-20 md:mt-10">
         <h1 className="text-center text-3xl md:text-5xl font-black text-[#12066a] uppercase mb-10 px-2 leading-tight">
-          {activeCat ? activeCat.replace(/-/g, " ") : "Digital Marketing"} <span className="text-[#997819]">Insights</span>
+          {activeCat ? activeCat.replace(/-/g, " ") : "Bizgrow Holdings"} <span className="text-[#997819]">Insights</span>
         </h1>
 
         <div className="w-full mb-12"><FilterBar categories={categories} /></div>
