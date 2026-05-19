@@ -17,9 +17,15 @@ const securityHeaders = [
     key: "Referrer-Policy",
     value: "origin-when-cross-origin",
   },
+  // 🚀 FIX 1: Cross-Origin-Opener-Policy (COOP) header added for Lighthouse pass
+  {
+    key: "Cross-Origin-Opener-Policy",
+    value: "same-origin",
+  },
+  // 🚀 FIX 2: Corrected Permissions-Policy format (Removed parser error)
   {
     key: "Permissions-Policy",
-    value: "camera=(), microphone=(), geolocation=(), xr-spatial-tracking=(self 'https://challenges.cloudflare.com')",
+    value: "camera=(), microphone=(), geolocation=(), xr-spatial-tracking=*",
   },
   {
     key: 'Content-Security-Policy',
@@ -31,8 +37,7 @@ const securityHeaders = [
            "connect-src 'self' https://cdn.endorsal.io https://*.endorsal.io https://va.vercel-scripts.com; " +
            "frame-src 'self' https://www.google.com https://challenges.cloudflare.com blob:; " +
            "base-uri 'self'; " +
-           "form-action 'self';" 
-           // 🚨 'require-trusted-types-for' aur 'trusted-types' yahan se hata diye gaye hain
+           "form-action 'self';"
   }
 ];
 const nextConfig = {
