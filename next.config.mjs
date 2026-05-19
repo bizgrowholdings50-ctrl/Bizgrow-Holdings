@@ -90,6 +90,13 @@ const nextConfig = {
       { source: '/how-cop-119-helps-security-businesses-maintain-high-standards-in-the-uk/', destination: '/cop-119-helps-security-businesses-maintain-high-standards/', permanent: true },
       { source: '/compliance-consultancies/cop-119-labour-provision/', destination: '/our-services/cop-119-labour-provision/', permanent: true },
       { source: '/compliance-consultancies/safe-contractor/', destination: '/our-services/safe-contractor/', permanent: true },
+      { source: '/careers/', destination: '/contact-us/', permanent: true },
+      { source: '/category/iso-certification/', destination: '/our-services/iso-9001/', permanent: true },
+      { source: '/the-role-of-iso-14001-environmental-management-system-in-chemical-industries/', destination: '/iso-14001-consulting-services/', permanent: true },
+      { source: '/sheq-management-system-safety-health-environment-and-quality-explained/', destination: '/sheq-management-system-explained/', permanent: true },
+     { source: '/home/', destination: '/', permanent: true },
+     { source: '/privacy-policy-bizgrow-holdings-ltd/', destination: '/privacy-policy/', permanent: true },
+     { source: '/iso-certification/', destination: '/our-services/iso-9001/', permanent: true },
       { source: '/without-safecontractor-accreditation-your-business-is-invisible-to-uk-buyers/', destination: '/without-safecontractor-your-business-is-invisible-to-uk-buyers/', permanent: true },
     ];
   },
