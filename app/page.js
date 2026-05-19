@@ -224,7 +224,10 @@ export default function HomePage() {
         />
         {/* Black Overlay Effect */}
         <div className="hidden md:block absolute inset-0 bg-black/70 backdrop-blur-[1px]" />
-        <div aria-hidden="true" className="absolute top-10 right-0 text-[4rem] md:text-[15rem] font-black text-white/2 select-none leading-none -translate-y-1/4">
+        <div
+          aria-hidden="true"
+          className="absolute top-10 right-0 text-[4rem] md:text-[15rem] font-black text-white/2 select-none leading-none -translate-y-1/4"
+        >
           BIZGROW
         </div>
 
@@ -303,7 +306,10 @@ export default function HomePage() {
           />
 
           {/* 🔹 2. Background Large Text (Watermark) */}
-          <div aria-hidden="true" className="absolute top-0 right-0 text-[10rem] md:text-[15rem] font-black text-white/5 select-none leading-none -translate-x-7 translate-y-6 pointer-events-none uppercase z-10">
+          <div
+            aria-hidden="true"
+            className="absolute top-0 right-0 text-[10rem] md:text-[15rem] font-black text-white/[0.12] select-none leading-none -translate-x-7 translate-y-6 pointer-events-none uppercase z-10"
+          >
             BIZGROW
           </div>
 
