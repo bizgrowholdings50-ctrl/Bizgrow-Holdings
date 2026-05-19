@@ -226,7 +226,7 @@ export default function HomePage() {
         <div className="hidden md:block absolute inset-0 bg-black/70 backdrop-blur-[1px]" />
         <div
           aria-hidden="true"
-          className="absolute top-10 right-0 text-[4rem] md:text-[15rem] font-black text-white/2 select-none leading-none -translate-y-1/4"
+          className="absolute top-10 right-0 text-[4rem] md:text-[15rem] font-black text-white/60 md:text-white/20 select-none leading-none -translate-y-1/4"
         >
           BIZGROW
         </div>

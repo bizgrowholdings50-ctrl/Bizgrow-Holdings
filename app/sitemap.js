@@ -45,6 +45,7 @@ export default async function sitemap() {
     { url: `${baseUrl}/our-services/nasdu`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.9 },
     { url: `${baseUrl}/our-services/smas-accreditation`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.9 },
     { url: `${baseUrl}/our-services/cyber-essentials`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.9 },
+     { url: `${baseUrl}/our-services/cyber-essentials-plus/`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.9 },
     { url: `${baseUrl}/our-services/chas-scheme`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.9 },
     { url: `${baseUrl}/our-services/bs-10800`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.9 },
     { url: `${baseUrl}/our-services/bs7858-screening-vetting`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.9 },
