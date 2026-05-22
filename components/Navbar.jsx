@@ -160,10 +160,10 @@ export default function Navbar() {
             </Link>
 
             <Link
-              href="/our-mission"
+              href="/it-services"
               className="hover:text-[#997819] transition"
             >
-              Our Mission
+              IT Solutions
             </Link>
 
             <div
