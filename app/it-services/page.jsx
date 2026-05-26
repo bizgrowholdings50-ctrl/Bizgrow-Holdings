@@ -20,9 +20,9 @@ import {
 import Link from "next/link";
 
 export const metadata = {
-  title: "Managed IT Services & Cyber Security UK | BizGrow Holdings",
+  title: "Managed IT Services UK | Cyber Security & IT Support",
   description:
-    "Securely managed IT services, equipment procurement, Microsoft 365 administration, and Cyber Essentials support for UK public sector, corporate, and SMEs.",
+    "Secure managed IT services, cyber security, Microsoft 365 & IT support solutions for UK businesses and organisations.",
 };
 
 const ITServicesPage = () => {
@@ -140,7 +140,7 @@ const ITServicesPage = () => {
                     src="/it-procurement.jpg"
                     width={600}
                     height={700}
-                    alt="IT Hardware Supply - BizGrow Holdings"
+                    alt="BizGrow - Trusted Business Hardware Partner"
                     className="object-cover h-[520px]"
                   />
                 </div>
@@ -346,7 +346,10 @@ const ITServicesPage = () => {
                   administration, security, and ongoing support. Our specialists
                   ensure organisations maximise the value of Microsoft cloud
                   services while maintaining security, productivity, and
-                  compliance.
+                  <Link href="/compliance-consultancies/" className="text-[#997819] ml-1 hover:underline font-bold">
+                    compliance
+                  </Link>
+                  .
                 </p>
                 <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
                   {[
@@ -382,7 +385,7 @@ const ITServicesPage = () => {
                     src="/m365-security.jpg"
                     width={600}
                     height={700}
-                    alt="Microsoft 365 Cloud Solutions"
+                    alt="Microsoft 365 & Cloud Solutions"
                     className="object-cover h-[500px]"
                   />
                 </div>
@@ -431,7 +434,9 @@ const ITServicesPage = () => {
                   <span className="text-[#997819]">Cyber Resilience</span>
                 </h2>
                 <p className="mb-8 text-zinc-600 font-medium leading-relaxed">
-                  BizGrow supports organisations with Cyber Essentials
+                  BizGrow supports organisations with <Link href="/cyber-essentials/" className="text-[#997819] mr-1 hover:underline font-bold">
+                    Cyber Essentials
+                  </Link>
                   readiness, cyber security management, and best-practice
                   implementation. We help organisations strengthen cyber
                   resilience by implementing practical security controls,
@@ -442,9 +447,9 @@ const ITServicesPage = () => {
                   sensitive information.
                 </p>
                 <div className="space-y-4 max-h-[380px] overflow-y-auto pr-2 scrollbar-thin">
-                  <h4 className="text-[#12066a] font-black uppercase text-xs tracking-wider">
+                  <h3 className="text-[#12066a] font-black uppercase text-xs tracking-wider">
                     Cyber Security Services Include:
-                  </h4>
+                  </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                     {[
                       "Cyber Essentials readiness support",
@@ -479,7 +484,7 @@ const ITServicesPage = () => {
                   src="/cyber-security-panel.jpg"
                   fill
                   className="object-cover opacity-50 group-hover:scale-105 transition-transform duration-[2s]"
-                  alt="Cyber Security Management Services"
+                  alt="BizGrow - Cybersecurity Management"
                 />
               </div>
             </FadeIn>
@@ -586,9 +591,9 @@ const ITServicesPage = () => {
 
             <div className="lg:col-span-2 bg-zinc-50 p-8 rounded-[2.5rem] border border-zinc-100">
               <FadeIn direction="left">
-                <h4 className="font-black text-xs uppercase tracking-widest text-[#12066a] mb-6">
+                <h3 className="font-black text-xs uppercase tracking-widest text-[#12066a] mb-6">
                   Public Sector Support Capabilities:
-                </h4>
+                </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm font-bold text-[#12066a]">
                   {[
                     "Local authority IT support",
@@ -754,7 +759,9 @@ const ITServicesPage = () => {
                 </h2>
                 <div className="text-zinc-600 text-sm font-medium leading-relaxed space-y-4 mb-8">
                   <p>
-                    At BizGrow, we believe that professional IT services and
+                    At <Link href="/" className="text-[#997819] hover:underline font-bold">
+                      BizGrow
+                    </Link>, we believe that professional IT services and
                     business technology solutions should be secure, reliable,
                     cost-effective, and delivered with complete transparency.
                   </p>

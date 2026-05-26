@@ -131,7 +131,7 @@ export default function HomePage() {
                 </p>
               </div>
             </div>
-            <Link href="/contact-us">
+            <Link href="/contact-us" className="md:hidden lg:block">
               <button className="bg-white text-[#12066a] px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-blue-50 transition-all shadow-lg active:scale-95">
                 Book a Consultation
               </button>

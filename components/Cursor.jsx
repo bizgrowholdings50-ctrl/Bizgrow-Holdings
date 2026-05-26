@@ -8,10 +8,13 @@ export default function CustomCursor() {
   const [isHovering, setIsHovering] = useState(false);
 
   useEffect(() => {
+    // 🔹 Mobile/Touch devices par animation ko bypass karein
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+
     const dot = dotRef.current;
     const ring = ringRef.current;
+    if (!dot || !ring) return;
 
-    // 🔹 QuickSetter for Performance (Better than gsap.to in mousemove)
     const xDotSetter = gsap.quickSetter(dot, "x", "px");
     const yDotSetter = gsap.quickSetter(dot, "y", "px");
     const xRingSetter = gsap.quickSetter(ring, "x", "px");
@@ -19,12 +22,9 @@ export default function CustomCursor() {
 
     const moveCursor = (e) => {
       const { clientX, clientY } = e;
-      
-      // Dot - Instant follow
       xDotSetter(clientX);
       yDotSetter(clientY);
-
-      // Ring - Smooth follow with Lag
+      
       gsap.to(ring, {
         x: clientX,
         y: clientY,
@@ -37,11 +37,11 @@ export default function CustomCursor() {
       setIsHovering(true);
       gsap.to(ring, { 
         scale: 2.5, 
-        backgroundColor: "rgba(153, 120, 25, 0.1)", // Light Gold tint
+        backgroundColor: "rgba(153, 120, 25, 0.1)",
         borderColor: "transparent",
         duration: 0.3 
       });
-      gsap.to(dot, { scale: 0, duration: 0.2 }); // Dot chupa dein
+      gsap.to(dot, { scale: 0, duration: 0.2 });
     };
 
     const onMouseLeave = () => {
@@ -57,7 +57,7 @@ export default function CustomCursor() {
 
     window.addEventListener("mousemove", moveCursor);
 
-    // Target links, buttons and our custom 'View' areas
+    // Interactive Elements setup
     const interactiveElements = document.querySelectorAll('a, button, .cursor-pointer, .project-card');
     interactiveElements.forEach((el) => {
       el.addEventListener("mouseenter", onMouseEnter);
@@ -75,19 +75,21 @@ export default function CustomCursor() {
 
   return (
     <>
+      {/* 🔹 hidden lg:block se ye sirf desktop par dikhega */}
+      
       {/* Small Core Dot */}
       <div
         ref={dotRef}
-        className="fixed top-0 left-0 w-2 h-2 bg-[#997819] rounded-full pointer-events-none z-[10000] "
+        className="hidden lg:block fixed top-0 left-0 w-2 h-2 bg-[#997819] rounded-full pointer-events-none z-[10000]"
         style={{ transform: "translate(-50%, -50%)" }}
       />
+      
       {/* Main Interactive Ring */}
       <div
         ref={ringRef}
-        className="fixed top-0 left-0 w-7 h-7 border-2 border-[#997819] rounded-full pointer-events-none z-[9999] flex items-center justify-center "
+        className="hidden lg:block fixed top-0 left-0 w-7 h-7 border-2 border-[#997819] rounded-full pointer-events-none z-[9999] flex items-center justify-center"
         style={{ transform: "translate(-50%, -50%)" }}
       >
-        {/* Ring ke andar agar text dikhana ho (e.g. View) */}
         {isHovering && (
            <span className="text-[4px] font-black text-white uppercase tracking-tighter">View</span>
         )}
