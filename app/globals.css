@@ -52,6 +52,14 @@ html, body {
   font-weight: 800 !important;
   text-transform: none !important;
 }
+.blog-content-flow h3 {
+  font-size: 1.4rem !important; /* H2 se thoda chota */
+  color: #12066a !important;    /* H2 wala colour */
+  font-weight: 700 !important;  /* Bold */
+  margin-top: 2rem !important;
+  margin-bottom: 1rem !important;
+  line-height: 1.3 !important;
+}
 
 .blog-content-flow p {
   font-size: 1.15rem !important;
