@@ -93,7 +93,7 @@ export default function Footer() {
                 <li key={item}>
                   <Link
                     href={item === "Home" ? "/" : `/${item.toLowerCase().replace(" ", "-")}`} // 👈 Home fix
-                    className="text-blue-100/70 hover:text-white hover:pl-2 transition-all duration-300 flex items-center gap-2"
+                    className="text-blue-100/70 hover:text-white hover:pl-2 transition-all duration-300  flex items-center gap-2"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-[#EAB308]" />{" "}
                     {item}

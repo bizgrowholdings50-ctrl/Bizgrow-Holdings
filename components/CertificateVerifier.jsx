@@ -16,59 +16,294 @@ import Link from "next/link";
 
 // Data Registry yahan rakhein
 const certificateData = [
-  { id: "BG-06022401", name: "Kamran Khan", company: "JK 724 Security Services", trainer: "Ms. Sabahat Haider", date: "05/02/2024", status: "Sent" },
-  { id: "BG-06022402", name: "Jalal Jalal", company: "JK 724 Security Services", trainer: "Mr. Qasim Moavia", date: "N/A", status: "Sent" },
-  { id: "BG-06022403", name: "Elena Naydenova", company: "Elma Security", trainer: "Ms. Sabahat Haider", date: "05/02/2024", status: "Sent" },
-  { id: "BG-06022404", name: "Mohammad Sardar", company: "United FM Limited", trainer: "Ms. Sabahat Haider", date: "03/07/2023", status: "Sent" },
-  { id: "BG-06022405", name: "Amna Yousaf", company: "United FM Limited", trainer: "Ms. Sabahat Haider", date: "N/A", status: "Sent" },
-  { id: "BG-06022406", name: "Ch. M. Mudassar Bashir", company: "Charles Security Group Ltd", trainer: "Ms. Sabahat Haider", date: "01/05/2024", status: "Sent" },
-  { id: "BG-06022407", name: "Neelam Iqbal", company: "Charles Security Group Ltd", trainer: "Ms. Sabahat Haider", date: "N/A", status: "Sent" },
-  { id: "BG-06022408", name: "M. Zakria", company: "ZSS Facility Ltd", trainer: "Ms. Sabahat Haider", date: "10/03/2023", status: "Sent" },
-  { id: "BG-06022409", name: "Shaheera Jannat", company: "Cerberus Security Services Ltd", trainer: "Ms. Sabahat Haider", date: "15/03/2024", status: "Sent" },
-  { id: "BG-06022410", name: "Rizwan Ali", company: "Cerberus Security Services Ltd", trainer: "Ms. Sabahat Haider", date: "N/A", status: "Sent" },
-  { id: "BG-06022411", name: "Javeria", company: "Boro Protect Security Ltd", trainer: "Ms. Sabahat Haider", date: "10/04/2024", status: "Sent" },
-  { id: "BG-06022412", name: "Zakria Shinwari", company: "Boro Protect Security Ltd", trainer: "Ms. Sabahat Haider", date: "N/A", status: "Sent" },
-  { id: "BG-06022413", name: "Dianne Calafatis", company: "BizGrow Holdings Ltd", trainer: "None", date: "08/07/2022", status: "Sent" },
-  { id: "BG-06022414", name: "Junaid Asim", company: "Grizzlys Security Services Ltd", trainer: "Ms. Sabahat Haider", date: "05/12/2022", status: "Sent" },
-  { id: "BG-06022415", name: "Aamir Ilyas Awan", company: "Apex Security & K9 Limited", trainer: "Ms. Sabahat Haider", date: "10/05/2023", status: "Sent" },
-  { id: "BG-06022416", name: "Mustafa-Ur-Rehman", company: "Apex Security & K9 Limited", trainer: "Ms. Sabahat Haider", date: "N/A", status: "Sent" },
-  { id: "BG-06022417", name: "M. Saqib", company: "Apex Secure Ltd", trainer: "Ms. Sabahat Haider", date: "12/06/2023", status: "Sent" },
-  { id: "BG-06022418", name: "Saad Ahmad", company: "Apex Secure Ltd", trainer: "Ms. Sabahat Haider", date: "N/A", status: "Sent" },
-  { id: "BG-06022419", name: "Shehzad Nazir", company: "Progressive Group Services Ltd", trainer: "Ms. Sabahat Haider", date: "05/01/2026", status: "Sent" },
-  { id: "BG-06022420", name: "Saleem Raza Malik", company: "Comprehensive Service Ltd", trainer: "Dr. Javed Iqbal", date: "03/09/2024", status: "Verified" },
-  { id: "BG-06022421", name: "Mohammad Abdul Azhar", company: "FBS Security Limited", trainer: "Mr. Muhammad Qasim", date: "05/06/2024", status: "Sent" },
-  { id: "BG-06022422", name: "Muhammad Khalid Farooq", company: "Paramount BPO Ltd", trainer: "Mr. Muhammad Qasim", date: "12/06/2024", status: "Training Certificate" },
-  { id: "BG-06022423", name: "Muhammad Sabeeh", company: "Pristine Facilities and Security Ltd", trainer: "Mr. Muhammad Qasim", date: "13/11/2024", status: "Training Certificate" },
-  { id: "BG-06022424", name: "Muhammad Bilal Ansari", company: "MBS Security FM Ltd", trainer: "Mr. Muhammad Qasim", date: "13/11/2024", status: "Training Certificate" },
-  { id: "BG-06022425", name: "MUHAMMAD UBAIR KHAN", company: "Pacific Business Solutions", trainer: "Mr. Muhammad Qasim", date: "07/10/2024", status: "Training Certificate" },
-  { id: "BG-06022426", name: "Jahanzeb Ehtesham", company: "Pacific Business Solutions", trainer: "Mr. Muhammad Qasim", date: "12/11/2024", status: "Training Certificate" },
-  { id: "BG-06022427", name: "Waseem Akram", company: "Dexter Multiservices Ltd", trainer: "Mr. Muhammad Qasim", date: "15/11/2024", status: "Training Certificate" },
-  { id: "BG-06022428", name: "Keyur KACHHADIYA", company: "Immaculate & Co. Ltd", trainer: "Mr. Muhammad Qasim", date: "02/01/2025", status: "Training Completed" },
-  { id: "BG-06022429", name: "Gulfam Arshad", company: "Bold Security Solutions Ltd", trainer: "Mr. Muhammad Qasim", date: "15/11/2024", status: "Training Completed" },
-  { id: "BG-06022430", name: "Muhammad Adnan Gondal", company: "AR FM Ltd", trainer: "Mr. Muhammad Qasim", date: "09/10/2024", status: "Training Completed" },
-  { id: "BG-06022431", name: "Ishtiaq Hassan", company: "Pearl Security Ltd", trainer: "Mr. Muhammad Qasim", date: "05/07/2024", status: "Training Completed" },
-  { id: "BG-06022432", name: "Asim Shah", company: "Zee Security Solutions Ltd", trainer: "Mr. Muhammad Qasim", date: "01/06/2023", status: "Training Completed" },
-  { id: "BG-06022433", name: "Muhammad Tahseen", company: "We Secure Ltd", trainer: "Mr. Muhammad Qasim", date: "28/08/2024", status: "Training Certificate" },
-  { id: "BG-06022434", name: "Roxana Popa", company: "We Secure Ltd", trainer: "Mr. Muhammad Qasim", date: "07/12/2024", status: "Training Certificate" },
-  { id: "BG-06022435", name: "Hamza Tahir", company: "We Secure Ltd", trainer: "Mr. Muhammad Qasim", date: "20/03/2025", status: "Training Certificate" },
-  { id: "BG-06022437", name: "Muhammad Sajid", company: "Smart Guarding Services Ltd (SGS)", trainer: "N/A", date: "02/06/2025", status: "Training Completed" },
-  { id: "BG-06022438", name: "Rameez Ali Amjad", company: "ARFM Ltd", trainer: "Mr. Muhammad Qasim", date: "N/A", status: "Pending" },
-  { id: "BG-06022439", name: "Jagmohan Sharma", company: "Akita Security Services Ltd", trainer: "N/A", date: "N/A", status: "Pending" },
-  { id: "BG-06022440", name: "Haroon Hafeez", company: "Rawal Veritas/Cava Guards", trainer: "N/A", date: "N/A", status: "Pending" },
-  { id: "BG-06022441", name: "Abdul Sattar Abbasi", company: "Guardsman Security Services Ltd", trainer: "N/A", date: "N/A", status: "Pending" },
-  { id: "BG-06022442", name: "Dr Rizwan Tariq", company: "Newland Security Ltd", trainer: "N/A", date: "26/08/2025", status: "Pending" },
-  { id: "BG-06022443", name: "Muhammad Moeez Adnan", company: "Protecto K9 Security Ltd", trainer: "N/A", date: "07/02/2025", status: "Pending" },
-  { id: "BG-06022444", name: "Muhammad Usman", company: "Brites Security Ltd", trainer: "N/A", date: "25/05/2024", status: "Pending" },
-  { id: "BG-06022445", name: "DENZIL FERNANDES", company: "Jehovah Jireh Security Services Ltd", trainer: "N/A", date: "17/09/2025", status: "Pending" },
-  { id: "BG-06022446", name: "Abbas Hussain Kamdar", company: "Guarding24Seven Services Ltd", trainer: "N/A", date: "17/11/2023", status: "Pending" },
-  { id: "BG-06022447", name: "Magina Charith Madura Mirando", company: "Comprehensive Services Ltd", trainer: "N/A", date: "25/01/2024", status: "Pending" },
-  { id: "BG-06022448", name: "COLLINS EDDIE SYLVERKEN", company: "BNK Protection Services Ltd", trainer: "N/A", date: "25/06/2025", status: "Pending" },
-  { id: "BG-06022449", name: "Alex Lepadatu", company: "Gr8 Guard", trainer: "N/A", date: "15/05/2024", status: "Pending" },
-  { id: "BG-06022450", name: "Naveed Farooq", company: "White Collar Security", trainer: "N/A", date: "08/12/2025", status: "Pending" },
-  { id: "BG-06022451", name: "Fayazuddin Mohammed", company: "Century 4 Security", trainer: "N/A", date: "05/03/2024", status: "Pending" },
-  { id: "BG-06022452", name: "Mohammed OTENG", company: "Security Jobs & Services", trainer: "N/A", date: "N/A", status: "Pending" },
-  { id: "BG-06022453", name: "Umair Akhtar", company: "Protech Team Ltd", trainer: "N/A", date: "N/A", status: "Pending" },
-  { id: "BG-06022454", name: "Atif Sarfraz", company: "Watchguard Security Ltd", trainer: "N/A", date: "05/09/2025", status: "Pending" }
+  {
+    id: "BG-06022401",
+    name: "Kamran Khan",
+    company: "JK 724 Security Services",
+    trainer: "Ms. Sabahat Haider",
+    date: "05/02/2024",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022402",
+    name: "Jalal Jalal",
+    company: "JK 724 Security Services",
+    trainer: "Mr. Qasim Moavia",
+    date: "N/A",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022403",
+    name: "Elena Naydenova",
+    company: "Elma Security",
+    trainer: "Ms. Sabahat Haider",
+    date: "05/02/2024",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022404",
+    name: "Mohammad Sardar",
+    company: "United FM Limited",
+    trainer: "Ms. Sabahat Haider",
+    date: "03/07/2023",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022405",
+    name: "Amna Yousaf",
+    company: "United FM Limited",
+    trainer: "Ms. Sabahat Haider",
+    date: "N/A",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022406",
+    name: "Ch. M. Mudassar Bashir",
+    company: "Charles Security Group Ltd",
+    trainer: "Ms. Sabahat Haider",
+    date: "01/05/2024",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022407",
+    name: "Neelam Iqbal",
+    company: "Charles Security Group Ltd",
+    trainer: "Ms. Sabahat Haider",
+    date: "N/A",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022408",
+    name: "M. Zakria",
+    company: "ZSS Facility Ltd",
+    trainer: "Ms. Sabahat Haider",
+    date: "10/03/2023",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022409",
+    name: "Shaheera Jannat",
+    company: "Cerberus Security Services Ltd",
+    trainer: "Ms. Sabahat Haider",
+    date: "15/03/2024",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022410",
+    name: "Rizwan Ali",
+    company: "Cerberus Security Services Ltd",
+    trainer: "Ms. Sabahat Haider",
+    date: "N/A",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022411",
+    name: "Javeria",
+    company: "Boro Protect Security Ltd",
+    trainer: "Ms. Sabahat Haider",
+    date: "10/04/2024",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022412",
+    name: "Zakria Shinwari",
+    company: "Boro Protect Security Ltd",
+    trainer: "Ms. Sabahat Haider",
+    date: "N/A",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022413",
+    name: "Dianne Calafatis",
+    company: "BizGrow Holdings Ltd",
+    trainer: "None",
+    date: "08/07/2022",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022414",
+    name: "Junaid Asim",
+    company: "Grizzlys Security Services Ltd",
+    trainer: "Ms. Sabahat Haider",
+    date: "05/12/2022",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022415",
+    name: "Aamir Ilyas Awan",
+    company: "Apex Security & K9 Limited",
+    trainer: "Ms. Sabahat Haider",
+    date: "10/05/2023",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022416",
+    name: "Mustafa-Ur-Rehman",
+    company: "Apex Security & K9 Limited",
+    trainer: "Ms. Sabahat Haider",
+    date: "N/A",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022417",
+    name: "M. Saqib",
+    company: "Apex Secure Ltd",
+    trainer: "Ms. Sabahat Haider",
+    date: "12/06/2023",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022418",
+    name: "Saad Ahmad",
+    company: "Apex Secure Ltd",
+    trainer: "Ms. Sabahat Haider",
+    date: "N/A",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022419",
+    name: "Shehzad Nazir",
+    company: "Progressive Group Services Ltd",
+    trainer: "Ms. Sabahat Haider",
+    date: "05/01/2026",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022420",
+    name: "Saleem Raza Malik",
+    company: "Comprehensive Service Ltd",
+    trainer: "Dr. Javed Iqbal",
+    date: "03/09/2024",
+    status: "Verified",
+  },
+  {
+    id: "BG-06022421",
+    name: "Mohammad Abdul Azhar",
+    company: "FBS Security Limited",
+    trainer: "Mr. Muhammad Qasim",
+    date: "05/06/2024",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022422",
+    name: "Muhammad Khalid Farooq",
+    company: "Paramount BPO Ltd",
+    trainer: "Mr. Muhammad Qasim",
+    date: "12/06/2024",
+    status: "Training Certificate",
+  },
+  {
+    id: "BG-06022423",
+    name: "Muhammad Sabeeh",
+    company: "Pristine Facilities and Security Ltd",
+    trainer: "Mr. Muhammad Qasim",
+    date: "13/11/2024",
+    status: "Training Certificate",
+  },
+  {
+    id: "BG-06022424",
+    name: "Muhammad Bilal Ansari",
+    company: "MBS Security FM Ltd",
+    trainer: "Mr. Muhammad Qasim",
+    date: "13/11/2024",
+    status: "Training Certificate",
+  },
+  {
+    id: "BG-06022425",
+    name: "MUHAMMAD UBAIR KHAN",
+    company: "Pacific Business Solutions",
+    trainer: "Mr. Muhammad Qasim",
+    date: "07/10/2024",
+    status: "Training Certificate",
+  },
+  {
+    id: "BG-06022426",
+    name: "Jahanzeb Ehtesham",
+    company: "Pacific Business Solutions",
+    trainer: "Mr. Muhammad Qasim",
+    date: "12/11/2024",
+    status: "Training Certificate",
+  },
+  {
+    id: "BG-06022427",
+    name: "Waseem Akram",
+    company: "Dexter Multiservices Ltd",
+    trainer: "Mr. Muhammad Qasim",
+    date: "15/11/2024",
+    status: "Training Certificate",
+  },
+  {
+    id: "BG-06022428",
+    name: "Keyur KACHHADIYA",
+    company: "Immaculate & Co. Ltd",
+    trainer: "Mr. Muhammad Qasim",
+    date: "02/01/2025",
+    status: "Training Completed",
+  },
+  {
+    id: "BG-06022429",
+    name: "Gulfam Arshad",
+    company: "Bold Security Solutions Ltd",
+    trainer: "Mr. Muhammad Qasim",
+    date: "15/11/2024",
+    status: "Training Completed",
+  },
+  {
+    id: "BG-06022430",
+    name: "Muhammad Adnan Gondal",
+    company: "AR FM Ltd",
+    trainer: "Mr. Muhammad Qasim",
+    date: "09/10/2024",
+    status: "Training Completed",
+  },
+  {
+    id: "BG-06022431",
+    name: "Ishtiaq Hassan",
+    company: "Pearl Security Ltd",
+    trainer: "Mr. Muhammad Qasim",
+    date: "05/07/2024",
+    status: "Training Completed",
+  },
+  {
+    id: "BG-06022432",
+    name: "Asim Shah",
+    company: "Zee Security Solutions Ltd",
+    trainer: "Mr. Muhammad Qasim",
+    date: "01/06/2023",
+    status: "Training Completed",
+  },
+  {
+    id: "BG-06022433",
+    name: "Muhammad Tahseen",
+    company: "We Secure Ltd",
+    trainer: "Mr. Muhammad Qasim",
+    date: "28/08/2024",
+    status: "Training Certificate",
+  },
+  {
+    id: "BG-06022434",
+    name: "Roxana Popa",
+    company: "We Secure Ltd",
+    trainer: "Mr. Muhammad Qasim",
+    date: "07/12/2024",
+    status: "Training Certificate",
+  },
+  {
+    id: "BG-06022435",
+    name: "Hamza Tahir",
+    company: "We Secure Ltd",
+    trainer: "Mr. Muhammad Qasim",
+    date: "20/03/2025",
+    status: "Training Certificate",
+  },
+  {
+    id: "BG-06022437",
+    name: "Muhammad Sajid",
+    company: "Smart Guarding Services Ltd (SGS)",
+    trainer: "N/A",
+    date: "02/06/2025",
+    status: "Training Completed",
+  },
 ];
 
 export default function CertificateVerifier() {
@@ -206,6 +441,7 @@ export default function CertificateVerifier() {
                   <div className="absolute right-0 top-0 text-9xl font-black text-white/[0.03] uppercase pointer-events-none">
                     VALID
                   </div>
+
                   <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-12">
                     <div>
                       <p className="text-[#997819] text-[10px] font-black uppercase tracking-widest">
@@ -213,24 +449,28 @@ export default function CertificateVerifier() {
                       </p>
                       <p className="text-xl font-bold mt-1">{result.name}</p>
                     </div>
+
                     <div>
                       <p className="text-[#997819] text-[10px] font-black uppercase tracking-widest">
                         Verification Status
                       </p>
                       <p className="text-xl font-bold mt-1 flex items-center gap-2">
-                        <CheckCircle2 className="text-green-400" size={20} />{" "}
-                        {result.status}
+                        <CheckCircle2 className="text-green-400" size={20} />
+                        Approved
                       </p>
                     </div>
+
                     <div className="md:col-span-2 h-px bg-white/10 w-full" />
+
                     <div>
                       <p className="text-[#997819] text-[10px] font-black uppercase tracking-widest">
-                        Organization
+                        Certificate Number
                       </p>
                       <p className="text-sm font-bold mt-1 opacity-80">
-                        {result.company}
+                        {result.id}
                       </p>
                     </div>
+
                     <div>
                       <p className="text-[#997819] text-[10px] font-black uppercase tracking-widest">
                         Issue Date
