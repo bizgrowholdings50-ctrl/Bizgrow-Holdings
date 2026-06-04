@@ -136,7 +136,7 @@ export default function Navbar() {
 
   return (
     // Nav tag ki classes mein ye change karein
-    <nav className="fixed top-4 inset-x-0 mx-2 md:mx-auto rounded-2xl max-w-7xl z-[100] bg-white backdrop-blur-md border border-[#12066a] shadow-lg">
+    <nav className="fixed top-4 inset-x-0 mx-2 md:mx-auto rounded-4xl max-w-7xl z-[100] bg-white backdrop-blur-md border border-[#12066a] shadow-lg">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex py-3 items-center justify-between">
           <Link href="/">
