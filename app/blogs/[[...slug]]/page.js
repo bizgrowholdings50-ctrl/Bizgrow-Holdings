@@ -28,6 +28,19 @@ async function getData(page = 1, catSlug = null) {
   };
 }
 
+const getPaginationRange = (current, total) => {
+  if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1);
+
+  let start = Math.max(1, current - 3); // 3 numbers left
+  let end = Math.min(total, start + 6); // Total 7 items (start + 6)
+
+  if (end - start < 6) {
+    start = Math.max(1, total - 6);
+  }
+
+  return Array.from({ length: end - start + 1 }, (_, i) => start + i);
+};
+
 export const metadata = {
   title: "BizGrow Blogs | Compliance, Certification & Growth Tips",
   description: "Learn how to achieve compliance, secure certifications & scale your business with expert advice from BizGrow Holdings.",
@@ -91,17 +104,45 @@ export default async function BlogPage({ params }) {
           })}
         </div>
 
+       {/* Enhanced Pagination */}
         {totalPages > 1 && (
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-6 mt-16 pt-10 border-t border-gray-100">
-            <div className="flex flex-wrap justify-center gap-2">
-              {[...Array(totalPages)].map((_, i) => (
-                <Link key={i} href={getPageLink(i + 1)} className={`w-10 h-10 flex items-center justify-center rounded-full text-xs font-bold transition-all ${currentPage === i + 1 ? "bg-[#12066a] text-white shadow-lg" : "text-[#12066a]/50 hover:bg-gray-100"}`}>{i + 1}</Link>
+          <nav className="flex flex-col sm:flex-row justify-center items-center gap-8 mt-20 pt-10 border-t border-gray-100 dark:border-white/5">
+            {/* Previous Page Button (Sirf tab jab page > 1 ho) */}
+            {currentPage > 1 && (
+              <Link
+                href={getPageLink(currentPage - 1)}
+                className="px-8 py-4 rounded-full border-2 border-gray-200 dark:border-white/10 text-gray-500 font-black text-xs uppercase tracking-widest hover:border-[#997819] hover:text-[#997819] transition-all duration-300"
+              >
+                Previous
+              </Link>
+            )}
+
+            <div className="flex flex-wrap justify-center gap-3 items-center">
+              {getPaginationRange(currentPage, totalPages).map((page) => (
+                <Link
+                  key={page}
+                  href={getPageLink(page)}
+                  className={`w-11 h-11 flex items-center justify-center rounded-full text-sm font-black transition-all ${
+                    currentPage === page
+                      ? "bg-[#997819] text-white shadow-lg shadow-[#997819]/30"
+                      : "text-gray-400 dark:text-gray-500 hover:bg-gray-100 dark:hover:bg-white/5"
+                  }`}
+                >
+                  {page}
+                </Link>
               ))}
             </div>
+
+            {/* Next Page Button (Sirf tab jab page < totalPages ho) */}
             {currentPage < totalPages && (
-              <Link href={getPageLink(currentPage + 1)} className="px-12 py-3 rounded-full border-2 border-[#997819] text-[#12066a] font-black text-xs uppercase tracking-widest hover:bg-[#997819] hover:text-white transition-all shadow-sm">NEXT</Link>
+              <Link
+                href={getPageLink(currentPage + 1)}
+                className="px-8 py-4 rounded-full border-2 border-[#997819] text-[#997819] font-black text-xs uppercase tracking-widest hover:bg-[#997819] hover:text-white transition-all duration-300 shadow-sm"
+              >
+                Next Page
+              </Link>
             )}
-          </div>
+          </nav>
         )}
       </div>
     </section>
