@@ -84,8 +84,8 @@ const CHASSchemePage = () => {
       {/* 🔹 2. BEYOND COMPLIANCE (Asymmetric Layout) */}
       <section className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row gap-16 items-start">
-            <div className="md:w-1/3 sticky top-32">
+          <div className="flex flex-col lg:flex-row gap-16 items-start">
+            <div className="lg:w-1/3 sticky top-32">
               <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-none uppercase">
                 The <span className="text-[#997819]">Safety</span> <br />{" "}
                 Standard.
@@ -104,7 +104,7 @@ const CHASSchemePage = () => {
               </p>
             </div>
 
-            <div className="md:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-6">
               {[
                 {
                   t: "SSIP Recognition",
@@ -287,7 +287,7 @@ const CHASSchemePage = () => {
       {/* 🔹 5. CHAS SUBMISSION PROCESS */}
       <section className="py-24 bg-zinc-50">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-4 gap-4">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               {
                 n: "01",

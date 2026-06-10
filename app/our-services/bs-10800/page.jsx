@@ -56,7 +56,7 @@ const BS10800Page = () => {
             </FadeIn>
 
             <FadeIn direction="right" duration="0.6">
-              <h1 className="text-5xl md:text-7xl font-black text-white mt-6 leading-[1.1] tracking-tighter uppercase">
+              <h1 className="text-3xl md:text-7xl font-black text-white mt-6 leading-[1.1] tracking-tighter uppercase">
                 BS 10800 Support for UK
                 <span className="text-[#997819]"> CONSULTANCY.</span>
               </h1>
@@ -89,7 +89,7 @@ const BS10800Page = () => {
       {/* 🔹 2. UK COMPLIANCE AUDIT (Grid Layout) */}
       <section className="py-24 bg-zinc-50">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-5xl md:text-7xl font-black text-[#12066a] text-center tracking-tighter uppercase ">
+          <h2 className="text-4xl md:text-7xl font-black text-[#12066a] text-center tracking-tighter uppercase ">
             UK SECURITY <br />
             <span className="text-[#997819]">COMPLIANCE.</span>
           </h2>
@@ -181,7 +181,7 @@ const BS10800Page = () => {
       </section>
 
       {/* 🔹 3. WHY BS 10800 MATTERS (Strategic Benefits) */}
-      <section className="py-32 bg-white">
+      <section className="py-14 lg:py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row gap-20 items-center">
           <div className="md:w-1/2">
             <h3 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter uppercase ">
@@ -245,7 +245,7 @@ const BS10800Page = () => {
       </section>
 
       {/* 🔹 4. BS 10800 VS ACS (Competitive Comparison) */}
-      <section className="py-24 bg-[#12066a] text-white relative overflow-hidden">
+      <section className="py-14 bg-[#12066a] text-white relative overflow-hidden">
         <div className="absolute inset-0 " />
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <h2 className="text-4xl md:text-6xl text-center font-black tracking-tighter uppercase mb-12">
@@ -281,7 +281,7 @@ const BS10800Page = () => {
       <section className="py-32 bg-zinc-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
-            <h2 className="text-5xl  font-black text-[#12066a] tracking-tighter uppercase leading-none">
+            <h2 className="text-4xl lg:text-5xl  font-black text-[#12066a] tracking-tighter uppercase leading-none">
               How Our BS 10800{" "}
               <span className="text-[#997819]">Support Works?</span>
             </h2>
@@ -342,7 +342,7 @@ const BS10800Page = () => {
       {/* 🔹 6. FAQs (SEO Boost) */}
       <section className="py-22 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-5xl md:text-6xl font-black text-[#12066a] tracking-tighter uppercase mb-20 text-center">
+          <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter uppercase mb-20 text-center">
             COMMON <span className="text-[#997819]">QUESTIONS.</span>
           </h2>
           <div className="max-w-4xl mx-auto space-y-4">
@@ -418,10 +418,10 @@ const BS10800Page = () => {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-6 relative z-10 ">
                 <Link
                   href="/contact"
-                  className="relative group/btn overflow-hidden inline-flex items-center justify-center gap-3 bg-[#997819] text-white px-16 py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-xs transition-all duration-700 shadow-2xl active:scale-95"
+                  className="relative group/btn overflow-hidden inline-flex items-center justify-center gap-3 bg-[#997819] text-white px-16 py-6 rounded-4xl font-black uppercase tracking-[0.3em] text-xs transition-all duration-700 shadow-2xl active:scale-95"
                 >
                   {/* Layer 1: Text & Icon (Top Layer) */}
-                  <span className="relative z-40 flex items-center gap-3 transition-colors duration-700 group-hover/btn:text-[#12066a]">
+                  <span className="relative z-40 flex items-center gap-3  transition-colors duration-700 group-hover/btn:text-[#12066a]">
                     Get Expert Consultancy
                     <ArrowRight className="group-hover/btn:translate-x-2 transition-transform duration-500" />
                   </span>

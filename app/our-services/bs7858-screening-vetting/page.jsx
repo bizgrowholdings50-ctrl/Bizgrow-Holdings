@@ -99,7 +99,7 @@ const BS7858Page = () => {
       {/* 🔹 2. THE VETTING FRAMEWORK (Core Pillars) */}
       <section className="py-24 bg-zinc-50">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-5xl md:text-7xl font-black  text-[#12066a] tracking-tighter uppercase mb-6 leading-none text-center ">
+          <h2 className="text-5xl md:text-6xl font-black  text-[#12066a] tracking-tighter uppercase mb-6 leading-none text-center ">
             VETTING
             <span className="text-[#997819]"> PROTOCOL.</span>
           </h2>
@@ -177,9 +177,9 @@ const BS7858Page = () => {
 
       {/* 🔹 3. WHY BS 7858 MATTERS (Strategic Value) */}
       <section className="py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row gap-20 items-center">
-          <div className="md:w-1/2">
-            <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter uppercase mb-10 leading-tight">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row gap-20 items-center">
+          <div className="lg:w-1/2">
+            <h2 className="text-4xl md:text-5xl font-black text-[#12066a] tracking-tighter uppercase mb-10 leading-tight">
               Benefits of <br />{" "}
               <span className="text-[#997819]">
                 BS7858 Screening and Vetting
@@ -245,7 +245,7 @@ const BS7858Page = () => {
               ))}
             </div>
           </div>
-          <div className="md:w-1/2 relative">
+          <div className="lg:w-1/2 relative">
             <div className="rounded-[4rem] overflow-hidden border-[15px] border-zinc-50 shadow-2xl">
               <Image
                 src="/vetting-check.jpg"
@@ -412,7 +412,7 @@ const BS7858Page = () => {
       <section className="py-32 bg-[#12066a]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
-            <h2 className="text-6xl font-black text-white tracking-tighter uppercase leading-none text-center">
+            <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter uppercase leading-none text-center">
               SCREENING <span className="text-[#997819]">PHASES.</span>
             </h2>
             <p className="text-white my-6 md:mx-28">
@@ -421,7 +421,7 @@ const BS7858Page = () => {
               security-sensitive roles.
             </p>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
                 n: "01",
@@ -523,7 +523,7 @@ const BS7858Page = () => {
             </div>
 
             <div className="relative z-10 p-12 md:p-24 text-center flex flex-col items-center">
-              <h2 className="text-4xl md:text-8xl font-black text-white tracking-tighter mb-10 uppercase leading-[0.9]">
+              <h2 className="text-4xl md:text-5xl lg:text-8xl font-black text-white tracking-tighter mb-10 uppercase leading-[0.9]">
                 GET YOUR STAFF <br />
                 <span className="text-[#997819]">BS 7858 COMPLIANT.</span>
               </h2>

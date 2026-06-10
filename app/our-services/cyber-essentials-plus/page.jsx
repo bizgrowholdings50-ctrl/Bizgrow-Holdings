@@ -60,16 +60,22 @@ const CyberEssentialsPlusPage = () => {
             <FadeIn direction="right" duration="0.8">
               <p className="mt-10 text-blue-100/70 text-xl md:text-2xl max-w-2xl leading-relaxed font-medium italic">
                 "We help UK businesses prepare for Cyber Essentials Plus from
-                gap analysis and remediation to <Link href="https://bizgrow-holdings.com/our-services/internal-audit/" className="text-[#997819] font-bold">audit readiness</Link> and evidence
-                support."
+                gap analysis and remediation to{" "}
+                <Link
+                  href="https://bizgrow-holdings.com/our-services/internal-audit/"
+                  className="text-[#997819] font-bold"
+                >
+                  audit readiness
+                </Link>{" "}
+                and evidence support."
               </p>
             </FadeIn>
 
             <FadeIn direction="right" duration="1.0">
               <Link href="/contact-us">
-              <button className="relative z-10 bg-[#997819] text-white px-16 py-6 my-4 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-3xl">
-                Book a Consultation
-              </button>
+                <button className="relative z-10 bg-[#997819] text-white px-16 py-6 my-4 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-3xl">
+                  Book a Consultation
+                </button>
               </Link>
             </FadeIn>
           </div>
@@ -79,8 +85,8 @@ const CyberEssentialsPlusPage = () => {
       {/* 🔹 2. THE RIGOROUS AUDIT (Asymmetric Grid) */}
       <section className="py-22 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row gap-16 items-start">
-            <div className="md:w-1/3 sticky top-32">
+          <div className="flex flex-col lg:flex-row gap-16 items-start">
+            <div className="lg:w-1/3 sticky top-32">
               <h2 className="text-5xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-none uppercase">
                 WHY Cyber Essentials <br />
                 <span className="text-[#997819]">PLUS?</span>
@@ -94,7 +100,7 @@ const CyberEssentialsPlusPage = () => {
               </p>
             </div>
 
-            <div className="md:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-6">
               {[
                 {
                   t: "Verified Security",
@@ -103,7 +109,18 @@ const CyberEssentialsPlusPage = () => {
                 },
                 {
                   t: "Vulnerability Scanning",
-                  d: <><Link href="https://bizgrow-holdings.com/difference-between-internal-audit-and-external-audit/" className="text-[#997819] font-bold">Internal and external</Link> scans identify potential weaknesses that could expose your organisation to cyber threats.</>,
+                  d: (
+                    <>
+                      <Link
+                        href="https://bizgrow-holdings.com/difference-between-internal-audit-and-external-audit/"
+                        className="text-[#997819] font-bold"
+                      >
+                        Internal and external
+                      </Link>{" "}
+                      scans identify potential weaknesses that could expose your
+                      organisation to cyber threats.
+                    </>
+                  ),
                   icon: <Fingerprint />,
                 },
                 {
@@ -141,11 +158,11 @@ const CyberEssentialsPlusPage = () => {
         </div>
       </section>
 
-{/* 🔹 NEW SECTION: How to Become Certified (The Roadmap) */}
+      {/* 🔹 NEW SECTION: How to Become Certified (The Roadmap) */}
       <section className="py-22 bg-zinc-50 relative overflow-hidden">
         {/* Decorative Grid Pattern for Tech Feel */}
         <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-5 pointer-events-none" />
-        
+
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center mb-24">
             <FadeIn direction="up">
@@ -154,12 +171,14 @@ const CyberEssentialsPlusPage = () => {
               </span>
               <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-none uppercase ">
                 How to Become <br />
-                <span className="text-[#997819] not-italic">Cyber Essentials Plus Certified.</span>
+                <span className="text-[#997819] not-italic">
+                  Cyber Essentials Plus Certified.
+                </span>
               </h2>
             </FadeIn>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {[
               {
                 step: "Step 1",
@@ -184,21 +203,32 @@ const CyberEssentialsPlusPage = () => {
               {
                 step: "Step 5",
                 title: "Annual Renewal",
-                desc: <>Review and renew annually to maintain <Link href="https://bizgrow-holdings.com/compliance-consultancies/" className="text-[#997819] font-bold">compliance</Link> and ensure ongoing cybersecurity assurance.</>,
+                desc: (
+                  <>
+                    Review and renew annually to maintain{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/compliance-consultancies/"
+                      className="text-[#997819] font-bold"
+                    >
+                      compliance
+                    </Link>{" "}
+                    and ensure ongoing cybersecurity assurance.
+                  </>
+                ),
               },
             ].map((item, i) => (
               <FadeIn key={i} direction="up" delay={i * 0.1}>
                 <div className="relative group">
                   {/* Step Number with Glow Effect */}
                   <div className="flex flex-col h-full bg-white p-8 rounded-[2.5rem] border border-zinc-200 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500">
-                    <div className="w-12 h-12 rounded-xl bg-[#12066a] text-[#997819] flex items-center justify-center font-black text-xs mb-6 group-hover:bg-[#997819] group-hover:text-white transition-colors duration-500">
+                    <div className="w-12 h-12 rounded-xl bg-[#12066a] text-white flex items-center justify-center font-black text-xs mb-6 group-hover:bg-[#997819] group-hover:text-white transition-colors duration-500">
                       {item.step.split(" ")[1]}
                     </div>
-                    
+
                     <h3 className="text-lg font-black text-[#12066a] uppercase tracking-tight mb-4 leading-tight min-h-[50px]">
                       {item.title}
                     </h3>
-                    
+
                     <p className="text-zinc-500 text-xs font-medium leading-relaxed italic">
                       {item.desc}
                     </p>
@@ -219,8 +249,8 @@ const CyberEssentialsPlusPage = () => {
       <section className="py-22 bg-zinc-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-16">
-            <h2 className="text-4xl md:text-7xl font-black text-[#12066a] tracking-normal uppercase">
-              Benefits of <span className="text-[#997819]">Cyber</span> 
+            <h2 className="text-4xl md:text-5xl  font-black text-[#12066a] tracking-normal uppercase">
+              Benefits of <span className="text-[#997819]">Cyber</span>
               <span className="text-[#997819]"> Essentials Plus</span>{" "}
               Certification
             </h2>
@@ -260,7 +290,7 @@ const CyberEssentialsPlusPage = () => {
       {/* 🔹 4. THE ROADMAP (Horizontal Journey) */}
       <section className="py-22 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-4xl md:text-7xl pb-10 text-center font-black text-[#12066a] tracking-normal uppercase">
+          <h2 className="text-4xl md:text-5xl pb-10 text-center font-black text-[#12066a] tracking-normal uppercase">
             Why Choose <span className="text-[#997819]">BizGrow Holdings?</span>
           </h2>
           <p className="text-center md:mx-48 pb-10">
@@ -268,7 +298,7 @@ const CyberEssentialsPlusPage = () => {
             ensuring a smooth and efficient process from preparation to
             approval.
           </p>
-          <div className="grid md:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
                 n: "01",
@@ -283,7 +313,19 @@ const CyberEssentialsPlusPage = () => {
               {
                 n: "03",
                 t: "Proven Client Trust: ",
-                d: <>Trusted by <Link href="https://bizgrow-holdings.com/top-security-companies-trusted-protection-for-every-business/" className="text-white font-bold ">UK security</Link> and contracting businesses for reliable advice and consistent results.</>,
+                d: (
+                  <>
+                    Trusted by{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/top-security-companies-trusted-protection-for-every-business/"
+                      className="text-white font-bold "
+                    >
+                      UK security
+                    </Link>{" "}
+                    and contracting businesses for reliable advice and
+                    consistent results.
+                  </>
+                ),
               },
               {
                 n: "04",
@@ -316,8 +358,8 @@ const CyberEssentialsPlusPage = () => {
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid md:grid-cols-2 gap-20 items-center">
             <div>
-              <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter mb-8 leading-[0.9] uppercase">
-                Strengthen Your <br />{" "}
+              <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter mb-8 leading-[0.9] uppercase">
+                Strengthen Your <br  className="hidden lg:block"/>{" "}
                 <span className="text-[#997819]">Cyber Security.</span>
               </h2>
               <p className="text-blue-100/60 font-medium text-lg italic mb-10 border-l-4 border-[#997819] pl-6">
@@ -364,7 +406,7 @@ const CyberEssentialsPlusPage = () => {
             {/* Background Pattern Fix Applied */}
             <div className="absolute inset-0 bg-[url('/cyber-plus-cta.jpg')] bg-no-repeat bg-cover bg-fixed bg-center opacity-50 pointer-events-none" />
 
-            <h2 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-none mb-3 uppercase relative z-10">
+            <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter leading-none mb-3 uppercase relative z-10">
               UPGRADE TO <br />{" "}
               <span className="text-[#997819]">Cyber Essentials Plus.</span>
             </h2>
@@ -372,18 +414,18 @@ const CyberEssentialsPlusPage = () => {
               Strengthen your organisation’s security posture, build client
               trust, and demonstrate verified cyber resilience.
             </p>
-          <Link 
-  href="/contact-us" 
-  className="relative group/btn overflow-hidden inline-flex items-center justify-center bg-[#997819] text-white md:px-16 px-8 py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-xs transition-all duration-500 shadow-3xl active:scale-95"
->
-  {/* Layer 1: Text jo animation ke upar rahega */}
-  <span className="relative z-40 transition-colors duration-500 group-hover/btn:text-[#12066a]">
-    Book Your Audit today
-  </span>
+            <Link
+              href="/contact-us"
+              className="relative group/btn overflow-hidden inline-flex items-center justify-center bg-[#997819] text-white md:px-16 px-8 py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-xs transition-all duration-500 shadow-3xl active:scale-95"
+            >
+              {/* Layer 1: Text jo animation ke upar rahega */}
+              <span className="relative z-40 transition-colors duration-500 group-hover/btn:text-[#12066a]">
+                Book Your Audit today
+              </span>
 
-  {/* Layer 2: White Background jo niche se slide hokar aayega */}
-  <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
-</Link>
+              {/* Layer 2: White Background jo niche se slide hokar aayega */}
+              <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
+            </Link>
           </div>
         </div>
       </section>
