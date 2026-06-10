@@ -136,7 +136,7 @@ export default function Navbar() {
 
   return (
     
-    <nav className="fixed top-4 inset-x-0 mx-2 md:mx-auto rounded-4xl max-w-7xl z-[100] bg-white backdrop-blur-md border border-[#12066a] shadow-lg">
+    <nav className="fixed top-4 inset-x-0 mx-4 xl:mx-auto rounded-4xl max-w-7xl z-[100] bg-white backdrop-blur-md border border-[#12066a] shadow-lg">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex py-3 items-center justify-between">
           <Link href="/">
@@ -151,7 +151,7 @@ export default function Navbar() {
           </Link>
 
           {/* DESKTOP MENU */}
-          <div className="hidden lg:flex items-center gap-10 text-sm font-semibold text-black">
+          <div className="hidden xl:flex items-center gap-10 text-sm font-semibold text-black">
             <Link href="/" className="hover:text-[#997819] transition">
               Home
             </Link>
@@ -258,7 +258,7 @@ export default function Navbar() {
               aria-label={mobileOpen ? "Close Menu" : "Open Menu"}
               aria-expanded={mobileOpen}
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="lg:hidden text-black text-2xl mx-4 p-2"
+              className="xl:hidden text-black text-2xl mx-4 p-2"
             >
               {mobileOpen ? "✕" : "☰"}
             </button>

@@ -214,7 +214,7 @@ const SafeContractorPage = () => {
             </FadeIn>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid lg:grid-cols-3 gap-8">
             {[
               {
                 t: "Construction Safety Compliance",
@@ -336,92 +336,77 @@ const SafeContractorPage = () => {
         </div>
       </section>
 
-      {/* 🔹 NEW SECTION: INDUSTRIES COVERED (Visual Grid) */}
-      <section className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div
-            className="bg-[#12066a] rounded-[4rem] p-12 md:p-20 overflow-hidden relative group shadow-2xl"
-            style={{
-              backgroundImage: 'url("/sf.jpg")', // Consistent CTA background
-              backgroundSize: "cover",
-              backgroundPosition: "top",
-              backgroundAttachment: "fixed", // 👈 Parallax effect without scaling
-            }}
-          >
-            {/* 🔹 Dark Blue Overlay - Readability aur Consistency ke liye */}
-            <div className="absolute inset-0 bg-[#12066a]/85 z-0" />
+      {/* 🔹 NEW SECTION: INDUSTRIES COVERED (Responsive Optimized) */}
+<section className="py-12 md:py-24 bg-white">
+  <div className="max-w-7xl mx-auto px-4 md:px-6">
+    <div
+      className="bg-[#12066a] rounded-[2rem] md:rounded-[4rem] p-8 md:p-20 overflow-hidden relative shadow-2xl"
+      style={{
+        backgroundImage: 'url("/sf.jpg")',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <div className="absolute inset-0 bg-[#12066a]/90 z-0" />
 
-            {/* Decorative Glow */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-[#997819]/20 rounded-full blur-[100px] z-10 animate-pulse"></div>
+      <div className="relative z-20 grid lg:grid-cols-2 gap-12 md:gap-16 items-center">
+        
+        {/* TEXT CONTENT */}
+        <div>
+          <h2 className="text-3xl md:text-6xl font-black text-white tracking-tighter leading-[1.1] mb-6 md:mb-8 uppercase">
+            Why Choose SafeContractor <br />{" "}
+            <span className="text-[#997819]">Accreditation.</span>
+          </h2>
+          <p className="text-blue-100/70 text-base md:text-lg font-medium mb-8 md:mb-10 leading-relaxed">
+            Choosing{" "}
+            <Link href="#" className="text-[#997819] font-bold hover:underline">
+              SafeContractor
+            </Link>{" "}
+            shows your commitment to professional standards and client confidence. It helps your business stand out in the competitive UK market.
+          </p>
 
-            <div className="relative z-20 grid lg:grid-cols-2 gap-16 items-center">
-              <div>
-                <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter leading-none mb-8 uppercase">
-                  Why Choose SafeContractor <br />{" "}
-                  <span className="text-[#997819]">Accreditation.</span>
-                </h2>
-                <p className="text-blue-100/70 text-lg font-medium mb-10 leading-relaxed">
-                  Choosing{" "}
-                  <Link
-                    href="https://bizgrow-holdings.com/what-is-safe-contractor-accreditation-and-why-is-it-important/"
-                    className="text-[#997819] font-bold"
-                  >
-                    SafeContractor
-                  </Link>{" "}
-                  shows your commitment to professional standards and client
-                  confidence. It helps your business stand out in the
-                  competitive UK market.
-                </p>
-
-                {/* Feature List */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {[
-                    "Accreditation Support",
-                    "Documentation Assistance",
-                    "Gap Analysis Guidance",
-                    "Fast Track Approvals",
-                    "Tender Readiness",
-                    "Ongoing Compliance Monitoring",
-                  ].map((s, i) => (
-                    <div
-                      key={i}
-                      className="flex items-center gap-3 text-white/90 font-bold text-sm group/item"
-                    >
-                      <div className="w-2 h-2 bg-[#997819] rounded-full group-hover/item:scale-150 transition-transform"></div>{" "}
-                      {s}
-                    </div>
-                  ))}
-                </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {[
+              "Accreditation Support", "Documentation Assistance", "Gap Analysis Guidance",
+              "Fast Track Approvals", "Tender Readiness", "Ongoing Compliance Monitoring",
+            ].map((s, i) => (
+              <div key={i} className="flex items-center gap-3 text-white/90 font-bold text-sm">
+                <div className="w-2 h-2 bg-[#997819] rounded-full shrink-0"></div>
+                {s}
               </div>
+            ))}
+          </div>
+        </div>
 
-              {/* Stats Grid */}
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-4">
-                  <div className="h-20 md:h-40 bg-white/5 rounded-3xl backdrop-blur-xl border border-white/10 flex items-center justify-center p-6 text-center hover:bg-white/10 transition-colors">
-                    <p className="text-white font-black text-xs uppercase tracking-widest">
-                      100% Approval Rate
-                    </p>
-                  </div>
-                  <div className="h-30 md:h-60 bg-[#997819] rounded-3xl flex items-center justify-center p-6 text-center shadow-lg group-hover:rotate-2 transition-transform duration-500">
-                    <ShieldCheck size={60} className="text-white opacity-80" />
-                  </div>
-                </div>
+        {/* STATS GRID - Now responsive */}
+        <div className="grid grid-cols-2 gap-3 md:gap-4">
+          <div className="space-y-3 md:space-y-4">
+            <div className="aspect-square bg-white/5 rounded-2xl md:rounded-3xl border border-white/10 flex items-center justify-center p-4 text-center">
+              <p className="text-white font-black text-[10px] md:text-xs uppercase tracking-widest">
+                100% Approval Rate
+              </p>
+            </div>
+            <div className="aspect-[3/4] bg-[#997819] rounded-2xl md:rounded-3xl flex items-center justify-center p-6">
+              <ShieldCheck size={40} className="md:size-[60px] text-white opacity-80" />
+            </div>
+          </div>
 
-                <div className="space-y-4 pt-8">
-                  <div className="relative h-40 md:h-60 bg-white/10 rounded-3xl backdrop-blur-xl border border-white/10 flex flex-col items-center justify-center p-6 text-center hover:bg-white/20 transition-all">
-                    <p className="text-[#997819] font-black text-5xl md:text-7xl leading-none mb-2">
-                      500+
-                    </p>
-                    <p className="text-white/80 text-[10px] uppercase font-black tracking-tighter">
-                      Audits Passed
-                    </p>
-                  </div>
-                </div>
-              </div>
+          <div className="space-y-3 md:space-y-4 mt-0 md:pt-8">
+            <div className="aspect-[3/4] bg-white/10 rounded-2xl md:rounded-3xl border border-white/10 flex flex-col items-center justify-center p-4 text-center">
+              <p className="text-[#997819] font-black text-4xl md:text-7xl leading-none mb-2">
+                500+
+              </p>
+              <p className="text-white/80 text-[9px] md:text-[10px] uppercase font-black tracking-tighter">
+                Audits Passed
+              </p>
             </div>
           </div>
         </div>
-      </section>
+
+      </div>
+    </div>
+  </div>
+</section>
       {/* 🔹 4. CALL TO ACTION (CTA) */}
       <section className="py-24 bg-white px-6 text-center">
         <div className="max-w-5xl mx-auto">

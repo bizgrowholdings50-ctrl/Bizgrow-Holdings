@@ -199,7 +199,7 @@ export default function AboutUs() {
               <span className="text-[#997819]">Define Us</span>
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {[
               {
                 title: "Transparency and Trust",
@@ -251,7 +251,7 @@ export default function AboutUs() {
 
       {/* 4. MISSION & VISION - Double Card */}
       <section className="py-24 px-6">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
           <FadeIn
             direction="left"
             className="bg-[#12066a] p-12 md:p-16 rounded-[3rem] text-white relative overflow-hidden"

@@ -321,7 +321,7 @@ const ConstructionlinePage = () => {
       {/* 🔹 6. OUR PROCESS (Refined Left-Aligned Stepper) */}
       <section className="py-14 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
+          <div className="grid  xl:grid-cols-2 gap-16 items-start">
             {/* LEFT SIDE: STEPS */}
             <div className="relative">
               <FadeIn direction="right">
@@ -408,7 +408,7 @@ const ConstructionlinePage = () => {
             {/* RIGHT SIDE: VISUAL ELEMENT */}
             <div className="sticky top-32">
               <div className="bg-[#12066a] rounded-[3.5rem] p-4 shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-700">
-                <div className="aspect-[4/5]  w-full bg-zinc-900 rounded-[3rem] overflow-hidden relative">
+                <div className="aspect-video xl:aspect-[4/5] w-full bg-zinc-900 rounded-[3rem] overflow-hidden relative">
                   <Image
                     src="/construction-process.jpg"
                     fill

@@ -131,7 +131,7 @@ export default function HomePage() {
                 </p>
               </div>
             </div>
-            <Link href="/contact-us" className="md:hidden lg:block">
+            <Link href="/contact-us" className="md:hidden xl:block">
               <button className="bg-white text-[#12066a] px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-blue-50 transition-all shadow-lg active:scale-95">
                 Book a Consultation
               </button>
@@ -214,7 +214,7 @@ export default function HomePage() {
       {/* 4. HORIZONTAL SERVICES (GSAP PINNED SECTION) */}
       <HorizontalServices />
 
-      <section className="py-24 min-h-screen lg:h-auto bg-[#12066a] relative overflow-hidden">
+      <section className="py-24 max-h-screen xl:h-screen bg-[#12066a] relative overflow-hidden">
         {/* Decorative Background Text */}
         <Image
           src="/experts-home.jpg"
@@ -226,7 +226,7 @@ export default function HomePage() {
         <div className="hidden md:block absolute inset-0 bg-black/70 backdrop-blur-[1px]" />
         <div
           aria-hidden="true"
-          className="absolute top-10 right-0 text-[4rem] md:text-[15rem] font-black text-white/60 md:text-white/20 select-none leading-none -translate-y-1/4"
+          className="absolute top-10 lg:right-8 xl:right-20 md:right-0 text-[4rem] md:text-[15rem] lg:text-[10rem] font-black text-white/60 md:text-white/20 select-none leading-none -translate-y-1/4"
         >
           BIZGROW
         </div>
@@ -270,7 +270,7 @@ export default function HomePage() {
       {/* 6. TESTIMONIALS */}
       <section className="py-32 bg-zinc-50 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {reviews.map((rev, i) => (
               <FadeIn key={i} delay={i * 0.2}>
                 <div className="p-12 rounded-[3.5rem] bg-white shadow-xl border border-zinc-300 flex flex-col justify-between h-full hover:border-[#997819] transition-transform  group">
@@ -308,7 +308,7 @@ export default function HomePage() {
           {/* 🔹 2. Background Large Text (Watermark) */}
           <div
             aria-hidden="true"
-            className="absolute top-0 right-0 text-[10rem] md:text-[15rem] font-black text-white/[0.12] select-none leading-none -translate-x-7 translate-y-6 pointer-events-none uppercase z-10"
+            className="absolute top-28 md:top-0 right-0 text-[3rem] md:text-[15rem] font-black text-white/[0.12] select-none leading-none -translate-x-7 translate-y-6 pointer-events-none uppercase z-10"
           >
             BIZGROW
           </div>

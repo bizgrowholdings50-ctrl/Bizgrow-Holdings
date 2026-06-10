@@ -1,9 +1,17 @@
 "use client";
-import React, { useState } from "react";
-import { Send, ArrowDown, CheckCircle2, Loader2 } from "lucide-react";
-import { toast, Toaster } from "sonner";
-import { Turnstile } from '@marsidev/react-turnstile'; // 1. Turnstile Import
 
+import React, { useState } from "react";
+import {
+  Send,
+  ArrowRight,
+  CheckCircle2,
+  Loader2,
+  ChevronLeft,
+} from "lucide-react";
+import { toast, Toaster } from "sonner";
+import { Turnstile } from "@marsidev/react-turnstile";
+
+// ─── Shared Input Styles ────────────────────────────────────────────────────
 const inputClasses = `
   peer w-full bg-transparent border-b-2 border-slate-100 
   px-0 py-5 text-xl font-bold text-[#12066a] 
@@ -18,15 +26,157 @@ const labelClasses = `
   peer-[:not(:placeholder-shown)]:-translate-y-10
 `;
 
-const ContactForm = () => {
+// ─── All Services List ───────────────────────────────────────────────────────
+const ALL_SERVICES = [
+  "SIA ACS",
+  "COP 119",
+  "Safe Contractor",
+  "ISO 9001",
+  "ISO 14001",
+  "ISO 45001",
+  "Construction Line",
+  "NASDU",
+  "SMAS",
+  "Cyber Essentials",
+  "Cyber Essentials Plus",
+  "Chas Scheme",
+  "BS 10800",
+  "BS 7858",
+  "BS 7499",
+];
+
+// ─── Step 1: Service Selection ───────────────────────────────────────────────
+const ServiceStep = ({ selectedServices, setSelectedServices, onContinue }) => {
+  const toggle = (service) => {
+    setSelectedServices((prev) =>
+      prev.includes(service)
+        ? prev.filter((s) => s !== service)
+        : [...prev, service],
+    );
+  };
+
+  return (
+    <div className="w-full">
+      {/* Header */}
+      <div className="mb-10">
+        <h2 className="text-4xl md:text-5xl font-black text-[#12066a] tracking-tighter mb-4">
+          Start your <span className="text-[#997819] italic">Consultation</span>
+        </h2>
+        <p className="text-slate-400 font-medium text-lg">
+          Tell us about your requirements and we'll get back to you promptly.
+        </p>
+      </div>
+
+      {/* Progress Indicator */}
+      <div className="flex items-center gap-3 mb-10">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-full bg-[#12066a] text-white flex items-center justify-center text-xs font-black">
+            1
+          </div>
+          <span className="text-xs font-black uppercase tracking-widest text-[#12066a]">
+            Services
+          </span>
+        </div>
+        <div className="flex-1 h-px bg-slate-200 max-w-[60px]" />
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-full bg-slate-200 text-slate-400 flex items-center justify-center text-xs font-black">
+            2
+          </div>
+          <span className="text-xs font-black uppercase tracking-widest text-slate-400">
+            Your Details
+          </span>
+        </div>
+      </div>
+
+      {/* Services Grid */}
+      <div>
+        <p className="text-sm font-black uppercase tracking-widest text-[#12066a] mb-1">
+          Select Your Services
+        </p>
+        <p className="text-slate-400 text-sm mb-6">
+          Choose one or more services you're interested in.
+        </p>
+
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+          {ALL_SERVICES.map((service) => {
+            const isSelected = selectedServices.includes(service);
+            return (
+              <button
+                key={service}
+                type="button"
+                onClick={() => toggle(service)}
+                className={`
+                  flex items-center gap-2 px-4 py-3 rounded-lg border-2 text-left
+                  transition-all duration-300 text-sm font-bold
+                  ${
+                    isSelected
+                      ? "border-[#997819] bg-[#997819]/10 text-[#12066a]"
+                      : "border-slate-200 bg-white text-slate-500 hover:border-slate-300 hover:text-[#12066a]"
+                  }
+                `}
+              >
+                <div
+                  className={`
+                    w-4 h-4 rounded border-2 flex-shrink-0 flex items-center justify-center transition-all
+                    ${isSelected ? "border-[#997819] bg-[#997819]" : "border-slate-300"}
+                  `}
+                >
+                  {isSelected && (
+                    <svg
+                      className="w-2.5 h-2.5 text-white"
+                      fill="none"
+                      viewBox="0 0 10 8"
+                      stroke="currentColor"
+                      strokeWidth={2.5}
+                    >
+                      <path
+                        d="M1 4l3 3 5-6"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  )}
+                </div>
+                <span className="leading-snug">{service}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Continue Button */}
+      <div className="mt-10 flex justify-end">
+        <button
+          type="button"
+          onClick={() => {
+            if (selectedServices.length === 0) {
+              toast.warning("Please select at least one service.");
+              return;
+            }
+            onContinue();
+          }}
+          className="bg-[#12066a] hover:bg-[#997819] text-white font-black uppercase tracking-[0.2em] px-10 py-5 rounded-full transition-all duration-700 flex items-center gap-3 group shadow-xl active:scale-95"
+        >
+          <span className="text-sm">Continue</span>
+          <ArrowRight
+            size={18}
+            className="group-hover:translate-x-1 transition-transform"
+          />
+        </button>
+      </div>
+    </div>
+  );
+};
+
+// ─── Step 2: Contact Form ────────────────────────────────────────────────────
+const ContactStep = ({ selectedServices, onBack }) => {
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
-  const [captchaToken, setCaptchaToken] = useState(null); // 2. Token State
+  const [captchaToken, setCaptchaToken] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // 3. Captcha Check
     if (!captchaToken) {
       toast.error("Please verify that you are a human.");
       return;
@@ -38,9 +188,9 @@ const ContactForm = () => {
       name: e.target.name.value,
       email: e.target.email.value,
       number: e.target.number.value,
-      service: e.target.service.value,
+      service: selectedServices.join(", "), // Step 1 services passed here
       message: e.target.msg.value,
-      captchaToken: captchaToken, // 4. Token added to data
+      captchaToken: captchaToken,
     };
 
     try {
@@ -61,7 +211,7 @@ const ContactForm = () => {
       toast.success("Consultation inquiry sent successfully!");
       setSent(true);
       e.target.reset();
-      setCaptchaToken(null); // Reset token after success
+      setCaptchaToken(null);
       setTimeout(() => setSent(false), 5000);
     } catch (err) {
       console.error("Error sending email:", err);
@@ -72,136 +222,246 @@ const ContactForm = () => {
   };
 
   return (
+    <form className="w-full" onSubmit={handleSubmit}>
+      {/* Header */}
+      <div className="mb-10">
+        <button
+          type="button"
+          onClick={onBack}
+          className="flex items-center gap-2 text-slate-400 hover:text-[#12066a] transition-colors mb-6 text-xs font-black uppercase tracking-widest"
+        >
+          <ChevronLeft size={14} />
+          Back to Services
+        </button>
+
+        <h2 className="text-4xl md:text-5xl font-black text-[#12066a] tracking-tighter mb-4">
+          Send Us A <span className="text-[#997819] italic">Message.</span>
+        </h2>
+        <p className="text-slate-400 font-medium text-lg">
+          Initiate your strategic consultation today.
+        </p>
+      </div>
+
+      {/* Progress Indicator */}
+      <div className="flex items-center gap-3 mb-10">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-full bg-[#997819] text-white flex items-center justify-center text-xs font-black">
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              viewBox="0 0 10 8"
+              stroke="currentColor"
+              strokeWidth={2.5}
+            >
+              <path
+                d="M1 4l3 3 5-6"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
+          <span className="text-xs font-black uppercase tracking-widest text-[#997819]">
+            Services
+          </span>
+        </div>
+        <div className="flex-1 h-px bg-[#997819] max-w-[60px]" />
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-full bg-[#12066a] text-white flex items-center justify-center text-xs font-black">
+            2
+          </div>
+          <span className="text-xs font-black uppercase tracking-widest text-[#12066a]">
+            Your Details
+          </span>
+        </div>
+      </div>
+
+      {/* Selected Services Tags */}
+      <div className="mb-10">
+        <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-3">
+          Selected Services
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {selectedServices.map((s) => (
+            <span
+              key={s}
+              className="px-3 py-1 rounded-full bg-[#12066a]/10 text-[#12066a] text-xs font-black border border-[#12066a]/20"
+            >
+              {s}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      {/* Form Fields */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+        <div className="relative group col-span-1">
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder=" "
+            className={inputClasses}
+            required
+          />
+          <label htmlFor="name" className={labelClasses}>
+            Your Full Name
+          </label>
+        </div>
+
+        <div className="relative group col-span-1">
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder=" "
+            className={inputClasses}
+            required
+          />
+          <label htmlFor="email" className={labelClasses}>
+            Email Address
+          </label>
+        </div>
+
+        <div className="relative group col-span-1">
+          <input
+            type="tel"
+            name="number"
+            id="number"
+            placeholder=" "
+            className={inputClasses}
+            required
+            onInput={(e) => {
+              const originalValue = e.target.value;
+              const cleanValue = originalValue.replace(/[^0-9+]/g, "");
+              if (originalValue !== cleanValue) {
+                toast.warning(
+                  "Numbers Only: Please use only digits for the phone number.",
+                  {
+                    id: "phone-warning",
+                    duration: 2000,
+                  },
+                );
+              }
+              e.target.value = cleanValue;
+            }}
+          />
+          <label htmlFor="number" className={labelClasses}>
+            Phone Number
+          </label>
+        </div>
+
+        <div className="relative group md:col-span-2">
+          <textarea
+            name="msg"
+            id="msg"
+            placeholder=" "
+            className={`${inputClasses} min-h-[100px] py-4 resize-none`}
+            required
+          />
+          <label htmlFor="msg" className={labelClasses}>
+            Briefly describe your objectives
+          </label>
+        </div>
+      </div>
+
+      {/* Turnstile */}
+      <div className="mt-10">
+        <Turnstile
+          siteKey={process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY}
+          onSuccess={(token) => setCaptchaToken(token)}
+          onExpire={() => setCaptchaToken(null)}
+          onError={() => setCaptchaToken(null)}
+          theme="dark"
+        />
+      </div>
+
+      {/* Submit */}
+      <div className="mt-20 flex flex-col md:flex-row items-center justify-between gap-10">
+        <button
+          disabled={loading || sent || !captchaToken}
+          type="submit"
+          className="w-full md:w-auto bg-[#12066a] hover:bg-[#997819] text-white font-black uppercase tracking-[0.2em] px-14 py-6 rounded-full transition-all duration-700 flex items-center justify-center gap-4 group relative overflow-hidden shadow-2xl disabled:opacity-70 disabled:cursor-not-allowed active:scale-95"
+        >
+          <span className="relative z-10 text-sm">
+            {loading
+              ? "Processing..."
+              : sent
+                ? "Inquiry Sent"
+                : !captchaToken
+                  ? "Verify Captcha First"
+                  : "Initialize Consultation"}
+          </span>
+
+          {loading ? (
+            <Loader2 size={18} className="animate-spin relative z-10" />
+          ) : sent ? (
+            <CheckCircle2
+              size={18}
+              className="text-emerald-400 relative z-10"
+            />
+          ) : (
+            <Send
+              size={18}
+              className="relative z-10 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
+            />
+          )}
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+        </button>
+
+        <div className="flex items-center gap-3">
+          <div
+            className={`w-2 h-2 rounded-full animate-pulse ${
+              sent
+                ? "bg-emerald-500"
+                : captchaToken
+                  ? "bg-[#997819]"
+                  : "bg-red-500"
+            }`}
+          />
+          <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+            {sent
+              ? "Message Received Successfully"
+              : captchaToken
+                ? "Verified Professional Inquiry"
+                : "Complete Verification"}
+          </span>
+        </div>
+      </div>
+    </form>
+  );
+};
+
+// ─── Main Component ──────────────────────────────────────────────────────────
+const ContactForm = () => {
+  const [step, setStep] = useState(1);
+  const [selectedServices, setSelectedServices] = useState([]);
+
+  return (
     <>
-      <Toaster 
-        position="bottom-center" 
-        theme="dark" 
-        richColors 
+      <Toaster
+        position="bottom-center"
+        theme="dark"
+        richColors
         toastOptions={{
           style: {
-            background: '#ffffff', 
-            color: '#12066a',
+            background: "#ffffff",
+            color: "#12066a",
           },
         }}
       />
 
-      <form className="w-full" onSubmit={handleSubmit}>
-        <div className="mb-16">
-          <h2 className="text-4xl md:text-5xl font-black text-[#12066a] tracking-tighter mb-4">
-            Send Us A <span className="text-[#997819] italic">Message.</span>
-          </h2>
-          <p className="text-slate-400 font-medium text-lg">
-            Initiate your strategic consultation today.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
-          <div className="relative group col-span-1">
-            <input type="text" name="name" id="name" placeholder=" " className={inputClasses} required />
-            <label htmlFor="name" className={labelClasses}>Your Full Name</label>
-          </div>
-
-          <div className="relative group col-span-1">
-            <input type="email" name="email" id="email" placeholder=" " className={inputClasses} required />
-            <label htmlFor="email" className={labelClasses}>Email Address</label>
-          </div>
-
-          <div className="relative group col-span-1">
-            <input
-              type="tel"
-              name="number"
-              id="number"
-              placeholder=" "
-              className={inputClasses}
-              required
-              onInput={(e) => {
-                const originalValue = e.target.value;
-                const cleanValue = originalValue.replace(/[^0-9+]/g, "");
-                if (originalValue !== cleanValue) {
-                  toast.warning(
-                    "Numbers Only: Please use only digits for the phone number.",
-                    { id: "phone-warning", duration: 2000 }
-                  );
-                }
-                e.target.value = cleanValue;
-              }}
-            />
-            <label htmlFor="number" className={labelClasses}>Phone Number</label>
-          </div>
-
-          <div className="relative group col-span-1">
-            <select
-              name="service"
-              id="service"
-              className={`${inputClasses} appearance-none cursor-pointer bg-transparent`}
-              defaultValue=""
-              required
-            >
-              <option value="" disabled hidden>What are you looking for?</option>
-              <option value="ISO Certification">ISO certifications Support</option>
-              <option value="SIA ACS Support">ACS compliance and support</option>
-              <option value="Cyber Essentials">COP-119 Certification</option>
-              <option value="General Inquiry">Safecontractor and CHAS support</option>
-              <option value="General Inquiry">Constructionline accreditation</option>
-              <option value="General Inquiry">SMAS and NASDU</option>
-              <option value="General Inquiry">Business Growth</option>
-              <option value="General Inquiry">Cyber essential and Cyber essential plus</option>
-            </select>
-            <label htmlFor="service" className={labelClasses}>Interested Service</label>
-            <ArrowDown className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-300 pointer-events-none group-focus-within:rotate-180 transition-transform" />
-          </div>
-
-          <div className="relative group md:col-span-2">
-            <textarea
-              name="msg"
-              id="msg"
-              placeholder=" "
-              className={`${inputClasses} min-h-[100px] py-4 resize-none`}
-              required
-            />
-            <label htmlFor="msg" className={labelClasses}>Briefly describe your objectives</label>
-          </div>
-        </div>
-
-        {/* 5. Turnstile Widget Added Here */}
-        <div className="mt-10">
-          <Turnstile 
-            siteKey={process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY} 
-            onSuccess={(token) => setCaptchaToken(token)} 
-            onExpire={() => setCaptchaToken(null)}
-            onError={() => setCaptchaToken(null)}
-            theme="dark" 
-          />
-        </div>
-
-        <div className="mt-20 flex flex-col md:flex-row items-center justify-between gap-10">
-          <button
-            disabled={loading || sent || !captchaToken}
-            type="submit"
-            className="w-full md:w-auto bg-[#12066a] hover:bg-[#997819] text-white font-black uppercase tracking-[0.2em] px-14 py-6 rounded-full transition-all duration-700 flex items-center justify-center gap-4 group relative overflow-hidden shadow-2xl disabled:opacity-70 disabled:cursor-not-allowed active:scale-95"
-          >
-            <span className="relative z-10 text-sm">
-              {loading ? "Processing..." : sent ? "Inquiry Sent" : !captchaToken ? "Verify Captcha First" : "Initialize Consultation"}
-            </span>
-
-            {loading ? (
-              <Loader2 size={18} className="animate-spin relative z-10" />
-            ) : sent ? (
-              <CheckCircle2 size={18} className="text-emerald-400 relative z-10" />
-            ) : (
-              <Send size={18} className="relative z-10 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-            )}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-          </button>
-
-          <div className="flex items-center gap-3">
-            <div className={`w-2 h-2 rounded-full animate-pulse ${sent ? "bg-emerald-500" : captchaToken ? "bg-[#997819]" : "bg-red-500"}`} />
-            <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
-              {sent ? "Message Received Successfully" : captchaToken ? "Verified Professional Inquiry" : "Complete Verification"}
-            </span>
-          </div>
-        </div>
-      </form>
+      {step === 1 ? (
+        <ServiceStep
+          selectedServices={selectedServices}
+          setSelectedServices={setSelectedServices}
+          onContinue={() => setStep(2)}
+        />
+      ) : (
+        <ContactStep
+          selectedServices={selectedServices}
+          onBack={() => setStep(1)}
+        />
+      )}
     </>
   );
 };

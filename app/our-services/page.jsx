@@ -137,7 +137,7 @@ const ServicesPage = () => {
   return (
     <main className="bg-white text-zinc-900">
       {/* 🔹 1. HERO SECTION */}
-      <section className="relative  h-[95vh] md:h-screen w-full flex items-center overflow-hidden">
+      <section className="relative  h-[92vh]  xl:h-screen w-full flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
             src="/h.png"
@@ -182,7 +182,7 @@ const ServicesPage = () => {
       <section className="py-14 bg-white">
         <div className="max-w-4xl mx-auto px-6 md:text-center">
           <FadeIn direction="up">
-            <h2 className="text-5xl md:text-6xl font-black text-[#12066a] mb-8 tracking-tighter">
+            <h2 className="text-3xl md:text-6xl font-black text-[#12066a] mb-8 tracking-tighter">
               Professional and dedicated consulting services
             </h2>
             <p className="text-zinc-600 text-lg  leading-relaxed font-medium">
@@ -289,7 +289,7 @@ const ServicesPage = () => {
       {/* 🔹 4. METHODOLOGY (Bonus Section for Length & Authority) */}
       <section className="py-22 bg-white/40 text-black">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
+          <div className="grid lg:grid-cols-1 xl:grid-cols-2 gap-20 items-center">
             <FadeIn direction="left">
               <h2 className="text-5xl md:text-6xl text-[#12066a] font-black mb-8 leading-tight tracking-tighter ">
                 Our Proven <br />{" "}
@@ -346,7 +346,7 @@ const ServicesPage = () => {
               </div>
             </FadeIn>
             <FadeIn direction="right">
-              <div className="relative aspect-square bg-[#0a0a0a] rounded-[4rem] overflow-hidden border border-white/5">
+              <div className="relative aspect-square md:aspect-video xl:aspect-square bg-[#0a0a0a] rounded-[4rem] overflow-hidden border border-white/5">
                 <Image
                   src="/methodology.jpg"
                   alt="Our Proven Methodology - BizGrow Holdings ltd

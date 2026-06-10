@@ -103,19 +103,19 @@ const SMASPage = () => {
         </div>
       </section>
 
-      {/* 🔹 New Section. WHY IT MATTERS (Blueprint Split Layout) */}
+      {/* 🔹 3 New Section. WHY IT MATTERS (Blueprint Split Layout) */}
       <section className="py-22 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col lg:flex-row items-center gap-24">
+          <div className="flex flex-col-reverse lg:flex-row items-center gap-24">
             <div className="lg:w-1/2 relative">
               <div className="absolute -inset-4 bg-zinc-100 rounded-[4rem] -rotate-3" />
-              <div className="relative rounded-[4rem] overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-all duration-700">
+              <div className="relative aspect-square rounded-[4rem] overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-all duration-700">
                 <Image
                   src="/blueprint-work.jpg"
                   width={600}
                   height={700}
                   alt="SMAS Accreditation - BizGrow Holdings Ltd"
-                  className="object-cover h-[500px]"
+                  className="object-cover"
                 />
               </div>
             </div>
@@ -148,7 +148,7 @@ const SMASPage = () => {
         </div>
       </section>
 
-      {/* 🔹 3. THE COMPLIANCE GRID (Refined Card Layout) */}
+      {/* 🔹 4. THE COMPLIANCE GRID (Refined Card Layout) */}
       <section className="py-12 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           {/* Heading aur Description Section: In 3 classes ko change kiya hai */}
@@ -187,7 +187,7 @@ const SMASPage = () => {
         </div>
       </section>
 
-      {/* 🔹 New Section. WHY IT MATTERS (Blueprint Split Layout) */}
+      {/* 🔹5 New Section. WHY IT MATTERS (Blueprint Split Layout) */}
       <section className="py-22 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col lg:flex-row items-center gap-24">
@@ -195,7 +195,7 @@ const SMASPage = () => {
               <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs mb-6">
                 Market Authority
               </span>
-              <h2 className="text-5xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-none ">
+              <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-none ">
                 How SMAS Helps You
                 <span className="text-[#997819]"> Win More Tenders </span> &
                 Site Approvals
@@ -217,13 +217,13 @@ const SMASPage = () => {
             </div>
             <div className="lg:w-1/2 relative">
               <div className="absolute -inset-4 bg-zinc-100 rounded-[4rem] -rotate-3" />
-              <div className="relative rounded-[4rem] overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-all duration-700">
+              <div className="relative aspect-square rounded-[4rem] overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-all duration-700">
                 <Image
                   src="/site-approvals.jpg"
                   width={600}
                   height={700}
                   alt="SMAS Helps You Win More Tenders - BizGrow "
-                  className="object-cover h-[500px]"
+                  className="object-cover"
                 />
               </div>
             </div>
@@ -258,8 +258,8 @@ const SMASPage = () => {
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             {/* Steps on the Left */}
             <div>
-              <h2 className="text-4xl md:text-5xl font-black text-[#12066a] tracking-tighter leading-none mb-6 uppercase">
-                Key Benefits of <br />{" "}
+              <h2 className="text-3xl md:text-5xl font-black text-[#12066a] tracking-tighter leading-none mb-6 uppercase">
+                Key Benefits of <br  />{" "}
                 <span className="text-[#997819]">SMAS Accreditation </span>for
                 Your Business
               </h2>
@@ -518,7 +518,7 @@ const SMASPage = () => {
                 <span className="inline-block text-[#997819] font-black uppercase tracking-[0.5em] text-[10px] bg-white/5 px-6 py-2 rounded-full border border-white/10 mb-10">
                   Accreditation Guaranteed
                 </span>
-                <h2 className="text-5xl md:text-8xl font-black text-white tracking-tighter leading-[0.85] mb-8 uppercase">
+                <h2 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-[0.85] mb-8 uppercase">
                   Fast-Track <br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#997819] to-[#d4af37] inline-block mt-2">
                     Your Success.

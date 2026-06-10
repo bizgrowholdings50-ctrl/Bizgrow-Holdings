@@ -81,7 +81,7 @@ const SIAACSPage = () => {
       {/* 🔹 2. DEEP INTRO & FOCUS AREAS */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-12 gap-16 items-start">
+          <div className="grid xl:grid-cols-12 gap-16 items-start">
             <div className="lg:col-span-8">
               <FadeIn direction="right">
                 <h2 className="text-4xl md:text-5xl font-black text-[#12066a] tracking-tighter mb-8">
@@ -115,7 +115,7 @@ const SIAACSPage = () => {
               </FadeIn>
             </div>
 
-            <div className="lg:col-span-4 bg-[#12066a] p-10 rounded-[3rem] border border-zinc-100 shadow-sm">
+            <div className="lg:col-span-8 xl:col-span-4 bg-[#12066a] p-10 rounded-[3rem] border border-zinc-100 shadow-sm">
               <h3 className="text-white font-black uppercase tracking-widest text-md mb-6">
                 ACS Compliance Focus Areas:
               </h3>

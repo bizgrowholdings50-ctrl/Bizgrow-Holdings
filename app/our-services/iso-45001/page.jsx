@@ -357,7 +357,7 @@ const ISO45001Page = () => {
             { v: "100%", l: "Commitment to Employee Protection" },
           ].map((stat, i) => (
             <div key={i} className="group">
-              <span className="text-7xl font-black text-[#12066a] block group-hover:text-[#997819] transition-colors duration-500">
+              <span className="text-4xl lg:text-6xl font-black text-[#12066a] block group-hover:text-[#997819] transition-colors duration-500">
                 {stat.v}
               </span>
               <p className="text-[#997819] font-black uppercase tracking-widest text-[10px] mt-4">
@@ -392,7 +392,7 @@ const ISO45001Page = () => {
               <span className="inline-block text-[#997819] font-black uppercase tracking-[0.5em] text-[10px] bg-white/5 px-6 py-2 rounded-full border border-white/10 mb-10">
                 Secure Your Workforce
               </span>
-              <h2 className="text-5xl md:text-8xl font-black text-white tracking-tighter leading-[0.85] mb-8 uppercase">
+              <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter leading-[0.85] mb-8 uppercase">
                 Ready to Protect <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#997819] to-[#d4af37] inline-block mt-2">
                   Your People?

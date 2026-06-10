@@ -189,7 +189,7 @@ const COP119Page = () => {
             </FadeIn>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-8">
             {[
               {
                 t: "Workforce Screening & Vetting",

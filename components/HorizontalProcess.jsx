@@ -8,16 +8,21 @@ import Image from "next/image";
 const HorizontalProcess = () => {
   const targetRef = useRef(null);
   
-  // FIX 1: Initial state 'null' rakhi hai taake server aur client ka layout match kare (CLS Fix)
+  // FIX: Breakpoint 1100px kiya hai taake iPad Pro (1024px) par bhi vertical layout aaye
   const [isVertical, setIsVertical] = useState(null);
 
-  useEffect(() => {
-    const handleResize = () => setIsVertical(window.innerWidth < 1024);
+useEffect(() => {
+    const handleResize = () => {
+      // Logic: Agar screen 1025px se choti hai, toh vertical mode on ho jayega.
+      // iPad Pro (1024px) ab is category mein aa jayega.
+      const isTabletTouch = window.matchMedia("(pointer: coarse) and (max-width: 1366px)").matches;
+      setIsVertical(isTabletTouch || window.innerWidth <= 1025);
+    };
+
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
-
   const { scrollYProgress } = useScroll({
     target: targetRef,
     offset: ["start start", "end end"],
@@ -74,7 +79,6 @@ const HorizontalProcess = () => {
     },
   ];
 
-  // FIX 2: Dynamic height logic with a fallback to prevent layout jumping
   const sectionHeightVh = isVertical === false ? (sections.length + 1) * 100 : "auto";
 
   return (
@@ -90,7 +94,6 @@ const HorizontalProcess = () => {
             : "relative"
         }`}
       >
-        {/* Header Section */}
         <div
           className={`${
             isVertical
@@ -100,13 +103,12 @@ const HorizontalProcess = () => {
         >
           <div className="text-center px-4">
             <FadeIn direction="up">
-              {/* FIX 3: Brightened Golden color (#D4AF37) for better contrast/accessibility */}
-              <h2 className="text-[#D4AF37] font-extrabold tracking-[0.2em] text-xs md:text-lg mb-2 uppercase">
+              <h2 className="text-[#D4AF37] font-extrabold tracking-[0.2em] text-xs md:text-lg  lg:text-xl mb-2 uppercase">
                 Comprehensive Solutions
               </h2>
             </FadeIn>
             <FadeIn direction="up" delay={0.2}>
-              <h2 className="text-3xl md:text-5xl lg:text-5xl font-black text-[#12066a] uppercase italic">
+              <h2 className="text-3xl md:text-5xl lg:text-7xl xl:text-5xl font-black text-[#12066a] uppercase italic">
                 Tailored consultancy services
               </h2>
             </FadeIn>
@@ -114,7 +116,6 @@ const HorizontalProcess = () => {
           </div>
         </div>
 
-        {/* Horizontal/Vertical Scrolling Content */}
         <motion.div
           style={{ x: isVertical ? 0 : x }}
           className={`flex ${
@@ -126,21 +127,21 @@ const HorizontalProcess = () => {
           {sections.map((item, index) => (
             <div
               key={item.id}
-              className={`relative flex-shrink-0 flex flex-col lg:flex-row items-center justify-between 
+              className={`relative shrink-0 flex flex-col xl:flex-row items-center justify-between 
               ${
                 isVertical
                   ? "w-full max-w-4xl mx-auto"
                   : "h-screen w-screen px-20 lg:pt-32"
               }`}
             >
-              <div className="z-10 w-full lg:w-1/2 mb-10 lg:mb-0 text-center lg:text-left">
+              <div className="z-10 w-full xl:w-1/2 mb-10 lg:mb-0 text-center lg:text-left">
                 <FadeIn direction={isVertical ? "up" : "right"}>
                   <span className="text-[#D4AF37] font-bold tracking-[0.3em] uppercase text-sm">
                     {item.tag}
                   </span>
                 </FadeIn>
                 <FadeIn direction={isVertical ? "up" : "right"} delay={0.2}>
-                  <h3 className="text-5xl sm:text-7xl lg:text-[7rem] font-black text-[#12066a] leading-none mt-4 uppercase italic">
+                  <h3 className="text-5xl sm:text-7xl lg:text-[7rem] xl:text-[5rem] font-black text-[#12066a] leading-none mt-4 uppercase italic">
                     {item.title}
                   </h3>
                 </FadeIn>
@@ -151,15 +152,15 @@ const HorizontalProcess = () => {
                 </FadeIn>
               </div>
 
-              {/* FIX 4: Optimized Image component with quality control */}
-              <div className="w-full lg:w-[45%] h-[40vh] lg:h-[55vh] relative">
+              {/* FIX: Image height adjusted for tablets and desktop balance */}
+              <div className="w-full xl:w-[45%] h-[35vh] md:h-[40vh] md:my-8 lg:h-[45vh] relative">
                 <Image
                   src={item.img}
                   alt={item.alt}
                   fill
-                  quality={75} // Better compression without visible loss
-                  sizes="(max-width: 1024px) 100vw, 45vw"
-                  priority={index === 0} // Loads the first image immediately (LCP Fix)
+                  quality={75}
+                  sizes="(max-width: 1024px) 90vw, 45vw"
+                  priority={index === 0}
                   className="object-cover rounded-[3rem] shadow-2xl relative z-10 border-2 border-zinc-50"
                 />
                 <div className="absolute -bottom-10 -left-10 text-[10rem] lg:text-[14rem] font-black text-[#12066a]/5 z-0 select-none italic">

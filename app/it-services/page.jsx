@@ -51,7 +51,7 @@ const ITServicesPage = () => {
                 </span>
               </div>
 
-              <h1 className="text-6xl md:text-8xl font-black text-white leading-[0.85] tracking-tighter uppercase">
+              <h1 className="text-5xl md:text-8xl font-black text-white leading-[0.85] tracking-tighter uppercase">
                 IT Services <br />
                 <span className="text-[#997819]">& Solutions.</span>
               </h1>
@@ -131,7 +131,7 @@ const ITServicesPage = () => {
       {/* 🔹 3. HARDWARE PROCUREMENT (Blueprint Split Layout) */}
       <section className="py-22 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col lg:flex-row items-center gap-24">
+          <div className="flex flex-col-reverse lg:flex-row items-center gap-24">
             <div className="lg:w-1/2 relative">
               <FadeIn direction="right">
                 <div className="absolute -inset-4 bg-zinc-100 rounded-[4rem] -rotate-3" />
@@ -208,7 +208,7 @@ const ITServicesPage = () => {
             </FadeIn>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Box 1 */}
             <FadeIn direction="up" delay={0.1}>
               <div className="bg-white p-8 rounded-[2.5rem] border border-zinc-200/60 shadow-sm h-full">
@@ -337,7 +337,7 @@ const ITServicesPage = () => {
                 <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs mb-6 block">
                   Cloud Ecosystems
                 </span>
-                <h2 className="text-5xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-none uppercase">
+                <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-none uppercase">
                   Microsoft 365 <br />
                   <span className="text-[#997819]">& Cloud Solutions</span>
                 </h2>
@@ -346,7 +346,10 @@ const ITServicesPage = () => {
                   administration, security, and ongoing support. Our specialists
                   ensure organisations maximise the value of Microsoft cloud
                   services while maintaining security, productivity, and
-                  <Link href="/compliance-consultancies/" className="text-[#997819] ml-1 hover:underline font-bold">
+                  <Link
+                    href="/compliance-consultancies/"
+                    className="text-[#997819] ml-1 hover:underline font-bold"
+                  >
                     compliance
                   </Link>
                   .
@@ -397,7 +400,7 @@ const ITServicesPage = () => {
 
       {/* 🔹 7. DATA BAR (Impact Metrics) */}
       <section className="py-20 bg-[#12066a] mx-6 rounded-[3rem]">
-        <div className="max-w-7xl mx-auto px-10 grid md:grid-cols-4 gap-10">
+        <div className="max-w-7xl mx-auto px-10 grid md:grid-cols-2 lg:grid-cols-4 gap-10">
           {[
             { n: "Secure", t: "M365 Cloud Deployments" },
             { n: "UK Wide", t: "Hardware Procurement Logistics" },
@@ -434,7 +437,11 @@ const ITServicesPage = () => {
                   <span className="text-[#997819]">Cyber Resilience</span>
                 </h2>
                 <p className="mb-8 text-zinc-600 font-medium leading-relaxed">
-                  BizGrow supports organisations with <Link href="/cyber-essentials/" className="text-[#997819] mr-1 hover:underline font-bold">
+                  BizGrow supports organisations with{" "}
+                  <Link
+                    href="/cyber-essentials/"
+                    className="text-[#997819] mr-1 hover:underline font-bold"
+                  >
                     Cyber Essentials
                   </Link>
                   readiness, cyber security management, and best-practice
@@ -494,7 +501,7 @@ const ITServicesPage = () => {
 
       {/* 🔹 8.5 ENDPOINT PROTECTION & BACKUP MATRICES */}
       <section className="py-20 bg-zinc-50 border-y border-zinc-100">
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12">
+        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Endpoint protection side */}
           <FadeIn direction="right">
             <div className="bg-white p-8 rounded-[2.5rem] border border-zinc-200/60 shadow-sm h-full">
@@ -567,7 +574,7 @@ const ITServicesPage = () => {
       {/* 🔹 9. PUBLIC SECTOR & TARGET INDUSTRIES */}
       <section className="py-22 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-3 gap-16 items-start mb-16">
+          <div className="grid lg:grid-cols-1 xl:grid-cols-3 gap-16 items-start mb-16">
             <div className="lg:col-span-1">
               <FadeIn direction="right">
                 <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs mb-4 block">
@@ -747,22 +754,31 @@ const ITServicesPage = () => {
       {/* 🔹 10. ETHICAL BUSINESS STANDARDS & CTA */}
       <section className="py-22 bg-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
-            <div>
+          <div className="grid lg:grid-cols-2 gap-10 md:gap-20 items-center">
+            {/* LEFT SIDE */}
+            <div className="w-full">
               <FadeIn direction="right">
-                <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs mb-6 block">
+                <span className="text-[#997819] font-black uppercase tracking-[0.2em] md:tracking-[0.4em] text-[10px] md:text-xs mb-4 block">
                   Ethical Commitments
                 </span>
-                <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-none mb-10 uppercase">
+                {/* Heading choti ki hai mobile ke liye */}
+                <h2 className="text-3xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-[1.1] mb-6 md:mb-10 uppercase">
                   Affordable, Professional <br />
                   <span className="text-[#997819]">& Ethical IT Solutions</span>
                 </h2>
-                <div className="text-zinc-600 text-sm font-medium leading-relaxed space-y-4 mb-8">
+
+                {/* BREAK-WORDS ADD KIYA HAI TAAKE TEXT BAAHAR NA NIKLE */}
+                <div className="text-zinc-600 text-sm font-medium leading-relaxed space-y-4 mb-8 break-words max-w-full">
                   <p>
-                    At <Link href="/" className="text-[#997819] hover:underline font-bold">
+                    At{" "}
+                    <Link
+                      href="/"
+                      className="text-[#997819] hover:underline font-bold"
+                    >
                       BizGrow
-                    </Link>, we believe that professional IT services and
-                    business technology solutions should be secure, reliable,
+                    </Link>
+                    , we believe that professional IT services and business
+                    technology solutions should be secure, reliable,
                     cost-effective, and delivered with complete transparency.
                   </p>
                   <p>
@@ -775,27 +791,28 @@ const ITServicesPage = () => {
               </FadeIn>
             </div>
 
-            <div className="bg-[#12066a] p-12 rounded-[3.5rem] text-white relative shadow-xl">
+            {/* RIGHT SIDE (CTA) */}
+            <div className="bg-[#12066a] p-8 md:p-12 rounded-[2rem] md:rounded-[3.5rem] text-white relative shadow-xl w-full">
               <FadeIn direction="left">
-                <span className="text-[#997819] font-black uppercase tracking-[0.3em] text-[10px] block mb-4">
+                <span className="text-[#997819] font-black uppercase tracking-[0.2em] text-[10px] block mb-4">
                   Partner With Us Today
                 </span>
-                <h3 className="text-3xl md:text-4xl font-black uppercase tracking-tight mb-4 leading-none">
+                <h3 className="text-2xl md:text-4xl font-black uppercase tracking-tight mb-4 leading-tight">
                   Ready to Secure Your Infrastructure?
                 </h3>
-                <p className="text-blue-100/70 text-sm font-medium mb-8 leading-relaxed">
+                <p className="text-blue-100/70 text-sm font-medium mb-8 leading-relaxed break-words">
                   Get in touch with our British operations compliance office
                   today to schedule a structural security assessment or setup
                   customized equipment contracts.
                 </p>
                 <Link
                   href="/contact-us"
-                  className="inline-flex items-center justify-between bg-white text-[#12066a] font-black uppercase text-xs tracking-wider px-6 py-4 rounded-2xl w-full sm:w-auto gap-12 group hover:bg-[#997819] hover:text-white transition-all duration-300 shadow-lg"
+                  className="inline-flex items-center justify-between bg-white text-[#12066a] font-black uppercase text-xs tracking-wider px-6 py-4 rounded-2xl w-full sm:w-auto gap-4 group hover:bg-[#997819] hover:text-white transition-all duration-300 shadow-lg text-center"
                 >
                   <span>Request an IT Consultation</span>
                   <ArrowUpRight
                     size={16}
-                    className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
+                    className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform shrink-0"
                   />
                 </Link>
               </FadeIn>

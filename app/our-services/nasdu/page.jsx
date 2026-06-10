@@ -127,7 +127,7 @@ const NASDUPage = () => {
             </FadeIn>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
                 title: "Trusted Industry Standards",
@@ -228,7 +228,7 @@ const NASDUPage = () => {
       <section className="py-14 bg-white">
         <div className="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row gap-20 items-center">
           <div className="lg:w-1/2">
-            <h2 className="text-5xl md:text-5xl font-black text-[#12066a] tracking-tighter leading-tighter mb-4 uppercase">
+            <h2 className="text-4xl md:text-5xl font-black text-[#12066a] tracking-tighter leading-tighter mb-4 uppercase">
               How NASDU Supports
               <span className="text-[#997819]"> UK Standards.</span>
             </h2>
@@ -276,7 +276,7 @@ const NASDUPage = () => {
               </p>
             </div>
           </div>
-          <div className="lg:w-1/2 relative h-[500px] w-full rounded-[4rem] overflow-hidden shadow-2xl">
+          <div className="lg:w-1/2 relative aspect-square w-full rounded-[4rem] overflow-hidden shadow-2xl">
             <Image
               src="/nasdu-discipline.jpg"
               fill
