@@ -24,7 +24,7 @@ const SecurityStartupPage = () => {
   return (
     <main className="bg-white text-zinc-900 overflow-hidden">
       {/* 🔹 1. HERO SECTION */}
-      <section className="relative h-[85vh] md:h-screen w-full flex items-center overflow-hidden bg-[#12066a]">
+      <section className="relative h-[90vh] md:h-screen w-full flex items-center overflow-hidden bg-[#12066a]">
         <div className="absolute inset-0 z-0">
           <Image
             src="/security-startup-hero.jpg" // Ensure this image exists
@@ -38,11 +38,11 @@ const SecurityStartupPage = () => {
 
         <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
           <FadeIn direction="up">
-            <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs mb-6 block">
+            <span className="text-[#997819] mt-10 md:mt-0 font-black uppercase tracking-[0.4em] text-xs mb-6 block">
               SIA & ACS Compliance Experts
             </span>
-            <h1 className="text-5xl md:text-7xl font-black text-white leading-[0.9] tracking-tighter uppercase mb-8">
-              Start and Scale Your <br />
+            <h1 className="text-3xl md:text-6xl font-black text-white leading-[0.9] tracking-tighter uppercase mb-8">
+              Start and Scale Your <br className="hidden md:block" />
               <span className="text-[#997819]">Security Startup.</span>
             </h1>
             <p className="text-blue-100/70 text-lg md:text-xl max-w-2xl font-medium leading-relaxed mb-10">
@@ -97,12 +97,12 @@ const SecurityStartupPage = () => {
                   width={600}
                   height={700}
                   alt="Private Security startup - BizGrow Holdings Ltd"
-                  className="object-cover"
+                  className="object-cover w-full"
                 />
               </div>
             </div>
             <div className="order-1 lg:order-2">
-              <h2 className="text-4xl md:text-5xl font-black text-[#12066a] uppercase tracking-tighter mb-8 leading-tight">
+              <h2 className="text-4xl md:text-5xl font-black text-[#12066a] uppercase tracking-tighter mb-8 leading-normnal">
                 Building a Foundation <br />{" "}
                 <span className="text-[#997819]">for Credibility.</span>
               </h2>
@@ -152,7 +152,7 @@ const SecurityStartupPage = () => {
       <section className="py-24 bg-zinc-50 border-y border-zinc-100">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
-            <h2 className="text-[#12066a] text-4xl md:text-6xl font-black uppercase tracking-tighter">
+            <h2 className="text-[#12066a] text-4xl md:text-5xl font-black uppercase tracking-tighter">
               Advantages Our{" "}
               <span className="text-[#997819]">Clients Gain</span>
             </h2>
@@ -272,7 +272,7 @@ const SecurityStartupPage = () => {
       <section className="py-24 bg-[#12066a] text-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-20">
-            <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none">
+            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none">
               Our Step-By-Step <br />{" "}
               <span className="text-[#997819]">Consultancy Process.</span>
             </h2>
@@ -366,7 +366,7 @@ const SecurityStartupPage = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="bg-white rounded-[4rem] p-10 md:p-20 text-[#12066a] flex flex-col lg:flex-row gap-16 border border-[#12066a] items-center">
             <div className="lg:w-1/2">
-              <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-8">
+              <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-8">
                 Why Startups Choose{" "}
                 <span className="text-[#997819]">BizGrow.</span>
               </h2>

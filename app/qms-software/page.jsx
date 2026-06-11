@@ -29,7 +29,7 @@ const QMSPage = () => {
             <span className="text-[#997819] font-black uppercase tracking-[0.5em] text-xs md:text-sm mb-6 inline-block bg-white/5 px-6 py-2.5 rounded-full backdrop-blur-md border border-white/10">
               UK-Based
             </span>
-            <h1 className="text-5xl md:text-7xl font-black text-white tracking-tighter leading-[0.85] italic mb-8 uppercase">
+            <h1 className="text-4xl md:text-6xl font-black text-white tracking-tighter leading-[0.95] italic mb-8 uppercase">
               QMS Software Solutions <br />
               <span className="text-[#997819]">by BizGrow Holdings</span>
             </h1>
@@ -65,8 +65,8 @@ const QMSPage = () => {
       <section className="py-24 md:py-32 bg-white relative z-20">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24 items-center">
-            {/* 🖼️ LEFT SIDE: Image Frame */}
-            <FadeIn direction="right">
+            {/* 🖼️ IMAGE SIDE: Desktop pe Order 1, Mobile pe Order 2 */}
+            <FadeIn direction="right" className="order-2 lg:order-1">
               <div className="relative group">
                 <div className="relative rounded-[3rem] md:rounded-[4.5rem] overflow-hidden shadow-2xl shadow-blue-900/10 border-[12px] border-slate-50">
                   <img
@@ -87,12 +87,12 @@ const QMSPage = () => {
               </div>
             </FadeIn>
 
-            {/* 📝 RIGHT SIDE: Content */}
-            <div className="flex flex-col">
+            {/* 📝 CONTENT SIDE: Desktop pe Order 2, Mobile pe Order 1 */}
+            <div className="order-1 lg:order-2 flex flex-col">
               <FadeIn direction="left">
                 <h2 className="text-[#12066a] text-4xl md:text-6xl font-black tracking-tighter leading-[0.9] mb-10">
                   What is QMS Software & <br />
-                  <span className="text-[#997819]  font-light">
+                  <span className="text-[#997819] font-light">
                     Why UK Businesses Need It
                   </span>
                 </h2>
@@ -107,28 +107,28 @@ const QMSPage = () => {
                   </p>
                 </div>
 
-                <div className="space-y-6 text-zinc-500 text-lg font-medium ">
+                <div className="space-y-6 text-zinc-500 text-lg font-medium">
                   <p>
                     It enables organisations to maintain consistent standards,
                     improve operational efficiency, and meet recognised
                     frameworks such as{" "}
                     <Link
                       href="https://bizgrow-holdings.com/iso-9001-guide/"
-                      className="text-[#997819] font-bold"
+                      className="text-[#997819] font-bold hover:underline"
                     >
                       ISO 9001
                     </Link>
                     ,{" "}
                     <Link
                       href="https://bizgrow-holdings.com/iso-14001-consulting-services/"
-                      className="text-[#997819] font-bold"
+                      className="text-[#997819] font-bold hover:underline"
                     >
                       ISO 14001
                     </Link>
                     , and{" "}
                     <Link
                       href="https://bizgrow-holdings.com/is-iso-45001-the-essential-solution-for-safety-and-compliance/"
-                      className="text-[#997819] font-bold"
+                      className="text-[#997819] font-bold hover:underline"
                     >
                       ISO 45001
                     </Link>
@@ -139,8 +139,7 @@ const QMSPage = () => {
                     software is essential for maintaining compliance and audit
                     readiness. It helps ensure accurate documentation, reduces
                     the risk of non-conformities, and streamlines internal
-                    processes. Ultimately, it supports businesses in building
-                    credibility and securing more contracts in the UK market.
+                    processes.
                   </p>
                 </div>
               </FadeIn>
@@ -168,7 +167,7 @@ const QMSPage = () => {
 
         <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
           <FadeIn direction="up">
-            <h2 className="text-3xl md:text-7xl font-black tracking-tighter text-center mb-20 italic uppercase">
+            <h2 className="text-3xl md:text-6xl font-black tracking-tighter text-center mb-20 italic uppercase">
               Common Quality &{" "}
               <span className="text-[#997819]">
                 Compliance Challenges in UK Businesses
@@ -232,7 +231,7 @@ const QMSPage = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
             <FadeIn direction="up">
-              <h2 className="text-[#12066a] text-5xl md:text-7xl font-black tracking-tighter mb-6">
+              <h2 className="text-[#12066a] text-4xl md:text-7xl font-black tracking-tighter mb-6">
                 Key Features of{" "}
                 <span className="text-[#997819]">BizGrow QMS Software</span> for
                 UK Companies
@@ -406,7 +405,7 @@ const QMSPage = () => {
             {/* Content Container (z-index ensure karega text upar rahe) */}
             <div className="relative z-10 flex flex-col items-center">
               <FadeIn direction="up">
-                <h2 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-none mb-10 uppercase">
+                <h2 className="text-3xl md:text-6xl font-black text-white tracking-tighter leading-none mb-10 uppercase">
                   Get Started with{" "}
                   <span className="text-[#997819]">BizGrow QMS Software</span>{" "}
                   in the UK

@@ -81,15 +81,15 @@ const BS7858Page = () => {
             <FadeIn direction="right" duration="1.0">
               <Link
                 href="/contact-us"
-                className="relative group/btn overflow-hidden inline-flex items-center justify-center bg-[#997819] text-white px-16 py-6 my-4 rounded-2xl font-black uppercase tracking-[0.3em] text-xs transition-all duration-500 shadow-3xl active:scale-95"
+                className="relative mt-4 group/btn overflow-hidden inline-flex items-center justify-center bg-[#997819] text-white px-6 md:px-12 py-5 md:py-6 rounded-2xl font-black uppercase tracking-[0.1em] md:tracking-[0.2em] text-[10px] md:text-xs transition-all duration-500 shadow-xl active:scale-95 w-full sm:w-auto text-center"
               >
-                {/* Layer 1: The Text (Top Layer) */}
-                <span className="relative z-40 transition-colors duration-500 group-hover/btn:text-[#12066a]">
+                {/* Layer 1: Text */}
+                <span className="relative z-40 transition-colors duration-500 group-hover/btn:text-[#12066a] whitespace-nowrap">
                   Book a Screening Consultation
                 </span>
 
-                {/* Layer 2: The Animated Background (Middle Layer) */}
-                <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 base-out z-30" />
+                {/* Layer 2: Animated Background */}
+                <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
               </Link>
             </FadeIn>
           </div>
@@ -319,10 +319,13 @@ const BS7858Page = () => {
               </div>
             </div>
 
-            {/* RIGHT COLUMN: PROCEDURE STEPS */}
-            <div className="bg-white/5 backdrop-blur-md p-8 md:p-12 rounded-[3rem] border border-white/10 shadow-2xl relative">
-              <div className="absolute -top-6 -right-6 bg-[#997819] text-white px-6 py-2 rounded-full font-black text-[10px] uppercase tracking-widest shadow-xl">
-                The Process
+            {/* RIGHT COLUMN: PROCEDURE STEPS (Responsive Gold Tag) */}
+            <div className="bg-white/5 backdrop-blur-md p-8 md:p-12 rounded-[3rem] border border-white/10 shadow-2xl relative mt-10 md:mt-0">
+              {/* Gold Tag: Responsive Position */}
+              <div className="flex justify-center md:absolute md:-top-6 md:-right-6 mb-6 md:mb-0">
+                <div className="bg-[#997819] text-white px-6 py-2 rounded-full font-black text-[10px] uppercase tracking-widest shadow-xl">
+                  The Process
+                </div>
               </div>
 
               <h3 className="text-2xl font-black text-white uppercase italic tracking-tighter mb-4 text-center">
@@ -331,6 +334,7 @@ const BS7858Page = () => {
                   BS7858 Screening and Vetting:
                 </span>
               </h3>
+
               <p className="text-blue-100/40 text-[10px] uppercase font-bold tracking-widest text-center mb-8">
                 Ensuring dependable & trustworthy personnel selection
               </p>
@@ -370,7 +374,7 @@ const BS7858Page = () => {
           <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-center uppercase mb-2">
             THE VETTING <span className="text-[#997819]">GAP.</span>
           </h2>
-          <p className="text-black MD:mx-28 my-10 text-center">
+          <p className="text-black md:mx-28 my-10 text-center">
             Not all background checks provide the same level of security. Basic
             screening only verifies limited information, while{" "}
             <Link
@@ -412,7 +416,7 @@ const BS7858Page = () => {
       <section className="py-32 bg-[#12066a]">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter uppercase leading-none text-center">
+            <h2 className="text-4xl md:text-6-xl font-black text-white tracking-tighter uppercase leading-none text-center">
               SCREENING <span className="text-[#997819]">PHASES.</span>
             </h2>
             <p className="text-white my-6 md:mx-28">
@@ -511,51 +515,55 @@ const BS7858Page = () => {
         </div>
       </section>
 
-      {/* 🔹 7. CALL TO ACTION (Fixed Parallax Style) */}
-      <section className="py-24 px-6 bg-white relative">
-        <FadeIn direction="up">
-          <div className="max-w-7xl mx-auto relative rounded-[4rem] overflow-hidden shadow-3xl group">
-            <div
-              className="absolute inset-0 z-0 bg-cover bg-center bg-fixed"
-              style={{ backgroundImage: "url('/vetting-cta-bg.jpg')" }}
-            >
-              <div className="absolute inset-0 bg-[#12066a] mix-blend-multiply" />
-            </div>
+      {/* 🔹 7. CALL TO ACTION (Responsive Optimized) */}
+      <section className="py-12 md:py-24 px-4 md:px-6 bg-white relative">
+        <div className="max-w-7xl mx-auto relative rounded-[2rem] md:rounded-[4rem] overflow-hidden shadow-3xl">
+          {/* Image Background */}
+          <div
+            className="absolute inset-0 z-0 bg-cover bg-center"
+            style={{ backgroundImage: "url('/vetting-cta-bg.jpg')" }}
+          >
+            <div className="absolute inset-0 bg-[#12066a]/90 mix-blend-multiply" />
+          </div>
 
-            <div className="relative z-10 p-12 md:p-24 text-center flex flex-col items-center">
-              <h2 className="text-4xl md:text-5xl lg:text-8xl font-black text-white tracking-tighter mb-10 uppercase leading-[0.9]">
-                GET YOUR STAFF <br />
-                <span className="text-[#997819]">BS 7858 COMPLIANT.</span>
-              </h2>
-              <p className="text-white mb-6 md:mx-28">
-                Ensure your workforce meets the BS 7858 screening standard with
-                professional vetting and compliant documentation for
-                security-sensitive roles.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-6">
-                <Link
-                  href="/contact-us"
-                  className="relative group/btn overflow-hidden inline-flex items-center justify-center gap-3 bg-[#997819] text-white px-16 py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-[10px] transition-all duration-700 shadow-2xl active:scale-95"
-                >
-                  {/* Layer 1: Text & Icon (Top Layer) */}
-                  <span className="relative z-40 flex items-center gap-3 transition-colors duration-700 group-hover/btn:text-[#12066a]">
-                    Start Vetting Now
-                    <ArrowRight className="group-hover/btn:translate-x-2 transition-transform duration-500" />
-                  </span>
+          {/* Content */}
+          <div className="relative z-10 p-8 md:p-24 text-center flex flex-col items-center">
+            <h2 className="text-3xl sm:text-5xl lg:text-7xl font-black text-white tracking-tighter mb-6 md:mb-10 uppercase leading-[0.9]">
+              GET YOUR STAFF <br />
+              <span className="text-[#997819]">BS 7858 COMPLIANT.</span>
+            </h2>
 
-                  {/* Layer 2: Sliding Background (Middle Layer) */}
-                  <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-700 ease-out z-30" />
-                </Link>
-                <a
-                  href="tel:+447898205035"
-                  className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-10 py-6 rounded-2xl font-black uppercase tracking-[0.2em] text-[10px] flex items-center gap-3"
-                >
-                  <PhoneCall size={18} /> Call a Compliance Specialist
-                </a>
-              </div>
+            <p className="text-blue-100/80 text-sm md:text-base mb-8 max-w-2xl mx-auto leading-relaxed">
+              Ensure your workforce meets the BS 7858 screening standard with
+              professional vetting and compliant documentation for
+              security-sensitive roles.
+            </p>
+
+            {/* Buttons */}
+            <div className="flex flex-col w-full sm:w-auto sm:flex-row gap-4">
+              <Link
+                href="/contact-us"
+                className="relative group/btn overflow-hidden inline-flex items-center justify-center gap-2 md:gap-3 bg-[#997819] text-white px-6 py-5 md:px-12 md:py-6 rounded-2xl font-black uppercase tracking-[0.05em] md:tracking-[0.2em] text-[10px] md:text-xs transition-all duration-700 w-full sm:w-auto text-center"
+              >
+                <span className="relative z-40 whitespace-nowrap flex items-center gap-2">
+                  Start Vetting Now
+                  <ArrowRight
+                    size={14}
+                    className="group-hover/btn:translate-x-2 transition-transform duration-500"
+                  />
+                </span>
+                <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-700 ease-out z-30" />
+              </Link>
+
+              <a
+                href="tel:+447898205035"
+                className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 py-5 md:px-8 md:py-6 rounded-2xl font-black uppercase tracking-[0.05em] md:tracking-[0.15em] text-[10px] md:text-xs flex items-center justify-center gap-2 w-full sm:w-auto"
+              >
+                <PhoneCall size={14} /> Call Specialist
+              </a>
             </div>
           </div>
-        </FadeIn>
+        </div>
       </section>
     </main>
   );

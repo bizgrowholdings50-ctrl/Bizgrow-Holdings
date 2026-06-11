@@ -25,7 +25,7 @@ const ComplianceConsultancyPage = () => {
   return (
     <main className="bg-white">
       {/* 🔹 HERO SECTION */}
-      <section className="relative h-[70vh] md:h-screen w-full flex items-center overflow-hidden bg-[#12066a]">
+      <section className="relative h-[90vh] md:h-screen w-full flex items-center overflow-hidden bg-[#12066a]">
         <div className="absolute inset-0 opacity-20">
           <Image
             src="/compliance-hero-bg.jpg"
@@ -39,7 +39,7 @@ const ComplianceConsultancyPage = () => {
             <span className="text-[#997819] font-bold uppercase tracking-[0.4em] text-sm mb-6 block">
               Strategic Industry Alignment
             </span>
-            <h1 className="text-white text-5xl md:text-8xl font-black uppercase tracking-tighter leading-[0.9] mb-8">
+            <h1 className="text-white text-5xl md:text-7xl font-black uppercase tracking-tighter leading-[0.9] mb-8">
               Compliance <br />{" "}
               <span className="text-[#997819]">Consultancies.</span>
             </h1>
@@ -58,7 +58,7 @@ const ComplianceConsultancyPage = () => {
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <div>
             <h2 className="text-[#12066a] text-4xl md:text-5xl font-black uppercase tracking-tighter mb-8">
-              Expert Guidance for <br />{" "}
+              Expert Guidance for <br className="hidden md:block"/>{" "}
               <span className="text-[#997819]">Regulated Excellence.</span>
             </h2>
             <p className="text-zinc-600 text-lg mb-6 leading-relaxed ">
@@ -126,8 +126,8 @@ const ComplianceConsultancyPage = () => {
                 <span className="text-[#997819] font-black uppercase tracking-[0.3em] text-xs mb-4 block">
                   Strategic Necessity
                 </span>
-                <h2 className="text-white text-5xl md:text-6xl font-black uppercase tracking-tighter leading-[0.9]">
-                  Why Compliance <br />
+                <h2 className="text-white text-4xl md:text-5xl font-black uppercase tracking-tighter leading-[0.9]">
+                  Why Compliance <br  />
                   <span className="text-[#997819]">Is Important.</span>
                 </h2>
                 <div className="h-1 w-20 bg-[#997819] mt-8" />
@@ -199,7 +199,7 @@ const ComplianceConsultancyPage = () => {
               Our Strategic <span className="text-[#997819]">Services</span>
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {[
               {
                 title: "Gap Analysis",
@@ -257,7 +257,7 @@ const ComplianceConsultancyPage = () => {
               <span className="text-[#997819] font-black uppercase tracking-[0.3em] text-xs mb-4 block">
                 The BizGrow Advantage
               </span>
-              <h2 className="text-[#12066a] text-5xl md:text-7xl font-black uppercase tracking-tighter leading-[0.9] italic">
+              <h2 className="text-[#12066a] text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[0.9] italic">
                 Benefits of <br />
                 <span className="text-[#997819]">Working With Us.</span>
               </h2>
@@ -331,7 +331,7 @@ const ComplianceConsultancyPage = () => {
             ].map((benefit, i) => (
               <FadeIn key={i} direction="up" delay={i * 0.1}>
                 <div className="group p-10 rounded-[2.5rem] bg-zinc-50 border border-zinc-100 hover:border-[#997819]/30 hover:bg-white hover:shadow-2xl transition-all duration-500 flex flex-col h-full">
-                  <div className="w-14 h-14 bg-[#12066a] text-[#997819] rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500 shadow-lg">
+                  <div className="w-14 h-14 bg-[#12066a] text-white rounded-2xl flex items-center justify-center mb-8 group-hover:scale-110 transition-transform duration-500 shadow-lg">
                     {benefit.icon}
                   </div>
                   <h3 className="text-[#12066a] font-black uppercase tracking-tighter text-2xl mb-4 italic">
@@ -352,7 +352,7 @@ const ComplianceConsultancyPage = () => {
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <div>
-              <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter leading-none mb-10">
+              <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none mb-10">
                 STRENGTHENING <br />{" "}
                 <span className="text-[#997819]">REPUTATION.</span>
               </h2>
@@ -434,7 +434,7 @@ const ComplianceConsultancyPage = () => {
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#997819]/5 blur-[80px] rounded-full -translate-x-1/2 translate-y-1/2" />
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="flex flex-col lg:flex-row gap-16 items-center">
+          <div className="flex flex-col-reverse lg:flex-row gap-16 items-center">
             {/* Left Side: Image/Visual Element */}
             <div className="w-full lg:w-5/12">
               <FadeIn direction="right">
@@ -464,7 +464,7 @@ const ComplianceConsultancyPage = () => {
                 <span className="text-[#997819] font-black uppercase tracking-[0.3em] text-xs mb-4 block">
                   The Strategic Choice
                 </span>
-                <h2 className="text-[#12066a] text-5xl md:text-6xl font-black uppercase tracking-tighter leading-[0.9] mb-10 italic">
+                <h2 className="text-[#12066a] text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[0.9] mb-10 italic">
                   Why Choose <br />
                   <span className="text-[#997819]">BizGrow Holdings.</span>
                 </h2>
@@ -508,13 +508,13 @@ const ComplianceConsultancyPage = () => {
       {/* 🔹 FINAL CALL TO ACTION */}
       <section className="py-32 bg-white text-center">
         <div className="max-w-4xl mx-auto px-6">
-          <h2 className="text-5xl md:text-7xl font-black text-[#12066a] uppercase tracking-tighter mb-10 leading-none">
+          <h2 className="text-4xl md:text-6xl font-black text-[#12066a] uppercase tracking-tighter mb-10 leading-none">
             Ready to Achieve <br />{" "}
             <span className="text-[#997819]">Excellence?</span>
           </h2>
           <Link
             href="/contact-us"
-            className="relative group/btn overflow-hidden inline-flex items-center justify-center bg-[#12066a] text-white px-12 py-6 rounded-2xl font-black uppercase tracking-widest text-xs transition-all duration-500 shadow-2xl active:scale-95"
+            className="relative group/btn overflow-hidden inline-flex items-center justify-center bg-[#12066a] text-white px-6 py-4 md:px-12 md:py-6 rounded-2xl font-black uppercase tracking-widest text-xs transition-all duration-500 shadow-2xl active:scale-95"
           >
             {/* Layer 1: The Text (Top Layer) */}
             <span className="relative z-40 transition-colors duration-500 group-hover/btn:text-white">

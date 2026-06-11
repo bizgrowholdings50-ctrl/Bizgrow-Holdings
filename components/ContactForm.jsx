@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Send,
   ArrowRight,
@@ -169,7 +169,7 @@ const ServiceStep = ({ selectedServices, setSelectedServices, onContinue }) => {
 };
 
 // ─── Step 2: Contact Form ────────────────────────────────────────────────────
-const ContactStep = ({ selectedServices, onBack }) => {
+const ContactStep = ({ selectedServices, onBack, coupon }) => {
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
   const [captchaToken, setCaptchaToken] = useState(null);
@@ -189,7 +189,9 @@ const ContactStep = ({ selectedServices, onBack }) => {
       email: e.target.email.value,
       number: e.target.number.value,
       service: selectedServices.join(", "), // Step 1 services passed here
-      message: e.target.msg.value,
+      // Logic: Send coupon if exists, otherwise send regular message
+      message: coupon ? `Coupon Applied: ${coupon}` : e.target.msg.value, 
+      coupon: coupon || "", 
       captchaToken: captchaToken,
     };
 
@@ -350,18 +352,35 @@ const ContactStep = ({ selectedServices, onBack }) => {
           </label>
         </div>
 
-        <div className="relative group md:col-span-2">
-          <textarea
-            name="msg"
-            id="msg"
-            placeholder=" "
-            className={`${inputClasses} min-h-[100px] py-4 resize-none`}
-            required
-          />
-          <label htmlFor="msg" className={labelClasses}>
-            Briefly describe your objectives
-          </label>
-        </div>
+        {/* Dynamic Logics: Show Coupon field if URL has coupon, otherwise regular text box */}
+        {coupon ? (
+          <div className="relative group md:col-span-2">
+            <input
+              type="text"
+              value={`COUPON APPLIED: ${coupon}`}
+              readOnly
+              className={`${inputClasses} border-[#997819] text-[#997819]`}
+            />
+            {/* Custom label styling for readonly coupon field to keep it floated */}
+            <label className="absolute left-0 top-5 text-[#997819] pointer-events-none transition-all duration-500 origin-left uppercase tracking-[0.3em] font-black text-[10px] -translate-y-10">
+              Coupon Code
+            </label>
+            <input type="hidden" name="coupon" value={coupon} />
+          </div>
+        ) : (
+          <div className="relative group md:col-span-2">
+            <textarea
+              name="msg"
+              id="msg"
+              placeholder=" "
+              className={`${inputClasses} min-h-[100px] py-4 resize-none`}
+              required
+            />
+            <label htmlFor="msg" className={labelClasses}>
+              Briefly describe your objectives
+            </label>
+          </div>
+        )}
       </div>
 
       {/* Turnstile */}
@@ -435,6 +454,27 @@ const ContactStep = ({ selectedServices, onBack }) => {
 const ContactForm = () => {
   const [step, setStep] = useState(1);
   const [selectedServices, setSelectedServices] = useState([]);
+  const [coupon, setCoupon] = useState("");
+
+  useEffect(() => {
+    // Ye logic page load hone pe URL parameters fetch karti hai
+    const params = new URLSearchParams(window.location.search);
+    const urlCoupon = params.get("coupon");
+    const urlServices = params.get("services");
+
+    if (urlCoupon) {
+      setCoupon(urlCoupon);
+    }
+    
+    if (urlServices) {
+      // String ko array mein split karke state mein set karte hain
+      const parsedServices = urlServices.split(",").map((s) => s.trim());
+      setSelectedServices(parsedServices);
+      
+      // Seedha Step 2 par bhej dete hain
+      setStep(2);
+    }
+  }, []);
 
   return (
     <>
@@ -459,6 +499,7 @@ const ContactForm = () => {
       ) : (
         <ContactStep
           selectedServices={selectedServices}
+          coupon={coupon}
           onBack={() => setStep(1)}
         />
       )}

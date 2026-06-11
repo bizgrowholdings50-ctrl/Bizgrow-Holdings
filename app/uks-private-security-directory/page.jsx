@@ -46,7 +46,7 @@ const MarketingSolutionsPage = () => {
                 TRUSTED SECURITY NETWORK
               </span>
             </div>
-            <h1 className="text-6xl md:text-7xl font-black text-white leading-[0.85] tracking-tighter uppercase">
+            <h1 className="text-5xl md:text-7xl font-black text-white leading-[0.95] tracking-tighter uppercase">
               UK’S PRIVATE <br />
               <span className="text-[#997819]">SECURITY DIRECTORY.</span>
             </h1>
@@ -69,16 +69,16 @@ const MarketingSolutionsPage = () => {
       {/* 🔹 2. STRATEGIC OVERVIEW (Content-Heavy Split Layout) */}
       <section className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col lg:flex-row items-center gap-24">
+          <div className="flex flex-col-reverse lg:flex-row items-center gap-24">
             <div className="lg:w-1/2 relative">
               <div className="absolute -inset-4 bg-zinc-100 rounded-[4rem] -rotate-2" />
-              <div className="relative rounded-[4rem] overflow-hidden shadow-2xl rotate-2 hover:rotate-0 transition-all duration-700">
+              <div className="relative rounded-[4rem] aspect-[4/5] overflow-hidden shadow-2xl rotate-2 hover:rotate-0 transition-all duration-700">
                 <Image
                   src="/strategy-meeting.webp"
                   width={600}
                   height={750}
                   alt="UK’s Private Security Directory - BizGrow Holdings Ltd"
-                  className="object-cover h-[650px]"
+                  className="object-cover h-full"
                 />
               </div>
             </div>
@@ -86,7 +86,7 @@ const MarketingSolutionsPage = () => {
               <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs mb-6 block">
                 OUR DIRECTORY
               </span>
-              <h2 className="text-5xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-tight mb-8">
+              <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-[0.98] mb-8">
                 UK’s Private <br />
                 <span className="text-[#997819]">Security Directory.</span>
               </h2>
@@ -146,9 +146,9 @@ const MarketingSolutionsPage = () => {
       </section>
 
       {/* 🔹 3. ROI METRICS (Dark Dashboard Style) */}
-      <section className="py-24 bg-[#12066a] mx-6 rounded-[4rem] my-10 relative overflow-hidden">
+      <section className="py-24 bg-[#12066a] mx-6 px-8 rounded-[4rem] my-10 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-10 relative z-10">
-          <div className="grid md:grid-cols-4 gap-12">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
             {[
               { n: "100+", t: "SECURITY COMPANIES" },
               { n: "UK WIDE", t: "SERVICE COVERAGE" },
@@ -157,9 +157,9 @@ const MarketingSolutionsPage = () => {
             ].map((stat, i) => (
               <div
                 key={i}
-                className="text-center md:text-left border-l border-white/10 pl-8"
+                className="text-center md:text-left border-l border-white/10"
               >
-                <h3 className="text-5xl font-black text-white tracking-tighter mb-2">
+                <h3 className="text-4xl md:text-5xl font-black text-white tracking-tighter mb-2">
                   {stat.n}
                 </h3>
                 <p className="text-[#997819] font-black uppercase tracking-widest text-[10px]">
@@ -172,11 +172,11 @@ const MarketingSolutionsPage = () => {
       </section>
 
       {/* 🔹 4. DETAILED SOLUTIONS (Interactive List Style) */}
-      <section className="py-32 bg-white">
+      <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-20 items-start">
             <div>
-              <h2 className="text-5xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-[0.9] uppercase mb-6">
+              <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-[0.9] uppercase mb-6">
                 Why Use the UK’s <br />
                 <span className="text-[#997819]">
                   Private Security Directory
@@ -259,14 +259,16 @@ const MarketingSolutionsPage = () => {
       </section>
 
       {/* 🔹 5. CORE PILLARS (3-Column Vertical Layout) */}
-      <section className="py-32 bg-white">
+      <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-24">
             <h2 className="text-5xl font-black text-[#12066a] uppercase">
-              The Pillars of TRUST
+              The <span className="text-[#997819]">Pillars</span> of TRUST
             </h2>
           </div>
-          <div className="grid md:grid-cols-3 gap-16">
+
+          {/* Grid System: 1 col (mob) -> 2 cols (tab) -> 3 cols (desk) */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-16">
             {[
               {
                 t: "VERIFIED COMPANIES",
@@ -275,7 +277,7 @@ const MarketingSolutionsPage = () => {
                     We showcase private{" "}
                     <Link
                       href="https://bizgrow-holdings.com/top-security-companies-trusted-protection-for-every-business/"
-                      className="text-[#997819] font-bold"
+                      className="text-[#997819] font-bold hover:underline"
                     >
                       security companies
                     </Link>{" "}
@@ -298,9 +300,13 @@ const MarketingSolutionsPage = () => {
             ].map((pillar, i) => (
               <div
                 key={i}
-                className="text-center border border-[#12066a] rounded-3xl transition-transform hover:scale-105 duration-300 p-3"
+                className={`
+            text-center border border-[#12066a] rounded-3xl transition-transform hover:scale-105 duration-300 p-8
+            /* Logic: Tablet (md) screen par teesra card center mein aa jayega */
+            ${i === 2 ? "md:col-span-2 lg:col-span-1 mx-auto w-full md:max-w-[400px] lg:max-w-none" : ""}
+          `}
               >
-                <div className="w-20 h-20 bg-zinc-50 rounded-3xl flex items-center justify-center mx-auto mb-8 text-[#997819] group-hover:rotate-12 transition-transform">
+                <div className="w-20 h-20 bg-zinc-50 rounded-3xl flex items-center justify-center mx-auto mb-8 text-[#997819]">
                   {pillar.icon}
                 </div>
                 <h3 className="text-2xl font-black text-[#12066a] uppercase mb-4">
@@ -324,7 +330,7 @@ const MarketingSolutionsPage = () => {
                 <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs mb-4 block">
                   Maximising Value
                 </span>
-                <h2 className="text-5xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-tight mb-8 uppercase">
+                <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-tight mb-8 uppercase">
                   Key Benefits of <br />
                   <span className="text-[#997819]">The Directory.</span>
                 </h2>
@@ -390,18 +396,19 @@ const MarketingSolutionsPage = () => {
       </section>
 
       {/* 🔹 7. INDUSTRY REACH (h3 in Map) */}
-      <section className="py-24 bg-[#12066a] rounded-t-[5rem]">
+      <section className="py-12 md:py-24 bg-[#12066a] rounded-t-[3rem] md:rounded-t-[5rem]">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col justify-between items-center mb-16 gap-8">
-            <h2 className="text-7xl text-center font-black text-white uppercase tracking-tighter">
+          {/* Header Section */}
+          <div className="flex flex-col items-center mb-12 md:mb-16 gap-4 md:gap-8">
+            <h2 className="text-4xl md:text-7xl text-center font-black text-white uppercase tracking-tighter leading-[0.9]">
               Industries We <br />
               <span className="text-[#997819]">SERVE.</span>
             </h2>
-            <p className="text-blue-100/50 max-w-xl  text-center text-lg">
+            <p className="text-blue-100/50 max-w-xl text-center text-sm md:text-lg leading-relaxed">
               Connecting businesses with trusted and compliant private{" "}
               <Link
                 href="https://bizgrow-holdings.com/how-bizgrow-holdings-helps-security-companies-win-contracts-in-the-uk/"
-                className="text-[#997819] font-bold"
+                className="text-[#997819] font-bold hover:underline"
               >
                 security companies
               </Link>{" "}
@@ -409,7 +416,9 @@ const MarketingSolutionsPage = () => {
               protection services.
             </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+
+          {/* Grid System: 1 col (mobile) -> 2 cols (tablet) -> 4 cols (desktop) */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {[
               "CORPORATE & COMMERCIAL",
               "CONSTRUCTION SITES",
@@ -418,12 +427,12 @@ const MarketingSolutionsPage = () => {
             ].map((item, i) => (
               <div
                 key={i}
-                className="p-10 bg-white/5 border border-white/10 rounded-[2rem] hover:bg-[#997819] transition-all duration-500 group"
+                className="p-8 md:p-10 bg-white/5 border border-white/10 rounded-[2rem] hover:bg-[#997819] transition-all duration-500 group cursor-pointer"
               >
-                <h3 className="text-white font-black uppercase text-sm tracking-widest">
+                <h3 className="text-white font-black uppercase text-xs md:text-sm tracking-widest leading-snug">
                   {item}
                 </h3>
-                <ArrowUpRight className="text-white/20 mt-4 group-hover:translate-x-2 transition-transform" />
+                <ArrowUpRight className="text-white/20 mt-6 md:mt-4 group-hover:text-white group-hover:translate-x-2 transition-all duration-300" />
               </div>
             ))}
           </div>

@@ -55,7 +55,7 @@ const BS7499Page = () => {
             </FadeIn>
 
             <FadeIn direction="right" delay={0.2}>
-              <h1 className="text-5xl md:text-8xl font-black text-white mt-6 leading-[1.1] tracking-tighter uppercase">
+              <h1 className="text-5xl md:text-7xl font-black text-white mt-6 leading-[1.1] tracking-tighter uppercase">
                 BS 7499 <br />
                 <span className="text-[#997819]">OPERATIONS.</span>
               </h1>
@@ -75,9 +75,9 @@ const BS7499Page = () => {
       {/* 🔹 2. OPERATIONAL STANDARDS (Core Focus) */}
       <section className="py-24 bg-zinc-50">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-5xl md:text-7xl font-black text-[#12066a] tracking-tighter uppercase mb-16 leading-none">
-            SITE <br />
-            <span className="text-[#997819]">PROTOCOLS.</span>
+          <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter uppercase mb-6 md:mb-16 leading-none">
+            SITE
+            <span className="text-[#997819] ml-3">PROTOCOLS.</span>
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
@@ -130,9 +130,9 @@ const BS7499Page = () => {
       </section>
 
       {/* 🔹 3. THE BIZGROW ADVANTAGE (Why Us) */}
-      <section className="py-32 bg-white">
-        <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row gap-20 items-center">
-          <div className="md:w-1/2">
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row gap-20 items-center">
+          <div className="lg:w-1/2">
             <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter uppercase mb-10 leading-tight">
               Why <span className="text-[#997819]">BS 7499 </span> Certification
               Matters
@@ -169,13 +169,13 @@ const BS7499Page = () => {
               services market.
             </p>
           </div>
-          <div className="md:w-1/2 relative rounded-[4rem] overflow-hidden shadow-2xl">
+          <div className="lg:w-1/2 aspect-square relative rounded-[4rem] overflow-hidden shadow-2xl">
             <Image
               src="/t.jpg"
               alt="Why BS 7499 Certification Matters"
               width={600}
               height={600}
-              className="object-cover h-137.5"
+              className="object-cover h-full"
             />
           </div>
         </div>
@@ -234,9 +234,9 @@ const BS7499Page = () => {
             {/* Left Column: Context & Title */}
             <FadeIn direction="right">
               <div>
-                <h2 className="text-5xl md:text-7xl font-black text-[#12066a] tracking-tighter uppercase leading-none mb-8">
-                  KEY <br />
-                  <span className="text-[#997819]">REQUIREMENTS.</span>
+                <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter uppercase leading-none mb-8">
+                  KEY 
+                  <span className="text-[#997819] ml-2">REQUIREMENTS.</span>
                 </h2>
                 <p className="text-zinc-600 font-medium text-lg leading-relaxed mb-6">
                   BS 7499 sets out clear operational requirements for companies
@@ -313,7 +313,7 @@ const BS7499Page = () => {
               ].map((item, index) => (
                 <FadeIn key={index} direction="up" delay={index * 0.1}>
                   <div className="h-full bg-zinc-50 p-8 rounded-[2rem] border border-zinc-100 hover:border-[#997819]/30 transition-all group hover:shadow-lg">
-                    <div className="w-12 h-12 rounded-xl bg-[#12066a] text-[#997819] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <div className="w-12 h-12 rounded-xl bg-[#12066a] text-white flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                       {item.icon}
                     </div>
                     <h3 className="font-black text-[#12066a] uppercase text-xs tracking-widest mb-3">
@@ -334,7 +334,7 @@ const BS7499Page = () => {
       <section className="py-32 bg-zinc-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
-            <h2 className="text-5xl font-black text-[#12066a] tracking-tighter uppercase leading-none text-center">
+            <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter uppercase leading-none text-center">
               AUDIT <span className="text-[#997819]">PROCESS.</span>
             </h2>
           </div>
@@ -413,7 +413,7 @@ const BS7499Page = () => {
               <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs">
                 Strategic Advantage
               </span>
-              <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter uppercase mt-4">
+              <h2 className="text-3xl md:text-7xl font-black text-white  tracking-tighter uppercase mt-4">
                 Benefits of <span className="text-[#997819]">BS 7499</span>{" "}
                 Certification
               </h2>
@@ -496,7 +496,7 @@ const BS7499Page = () => {
             {/* Left Content Column */}
             <div className="lg:w-1/2">
               <FadeIn direction="right">
-                <h2 className="text-5xl md:text-7xl font-black text-[#12066a] tracking-tighter uppercase leading-[0.9] mb-10">
+                <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter uppercase leading-[0.9] mb-10">
                   Get Certified <br />
                   <span className="text-[#997819]">With BizGrow.</span>
                 </h2>
@@ -597,7 +597,7 @@ const BS7499Page = () => {
       {/* 🔹 6. FAQs (SEO Boost) */}
       <section className="py-32 bg-white">
         <div className="max-w-4xl mx-auto px-6">
-          <h2 className="text-5xl md:text-6xl font-black text-[#12066a] tracking-tighter uppercase md:mb-20 text-center">
+          <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter uppercase md:mb-20 text-center">
             COMMON <span className="text-[#997819]">QUERIES.</span>
           </h2>
           <div className="space-y-6">
@@ -646,29 +646,38 @@ const BS7499Page = () => {
           </div>
 
           <div className="relative z-10 p-12 md:p-24 text-center flex flex-col items-center">
-            <h2 className="text-4xl md:text-7xl font-black text-white tracking-tighter mb-10 uppercase leading-[0.9]">
+            <h2 className="text-3xl md:text-6xl font-black text-white tracking-tighter mb-10 uppercase leading-[0.9]">
               STANDARDISE YOUR <br />
               <span className="text-[#997819]">GUARDING OPERATIONS.</span>
             </h2>
             <div className="flex flex-col sm:flex-row gap-6">
               <Link
                 href="/contact-us"
-                className="relative group/btn overflow-hidden inline-flex items-center justify-center gap-3 bg-[#997819] text-white px-16 py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-[10px] transition-all duration-700 shadow-2xl active:scale-95"
+                className="relative group/btn overflow-hidden inline-flex items-center justify-center gap-2 md:gap-3 bg-[#997819] text-white 
+  px-6 py-5 md:px-16 md:py-6 rounded-2xl font-black uppercase 
+  tracking-[0.05em] md:tracking-[0.3em] text-[10px] md:text-xs 
+  transition-all duration-700 shadow-2xl active:scale-95 w-full sm:w-auto text-center"
               >
-                {/* Layer 1: Text & Icon (Top Layer) */}
-                <span className="relative z-40 flex items-center gap-3 transition-colors duration-700 group-hover/btn:text-[#12066a]">
+                <span className="relative z-40 flex items-center justify-center gap-2 md:gap-3 transition-colors duration-700 group-hover/btn:text-[#12066a] whitespace-nowrap">
                   Audit My Operations
-                  <ArrowRight className="group-hover/btn:translate-x-2 transition-transform duration-500" />
+                  <ArrowRight
+                    size={14}
+                    className="group-hover/btn:translate-x-2 transition-transform duration-500"
+                  />
                 </span>
 
-                {/* Layer 2: Sliding Background (Middle Layer) */}
                 <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-700 ease-out z-30" />
               </Link>
               <a
                 href="tel:+447898205035"
-                className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-10 py-6 rounded-2xl font-black uppercase tracking-[0.2em] text-[10px] flex items-center gap-3 transition-all duration-500"
+                className="bg-white/10 backdrop-blur-md border border-white/20 text-white 
+  px-6 py-5 md:px-8 md:py-6 rounded-2xl font-black uppercase 
+  tracking-[0.05em] md:tracking-[0.15em] text-[10px] md:text-xs 
+  flex items-center justify-center gap-2 w-full sm:w-auto text-center"
               >
-                <PhoneCall size={18} /> Call Consultant
+                {/* Yahan 'size' prop ko fix rakhein aur 'className' se styling manage karein */}
+                <PhoneCall className="w-3.5 h-3.5 md:w-4.5 md:h-4.5" />
+                <span className="whitespace-nowrap">Call Consultant</span>
               </a>
             </div>
           </div>
