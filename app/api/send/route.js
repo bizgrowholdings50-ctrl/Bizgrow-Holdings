@@ -37,7 +37,9 @@ export async function POST(req) {
         { status: 429 }
       );
     }
-    const { name, email, number, service, message, captchaToken } = await req.json();
+
+    // 1. Destructure coupon from the incoming request payload
+    const { name, email, number, service, message, coupon, captchaToken } = await req.json();
 
     // --- CAPTCHA VALIDATION ---
     if (!captchaToken) {
@@ -64,6 +66,7 @@ export async function POST(req) {
     const sanitizedNumber = number?.replace(/\s/g, "");
     const sanitizedService = service?.trim();
     const sanitizedMessage = message?.trim();
+    const sanitizedCoupon = coupon?.trim() || ""; // Default empty string if not present
 
     if (!sanitizedName || !sanitizedEmail || !sanitizedNumber || !sanitizedService || !sanitizedMessage) {
       return NextResponse.json(
@@ -72,8 +75,14 @@ export async function POST(req) {
       );
     }
 
-    // Length limits for security
-    if (sanitizedName.length > 100 || sanitizedEmail.length > 254 || sanitizedNumber.length > 20 || sanitizedMessage.length > 2000) {
+    // Length limits for security (Including Coupon Code validation)
+    if (
+      sanitizedName.length > 100 || 
+      sanitizedEmail.length > 254 || 
+      sanitizedNumber.length > 20 || 
+      sanitizedMessage.length > 2000 ||
+      sanitizedCoupon.length > 50 // Security check for coupon length
+    ) {
       return NextResponse.json(
         { error: "Input data exceeds maximum allowed length." },
         { status: 400 }
@@ -105,12 +114,17 @@ export async function POST(req) {
       );
     }
 
-    // --- EMAIL SENDING (Your Template Kept Intact) ---
+    // Dynamic Subject Line (Agar coupon lag kar aaya hai toh alert dikhega)
+    const emailSubject = sanitizedCoupon 
+      ? `💥 [OFFER ALERT - ${sanitizedCoupon}] New Inquiry from ${sanitizedName}`
+      : `New Inquiry: ${sanitizedService} from ${sanitizedName}`;
+
+    // --- EMAIL SENDING ---
     const { data, error } = await resend.emails.send({
       from: 'BizGrow Sales <sales@bizgrow-holdings.net>', 
       to: ['sales@bizgrow-holdings.net'],
       reply_to: sanitizedEmail, 
-      subject: `New Inquiry: ${sanitizedService} from ${sanitizedName}`,
+      subject: emailSubject,
       html: `
         <div style="font-family: sans-serif; max-width: 600px; border: 1px solid #e0e0e0; padding: 30px; border-radius: 12px; color: #333;">
           <h2 style="color: #12066a; margin-top: 0;">New Business Inquiry</h2>
@@ -136,6 +150,17 @@ export async function POST(req) {
               <td style="padding: 8px 0; font-weight: bold; color: #666;">Service:</td>
               <td style="padding: 8px 0;"><span style="background: #eef2ff; color: #12066a; padding: 4px 10px; border-radius: 5px; font-size: 13px; font-weight: bold;">${sanitizedService}</span></td>
             </tr>
+
+            ${sanitizedCoupon ? `
+            <tr>
+              <td style="padding: 8px 0; font-weight: bold; color: #d97706;">Coupon Applied:</td>
+              <td style="padding: 8px 0;">
+                <span style="background: #fef3c7; color: #b45309; padding: 4px 10px; border-radius: 5px; font-size: 13px; font-weight: bold; border: 1px solid #fde68a;">
+                  ${sanitizedCoupon}
+                </span>
+              </td>
+            </tr>
+            ` : ''}
           </table>
 
           <div style="background: #fcfcfc; border-left: 4px solid #12066a; padding: 15px; border-radius: 4px; margin-top: 25px;">
