@@ -241,11 +241,17 @@ const ContactStep = ({ selectedServices, onBack, coupon }) => {
         </button>
 
         <h2 className="text-4xl md:text-5xl font-black text-[#12066a] tracking-tighter mb-4">
-          Send Us A <span className="text-[#997819] italic">Message.</span>
+          {coupon ? (
+            <>Send Us A <span className="text-[#997819] italic">Quotation</span>.</>
+          ) : (
+            <>Send Us A <span className="text-[#997819] italic">Message.</span></>
+          )}
         </h2>
-        <p className="text-slate-400 font-medium text-lg">
-          Initiate your strategic consultation today.
-        </p>
+        {!coupon && (
+          <p className="text-slate-400 font-medium text-lg">
+            Initiate your strategic consultation today.
+          </p>
+        )}
       </div>
 
       {/* Progress Indicator */}
@@ -411,7 +417,9 @@ const ContactStep = ({ selectedServices, onBack, coupon }) => {
                 ? "Inquiry Sent"
                 : !captchaToken
                   ? "Verify Captcha First"
-                  : "Initialize Consultation"}
+                  : coupon
+                    ? "Get A Quotation"
+                    : "Initialize Consultation"}
           </span>
 
           {loading ? (
