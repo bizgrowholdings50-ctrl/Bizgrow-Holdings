@@ -45,6 +45,11 @@ const ALL_SERVICES = [
   "BS 7499",
 ];
 
+const useLenis = () => {
+  if (typeof window === "undefined") return null;
+  return window.lenis ?? null;
+};
+
 // ─── Step 1: Service Selection ───────────────────────────────────────────────
 const ServiceStep = ({ selectedServices, setSelectedServices, onContinue }) => {
   const toggle = (service) => {
@@ -479,6 +484,17 @@ const ContactForm = () => {
         if (matchedServices.length > 0) {
           setSelectedServices(matchedServices);
           setStep(2); // Match hone par direct Step 2 par switch karein
+
+          requestAnimationFrame(() => {
+            const lenis = useLenis();
+            if (lenis?.scrollTo) {
+              lenis.scrollTo("#consultation-form");
+            } else {
+              document.getElementById("consultation-form")?.scrollIntoView({
+                behavior: "smooth",
+              });
+            }
+          });
         }
       }
     }
