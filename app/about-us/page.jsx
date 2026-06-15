@@ -117,7 +117,7 @@ export default function AboutUs() {
                 supporting security companies and construction businesses
                 pursuing{" "}
                 <Link
-                  href="https://bizgrow-holdings.vercel.app/our-services/sia-acs/"
+                  href="https://bizgrow-holdings.com/our-services/sia-acs/"
                   className="text-[#997819] mr-1 font-bold"
                 >
                   SIA ACS
@@ -263,7 +263,7 @@ export default function AboutUs() {
               <p className="text-md md:text-2xl font-bold leading-relaxed">
                 "To deliver clear, structured, and practical
                 <Link
-                  href="https://bizgrow-holdings.vercel.app/compliance-consultancies/"
+                  href="https://bizgrow-holdings.com/compliance-consultancies/"
                   className="text-[#997819] font:bold ml-1"
                 >
                   compliance consultancy
