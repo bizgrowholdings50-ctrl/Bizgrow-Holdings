@@ -111,7 +111,7 @@ const ServiceStep = ({ selectedServices, setSelectedServices, onContinue }) => {
                   ${
                     isSelected
                       ? "border-[#997819] bg-[#997819]/10 text-[#12066a]"
-                      : "border-slate-200 bg-white text-slate-500 hover:border-slate-300 hover:text-[#12066a]"
+                      : "border-slate-200 bg-white text-slate-500 hover:border-[#997819] hover:text-[#12066a]"
                   }
                 `}
               >
@@ -223,7 +223,7 @@ const ContactStep = ({ selectedServices, onBack, coupon }) => {
   };
 
   return (
-    <form className="w-full" onSubmit={handleSubmit}>
+    <form className="w-full" id="consultation-form" onSubmit={handleSubmit}>
       {/* Header */}
       <div className="mb-10">
         <button

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import DiscountCard from "@/components/DiscountCard";
 import FadeIn from "@/components/MotionWrapper";
 
@@ -14,7 +14,8 @@ const offersData = [
     image: "/offer 1.webp", // Aapki flyer image ka path
     discount: "",
     price: "350", // Flyer ke mutabiq starting price
-    shortDesc: "To celebrate our 15 years in industry, Bizgrow Holdings Ltd is offering certifications 𝐬𝐭𝐚𝐫𝐭𝐢𝐧𝐠 𝐟𝐫𝐨𝐦 £𝟑𝟓𝟎 𝐩𝐞𝐫 𝐦𝐨𝐧𝐭𝐡 on",
+    shortDesc:
+      "To celebrate our 15 years in industry, Bizgrow Holdings Ltd is offering certifications 𝐬𝐭𝐚𝐫𝐭𝐢𝐧𝐠 𝐟𝐫𝐨𝐦 £𝟑𝟓𝟎 𝐩𝐞𝐫 𝐦𝐨𝐧𝐭𝐡 on",
     fullDetail: `Attention UK Security & Construction Companies!
 
 To celebrate our 15 years in industry, we are offering certifications 𝐬𝐭𝐚𝐫𝐭𝐢𝐧𝐠 𝐟𝐫𝐨𝐦 £𝟑𝟓𝟎 𝐩𝐞𝐫 𝐦𝐨𝐧𝐭𝐡 on:
@@ -45,23 +46,34 @@ Don’t risk losing business, get compliant and contract-ready today!
     //   }
     // ]
   },
- 
 ];
 
 const DiscountPage = () => {
   return (
     <div className="bg-zinc-50 min-h-screen">
-      {/* 🔹 HERO SECTION (Matching image_99bd66.png) */}
-      <section className="relative py-24 bg-[#12066a] overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[url('/images/pattern.png')]" />
-        <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
+      {/* 🔹 HERO SECTION (Matching image_99bd66.png - Perfected) */}
+      <section className="relative py-20 md:py-32 bg-[#12066a] overflow-hidden flex items-center justify-center min-h-[60vh] md:min-h-[70vh]">
+        {/* 🖼️ Background Pattern Layer */}
+        <div className="absolute inset-0 opacity-10 bg-[url('/images/pattern.png')] bg-cover bg-center pointer-events-none" />
+
+        {/* ✨ Premium Ambient Glow (Gives depth behind text) */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-[#997819]/15 rounded-full blur-[80px] sm:blur-[130px] pointer-events-none animate-pulse duration-[4s]" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center flex flex-col items-center justify-center">
           <FadeIn direction="up">
-            <h1 className="text-5xl md:text-8xl font-black text-white tracking-tighter uppercase leading-none mb-6">
-              Act Fast <br /> 
-              <span className="text-[#997819]">Discounts Won't Last Forever</span>
+            {/* Fluid Typography with Safe Mobile Leading */}
+            <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-white tracking-tighter uppercase leading-[1.1] sm:leading-none mb-8 max-w-5xl">
+              Act Fast <br />
+              <span className="text-[#997819]">
+                Discounts Won't Last Forever
+              </span>
             </h1>
-            <div className="inline-block px-8 py-3 bg-white/5 border border-white/10 rounded-full backdrop-blur-md">
-              <p className="text-blue-100/80 font-bold tracking-widest uppercase text-xs">
+          </FadeIn>
+
+          <FadeIn direction="up" delay={0.15}>
+            {/* Bulletproof Pill Badge (Never breaks layout) */}
+            <div className="inline-flex items-center justify-center px-5 sm:px-8 py-2.5 sm:py-3 bg-white/5 border border-white/10 rounded-full backdrop-blur-md max-w-[90vw] sm:max-w-full">
+              <p className="text-white/80 font-bold tracking-[0.1em] sm:tracking-widest uppercase text-[10px] sm:text-xs whitespace-nowrap sm:whitespace-normal overflow-hidden text-ellipsis">
                 Limited Time Offer | Don't Miss Out
               </p>
             </div>
@@ -84,17 +96,27 @@ const DiscountPage = () => {
       <section className="pb-24">
         <div className="max-w-3xl mx-auto px-6 text-center">
           <div className="p-10 bg-white rounded-[3rem] border border-zinc-100 shadow-xl">
-            <p className="text-zinc-400 font-bold uppercase tracking-[0.3em] text-[10px] mb-6 text-center">Contact our team to claim</p>
+            <p className="text-zinc-400 font-bold uppercase tracking-[0.3em] text-[10px] mb-6 text-center">
+              Contact our team to claim
+            </p>
             <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
-               <div className="text-center">
-                  <p className="text-[#12066a] font-black text-lg">07898 205035 </p>
-                  <p className="text-zinc-500 text-xs font-medium uppercase">Call Us Now</p>
-               </div>
-               <div className="w-px h-12 bg-zinc-200 hidden md:block" />
-               <div className="text-center">
-                  <p className="text-[#12066a] font-black text-lg text-lowercase">info@bizgrow-holdings.co.uk</p>
-                  <p className="text-zinc-500 text-xs font-medium uppercase">Email Support</p>
-               </div>
+              <div className="text-center">
+                <p className="text-[#12066a] font-black text-lg">
+                  07898 205035{" "}
+                </p>
+                <p className="text-zinc-500 text-xs font-medium uppercase">
+                  Call Us Now
+                </p>
+              </div>
+              <div className="w-px h-12 bg-zinc-200 hidden md:block" />
+              <div className="text-center">
+                <p className="text-[#12066a] font-black text-lg text-lowercase">
+                  info@bizgrow-holdings.co.uk
+                </p>
+                <p className="text-zinc-500 text-xs font-medium uppercase">
+                  Email Support
+                </p>
+              </div>
             </div>
           </div>
         </div>

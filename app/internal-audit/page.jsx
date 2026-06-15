@@ -38,7 +38,7 @@ const InternalAuditPage = () => {
             <span className="inline-block text-[#997819] font-black uppercase tracking-[0.5em] text-[10px] bg-white/5 px-6 py-2 rounded-full border border-white/10 mb-8">
               Stay Compliant
             </span>
-            <h1 className="text-5xl md:text-7xl font-black text-white tracking-tighter leading-[0.85] mb-8">
+            <h1 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-[0.85] mb-8">
               Internal Audit <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#997819] to-[#d4af37]">
                 Services for UK <br /> Businesses.
@@ -128,13 +128,13 @@ const InternalAuditPage = () => {
             </div>
             <div className="lg:w-1/2 relative">
               <div className="absolute -inset-4 bg-zinc-100 rounded-[4rem] rotate-3" />
-              <div className="relative rounded-[4rem] overflow-hidden shadow-2xl -rotate-3 hover:rotate-0 transition-all duration-700">
+              <div className="relative rounded-[4rem] aspect-square overflow-hidden shadow-2xl -rotate-3 hover:rotate-0 transition-all duration-700">
                 <Image
                   src="/audit-works.jpg"
                   width={600}
                   height={500}
                   alt="Internal Audit UK – BizGrow Holdings Ltd"
-                  className="object-cover h-[500px]"
+                  className="object-cover h-full"
                 />
               </div>
             </div>
@@ -155,7 +155,7 @@ const InternalAuditPage = () => {
                 <h2 className="text-[#997819] font-black uppercase tracking-[0.4em] text-[10px] mb-4">
                   Strategic Assurance
                 </h2>
-                <h2 className="text-5xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-[0.9] mb-8 uppercase">
+                <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-[0.99] mb-8 uppercase">
                   Why Internal Audit
                   <span className="text-[#997819]"> is Important</span>
                 </h2>
@@ -435,16 +435,15 @@ const InternalAuditPage = () => {
       </section>
 
       {/* 🔹 5. FINAL CTA SECTION (Premium Parallax Design) */}
-      <section className="pb-32 bg-zinc-50">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="pb-16 md:pb-32 bg-zinc-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6">
           {/* Main Container */}
-          <div className="relative group overflow-hidden rounded-[4rem] p-16 md:p-32 bg-[#12066a] text-center flex flex-col items-center shadow-2xl">
-            {/* 🖼️ Fixed Parallax Background Layer */}
+          <div className="relative group overflow-hidden rounded-[2.5rem] md:rounded-[4rem] p-8 sm:p-16 md:p-24 lg:p-32 bg-[#12066a] text-center flex flex-col items-center shadow-2xl">
+            {/* 🖼️ Responsive Background Layer (Mobile Parallax Bug Fixed) */}
             <div
-              className="absolute inset-0 z-0 bg-cover bg-no-repeat bg-fixed opacity-40 transition-transform duration-700"
+              className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat bg-scroll md:bg-fixed opacity-40 transition-transform duration-700"
               style={{
                 backgroundImage: "url('/audit-cta-bg.jpg')", // Aapki background image
-                backgroundAttachment: "fixed", // 👈 Yeh parallax create karega
               }}
             />
 
@@ -452,15 +451,15 @@ const InternalAuditPage = () => {
             <div className="absolute inset-0 bg-[#12066a]/60 z-0" />
 
             {/* Content Layer */}
-            <div className="relative z-10">
+            <div className="relative z-10 w-full max-w-3xl mx-auto">
               <FadeIn direction="up">
-                <h2 className="text-5xl md:text-7xl font-black text-white mb-8 tracking-tighter uppercase leading-none">
+                <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-6 md:mb-8 tracking-tighter uppercase leading-tight sm:leading-none">
                   Ready to <span className="text-[#997819]">Get Started?</span>
                 </h2>
               </FadeIn>
 
               <FadeIn direction="up" delay={0.1}>
-                <p className="text-white/80 max-w-xl mx-auto mb-10 text-lg font-medium">
+                <p className="text-white/80 max-w-xl mx-auto mb-8 md:mb-10 text-sm sm:text-base md:text-lg font-medium leading-relaxed">
                   Take the next step towards compliance, efficiency, and
                   business growth with expert internal audit support.
                 </p>
@@ -469,7 +468,7 @@ const InternalAuditPage = () => {
               <FadeIn direction="up" delay={0.2}>
                 <Link
                   href="https://bizgrow-holdings.com/contact-us/"
-                  className="group/btn relative overflow-hidden inline-flex items-center justify-center bg-[#997819] text-white px-16 py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-xs transition-all duration-500 shadow-2xl active:scale-95"
+                  className="group/btn relative overflow-hidden inline-flex items-center justify-center bg-[#997819] text-white w-full sm:w-auto px-6 sm:px-12 md:px-16 py-4 sm:py-5 md:py-6 rounded-xl sm:rounded-2xl font-black uppercase tracking-[0.15em] sm:tracking-[0.3em] text-[10px] sm:text-xs transition-all duration-500 shadow-2xl active:scale-95 text-center"
                 >
                   {/* Layer 1: The Text (Top Layer) */}
                   <span className="relative z-40 transition-colors duration-500 group-hover/btn:text-[#12066a]">
@@ -486,7 +485,7 @@ const InternalAuditPage = () => {
             </div>
 
             {/* Decorative Border Glow */}
-            <div className="absolute inset-0 border border-white/10 rounded-[4rem] z-20 pointer-events-none" />
+            <div className="absolute inset-0 border border-white/10 rounded-[2.5rem] md:rounded-[4rem] z-20 pointer-events-none" />
           </div>
         </div>
       </section>
