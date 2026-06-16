@@ -84,7 +84,7 @@ const CustomerServicePage = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-20 items-start">
             <div>
-              <h2 className="text-4xl md:text-7xl  font-black text-[#12066a] uppercase tracking-tighter leading-none mb-10">
+              <h2 className="text-4xl md:text-6xl  font-black text-[#12066a] uppercase tracking-tighter leading-none mb-10">
                 Our Approach to
                 <span className="text-[#997819]"> Customer Care</span>
               </h2>
@@ -226,7 +226,7 @@ const CustomerServicePage = () => {
 
         <div className="max-w-7xl mx-auto px-6 relative z-20">
           <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-8xl font-black text-white uppercase tracking-tighter leading-none">
+            <h2 className="text-4xl md:text-7xl font-black text-white uppercase tracking-tighter leading-none">
               How We <span className="text-[#997819]">Can Help</span>
             </h2>
             <p className="text-blue-100/60 mt-6 max-w-2xl mx-auto">
@@ -334,7 +334,7 @@ const CustomerServicePage = () => {
       <section className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-20">
           <div className="lg:col-span-5">
-            <h3 className="text-3xl font-black text-[#12066a] uppercase mb-10 tracking-tighter leading-none">
+            <h3 className="text-4xl md:text-5xl font-black text-[#12066a] uppercase mb-10 tracking-tighter leading-none">
               Communication <br />{" "}
               <span className="text-[#997819]">That Works For You</span>
             </h3>

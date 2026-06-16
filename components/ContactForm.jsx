@@ -242,7 +242,7 @@ const ContactStep = ({ selectedServices, onBack, coupon }) => {
 
         <h2 className="text-4xl md:text-5xl font-black text-[#12066a] tracking-tighter mb-4">
           {coupon ? (
-            <>Send Us A <span className="text-[#997819] italic">Quotation</span>.</>
+            <>Send <span className="text-[#997819] italic">Quotation</span></>
           ) : (
             <>Send Us A <span className="text-[#997819] italic">Message.</span></>
           )}
@@ -418,7 +418,7 @@ const ContactStep = ({ selectedServices, onBack, coupon }) => {
                 : !captchaToken
                   ? "Verify Captcha First"
                   : coupon
-                    ? "Submit Quotation"
+                    ? "Submit"
                     : "Initialize Consultation"}
           </span>
 
