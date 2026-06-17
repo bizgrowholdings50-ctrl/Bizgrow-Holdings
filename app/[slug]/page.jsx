@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { cache } from "react";
+import SchemaMarkup from "@/components/SchemaMarkup";
 
 // 🚀 cache() use karne se performance behtar hogi
 const getPost = cache(async (slug) => {
@@ -96,6 +97,9 @@ export default async function SingleBlogPost({ params }) {
           dangerouslySetInnerHTML={{ __html: post.content.rendered }}
         />
       </article>
+
+      {/* Schema Markup Injection */}
+      <SchemaMarkup schema={post.yoast_head_json?.schema} />
     </div>
   );
 }
