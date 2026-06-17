@@ -702,7 +702,7 @@ const ITServicesPage = () => {
         </div>
       </section>
 
-      {/* 🔹 9.5 EXAMPLE CONTRACT PROVISION FRAMEWORK */}
+      {/* 🔹 9.5 EXAMPLES CONTRACT PROVISION FRAMEWORK */}
       <section className="py-16 bg-zinc-50 border-t border-zinc-100">
         <div className="max-w-7xl mx-auto px-6">
           <div className="max-w-3xl mx-auto text-center mb-10">
