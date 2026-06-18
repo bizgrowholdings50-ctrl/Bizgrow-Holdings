@@ -1,4 +1,6 @@
 import React from "react";
+import JsonLd from "@/components/JsonLd";
+import { consultancyServicesSchema } from "@/lib/jsonSchemas";
 import {
   ShieldCheck,
   FileText,
@@ -23,7 +25,9 @@ export const metadata = {
 
 const ComplianceConsultancyPage = () => {
   return (
-    <main className="bg-white">
+    <>
+      <JsonLd schema={consultancyServicesSchema} />
+      <main className="bg-white">
       {/* 🔹 HERO SECTION */}
       <section className="relative h-[90vh] md:h-screen w-full flex items-center overflow-hidden bg-[#12066a]">
         <div className="absolute inset-0 opacity-20">
@@ -527,6 +531,7 @@ const ComplianceConsultancyPage = () => {
         </div>
       </section>
     </main>
+    </>
   );
 };
 

@@ -10,6 +10,8 @@ import {
   ArrowRight,
 } from "lucide-react";
 import HorizontalServices from "@/components/HorizontalProcess";
+import JsonLd from "@/components/JsonLd";
+import { organizationSchema } from "@/lib/jsonSchemas";
 
 const steps = [
   {
@@ -79,9 +81,11 @@ export const metadata = {
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-white selection:bg-[#997819] selection:text-white">
-      {/* 1. HERO SECTION */}
-      <HeroCarousel />
+    <>
+      <JsonLd schema={organizationSchema} />
+      <main className="min-h-screen bg-white selection:bg-[#997819] selection:text-white">
+        {/* 1. HERO SECTION */}
+        <HeroCarousel />
 
       {/* 2 About Us  */}
       <section className="relative mt-10 z-30 px-6 bg-white">
@@ -366,5 +370,6 @@ export default function HomePage() {
         </div>
       </section>
     </main>
+    </>
   );
 }

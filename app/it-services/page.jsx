@@ -1,6 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import FadeIn from "@/components/MotionWrapper";
+import JsonLd from "@/components/JsonLd";
+import { itServicesSchema } from "@/lib/jsonSchemas";
 import {
   CheckCircle2,
   Zap,
@@ -27,7 +29,9 @@ export const metadata = {
 
 const ITServicesPage = () => {
   return (
-    <main className="bg-white text-zinc-900 overflow-hidden font-sans">
+    <>
+      <JsonLd schema={itServicesSchema} />
+      <main className="bg-white text-zinc-900 overflow-hidden font-sans">
       {/* 🔹 1. HERO SECTION */}
       <section className="relative min-h-screen w-full flex items-center overflow-hidden bg-[#12066a]">
         <div className="absolute inset-0 z-0">
@@ -821,6 +825,7 @@ const ITServicesPage = () => {
         </div>
       </section>
     </main>
+    </>
   );
 };
 

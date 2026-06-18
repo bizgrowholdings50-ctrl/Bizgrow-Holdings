@@ -1,6 +1,8 @@
 import React from "react";
 import Image from "next/image";
 import FadeIn from "@/components/MotionWrapper";
+import JsonLd from "@/components/JsonLd";
+import { aboutPageSchema } from "@/lib/jsonSchemas";
 import {
   ShieldCheck,
   Target,
@@ -20,7 +22,9 @@ export const metadata = {
 
 export default function AboutUs() {
   return (
-    <main className="bg-white">
+    <>
+      <JsonLd schema={aboutPageSchema} />
+      <main className="bg-white">
       {/* 🔹 1. HERO SECTION (Consistent Signature Style) */}
       <section className="relative h-screen w-full flex items-center overflow-hidden">
         {/* 🔹 Step 1: Background Image */}
@@ -367,5 +371,6 @@ export default function AboutUs() {
         </div>
       </section>
     </main>
+    </>
   );
 }

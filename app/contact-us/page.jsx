@@ -1,5 +1,7 @@
 import React from "react";
 import FadeIn from "@/components/MotionWrapper";
+import JsonLd from "@/components/JsonLd";
+import { contactPageSchema } from "@/lib/jsonSchemas";
 import { Mail, Phone, MapPin, Globe, Sparkles } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
 
@@ -10,7 +12,9 @@ export const metadata = {
 };
 const ContactPage = () => {
   return (
-    <main className="bg-[#f8fafc] text-zinc-900 overflow-x-hidden w-full relative min-h-screen">
+    <>
+      <JsonLd schema={contactPageSchema} />
+      <main className="bg-[#f8fafc] text-zinc-900 overflow-x-hidden w-full relative min-h-screen">
       {/* 🔹 1. HERO HEADER (h-screen) */}
       <section className="relative h-screen w-full flex items-center bg-[#12066a] overflow-hidden">
         <div
@@ -156,6 +160,7 @@ const ContactPage = () => {
         </div>
       </section>
     </main>
+    </>
   );
 };
 
