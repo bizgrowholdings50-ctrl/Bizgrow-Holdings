@@ -68,6 +68,15 @@ export async function POST(req) {
     const sanitizedMessage = message?.trim();
     const sanitizedCoupon = coupon?.trim() || ""; // Default empty string if not present
 
+    console.log("Contact form received:", {
+      name: sanitizedName,
+      email: sanitizedEmail,
+      number: sanitizedNumber,
+      service: sanitizedService,
+      coupon: sanitizedCoupon,
+      messageLength: sanitizedMessage?.length,
+    });
+
     if (!sanitizedName || !sanitizedEmail || !sanitizedNumber || !sanitizedService || !sanitizedMessage) {
       return NextResponse.json(
         { error: "All fields are required. Please fill the complete form." },
@@ -81,7 +90,7 @@ export async function POST(req) {
       sanitizedEmail.length > 254 || 
       sanitizedNumber.length > 20 || 
       sanitizedMessage.length > 2000 ||
-      sanitizedCoupon.length > 50 // Security check for coupon length
+      sanitizedCoupon.length > 50 
     ) {
       return NextResponse.json(
         { error: "Input data exceeds maximum allowed length." },
@@ -114,72 +123,144 @@ export async function POST(req) {
       );
     }
 
+ 
+
     // Dynamic Subject Line (Agar coupon lag kar aaya hai toh alert dikhega)
     const emailSubject = sanitizedCoupon 
       ? `💥 [OFFER ALERT - ${sanitizedCoupon}] New Inquiry from ${sanitizedName}`
       : `New Inquiry: ${sanitizedService} from ${sanitizedName}`;
 
-    // --- EMAIL SENDING ---
-    const { data, error } = await resend.emails.send({
-      from: 'BizGrow Sales <sales@bizgrow-holdings.net>', 
-      to: ['sales@bizgrow-holdings.net'],
-      reply_to: sanitizedEmail, 
-      subject: emailSubject,
-      html: `
-        <div style="font-family: sans-serif; max-width: 600px; border: 1px solid #e0e0e0; padding: 30px; border-radius: 12px; color: #333;">
-          <h2 style="color: #12066a; margin-top: 0;">New Business Inquiry</h2>
-          <p style="font-size: 16px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
-            A new lead has been submitted through the <strong>BizGrow Holdings</strong> website.
-          </p>
-          
-          <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
-            <tr>
-              <td style="padding: 8px 0; font-weight: bold; color: #666; width: 140px;">Client Name:</td>
-              <td style="padding: 8px 0;">${sanitizedName}</td>
-            </tr>
-            <tr>
-              <td style="padding: 8px 0; font-weight: bold; color: #666;">Client Email:</td>
-              <td style="padding: 8px 0;"><a href="mailto:${sanitizedEmail}" style="color: #12066a;">${sanitizedEmail}</a></td>
-            </tr>
-           
-            <tr>
-              <td style="padding: 8px 0; font-weight: bold; color: #666;">Phone Number:</td>
-              <td style="padding: 8px 0;"><a href="tel:${sanitizedNumber}" style="color: #12066a; text-decoration: none;">${sanitizedNumber}</a></td>
-            </tr>
-            <tr>
-              <td style="padding: 8px 0; font-weight: bold; color: #666;">Service:</td>
-              <td style="padding: 8px 0;"><span style="background: #eef2ff; color: #12066a; padding: 4px 10px; border-radius: 5px; font-size: 13px; font-weight: bold;">${sanitizedService}</span></td>
-            </tr>
 
-            ${sanitizedCoupon ? `
-            <tr>
-              <td style="padding: 8px 0; font-weight: bold; color: #d97706;">Coupon Applied:</td>
-              <td style="padding: 8px 0;">
-                <span style="background: #fef3c7; color: #b45309; padding: 4px 10px; border-radius: 5px; font-size: 13px; font-weight: bold; border: 1px solid #fde68a;">
-                  ${sanitizedCoupon}
-                </span>
-              </td>
-            </tr>
-            ` : ''}
-          </table>
+    // --- PARALLEL EMAIL SENDING (Promise.allSettled) ---
+    const [adminResult, clientResult] = await Promise.allSettled([
+      
+      // 1. ADMIN NOTIFICATION EMAIL (Sales Team Ke Liye)
+      resend.emails.send({
+        from: 'BizGrow Sales <sales@bizgrow-holdings.net>', 
+        to: ['sales@bizgrow-holdings.net'],
+        reply_to: sanitizedEmail, 
+        subject: emailSubject,
+        html: `
+          <div style="font-family: sans-serif; max-width: 600px; border: 1px solid #e0e0e0; padding: 30px; border-radius: 12px; color: #333;">
+            <h2 style="color: #12066a; margin-top: 0;">New Business Inquiry</h2>
+            <p style="font-size: 16px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
+              A new lead has been submitted through the <strong>BizGrow Holdings</strong> website.
+            </p>
+            
+            <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+              <tr>
+                <td style="padding: 8px 0; font-weight: bold; color: #666; width: 140px;">Client Name:</td>
+                <td style="padding: 8px 0;">${sanitizedName}</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px 0; font-weight: bold; color: #666;">Client Email:</td>
+                <td style="padding: 8px 0;"><a href="mailto:${sanitizedEmail}" style="color: #12066a;">${sanitizedEmail}</a></td>
+              </tr>
+             
+              <tr>
+                <td style="padding: 8px 0; font-weight: bold; color: #666;">Phone Number:</td>
+                <td style="padding: 8px 0;"><a href="tel:${sanitizedNumber}" style="color: #12066a; text-decoration: none;">${sanitizedNumber}</a></td>
+              </tr>
+              <tr>
+                <td style="padding: 8px 0; font-weight: bold; color: #666;">Service:</td>
+                <td style="padding: 8px 0;"><span style="background: #eef2ff; color: #12066a; padding: 4px 10px; border-radius: 5px; font-size: 13px; font-weight: bold;">${sanitizedService}</span></td>
+              </tr>
 
-          <div style="background: #fcfcfc; border-left: 4px solid #12066a; padding: 15px; border-radius: 4px; margin-top: 25px;">
-            <p style="margin-top: 0; font-weight: bold; color: #12066a;">Message:</p>
-            <p style="line-height: 1.6; margin-bottom: 0;">${sanitizedMessage.replace(/\n/g, '<br>')}</p>
+              ${sanitizedCoupon ? `
+              <tr>
+                <td style="padding: 8px 0; font-weight: bold; color: #d97706;">Coupon Applied:</td>
+                <td style="padding: 8px 0;">
+                  <span style="background: #fef3c7; color: #b45309; padding: 4px 10px; border-radius: 5px; font-size: 13px; font-weight: bold; border: 1px solid #fde68a;">
+                    ${sanitizedCoupon}
+                  </span>
+                </td>
+              </tr>
+              ` : ''}
+            </table>
+
+            <div style="background: #fcfcfc; border-left: 4px solid #12066a; padding: 15px; border-radius: 4px; margin-top: 25px;">
+              <p style="margin-top: 0; font-weight: bold; color: #12066a;">Message:</p>
+              <p style="line-height: 1.6; margin-bottom: 0;">${sanitizedMessage.replace(/\n/g, '<br>')}</p>
+            </div>
+
+            <p style="margin-top: 30px; font-size: 11px; color: #aaa; text-align: center;">
+              This email was automatically generated by the BizGrow Holdings Portal.
+            </p>
           </div>
+        `,
+      }),
 
-          <p style="margin-top: 30px; font-size: 11px; color: #aaa; text-align: center;">
-            This email was automatically generated by the BizGrow Holdings Portal.
-          </p>
-        </div>
-      `,
+      // 2. CLIENT THANK YOU EMAIL (Auto-Responder) - TYPO FIXED (.net)
+      resend.emails.send({
+        from: 'BizGrow Holdings <sales@bizgrow-holdings.net>', 
+        to: [sanitizedEmail], 
+        subject: `Thank you for contacting BizGrow Holdings!`,
+        html: `
+          <div style="font-family: sans-serif; max-width: 600px; border: 1px solid #e0e0e0; padding: 30px; border-radius: 12px; color: #333;">
+            <h2 style="color: #12066a; margin-top: 0;">Thank You, ${sanitizedName}!</h2>
+            <p style="font-size: 15px; line-height: 1.6;">
+              We have successfully received your inquiry regarding <strong>${sanitizedService}</strong>. Our team is currently reviewing your details, and a representative will get in touch with you shortly.
+            </p>
+            
+            ${sanitizedCoupon ? `
+            <div style="background: #fffbeb; border: 1px solid #fde68a; padding: 15px; border-radius: 8px; margin: 20px 0;">
+              <p style="margin: 0; color: #b45309; font-weight: bold; font-size: 14px;">
+                🎉 Coupon Confirmed: <span style="background: #fef3c7; padding: 2px 6px; border-radius: 4px;">${sanitizedCoupon}</span> has been applied to your request.
+              </p>
+            </div>
+            ` : ''}
+
+            <div style="background: #f9fafb; padding: 15px; border-radius: 8px; margin-top: 20px; border-top: 3px solid #12066a;">
+              <h4 style="margin-top: 0; margin-bottom: 10px; color: #12066a;">What's Next?</h4>
+              <ul style="margin: 0; padding-left: 20px; line-height: 1.5; font-size: 14px; color: #555;">
+                <li>Our consultants will analyze your project requirements.</li>
+                <li>We will reach out via email or phone (${sanitizedNumber}) within 24 business hours.</li>
+              </ul>
+            </div>
+
+            <p style="font-size: 14px; margin-top: 25px;">
+              If you have any urgent attachments or details to provide, feel free to reply directly to this email.
+            </p>
+
+            <br />
+            <p style="margin-bottom: 5px; font-size: 14px;">Best regards,</p>
+            <p style="margin-top: 0; font-weight: bold; color: #12066a; font-size: 16px;">BizGrow Holdings Team</p>
+            
+            <hr style="border: 0; border-top: 1px solid #eee; margin-top: 30px;" />
+            <p style="font-size: 11px; color: #aaa; text-align: center;">
+              This is an automated confirmation of your submission. Please do not hesitate to reach out if you have any questions.
+            </p>
+          </div>
+        `
+      })
+
+    ]);
+
+    console.log("Resend send results:", {
+      admin: adminResult.status === "fulfilled" ? adminResult.value : adminResult.reason,
+      client: clientResult.status === "fulfilled" ? clientResult.value : clientResult.reason,
     });
 
-    if (error) {
-      return NextResponse.json({ error }, { status: 400 });
+    if (adminResult.status === "rejected") {
+      console.error("Admin email send failed:", adminResult.reason);
+      return NextResponse.json({ error: "Failed to send admin notification email." }, { status: 500 });
     }
 
-    return NextResponse.json({ success: true, message: "Lead sent successfully", data });
+    if (clientResult.status === "rejected") {
+      console.warn("Client thank-you email failed:", clientResult.reason);
+      return NextResponse.json({
+        success: true,
+        message: "Lead submitted, but the thank-you email could not be delivered.",
+        data: adminResult.value,
+      });
+    }
+
+    return NextResponse.json({
+      success: true,
+      message: "Lead sent and confirmation email triggered successfully",
+      data: adminResult.value,
+    });
+
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
