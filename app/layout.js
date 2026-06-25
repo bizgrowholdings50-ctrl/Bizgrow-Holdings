@@ -8,7 +8,6 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import CustomCursor from "@/components/Cursor";
 import EndorsalScript from "@/components/EndorsalScript";
-import Script from "next/script"; // Yeh humari default Next Script hai
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -60,27 +59,29 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <head />
+      <head>
+        {/* Pure HTML Script Method - Browser isay lazmi execute karega */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-FFG6DVXKQX"
+        ></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-FFG6DVXKQX');
+            `,
+          }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {isProduction && <Analytics />}
         {isProduction && <SpeedInsights />}
         {isProduction && <EndorsalScript />}
-        
-        {/* Standard Next Script Method - Yeh har haal mein trigger hogi */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-FFG6DVXKQX"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-FFG6DVXKQX');
-          `}
-        </Script>
 
         <CustomCursor />
         <Navbar />
