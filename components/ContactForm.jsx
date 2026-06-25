@@ -228,7 +228,7 @@ const ContactStep = ({ selectedServices, onBack, coupon }) => {
   };
 
   return (
-    <form className="w-full" id="consultation-form" onSubmit={handleSubmit}>
+    <form className="w-full"  onSubmit={handleSubmit}>
       {/* Header */}
       <div className="mb-10">
        {coupon? (null):(<button
