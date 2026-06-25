@@ -8,9 +8,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import CustomCursor from "@/components/Cursor";
 import EndorsalScript from "@/components/EndorsalScript";
-import Script from "next/script";
-// Google Analytics component import kiya
-import { GoogleAnalytics } from "@next/third-parties/google";
+import Script from "next/script"; // Yeh humari default Next Script hai
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -70,8 +68,19 @@ export default function RootLayout({ children }) {
         {isProduction && <SpeedInsights />}
         {isProduction && <EndorsalScript />}
         
-        {/* Google Analytics direct load hoga bina kisi strict production block ke */}
-        <GoogleAnalytics gaId="G-FFG6DVXKQX" />
+        {/* Standard Next Script Method - Yeh har haal mein trigger hogi */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-FFG6DVXKQX"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-FFG6DVXKQX');
+          `}
+        </Script>
 
         <CustomCursor />
         <Navbar />
