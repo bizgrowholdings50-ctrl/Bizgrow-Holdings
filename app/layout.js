@@ -9,7 +9,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import CustomCursor from "@/components/Cursor";
 import EndorsalScript from "@/components/EndorsalScript";
 import Script from "next/script";
-// 1. Google Analytics component import kiya
+// Google Analytics component import kiya
 import { GoogleAnalytics } from "@next/third-parties/google";
 
 const isProduction = process.env.NODE_ENV === "production";
@@ -70,8 +70,8 @@ export default function RootLayout({ children }) {
         {isProduction && <SpeedInsights />}
         {isProduction && <EndorsalScript />}
         
-        {/* 2. Google Analytics ko production check ke sath yahan add kar diya */}
-        {isProduction && <GoogleAnalytics gaId="G-FFG6DVXKQX" />}
+        {/* Google Analytics direct load hoga bina kisi strict production block ke */}
+        <GoogleAnalytics gaId="G-FFG6DVXKQX" />
 
         <CustomCursor />
         <Navbar />
