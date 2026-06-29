@@ -214,6 +214,16 @@ const ContactStep = ({ selectedServices, onBack, coupon }) => {
         return;
       }
 
+      // 🚀 GOOGLE ANALYTICS CUSTOM EVENT INJECTED HERE
+      if (typeof window !== "undefined" && window.gtag) {
+        window.gtag("event", "form_submission", {
+          event_category: "Lead Generation",
+          event_label: coupon ? "Quotation Form" : "Consultation Form",
+          services_selected: formData.service,
+          coupon_used: formData.coupon || "none"
+        });
+      }
+
       toast.success("Consultation inquiry sent successfully!");
       setSent(true);
       e.target.reset();
@@ -223,6 +233,7 @@ const ContactStep = ({ selectedServices, onBack, coupon }) => {
       console.error("Error sending email:", err);
       toast.error("Network error. Please check your connection.");
     } finally {
+      document.body.style.cursor = "default";
       setLoading(false);
     }
   };
@@ -386,7 +397,7 @@ const ContactStep = ({ selectedServices, onBack, coupon }) => {
               required
             />
             <label htmlFor="msg" className={labelClasses}>
-              Briefly describe your objectives
+              Brief describe your objectives
             </label>
           </div>
         )}
