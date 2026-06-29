@@ -27,15 +27,17 @@ const securityHeaders = [
     key: "Permissions-Policy",
     value: "camera=(), microphone=(), geolocation=(), xr-spatial-tracking=*",
   },
-  {
+ {
     key: "Content-Security-Policy",
     value:
       "default-src 'self'; " +
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://va.vercel-scripts.com https://cdn.endorsal.io; " +
+      // 🔹 FIX: script-src mein Google Analytics aur Tag Manager ke domains add kar diye
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://va.vercel-scripts.com https://cdn.endorsal.io https://www.googletagmanager.com https://www.google-analytics.com; " +
       "style-src 'self' 'unsafe-inline' https://cdn.endorsal.io https://fonts.googleapis.com; " +
-      "img-src 'self' https://cms.bizgrow-holdings.com https://cdn.endorsal.io https://*.cloudfront.net https://www.google.com data: blob:; " +
+      "img-src 'self' https://cms.bizgrow-holdings.com https://cdn.endorsal.io https://*.cloudfront.net https://www.google.com https://www.google-analytics.com https://*.google-analytics.com data: blob:; " +
       "font-src 'self' https://fonts.gstatic.com data:; " +
-      "connect-src 'self' https://cdn.endorsal.io https://*.endorsal.io https://va.vercel-scripts.com; " +
+      // 🔹 FIX: connect-src mein bhi Google Analytics ka domain add kiya taake data bhej sakay
+      "connect-src 'self' https://cdn.endorsal.io https://*.endorsal.io https://va.vercel-scripts.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com; " +
       "frame-src 'self' https://www.google.com https://challenges.cloudflare.com blob:; " +
       "base-uri 'self'; " +
       "form-action 'self';",
