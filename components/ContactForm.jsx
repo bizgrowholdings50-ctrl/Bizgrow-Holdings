@@ -430,7 +430,7 @@ const ContactStep = ({ selectedServices, onBack, coupon }) => {
                   ? "Verify Captcha First"
                   : coupon
                     ? "Submit"
-                    : "Initialize Consultation"}
+                    : "Initialise Consultation"}
           </span>
 
           {loading ? (
