@@ -6,7 +6,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 // Simple in-memory rate limiter (for production, use Redis or similar)
 const rateLimit = new Map();
 const RATE_LIMIT_WINDOW = 15 * 60 * 1000; // 15 minutes
-const MAX_REQUESTS = 3; // Max 3 submissions per IP per window
+const MAX_REQUESTS = 5; // Max 5 submissions per IP per window
 
 function checkRateLimit(ip) {
   const now = Date.now();
