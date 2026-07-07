@@ -14,7 +14,7 @@ export default async function sitemap() {
       const posts = await response.json();
       blogUrls = posts.map((post) => ({
         // Blogs direct slug par hain (e.g. bizgrow-holdings.com/what-is-pqq)
-        url: `${baseUrl}/${post.slug}`, 
+        url: `${baseUrl}/${post.slug}/`, 
         lastModified: new Date(post.modified),
         changeFrequency: 'weekly',
         priority: 0.7,
