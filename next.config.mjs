@@ -86,6 +86,17 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/why-iso-9001-matters-for-uk-business-quality-and-growth',
+        destination: '/iso-9001-matters-for-uk-business/',
+        permanent: true,
+      },
+      {
+        source: '/could-iso-45001-enhance-workplace-safety-and-compliance',
+        destination: '/could-iso-45001-enhance-workplace-safety/',
+        permanent: true,
+      },
+
+      {
         source: "/why-clients-trust-iso-14001-certified-suppliers-in-the-uk/",
         destination: "/why-clients-trust-iso-14001-certified/",
         permanent: true,
