@@ -9,10 +9,9 @@ export const metadata = {
     "Explore BizGrow Holdings FAQs for Clear Answers on ACS, ISO, CHAS, and Compliance to Support your UK Security Business Growth",
 };
 const faqData = [
-  {
-    q: "What qualifications do you need to be a dog handler?",
-    a: "To be a dog handler in the UK, you usually need a Level 2 or 3 canine handling qualification. Relevant experience and licensing are also required, depending on the sector, such as security, detection, or assistance.Training ensures you meet industry standards and safety requirements.",
-  },
+  // ==========================================
+  // CORE COMPLIANCE (ISO, COP, ACS, ACCREDITATIONS)
+  // ==========================================
   {
     q: "What are the main requirements of ISO 14001?",
     a: (
@@ -28,6 +27,68 @@ const faqData = [
         environmental impacts, comply with legislation, and pursue continual
         improvement. This standard helps UK businesses reduce risk and operate
         sustainably
+      </>
+    ),
+  },
+  {
+    q: "Difference between ISO 9001, ISO 14001, and ISO 45001?",
+    a: (
+      <>
+        <Link
+          href="https://bizgrow-holdings.com/our-services/iso-9001/"
+          className="text-[#997819] font-bold"
+        >
+          ISO 9001
+        </Link>
+        : Quality management |{" "}
+        <Link
+          href="https://bizgrow-holdings.com/iso-14001-consulting-services/"
+          className="text-[#997819] font-bold"
+        >
+          ISO 14001
+        </Link>
+        : Environmental management |{" "}
+        <Link
+          href="https://bizgrow-holdings.com/our-services/iso-45001/"
+          className="text-[#997819] font-bold"
+        >
+          ISO 45001
+        </Link>
+        : Health and safety management.Each standard targets specific business
+        processes and improves operational performance in the UK.
+      </>
+    ),
+  },
+  {
+    q: "The Importance of ISO 9001 in the construction industry?",
+    a: (
+      <>
+        <Link
+          href="https://bizgrow-holdings.com/iso-9001-for-small-businesses/"
+          className="text-[#997819] font-bold"
+        >
+          ISO 9001
+        </Link>{" "}
+        helps construction businesses maintain quality, efficiency, and client
+        trust. It ensures consistent processes and reduces errors. This standard
+        is widely recognised in the UK construction sector.
+      </>
+    ),
+  },
+  {
+    q: "How to get a COP 119 certificate?",
+    a: (
+      <>
+        Enroll in a{" "}
+        <Link
+          href="https://bizgrow-holdings.com/our-services/cop-119-labour-provision/"
+          className="text-[#997819] font-bold"
+        >
+          COP 119
+        </Link>{" "}
+        course or assessment via a certified UK training provider. Submit the
+        required documentation for review. Once approved, you receive the
+        official certificate.
       </>
     ),
   },
@@ -73,69 +134,6 @@ const faqData = [
     ),
   },
   {
-    q: "Difference between ISO 9001, ISO 14001, and ISO 45001?",
-    a: (
-      <>
-        <Link
-          href="https://bizgrow-holdings.com/our-services/iso-9001/"
-          className="text-[#997819] font-bold"
-        >
-          ISO 9001
-        </Link>
-        : Quality management |{" "}
-        <Link
-          href="https://bizgrow-holdings.com/iso-14001-consulting-services/"
-          className="text-[#997819] font-bold"
-        >
-          ISO 14001
-        </Link>
-        : Environmental management |{" "}
-        <Link
-          href="https://bizgrow-holdings.com/our-services/iso-45001/"
-          className="text-[#997819] font-bold"
-        >
-          ISO 45001
-        </Link>
-        : Health and safety management.Each standard targets specific business
-        processes and improves operational performance in the UK.
-      </>
-    ),
-  },
-  {
-    q: "What are the differences between an internal audit and an external audit?",
-    a: (
-      <>
-        {" "}
-        <Link
-          href="https://bizgrow-holdings.com/difference-between-internal-audit-and-external-audit/"
-          className="text-[#997819] font-bold"
-        >
-          Internal audits
-        </Link>{" "}
-        are conducted by your staff to check compliance and identify
-        improvements. External audits are independent assessments for
-        certification or regulatory purposes. Both ensure standards are met and
-        maintained.
-      </>
-    ),
-  },
-  {
-    q: "The Importance of ISO 9001 in the construction industry?",
-    a: (
-      <>
-        <Link
-          href="https://bizgrow-holdings.com/iso-9001-for-small-businesses/"
-          className="text-[#997819] font-bold"
-        >
-          ISO 9001
-        </Link>{" "}
-        helps construction businesses maintain quality, efficiency, and client
-        trust. It ensures consistent processes and reduces errors. This standard
-        is widely recognised in the UK construction sector.
-      </>
-    ),
-  },
-  {
     q: "What are the SafeContractor accreditation requirements?",
     a: (
       <>
@@ -155,83 +153,6 @@ const faqData = [
         </Link>{" "}
         reviews these documents to verify standards. Accreditation demonstrates
         your business is safe and reliable.
-      </>
-    ),
-  },
-  {
-    q: "How do I become a contractor?",
-    a: (
-      <>
-        Register as a self-employed or limited company and ensure you meet
-        insurance, legal, and{" "}
-        <Link
-          href="/compliance-consultancies"
-          className="text-[#997819] font-bold"
-        >
-          compliance
-        </Link>{" "}
-        requirements. Gain industry-relevant certifications to strengthen
-        credibility. Contractors must maintain professional standards for client
-        trust.
-      </>
-    ),
-  },
-  {
-    q: "What does it mean to be a Constructionline Gold member?",
-    a: (
-      <>
-        Gold membership shows enhanced pre-qualification status. It proves high
-        standards in safety, finance, and{" "}
-        <Link
-          href="https://bizgrow-holdings.com/qms-software/"
-          className="text-[#997819] font-bold"
-        >
-          quality management
-        </Link>
-        . Clients in the UK see it as a mark of reliability and competence
-      </>
-    ),
-  },
-  {
-    q: "Is Cyber Essentials hard to get?",
-    a: "No. Most UK businesses can achieve it with basic IT security measures. Documentation and simple processes make certification straightforward and quick.",
-  },
-  {
-    q: "What is the difference between Cyber Essentials and Cyber Essentials Plus?",
-    a: (
-      <>
-        <Link
-          href="https://bizgrow-holdings.com/our-services/cyber-essentials/"
-          className="text-[#997819] font-bold"
-        >
-          Cyber Essentials
-        </Link>{" "}
-        is a self-assessment of IT security.{" "}
-        <Link
-          href="https://bizgrow-holdings.vercel.app/our-services/cyber-essentials-plus/"
-          className="text-[#997819] font-bold"
-        >
-          Cyber Essentials Plus
-        </Link>{" "}
-        involves independent technical testing. The Plus version provides
-        greater assurance to clients and stakeholders.
-      </>
-    ),
-  },
-  {
-    q: "How to get a COP 119 certificate?",
-    a: (
-      <>
-        Enroll in a{" "}
-        <Link
-          href="https://bizgrow-holdings.com/our-services/cop-119-labour-provision/"
-          className="text-[#997819] font-bold"
-        >
-          COP 119
-        </Link>{" "}
-        course or assessment via a certified UK training provider. Submit the
-        required documentation for review. Once approved, you receive the
-        official certificate.
       </>
     ),
   },
@@ -278,6 +199,70 @@ const faqData = [
         </Link>{" "}
         is more construction-focused. Choice depends on client preference and
         sector requirements.
+      </>
+    ),
+  },
+  {
+    q: "What does it mean to be a Constructionline Gold member?",
+    a: (
+      <>
+        Gold membership shows enhanced pre-qualification status. It proves high
+        standards in safety, finance, and{" "}
+        <Link
+          href="https://bizgrow-holdings.com/qms-software/"
+          className="text-[#997819] font-bold"
+        >
+          quality management
+        </Link>
+        . Clients in the UK see it as a mark of reliability and competence
+      </>
+    ),
+  },
+  {
+    q: "What are the differences between an internal audit and an external audit?",
+    a: (
+      <>
+        {" "}
+        <Link
+          href="https://bizgrow-holdings.com/difference-between-internal-audit-and-external-audit/"
+          className="text-[#997819] font-bold"
+        >
+          Internal audits
+        </Link>{" "}
+        are conducted by your staff to check compliance and identify
+        improvements. External audits are independent assessments for
+        certification or regulatory purposes. Both ensure standards are met and
+        maintained.
+      </>
+    ),
+  },
+
+  // ==========================================
+  // TECH, OPERATIONS, SECURITY & SPECIFIC QUALIFICATIONS (NICHE)
+  // ==========================================
+  {
+    q: "Is Cyber Essentials hard to get?",
+    a: "No. Most UK businesses can achieve it with basic IT security measures. Documentation and simple processes make certification straightforward and quick.",
+  },
+  {
+    q: "What is the difference between Cyber Essentials and Cyber Essentials Plus?",
+    a: (
+      <>
+        <Link
+          href="https://bizgrow-holdings.com/our-services/cyber-essentials/"
+          className="text-[#997819] font-bold"
+        >
+          Cyber Essentials
+        </Link>{" "}
+        is a self-assessment of IT security.{" "}
+        <Link
+          href="https://bizgrow-holdings.vercel.app/our-services/cyber-essentials-plus/"
+          className="text-[#997819] font-bold"
+        >
+          Cyber Essentials Plus
+        </Link>{" "}
+        involves independent technical testing. The Plus version provides
+        greater assurance to clients and stakeholders.
       </>
     ),
   },
@@ -329,6 +314,28 @@ const faqData = [
         regulated positions.
       </>
     ),
+  },
+  {
+    q: "How do I become a contractor?",
+    a: (
+      <>
+        Register as a self-employed or limited company and ensure you meet
+        insurance, legal, and{" "}
+        <Link
+          href="/compliance-consultancies"
+          className="text-[#997819] font-bold"
+        >
+          compliance
+        </Link>{" "}
+        requirements. Gain industry-relevant certifications to strengthen
+        credibility. Contractors must maintain professional standards for client
+        trust.
+      </>
+    ),
+  },
+  {
+    q: "What qualifications do you need to be a dog handler?",
+    a: "To be a dog handler in the UK, you usually need a Level 2 or 3 canine handling qualification. Relevant experience and licensing are also required, depending on the sector, such as security, detection, or assistance.Training ensures you meet industry standards and safety requirements.",
   },
 ];
 
