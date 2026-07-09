@@ -13,226 +13,106 @@ const faqData = [
   // CORE COMPLIANCE (ISO, COP, ACS, ACCREDITATIONS)
   // ==========================================
   {
-    q: "What are the main requirements of ISO 14001?",
+    q: "How to get ACS certification in the UK?",
     a: (
       <>
-        ISO{" "}
-        <Link
-          href="https://bizgrow-holdings.com/our-services/iso-14001/"
-          className="text-[#997819] font-bold"
-        >
-          14001
-        </Link>{" "}
-        focuses on environmental management systems. Organisations must manage
-        environmental impacts, comply with legislation, and pursue continual
-        improvement. This standard helps UK businesses reduce risk and operate
-        sustainably
+        To get ACS certification, your security company must meet the SIA
+        eligibility requirements and submit an application through the SIA
+        business portal. An approved assessing body will assess your business
+        before the SIA makes the final decision. Companies choose BizGrow
+        Holdings for expert guidance and smoother preparation.
       </>
     ),
   },
   {
-    q: "Difference between ISO 9001, ISO 14001, and ISO 45001?",
+    q: "What documents are required for a CHAS application?",
     a: (
       <>
-        <Link
-          href="https://bizgrow-holdings.com/our-services/iso-9001/"
-          className="text-[#997819] font-bold"
-        >
-          ISO 9001
-        </Link>
-        : Quality management |{" "}
-        <Link
-          href="https://bizgrow-holdings.com/iso-14001-consulting-services/"
-          className="text-[#997819] font-bold"
-        >
-          ISO 14001
-        </Link>
-        : Environmental management |{" "}
-        <Link
-          href="https://bizgrow-holdings.com/our-services/iso-45001/"
-          className="text-[#997819] font-bold"
-        >
-          ISO 45001
-        </Link>
-        : Health and safety management.Each standard targets specific business
-        processes and improves operational performance in the UK.
+        You'll need a health and safety policy, relevant risk assessments (RAMS), 
+        staff training records, and valid insurance certificates. Your documents 
+        must be up to date, accurate, and specific to your business to improve approval chances.
       </>
     ),
   },
   {
-    q: "The Importance of ISO 9001 in the construction industry?",
+    q: "What does SafeContractor-approved mean?",
     a: (
       <>
-        <Link
-          href="https://bizgrow-holdings.com/iso-9001-for-small-businesses/"
-          className="text-[#997819] font-bold"
-        >
-          ISO 9001
-        </Link>{" "}
-        helps construction businesses maintain quality, efficiency, and client
-        trust. It ensures consistent processes and reduces errors. This standard
-        is widely recognised in the UK construction sector.
+        SafeContractor approval confirms that your business meets recognised UK 
+        health and safety standards. It helps build client confidence, simplifies 
+        pre-qualification, and can improve your chances of winning contracts.
       </>
     ),
   },
   {
-    q: "How to get a COP 119 certificate?",
+    q: "What are the main requirements of COP 119?",
     a: (
       <>
-        Enroll in a{" "}
-        <Link
-          href="https://bizgrow-holdings.com/our-services/cop-119-labour-provision/"
-          className="text-[#997819] font-bold"
-        >
-          COP 119
-        </Link>{" "}
-        course or assessment via a certified UK training provider. Submit the
-        required documentation for review. Once approved, you receive the
-        official certificate.
+        COP 119 requires businesses to follow best practices for supplying security 
+        labour, including SIA licence checks, BS 7858 screening, right-to-work verification, 
+        and compliant payroll processes. It helps demonstrate a professional and compliant workforce.
       </>
     ),
   },
   {
-    q: "Is ACS certification worth it in the UK?",
+    q: "What is ISO 9001 in simple terms?",
     a: (
       <>
-        Yes,{" "}
-        <Link
-          href="https://bizgrow-holdings.com/our-services/sia-acs/"
-          className="text-[#997819] font-bold"
-        >
-          ACS
-        </Link>{" "}
-        certification proves competence and regulatory compliance in the UK
-        security sector. It increases credibility with clients and authorities.
-        Many businesses find it essential to win contracts, and BizGrow provides
-        guidance for achieving this.
+        ISO 9001 is an international quality management standard that helps businesses 
+        deliver consistent, reliable services. It focuses on improving processes, 
+        customer satisfaction, and continual improvement across the organisation.
       </>
     ),
   },
   {
-    q: "Is SafeContractor the same as SSIP?",
+    q: "What is the main purpose of ISO 14001 certification?",
     a: (
       <>
-        No.{" "}
-        <Link
-          href="https://bizgrow-holdings.com/our-services/safe-contractor/"
-          className="text-[#997819] font-bold"
-        >
-          SafeContractor
-        </Link>{" "}
-        is an SSIP-accredited scheme, while SSIP is the umbrella framework
-        covering multiple UK health and safety schemes. SafeContractor provides
-        verified evidence of compliance under{" "}
-        <Link
-          href="https://bizgrow-holdings.com/rules-requirements-for-ssip/"
-          className="text-[#997819] font-bold"
-        >
-          SSIP standards
-        </Link>
+        The main purpose of ISO 14001 is to help businesses manage and reduce their 
+        environmental impact through structured processes. It supports legal compliance, 
+        improves sustainability, and demonstrates environmental responsibility to clients.
       </>
     ),
   },
   {
-    q: "What are the SafeContractor accreditation requirements?",
+    q: "What are the key elements of ISO 45001?",
     a: (
       <>
-        Applicants must provide proof of health and safety policies,{" "}
-        <Link
-          href="https://bizgrow-holdings.com/site-specific-risk-assessment/"
-          className="text-[#997819] font-bold"
-        >
-          risk assessments
-        </Link>
-        , and legal compliance.{" "}
-        <Link
-          href="https://bizgrow-holdings.com/safe-contractor-checklist/"
-          className="text-[#997819] font-bold"
-        >
-          SafeContractor
-        </Link>{" "}
-        reviews these documents to verify standards. Accreditation demonstrates
-        your business is safe and reliable.
+        The key elements of ISO 45001 include hazard identification, risk assessment, 
+        legal compliance, employee participation, emergency preparedness, and continual 
+        improvement. Together, these elements help businesses create a safer workplace 
+        and reduce health and safety risks.
       </>
     ),
   },
   {
-    q: "What Is SMAS Accreditation in Construction?",
+    q: "What is Constructionline Gold accreditation?",
     a: (
       <>
-        <Link
-          href="https://bizgrow-holdings.com/our-services/smas-accreditation/"
-          className="text-[#997819] font-bold"
-        >
-          SMAS
-        </Link>{" "}
-        is a{" "}
-        <Link
-          href="https://bizgrow-holdings.com/key-components-of-health-and-safety-policy/"
-          className="text-[#997819] font-bold"
-        >
-          health and safety
-        </Link>{" "}
-        accreditation scheme for the UK construction sector. It demonstrates
-        that a business meets industry safety standards. SMAS helps improve
-        credibility with clients and regulators
+        Constructionline Gold is a recognised UK accreditation that assesses health 
+        and safety, quality, environmental management, and financial standing. It helps 
+        businesses demonstrate credibility and qualify for larger contracts.
       </>
     ),
   },
   {
-    q: "What is better, CHAS or SMAS?",
+    q: "What happens if my SMAS accreditation expires?",
     a: (
       <>
-        Both are recognised in the UK, but{" "}
-        <Link
-          href="https://bizgrow-holdings.com/our-services/chas-scheme/"
-          className="text-[#997819] font-bold"
-        >
-          CHAS
-        </Link>{" "}
-        is widely accepted across sectors.{" "}
-        <Link
-          href="https://bizgrow-holdings.com/smas-accreditation-requirements-in-the-uk/"
-          className="text-[#997819] font-bold"
-        >
-          SMAS
-        </Link>{" "}
-        is more construction-focused. Choice depends on client preference and
-        sector requirements.
+        If your SMAS accreditation expires, you can no longer use it to demonstrate 
+        compliance for tenders or client requirements. Renewing it on time helps 
+        maintain your approved status and avoid business interruptions.
       </>
     ),
   },
   {
-    q: "What does it mean to be a Constructionline Gold member?",
+    q: "What is the difference between internal and external audits?",
     a: (
       <>
-        Gold membership shows enhanced pre-qualification status. It proves high
-        standards in safety, finance, and{" "}
-        <Link
-          href="https://bizgrow-holdings.com/qms-software/"
-          className="text-[#997819] font-bold"
-        >
-          quality management
-        </Link>
-        . Clients in the UK see it as a mark of reliability and competence
-      </>
-    ),
-  },
-  {
-    q: "What are the differences between an internal audit and an external audit?",
-    a: (
-      <>
-        {" "}
-        <Link
-          href="https://bizgrow-holdings.com/difference-between-internal-audit-and-external-audit/"
-          className="text-[#997819] font-bold"
-        >
-          Internal audits
-        </Link>{" "}
-        are conducted by your staff to check compliance and identify
-        improvements. External audits are independent assessments for
-        certification or regulatory purposes. Both ensure standards are met and
-        maintained.
+        The main difference between an internal and external audit is that an internal 
+        audit is carried out by your own team or a consultant to identify and improve 
+        gaps before certification. An external audit is conducted by an independent 
+        certification body to verify that your business meets the required standard.
       </>
     ),
   },
@@ -241,101 +121,37 @@ const faqData = [
   // TECH, OPERATIONS, SECURITY & SPECIFIC QUALIFICATIONS (NICHE)
   // ==========================================
   {
-    q: "Is Cyber Essentials hard to get?",
-    a: "No. Most UK businesses can achieve it with basic IT security measures. Documentation and simple processes make certification straightforward and quick.",
-  },
-  {
     q: "What is the difference between Cyber Essentials and Cyber Essentials Plus?",
     a: (
       <>
-        <Link
-          href="https://bizgrow-holdings.com/our-services/cyber-essentials/"
-          className="text-[#997819] font-bold"
-        >
-          Cyber Essentials
-        </Link>{" "}
-        is a self-assessment of IT security.{" "}
-        <Link
-          href="https://bizgrow-holdings.vercel.app/our-services/cyber-essentials-plus/"
-          className="text-[#997819] font-bold"
-        >
-          Cyber Essentials Plus
-        </Link>{" "}
-        involves independent technical testing. The Plus version provides
-        greater assurance to clients and stakeholders.
+        The main difference between Cyber Essentials and Cyber Essentials Plus is 
+        that Cyber Essentials is a self-assessment certification, while Cyber 
+        Essentials Plus includes an independent technical assessment. Cyber Essentials 
+        Plus provides a higher level of assurance because your security controls are 
+        tested and verified by a qualified assessor.
       </>
     ),
   },
   {
-    q: "What is the BS 10800 provision of security services?",
+    q: "Is NASDU certification hard to get?",
     a: (
       <>
-        <Link
-          href="https://bizgrow-holdings.com/our-services/bs-10800/"
-          className="text-[#997819] font-bold"
-        >
-          BS 10800
-        </Link>{" "}
-        sets standards for private security operations in the UK. It covers
-        personnel competence, operational procedures, and legal compliance.
-        Following it ensures quality and safety in security services.
+        NASDU certification is not hard to get if the handler and the dog are properly 
+        trained and prepared. The assessment evaluates practical skills, obedience, and 
+        operational performance to ensure they meet UK industry standards. With the 
+        right preparation, most professional teams can pass successfully.
       </>
     ),
   },
   {
-    q: "What is BS 7499?",
+    q: "What is BS 10800?",
     a: (
       <>
-        <Link
-          href="https://bizgrow-holdings.vercel.app/our-services/bs-7499/"
-          className="text-[#997819] font-bold"
-        >
-          BS 7499
-        </Link>{" "}
-        is the UK standard for manned guarding and static security services. It
-        ensures personnel are trained, competent, and operating safely.
-        Compliance improves trust with clients.
+        BS 10800 is a British Standard for security guarding companies that sets 
+        requirements for staff, operations, and service quality. It helps businesses 
+        demonstrate professionalism and strengthen their position in tenders and client contracts.
       </>
     ),
-  },
-  {
-    q: "What is the difference between screening and vetting?",
-    a: (
-      <>
-        Screening involves basic background and identity checks.{" "}
-        <Link
-          href="https://bizgrow-holdings.vercel.app/our-services/bs7858-screening-vetting/"
-          className="text-[#997819] font-bold"
-        >
-          Vetting
-        </Link>{" "}
-        is more detailed, including criminal records, references, and
-        suitability for sensitive roles. Vetting is used for high-security or
-        regulated positions.
-      </>
-    ),
-  },
-  {
-    q: "How do I become a contractor?",
-    a: (
-      <>
-        Register as a self-employed or limited company and ensure you meet
-        insurance, legal, and{" "}
-        <Link
-          href="/compliance-consultancies"
-          className="text-[#997819] font-bold"
-        >
-          compliance
-        </Link>{" "}
-        requirements. Gain industry-relevant certifications to strengthen
-        credibility. Contractors must maintain professional standards for client
-        trust.
-      </>
-    ),
-  },
-  {
-    q: "What qualifications do you need to be a dog handler?",
-    a: "To be a dog handler in the UK, you usually need a Level 2 or 3 canine handling qualification. Relevant experience and licensing are also required, depending on the sector, such as security, detection, or assistance.Training ensures you meet industry standards and safety requirements.",
   },
 ];
 

@@ -3,20 +3,20 @@ import React, { useState } from 'react';
 import { Plus, Minus, HelpCircle, Award, Shield, ShieldAlert, BadgeCheck } from 'lucide-react';
 import FadeIn from "@/components/MotionWrapper";
 
-// 🔹 Premium Categories configuration inside the Client Component
+
+// Premium Categories configuration explicitly matching your questions
 const categories = [
   { id: "all", name: "All Questions", icon: HelpCircle },
-  { id: "iso", name: "ISO Standards", icon: Award },
-  { id: "security", name: "Security Sector", icon: Shield },
-  { id: "health", name: "Health, Safety & SSIP", icon: ShieldAlert },
-  { id: "compliance", name: "Cyber & Compliance", icon: BadgeCheck },
+  { id: "iso", name: "ISO Standards & Audits", icon: Award },
+  { id: "sia-acs", name: "SIA ACS & BS Standards", icon: Shield }, // Relevant to your exact questions
+  { id: "ssip-health", name: "CHAS, SMAS & SSIP", icon: ShieldAlert }, // Grouped by scheme type
+  { id: "compliance", name: "Cyber & Labour Compliance", icon: BadgeCheck },
 ];
-
 const FaqAccordion = ({ faqData }) => {
   const [activeIndex, setActiveIndex] = useState(null);
   const [activeCategory, setActiveCategory] = useState("all");
 
-  // 🔍 Dynamic Client-side Filtering without mutating state or data
+  // Dynamic Client-side Filtering Mapped precisely to New FAQ Data
   const filteredFaqData = faqData.filter((faq) => {
     if (activeCategory === "all") return true;
     const questionText = faq.q.toLowerCase();
@@ -24,16 +24,19 @@ const FaqAccordion = ({ faqData }) => {
     if (activeCategory === "iso") {
       return questionText.includes("iso") || questionText.includes("audit");
     }
+    
     if (activeCategory === "security") {
       return (
         questionText.includes("security") ||
         questionText.includes("dog") ||
+        questionText.includes("nasdu") ||
         questionText.includes("acs") ||
         questionText.includes("bs ") ||
         questionText.includes("screening") ||
         questionText.includes("vetting")
       );
     }
+    
     if (activeCategory === "health") {
       return (
         questionText.includes("smas") ||
@@ -42,6 +45,7 @@ const FaqAccordion = ({ faqData }) => {
         questionText.includes("constructionline")
       );
     }
+    
     if (activeCategory === "compliance") {
       return (
         questionText.includes("cyber") ||
@@ -52,7 +56,6 @@ const FaqAccordion = ({ faqData }) => {
     }
     return true;
   });
-
   // Category change hone par purana open accordion collapse karne ke liye
   const handleCategoryChange = (catId) => {
     setActiveCategory(catId);
