@@ -4,7 +4,6 @@ import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import FadeIn from "@/components/MotionWrapper";
 
-// Hum 'faqs', 'title', aur 'subtitle' ko as a prop accept kar rahe hain
 const ServicesFaq = ({ faqs = [], title = "FAQs", subtitle = "Questions & Answers" }) => {
   const [openIndex, setOpenIndex] = useState(null);
 
@@ -12,11 +11,30 @@ const ServicesFaq = ({ faqs = [], title = "FAQs", subtitle = "Questions & Answer
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  // Agar galti se kisi page par data pass na ho, to crash na ho
   if (!faqs || faqs.length === 0) return null;
+
+  // 🔹 AUTOMATIC FAQ SCHEMA GENERATION
+  const jsonLdSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": faqs.map((faq) => ({
+      "@type": "Question",
+      "name": faq.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": faq.a,
+      },
+    })),
+  };
 
   return (
     <section className="py-32 bg-zinc-50">
+      {/* 🔹 Injecting the Schema dynamically in HTML head/body for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSchema) }}
+      />
+
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <FadeIn direction="up">
