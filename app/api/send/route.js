@@ -38,7 +38,7 @@ export async function POST(req) {
       );
     }
 
-    // 1. Destructure coupon from the incoming request payload
+    // 1. Destructure payload parameters
     const { name, email, number, service, message, coupon, captchaToken } = await req.json();
 
     // --- CAPTCHA VALIDATION ---
@@ -66,7 +66,16 @@ export async function POST(req) {
     const sanitizedNumber = number?.replace(/\s/g, "");
     const sanitizedService = service?.trim();
     const sanitizedMessage = message?.trim();
-    const sanitizedCoupon = coupon?.trim() || ""; // Default empty string if not present
+    const sanitizedCoupon = coupon?.trim() || "";
+
+    // Identify if it's an internal string-matched referral submission
+    const isReferralSubmission = sanitizedMessage?.startsWith("Referral Submission.");
+
+    // Extractor for referrer name if present in structured message string
+    let referrerName = "";
+    if (isReferralSubmission && sanitizedMessage.includes("Who Referred:")) {
+      referrerName = sanitizedMessage.split("Who Referred:")[1]?.trim() || "Unknown Referrer";
+    }
 
     console.log("Contact form received:", {
       name: sanitizedName,
@@ -74,6 +83,8 @@ export async function POST(req) {
       number: sanitizedNumber,
       service: sanitizedService,
       coupon: sanitizedCoupon,
+      isReferral: isReferralSubmission,
+      referrer: referrerName,
       messageLength: sanitizedMessage?.length,
     });
 
@@ -84,7 +95,7 @@ export async function POST(req) {
       );
     }
 
-    // Length limits for security (Including Coupon Code validation)
+    // Length limits for security 
     if (
       sanitizedName.length > 100 || 
       sanitizedEmail.length > 254 || 
@@ -123,18 +134,18 @@ export async function POST(req) {
       );
     }
 
- 
-
-    // Dynamic Subject Line (Agar coupon lag kar aaya hai toh alert dikhega)
-    const emailSubject = sanitizedCoupon 
-      ? `💥 [OFFER ALERT - ${sanitizedCoupon}] New Inquiry from ${sanitizedName}`
-      : `New Inquiry: ${sanitizedService} from ${sanitizedName}`;
-
+    // ─── DYNAMIC SUBJECT LINE ───────────────────────────────────────────────
+    let emailSubject = `New Inquiry: ${sanitizedService} from ${sanitizedName}`;
+    if (sanitizedCoupon) {
+      emailSubject = `💥 [OFFER ALERT - ${sanitizedCoupon}] New Inquiry from ${sanitizedName}`;
+    } else if (isReferralSubmission) {
+      emailSubject = `🤝 [REFERRAL LEAD] New Onboarding Inquiry from ${sanitizedName}`;
+    }
 
     // --- PARALLEL EMAIL SENDING (Promise.allSettled) ---
     const [adminResult, clientResult] = await Promise.allSettled([
       
-      // 1. ADMIN NOTIFICATION EMAIL (Sales Team Ke Liye)
+      // 1. ADMIN NOTIFICATION EMAIL (Sales Team Template)
       resend.emails.send({
         from: 'BizGrow Sales <sales@bizgrow-holdings.net>', 
         to: ['sales@bizgrow-holdings.net'],
@@ -142,9 +153,11 @@ export async function POST(req) {
         subject: emailSubject,
         html: `
           <div style="font-family: sans-serif; max-width: 600px; border: 1px solid #e0e0e0; padding: 30px; border-radius: 12px; color: #333;">
-            <h2 style="color: #12066a; margin-top: 0;">New Business Inquiry</h2>
+            <h2 style="color: #12066a; margin-top: 0;">
+              ${isReferralSubmission ? 'Referral Network Submission' : 'New Business Inquiry'}
+            </h2>
             <p style="font-size: 16px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
-              A new lead has been submitted through the <strong>BizGrow Holdings</strong> website.
+              A new lead has been submitted through the <strong>BizGrow Holdings</strong> portal route.
             </p>
             
             <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
@@ -156,7 +169,6 @@ export async function POST(req) {
                 <td style="padding: 8px 0; font-weight: bold; color: #666;">Client Email:</td>
                 <td style="padding: 8px 0;"><a href="mailto:${sanitizedEmail}" style="color: #12066a;">${sanitizedEmail}</a></td>
               </tr>
-             
               <tr>
                 <td style="padding: 8px 0; font-weight: bold; color: #666;">Phone Number:</td>
                 <td style="padding: 8px 0;"><a href="tel:${sanitizedNumber}" style="color: #12066a; text-decoration: none;">${sanitizedNumber}</a></td>
@@ -176,10 +188,21 @@ export async function POST(req) {
                 </td>
               </tr>
               ` : ''}
+
+              ${isReferralSubmission ? `
+              <tr>
+                <td style="padding: 8px 0; font-weight: bold; color: #047857;">Who Referred:</td>
+                <td style="padding: 8px 0;">
+                  <span style="background: #d1fae5; color: #065f46; padding: 4px 10px; border-radius: 5px; font-size: 13px; font-weight: bold; border: 1px solid #a7f3d0;">
+                    ${referrerName}
+                  </span>
+                </td>
+              </tr>
+              ` : ''}
             </table>
 
             <div style="background: #fcfcfc; border-left: 4px solid #12066a; padding: 15px; border-radius: 4px; margin-top: 25px;">
-              <p style="margin-top: 0; font-weight: bold; color: #12066a;">Message:</p>
+              <p style="margin-top: 0; font-weight: bold; color: #12066a;">Submission Content / Metadata:</p>
               <p style="line-height: 1.6; margin-bottom: 0;">${sanitizedMessage.replace(/\n/g, '<br>')}</p>
             </div>
 
@@ -190,18 +213,26 @@ export async function POST(req) {
         `,
       }),
 
-      // 2. CLIENT THANK YOU EMAIL (Auto-Responder) - TYPO FIXED (.net)
+      // 2. CLIENT THANK YOU EMAIL (Auto-Responder Template)
       resend.emails.send({
         from: 'BizGrow Holdings <sales@bizgrow-holdings.net>', 
         to: [sanitizedEmail], 
-        subject: `Thank you for contacting BizGrow Holdings!`,
+        subject: isReferralSubmission 
+          ? `Priority Onboarding: Thank you for connecting with BizGrow Holdings`
+          : `Thank you for contacting BizGrow Holdings!`,
         html: `
           <div style="font-family: sans-serif; max-width: 600px; border: 1px solid #e0e0e0; padding: 30px; border-radius: 12px; color: #333;">
             <h2 style="color: #12066a; margin-top: 0;">Thank You, ${sanitizedName}!</h2>
+            
             <p style="font-size: 15px; line-height: 1.6;">
-              We have successfully received your inquiry regarding <strong>${sanitizedService}</strong>. Our team is currently reviewing your details, and a representative will get in touch with you shortly.
+              ${isReferralSubmission ? `
+                We have successfully verified your routing through our trusted partner referral channel regarding your interest in <strong>${sanitizedService}</strong>. Your profile has been passed directly to our priority account managers.
+              ` : `
+                We have successfully received your inquiry regarding <strong>${sanitizedService}</strong>. Our team is currently reviewing your details, and a representative will get in touch with you shortly.
+              `}
             </p>
             
+          
             ${sanitizedCoupon ? `
             <div style="background: #fffbeb; border: 1px solid #fde68a; padding: 15px; border-radius: 8px; margin: 20px 0;">
               <p style="margin: 0; color: #b45309; font-weight: bold; font-size: 14px;">
@@ -210,11 +241,20 @@ export async function POST(req) {
             </div>
             ` : ''}
 
+            
+            ${isReferralSubmission ? `
+            <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 15px; border-radius: 8px; margin: 20px 0;">
+              <p style="margin: 0; color: #166534; font-weight: bold; font-size: 14px;">
+                🤝 Referral Partner Confirmed: Account associated via reference of <span style="background: #d1fae5; padding: 2px 6px; border-radius: 4px;">${referrerName}</span>.
+              </p>
+            </div>
+            ` : ''}
+
             <div style="background: #f9fafb; padding: 15px; border-radius: 8px; margin-top: 20px; border-top: 3px solid #12066a;">
               <h4 style="margin-top: 0; margin-bottom: 10px; color: #12066a;">What's Next?</h4>
               <ul style="margin: 0; padding-left: 20px; line-height: 1.5; font-size: 14px; color: #555;">
-                <li>Our consultants will analyze your project requirements.</li>
-                <li>We will reach out via email or phone (${sanitizedNumber}) within 24 business hours.</li>
+                <li>Our consultants will analyse your project requirements.</li>
+                <li>We will reach out via email or phone (${sanitizedNumber}) within ${isReferralSubmission ? '12-24 fast-tracked' : '24'} business hours.</li>
               </ul>
             </div>
 
@@ -227,7 +267,7 @@ export async function POST(req) {
             <p style="margin-top: 0; font-weight: bold; color: #12066a; font-size: 16px;">BizGrow Holdings Team</p>
             
             <hr style="border: 0; border-top: 1px solid #eee; margin-top: 30px;" />
-            <p style="font-size: 11px; color: #aaa; text-align: center;">
+            <p style="font-size: 11px; text-align: center;">
               This is an automated confirmation of your submission. Please do not hesitate to reach out if you have any questions.
             </p>
           </div>

@@ -13,16 +13,21 @@ export const metadata = {
 
 const ContactPage = async ({ searchParams }) => {
   const params = await searchParams;
+  
   const hasCoupon = !!params?.coupon; // Link mein '?coupon=...' check karne ke liye
+  const hasReferral = !!params?.referral_code; // Link mein '?referral_code=...' check karne ke liye
+
+  // Agar dono mein se koi aik bhi mode active ho toh pure page par strict clean form load hoga
+  const isCampaignMode = hasCoupon || hasReferral;
 
   return (
     <>
       <JsonLd schema={contactPageSchema} />
       <main
-        className={`${hasCoupon ? "bg-white" : "bg-[#f8fafc]"} text-zinc-900 overflow-x-hidden w-full relative min-h-screen`}
+        className={`${isCampaignMode ? "bg-white" : "bg-[#f8fafc]"} text-zinc-900 overflow-x-hidden w-full relative min-h-screen`}
       >
-        {/* 🔹 1. HERO HEADER - Coupon campaign par hide rahega */}
-        {!hasCoupon && (
+        {/* 🔹 1. HERO HEADER - Coupon ya Referral campaign par bilkul hide rahega */}
+        {!isCampaignMode && (
           <section className="relative h-screen w-full flex items-center bg-[#12066a] overflow-hidden">
             <div
               className="absolute inset-0 z-0 opacity-25"
@@ -50,32 +55,34 @@ const ContactPage = async ({ searchParams }) => {
 
         {/* 🔹 2. MAIN HEADING SECTION */}
         <section
-          className={`${hasCoupon ? "pt-32 pb-12" : "py-24"} bg-white relative z-20 border-b border-slate-100`}
+          className={`${isCampaignMode ? "pt-32 pb-12" : "py-24"} bg-white relative z-20 border-b border-slate-100`}
         >
           <div className="max-w-7xl mx-auto px-6">
             <div className="max-w-7xl text-center">
-              {/* 1. Main Heading */}
+              {/* 1. Main Heading (Dynamic) */}
               <FadeIn direction="up" delay={0.2}>
                 <h2 className="text-[#12066a] text-xl font-black tracking-tighter leading-[0.9] mb-4 uppercase">
-                  {hasCoupon ? "Exclusive Campaign Offer" : "Let's Build Your"}
+                  {hasCoupon && "Exclusive Campaign Offer"}
+                  {hasReferral && "Exclusive Referral Program"}
+                  {!isCampaignMode && "Let's Build Your"}
                 </h2>
               </FadeIn>
 
-              {/* 2. Sub-Heading */}
+              {/* 2. Sub-Heading (Dynamic) */}
               <FadeIn direction="up" delay={0.4}>
                 <span className="text-[#997819] italic font-bold text-4xl md:text-6xl block mb-10 tracking-tight">
-                  {hasCoupon
-                    ? "Accelerate Your Growth."
-                    : "Compliance & Growth Partner."}
+                  {hasCoupon && "Accelerate Your Growth."}
+                  {hasReferral && "Welcome To BizGrow."}
+                  {!isCampaignMode && "Compliance & Growth Partner."}
                 </span>
               </FadeIn>
 
-              {/* 3. Paragraph */}
+              {/* 3. Paragraph Description (Dynamic) */}
               <div className="w-full flex justify-center">
                 <div className="max-w-3xl mx-auto">
                   <FadeIn direction="up" delay={0.6}>
                     <p className="text-zinc-600 text-lg md:text-lg font-medium leading-relaxed">
-                      {hasCoupon ? (
+                      {hasCoupon && (
                         <>
                           Your coupon code has been successfully applied! Secure
                           your
@@ -87,7 +94,21 @@ const ContactPage = async ({ searchParams }) => {
                           out the form below to lock in your exclusive rate and
                           fast-track your corporate growth.
                         </>
-                      ) : (
+                      )}
+                      
+                      {hasReferral && (
+                        <>
+                          You have been successfully routed through our verified corporate referral program. 
+                          Submit your required parameters below to initiate a prioritised 
+                          <span className="text-[#12066a] font-bold">
+                            {" "}
+                            onboarding evaluation{" "}
+                          </span>
+                          with our core compliance management unit.
+                        </>
+                      )}
+
+                      {!isCampaignMode && (
                         "Our expert team is dedicated to accelerating your security business growth within the UK market. Please utilise the form below or our contact details to initiate your strategic ACS, ISO, and compliance consultation"
                       )}
                     </p>
@@ -98,20 +119,19 @@ const ContactPage = async ({ searchParams }) => {
           </div>
         </section>
 
-        {/* 🔹 3. THE CONTACT CARD (Perfect Wrapper Dynamic Logic) */}
+        {/* 🔹 3. THE CONTACT CARD */}
         <section
-          className={`relative z-30 ${hasCoupon ? "pt-4 pb-24" : "-mt-16 pb-24"} px-4 sm:px-6`}
+          className={`relative z-30 ${isCampaignMode ? "pt-4 pb-24" : "-mt-16 pb-24"} px-4 sm:px-6`}
         >
-          {/* Normal state mein unified block layout aur coupon mein transparent container */}
           <div
             className={`max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch overflow-hidden
-              ${hasCoupon 
+              ${isCampaignMode 
                 ? "justify-center" 
                 : "bg-white rounded-[3rem] md:rounded-[4.5rem] shadow-[0_50px_100px_-20px_rgba(18,6,106,0.12)] border border-slate-100"
               }`}
           >
-            {/* LEFT SIDE DETAILS PANEL - Only visible on Normal state */}
-            {!hasCoupon && (
+            {/* LEFT SIDE DETAILS PANEL - Hidden on Coupon & Referral Campaigns */}
+            {!isCampaignMode && (
               <div className="w-full lg:w-[38%] bg-[#12066a] p-12 md:p-20 text-white flex flex-col justify-between relative min-h-[600px]">
                 <div className="relative z-10">
                   <h3 className="text-4xl font-black tracking-tighter italic mb-12">
@@ -148,10 +168,10 @@ const ContactPage = async ({ searchParams }) => {
               </div>
             )}
 
-            {/* RIGHT SIDE: Contact Form */}
+            {/* RIGHT SIDE: Contact Form Layout */}
             <div
               className={`bg-white 
-                ${hasCoupon
+                ${isCampaignMode
                   ? "w-full max-w-2xl p-8 md:p-16 rounded-[2.5rem] shadow-[0_50px_100px_-20px_rgba(18,6,106,0.12)] border border-slate-100"
                   : "w-full lg:w-[62%] p-10 md:p-24"
                 }`}
@@ -161,8 +181,8 @@ const ContactPage = async ({ searchParams }) => {
           </div>
         </section>
 
-        {/* 🔹 4. GOOGLE MAP SECTION - Coupon par hide rahega */}
-        {!hasCoupon && (
+        {/* 🔹 4. GOOGLE MAP SECTION - Hidden on Coupon & Referral Campaigns */}
+        {!isCampaignMode && (
           <section className="max-w-7xl h-[500px] mx-auto px-4 sm:px-6 mb-24">
             <div className="w-full h-full relative bg-slate-100 rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl shadow-[#12066a]/5 grayscale hover:grayscale-0 transition-all duration-1000 border border-white">
               <iframe
@@ -176,7 +196,7 @@ const ContactPage = async ({ searchParams }) => {
                 title="BizGrow Office Location"
                 className="rounded-[2rem] md:rounded-[3rem]"
               />
-              <div className="absolute  inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white/20 to-transparent pointer-events-none" />
+              <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white/20 to-transparent pointer-events-none" />
               <div className="absolute top-8 left-8 bg-white/90 backdrop-blur-md px-6 py-3 rounded-2xl shadow-lg border border-slate-100 flex items-center gap-3">
                 <div className="w-2 h-2 bg-[#997819] rounded-full animate-ping" />
                 <span className="text-[10px] font-black uppercase tracking-widest text-[#12066a]">
