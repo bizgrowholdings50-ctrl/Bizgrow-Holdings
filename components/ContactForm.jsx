@@ -26,7 +26,7 @@ const labelClasses = `
   peer-[:not(:placeholder-shown)]:-translate-y-10
 `;
 
-// ─── All Services List ──────────────────────────────────────────────────────
+// ─── All Services List (Now Open For All Channels) ──────────────────────────
 const ALL_SERVICES = [
   "SIA ACS",
   "COP 119",
@@ -45,21 +45,13 @@ const ALL_SERVICES = [
   "BS 7499",
 ];
 
-// ─── Referral 4 Specific Services ───────────────────────────────────────────
-const REFERRAL_SERVICES = [
-  "ISO 9001",
-  "SIA ACS",
-  "COP 119",
-  "Safe Contractor",
-];
-
 const useLenis = () => {
   if (typeof window === "undefined") return null;
   return window.lenis ?? null;
 };
 
 // ─── Step 1: Service Selection ───────────────────────────────────────────────
-const ServiceStep = ({ selectedServices, setSelectedServices, onContinue }) => {
+const ServiceStep = ({ selectedServices, setSelectedServices, onContinue, isReferralMode }) => {
   const toggle = (service) => {
     setSelectedServices((prev) =>
       prev.includes(service)
@@ -70,14 +62,27 @@ const ServiceStep = ({ selectedServices, setSelectedServices, onContinue }) => {
 
   return (
     <div className="w-full">
-      {/* Header */}
+      {/* Dynamic Header Based on Mode */}
       <div className="mb-10">
-        <h2 className="text-4xl md:text-5xl font-black text-[#12066a] tracking-tighter mb-4">
-          Start your <span className="text-[#997819] italic">Consultation</span>
-        </h2>
-        <p className="text-slate-400 font-medium text-lg">
-          Tell us about your requirements and we'll get back to you promptly.
-        </p>
+        {isReferralMode ? (
+          <>
+            <h2 className="text-4xl md:text-5xl font-black text-[#12066a] tracking-tighter mb-4">
+              Partner <span className="text-[#997819] italic">Referral Channel</span>
+            </h2>
+            <p className="text-slate-400 font-medium text-lg">
+              Please select the eligible services you want to apply for via our referral network.
+            </p>
+          </>
+        ) : (
+          <>
+            <h2 className="text-4xl md:text-5xl font-black text-[#12066a] tracking-tighter mb-4">
+              Start your <span className="text-[#997819] italic">Consultation</span>
+            </h2>
+            <p className="text-slate-400 font-medium text-lg">
+              Tell us about your requirements and we'll get back to you promptly.
+            </p>
+          </>
+        )}
       </div>
 
       {/* Progress Indicator */}
@@ -107,7 +112,10 @@ const ServiceStep = ({ selectedServices, setSelectedServices, onContinue }) => {
           Select Your Services
         </p>
         <p className="text-slate-400 text-sm mb-6">
-          Choose one or more services you're interested in.
+          {isReferralMode 
+            ? "Choose one or multiple corporate compliance services from the list below."
+            : "Choose one or more services you're interested in."
+          }
         </p>
 
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
@@ -163,7 +171,7 @@ const ServiceStep = ({ selectedServices, setSelectedServices, onContinue }) => {
           type="button"
           onClick={() => {
             if (selectedServices.length === 0) {
-              toast.warning("Please select at least one service.");
+              toast.warning("Please select at least one service to proceed.");
               return;
             }
             onContinue();
@@ -182,26 +190,13 @@ const ServiceStep = ({ selectedServices, setSelectedServices, onContinue }) => {
 };
 
 // ─── Step 2: Contact Form ────────────────────────────────────────────────────
-const ContactStep = ({ selectedServices, setSelectedServices, onBack, coupon, isReferralMode }) => {
+const ContactStep = ({ selectedServices, onBack, coupon, isReferralMode }) => {
   const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
   const [captchaToken, setCaptchaToken] = useState(null);
 
-  const toggleReferralService = (service) => {
-    setSelectedServices((prev) =>
-      prev.includes(service)
-        ? prev.filter((s) => s !== service)
-        : [...prev, service]
-    );
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    if (isReferralMode && selectedServices.length === 0) {
-      toast.warning("Please select at least one service.");
-      return;
-    }
 
     if (!captchaToken) {
       toast.error("Please verify that you are a human.");
@@ -210,7 +205,6 @@ const ContactStep = ({ selectedServices, setSelectedServices, onBack, coupon, is
 
     setLoading(true);
 
-    // Fixed interpolation parameters string matching cleanly
     let finalizedMessage = e.target.msg?.value || "";
     if (coupon) {
       finalizedMessage = `Coupon Applied: ${coupon}`;
@@ -243,7 +237,6 @@ const ContactStep = ({ selectedServices, setSelectedServices, onBack, coupon, is
         return;
       }
 
-      // Google Analytics Integration
       if (typeof window !== "undefined" && window.gtag) {
         window.gtag("event", "form_submission", {
           event_category: "Lead Generation",
@@ -256,7 +249,6 @@ const ContactStep = ({ selectedServices, setSelectedServices, onBack, coupon, is
       toast.success(isReferralMode ? "Referral lead submitted successfully!" : "Consultation inquiry sent successfully!");
       setSent(true);
       e.target.reset();
-      if(isReferralMode) setSelectedServices([]); 
       setCaptchaToken(null);
       setTimeout(() => setSent(false), 5000);
     } catch (err) {
@@ -272,16 +264,17 @@ const ContactStep = ({ selectedServices, setSelectedServices, onBack, coupon, is
     <form className="w-full" onSubmit={handleSubmit}>
       {/* Header */}
       <div className="mb-10">
-        {coupon || isReferralMode ? null : (
-          <button
-            type="button"
-            onClick={onBack}
-            className="flex items-center gap-2 text-slate-400 hover:text-[#12066a] transition-colors mb-6 text-xs font-black uppercase tracking-widest"
-          >
-            <ChevronLeft size={14} />
-            Back to Services
-          </button>
-        )}
+       {!coupon && (
+    <button
+      type="button"
+      onClick={onBack}
+      className="flex items-center gap-2 text-slate-400 hover:text-[#12066a] transition-colors mb-6 text-xs font-black uppercase tracking-widest"
+    >
+      <ChevronLeft size={14} />
+      Back to Services
+    </button>
+  )}
+
         <h2 className="text-4xl md:text-5xl font-black text-[#12066a] tracking-tighter mb-4">
           {coupon ? (
             <>Send <span className="text-[#997819] italic">Quotation</span></>
@@ -291,147 +284,74 @@ const ContactStep = ({ selectedServices, setSelectedServices, onBack, coupon, is
             <>Send Us A <span className="text-[#997819] italic">Message.</span></>
           )}
         </h2>
-        {!coupon && !isReferralMode && (
+        
+        {isReferralMode ? (
+          <p className="text-slate-400 font-medium text-lg">
+            Complete the secure fields below to route your profile directly to priority managers.
+          </p>
+        ) : !coupon ? (
           <p className="text-slate-400 font-medium text-lg">
             Initiating your strategic consultation today.
           </p>
-        )}
-        {isReferralMode && (
-          <p className="text-slate-400 font-medium text-lg">
-            Select services and complete the fields below to submit the referral lead.
-          </p>
-        )}
+        ) : null}
       </div>
 
       {/* Progress Indicator */}
-      {!isReferralMode && (
-        <div className="flex items-center gap-3 mb-10">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-[#997819] text-white flex items-center justify-center text-xs font-black">
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                viewBox="0 0 10 8"
-                stroke="currentColor"
-                strokeWidth={2.5}
-              >
-                <path
-                  d="M1 4l3 3 5-6"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
-            <span className="text-xs font-black uppercase tracking-widest text-[#997819]">
-              Services
-            </span>
+      <div className="flex items-center gap-3 mb-10">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-full bg-[#997819] text-white flex items-center justify-center text-xs font-black">
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              viewBox="0 0 10 8"
+              stroke="currentColor"
+              strokeWidth={2.5}
+            >
+              <path d="M1 4l3 3 5-6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </div>
-          <div className="flex-1 h-px bg-[#997819] max-w-[60px]" />
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-[#12066a] text-white flex items-center justify-center text-xs font-black">
-              2
-            </div>
-            <span className="text-xs font-black uppercase tracking-widest text-[#12066a]">
-              Your Details
-            </span>
-          </div>
+          <span className="text-xs font-black uppercase tracking-widest text-[#997819]">
+            Services
+          </span>
         </div>
-      )}
-
-      {/* Referral Services Selection */}
-      {isReferralMode && (
-        <div className="mb-12 border-b border-slate-100 pb-10">
-          <p className="text-sm font-black uppercase tracking-widest text-[#12066a] mb-2">
-            Select Services For Referral Lead
-          </p>
-          <p className="text-slate-400 text-xs mb-6">
-            Choose one or more eligible services.
-          </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-            {REFERRAL_SERVICES.map((service) => {
-              const isSelected = selectedServices.includes(service);
-              return (
-                <button
-                  key={service}
-                  type="button"
-                  onClick={() => toggleReferralService(service)}
-                  className={`
-                    flex items-center gap-2 px-4 py-3 rounded-lg border-2 text-left
-                    transition-all duration-300 text-xs font-bold
-                    ${
-                      isSelected
-                        ? "border-[#997819] bg-[#997819]/10 text-[#12066a]"
-                        : "border-slate-200 bg-white text-slate-500 hover:border-[#997819] hover:text-[#12066a]"
-                    }
-                  `}
-                >
-                  <div
-                    className={`
-                      w-3.5 h-3.5 rounded border-2 flex-shrink-0 flex items-center justify-center transition-all
-                      ${isSelected ? "border-[#997819] bg-[#997819]" : "border-slate-300"}
-                    `}
-                  >
-                    {isSelected && (
-                      <svg className="w-2 h-2 text-white" fill="none" viewBox="0 0 10 8" stroke="currentColor" strokeWidth={3}>
-                        <path d="M1 4l3 3 5-6" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    )}
-                  </div>
-                  <span className="leading-tight">{service}</span>
-                </button>
-              );
-            })}
+        <div className="flex-1 h-px bg-[#997819] max-w-[60px]" />
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded-full bg-[#12066a] text-white flex items-center justify-center text-xs font-black">
+            2
           </div>
+          <span className="text-xs font-black uppercase tracking-widest text-[#12066a]">
+            Your Details
+          </span>
         </div>
-      )}
+      </div>
 
       {/* Selected Services Tags */}
-      {!isReferralMode && (
-        <div className="mb-10">
-          <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-3">
-            Selected Services
-          </p>
-          <div className="flex flex-wrap gap-2">
-            {selectedServices.map((s) => (
-              <span
-                key={s}
-                className="px-3 py-1 rounded-full bg-[#12066a]/10 text-[#12066a] text-xs font-black border border-[#12066a]/20"
-              >
-                {s}
-              </span>
-            ))}
-          </div>
+      <div className="mb-10">
+        <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-3">
+          Selected Services
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {selectedServices.map((s) => (
+            <span
+              key={s}
+              className="px-3 py-1 rounded-full bg-[#12066a]/10 text-[#12066a] text-xs font-black border border-[#12066a]/20"
+            >
+              {s}
+            </span>
+          ))}
         </div>
-      )}
+      </div>
 
       {/* Form Fields */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
         <div className="relative group col-span-1">
-          <input
-            type="text"
-            name="name"
-            id="name"
-            placeholder=" "
-            className={inputClasses}
-            required
-          />
-          <label htmlFor="name" className={labelClasses}>
-            Your Full Name
-          </label>
+          <input type="text" name="name" id="name" placeholder=" " className={inputClasses} required />
+          <label htmlFor="name" className={labelClasses}>Your Full Name</label>
         </div>
 
         <div className="relative group col-span-1">
-          <input
-            type="email"
-            name="email"
-            id="email"
-            placeholder=" "
-            className={inputClasses}
-            required
-          />
-          <label htmlFor="email" className={labelClasses}>
-            Email Address
-          </label>
+          <input type="email" name="email" id="email" placeholder=" " className={inputClasses} required />
+          <label htmlFor="email" className={labelClasses}>Email Address</label>
         </div>
 
         <div className="relative group col-span-1">
@@ -446,31 +366,18 @@ const ContactStep = ({ selectedServices, setSelectedServices, onBack, coupon, is
               const originalValue = e.target.value;
               const cleanValue = originalValue.replace(/[^0-9+]/g, "");
               if (originalValue !== cleanValue) {
-                toast.warning(
-                  "Numbers Only: Please use only digits for the phone number.",
-                  {
-                    id: "phone-warning",
-                    duration: 2000,
-                  },
-                );
+                toast.warning("Numbers Only: Please use only digits.", { id: "phone-warning", duration: 2000 });
               }
               e.target.value = cleanValue;
             }}
           />
-          <label htmlFor="number" className={labelClasses}>
-            Phone Number
-          </label>
+          <label htmlFor="number" className={labelClasses}>Phone Number</label>
         </div>
 
         {/* Dynamic Fields */}
         {coupon ? (
           <div className="relative group md:col-span-2">
-            <input
-              type="text"
-              value={`${coupon}`}
-              readOnly
-              className={`${inputClasses} border-[#997819] text-[#997819]`}
-            />
+            <input type="text" value={coupon} readOnly className={`${inputClasses} border-[#997819] text-[#997819]`} />
             <label className="absolute left-0 top-5 text-[#997819] pointer-events-none transition-all duration-500 origin-left uppercase tracking-[0.3em] font-black text-[10px] -translate-y-10">
               Coupon Code
             </label>
@@ -478,30 +385,13 @@ const ContactStep = ({ selectedServices, setSelectedServices, onBack, coupon, is
           </div>
         ) : isReferralMode ? (
           <div className="relative group col-span-1">
-            <input
-              type="text"
-              name="referred_by"
-              id="referred_by"
-              placeholder=" "
-              className={inputClasses}
-              required
-            />
-            <label htmlFor="referred_by" className={labelClasses}>
-              Who Referred You?
-            </label>
+            <input type="text" name="referred_by" id="referred_by" placeholder=" " className={inputClasses} required />
+            <label htmlFor="referred_by" className={labelClasses}>Who Referred You?</label>
           </div>
         ) : (
           <div className="relative group md:col-span-2">
-            <textarea
-              name="msg"
-              id="msg"
-              placeholder=" "
-              className={`${inputClasses} min-h-[100px] py-4 resize-none`}
-              required
-            />
-            <label htmlFor="msg" className={labelClasses}>
-              Briefly describe your objectives
-            </label>
+            <textarea name="msg" id="msg" placeholder=" " className={`${inputClasses} min-h-[100px] py-4 resize-none`} required />
+            <label htmlFor="msg" className={labelClasses}>Briefly describe your objectives</label>
           </div>
         )}
       </div>
@@ -530,41 +420,22 @@ const ContactStep = ({ selectedServices, setSelectedServices, onBack, coupon, is
               : sent
                 ? "Inquiry Sent"
                 : !captchaToken
-                  ? "Verify Captcha First"
-                  : coupon || isReferralMode
-                    ? "Submit"
-                    : "Initialise Consultation"}
+                  ? "Verify Captcha"
+                  : "Submit Details"}
           </span>
-
           {loading ? (
             <Loader2 size={18} className="animate-spin relative z-10" />
           ) : sent ? (
             <CheckCircle2 size={18} className="text-emerald-400 relative z-10" />
           ) : (
-            <Send
-              size={18}
-              className="relative z-10 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"
-            />
+            <Send size={18} className="relative z-10 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
           )}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
         </button>
 
         <div className="flex items-center gap-3">
-          <div
-            className={`w-2 h-2 rounded-full animate-pulse ${
-              sent
-                ? "bg-emerald-500"
-                : captchaToken
-                  ? "bg-[#997819]"
-                  : "bg-red-500"
-            }`}
-          />
+          <div className={`w-2 h-2 rounded-full animate-pulse ${sent ? "bg-emerald-500" : captchaToken ? "bg-[#997819]" : "bg-red-500"}`} />
           <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
-            {sent
-              ? "Message Received Successfully"
-              : captchaToken
-                ? "Verified Professional Inquiry"
-                : "Complete Verification"}
+            {sent ? "Message Received" : captchaToken ? "Verified Channel Access" : "Complete Verification"}
           </span>
         </div>
       </div>
@@ -579,7 +450,6 @@ const ContactForm = () => {
   const [coupon, setCoupon] = useState("");
   const [isReferralMode, setIsReferralMode] = useState(false);
   
-  // Invoking Lenis Hook Context at Top-Level Component State Execution Scope
   const lenis = useLenis();
 
   useEffect(() => {
@@ -595,10 +465,11 @@ const ContactForm = () => {
 
       if (hasReferralCode) {
         setIsReferralMode(true);
-        setStep(2); 
+        // Start from step 1 for referrals too now, so they can select from ALL services
+        setStep(1); 
       }
 
-      if (urlServices && !hasReferralCode) {
+      if (urlServices) {
         const decodedServices = decodeURIComponent(urlServices).replace(/\+/g, " ");
         const rawUrlArray = decodedServices.split(",").map((s) => s.trim().toLowerCase());
         
@@ -617,9 +488,7 @@ const ContactForm = () => {
           if (lenis?.scrollTo) {
             lenis.scrollTo("#consultation-form");
           } else {
-            document.getElementById("consultation-form")?.scrollIntoView({
-              behavior: "smooth",
-              });
+            document.getElementById("consultation-form")?.scrollIntoView({ behavior: "smooth" });
           }
         });
       }
@@ -628,28 +497,18 @@ const ContactForm = () => {
 
   return (
     <>
-      <Toaster
-        position="bottom-center"
-        theme="dark"
-        richColors
-        toastOptions={{
-          style: {
-            background: "#ffffff",
-            color: "#12066a",
-          },
-        }}
-      />
+      <Toaster position="bottom-center" theme="dark" richColors />
 
       {step === 1 ? (
         <ServiceStep
           selectedServices={selectedServices}
           setSelectedServices={setSelectedServices}
+          isReferralMode={isReferralMode}
           onContinue={() => setStep(2)}
         />
       ) : (
         <ContactStep
           selectedServices={selectedServices}
-          setSelectedServices={setSelectedServices}
           coupon={coupon}
           isReferralMode={isReferralMode}
           onBack={() => setStep(1)}
