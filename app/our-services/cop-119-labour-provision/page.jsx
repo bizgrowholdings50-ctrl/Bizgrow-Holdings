@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import FadeIn from "@/components/MotionWrapper";
+import ServicesFaq from "@/components/ServicesFaq";
 import {
   ShieldCheck,
   Users,
@@ -16,6 +17,25 @@ export const metadata = {
   description:
     "BizGrow Holdings Ltd provides expert COP119 compliance support, documentation & audit guidance to confidently meet UK standards.",
 };
+
+const cop119Data = [
+  {
+    q: "What documents are required for COP 119 compliance?",
+    a: "COP 119 compliance requires documented staff screening records confirming BS 7858 vetting has been carried out for all workers, valid SIA licence records, right-to-work checks, and evidence of PAYE payroll compliance. You will also need subcontractor management procedures, Working Time Regulations records, contractual documentation between labour providers and end users, and written policies covering ethical trading and worker welfare. All documents must be kept up to date and available for inspection at any time."
+  },
+  {
+    q: "What are the benefits of implementing COP 119?",
+    a: "The benefits of implementing COP 119 include demonstrating that your labour supply processes meet recognised UK industry standards and building greater trust with clients and procurement teams. It also reduces the risk of relying on unvetted staff and strengthens your tender applications by demonstrating that your labour supply arrangements are well managed."
+  },
+  {
+    q: "What are common compliance mistakes businesses make with COP 119?",
+    a: "The most common mistakes include failing to carry out full BS 7858 screening on all workers before deployment, using subcontractors without verifying their SIA licence status or vetting standards, and not maintaining consistent PAYE payroll records that comply with Working Time Regulations. Many businesses also fail to document their subcontractor management systems properly, leaving gaps that become obvious during an audit or assessment."
+  },
+  {
+    q: "Can a COP 119 consultant help with compliance?",
+    a: "Yes, a specialist consultant can review your current labour supply processes, identify gaps against COP 119 requirements, and help you build the documentation and systems needed to achieve and maintain compliance. They bring direct experience of how assessors evaluate COP 119 submissions, which means your business is properly prepared rather than discovering weaknesses during an official audit."
+  }
+];
 
 const COP119Page = () => {
   return (
@@ -339,6 +359,16 @@ const COP119Page = () => {
           </div>
         </div>
       </section>
+
+       <ServicesFaq
+        faqs={cop119Data}
+        title={
+          <>
+            COP 119 <span className="text-[#997819]">FAQ's</span>
+          </>
+        }
+        subtitle="Questions & Answers"
+      />
       {/* 🔹 4. PREMIUM CTA SECTION (With BG Image Support) */}
       <section className="py-24 bg-white px-6 text-center">
         <div className="max-w-5xl mx-auto">

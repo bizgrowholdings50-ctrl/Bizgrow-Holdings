@@ -1,6 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import FadeIn from "@/components/MotionWrapper";
+import ServicesFaq from "@/components/ServicesFaq";
 import {
   HardHat,
   ShieldCheck,
@@ -18,6 +19,25 @@ export const metadata = {
   description:
     "Achieve CHAS Scheme approval with BizGrow Holdings. We help UK businesses meet compliance, health, & safety standards with ease.",
 };
+
+const chasData = [
+  {
+    q: "How to get CHAS certification in the UK?",
+    a: "To get CHAS certification, you must register on the CHAS portal, complete a health and safety assessment questionnaire, and submit supporting evidence including your health and safety policy, risk assessments, training records, and valid insurance certificates. A CHAS assessor reviews your submission and may request additional information before making a decision.",
+  },
+  {
+    q: "How do I apply for CHAS accreditation?",
+    a: "Start by registering your business on the CHAS online portal and selecting the appropriate membership level for your business size and sector. Complete the assessment questionnaire covering health and safety management, risk assessments, training, and insurance, then upload all required supporting documents. Once submitted, a CHAS assessor reviews everything and contacts you if further evidence is needed before issuing your certificate.",
+  },
+  {
+    q: "What are the common reasons a CHAS application is rejected?",
+    a: "The most common reasons include an unsigned or outdated health and safety policy, risk assessments that are clearly generic and not relevant to your actual work activities, and insurance certificates that have expired or show insufficient levels of cover. Missing training records, no evidence of accident reporting procedures, and failure to demonstrate access to a competent health and safety adviser are also frequent causes of rejection.",
+  },
+  {
+    q: "What are the benefits of CHAS accreditation for contractors?",
+    a: "The benefits of CHAS accreditation include proving your business meets recognised UK health and safety standards and improving your chances of winning public and private sector contracts. It also strengthens your health and safety systems, builds client confidence, and reduces the need for repeated pre-qualification questionnaires.",
+  },
+];
 const CHASSchemePage = () => {
   return (
     <main className="bg-white text-zinc-900 overflow-hidden">
@@ -384,6 +404,16 @@ const CHASSchemePage = () => {
           </p>
         </div>
       </section>
+
+      <ServicesFaq
+        faqs={chasData}
+        title={
+          <>
+            CHAS <span className="text-[#997819]">FAQ's</span>
+          </>
+        }
+        subtitle="Questions & Answers"
+      />
 
       {/* 🔹 7. CTA (Signature Style) */}
       <section className="py-24 bg-white">
