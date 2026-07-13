@@ -8,6 +8,7 @@ import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import CustomCursor from "@/components/Cursor";
 import EndorsalScript from "@/components/EndorsalScript";
+import WhatsAppWidget from "@/components/WhatsAppWidget";
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -87,6 +88,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         <SmoothScroll>{children}</SmoothScroll>
         <Footer />
+        <WhatsAppWidget /> 
       </body>
     </html>
   );
