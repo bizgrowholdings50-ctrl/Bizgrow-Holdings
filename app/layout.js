@@ -9,7 +9,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import CustomCursor from "@/components/Cursor";
 import EndorsalScript from "@/components/EndorsalScript";
 import WhatsAppWidget from "@/components/WhatsAppWidget";
-
+import { MicrosoftClarity } from '@next/third-parties/google'
 const isProduction = process.env.NODE_ENV === "production";
 
 const geistSans = Geist({
@@ -83,12 +83,14 @@ export default function RootLayout({ children }) {
         {isProduction && <Analytics />}
         {isProduction && <SpeedInsights />}
         {isProduction && <EndorsalScript />}
+        {isProduction && <MicrosoftClarity id="xlrg4ssjci" />}
 
         <CustomCursor />
         <Navbar />
         <SmoothScroll>{children}</SmoothScroll>
         <Footer />
         <WhatsAppWidget /> 
+       
       </body>
     </html>
   );
