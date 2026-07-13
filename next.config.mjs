@@ -27,17 +27,18 @@ const securityHeaders = [
     key: "Permissions-Policy",
     value: "camera=(), microphone=(), geolocation=(), xr-spatial-tracking=*",
   },
- {
+  {
     key: "Content-Security-Policy",
     value:
       "default-src 'self'; " +
-      // 🔹 FIX: script-src mein Google Analytics aur Tag Manager ke domains add kar diye
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://va.vercel-scripts.com https://cdn.endorsal.io https://www.googletagmanager.com https://www.google-analytics.com; " +
+      // 🔹 FIX: script-src mein Microsoft Clarity ke domains (https://www.clarity.ms aur https://*.clarity.ms) add kar diye hain
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://va.vercel-scripts.com https://cdn.endorsal.io https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms https://*.clarity.ms; " +
       "style-src 'self' 'unsafe-inline' https://cdn.endorsal.io https://fonts.googleapis.com; " +
-      "img-src 'self' https://cms.bizgrow-holdings.com https://cdn.endorsal.io https://*.cloudfront.net https://www.google.com https://www.google-analytics.com https://*.google-analytics.com data: blob:; " +
+      // 🔹 FIX: img-src mein Clarity ki tracking pixel image host (https://c.bing.com) add ki hai
+      "img-src 'self' https://cms.bizgrow-holdings.com https://cdn.endorsal.io https://*.cloudfront.net https://www.google.com https://www.google-analytics.com https://*.google-analytics.com https://c.bing.com data: blob:; " +
       "font-src 'self' https://fonts.gstatic.com data:; " +
-      // 🔹 FIX: connect-src mein bhi Google Analytics ka domain add kiya taake data bhej sakay
-      "connect-src 'self' https://cdn.endorsal.io https://*.endorsal.io https://va.vercel-scripts.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com; " +
+      // 🔹 FIX: connect-src mein Clarity ke data collection endpoints (https://*.clarity.ms aur bings logs) whitelist kar diye hain
+      "connect-src 'self' https://cdn.endorsal.io https://*.endorsal.io https://va.vercel-scripts.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://*.clarity.ms https://c.bing.com; " +
       "frame-src 'self' https://www.google.com https://challenges.cloudflare.com blob:; " +
       "base-uri 'self'; " +
       "form-action 'self';",
