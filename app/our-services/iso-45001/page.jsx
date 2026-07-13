@@ -34,7 +34,7 @@ const ISO45001Page = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-[#12066a] via-[#12066a]/40 to-transparent" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 relative z-20 w-full">
+        <div className="max-w-7xl mx-auto px-6 mt-10 relative z-20 w-full">
           <div className="max-w-3xl">
             <FadeIn direction="right">
               <div className="flex items-center gap-4 mb-6">
@@ -48,12 +48,19 @@ const ISO45001Page = () => {
                 <span className="text-[#997819]">Health & Safety </span>{" "}
                 Management.
               </h1>
-              <p className="mt-10 text-blue-100/60 text-xl md:text-2xl leading-relaxed font-medium">
+              <p className="mt-10 text-blue-100/60 text-xl md:text-xl leading-relaxed font-medium">
                 ISO 45001 is the Occupational Health & Safety Management Systems
                 standard recognised throughout the UK. Businesses across the UK
                 can fully comply with <Link href="https://bizgrow-holdings.com/key-components-of-health-and-safety-policy/" className="text-[#997819] font-bold">UK Health and Safety</Link> legislation with its
                 help.
               </p>
+            </FadeIn>
+             <FadeIn direction="right" duration="1.0">
+              <Link href="/contact-us">
+                <button className="relative z-10 bg-[#997819] text-white px-16 py-6 my-4 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-3xl">
+                  Book a Consultation
+                </button>
+              </Link>
             </FadeIn>
           </div>
         </div>

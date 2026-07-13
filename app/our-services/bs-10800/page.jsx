@@ -76,11 +76,12 @@ const BS10800Page = () => {
               </p>
             </FadeIn>
 
-            <FadeIn direction="right" duration="1.0">
-              <div className="mt-12 flex items-center gap-4">
-                <div className="w-32 h-2 bg-[#997819] rounded-full" />
-                <ShieldCheck className="text-white/20" size={30} />
-              </div>
+             <FadeIn direction="right" duration="1.0">
+              <Link href="/contact-us">
+                <button className="relative z-10 bg-[#997819] text-white px-16 py-6 my-4 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-3xl">
+                  Book a Consultation
+                </button>
+              </Link>
             </FadeIn>
           </div>
         </div>

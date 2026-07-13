@@ -68,6 +68,13 @@ const BS7499Page = () => {
                 manned security operations."
               </p>
             </FadeIn>
+             <FadeIn direction="right" duration="1.0">
+              <Link href="/contact-us">
+                <button className="relative z-10 bg-[#997819] text-white px-16 py-6 my-4 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-3xl">
+                  Book a Consultation
+                </button>
+              </Link>
+            </FadeIn>
           </div>
         </div>
       </section>
@@ -75,7 +82,7 @@ const BS7499Page = () => {
       {/* 🔹 2. OPERATIONAL STANDARDS (Core Focus) */}
       <section className="py-24 bg-zinc-50">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter uppercase mb-6 md:mb-16 leading-none">
+          <h2 className="text-4xl md:text-6xl text-center font-black text-[#12066a] tracking-tighter uppercase mb-6 md:mb-16 leading-none">
             SITE
             <span className="text-[#997819] ml-3">PROTOCOLS.</span>
           </h2>

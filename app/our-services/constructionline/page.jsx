@@ -50,7 +50,7 @@ const ConstructionlinePage = () => {
                 </span>
               </div>
 
-              <h1 className="text-6xl md:text-8xl font-black text-white leading-[0.85] tracking-tighter">
+              <h1 className="text-6xl md:text-7xl font-black text-white leading-[0.85] tracking-tighter">
                 CONSTRUCTION <br />
                 <span className="text-[#997819]">LINE.</span>
               </h1>
@@ -59,6 +59,13 @@ const ConstructionlinePage = () => {
                 Unlock the UK's largest procurement network. We handle your
                 Silver, Gold, or Platinum membership from audit to approval.
               </p>
+            </FadeIn>
+            <FadeIn direction="right" duration="1.0">
+              <Link href="/contact-us">
+                <button className="relative z-10 bg-[#997819] text-white px-16 py-6 my-4 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-3xl">
+                  Book a Consultation
+                </button>
+              </Link>
             </FadeIn>
           </div>
         </div>
@@ -81,12 +88,34 @@ const ConstructionlinePage = () => {
             {[
               {
                 level: "Silver",
-                desc: <>PAS91 <Link href="compliance-consultancies/" className="text-[#997819] font-bold">Compliance</Link> & Basic PQQ Support</>,
+                desc: (
+                  <>
+                    PAS91{" "}
+                    <Link
+                      href="compliance-consultancies/"
+                      className="text-[#997819] font-bold"
+                    >
+                      Compliance
+                    </Link>{" "}
+                    & Basic PQQ Support
+                  </>
+                ),
                 icon: <Construction />,
               },
               {
                 level: "Gold",
-                desc: <>Full <Link href="https://bizgrow-holdings.com/key-components-of-health-and-safety-policy/" className="text-[#997819] font-bold">Health & Safety</Link>, Quality & Environmental Compliance</>,
+                desc: (
+                  <>
+                    Full{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/key-components-of-health-and-safety-policy/"
+                      className="text-[#997819] font-bold"
+                    >
+                      Health & Safety
+                    </Link>
+                    , Quality & Environmental Compliance
+                  </>
+                ),
                 icon: <Trophy />,
               },
               {
@@ -137,10 +166,16 @@ const ConstructionlinePage = () => {
                   <span className="text-[#997819]">Levels Explained</span>
                 </h2>
                 <p className="text-zinc-600 md:mx-30 text-lg  font-medium leading-relaxed">
-                  <Link href="https://bizgrow-holdings.com/get-constructionline-accreditation-its-requirements/" className="text-[#997819] font-bold">Constructionline</Link> offers different levels to match your
-                  business size, risk profile, and buyer requirements. Choosing
-                  the right level helps you qualify for the right contracts,
-                  without overcomplicating compliance.
+                  <Link
+                    href="https://bizgrow-holdings.com/get-constructionline-accreditation-its-requirements/"
+                    className="text-[#997819] font-bold"
+                  >
+                    Constructionline
+                  </Link>{" "}
+                  offers different levels to match your business size, risk
+                  profile, and buyer requirements. Choosing the right level
+                  helps you qualify for the right contracts, without
+                  overcomplicating compliance.
                 </p>
               </div>
             </FadeIn>
@@ -166,7 +201,19 @@ const ConstructionlinePage = () => {
               {
                 level: "Platinum",
                 subtitle: "Maximum Audit & Supply Chain Trust",
-                desc: <>Designed for established companies working with major buyers who require enhanced <Link href="/interal-audit" className="text-[#997819] font-bold">audits</Link> and highest level of assurance.</>,
+                desc: (
+                  <>
+                    Designed for established companies working with major buyers
+                    who require enhanced{" "}
+                    <Link
+                      href="/interal-audit"
+                      className="text-[#997819] font-bold"
+                    >
+                      audits
+                    </Link>{" "}
+                    and highest level of assurance.
+                  </>
+                ),
                 icon: <Briefcase size={24} />,
                 accent: "border-[#12066a]/30",
               },
@@ -240,11 +287,17 @@ const ConstructionlinePage = () => {
                 </span>
               </h2>
               <p className="py-6 text-zinc-600 leading-relaxed">
-                <Link href="https://bizgrow-holdings.com/9-construction-safety-certifications-every-workplace-needs/" className="text-[#997819] font-bold">Constructionline</Link> is a trusted prequalification platform that
-                helps construction businesses prove their compliance,
-                credibility, and capability to buyers across the UK. It
-                simplifies the tendering process and increases your visibility
-                to top contractors and public sector clients.
+                <Link
+                  href="https://bizgrow-holdings.com/9-construction-safety-certifications-every-workplace-needs/"
+                  className="text-[#997819] font-bold"
+                >
+                  Constructionline
+                </Link>{" "}
+                is a trusted prequalification platform that helps construction
+                businesses prove their compliance, credibility, and capability
+                to buyers across the UK. It simplifies the tendering process and
+                increases your visibility to top contractors and public sector
+                clients.
               </p>
 
               <p className="font-bold text-xl md:text-2xl py-2 text-black mb-6">
@@ -263,7 +316,18 @@ const ConstructionlinePage = () => {
                   },
                   {
                     t: "Compliance Made Simple",
-                    d: <>Covers key areas like PAS91, <Link href="https://bizgrow-holdings.com/is-your-security-business-losing-work-without-constructionline/" className="text-[#997819] font-bold">Health & Safety</Link>, and financial checks.</>,
+                    d: (
+                      <>
+                        Covers key areas like PAS91,{" "}
+                        <Link
+                          href="https://bizgrow-holdings.com/is-your-security-business-losing-work-without-constructionline/"
+                          className="text-[#997819] font-bold"
+                        >
+                          Health & Safety
+                        </Link>
+                        , and financial checks.
+                      </>
+                    ),
                   },
                   {
                     t: "Boosts Business Credibility",
@@ -333,7 +397,14 @@ const ConstructionlinePage = () => {
               <FadeIn direction="right">
                 <p>
                   Whether you’re a contractor, subcontractor, or client, you
-                  will all benefit from <Link href="https://bizgrow-holdings.com/constructionline-rejections-uk-contractors-repeat/" className="text-[#997819] font-bold">ConstructionLine certification</Link>:
+                  will all benefit from{" "}
+                  <Link
+                    href="https://bizgrow-holdings.com/constructionline-rejections-uk-contractors-repeat/"
+                    className="text-[#997819] font-bold"
+                  >
+                    ConstructionLine certification
+                  </Link>
+                  :
                 </p>
               </FadeIn>
               <div className="space-y-10 relative">
@@ -501,12 +572,12 @@ const ConstructionlinePage = () => {
               <div className="flex flex-col sm:flex-row gap-4 w-full justify-center items-center mt-4">
                 <FadeIn direction="up" delay={0.2}>
                   <Link href="/contact-us">
-                  <button className="relative group/btn overflow-hidden w-full sm:w-64 bg-[#997819] text-white px-8 py-5 rounded-2xl font-black uppercase tracking-[0.25em] text-[10px] transition-all duration-500 hover:shadow-[0_20px_40px_rgba(153,120,25,0.4)]">
-                    <span className="relative z-40 group-hover/btn:text-[#12066a] transition-colors duration-500">
-                      Contact US Now
-                    </span>
-                    <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
-                  </button>
+                    <button className="relative group/btn overflow-hidden w-full sm:w-64 bg-[#997819] text-white px-8 py-5 rounded-2xl font-black uppercase tracking-[0.25em] text-[10px] transition-all duration-500 hover:shadow-[0_20px_40px_rgba(153,120,25,0.4)]">
+                      <span className="relative z-40 group-hover/btn:text-[#12066a] transition-colors duration-500">
+                        Contact US Now
+                      </span>
+                      <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
+                    </button>
                   </Link>
                 </FadeIn>
               </div>

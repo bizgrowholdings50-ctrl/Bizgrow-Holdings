@@ -38,7 +38,7 @@ const ComplianceConsultancyPage = () => {
             className="object-cover"
           />
         </div>
-        <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
+        <div className="max-w-7xl mx-auto px-6 mt-10 relative z-10 w-full">
           <FadeIn direction="up">
             <span className="text-[#997819] font-bold uppercase tracking-[0.4em] text-sm mb-6 block">
               Strategic Industry Alignment
@@ -54,6 +54,13 @@ const ComplianceConsultancyPage = () => {
               contracts.
             </p>
           </FadeIn>
+           <FadeIn direction="right" duration="1.0">
+              <Link href="/contact-us">
+                <button className="relative z-10 bg-[#997819] text-white px-16 py-6 my-4 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-3xl">
+                  Book a Consultation
+                </button>
+              </Link>
+            </FadeIn>
         </div>
       </section>
 

@@ -45,9 +45,9 @@ const SMASPage = () => {
                 </span>
               </div>
 
-              <h1 className="text-6xl md:text-8xl font-black text-white leading-[0.85] tracking-tighter">
-                SMAS <br />
-                <span className="text-[#997819]">WORKSAFE Accreditation.</span>
+              <h1 className="text-6xl md:text-7xl font-black text-white leading-[0.85] tracking-tighter">
+                SMAS WORKSAFE<br />
+                <span className="text-[#997819]"> Accreditation.</span>
               </h1>
 
               <p className="mt-10 text-blue-100/60 text-xl  q max-w-2xl font-medium leading-relaxed italic">
@@ -62,6 +62,13 @@ const SMASPage = () => {
                 Health & Safety assessment while you focus on winning contracts
                 in Uk.
               </p>
+            </FadeIn>
+             <FadeIn direction="right" duration="1.0">
+              <Link href="/contact-us">
+                <button className="relative z-10 bg-[#997819] text-white px-16 py-6 my-4 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-3xl">
+                  Book a Consultation
+                </button>
+              </Link>
             </FadeIn>
           </div>
         </div>

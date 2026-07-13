@@ -65,6 +65,13 @@ const NASDUPage = () => {
                 compliance.
               </p>
             </FadeIn>
+            <FadeIn direction="right" duration="1.0">
+              <Link href="/contact-us">
+                <button className="relative z-10 bg-[#997819] text-white px-16 py-6 my-4 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-3xl">
+                  Book a Consultation
+                </button>
+              </Link>
+            </FadeIn>
           </div>
         </div>
       </section>
@@ -248,8 +255,14 @@ const NASDUPage = () => {
                   >
                     SIA
                   </Link>{" "}
-                  Licences & <Link href="https://bizgrow-holdings.com/get-acs-accreditation-fast/" className="text-[#997819] font-bold">ACS Accreditation</Link> are mandatory for security
-                  companies and staff.
+                  Licences &{" "}
+                  <Link
+                    href="https://bizgrow-holdings.com/get-acs-accreditation-fast/"
+                    className="text-[#997819] font-bold"
+                  >
+                    ACS Accreditation
+                  </Link>{" "}
+                  are mandatory for security companies and staff.
                 </p>
               </div>
               <div className="flex gap-6">
@@ -257,8 +270,13 @@ const NASDUPage = () => {
                   02
                 </div>
                 <p className="text-zinc-500 font-medium pt-2 italic">
-                  <Link href="https://bizgrow-holdings.com/what-is-bs-10800-in-the-uk-2026/" className="text-[#997819] font-bold">BS10800 Standards</Link> vetting, screening, and operational best
-                  practices.
+                  <Link
+                    href="https://bizgrow-holdings.com/what-is-bs-10800-in-the-uk-2026/"
+                    className="text-[#997819] font-bold"
+                  >
+                    BS10800 Standards
+                  </Link>{" "}
+                  vetting, screening, and operational best practices.
                 </p>
               </div>
               <div className="flex gap-6">
@@ -266,8 +284,14 @@ const NASDUPage = () => {
                   03
                 </div>
                 <p className="text-zinc-500 font-medium pt-2 italic">
-                  <Link href="https://bizgrow-holdings.com/difference-between-iso-9001-iso-14001-and-iso45001/" className="text-[#997819] font-bold">ISO Standards</Link> quality, environmental, and occupational health
-                  and safety management.
+                  <Link
+                    href="https://bizgrow-holdings.com/difference-between-iso-9001-iso-14001-and-iso45001/"
+                    className="text-[#997819] font-bold"
+                  >
+                    ISO Standards
+                  </Link>{" "}
+                  quality, environmental, and occupational health and safety
+                  management.
                 </p>
               </div>
               <p className="pb-4">
@@ -343,9 +367,15 @@ const NASDUPage = () => {
                   Official Accreditation Support
                 </h4>
                 <p className="text-zinc-500 text-sm leading-relaxed mb-8 italic">
-                  BizGrow Holdings assists security companies with <Link href="https://bizgrow-holdings.com/main-requirements-for-nasdu-security-certification/" className="text-[#997819] font-bold">NASDU
-                  accreditation</Link> by implementing the necessary documentation,
-                  procedures, and compliance frameworks.
+                  BizGrow Holdings assists security companies with{" "}
+                  <Link
+                    href="https://bizgrow-holdings.com/main-requirements-for-nasdu-security-certification/"
+                    className="text-[#997819] font-bold"
+                  >
+                    NASDU accreditation
+                  </Link>{" "}
+                  by implementing the necessary documentation, procedures, and
+                  compliance frameworks.
                 </p>
                 <div className="flex gap-2">
                   <div className="h-1 w-12 bg-[#997819]" />
@@ -410,12 +440,12 @@ const NASDUPage = () => {
               <div className="flex flex-col sm:flex-row gap-4 w-full justify-center items-center mt-4">
                 <FadeIn direction="up" delay={0.2}>
                   <Link href="/contact-us">
-                  <button className="relative group/btn overflow-hidden w-full sm:w-64 bg-[#997819] text-white px-8 py-5 rounded-lg font-black uppercase tracking-[0.25em] text-[10px] transition-all duration-500">
-                    <span className="relative z-40 group-hover/btn:text-[#12066a] transition-colors duration-500">
-                      Contact Us
-                    </span>
-                    <div className="absolute inset-0 bg-white translate-x-full group-hover/btn:translate-x-0 transition-transform duration-500 ease-out z-30" />
-                  </button>
+                    <button className="relative group/btn overflow-hidden w-full sm:w-64 bg-[#997819] text-white px-8 py-5 rounded-lg font-black uppercase tracking-[0.25em] text-[10px] transition-all duration-500">
+                      <span className="relative z-40 group-hover/btn:text-[#12066a] transition-colors duration-500">
+                        Contact Us
+                      </span>
+                      <div className="absolute inset-0 bg-white translate-x-full group-hover/btn:translate-x-0 transition-transform duration-500 ease-out z-30" />
+                    </button>
                   </Link>
                 </FadeIn>
               </div>

@@ -39,7 +39,7 @@ const MarketingSolutionsPage = () => {
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#12066a]/80 via-transparent to-[#12066a]" />
         </div>
-        <div className="max-w-7xl mx-auto px-6 relative z-20 w-full">
+        <div className="max-w-7xl mx-auto px-6 mt-12 relative z-20 w-full">
           <FadeIn direction="right">
             <div className="inline-flex items-center gap-3 bg-[#997819]/20 border border-[#997819]/30 px-4 py-2 rounded-full mb-8">
               <span className="text-[#997819] font-black uppercase tracking-[0.3em] text-[10px]">
@@ -50,7 +50,7 @@ const MarketingSolutionsPage = () => {
               UK’S PRIVATE <br />
               <span className="text-[#997819]">SECURITY DIRECTORY.</span>
             </h1>
-            <p className="mt-10 text-blue-100/60 text-xl md:text-2xl max-w-2xl font-medium leading-relaxed">
+            <p className="mt-10 text-blue-100/60 text-xl md:text-xl max-w-2xl font-medium leading-relaxed">
               Find trusted and compliant{" "}
               <Link
                 href="https://bizgrow-holdings.com/our-services/private-security-startup/"
@@ -63,6 +63,14 @@ const MarketingSolutionsPage = () => {
               services.
             </p>
           </FadeIn>
+
+           <FadeIn direction="right" duration="1.0">
+              <Link href="/contact-us">
+                <button className="relative z-10 bg-[#997819] text-white px-16 py-6 my-4 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-3xl">
+                  Book a Consultation
+                </button>
+              </Link>
+            </FadeIn>
         </div>
       </section>
 

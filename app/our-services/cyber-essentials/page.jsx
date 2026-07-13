@@ -57,7 +57,7 @@ const CyberEssentialsPage = () => {
             </FadeIn>
 
             <FadeIn direction="right" duration="0.8">
-              <p className="mt-10 text-blue-100/60 text-xl md:text-2xl max-w-2xl leading-relaxed font-medium italic">
+              <p className="mt-10 text-blue-100/60 text-xl  max-w-2xl leading-relaxed font-medium italic">
                 "Cyber Essentials is a UK government-backed cybersecurity
                 certification designed to help businesses protect themselves
                 from common cyber threats. The scheme is supported by the
@@ -65,8 +65,14 @@ const CyberEssentialsPage = () => {
               </p>
             </FadeIn>
 
+          
+
             <FadeIn direction="right" duration="1.0">
-              <div className="mt-12 w-32 h-2 bg-[#997819] rounded-full" />
+              <Link href="/contact-us">
+                <button className="relative z-10 bg-[#997819] text-white px-16 py-6 my-4 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-3xl">
+                  Book a Consultation
+                </button>
+              </Link>
             </FadeIn>
           </div>
         </div>
@@ -82,11 +88,17 @@ const CyberEssentialsPage = () => {
                 <span className="text-[#997819]">CONTROLS </span>
               </h2>
               <p className="mt-8 text-zinc-500 font-medium text-lg leading-relaxed">
-                To achieve <Link href="https://bizgrow-holdings.com/how-to-get-cyber-essentials-certification-in-the-uk/" className="text-[#997819] font-bold">Cyber Essentials certification</Link> in the UK, your
-                organisation must implement four key technical controls that
-                strengthen your IT security framework and reduce the risk of
-                cyber attacks. These controls form the foundation of a secure
-                and compliant business environment.
+                To achieve{" "}
+                <Link
+                  href="https://bizgrow-holdings.com/how-to-get-cyber-essentials-certification-in-the-uk/"
+                  className="text-[#997819] font-bold"
+                >
+                  Cyber Essentials certification
+                </Link>{" "}
+                in the UK, your organisation must implement four key technical
+                controls that strengthen your IT security framework and reduce
+                the risk of cyber attacks. These controls form the foundation of
+                a secure and compliant business environment.
               </p>
             </div>
 
@@ -153,8 +165,14 @@ const CyberEssentialsPage = () => {
               <div className="space-y-8 italic">
                 <p className="text-zinc-500 font-medium text-lg border-l-4 border-[#997819] pl-6">
                   Cyber Essentials is especially important for security
-                  providers, contractors, and <Link href="https://bizgrow-holdings.com/compliance-consultancies/" className="text-[#997819] font-bold">compliance-driven businesses</Link>. It
-                  helps you:
+                  providers, contractors, and{" "}
+                  <Link
+                    href="https://bizgrow-holdings.com/compliance-consultancies/"
+                    className="text-[#997819] font-bold"
+                  >
+                    compliance-driven businesses
+                  </Link>
+                  . It helps you:
                 </p>
               </div>
             </FadeIn>
@@ -359,9 +377,9 @@ const CyberEssentialsPage = () => {
               more opportunities, Cyber Essentials is the first step.
             </p>
             <Link href="/contact-us">
-            <button className="relative z-10 bg-[#997819] text-white px-16 py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-3xl">
-              Contact us today
-            </button>
+              <button className="relative z-10 bg-[#997819] text-white px-16 py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-3xl">
+                Contact us today
+              </button>
             </Link>
             {/* Updated Background Pattern Line */}
             <div className="absolute inset-0 bg-[url('/grid-pattern.jpg')] bg-no-repeat bg-cover bg-fixed bg-center opacity-30 pointer-events-none" />

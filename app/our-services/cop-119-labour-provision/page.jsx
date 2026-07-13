@@ -62,7 +62,7 @@ const COP119Page = () => {
         </div>
 
         {/* Step 3: Actual Content (Top Layer) */}
-        <div className="max-w-7xl mx-auto px-6 relative z-20 w-full">
+        <div className="max-w-7xl mx-auto px-6 mt-10 relative z-20 w-full">
           <div className="max-w-4xl">
             <FadeIn direction="right" duration="0.4">
               <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs md:text-sm">
@@ -91,9 +91,12 @@ const COP119Page = () => {
               </p>
             </FadeIn>
 
-            {/* Signature Decor Line */}
-            <FadeIn direction="right" duration="1.0">
-              <div className="mt-12 w-32 h-2 bg-[#997819] rounded-full" />
+             <FadeIn direction="right" duration="1.0">
+              <Link href="/contact-us">
+                <button className="relative z-10 bg-[#997819] text-white px-16 py-6 my-4 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-3xl">
+                  Book a Consultation
+                </button>
+              </Link>
             </FadeIn>
           </div>
         </div>
