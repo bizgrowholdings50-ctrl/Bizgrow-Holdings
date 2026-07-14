@@ -12,6 +12,7 @@ import {
   Briefcase,
 } from "lucide-react";
 import Link from "next/link";
+import ServicesFaq from "@/components/ServicesFaq";
 
 export const metadata = {
   title: "ISO 9001 Certification UK | BizGrow Holdings",
@@ -19,6 +20,24 @@ export const metadata = {
     "Achieve ISO 9001 certification with BizGrow Holdings. Expert guidance, audits & compliance support for UK businesses.",
 };
 
+const iso9001Data = [
+  {
+    q: "What are the key benefits of achieving ISO 9001 certification?",
+    a: "The key benefits of achieving ISO 9001 certification include building trust with clients, improving your chances of winning public-sector tenders, and demonstrating that your business adheres to an internationally recognised quality management system. It also helps improve efficiency, reduce errors, and support continual improvement. "
+  },
+  {
+    q: "What are the essential steps to prepare for an ISO 9001 audit?",
+    a: "Start with a gap analysis to identify where your current processes and documentation fall short of ISO 9001 requirements, then build or update all policies, procedures, and records accordingly. Conduct a full internal audit before the external assessment to make sure every clause is properly evidenced and that your team understands their responsibilities. Ensure your management review is recent, all corrective actions are closed out, and your quality objectives are documented and measurable."
+  },
+  {
+    q: "How to get ISO 9001 certification in the UK?",
+    a: "Begin with a gap analysis, then build your quality management system, including a quality policy, process documentation, objectives, and records, before running it for a sufficient period. Once operational, conduct an internal audit and management review, then engage a UKAS-accredited certification body for the formal two-stage external audit. BizGrow Holdings supports UK businesses through every stage of this process, from initial preparation through to successful certification."
+  },
+  {
+    q: "Is getting ISO 9001 certification worth it?",
+    a: "Yes, for most UK businesses, ISO 9001 delivers clear commercial value by opening doors to tenders, frameworks, and clients that require it as a minimum standard. It improves internal efficiency, reduces costly errors, and gives clients confidence in your ability to deliver consistently. Businesses that invest in ISO 9001 consistently report stronger customer retention and a more competitive market position."
+  }
+];
 const ISO9001Page = () => {
   return (
     <main className="bg-white text-zinc-900 overflow-hidden">
@@ -459,6 +478,15 @@ const ISO9001Page = () => {
         </div>
       </section>
 
+ <ServicesFaq
+        faqs={iso9001Data}
+        title={
+          <>
+            ISO 9001 <span className="text-[#997819]">FAQ's</span>
+          </>
+        }
+        subtitle="Questions & Answers"
+      />
       {/* 🔹 7. CTA (With Signature Design) */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">

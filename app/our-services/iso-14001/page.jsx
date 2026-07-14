@@ -11,12 +11,32 @@ import {
   Wind,
 } from "lucide-react";
 import Link from "next/link";
+import ServicesFaq from "@/components/ServicesFaq";
 
 export const metadata = {
   title: "ISO 14001 Certification UK | Environmental Management System",
   description:
     "Achieve ISO 14001 Certification with BizGrow Holdings, helping UK businesses stay compliant, reduce impact, and strengthen sustainability.",
 };
+
+const iso14001Data = [
+  {
+    q: "What are the common challenges when implementing ISO 14001?",
+    a: "Many businesses struggle to identify and document all environmental aspects and impacts relevant to their specific operations, which is one of the most technically demanding parts of the standard. Keeping legal compliance registers up to date with all relevant environmental legislation is another common challenge, particularly for businesses operating across multiple sites. Staff engagement can also be difficult, since ISO 14001 requires evidence that environmental responsibilities are actively managed at all levels."
+  },
+  {
+    q: "How to get ISO 14001 certification?",
+    a: "Start with a gap analysis, then develop an environmental policy, aspects and impacts register, legal compliance register, and documented objectives before running your management system for a sufficient period. Once operational and evidenced, conduct an internal audit and management review, then engage a UKAS-accredited certification body for the formal external assessment. BizGrow Holdings provides hands-on ISO 14001 support for UK businesses from initial preparation through to successful certification."
+  },
+  {
+    q: "What documents are required for ISO 14001 certification?",
+    a: "You will need a signed environmental policy, an environmental aspects and impacts register, a legal compliance register listing all applicable environmental legislation, and documented objectives and improvement targets. Supporting documents include operational control procedures, emergency preparedness plans, internal audit records, and management review minutes. All documents must be current, regularly maintained, and specific to your business rather than copied generic templates."
+  },
+  {
+    q: "Can an ISO 14001 consultant help with certification and compliance?",
+    a: "Yes, a specialist ISO 14001 consultant significantly improves your chances of passing first time by guiding you through requirements, building the right documentation, and preparing your team for the external audit. They identify gaps in your current environmental management approach that you might not notice alone, saving time and avoiding costly mistakes. BizGrow Holdings provides expert ISO 14001 consultancy covering everything from gap analysis and documentation through to full audit support."
+  }
+];
 
 const ISO14001Page = () => {
   return (
@@ -378,6 +398,16 @@ const ISO14001Page = () => {
           </div>
         </div>
       </section>
+
+ <ServicesFaq
+        faqs={iso14001Data}
+        title={
+          <>
+            ISO 14001 <span className="text-[#997819]">FAQ's</span>
+          </>
+        }
+        subtitle="Questions & Answers"
+      />
 
       {/* 🔹 5. CTA SECTION (With Compulsory Background Image) */}
       <section className="py-32 bg-white">

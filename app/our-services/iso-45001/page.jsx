@@ -11,6 +11,7 @@ import {
   HeartPulse,
 } from "lucide-react";
 import Link from "next/link";
+import ServicesFaq from "@/components/ServicesFaq";
 
 export const metadata = {
   title: "ISO 45001 Certification UK | Health & Safety Compliance",
@@ -18,6 +19,25 @@ export const metadata = {
     "Secure your UK business with ISO 45001 certification from BizGrow Holdings. Streamline safety, stay compliant, and impress auditors.",
 };
 
+
+const iso45001Data = [
+  {
+    q: "What are the key benefits of implementing ISO 45001 certification?",
+    a: "The key benefits of implementing ISO 45001 certification include demonstrating that your business has a structured, proactive approach to protecting the health and safety of workers and reducing the risk of accidents, injuries, and costly legal claims. It is increasingly required by large clients, principal contractors, and public-sector buyers as evidence of strong occupational health and safety management. It also improves staff morale, reduces absenteeism, and creates a safer working environment by identifying and controlling workplace hazards before they cause harm. "
+  },
+  {
+    q: "What are the main requirements of ISO 45001?",
+    a: "The main requirements include a signed occupational health and safety policy, a documented hazard identification and risk assessment process, a legal compliance obligations register, defined safety objectives and targets, evidence of worker consultation and participation, emergency preparedness plans, and incident investigation procedures. The standard also requires competence records for all relevant staff, internal audit records, and management review minutes demonstrating that the system is being actively monitored and continuously improved. All requirements must be evidenced through documented information that is kept current and available for auditor review."
+  },
+  {
+    q: "What is ISO 45001 and why is it important?",
+    a: "ISO 45001 is the international standard for occupational health and safety management systems, published in 2018 to replace the previous OHSAS 18001 standard. It helps businesses of all sizes build a proactive, systematic approach to identifying and controlling workplace hazards before they result in injuries, ill health, or fatalities. It is particularly important for UK businesses in high-risk sectors such as construction, security, manufacturing, and facilities management, where health and safety failures carry serious legal, financial, and reputational consequences."
+  },
+  {
+    q: "What are common mistakes businesses make when implementing ISO 45001?",
+    a: "One of the most common mistakes is treating ISO 45001 as a paper exercise rather than embedding it into real day-to-day operations, which results in documentation that looks complete but does not reflect how the business actually manages safety on the ground. Many businesses also fail to demonstrate genuine worker consultation, which is a specific and auditable requirement of the standard that assessors check carefully. Inadequate hazard identification, incomplete legal compliance registers, and missing evidence of management review are also frequent non-conformances that delay certification or result in failed audits."
+  }
+];
 const ISO45001Page = () => {
   return (
     <main className="bg-white text-zinc-900 overflow-x-hidden selection:bg-[#997819] selection:text-white">
@@ -374,6 +394,15 @@ const ISO45001Page = () => {
           ))}
         </div>
       </section>
+      <ServicesFaq
+        faqs={iso45001Data}
+        title={
+          <>
+            ISO 45001 <span className="text-[#997819]">FAQ's</span>
+          </>
+        }
+        subtitle="Questions & Answers"
+      />
 
       {/* 🔹 7. CTA SECTION */}
       <section className="pb-32 bg-white px-6">

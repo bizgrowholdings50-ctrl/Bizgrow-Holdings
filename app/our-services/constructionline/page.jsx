@@ -13,12 +13,32 @@ import {
   Briefcase,
 } from "lucide-react";
 import Link from "next/link";
+import ServicesFaq from "@/components/ServicesFaq";
 
 export const metadata = {
   title: "ConstructionLine Certification Consultant | BizGrow Holdings",
   description:
     "Get ConstructionLine Certification with BizGrow Holdings Ltd. Build Trust, Win Contracts, and Grow your UK Construction Business",
 };
+
+const constructionlineData = [
+  {
+    q: "How to get Constructionline accreditation?",
+    a: "Register your business on the Constructionline portal, choose the appropriate membership level based on your business size and the contracts you want to win, and complete the PAS 91-aligned questionnaire covering health and safety, financial standing, insurance, and management policies. Upload all required supporting documents through the portal and respond promptly to any queries raised by the Constructionline assessor during the review process. BizGrow Holdings supports UK businesses through the full Constructionline accreditation process, from document preparation to successful approval."
+  },
+  {
+    q: "Is Constructionline worth it?",
+    a: "Yes, for most UK contractors and service businesses, Constructionline accreditation is well worth the investment, since it opens access to over 2,500 buyers including NHS trusts, local authorities, and major principal contractors who use the platform to find verified suppliers. It removes the need to complete repeated pre-qualification questionnaires for different clients, saving significant time and administrative effort across the year. Gold membership in particular aligns with the Common Assessment Standard, which is now required by many tier-one contractors as a minimum supply chain compliance standard."
+  },
+  {
+    q: "Can a Constructionline consultant help with registration and compliance?",
+    a: "Yes, a specialist consultant can significantly speed up your Constructionline application by reviewing your existing documents, identifying gaps, and building the policies and procedures needed to meet the requirements of your chosen membership level. They know exactly what Constructionline assessors look for and can prepare a complete, accurate submission that avoids the common mistakes that cause delays and rejections. BizGrow Holdings supports UK businesses through the full Constructionline registration and compliance process as part of their wider accreditation consultancy service."
+  },
+  {
+    q: "What documents are required for a Constructionline application?",
+    a: "You will need a signed and dated health and safety policy reviewed within the last twelve months, relevant risk assessments and method statements specific to your actual work activities, staff training and competence records, and valid public liability and employers' liability insurance certificates. At Gold level, you will also need an environmental management policy, a quality management policy or documented procedures, an equality and diversity policy, and a modern slavery statement. All documents must be current, consistent with your application, and specific to your business rather than generic templates."
+  }
+];
 
 const ConstructionlinePage = () => {
   return (
@@ -530,6 +550,16 @@ const ConstructionlinePage = () => {
           ))}
         </div>
       </section>
+
+<ServicesFaq
+        faqs={constructionlineData}
+        title={
+          <>
+            ConstructionLine <span className="text-[#997819]">FAQ's</span>
+          </>
+        }
+        subtitle="Questions & Answers"
+      />
 
       {/* 🔹 8. CTA SECTION (Rebuilt for Stable Parallax) */}
       <section className="py-14 bg-white">

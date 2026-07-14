@@ -26,7 +26,8 @@ export default function Footer() {
               alt="BizGrow Holdings"
               width={150}
               height={50}
-              className="brightness-0 invert" // Logo ko white karne ke liye agar wo dark hai
+              className="brightness-0 invert"
+              style={{ width: 'auto', height: 'auto' }}
             />
             <p className="text-blue-100/70 text-sm leading-relaxed">
               Empowering businesses through strategic consultancy,

@@ -9,6 +9,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import CustomCursor from "@/components/Cursor";
 import EndorsalScript from "@/components/EndorsalScript";
 import WhatsAppWidget from "@/components/WhatsAppWidget";
+import ReferralTracker from "@/components/ReferralTracker";
 // 🚀 Next.js ka built-in Script tag import kiya
 import Script from "next/script";
 
@@ -99,6 +100,7 @@ export default function RootLayout({ children }) {
           </Script>
         )}
 
+        <ReferralTracker />
         <CustomCursor />
         <Navbar />
         <SmoothScroll>{children}</SmoothScroll>

@@ -34,11 +34,11 @@ const securityHeaders = [
       // 🔹 FIX: script-src mein Microsoft Clarity ke domains (https://www.clarity.ms aur https://*.clarity.ms) add kar diye hain
       "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://challenges.cloudflare.com https://va.vercel-scripts.com https://cdn.endorsal.io https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms https://*.clarity.ms; " +
       "style-src 'self' 'unsafe-inline' https://cdn.endorsal.io https://fonts.googleapis.com; " +
-      // 🔹 FIX: img-src mein Clarity ki tracking pixel image host (https://c.bing.com) add ki hai
-      "img-src 'self' https://cms.bizgrow-holdings.com https://cdn.endorsal.io https://*.cloudfront.net https://www.google.com https://www.google-analytics.com https://*.google-analytics.com https://c.bing.com data: blob:; " +
+      // 🔹 FIX: img-src mein Google user avatar host aur Clarity tracking pixel add kiya hai
+      "img-src 'self' https://cms.bizgrow-holdings.com https://cdn.endorsal.io https://*.cloudfront.net https://www.google.com https://lh3.googleusercontent.com https://www.google-analytics.com https://*.google-analytics.com https://c.bing.com data: blob:; " +
       "font-src 'self' https://fonts.gstatic.com data:; " +
-      // 🔹 FIX: connect-src mein Clarity ke data collection endpoints (https://*.clarity.ms aur bings logs) whitelist kar diye hain
-      "connect-src 'self' https://cdn.endorsal.io https://*.endorsal.io https://va.vercel-scripts.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://*.clarity.ms https://c.bing.com; " +
+      // 🔹 FIX: connect-src mein Supabase, Clarity aur analytics endpoints whitelist kar diye hain
+      "connect-src 'self' https://cdn.endorsal.io https://*.endorsal.io https://va.vercel-scripts.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://*.clarity.ms https://*.supabase.co https://*.supabase.in https://c.bing.com; " +
       "frame-src 'self' https://www.google.com https://challenges.cloudflare.com blob:; " +
       "base-uri 'self'; " +
       "form-action 'self';",
@@ -59,6 +59,10 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "*.cloudfront.net",
+      },
+      {
+        protocol: "https",
+        hostname: "lh3.googleusercontent.com",
       },
     ],
   },

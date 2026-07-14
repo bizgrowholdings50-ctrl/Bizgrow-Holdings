@@ -13,12 +13,32 @@ import {
   Wrench,
 } from "lucide-react";
 import Link from "next/link";
+import ServicesFaq from "@/components/ServicesFaq";
 
 export const metadata = {
   title: "SMAS Accreditation UK | Fast SSIP Approval – BizGrow Holdings",
   description:
     "Get SMAS accreditation in the UK fast. BizGrow handles SSIP compliance, audits, and policies so you can win more contracts easily.",
 };
+
+const smasData = [
+  {
+    q: "What are the benefits of SMAS accreditation?",
+    a: "The benefits of SMAS accreditation include proving your business meets recognised UK health and safety standards, building trust with clients, and improving your chances of winning contracts. It also reduces repeated pre-qualification assessments and provides a fast-track route to other SSIP schemes such as CHAS and SafeContractor. "
+  },
+  {
+    q: "What does SMAS stand for?",
+    a: "SMAS stands for Safety Management Advisory Service. It is a UK-based health and safety accreditation body and a recognised member of the Safety Schemes in Procurement (SSIP) forum, which means its certificate is accepted by a wide range of public and private sector buyers as evidence of health and safety competence. SMAS assesses businesses against SSIP core criteria aligned with the Health and Safety Executive's standards, covering policies, risk assessments, training records, insurance, and management systems."
+  },
+  {
+    q: "What are the common reasons a SMAS application is rejected?",
+    a: "The most common reasons a SMAS application is rejected include an unsigned or outdated health and safety policy, generic risk assessments, and missing training records or insurance certificates. Incomplete documentation or failing to demonstrate proper health and safety arrangements can also delay or result in rejection of the application. "
+  },
+  {
+    q: "How to get SMAS accreditation?",
+    a: "Start by gathering all required health and safety documents, including a current signed policy, relevant risk assessments and method statements, staff training records, and valid insurance certificates. Register on the SMAS portal, complete the health and safety assessment questionnaire, and submit your documentation for review by a qualified SMAS assessor. "
+  }
+];
 const SMASPage = () => {
   return (
     <main className="bg-white text-zinc-900 overflow-hidden font-sans">
@@ -506,6 +526,16 @@ const SMASPage = () => {
         {/* Background Decorative Element */}
         <div className="absolute top-1/2 -right-20 w-96 h-96 bg-[#997819]/5 rounded-full blur-3xl -z-10" />
       </section>
+
+      <ServicesFaq
+        faqs={smasData}
+        title={
+          <>
+            SMAS <span className="text-[#997819]">FAQ's</span>
+          </>
+        }
+        subtitle="Questions & Answers"
+      />
       {/* 🔹 7. CTA SECTION (Fixed Parallax Effect) */}
       <section className="py-22 bg-white">
         <div className="max-w-7xl mx-auto px-6">
