@@ -72,8 +72,10 @@ export function ReferralBox({ referralCode }) {
 
 export function GoogleLoginButton() {
   const supabase = createClient()
+  const [loading, setLoading] = useState(false)
 
   const handleGoogleLogin = async () => {
+    setLoading(true)
     const origin =
       typeof window !== 'undefined'
         ? window.location.origin
@@ -82,20 +84,45 @@ export function GoogleLoginButton() {
     const redirectTo = origin
       ? `${origin.replace(/\/$/, '')}/auth/callback`
       : '/auth/callback'
+    try {
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo,
+        },
+      })
 
-    await supabase.auth.signInWithOAuth({
-      provider: 'google',
-      options: {
-        redirectTo,
-      },
-    })
+      if (error) {
+        console.error('Google sign-in failed:', error)
+        setLoading(false)
+        return
+      }
+
+      if (data?.url) {
+        window.location.href = data.url
+        return
+      }
+
+      const base = process.env.NEXT_PUBLIC_SUPABASE_URL || ''
+      if (base) {
+        const fallback = `${base.replace(/\/$/, '')}/auth/v1/authorize?provider=google&redirect_to=${encodeURIComponent(
+          redirectTo
+        )}`
+        window.location.href = fallback
+        return
+      }
+    } catch (err) {
+      console.error('Exception during Google OAuth:', err)
+      setLoading(false)
+    }
   }
 
   return (
     <button
       type="button"
       onClick={handleGoogleLogin}
-      className="flex w-full items-center justify-center gap-3 rounded-2xl border border-slate-200 bg-white px-5 py-3.5 font-semibold text-slate-900 shadow-sm transition duration-150 ease-in-out hover:bg-slate-50"
+      disabled={loading}
+      className="flex w-full items-center justify-center gap-3 rounded-2xl border border-slate-200 bg-white px-5 py-3.5 font-semibold text-slate-900 shadow-sm transition duration-150 ease-in-out hover:bg-slate-50 disabled:opacity-70"
     >
       <span className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-slate-50">
         <svg viewBox="0 0 533.5 544.3" className="h-4.5 w-4.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
@@ -105,7 +132,7 @@ export function GoogleLoginButton() {
           <path fill="#ea4335" d="M272.1 107.1c39.9-.6 78 14.6 106.8 40.9l80.2-80.2C408.3 24.7 344.6-.3 272.1 0 168 0 76.1 62.1 31.2 150.4l102.6 70.7c21.4-64.6 81.7-112.4 138.3-113z"/>
         </svg>
       </span>
-      Continue with Google
+      {loading ? "Redirecting..." : "Continue with Google"}
     </button>
   )
 }
@@ -115,18 +142,9 @@ export function LogoutButton() {
   const router = useRouter()
 
   const handleLogout = async () => {
-    const { error } = await supabase.auth.signOut()
-
-    if (error) {
-      console.error('Logout failed:', error)
-      return
-    }
-
-    if (typeof window !== 'undefined') {
-      window.location.href = '/referral-program'
-    } else {
-      router.push('/referral-program')
-    }
+    await supabase.auth.signOut()
+    router.push('/referral-program')
+    router.refresh()
   }
 
   return (

@@ -2,6 +2,27 @@ import { NextResponse } from 'next/server'
 import { createClient } from '@/utils/supabase/server'
 import { cookies } from 'next/headers'
 
+function formatSupabaseError(error) {
+  if (!error) return null
+  if (error instanceof Error) {
+    return {
+      message: error.message || null,
+      code: error.name || null,
+      details: error.stack || null,
+      hint: null,
+      raw: error,
+    }
+  }
+
+  return {
+    message: error.message || error.code || error.details || String(error) || null,
+    code: error.code || null,
+    details: error.details || null,
+    hint: error.hint || null,
+    raw: error,
+  }
+}
+
 export async function GET(request) {
   const { searchParams, origin } = new URL(request.url)
   const code = searchParams.get('code')
@@ -20,11 +41,15 @@ export async function GET(request) {
   }
 
   if (code) {
-    const supabase = await createClient()
+    const supabase = await createClient({ serviceRole: true })
     const {
       data: { session },
       error,
     } = await supabase.auth.exchangeCodeForSession(code)
+
+    if (error) {
+      console.error('Auth callback failed to exchange code:', formatSupabaseError(error))
+    }
 
     if (!error) {
       const user = session?.user
@@ -95,11 +120,11 @@ export async function GET(request) {
             if (referrerProfile) {
               const { error: updateError } = await supabase
                 .from('profiles')
-                .update({ referred_by: referrerProfile.id })
+                .update({ referred_by_id: referrerProfile.id })
                 .eq('id', user.id)
 
               if (updateError) {
-                console.error('Failed to set referred_by:', updateError)
+                console.error('Failed to set referred_by_id:', updateError)
               }
             }
           }

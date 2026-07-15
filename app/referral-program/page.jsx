@@ -90,7 +90,7 @@ async function ensureReferralCode(supabase, user, currentCode, existingProfile) 
       avatar_url,
       referral_code: referralCode,
     },
-    { onConflict: "id", returning: "minimal" }
+    { onConflict: "id" }
   );
 
   if (hasSupabaseError(upsertError)) {
@@ -111,23 +111,10 @@ async function ensureReferralCode(supabase, user, currentCode, existingProfile) 
       "Unable to read referral code after upsert:",
       formatSupabaseError(selectError)
     );
-    return "";
+    return referralCode;
   }
 
-  const existingCode = selectData?.referral_code
-  if (existingCode && existingCode.trim() !== "") {
-    return existingCode;
-  }
-
-  if (hasSupabaseError(selectError)) {
-    console.error(
-      "Unable to read referral code after upsert:",
-      formatSupabaseError(selectError)
-    );
-    return "";
-  }
-
-  return selectData?.referral_code || "";
+  return selectData?.referral_code || referralCode;
 }
 
 export default async function ReferralPage() {
@@ -150,7 +137,7 @@ export default async function ReferralPage() {
   let partnerNetworkSize = 0;
 
   if (user) {
-    const { data, error } = await supabase
+    let { data, error } = await supabase
       .from("profiles")
       .select("full_name, email, avatar_url, referral_code")
       .eq("id", user.id)
@@ -160,16 +147,28 @@ export default async function ReferralPage() {
       console.error("Referral profile lookup failed:", formatSupabaseError(error));
     }
 
+    if (!data && user.email) {
+      const byEmail = await supabase
+        .from("profiles")
+        .select("full_name, email, avatar_url, referral_code")
+        .eq("email", user.email)
+        .maybeSingle();
+
+      if (!hasSupabaseError(byEmail.error) && byEmail.data) {
+        data = byEmail.data
+      }
+    }
+
     profile = data || null;
 
-    const referralCode = await ensureReferralCode(
+    const ensuredCode = await ensureReferralCode(
       supabase,
       user,
       profile?.referral_code,
       profile
     );
 
-    if (referralCode) {
+    if (ensuredCode) {
       profile = {
         full_name:
           profile?.full_name ||
@@ -183,7 +182,7 @@ export default async function ReferralPage() {
           user?.user_metadata?.avatar_url ||
           user?.user_metadata?.picture ||
           "",
-        referral_code: referralCode,
+        referral_code: ensuredCode,
       };
     } else {
       profileError = true;
@@ -192,7 +191,7 @@ export default async function ReferralPage() {
     const { data: referralList, error: referralError } = await supabase
       .from("profiles")
       .select("id, full_name, email, created_at")
-      .eq("referred_by", user.id)
+      .eq("referred_by_id", user.id)
       .order("created_at", { ascending: false });
 
     if (!referralError && referralList) {
@@ -207,7 +206,7 @@ export default async function ReferralPage() {
         const { data: nextLevel, error: nextError } = await supabase
           .from("profiles")
           .select("id")
-          .in("referred_by", currentQueue);
+          .in("referred_by_id", currentQueue);
 
         if (nextError || !nextLevel?.length) break;
 

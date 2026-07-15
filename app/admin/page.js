@@ -11,7 +11,7 @@ export default async function AdminDashboard() {
   // Fetch all users for the network tree
   const { data: allUsers } = await supabase
     .from('profiles')
-    .select('full_name, email, referred_by, role');
+    .select('full_name, email, referred_by_id, role');
 
   return (
     <div className="p-8 bg-slate-50 min-h-screen">
