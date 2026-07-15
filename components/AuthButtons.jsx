@@ -74,17 +74,20 @@ export function GoogleLoginButton() {
   const supabase = createClient()
 
   const handleGoogleLogin = async () => {
-    // Prefer browser origin, fall back to a public env var (set this in production)
-    const siteUrl =
+    const origin =
       typeof window !== 'undefined'
         ? window.location.origin
-        : process.env.NEXT_PUBLIC_SITE_URL || (process.env.NEXT_PUBLIC_VERCEL_URL ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}` : '');
+        : process.env.NEXT_PUBLIC_SITE_URL || ''
 
-    const redirectTo = siteUrl ? `${siteUrl.replace(/\/$/, '')}/auth/callback` : '/auth/callback';
+    const redirectTo = origin
+      ? `${origin.replace(/\/$/, '')}/auth/callback`
+      : '/auth/callback'
 
     await supabase.auth.signInWithOAuth({
       provider: 'google',
-      options: { redirectTo },
+      options: {
+        redirectTo,
+      },
     })
   }
 

@@ -5,14 +5,29 @@ import { cookies } from 'next/headers'
 export async function GET(request) {
   const { searchParams, origin } = new URL(request.url)
   const code = searchParams.get('code')
-  const next = searchParams.get('next') ?? '/referral-program'
+  const nextParam = searchParams.get('next') ?? '/referral-program'
+
+  const buildRedirectUrl = (destination) => {
+    try {
+      const nextUrl = new URL(destination, request.url)
+      if (nextUrl.origin !== origin) {
+        return `${origin}/referral-program`
+      }
+      return nextUrl.href
+    } catch (error) {
+      return `${origin}/referral-program`
+    }
+  }
 
   if (code) {
-    const supabase = await createClient({ serviceRole: true })
-    const { error } = await supabase.auth.exchangeCodeForSession(code)
+    const supabase = await createClient()
+    const {
+      data: { session },
+      error,
+    } = await supabase.auth.exchangeCodeForSession(code)
 
     if (!error) {
-      const { data: { user } } = await supabase.auth.getUser()
+      const user = session?.user
 
       if (user) {
         const { data: profileData, error: profileError } = await supabase
@@ -89,16 +104,18 @@ export async function GET(request) {
             }
           }
 
-          cookieStore.set('bizgrow_referrer', '', {
+          const response = NextResponse.redirect(buildRedirectUrl(nextParam))
+          response.cookies.set('bizgrow_referrer', '', {
             maxAge: 0,
             path: '/',
             httpOnly: true,
             sameSite: 'lax',
           })
+          return response
         }
       }
 
-      return NextResponse.redirect(`${origin}${next}`)
+      return NextResponse.redirect(buildRedirectUrl(nextParam))
     }
   }
 

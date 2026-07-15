@@ -25,17 +25,36 @@ function generateReferralCode(length = 10) {
 
 function hasSupabaseError(error) {
   if (!error) return false;
-  if (typeof error.message === "string" && error.message.trim() !== "") return true;
-  if (typeof error.code === "string" && error.code.trim() !== "") return true;
-  if (typeof error.details === "string" && error.details.trim() !== "") return true;
-  if (typeof error.hint === "string" && error.hint.trim() !== "") return true;
-  return Object.keys(error).length > 0;
+  if (typeof error === "string") return error.trim() !== "";
+  if (error instanceof Error) return true;
+
+  const message = typeof error.message === "string" ? error.message.trim() : "";
+  const code = typeof error.code === "string" ? error.code.trim() : "";
+  const details = typeof error.details === "string" ? error.details.trim() : "";
+  const hint = typeof error.hint === "string" ? error.hint.trim() : "";
+
+  if (message || code || details || hint) return true;
+  if (typeof error.status !== "undefined" && error.status !== null) return true;
+  if (typeof error.name === "string" && error.name.trim() !== "") return true;
+
+  return Object.getOwnPropertyNames(error).length > 0;
 }
 
 function formatSupabaseError(error) {
   if (!error) return null;
+  if (error instanceof Error) {
+    return {
+      message: error.message || null,
+      code: error.name || null,
+      details: error.stack || null,
+      hint: null,
+      raw: error,
+    };
+  }
+
+  const message = error.message || error.code || error.details || error.hint || String(error);
   return {
-    message: error.message || null,
+    message: message || null,
     code: error.code || null,
     details: error.details || null,
     hint: error.hint || null,
@@ -63,7 +82,7 @@ async function ensureReferralCode(supabase, user, currentCode, existingProfile) 
     null;
   const email = existingProfile?.email || user?.email || "";
 
-  const { data: upsertData, error: upsertError } = await supabase.from("profiles").upsert(
+  const { error: upsertError } = await supabase.from("profiles").upsert(
     {
       id: user.id,
       email,
@@ -71,23 +90,14 @@ async function ensureReferralCode(supabase, user, currentCode, existingProfile) 
       avatar_url,
       referral_code: referralCode,
     },
-    { onConflict: "id", returning: "representation" }
+    { onConflict: "id", returning: "minimal" }
   );
 
   if (hasSupabaseError(upsertError)) {
     console.error(
-      "Unable to ensure referral code:",
+      "Unable to ensure referral code during upsert:",
       formatSupabaseError(upsertError)
     );
-    return "";
-  }
-
-  const insertedReferralCode = Array.isArray(upsertData)
-    ? upsertData[0]?.referral_code
-    : upsertData?.referral_code;
-
-  if (insertedReferralCode && insertedReferralCode.trim() !== "") {
-    return insertedReferralCode;
   }
 
   const { data: selectData, error: selectError } = await supabase
@@ -104,11 +114,24 @@ async function ensureReferralCode(supabase, user, currentCode, existingProfile) 
     return "";
   }
 
+  const existingCode = selectData?.referral_code
+  if (existingCode && existingCode.trim() !== "") {
+    return existingCode;
+  }
+
+  if (hasSupabaseError(selectError)) {
+    console.error(
+      "Unable to read referral code after upsert:",
+      formatSupabaseError(selectError)
+    );
+    return "";
+  }
+
   return selectData?.referral_code || "";
 }
 
 export default async function ReferralPage() {
-  const supabase = await createClient({ serviceRole: true });
+  const supabase = await createClient();
   const cookieStore = await cookies();
   const refCookie = cookieStore.get("bizgrow_referrer");
   const referralCode = refCookie?.value

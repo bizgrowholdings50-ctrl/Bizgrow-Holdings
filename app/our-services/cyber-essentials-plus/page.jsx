@@ -12,7 +12,26 @@ import {
   Globe,
 } from "lucide-react";
 import Link from "next/link";
+import ServicesFaq from "@/components/ServicesFaq";
 
+const cyberEssentialsPlusData = [
+  {
+    q: "What does Cyber Essentials Plus certification mean?",
+    a: "Cyber Essentials Plus is an enhanced version of the standard certification that includes independent technical verification. Instead of self-assessment, a qualified assessor tests your systems directly on-site or remotely. It offers stronger assurance of your organisation's actual cybersecurity defences.",
+  },
+  {
+    q: "What is the difference between Cyber Essentials and Cyber Essentials Plus?",
+    a: "Cyber Essentials relies on a self-assessed questionnaire, while Cyber Essentials Plus requires hands-on technical testing by an independent assessor. Plus offers a higher level of verified assurance and is often needed for higher-risk contracts. Both cover the same five core security controls but differ in verification depth.",
+  },
+  {
+    q: "Who needs Cyber Essentials Plus certification in the UK?",
+    a: "Businesses handling sensitive data, bidding for high-value government contracts, or operating in regulated sectors typically need Cyber Essentials Plus. It's also valuable for organisations wanting to prove robust cybersecurity beyond self-declaration. Many UK supply chains now mandate it as a contractual requirement.",
+  },
+  {
+    q: "What are the benefits of Cyber Essentials Plus for businesses?",
+    a: "The benefits of Cyber Essentials Plus include independently verified proof of strong cybersecurity controls, boosting client and stakeholder confidence. It helps secure larger contracts, especially in government and regulated industries. It also reduces the risk of costly data breaches and cyberattacks.",
+  },
+];
 export const metadata = {
   title: "Cyber Essentials Plus Certification UK | BizGrow Holdings ltd",
   description:
@@ -359,7 +378,7 @@ const CyberEssentialsPlusPage = () => {
           <div className="grid md:grid-cols-2 gap-20 items-center">
             <div>
               <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter mb-8 leading-[0.9] uppercase">
-                Strengthen Your <br  className="hidden lg:block"/>{" "}
+                Strengthen Your <br className="hidden lg:block" />{" "}
                 <span className="text-[#997819]">Cyber Security.</span>
               </h2>
               <p className="text-blue-100/60 font-medium text-lg italic mb-10 border-l-4 border-[#997819] pl-6">
@@ -398,7 +417,15 @@ const CyberEssentialsPlusPage = () => {
           </div>
         </div>
       </section>
-
+      <ServicesFaq
+        faqs={cyberEssentialsPlusData}
+        title={
+          <>
+            Cyber Essentials Plus <span className="text-[#997819]">FAQ's</span>
+          </>
+        }
+        subtitle="Questions & Answers"
+      />
       {/* 🔹 6. CTA (Cyber Protect Design) */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">

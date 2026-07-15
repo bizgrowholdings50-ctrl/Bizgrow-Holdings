@@ -11,6 +11,7 @@ import {
   UserCheck,
 } from "lucide-react";
 import Link from "next/link";
+import ServicesFaq from "@/components/ServicesFaq";
 
 export const metadata = {
   title: "Cyber Essentials Certification | BizGrow Holdings UK",
@@ -18,6 +19,24 @@ export const metadata = {
     "Get Cyber Essentials certification in the UK with BizGrow Holdings. Protect your business from cyber threats and build client trust.",
 };
 
+const cyberEssentialsData = [
+  {
+    q: "What are the benefits of Cyber Essentials?",
+    a: "The benefits of Cyber Essentials include protecting your business from common cyber threats like phishing, malware, and hacking attempts. It boosts client confidence and is often required to bid for government and corporate contracts. Certification also demonstrates a proactive commitment to data security and regulatory compliance.",
+  },
+  {
+    q: "What does Cyber Essentials mean?",
+    a: "Cyber Essentials is a UK government-backed certification scheme that verifies your organisation has basic cybersecurity controls in place. It covers areas like firewalls, secure configuration, access control, and malware protection. It's widely recognised across UK industries as a baseline security standard.",
+  },
+  {
+    q: "Is Cyber Essentials worth it?",
+    a: "Yes, Cyber Essentials is worth it for most UK businesses, as it reduces cyber risk and opens doors to new contracts. Many public sector tenders require it as a minimum condition. It's a cost-effective way to strengthen security posture and build client trust.",
+  },
+  {
+    q: "How to get Cyber Essentials?",
+    a: "To get Cyber Essentials, complete a self-assessment questionnaire covering your organisation's IT security controls. An approved certifying body then reviews and verifies your submission. Working with a consultancy like BizGrow Holdings can simplify the process and improve pass rates.",
+  },
+];
 const CyberEssentialsPage = () => {
   return (
     <main className="bg-white text-zinc-900 overflow-hidden">
@@ -64,8 +83,6 @@ const CyberEssentialsPage = () => {
                 National Cyber Security Centre (NCSC)."
               </p>
             </FadeIn>
-
-          
 
             <FadeIn direction="right" duration="1.0">
               <Link href="/contact-us">
@@ -363,7 +380,15 @@ const CyberEssentialsPage = () => {
           </div>
         </div>
       </section>
-
+      <ServicesFaq
+        faqs={cyberEssentialsData}
+        title={
+          <>
+            Cyber Essentials <span className="text-[#997819]">FAQ's</span>
+          </>
+        }
+        subtitle="Questions & Answers"
+      />
       {/* 🔹 7. CTA (Signature Design) */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">

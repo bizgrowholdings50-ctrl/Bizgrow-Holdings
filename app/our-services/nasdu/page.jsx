@@ -13,6 +13,26 @@ import {
   TrendingUpIcon,
 } from "lucide-react";
 import Link from "next/link";
+import ServicesFaq from "@/components/ServicesFaq";
+
+const nasduData = [
+  {
+    q: "What are the main requirements of NASDU?",
+    a: "The main requirements of NASDU include completing approved training courses covering conflict management, physical intervention, and legal knowledge. Providers must also maintain quality assurance systems and undergo regular audits to retain their accreditation. Continuous professional development and adherence to industry codes of practice are equally essential. ",
+  },
+  {
+    q: "How to get NASDU Certification?How to get NASDU Certification?",
+    a: "To get NASDU certified, choose an approved training provider and enrol in the relevant course for your role, such as door supervision or conflict management. You'll complete both theoretical and practical assessments to demonstrate competency. Working with a compliance consultant can help streamline documentation and audit readiness.",
+  },
+  {
+    q: "What does NASDU stand for?",
+    a: "NASDU stands for the National Approval Scheme for Security Guarding and Door Supervision. It's a UK-recognised accreditation body that sets training standards for the private security sector. NASDU approval ensures training providers meet consistent, industry-wide quality benchmarks.",
+  },
+  {
+    q: "What is NASDU and why is it important?",
+    a: "NASDU is the UK's leading approval body for security industry training providers and conflict management courses. It matters because it assures clients and regulators that staff are trained to a recognised, consistent standard. For security businesses, NASDU accreditation builds trust and supports contract-winning credibility.",
+  },
+];
 
 export const metadata = {
   title: "NASDU Certification for UK Security Dog Companies",
@@ -406,7 +426,15 @@ const NASDUPage = () => {
           ))}
         </div>
       </section>
-
+      <ServicesFaq
+        faqs={nasduData}
+        title={
+          <>
+            NASDU <span className="text-[#997819]">FAQ's</span>
+          </>
+        }
+        subtitle="Questions & Answers"
+      />
       {/* 🔹 7. CTA SECTION (Tactical Theme with Fixed Background) */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
