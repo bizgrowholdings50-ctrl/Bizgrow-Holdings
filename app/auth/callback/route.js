@@ -41,7 +41,7 @@ export async function GET(request) {
       // 1. Profile fetch and create logic
       const { data: profileData } = await supabase
         .from('profiles')
-        .select('referral_code, email, full_name, avatar_url, referred_by_id')
+        .select('referral_code, email, full_name, avatar_url')
         .eq('id', user.id)
         .maybeSingle()
 
@@ -57,22 +57,42 @@ export async function GET(request) {
         if (upsertError) console.error('Upsert failed:', upsertError)
       }
 
-      // 2. Referral logic (check cookie and link parent)
+      // 2. Referral logic (Check cookie and insert into the separate referrals table)
       const cookieStore = await cookies()
       const refCookie = cookieStore.get('bizgrow_referrer')
 
-      if (refCookie?.value && !profileData?.referred_by) {
+      if (refCookie?.value) {
         const referrerCode = decodeURIComponent(refCookie.value).trim()
-        const { data: referrerProfile } = await supabase
-          .from('profiles')
+
+        // Pehle check karo ke kya is user ko pehle hi koi refer kar chuka hai (taakay duplicate entry na ho)
+        const { data: existingReferral } = await supabase
+          .from('referrals')
           .select('id')
-          .eq('referral_code', referrerCode)
+          .eq('referred_user_id', user.id)
           .maybeSingle()
 
-        if (referrerProfile) {
-          await supabase.from('profiles')
-            .update({ referred_by: referrerProfile.id })
-            .eq('id', user.id)
+        if (!existingReferral) {
+          // Referrer ki profile ID dhondo referral_code ke zariye (jo profiles table mein store hoti hai)
+          const { data: referrerProfile } = await supabase
+            .from('profiles')
+            .select('id')
+            .eq('referral_code', referrerCode)
+            .maybeSingle()
+
+          // Agr referrer mila aur wo khud current user nahi hai, toh referrals table mein record insert karo
+          if (referrerProfile && referrerProfile.id !== user.id) {
+            const { error: referralInsertError } = await supabase
+              .from('referrals')
+              .insert({
+                referrer_id: referrerProfile.id,
+                referred_user_id: user.id,
+                status: 'active'
+              })
+
+            if (referralInsertError) {
+              console.error('Failed to record referral:', formatSupabaseError(referralInsertError))
+            }
+          }
         }
       }
 
