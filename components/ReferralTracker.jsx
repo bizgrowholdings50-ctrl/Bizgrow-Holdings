@@ -18,6 +18,8 @@ export default function ReferralTracker() {
     const expires = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString()
     const secure = window.location.protocol === 'https:' ? '; Secure' : ''
 
+    console.log('Referral cookie detected on client:', ref)
+
     document.cookie = `bizgrow_referrer=${encodeURIComponent(ref)}; expires=${expires}; path=/; max-age=${30 * 24 * 60 * 60}; SameSite=Lax${secure}`
 
     if (pathname !== '/referral-program') {

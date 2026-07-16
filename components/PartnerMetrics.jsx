@@ -17,10 +17,9 @@ export default function PartnerMetrics({ userId, initialDirectCount = 0, initial
     const fetchData = async () => {
       setLoading(true)
       try {
-        // Direct referrals count using head+count
         const directRes = await supabase
-          .from('profiles')
-          .select('*', { count: 'exact', head: true })
+          .from('referrals')
+          .select('id', { count: 'exact', head: true })
           .eq('referrer_id', userId)
 
         if (!mounted) return
@@ -31,30 +30,53 @@ export default function PartnerMetrics({ userId, initialDirectCount = 0, initial
           setDirectCount(directRes.count || 0)
         }
 
-        // Network size via RPC
-        const rpcRes = await supabase.rpc('get_total_network_size', { user_id: userId })
+        const networkRes = await supabase
+          .from('referrals')
+          .select('referred_user_id')
+          .eq('referrer_id', userId)
+
         if (!mounted) return
-        if (rpcRes.error) {
-          console.error('Network size RPC failed:', rpcRes.error)
-        } else if (Array.isArray(rpcRes.data) && rpcRes.data.length && typeof rpcRes.data[0].get_total_network_size === 'number') {
-          // some RPCs return [{ get_total_network_size: 5 }]
-          setNetworkSize(rpcRes.data[0].get_total_network_size)
-        } else if (rpcRes.data && typeof rpcRes.data === 'number') {
-          setNetworkSize(rpcRes.data)
-        } else if (rpcRes.data && rpcRes.data.value) {
-          setNetworkSize(Number(rpcRes.data.value) || 0)
+        if (networkRes.error) {
+          console.error('Network size query failed:', networkRes.error)
+        } else {
+          setNetworkSize(networkRes.data?.length || 0)
         }
 
-        // Fetch direct referrals list if initial was empty
         if (!initialDirectReferrals || initialDirectReferrals.length === 0) {
           const listRes = await supabase
-            .from('profiles')
-            .select('id, full_name, email, created_at')
+            .from('referrals')
+            .select('referred_user_id, created_at')
             .eq('referrer_id', userId)
             .order('created_at', { ascending: false })
 
           if (!mounted) return
-          if (!listRes.error && listRes.data) setDirectReferrals(listRes.data)
+          if (!listRes.error && listRes.data) {
+            const referredIds = listRes.data.map((ref) => ref.referred_user_id).filter(Boolean)
+            if (referredIds.length) {
+              const { data: profileData, error: profileDataError } = await supabase
+                .from('profiles')
+                .select('id, full_name, email')
+                .in('id', referredIds)
+
+              if (profileDataError) {
+                console.error('Direct referrals profile lookup failed:', profileDataError)
+              } else if (profileData) {
+                const profileMap = profileData.reduce((acc, item) => {
+                  if (item?.id) acc[item.id] = item
+                  return acc
+                }, {})
+
+                setDirectReferrals(
+                  listRes.data.map((ref) => ({
+                    id: ref.referred_user_id,
+                    full_name: profileMap[ref.referred_user_id]?.full_name || '',
+                    email: profileMap[ref.referred_user_id]?.email || '',
+                    created_at: ref.created_at,
+                  }))
+                )
+              }
+            }
+          }
         }
       } catch (err) {
         console.error('PartnerMetrics fetch error:', err)

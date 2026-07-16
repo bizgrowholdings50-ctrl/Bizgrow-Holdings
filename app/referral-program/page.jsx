@@ -1,4 +1,5 @@
-﻿import { cookies } from "next/headers";
+﻿import crypto from "crypto";
+import { cookies } from "next/headers";
 import { createClient } from "../../utils/supabase/server";
 import AvatarWithFallback from "../../components/AvatarWithFallback";
 import {
@@ -12,16 +13,8 @@ import PartnerMetrics from "../../components/PartnerMetrics";
 const NAVY = "#12066a";
 const GOLD = "#997819";
 
-function generateReferralCode(length = 10) {
-  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  let code = "";
-
-  for (let i = 0; i < length; i += 1) {
-    const index = Math.floor(Math.random() * characters.length);
-    code += characters[index];
-  }
-
-  return code;
+function generateReferralCode() {
+  return crypto.randomUUID().replace(/-/g, "").slice(0, 10).toUpperCase();
 }
 
 function hasSupabaseError(error) {
@@ -189,30 +182,60 @@ export default async function ReferralPage() {
       profileError = true;
     }
 
-    const { data: referralList, error: referralError } = await supabase
-      .from("profiles")
-      .select("id, full_name, email, created_at")
-      .eq("referred_by_id", user.id)
+    const { data: referralRows, error: referralError } = await supabase
+      .from("referrals")
+      .select("referred_user_id, created_at")
+      .eq("referrer_id", user.id)
       .order("created_at", { ascending: false });
 
-    if (!referralError && referralList) {
-      directReferrals = referralList;
-      directReferralCount = referralList.length;
+    if (!referralError && referralRows) {
+      directReferralCount = referralRows.length;
       partnerNetworkSize = directReferralCount;
 
-      let currentQueue = referralList.map((ref) => ref.id).filter(Boolean);
+      const referredIds = referralRows
+        .map((ref) => ref.referred_user_id)
+        .filter(Boolean);
+
+      let profileMap = {};
+      if (referredIds.length) {
+        const { data: referredProfiles, error: referredProfilesError } = await supabase
+          .from("profiles")
+          .select("id, full_name, email")
+          .in("id", referredIds);
+
+        if (referredProfilesError) {
+          console.error(
+            "Referred profiles lookup failed:",
+            formatSupabaseError(referredProfilesError)
+          );
+        } else if (referredProfiles) {
+          profileMap = referredProfiles.reduce((acc, item) => {
+            if (item?.id) acc[item.id] = item;
+            return acc;
+          }, {});
+        }
+      }
+
+      directReferrals = referralRows.map((ref) => ({
+        id: ref.referred_user_id,
+        full_name: profileMap[ref.referred_user_id]?.full_name || "",
+        email: profileMap[ref.referred_user_id]?.email || "",
+        created_at: ref.created_at,
+      }));
+
+      let currentQueue = referredIds.filter(Boolean);
       const visited = new Set(currentQueue);
 
       while (currentQueue.length) {
         const { data: nextLevel, error: nextError } = await supabase
-          .from("profiles")
-          .select("id")
-          .in("referred_by_id", currentQueue);
+          .from("referrals")
+          .select("referred_user_id")
+          .in("referrer_id", currentQueue);
 
         if (nextError || !nextLevel?.length) break;
 
         const nextIds = nextLevel
-          .map((ref) => ref.id)
+          .map((ref) => ref.referred_user_id)
           .filter((id) => id && !visited.has(id));
 
         nextIds.forEach((id) => visited.add(id));
