@@ -11,15 +11,13 @@ export async function createClient({ serviceRole = false } = {}) {
   // `cookies` is a function exported by Next.js and can be async; await it when present.
   const cookieStore = typeof cookies === 'function' ? await cookies() : cookies
 
-  const key = serviceRole
-    ? process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-    : process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
-
   if (serviceRole && !process.env.SUPABASE_SERVICE_ROLE_KEY) {
-    console.warn(
-      'SUPABASE_SERVICE_ROLE_KEY is not set; falling back to anon key for server client.'
-    )
+    throw new Error('SUPABASE_SERVICE_ROLE_KEY is missing. Administrative operations require the service role key.');
   }
+
+  const key = serviceRole
+    ? process.env.SUPABASE_SERVICE_ROLE_KEY
+    : process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
 
   const cookiesAdapter = {
     getAll() {

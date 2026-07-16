@@ -81,13 +81,30 @@ function getReferralCookieValue() {
   return cookieValue ? decodeURIComponent(cookieValue.split('=')[1] || '').trim() : ''
 }
 
+function getReferralQueryParam() {
+  if (typeof window === 'undefined') return ''
+
+  const params = new URLSearchParams(window.location.search)
+  return params.get('ref')?.trim() || ''
+}
+
+function setReferralCookie(referralCode) {
+  if (typeof document === 'undefined' || !referralCode) return
+
+  const expires = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString()
+  const secure = window.location.protocol === 'https:' ? '; Secure' : ''
+  const sameSite = window.location.protocol === 'https:' ? 'SameSite=None' : 'SameSite=Lax'
+  document.cookie = `bizgrow_referrer=${encodeURIComponent(referralCode)}; expires=${expires}; path=/; max-age=${30 * 24 * 60 * 60}; ${sameSite}${secure}`
+}
+
 export function ReferralCookieNotice() {
   const [hasReferralCookie, setHasReferralCookie] = useState(false)
 
   useEffect(() => {
     if (typeof window === 'undefined') return
 
-    setHasReferralCookie(Boolean(getReferralCookieValue()))
+    const hasReferral = Boolean(getReferralCookieValue() || getReferralQueryParam())
+    setHasReferralCookie(hasReferral)
   }, [])
 
   if (!hasReferralCookie) return null
@@ -110,7 +127,9 @@ export function GoogleLoginButton() {
         ? window.location.origin
         : process.env.NEXT_PUBLIC_SITE_URL || ''
 
-    const referralCode = getReferralCookieValue()
+    const referralCode = getReferralCookieValue() || getReferralQueryParam()
+    setReferralCookie(referralCode)
+
     const redirectTo = origin
       ? `${origin.replace(/\/$/, '')}/auth/callback${referralCode ? `?ref=${encodeURIComponent(referralCode)}` : ''}`
       : '/auth/callback'
