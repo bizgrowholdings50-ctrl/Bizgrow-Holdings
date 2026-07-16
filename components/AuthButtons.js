@@ -1,1 +1,1 @@
-export { ReferralBox, GoogleLoginButton, LogoutButton } from './AuthButtons.jsx'
+export { ReferralBox, ReferralCookieNotice, GoogleLoginButton, LogoutButton } from './AuthButtons.jsx'

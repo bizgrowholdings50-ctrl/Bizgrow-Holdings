@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { createClient } from '../utils/supabase/client'
 import { useRouter } from 'next/navigation'
 
@@ -70,6 +70,30 @@ export function ReferralBox({ referralCode }) {
   )
 }
 
+export function ReferralCookieNotice() {
+  const [hasReferralCookie, setHasReferralCookie] = useState(false)
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+
+    const cookieValue = document.cookie
+      .split(';')
+      .map((item) => item.trim())
+      .find((item) => item.startsWith('bizgrow_referrer='))
+
+    const hasCookie = Boolean(cookieValue && cookieValue.split('=')[1]?.trim())
+    setHasReferralCookie(hasCookie)
+  }, [])
+
+  if (!hasReferralCookie) return null
+
+  return (
+    <div className="mb-3 rounded-2xl border border-sky-200 bg-sky-50 px-4 py-3 text-sm text-sky-800 shadow-sm">
+      <p className="font-semibold">You&apos;ve been invited! Complete registration to join the network.</p>
+    </div>
+  )
+}
+
 export function GoogleLoginButton() {
   const supabase = createClient()
   const [loading, setLoading] = useState(false)
@@ -118,22 +142,25 @@ export function GoogleLoginButton() {
   }
 
   return (
-    <button
-      type="button"
-      onClick={handleGoogleLogin}
-      disabled={loading}
-      className="flex w-full items-center justify-center gap-3 rounded-2xl border border-slate-200 bg-white px-5 py-3.5 font-semibold text-slate-900 shadow-sm transition duration-150 ease-in-out hover:bg-slate-50 disabled:opacity-70"
-    >
-      <span className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-slate-50">
-        <svg viewBox="0 0 533.5 544.3" className="h-4.5 w-4.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-          <path fill="#4285f4" d="M533.5 278.4c0-17.4-1.6-34.1-4.6-50.4H272.1v95.4h147.1c-6.3 34.4-25.3 63.5-54 83.1v68.8h87.4c51.2-47.1 80.9-116.4 80.9-196.9z"/>
-          <path fill="#34a853" d="M272.1 544.3c73.4 0 135-24.2 180-65.8l-87.4-68.8c-24.3 16.3-55.5 25.9-92.6 25.9-71 0-131.2-47.9-152.7-112.4H31.2v70.7c44.8 88.3 136.7 150.4 240.9 150.4z"/>
-          <path fill="#fbbc04" d="M119.4 323.2c-10.4-30.7-10.4-63.8 0-94.5V158c-32.8 65.7-32.8 143.4 0 209.1l102.6-43.9z"/>
-          <path fill="#ea4335" d="M272.1 107.1c39.9-.6 78 14.6 106.8 40.9l80.2-80.2C408.3 24.7 344.6-.3 272.1 0 168 0 76.1 62.1 31.2 150.4l102.6 70.7c21.4-64.6 81.7-112.4 138.3-113z"/>
-        </svg>
-      </span>
-      {loading ? "Redirecting..." : "Continue with Google"}
-    </button>
+    <div className="w-full">
+      <ReferralCookieNotice />
+      <button
+        type="button"
+        onClick={handleGoogleLogin}
+        disabled={loading}
+        className="flex w-full items-center justify-center gap-3 rounded-2xl border border-slate-200 bg-white px-5 py-3.5 font-semibold text-slate-900 shadow-sm transition duration-150 ease-in-out hover:bg-slate-50 disabled:opacity-70"
+      >
+        <span className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-slate-50">
+          <svg viewBox="0 0 533.5 544.3" className="h-4.5 w-4.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#4285f4" d="M533.5 278.4c0-17.4-1.6-34.1-4.6-50.4H272.1v95.4h147.1c-6.3 34.4-25.3 63.5-54 83.1v68.8h87.4c51.2-47.1 80.9-116.4 80.9-196.9z"/>
+            <path fill="#34a853" d="M272.1 544.3c73.4 0 135-24.2 180-65.8l-87.4-68.8c-24.3 16.3-55.5 25.9-92.6 25.9-71 0-131.2-47.9-152.7-112.4H31.2v70.7c44.8 88.3 136.7 150.4 240.9 150.4z"/>
+            <path fill="#fbbc04" d="M119.4 323.2c-10.4-30.7-10.4-63.8 0-94.5V158c-32.8 65.7-32.8 143.4 0 209.1l102.6-43.9z"/>
+            <path fill="#ea4335" d="M272.1 107.1c39.9-.6 78 14.6 106.8 40.9l80.2-80.2C408.3 24.7 344.6-.3 272.1 0 168 0 76.1 62.1 31.2 150.4l102.6 70.7c21.4-64.6 81.7-112.4 138.3-113z"/>
+          </svg>
+        </span>
+        {loading ? 'Redirecting...' : 'Continue with Google'}
+      </button>
+    </div>
   )
 }
 
