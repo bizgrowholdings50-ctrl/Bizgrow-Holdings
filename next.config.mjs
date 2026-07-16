@@ -86,18 +86,54 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: "/top-security-companies-trusted-protection-for-every-business/",
+        source:
+          "/top-security-companies-trusted-protection-for-every-business/",
         destination: "/top-security-companies/",
         permanent: true,
       },
       {
-        source: '/why-iso-9001-matters-for-uk-business-quality-and-growth',
-        destination: '/iso-9001-matters-for-uk-business/',
+        source: "/why-iso-9001-matters-for-uk-business-quality-and-growth",
+        destination: "/iso-9001-matters-for-uk-business/",
         permanent: true,
       },
       {
-        source: '/could-iso-45001-enhance-workplace-safety-and-compliance',
-        destination: '/could-iso-45001-enhance-workplace-safety/',
+        source: "/could-iso-45001-enhance-workplace-safety-and-compliance",
+        destination: "/could-iso-45001-enhance-workplace-safety/",
+        permanent: true,
+      },
+      {
+        source:
+          "/how-bizgrow-holdings-helps-security-companies-win-contracts-in-the-uk/",
+        destination: "/bizgrow-holdings-helps-security-companies/",
+        permanent: true,
+      },
+
+      {
+        source:
+          "/is-your-security-business-losing-work-without-constructionline/",
+        destination: "/security-business-losing-work-without-constructionline/",
+        permanent: true,
+      },
+      {
+        source:
+          "/cop119-compliance-guide-for-uk-security-businesses-requirements-and-benefits/",
+        destination: "/cop119-compliance-guide/",
+        permanent: true,
+      },
+      {
+        source:
+          "/understanding-iso-14001-standard-structure-principles-requirements/",
+        destination: "/understanding-iso-14001/",
+        permanent: true,
+      },
+      {
+        source: "/how-to-apply-for-an-sia-licence-in-the-uk/",
+        destination: "/sia-licence-in-the-uk/",
+        permanent: true,
+      },
+      {
+        source: "/top-cyber-security-consultancy-companies-in-london/",
+        destination: "/cyber-security-consultancy/",
         permanent: true,
       },
 
@@ -107,12 +143,14 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: "/cop119-compliance-guide-for-uk-security-businesses-requirements-and-benefits/  ",
+        source:
+          "/cop119-compliance-guide-for-uk-security-businesses-requirements-and-benefits/  ",
         destination: "/cop119-compliance-guide/",
         permanent: true,
       },
       {
-        source: "/what-is-safe-contractor-accreditation-and-why-is-it-important/",
+        source:
+          "/what-is-safe-contractor-accreditation-and-why-is-it-important/",
         destination: "/what-is-safe-contractor-accreditation/",
         permanent: true,
       },

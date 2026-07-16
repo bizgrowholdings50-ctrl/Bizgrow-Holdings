@@ -6,6 +6,7 @@ import {
   LogoutButton,
   ReferralBox,
 } from "../../components/AuthButtons";
+import PartnerMetrics from "../../components/PartnerMetrics";
 
 // Ultra-Premium Brand Palette
 const NAVY = "#12066a";
@@ -530,53 +531,12 @@ export default async function ReferralPage() {
 
               {/* Rules & Metrics Side Panel */}
               <div className="space-y-6">
-                <div className="bg-white border border-slate-200/60 rounded-[2rem] p-6 shadow-sm">
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <p className="text-xs uppercase tracking-[0.24em] font-semibold text-slate-500">
-                        Partner Network
-                      </p>
-                      <h4 className="mt-3 text-2xl font-bold" style={{ color: NAVY }}>
-                        Direct referrals
-                      </h4>
-                    </div>
-                    <div className="rounded-3xl bg-[#12066a] px-3 py-2 text-sm font-semibold text-white">
-                      {directReferralCount}
-                    </div>
-                  </div>
-
-                  <div className="mt-6 space-y-4">
-                    {directReferrals.length ? (
-                      directReferrals.map((ref) => (
-                        <div
-                          key={ref.id}
-                          className="rounded-3xl border border-slate-200/70 bg-slate-50 p-4"
-                        >
-                          <p className="text-sm font-semibold text-slate-900">
-                            {ref.full_name}
-                          </p>
-                          <p className="text-xs text-slate-500 mt-1 break-all">
-                            {ref.email}
-                          </p>
-                        </div>
-                      ))
-                    ) : (
-                      <div className="rounded-3xl border border-slate-200/70 bg-[#f8f7ff] p-5 text-sm text-slate-600">
-                        No referrals yet. Share your link to start building your
-                        network.
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="mt-6 rounded-3xl border border-slate-200/70 bg-slate-50 p-4">
-                    <p className="text-xs uppercase tracking-[0.24em] text-slate-500">
-                      Network size
-                    </p>
-                    <p className="mt-2 text-3xl font-bold" style={{ color: NAVY }}>
-                      {partnerNetworkSize}
-                    </p>
-                  </div>
-                </div>
+                <PartnerMetrics
+                  userId={user?.id}
+                  initialDirectCount={directReferralCount}
+                  initialNetworkSize={partnerNetworkSize}
+                  initialDirectReferrals={directReferrals}
+                />
 
                 <div className="bg-[#12066a] rounded-[2rem] p-8 text-white shadow-xl relative overflow-hidden">
                   {/* Subtle noise/texture overlay could go here */}
