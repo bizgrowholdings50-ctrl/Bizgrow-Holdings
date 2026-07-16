@@ -70,19 +70,24 @@ export function ReferralBox({ referralCode }) {
   )
 }
 
+function getReferralCookieValue() {
+  if (typeof document === 'undefined') return ''
+
+  const cookieValue = document.cookie
+    .split(';')
+    .map((item) => item.trim())
+    .find((item) => item.startsWith('bizgrow_referrer='))
+
+  return cookieValue ? decodeURIComponent(cookieValue.split('=')[1] || '').trim() : ''
+}
+
 export function ReferralCookieNotice() {
   const [hasReferralCookie, setHasReferralCookie] = useState(false)
 
   useEffect(() => {
     if (typeof window === 'undefined') return
 
-    const cookieValue = document.cookie
-      .split(';')
-      .map((item) => item.trim())
-      .find((item) => item.startsWith('bizgrow_referrer='))
-
-    const hasCookie = Boolean(cookieValue && cookieValue.split('=')[1]?.trim())
-    setHasReferralCookie(hasCookie)
+    setHasReferralCookie(Boolean(getReferralCookieValue()))
   }, [])
 
   if (!hasReferralCookie) return null
@@ -105,8 +110,9 @@ export function GoogleLoginButton() {
         ? window.location.origin
         : process.env.NEXT_PUBLIC_SITE_URL || ''
 
+    const referralCode = getReferralCookieValue()
     const redirectTo = origin
-      ? `${origin.replace(/\/$/, '')}/auth/callback`
+      ? `${origin.replace(/\/$/, '')}/auth/callback${referralCode ? `?ref=${encodeURIComponent(referralCode)}` : ''}`
       : '/auth/callback'
     try {
       const { data, error } = await supabase.auth.signInWithOAuth({

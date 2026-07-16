@@ -57,29 +57,38 @@ export async function GET(request) {
         if (upsertError) console.error('Upsert failed:', upsertError)
       }
 
-      // 2. Referral logic (Check cookie and insert into the separate referrals table)
+      // 2. Referral logic (Check cookie and query param, then insert into the separate referrals table)
       const cookieStore = await cookies()
       const refCookie = cookieStore.get('bizgrow_referrer')
+      const refParam = searchParams.get('ref')
+      const referrerCode = decodeURIComponent((refCookie?.value || refParam || '').trim())
 
-      if (refCookie?.value) {
-        const referrerCode = decodeURIComponent(refCookie.value).trim()
+      if (referrerCode) {
+        console.log('Referral callback triggered with referrerCode:', referrerCode)
 
         // Pehle check karo ke kya is user ko pehle hi koi refer kar chuka hai (taakay duplicate entry na ho)
-        const { data: existingReferral } = await supabase
+        const { data: existingReferral, error: existingReferralError } = await supabase
           .from('referrals')
           .select('id')
           .eq('referred_user_id', user.id)
           .maybeSingle()
 
+        if (existingReferralError) {
+          console.error('Referral existing check failed:', formatSupabaseError(existingReferralError))
+        }
+
         if (!existingReferral) {
           // Referrer ki profile ID dhondo referral_code ke zariye (jo profiles table mein store hoti hai)
-          const { data: referrerProfile } = await supabase
+          const { data: referrerProfile, error: referrerProfileError } = await supabase
             .from('profiles')
             .select('id')
             .eq('referral_code', referrerCode)
             .maybeSingle()
 
-          // Agr referrer mila aur wo khud current user nahi hai, toh referrals table mein record insert karo
+          if (referrerProfileError) {
+            console.error('Referrer profile lookup failed:', formatSupabaseError(referrerProfileError))
+          }
+
           if (referrerProfile && referrerProfile.id !== user.id) {
             const { error: referralInsertError } = await supabase
               .from('referrals')
@@ -91,9 +100,23 @@ export async function GET(request) {
 
             if (referralInsertError) {
               console.error('Failed to record referral:', formatSupabaseError(referralInsertError))
+            } else {
+              console.log('Referral recorded successfully:', {
+                referrer_id: referrerProfile.id,
+                referred_user_id: user.id,
+              })
             }
+          } else {
+            console.log('Referral not recorded: invalid or self-referral', {
+              referrerProfile,
+              userId: user.id,
+            })
           }
+        } else {
+          console.log('Referral already exists for referred_user_id:', user.id)
         }
+      } else {
+        console.log('No referral code found in cookie or query param for callback.')
       }
 
       // 3. Clear cookie and redirect
