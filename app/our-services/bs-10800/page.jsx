@@ -17,12 +17,32 @@ import {
   PhoneCall,
 } from "lucide-react";
 import Link from "next/link";
+import ServicesFaq from "@/components/ServicesFaq";
 
 export const metadata = {
   title: "BS 10800 Certification Services | Business Support UK",
   description:
     "BizGrow Holdings helps UK businesses achieve BS 10800 certification to strengthen business continuity and improve audit readiness.",
 };
+
+const bs10800Data = [
+  {
+    q: "What are the key requirements of BS 10800?",
+    a: "BS 10800 requires organisations to establish clear governance structures, performance measurement systems, and risk management processes. Strong supplier and client communication frameworks are also essential. Continuous improvement and documented service delivery standards form the core of compliance.",
+  },
+  {
+    q: "What's the importance of BS 10800?",
+    a: "BS 10800 is the UK standard for outsourced facilities management, ensuring consistent service quality and governance. It's important because it helps organisations demonstrate reliability, transparency, and strong supplier relationships. Certification builds trust with clients and supports long-term contract security.",
+  },
+  {
+    q: "Can a BS 10800 consultant help with implementation and compliance?",
+    a: "Yes, a BS 10800 consultant can guide you through gap analysis, documentation, and system implementation. They help ensure your processes align with the standard before the formal audit. This significantly reduces the risk of non-conformities and speeds up certification.",
+  },
+  {
+    q: "What documents are required for BS 10800 compliance?",
+    a: "Compliance typically requires a documented management system, service level agreements, and risk assessment records. Organisations also need performance monitoring reports and evidence of stakeholder communication. A compliance consultant can help identify and prepare the exact documentation needed.",
+  },
+];
 
 const BS10800Page = () => {
   return (
@@ -76,7 +96,7 @@ const BS10800Page = () => {
               </p>
             </FadeIn>
 
-             <FadeIn direction="right" duration="1.0">
+            <FadeIn direction="right" duration="1.0">
               <Link href="/contact-us">
                 <button className="relative z-10 bg-[#997819] text-white px-16 py-6 my-4 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-3xl">
                   Book a Consultation
@@ -340,43 +360,16 @@ const BS10800Page = () => {
         </div>
       </section>
 
-      {/* 🔹 6. FAQs (SEO Boost) */}
-      <section className="py-22 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter uppercase mb-20 text-center">
-            COMMON <span className="text-[#997819]">QUESTIONS.</span>
-          </h2>
-          <div className="max-w-4xl mx-auto space-y-4">
-            {[
-              {
-                q: "Is BS 10800 mandatory for UK security companies?",
-                a: "BS 10800 is not a legal requirement like SIA licensing. However, many public-sector contracts and high-value private tenders require compliance with recognised British Standards, making it a strong competitive advantage.",
-              },
-              {
-                q: "How long does the certification certification  take?",
-                a: "The timeframe typically ranges from 4–8 weeks, depending on your current documentation, operational controls, and staff vetting processes. A structured implementation plan can significantly speed up approval.",
-              },
-              {
-                q: "Does BS 10800 replace ISO 9001?",
-                a: "No. BS 10800 is a security sector-specific standard that complements ISO 9001. While ISO 9001 focuses on quality management systems, BS 10800 demonstrates professional competence in delivering security services.",
-              },
-            ].map((faq, i) => (
-              <div
-                key={i}
-                className="p-8 bg-zinc-50 rounded-[2.5rem] border border-zinc-100 hover:border-[#997819] transition-all group"
-              >
-                <h3 className="font-black text-[#12066a] uppercase text-sm mb-4 flex gap-3">
-                  <HelpCircle className="text-[#997819]" size={18} /> {faq.q}
-                </h3>
-                <p className="text-zinc-500 text-sm font-medium leading-relaxed pl-7">
-                  {faq.a}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
+    
+      <ServicesFaq
+        faqs={bs10800Data}
+        title={
+          <>
+            BS 10800 <span className="text-[#997819]">FAQ's</span>
+          </>
+        }
+        subtitle="Questions & Answers"
+      />
       {/* 🔹 7. CALL TO ACTION (Fixed Background / Parallax Style) */}
       <section className="py-24 px-6 bg-white relative">
         <div className="max-w-7xl mx-auto relative rounded-[4rem] overflow-hidden shadow-3xl group">

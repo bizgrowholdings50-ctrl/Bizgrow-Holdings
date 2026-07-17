@@ -16,12 +16,32 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import Link from "next/link";
+import ServicesFaq from "@/components/ServicesFaq";
 
 export const metadata = {
   title: "BS 7499 Certification for Static Guarding | BizGrow Holdings",
   description:
     "Get BS 7499 certification for static guarding services in the UK. BizGrow Holdings helps security companies achieve full compliance.",
 };
+
+const bs7499Data = [
+  {
+    q: "What is BS 7499, and why is it important for security companies?",
+    a: "BS 7499 is the British Standard for static guarding and mobile patrol services in the security industry. It's important because it sets benchmarks for service quality, staff competency, and operational procedures. Certification helps security companies win contracts and demonstrate professional credibility."
+  },
+  {
+    q: "What are common mistakes businesses make when implementing BS 7499?",
+    a: "Common mistakes include incomplete documentation, inconsistent staff training records, and poor risk assessment processes. Businesses often overlook regular internal audits needed to maintain compliance. Rushing implementation without expert guidance frequently leads to audit failures."
+  },
+  {
+    q: "How can I prepare my business for a BS 7499 assessment or audit?",
+    a: "Start by conducting a thorough gap analysis against the standard's requirements. Ensure all policies, training records, and operational procedures are properly documented and up to date. Partnering with a compliance consultant helps identify weak areas before the official audit."
+  },
+  {
+    q: "What are the key requirements of BS 7499?",
+    a: "BS 7499 requires documented operational procedures, trained and vetted security personnel, and robust quality management systems. Organisations must also demonstrate effective incident reporting and client communication processes. Regular internal audits are needed to maintain ongoing compliance."
+  }
+];
 
 const BS7499Page = () => {
   return (
@@ -601,46 +621,15 @@ const BS7499Page = () => {
         </div>
       </section>
 
-      {/* 🔹 6. FAQs (SEO Boost) */}
-      <section className="py-32 bg-white">
-        <div className="max-w-4xl mx-auto px-6">
-          <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter uppercase md:mb-20 text-center">
-            COMMON <span className="text-[#997819]">QUERIES.</span>
-          </h2>
-          <div className="space-y-6">
-            {[
-              {
-                q: "1. What is BS 7499 certification?",
-                a: "BS 7499 is a British Standard for static guarding security services, guiding the management, staffing, and operation of professional security guarding services.",
-              },
-              {
-                q: "2. Who needs BS 7499 certification in the UK?",
-                a: "BS 7499 certification is typically required by security companies providing static guarding services, especially those seeking recognised industry standards or working with large commercial clients.",
-              },
-              {
-                q: "3. What does BS 7499 cover?",
-                a: "The standard covers key areas such as security personnel management, assignment instructions, operational procedures, and incident reporting for guarding services.",
-              },
-              {
-                q: "4. How can a company achieve BS 7499 certification?",
-                a: "A company can achieve BS 7499 certification by implementing the required operational procedures and passing an audit from an approved certification body, often with guidance from compliance consultants like BizGrow Holdings.",
-              },
-            ].map((faq, i) => (
-              <div
-                key={i}
-                className="p-8 bg-zinc-50 rounded-[2.5rem] border border-zinc-100 hover:border-[#997819] transition-all group"
-              >
-                <h3 className="font-black text-[#12066a] uppercase text-sm mb-4 tracking-tighter">
-                  {faq.q}
-                </h3>
-                <p className="text-zinc-500 text-sm font-medium leading-relaxed">
-                  {faq.a}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+   <ServicesFaq
+        faqs={bs7499Data}
+        title={
+          <>
+            BS 7499 <span className="text-[#997819]">FAQ's</span>
+          </>
+        }
+        subtitle="Questions & Answers"
+      />
 
       {/* 🔹 7. CALL TO ACTION (Fixed Parallax Style) */}
       <section className="py-24 px-6 bg-white relative">

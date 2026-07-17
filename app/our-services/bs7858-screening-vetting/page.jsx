@@ -14,12 +14,32 @@ import {
   ArrowRight,
 } from "lucide-react";
 import Link from "next/link";
+import ServicesFaq from "@/components/ServicesFaq";
 
 export const metadata = {
   title: "BS7858 Screening & Vetting | BizGrow Holdings UK",
   description:
     "Learn the BS7858 screening process for security staff. Ensure compliance, build trust, and protect your business with professional vetting.",
 };
+
+const bs7858Data = [
+  {
+    q: "What are the requirements for BS 7858 screening?",
+    a: "BS 7858 requires verification of identity, employment history, and criminal record checks going back at least five years. Reference checks and financial probity screening may also be required for higher-risk roles. The process ensures only trustworthy individuals work in security positions."
+  },
+  {
+    q: "What happens if a BS 7858 screening expires?",
+    a: "If BS 7858 screening expires, the individual may no longer meet contractual or client security requirements. Employers typically need to conduct rescreening to maintain compliance and avoid contract breaches. Expired screening can also affect a company's ACS or NSI accreditation status."
+  },
+  {
+    q: "What is BS 7858, and why is it important?",
+    a: "BS 7858 is the British Standard for security screening of personnel employed in security roles. It's important because it verifies an individual's background, reducing risks of theft, fraud, or misconduct. Compliance is often mandatory for SIA ACS and NSI-approved security companies."
+  },
+  {
+    q: "What documents are required for BS 7858 screening?",
+    a: "Required documents typically include proof of identity, address history, and employment references covering at least five years. Criminal record checks and financial checks may also be needed depending on the role. Gaps in employment history must be explained and, where possible, verified."
+  }
+];
 const BS7858Page = () => {
   return (
     <main className="bg-white text-zinc-900 overflow-hidden">
@@ -478,42 +498,15 @@ const BS7858Page = () => {
         </div>
       </section>
 
-      {/* 🔹 6. FAQs (SEO & Clarification) */}
-      <section className="py-32 bg-white">
-        <div className="max-w-4xl mx-auto px-6">
-          <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter uppercase md:mb-20 text-center">
-            SCREENING <span className="text-[#997819]">FAQS.</span>
-          </h2>
-          <div className="space-y-6">
-            {[
-              {
-                q: "Q: Who needs BS 7858 screening?",
-                a: "BS 7858 is widely used for staff working in security-sensitive roles, especially in private security, key holding, CCTV operations, and any role requiring access to sites, assets, or confidential information.",
-              },
-              {
-                q: "Q: What if there is a gap in employment?",
-                a: "BS 7858 requires any unverified gap over 31 days to be supported with acceptable evidence, such as references, documents, or other verification records.",
-              },
-              {
-                q: "Q: How long does BS 7858 vetting take?",
-                a: "Timeframes vary by case, but most screening is completed within 7–21 working days, depending on how quickly references and supporting documents are provided.",
-              },
-            ].map((faq, i) => (
-              <div
-                key={i}
-                className="p-8 bg-zinc-50 rounded-[2.5rem] border border-zinc-100 hover:border-[#997819] transition-all group"
-              >
-                <h3 className="font-black text-[#12066a] uppercase text-sm mb-4">
-                  {faq.q}
-                </h3>
-                <p className="text-zinc-500 text-sm font-medium leading-relaxed">
-                  {faq.a}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+     <ServicesFaq
+        faqs={bs7858Data}
+        title={
+          <>
+            BS 7858 <span className="text-[#997819]">FAQ's</span>
+          </>
+        }
+        subtitle="Questions & Answers"
+      />
 
       {/* 🔹 7. CALL TO ACTION (Responsive Optimized) */}
       <section className="py-12 md:py-24 px-4 md:px-6 bg-white relative">

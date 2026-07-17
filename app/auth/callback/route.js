@@ -13,6 +13,7 @@ function formatSupabaseError(error) {
   };
 }
 
+
 function buildRedirectUrl(destination, origin, requestUrl) {
   try {
     const nextUrl = new URL(destination, requestUrl);

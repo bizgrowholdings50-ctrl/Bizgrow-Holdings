@@ -1,69 +1,95 @@
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 
-/**
- * Create a Supabase server client with a resilient cookie adapter.
- * The Next.js `cookies()` shape can differ depending on context (middleware, route, server component).
- * This adapter normalizes available methods into the `{ getAll, setAll }` shape expected by `@supabase/ssr`.
- */
 export async function createClient({ serviceRole = false } = {}) {
-  // Attempt to obtain the cookie store for the current execution context.
-  // `cookies` is a function exported by Next.js and can be async; await it when present.
   const cookieStore = typeof cookies === 'function' ? await cookies() : cookies
 
+  console.log("==========================================");
+  console.log("createClient() called");
+  console.log("serviceRole =", serviceRole);
+
+  console.log(
+    "SUPABASE_SERVICE_ROLE_KEY exists =",
+    !!process.env.SUPABASE_SERVICE_ROLE_KEY
+  );
+
+  console.log(
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY exists =",
+    !!process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+  );
+
   if (serviceRole && !process.env.SUPABASE_SERVICE_ROLE_KEY) {
-    throw new Error('SUPABASE_SERVICE_ROLE_KEY is missing. Administrative operations require the service role key.');
+    throw new Error(
+      "SUPABASE_SERVICE_ROLE_KEY is missing. Administrative operations require the service role key."
+    );
   }
 
   const key = serviceRole
     ? process.env.SUPABASE_SERVICE_ROLE_KEY
-    : process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+    : process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+  console.log(
+    "Key being used =",
+    key ? key.substring(0, 20) + "..." : "NULL"
+  );
+
+  console.log(
+    "Key type =",
+    key?.startsWith("sb_secret_")
+      ? "SERVICE ROLE"
+      : key?.startsWith("sb_publishable_")
+      ? "PUBLISHABLE"
+      : "JWT / OLD FORMAT"
+  );
+
+  console.log("==========================================");
 
   const cookiesAdapter = {
     getAll() {
       try {
-        // Next.js Cookies object usually has `getAll()` returning cookie objects
-        if (cookieStore && typeof cookieStore.getAll === 'function') {
-          const all = cookieStore.getAll()
-          // Normalize to { name, value } entries expected by supabase
+        if (cookieStore && typeof cookieStore.getAll === "function") {
+          const all = cookieStore.getAll();
+
+          console.log("Cookies:");
+          console.dir(all, { depth: null });
+
           return Array.isArray(all)
-            ? all.map((c) => ({ name: c?.name || c?.key || '', value: c?.value || '' }))
-            : []
+            ? all.map((c) => ({
+                name: c?.name || c?.key || "",
+                value: c?.value || "",
+              }))
+            : [];
         }
 
-        // In some contexts cookieStore may expose a plain map-like interface
-        if (cookieStore && typeof cookieStore.get === 'function') {
-          // There's no portable way to list all names here — return empty and let middleware handle writes
-          return []
-        }
-
-        return []
+        return [];
       } catch (e) {
-        return []
+        console.error("Cookie getAll failed:", e);
+        return [];
       }
     },
+
     setAll(cookiesToSet) {
       try {
-        if (!cookieStore) return
+        console.log("Setting Cookies:");
+        console.dir(cookiesToSet, { depth: null });
 
-        // Preferred API: cookieStore.set(name, value, options)
-        if (typeof cookieStore.set === 'function') {
+        if (!cookieStore) return;
+
+        if (typeof cookieStore.set === "function") {
           cookiesToSet.forEach(({ name, value, options }) =>
             cookieStore.set(name, value, options)
-          )
-          return
+          );
+          return;
         }
 
-        // Fallback: if cookieStore exposes setAll, call it directly
-        if (typeof cookieStore.setAll === 'function') {
-          cookieStore.setAll(cookiesToSet)
-          return
+        if (typeof cookieStore.setAll === "function") {
+          cookieStore.setAll(cookiesToSet);
         }
       } catch (e) {
-        // swallow cookie write errors in server components
+        console.error("Cookie setAll failed:", e);
       }
     },
-  }
+  };
 
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL,
@@ -71,5 +97,5 @@ export async function createClient({ serviceRole = false } = {}) {
     {
       cookies: cookiesAdapter,
     }
-  )
+  );
 }
