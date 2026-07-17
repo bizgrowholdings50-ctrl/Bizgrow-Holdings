@@ -96,6 +96,7 @@ export async function createClient({ serviceRole = false } = {}) {
     key,
     {
       cookies: cookiesAdapter,
+    
     }
   );
 }

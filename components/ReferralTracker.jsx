@@ -18,13 +18,18 @@ export default function ReferralTracker() {
     const expires = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString()
     const secure = window.location.protocol === 'https:' ? '; Secure' : ''
     const sameSite = window.location.protocol === 'https:' ? 'SameSite=None' : 'SameSite=Lax'
+    const hostname = window.location.hostname
+    const domain = hostname.includes('.') && !hostname.includes('localhost')
+      ? `; Domain=.${hostname.replace(/^www\./, '')}`
+      : ''
 
     console.log('Referral cookie detected on client:', ref)
 
-    document.cookie = `bizgrow_referrer=${encodeURIComponent(ref)}; expires=${expires}; path=/; max-age=${30 * 24 * 60 * 60}; ${sameSite}${secure}`
+    document.cookie = `bizgrow_referrer=${encodeURIComponent(ref)}; expires=${expires}; path=/; max-age=${30 * 24 * 60 * 60}; ${sameSite}${secure}${domain}`
 
-    if (pathname !== '/referral-program') {
-      router.replace('/referral-program')
+    const normalizedPath = pathname.replace(/\/$/, '')
+    if (normalizedPath !== '/referral-program') {
+      router.replace(`/referral-program/?ref=${encodeURIComponent(ref)}`)
     }
   }, [pathname, router])
 

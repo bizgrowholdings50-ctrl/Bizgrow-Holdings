@@ -9,9 +9,15 @@ const GOLD = '#997819'
 
 export function ReferralBox({ referralCode }) {
   const [copied, setCopied] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   const referralLink =
-    typeof window !== 'undefined' && referralCode && referralCode !== '—'
-      ? `${window.location.origin}/referral-program?ref=${referralCode}`
+    mounted && referralCode && referralCode !== '—'
+      ? `${window.location.origin}/referral-program/?ref=${referralCode}`
       : ''
 
   const handleCopy = async () => {
@@ -131,8 +137,8 @@ export function GoogleLoginButton() {
     setReferralCookie(referralCode)
 
     const redirectTo = origin
-      ? `${origin.replace(/\/$/, '')}/auth/callback${referralCode ? `?ref=${encodeURIComponent(referralCode)}` : ''}`
-      : '/auth/callback'
+      ? `${origin.replace(/\/$/, '')}/auth/callback/${referralCode ? `?ref=${encodeURIComponent(referralCode)}` : ''}`
+      : '/auth/callback/'
     try {
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
