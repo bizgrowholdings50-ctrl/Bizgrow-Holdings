@@ -29,8 +29,10 @@ function generateReferralCode() {
 }
 
 export async function GET(request) {
-  console.log("STEP 1: Auth callback route GET started.");
   const { searchParams, origin } = new URL(request.url);
+  console.log("Incoming callback URL:", request.url)
+  console.log("Origin:", origin)
+  console.log("STEP 1: Auth callback route GET started.");
   const code = searchParams.get("code");
   const nextParam = searchParams.get("next") ?? "/referral-program";
 
@@ -119,15 +121,30 @@ export async function GET(request) {
           .insert(newProfile)
           .select();
         console.log("PROFILE INSERT RESPONSE:", { data: insertProfileData, error: insertProfileError });
-      } else if (!profileData.referral_code?.trim()) {
-        const updatePayload = { referral_code: generateReferralCode() };
-        console.log("PROFILE UPSERT PAYLOAD:", updatePayload);
-        const { data: updateProfileData, error: updateProfileError } = await adminClient
-          .from("profiles")
-          .update(updatePayload)
-          .eq("id", authUid)
-          .select();
-        console.log("PROFILE INSERT RESPONSE:", { data: updateProfileData, error: updateProfileError });
+      } else {
+        const updatePayload = {};
+        if (!profileData.email && user.email) {
+          updatePayload.email = user.email;
+        }
+        if (!profileData.full_name && (user.user_metadata?.full_name || user.user_metadata?.name)) {
+          updatePayload.full_name = user.user_metadata?.full_name || user.user_metadata?.name;
+        }
+        if (!profileData.avatar_url && (user.user_metadata?.avatar_url || user.user_metadata?.picture)) {
+          updatePayload.avatar_url = user.user_metadata?.avatar_url || user.user_metadata?.picture;
+        }
+        if (!profileData.referral_code?.trim()) {
+          updatePayload.referral_code = generateReferralCode();
+        }
+
+        if (Object.keys(updatePayload).length > 0) {
+          console.log("PROFILE UPSERT PAYLOAD:", updatePayload);
+          const { data: updateProfileData, error: updateProfileError } = await adminClient
+            .from("profiles")
+            .update(updatePayload)
+            .eq("id", authUid)
+            .select();
+          console.log("PROFILE INSERT RESPONSE:", { data: updateProfileData, error: updateProfileError });
+        }
       }
 
       console.log("FINAL REFERRAL CODE:", referrerCode || null);

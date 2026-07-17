@@ -144,12 +144,16 @@ export function GoogleLoginButton() {
       ? `${origin.replace(/\/$/, '')}/auth/callback/${referralCode ? `?ref=${encodeURIComponent(referralCode)}` : ''}`
       : '/auth/callback/'
     try {
+      console.log("Current origin:", typeof window !== 'undefined' ? window.location.origin : '')
+      console.log("redirectTo:", redirectTo)
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
           redirectTo,
         },
       })
+
+      console.log("OAuth URL:", data?.url)
 
       if (error) {
         console.error('Google sign-in failed:', error)
