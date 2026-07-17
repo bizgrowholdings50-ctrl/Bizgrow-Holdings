@@ -147,73 +147,10 @@ export async function GET(request) {
         }
       }
 
-      console.log("FINAL REFERRAL CODE:", referrerCode || null);
-
-      if (referrerCode) {
-        const { data: referrerProfile, error: referrerProfileError } =
-          await adminClient
-            .from("profiles")
-            .select("id")
-            .eq("referral_code", referrerCode)
-            .maybeSingle();
-
-        console.log("REFERRER PROFILE RESULT:", referrerProfile || null);
-        if (referrerProfileError) {
-          console.error("Referrer profile lookup failed:", referrerProfileError);
-        }
-
-        if (referrerProfile?.id) {
-          if (referrerProfile.id === authUid) {
-            console.log("Self referral blocked. User ID:", authUid);
-          } else {
-            const { data: existingReferral } =
-              await adminClient
-                .from("referrals")
-                .select("id")
-                .eq("referred_user_id", authUid)
-                .maybeSingle();
-
-            if (!existingReferral) {
-              const referralPayload = {
-                referrer_id: referrerProfile.id,
-                referred_user_id: authUid,
-                status: "completed",
-              };
-
-              console.log("Referral insert payload:", referralPayload);
-
-              const {
-                data: insertReferralData,
-                error: referralInsertError,
-              } = await adminClient
-                .from("referrals")
-                .insert(referralPayload)
-                .select();
-
-              console.log("REFERRAL INSERT RESPONSE:", { data: insertReferralData, error: referralInsertError });
-            } else {
-              console.log("Referral already exists for referred_user_id:", authUid);
-            }
-          }
-        } else {
-          console.log("Referrer profile not found for code:", referrerCode);
-        }
-      } else {
-        console.log("No referral code found in cookie or search parameters.");
-      }
-
-      console.log("STEP 11: Redirecting user to next page and clearing cookie.");
+      console.log("STEP 11: Redirecting user to next page.");
       const response = NextResponse.redirect(
         buildRedirectUrl(nextParam, origin, request.url),
       );
-      
-      const requestHost = (request.headers.get("host") || "").split(":")[0];
-      const isIP = /^[0-9.]+$/.test(requestHost);
-      const cookieDomain = requestHost.includes(".") && !isIP && requestHost !== "localhost"
-        ? `.${requestHost.replace(/^www\./, "")}`
-        : undefined;
-
-      response.cookies.set("bizgrow_referrer", "", { maxAge: 0, path: "/", domain: cookieDomain });
       return response;
     }
   }
