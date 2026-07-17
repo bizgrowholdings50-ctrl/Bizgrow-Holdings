@@ -112,9 +112,7 @@ async function ensureReferralCode(supabase, user, currentCode, existingProfile) 
   return selectData?.referral_code || referralCode;
 }
 
-export default async function ReferralPage(props) {
-  const searchParams = await props.searchParams;
-  const refParam = searchParams?.ref;
+export default async function ReferralPage() {
   const supabase = await createClient();
   const cookieStore = await cookies();
   const refCookie = cookieStore.get("bizgrow_referrer");
@@ -185,60 +183,6 @@ export default async function ReferralPage(props) {
       profileError = true;
     }
 
-    let clearCookieFlag = false;
-    // Post-login referral check and insertion logic
-    const activeRefCode = (refParam || referralCode || "").trim().toUpperCase();
-    if (activeRefCode) {
-      try {
-        const adminClient = await createClient({ serviceRole: true });
-        const { data: referrerProfile } = await adminClient
-          .from("profiles")
-          .select("id")
-          .eq("referral_code", activeRefCode)
-          .maybeSingle();
-
-        if (referrerProfile?.id) {
-          if (referrerProfile.id === user.id) {
-            console.log("Post-login self referral blocked:", user.id);
-            clearCookieFlag = true;
-          } else {
-            const { data: existingReferral } = await adminClient
-              .from("referrals")
-              .select("id")
-              .eq("referred_user_id", user.id)
-              .maybeSingle();
-
-            if (!existingReferral) {
-              const referralPayload = {
-                referrer_id: referrerProfile.id,
-                referred_user_id: user.id,
-                status: "completed",
-              };
-              
-              console.log("Post-login referral insert payload:", referralPayload);
-              const { data: insertData, error: insertError } = await adminClient
-                .from("referrals")
-                .insert(referralPayload)
-                .select();
-              
-              console.log("Post-login referral insert response:", { data: insertData, error: insertError });
-              
-              if (!insertError && insertData?.length > 0) {
-                clearCookieFlag = true;
-              }
-            } else {
-              console.log("Post-login referral already exists for referred_user_id:", user.id);
-              clearCookieFlag = true;
-            }
-          }
-        } else {
-          console.log("Post-login referrer code not found:", activeRefCode);
-          clearCookieFlag = true;
-        }
-      } catch (err) {
-        console.error("Error in post-login referral tracking:", err);
-      }
-    }
 
     const { data: referralRows, error: referralError } = await supabase
       .from("referrals")
@@ -686,27 +630,7 @@ export default async function ReferralPage(props) {
             </div>
           </div>
         )}
-        {user && clearCookieFlag && (
-          <Script id="clear-referral-cookie" strategy="afterInteractive">
-            {`
-              try {
-                const hostname = window.location.hostname;
-                const domain = hostname.includes('.') && !hostname.includes('localhost')
-                  ? "; Domain=." + hostname.replace(/^www\\./, '')
-                  : '';
-                document.cookie = "bizgrow_referrer=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; max-age=0" + domain;
-                
-                if (window.location.search.includes('ref=')) {
-                  const url = new URL(window.location.href);
-                  url.searchParams.delete('ref');
-                  window.history.replaceState({}, '', url.pathname + url.search);
-                }
-              } catch (e) {
-                console.error("Failed to clear cookie:", e);
-              }
-            `}
-          </Script>
-        )}
+
       </div>
     </main>
   );

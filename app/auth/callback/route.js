@@ -147,10 +147,106 @@ export async function GET(request) {
         }
       }
 
+      let clearCookieFlag = false;
+      try {
+        console.log("=== REFERRAL TRACKING START ===");
+        console.log("Referral code received (raw):", referrerCode);
+        console.log("Cookie value:", refCookie?.value || null);
+        console.log("URL ref value:", refParam || null);
+        console.log("Auth user id:", user.id);
+        console.log("Profile id (authUid):", authUid);
+
+        if (referrerCode) {
+          console.log("STEP 7: Querying referrer profile for code:", referrerCode);
+          const { data: referrerProfile, error: referrerProfileError } =
+            await adminClient
+              .from("profiles")
+              .select("id")
+              .eq("referral_code", referrerCode)
+              .maybeSingle();
+
+          console.log("Referrer lookup result:", referrerProfile);
+          if (referrerProfileError) {
+            console.error("Referrer lookup error:", referrerProfileError);
+          }
+
+          if (referrerProfile?.id) {
+            const selfReferralCheck = referrerProfile.id === authUid;
+            console.log("Self-referral check (referrerProfile.id === authUid):", selfReferralCheck);
+
+            if (selfReferralCheck) {
+              console.log("Self referral blocked. Exiting.");
+              clearCookieFlag = true;
+            } else {
+              console.log("STEP 9: Querying existing referrals for duplicate check.");
+              const { data: existingReferral, error: existingReferralError } =
+                await adminClient
+                  .from("referrals")
+                  .select("id")
+                  .eq("referred_user_id", authUid)
+                  .maybeSingle();
+
+              console.log("Duplicate referral lookup:", existingReferral);
+              if (existingReferralError) {
+                console.error("Duplicate lookup error:", existingReferralError);
+              }
+
+              if (!existingReferral) {
+                const referralPayload = {
+                  referrer_id: referrerProfile.id,
+                  referred_user_id: authUid,
+                  status: "completed",
+                };
+
+                console.log("Referral payload:", referralPayload);
+                console.log("Whether execution reaches the insert statement: YES");
+
+                const {
+                  data: insertReferralData,
+                  error: referralInsertError,
+                } = await adminClient
+                  .from("referrals")
+                  .insert(referralPayload)
+                  .select();
+
+                console.log("Exact insert response:", insertReferralData);
+                console.log("Exact insert error:", referralInsertError);
+
+                if (!referralInsertError && insertReferralData?.length > 0) {
+                  clearCookieFlag = true;
+                }
+              } else {
+                console.log("Duplicate check failed: Referral already exists. Exiting.");
+                clearCookieFlag = true;
+              }
+            }
+          } else {
+            console.log("Referrer profile not found. Exiting.");
+            clearCookieFlag = true;
+          }
+        } else {
+          console.log("No referral code received. Exiting.");
+        }
+        console.log("=== REFERRAL TRACKING END ===");
+      } catch (err) {
+        console.error("Exception caught in referral tracking block:", err);
+      }
+
       console.log("STEP 11: Redirecting user to next page.");
       const response = NextResponse.redirect(
         buildRedirectUrl(nextParam, origin, request.url),
       );
+      
+      if (clearCookieFlag) {
+        const requestHost = (request.headers.get("host") || "").split(":")[0];
+        const isIP = /^[0-9.]+$/.test(requestHost);
+        const cookieDomain = requestHost.includes(".") && !isIP && requestHost !== "localhost"
+          ? `.${requestHost.replace(/^www\./, "")}`
+          : undefined;
+
+        response.cookies.set("bizgrow_referrer", "", { maxAge: 0, path: "/", domain: cookieDomain });
+        console.log("Cleared bizgrow_referrer cookie.");
+      }
       return response;
     }
   }
