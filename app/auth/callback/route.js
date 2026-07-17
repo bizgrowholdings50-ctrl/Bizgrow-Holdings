@@ -72,12 +72,10 @@ export async function GET(request) {
       const refCookie = cookieStore.get("bizgrow_referrer");
       const refParam = searchParams.get("ref");
       const referrerCode = decodeURIComponent(
-        (refCookie?.value || refParam || "").trim(),
+        (refParam || refCookie?.value || "").trim(),
       ).toUpperCase();
 
-      console.log("- refCookie value:", refCookie?.value);
-      console.log("- refParam value:", refParam);
-      console.log("- normalized referrerCode:", referrerCode);
+      console.log("AUTH USER:", { id: user.id, email: user.email });
 
       console.log("STEP 4.5: Creating adminClient with serviceRole: true");
       let adminClient;
@@ -93,12 +91,6 @@ export async function GET(request) {
         data: { user: currentUser },
         error: userError,
       } = await adminClient.auth.getUser();
-      console.log(
-        "- adminClient.auth.getUser() response id:",
-        currentUser?.id,
-        "error:",
-        userError,
-      );
       const authUid = currentUser?.id || user.id;
 
       console.log("STEP 5: Looking up profile. auth.uid() =", authUid);
@@ -121,14 +113,24 @@ export async function GET(request) {
           avatar_url: user.user_metadata?.avatar_url || user.user_metadata?.picture || null,
           referral_code: generateReferralCode(),
         };
-        await adminClient.from("profiles").insert(newProfile);
+        console.log("PROFILE UPSERT PAYLOAD:", newProfile);
+        const { data: insertProfileData, error: insertProfileError } = await adminClient
+          .from("profiles")
+          .insert(newProfile)
+          .select();
+        console.log("PROFILE INSERT RESPONSE:", { data: insertProfileData, error: insertProfileError });
       } else if (!profileData.referral_code?.trim()) {
         const updatePayload = { referral_code: generateReferralCode() };
-        await adminClient.from("profiles").update(updatePayload).eq("id", authUid);
+        console.log("PROFILE UPSERT PAYLOAD:", updatePayload);
+        const { data: updateProfileData, error: updateProfileError } = await adminClient
+          .from("profiles")
+          .update(updatePayload)
+          .eq("id", authUid)
+          .select();
+        console.log("PROFILE INSERT RESPONSE:", { data: updateProfileData, error: updateProfileError });
       }
 
-      console.log("Referral cookie value:", refCookie?.value || null);
-      console.log("Final referral code used:", referrerCode || null);
+      console.log("FINAL REFERRAL CODE:", referrerCode || null);
 
       if (referrerCode) {
         const { data: referrerProfile, error: referrerProfileError } =
@@ -138,7 +140,10 @@ export async function GET(request) {
             .eq("referral_code", referrerCode)
             .maybeSingle();
 
-        console.log("Referrer profile query result:", referrerProfile || referrerProfileError);
+        console.log("REFERRER PROFILE RESULT:", referrerProfile || null);
+        if (referrerProfileError) {
+          console.error("Referrer profile lookup failed:", referrerProfileError);
+        }
 
         if (referrerProfile?.id) {
           if (referrerProfile.id === authUid) {
@@ -168,7 +173,7 @@ export async function GET(request) {
                 .insert(referralPayload)
                 .select();
 
-              console.log("Supabase insert response:", insertReferralData || referralInsertError);
+              console.log("REFERRAL INSERT RESPONSE:", { data: insertReferralData, error: referralInsertError });
             } else {
               console.log("Referral already exists for referred_user_id:", authUid);
             }
@@ -184,7 +189,14 @@ export async function GET(request) {
       const response = NextResponse.redirect(
         buildRedirectUrl(nextParam, origin, request.url),
       );
-      response.cookies.set("bizgrow_referrer", "", { maxAge: 0, path: "/" });
+      
+      const requestHost = (request.headers.get("host") || "").split(":")[0];
+      const isIP = /^[0-9.]+$/.test(requestHost);
+      const cookieDomain = requestHost.includes(".") && !isIP && requestHost !== "localhost"
+        ? `.${requestHost.replace(/^www\./, "")}`
+        : undefined;
+
+      response.cookies.set("bizgrow_referrer", "", { maxAge: 0, path: "/", domain: cookieDomain });
       return response;
     }
   }
