@@ -138,7 +138,10 @@ export async function GET(request) {
         .maybeSingle();
 
       if (profileError) {
-        console.error("Profile lookup failed:", formatSupabaseError(profileError));
+        console.error(
+          "Profile lookup failed:",
+          formatSupabaseError(profileError),
+        );
       }
 
       console.log("STEP 6: Checking profile status...");
@@ -146,14 +149,24 @@ export async function GET(request) {
         const newProfile = {
           id: authUid,
           email: user.email || "",
-          full_name: user.user_metadata?.full_name || user.user_metadata?.name || user.email || "Partner",
-          avatar_url: user.user_metadata?.avatar_url || user.user_metadata?.picture || null,
+          full_name:
+            user.user_metadata?.full_name ||
+            user.user_metadata?.name ||
+            user.email ||
+            "Partner",
+          avatar_url:
+            user.user_metadata?.avatar_url ||
+            user.user_metadata?.picture ||
+            null,
           referral_code: generateReferralCode(),
         };
         await adminClient.from("profiles").insert(newProfile);
       } else if (!profileData.referral_code?.trim()) {
         const updatePayload = { referral_code: generateReferralCode() };
-        await adminClient.from("profiles").update(updatePayload).eq("id", authUid);
+        await adminClient
+          .from("profiles")
+          .update(updatePayload)
+          .eq("id", authUid);
       }
 
       // --- START REPLACED LOGIC ---
@@ -161,6 +174,10 @@ export async function GET(request) {
         cookie: refCookie?.value,
         urlRef: refParam,
         finalCode: referrerCode,
+      });
+      console.log("🚨 REFERRAL BLOCK STARTED", {
+        referrerCode,
+        authUid,
       });
 
       if (referrerCode) {
@@ -203,13 +220,11 @@ export async function GET(request) {
 
               console.log("🔥 INSERTING REFERRAL:", referralPayload);
 
-              const {
-                data: insertReferralData,
-                error: referralInsertError,
-              } = await adminClient
-                .from("referrals")
-                .insert(referralPayload)
-                .select();
+              const { data: insertReferralData, error: referralInsertError } =
+                await adminClient
+                  .from("referrals")
+                  .insert(referralPayload)
+                  .select();
 
               console.log("🔥 REFERRAL DATABASE RESPONSE:", {
                 insertReferralData,
@@ -227,7 +242,9 @@ export async function GET(request) {
       }
       // --- END REPLACED LOGIC ---
 
-      console.log("STEP 11: Redirecting user to next page and clearing cookie.");
+      console.log(
+        "STEP 11: Redirecting user to next page and clearing cookie.",
+      );
       const response = NextResponse.redirect(
         buildRedirectUrl(nextParam, origin, request.url),
       );
@@ -236,6 +253,8 @@ export async function GET(request) {
     }
   }
 
-  console.log("STEP 12: No code or user found. Redirecting to /referral-program.");
+  console.log(
+    "STEP 12: No code or user found. Redirecting to /referral-program.",
+  );
   return NextResponse.redirect(`${origin}/referral-program`);
 }
