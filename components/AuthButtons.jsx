@@ -100,7 +100,11 @@ function setReferralCookie(referralCode) {
   const expires = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toUTCString()
   const secure = window.location.protocol === 'https:' ? '; Secure' : ''
   const sameSite = window.location.protocol === 'https:' ? 'SameSite=None' : 'SameSite=Lax'
-  document.cookie = `bizgrow_referrer=${encodeURIComponent(referralCode)}; expires=${expires}; path=/; max-age=${30 * 24 * 60 * 60}; ${sameSite}${secure}`
+  const hostname = window.location.hostname
+  const domain = hostname.includes('.') && !hostname.includes('localhost')
+    ? `; Domain=.${hostname.replace(/^www\./, '')}`
+    : ''
+  document.cookie = `bizgrow_referrer=${encodeURIComponent(referralCode)}; expires=${expires}; path=/; max-age=${30 * 24 * 60 * 60}; ${sameSite}${secure}${domain}`
 }
 
 export function ReferralCookieNotice() {

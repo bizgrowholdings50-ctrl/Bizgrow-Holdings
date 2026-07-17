@@ -2,21 +2,6 @@ import crypto from "crypto";
 import { NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
-import fs from "fs";
-import path from "path";
-
-function writeDebugLog(message) {
-  try {
-    const logPath = path.join(process.cwd(), "debug.log");
-    fs.appendFileSync(
-      logPath,
-      `[${new Date().toISOString()}] ${message}\n`,
-      "utf-8",
-    );
-  } catch (e) {
-    console.error("Failed to write debug log:", e);
-  }
-}
 
 function formatSupabaseError(error) {
   if (!error) return null;
@@ -44,9 +29,6 @@ function generateReferralCode() {
 }
 
 export async function GET(request) {
-  writeDebugLog("--- NEW AUTH CALLBACK REQUEST ---");
-  writeDebugLog(`URL: ${request.url}`);
-  writeDebugLog(`Headers cookies: ${request.headers.get("cookie")}`);
   console.log("STEP 1: Auth callback route GET started.");
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
@@ -73,17 +55,10 @@ export async function GET(request) {
     } = await authClient.auth.exchangeCodeForSession(code);
     const sessionDuration = Date.now() - sessionStart;
 
-    writeDebugLog(
-      `Session present: ${!!session}, error: ${exchangeError ? exchangeError.message : "None"}`,
-    );
-
     if (exchangeError) {
       console.error(
         "Auth callback failed during exchangeCodeForSession:",
         formatSupabaseError(exchangeError),
-      );
-      writeDebugLog(
-        `Auth callback failed during exchangeCodeForSession: ${exchangeError.message}`,
       );
       return NextResponse.redirect(`${origin}/referral-program`);
     }
@@ -99,10 +74,6 @@ export async function GET(request) {
       const referrerCode = decodeURIComponent(
         (refCookie?.value || refParam || "").trim(),
       ).toUpperCase();
-
-      writeDebugLog(`refCookie: ${refCookie ? refCookie.value : "undefined"}`);
-      writeDebugLog(`refParam: ${refParam || "undefined"}`);
-      writeDebugLog(`normalized referrerCode: ${referrerCode}`);
 
       console.log("- refCookie value:", refCookie?.value);
       console.log("- refParam value:", refParam);
@@ -138,10 +109,7 @@ export async function GET(request) {
         .maybeSingle();
 
       if (profileError) {
-        console.error(
-          "Profile lookup failed:",
-          formatSupabaseError(profileError),
-        );
+        console.error("Profile lookup failed:", formatSupabaseError(profileError));
       }
 
       console.log("STEP 6: Checking profile status...");
@@ -149,40 +117,20 @@ export async function GET(request) {
         const newProfile = {
           id: authUid,
           email: user.email || "",
-          full_name:
-            user.user_metadata?.full_name ||
-            user.user_metadata?.name ||
-            user.email ||
-            "Partner",
-          avatar_url:
-            user.user_metadata?.avatar_url ||
-            user.user_metadata?.picture ||
-            null,
+          full_name: user.user_metadata?.full_name || user.user_metadata?.name || user.email || "Partner",
+          avatar_url: user.user_metadata?.avatar_url || user.user_metadata?.picture || null,
           referral_code: generateReferralCode(),
         };
         await adminClient.from("profiles").insert(newProfile);
       } else if (!profileData.referral_code?.trim()) {
         const updatePayload = { referral_code: generateReferralCode() };
-        await adminClient
-          .from("profiles")
-          .update(updatePayload)
-          .eq("id", authUid);
+        await adminClient.from("profiles").update(updatePayload).eq("id", authUid);
       }
 
-      // --- START REPLACED LOGIC ---
-      console.log("🔥 REFERRAL DEBUG VALUES:", {
-        cookie: refCookie?.value,
-        urlRef: refParam,
-        finalCode: referrerCode,
-      });
-      console.log("🚨 REFERRAL BLOCK STARTED", {
-        referrerCode,
-        authUid,
-      });
+      console.log("Referral cookie value:", refCookie?.value || null);
+      console.log("Final referral code used:", referrerCode || null);
 
       if (referrerCode) {
-        console.log("STEP 7: Searching referrer profile:", referrerCode);
-
         const { data: referrerProfile, error: referrerProfileError } =
           await adminClient
             .from("profiles")
@@ -190,26 +138,18 @@ export async function GET(request) {
             .eq("referral_code", referrerCode)
             .maybeSingle();
 
-        console.log("🔥 REFERRER RESULT:", {
-          referrerProfile,
-          referrerProfileError,
-        });
+        console.log("Referrer profile query result:", referrerProfile || referrerProfileError);
 
         if (referrerProfile?.id) {
           if (referrerProfile.id === authUid) {
-            console.log("❌ SELF REFERRAL BLOCKED");
+            console.log("Self referral blocked. User ID:", authUid);
           } else {
-            const { data: existingReferral, error: existingError } =
+            const { data: existingReferral } =
               await adminClient
                 .from("referrals")
                 .select("id")
                 .eq("referred_user_id", authUid)
                 .maybeSingle();
-
-            console.log("🔥 EXISTING REFERRAL:", {
-              existingReferral,
-              existingError,
-            });
 
             if (!existingReferral) {
               const referralPayload = {
@@ -218,33 +158,29 @@ export async function GET(request) {
                 status: "completed",
               };
 
-              console.log("🔥 INSERTING REFERRAL:", referralPayload);
+              console.log("Referral insert payload:", referralPayload);
 
-              const { data: insertReferralData, error: referralInsertError } =
-                await adminClient
-                  .from("referrals")
-                  .insert(referralPayload)
-                  .select();
+              const {
+                data: insertReferralData,
+                error: referralInsertError,
+              } = await adminClient
+                .from("referrals")
+                .insert(referralPayload)
+                .select();
 
-              console.log("🔥 REFERRAL DATABASE RESPONSE:", {
-                insertReferralData,
-                referralInsertError,
-              });
+              console.log("Supabase insert response:", insertReferralData || referralInsertError);
             } else {
-              console.log("⚠️ Referral already exists");
+              console.log("Referral already exists for referred_user_id:", authUid);
             }
           }
         } else {
-          console.log("❌ Referrer code not found:", referrerCode);
+          console.log("Referrer profile not found for code:", referrerCode);
         }
       } else {
-        console.log("❌ No referral code found");
+        console.log("No referral code found in cookie or search parameters.");
       }
-      // --- END REPLACED LOGIC ---
 
-      console.log(
-        "STEP 11: Redirecting user to next page and clearing cookie.",
-      );
+      console.log("STEP 11: Redirecting user to next page and clearing cookie.");
       const response = NextResponse.redirect(
         buildRedirectUrl(nextParam, origin, request.url),
       );
@@ -253,8 +189,6 @@ export async function GET(request) {
     }
   }
 
-  console.log(
-    "STEP 12: No code or user found. Redirecting to /referral-program.",
-  );
+  console.log("STEP 12: No code or user found. Redirecting to /referral-program.");
   return NextResponse.redirect(`${origin}/referral-program`);
 }
