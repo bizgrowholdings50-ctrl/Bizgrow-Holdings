@@ -2,6 +2,21 @@ import crypto from "crypto";
 import { NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
+import fs from "fs";
+import path from "path";
+
+function writeDebugLog(message) {
+  try {
+    const logPath = path.join(process.cwd(), "debug.log");
+    fs.appendFileSync(
+      logPath,
+      `[${new Date().toISOString()}] ${message}\n`,
+      "utf-8",
+    );
+  } catch (e) {
+    console.error("Failed to write debug log:", e);
+  }
+}
 
 function formatSupabaseError(error) {
   if (!error) return null;
@@ -12,7 +27,6 @@ function formatSupabaseError(error) {
     raw: error,
   };
 }
-
 
 function buildRedirectUrl(destination, origin, requestUrl) {
   try {
@@ -30,6 +44,9 @@ function generateReferralCode() {
 }
 
 export async function GET(request) {
+  writeDebugLog("--- NEW AUTH CALLBACK REQUEST ---");
+  writeDebugLog(`URL: ${request.url}`);
+  writeDebugLog(`Headers cookies: ${request.headers.get("cookie")}`);
   console.log("STEP 1: Auth callback route GET started.");
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
@@ -56,22 +73,17 @@ export async function GET(request) {
     } = await authClient.auth.exchangeCodeForSession(code);
     const sessionDuration = Date.now() - sessionStart;
 
-    console.log("Query Name: exchangeCodeForSession");
-    console.log("- Execution time:", sessionDuration, "ms");
-    console.log("- Returned session present:", !!session);
-    console.log(
-      "- Returned session user:",
-      session?.user ? { id: session.user.id, email: session.user.email } : null,
-    );
-    console.log(
-      "- Returned error:",
-      exchangeError ? formatSupabaseError(exchangeError) : null,
+    writeDebugLog(
+      `Session present: ${!!session}, error: ${exchangeError ? exchangeError.message : "None"}`,
     );
 
     if (exchangeError) {
       console.error(
         "Auth callback failed during exchangeCodeForSession:",
         formatSupabaseError(exchangeError),
+      );
+      writeDebugLog(
+        `Auth callback failed during exchangeCodeForSession: ${exchangeError.message}`,
       );
       return NextResponse.redirect(`${origin}/referral-program`);
     }
@@ -87,6 +99,10 @@ export async function GET(request) {
       const referrerCode = decodeURIComponent(
         (refCookie?.value || refParam || "").trim(),
       ).toUpperCase();
+
+      writeDebugLog(`refCookie: ${refCookie ? refCookie.value : "undefined"}`);
+      writeDebugLog(`refParam: ${refParam || "undefined"}`);
+      writeDebugLog(`normalized referrerCode: ${referrerCode}`);
 
       console.log("- refCookie value:", refCookie?.value);
       console.log("- refParam value:", refParam);
@@ -230,9 +246,8 @@ export async function GET(request) {
         console.log(
           "STEP 7: Referral code detected. Finding referrer's profile ID...",
         );
-        console.log("auth.uid() =", authUid);
-        console.log(
-          "Query Name: adminClient.profiles.select(id).eq(referral_code, referrerCode)",
+        writeDebugLog(
+          `STEP 7: Querying referrer profile for code = "${referrerCode}"`,
         );
         const { data: referrerProfile, error: referrerProfileError } =
           await adminClient
@@ -241,33 +256,25 @@ export async function GET(request) {
             .eq("referral_code", referrerCode)
             .maybeSingle();
 
-        console.log("- Returned data:", referrerProfile);
-        console.log(
-          "- Returned error:",
-          referrerProfileError
-            ? formatSupabaseError(referrerProfileError)
-            : null,
+        writeDebugLog(
+          `Referrer profile found: ${JSON.stringify(referrerProfile)}, error: ${referrerProfileError ? referrerProfileError.message : "None"}`,
         );
-
-        if (referrerProfileError) {
-          console.error(
-            "Referrer profile lookup failed:",
-            formatSupabaseError(referrerProfileError),
-          );
-        }
 
         if (referrerProfile?.id) {
           console.log("STEP 8: Referrer found with ID:", referrerProfile.id);
 
           if (referrerProfile.id === authUid) {
             console.log("STEP 8 Decision: Self referral blocked", authUid);
+            writeDebugLog(
+              `STEP 8 Decision: Self referral blocked. referrerProfile.id = authUid = ${authUid}`,
+            );
           } else {
             console.log(
               "STEP 9: Checking for existing referral to avoid duplicates. auth.uid() =",
               authUid,
             );
-            console.log(
-              "Query Name: adminClient.referrals.select(id).eq(referred_user_id, auth.uid())",
+            writeDebugLog(
+              `STEP 9: Checking existing referral for referred_user_id = "${authUid}"`,
             );
             const { data: existingReferral, error: existingReferralError } =
               await adminClient
@@ -276,20 +283,9 @@ export async function GET(request) {
                 .eq("referred_user_id", authUid)
                 .maybeSingle();
 
-            console.log("- Returned data:", existingReferral);
-            console.log(
-              "- Returned error:",
-              existingReferralError
-                ? formatSupabaseError(existingReferralError)
-                : null,
+            writeDebugLog(
+              `Existing referral found: ${JSON.stringify(existingReferral)}, error: ${existingReferralError ? existingReferralError.message : "None"}`,
             );
-
-            if (existingReferralError) {
-              console.error(
-                "Referral existing check failed:",
-                formatSupabaseError(existingReferralError),
-              );
-            }
 
             if (existingReferral) {
               console.log(
@@ -306,8 +302,10 @@ export async function GET(request) {
                 // Must match your CHECK constraint
                 status: "completed",
               };
-
-              console.log("Referral Payload:", referralPayload);
+              console.log("🚀 REFERRAL INSERT REACHED", referralPayload);
+              writeDebugLog(
+                `STEP 10: Inserting referral record. Payload: ${JSON.stringify(referralPayload)}`,
+              );
 
               const { data: insertReferralData, error: referralInsertError } =
                 await adminClient
@@ -318,9 +316,15 @@ export async function GET(request) {
               if (referralInsertError) {
                 console.error("Referral Insert Error:");
                 console.error(referralInsertError);
+                writeDebugLog(
+                  `❌ Referral Insert Error: ${JSON.stringify(referralInsertError)}`,
+                );
               } else {
                 console.log("Referral Insert Success");
                 console.log(insertReferralData);
+                writeDebugLog(
+                  `✅ Referral Insert Success: ${JSON.stringify(insertReferralData)}`,
+                );
               }
             }
           }
@@ -329,10 +333,16 @@ export async function GET(request) {
             "STEP 8 Decision: Referrer code not found in profiles:",
             referrerCode,
           );
+          writeDebugLog(
+            `STEP 8 Decision: Referrer code not found in profiles: ${referrerCode}`,
+          );
         }
       } else {
         console.log(
           "STEP 7 Decision: No referral code found in cookie or query param for callback.",
+        );
+        writeDebugLog(
+          "STEP 7 Decision: No referral code found in cookie or query param.",
         );
       }
 
