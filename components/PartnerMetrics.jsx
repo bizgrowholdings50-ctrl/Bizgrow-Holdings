@@ -104,7 +104,7 @@ export default function PartnerMetrics({ userId, initialDirectCount = 0, initial
         <div className="flex items-start justify-between gap-4">
           <div>
             <p className="text-xs uppercase tracking-[0.24em] font-semibold text-slate-500">Partner Network</p>
-            <h4 className="mt-3 text-2xl font-bold" style={{ color: '#12066a' }}>Direct referrals</h4>
+            <h4 className="mt-3 text-2xl font-bold" style={{ color: '#12066a' }}>Your referrals</h4>
           </div>
           <div className="rounded-3xl bg-[#12066a] px-3 py-2 text-sm font-semibold text-white">
             {loading ? '—' : directCount}

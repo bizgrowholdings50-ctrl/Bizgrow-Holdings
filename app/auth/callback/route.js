@@ -17,14 +17,23 @@ export async function GET(request) {
     const { searchParams, origin } = new URL(request.url);
 
     const code = searchParams.get("code");
-    const nextParam = searchParams.get("next") ?? "/referral-program";
     const refParam = searchParams.get("ref");
+
+    // Cookie check karein taake agar query param miss bhi ho jaye toh cookie se pata chal jaye
+    const cookieStore = await cookies();
+    const refCookie = cookieStore.get("bizgrow_referrer");
+    const hasReferral = Boolean(refParam || refCookie?.value);
+
+    // TARGET DECISION: Agar referral code mojood hai toh onboarding, warna default referral-program
+    const defaultNext = hasReferral ? "/onboarding" : "/referral-program";
+    const nextParam = searchParams.get("next") ?? defaultNext;
 
     console.log("STEP 2 - Query Parameters");
     console.log({
       codeExists: !!code,
       code,
       refParam,
+      hasReferral,
       nextParam,
       origin,
     });
@@ -72,9 +81,6 @@ export async function GET(request) {
     });
 
     // STEP 6 & 7 - Fetch Existing Profile or Generate Code
-    const cookieStore = await cookies();
-    const refCookie = cookieStore.get("bizgrow_referrer");
-
     const rawReferrerCode = (refParam || refCookie?.value || "").trim();
     const referrerCode = decodeURIComponent(rawReferrerCode).toUpperCase();
 

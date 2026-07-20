@@ -138,11 +138,16 @@ export function GoogleLoginButton() {
         : process.env.NEXT_PUBLIC_SITE_URL || ''
 
     const referralCode = getReferralCookieValue() || getReferralQueryParam()
-    setReferralCookie(referralCode)
+    if (referralCode) {
+      setReferralCookie(referralCode)
+    }
 
+    // Yahan callback URL ke sath referral code preserve kar diya gaya hai
+    // Take jab auth callback par jaye toh ref code lose na ho
     const redirectTo = origin
       ? `${origin.replace(/\/$/, '')}/auth/callback/${referralCode ? `?ref=${encodeURIComponent(referralCode)}` : ''}`
       : '/auth/callback/'
+
     try {
       console.log("Current origin:", typeof window !== 'undefined' ? window.location.origin : '')
       console.log("redirectTo:", redirectTo)
@@ -217,7 +222,7 @@ export function LogoutButton() {
     <button
       type="button"
       onClick={handleLogout}
-      className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 transition-all hover:bg-slate-50 active:scale-[0.99]"
+      className="w-full rounded-2xl border border-slate-200 bg-4 px-4 py-3 text-sm font-semibold text-slate-700 transition-all hover:bg-slate-50 active:scale-[0.99]"
       style={{ borderColor: `${GOLD}33` }}
     >
       Sign Out
