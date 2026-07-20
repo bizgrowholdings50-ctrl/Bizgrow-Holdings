@@ -71,6 +71,7 @@ export async function GET(request) {
       metadata: user.user_metadata,
     });
 
+    // STEP 6 & 7 - Fetch Existing Profile or Generate Code
     const cookieStore = await cookies();
     const refCookie = cookieStore.get("bizgrow_referrer");
 
@@ -85,8 +86,6 @@ export async function GET(request) {
       referrerCode,
     });
 
-    console.log("STEP 7 - Fetch Existing Profile");
-
     const {
       data: existingUser,
       error: existingUserError,
@@ -96,14 +95,38 @@ export async function GET(request) {
       .eq("id", user.id)
       .maybeSingle();
 
-    console.log("STEP 7 RESULT");
-    console.log({
-      existingUser,
-      existingUserError,
-    });
-
     const userReferralCode =
       existingUser?.referral_code || generateReferralCode();
+
+    // STEP 8 - Upsert Profile FIRST so the user officially exists in the database
+    console.log("STEP 8 - Upserting Profile");
+
+    const {
+      data: profileUpsert,
+      error: profileError,
+    } = await adminClient
+      .from("profiles")
+      .upsert(
+        {
+          id: user.id,
+          email: user.email,
+          full_name:
+            user.user_metadata?.full_name ||
+            user.user_metadata?.name ||
+            "Partner",
+          referral_code: userReferralCode,
+        },
+        {
+          onConflict: "id",
+        }
+      )
+      .select();
+
+    console.log("STEP 8 RESULT");
+    console.log({
+      profileUpsert,
+      profileError,
+    });
 
     let clearCookie = false;
     let verifiedReferrerId = null;
@@ -115,6 +138,7 @@ export async function GET(request) {
       sameCode: referrerCode === userReferralCode,
     });
 
+    // STEP 10 - Handle Referral Tracking AFTER User Profile is Created
     if (referrerCode && referrerCode !== userReferralCode) {
       console.log("STEP 10 - Looking Up Referrer");
 
@@ -198,42 +222,13 @@ export async function GET(request) {
       }
     }
 
-    console.log("STEP 8 - Upserting Profile");
-
-    const {
-      data: profileUpsert,
-      error: profileError,
-    } = await adminClient
-      .from("profiles")
-      .upsert(
-        {
-          id: user.id,
-          email: user.email,
-          full_name:
-            user.user_metadata?.full_name ||
-            user.user_metadata?.name ||
-            "Partner",
-          referral_code: userReferralCode,
-        },
-        {
-          onConflict: "id",
-        }
-      )
-      .select();
-
-    console.log("STEP 8 RESULT");
-    console.log({
-      profileUpsert,
-      profileError,
-    });
-
     console.log("STEP 13 - Preparing Redirect");
 
     const response = NextResponse.redirect(
       new URL(nextParam, origin)
     );
 
-    if (clearCookie) {
+    if (clearCookie || refCookie) {
       console.log("STEP 14 - Clearing Referral Cookie");
 
       response.cookies.set("bizgrow_referrer", "", {
