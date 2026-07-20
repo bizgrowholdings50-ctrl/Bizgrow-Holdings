@@ -10,85 +10,91 @@ export default function PartnerMetrics({ userId, initialDirectCount = 0, initial
   const [directReferrals, setDirectReferrals] = useState(initialDirectReferrals)
   const [loading, setLoading] = useState(false)
 
+  const fetchData = async () => {
+    if (!userId) return
+    setLoading(true)
+    try {
+      const directRes = await supabase
+        .from('referrals')
+        .select('id', { count: 'exact', head: true })
+        .eq('referrer_id', userId)
+
+      if (!directRes.error) {
+        setDirectCount(directRes.count || 0)
+      }
+
+      const networkRes = await supabase
+        .from('referrals')
+        .select('referred_user_id')
+        .eq('referrer_id', userId)
+
+      if (!networkRes.error) {
+        setNetworkSize(networkRes.data?.length || 0)
+      }
+
+      const listRes = await supabase
+        .from('referrals')
+        .select('referred_user_id, created_at')
+        .eq('referrer_id', userId)
+        .order('created_at', { ascending: false })
+
+      if (!listRes.error && listRes.data) {
+        const referredIds = listRes.data.map((ref) => ref.referred_user_id).filter(Boolean)
+        if (referredIds.length) {
+          const { data: profileData } = await supabase
+            .from('profiles')
+            .select('id, full_name, email')
+            .in('id', referredIds)
+
+          if (profileData) {
+            const profileMap = profileData.reduce((acc, item) => {
+              if (item?.id) acc[item.id] = item
+              return acc
+            }, {})
+
+            setDirectReferrals(
+              listRes.data.map((ref) => ({
+                id: ref.referred_user_id,
+                full_name: profileMap[ref.referred_user_id]?.full_name || '',
+                email: profileMap[ref.referred_user_id]?.email || '',
+                created_at: ref.created_at,
+              }))
+            )
+          }
+        } else {
+          setDirectReferrals([])
+        }
+      }
+    } catch (err) {
+      console.error('PartnerMetrics fetch error:', err)
+    } finally {
+      setLoading(false)
+    }
+  }
+
   useEffect(() => {
-    let mounted = true
     if (!userId) return
 
-    const fetchData = async () => {
-      setLoading(true)
-      try {
-        const directRes = await supabase
-          .from('referrals')
-          .select('id', { count: 'exact', head: true })
-          .eq('referrer_id', userId)
-
-        if (!mounted) return
-
-        if (directRes.error) {
-          console.error('Direct referrals count failed:', directRes.error)
-        } else {
-          setDirectCount(directRes.count || 0)
+    // Real-time subscription setup
+    const channel = supabase
+      .channel('partner-metrics-realtime')
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'referrals',
+          filter: `referrer_id=eq.${userId}`,
+        },
+        () => {
+          // Jaise hi naya referral aayega, ye function khud data fetch kar lega
+          fetchData()
         }
-
-        const networkRes = await supabase
-          .from('referrals')
-          .select('referred_user_id')
-          .eq('referrer_id', userId)
-
-        if (!mounted) return
-        if (networkRes.error) {
-          console.error('Network size query failed:', networkRes.error)
-        } else {
-          setNetworkSize(networkRes.data?.length || 0)
-        }
-
-        if (!initialDirectReferrals || initialDirectReferrals.length === 0) {
-          const listRes = await supabase
-            .from('referrals')
-            .select('referred_user_id, created_at')
-            .eq('referrer_id', userId)
-            .order('created_at', { ascending: false })
-
-          if (!mounted) return
-          if (!listRes.error && listRes.data) {
-            const referredIds = listRes.data.map((ref) => ref.referred_user_id).filter(Boolean)
-            if (referredIds.length) {
-              const { data: profileData, error: profileDataError } = await supabase
-                .from('profiles')
-                .select('id, full_name, email')
-                .in('id', referredIds)
-
-              if (profileDataError) {
-                console.error('Direct referrals profile lookup failed:', profileDataError)
-              } else if (profileData) {
-                const profileMap = profileData.reduce((acc, item) => {
-                  if (item?.id) acc[item.id] = item
-                  return acc
-                }, {})
-
-                setDirectReferrals(
-                  listRes.data.map((ref) => ({
-                    id: ref.referred_user_id,
-                    full_name: profileMap[ref.referred_user_id]?.full_name || '',
-                    email: profileMap[ref.referred_user_id]?.email || '',
-                    created_at: ref.created_at,
-                  }))
-                )
-              }
-            }
-          }
-        }
-      } catch (err) {
-        console.error('PartnerMetrics fetch error:', err)
-      } finally {
-        if (mounted) setLoading(false)
-      }
-    }
-
-    fetchData()
+      )
+      .subscribe()
 
     return () => {
-      mounted = false
+      supabase.removeChannel(channel)
     }
   }, [userId])
 
@@ -118,7 +124,6 @@ export default function PartnerMetrics({ userId, initialDirectCount = 0, initial
               {loading ? 'Loading referrals…' : 'No referrals yet. Share your link to start building your network.'}
             </div>
           )}
-
         </div>
 
         <div className="mt-6 rounded-3xl border border-slate-200/70 bg-slate-50 p-4">

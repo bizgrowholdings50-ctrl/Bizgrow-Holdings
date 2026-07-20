@@ -1,43 +1,48 @@
-'use client'
+"use client";
 
-import { useMemo, useState } from 'react'
+import { useState } from "react";
 
-export default function AvatarWithFallback({ src, name, size = 80, borderColor = '#b48c1e' }) {
-  const [failed, setFailed] = useState(false)
+export default function AvatarWithFallback({
+  src,
+  name,
+  email,
+  size = "w-10 h-10",
+  textSize = "text-sm",
+}) {
+  const [imgError, setImgError] = useState(false);
 
-  const initials = useMemo(() => {
-    const text = name?.trim() || 'U'
-    const parts = text.split(/\s+/)
-    if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase()
-    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
-  }, [name])
+  // Fallback text (Initials generator)
+  const getInitials = (n, e) => {
+    if (n && n.trim() !== "") {
+      const parts = n.trim().split(" ");
+      if (parts.length >= 2) {
+        return `${parts[0][0]}${parts[1][0]}`.toUpperCase();
+      }
+      return n.substring(0, 2).toUpperCase();
+    }
+    if (e) {
+      return e.substring(0, 2).toUpperCase();
+    }
+    return "U";
+  };
 
-  const fallbackStyle = {
-    backgroundColor: '#f8f8fa',
-    color: '#12103e',
-    width: size,
-    height: size,
-    borderRadius: '9999px',
-    border: `2px solid ${borderColor}`,
-    display: 'grid',
-    placeItems: 'center',
-    fontWeight: 700,
-    fontSize: size * 0.4,
-  }
-
-  if (!src || failed) {
-    return <div style={fallbackStyle}>{initials}</div>
-  }
+  const initials = getInitials(name, email);
+  const hasValidImage = src && typeof src === "string" && src.trim() !== "" && !imgError;
 
   return (
-    <img
-      src={src}
-      alt={name || 'Avatar'}
-      width={size}
-      height={size}
-      onError={() => setFailed(true)}
-      className="rounded-full object-cover shadow-md"
-      style={{ border: `2px solid ${borderColor}`, width: size, height: size }}
-    />
-  )
+    <div
+      className={`relative rounded-full overflow-hidden flex items-center justify-center font-bold shrink-0 border border-[#997819]/40 bg-[#12066a]/5 text-[#12066a] ${size} ${textSize}`}
+    >
+      {hasValidImage ? (
+        <img
+          src={src}
+          alt={name || "Avatar"}
+          className="w-full h-full object-cover"
+          onError={() => setImgError(true)}
+        />
+      ) : (
+        <span>{initials}</span>
+      )}
+    </div>
+  );
 }

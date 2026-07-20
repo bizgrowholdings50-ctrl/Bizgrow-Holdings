@@ -58,6 +58,10 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "lh3.googleusercontent.com", // Google avatars ke liye zaroori hai
+      },
+      {
+        protocol: "https",
         hostname: "*.cloudfront.net",
       },
       {
