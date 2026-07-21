@@ -167,7 +167,7 @@ export default function DashboardPage() {
                       : "text-slate-500 hover:text-slate-800"
                   }`}
                 >
-                  Overview & Guide
+                  Overview 
                 </button>
               </div>
               <LogoutButton />
