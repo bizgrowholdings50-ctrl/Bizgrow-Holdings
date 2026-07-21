@@ -346,32 +346,34 @@ export default async function ReferralPage() {
                   ? `${referrerName} has invited you to join the BizGrow Referral Partner Program. Earn exclusive rewards simply by referring businesses that need compliance, certification, or security consultancy.`
                   : "We've built our reputation through trusted clients and partners. Refer another security firm or business to BizGrow, and we'll reward you every single time."}
               </p>
- {/* Core Reward Architecture Highlight Card */}
-          <div className="max-w-3xl mx-auto">
-            <div className="relative group bg-white/90 backdrop-blur-2xl border-2 border-[#997819]/40 rounded-3xl p-8 sm:p-12 shadow-[0_20px_50px_rgba(153,120,25,0.08)] text-center space-y-5">
-              <div className="inline-flex items-center gap-2 bg-[#997819]/10 text-[#997819] text-[11px] font-extrabold uppercase tracking-[0.2em] px-4 py-1.5 rounded-full">
-                <Gift className="w-3.5 h-3.5" /> The Reward Architecture
+
+              {/* Core Reward Architecture Highlight Card */}
+              <div className="max-w-3xl mx-auto">
+                <div className="relative group bg-white/90 backdrop-blur-2xl border-2 border-[#997819]/40 rounded-3xl p-8 sm:p-12 shadow-[0_20px_50px_rgba(153,120,25,0.08)] text-center space-y-5">
+                  <div className="inline-flex items-center gap-2 bg-[#997819]/10 text-[#997819] text-[11px] font-extrabold uppercase tracking-[0.2em] px-4 py-1.5 rounded-full">
+                    <Gift className="w-3.5 h-3.5" /> The Reward Architecture
+                  </div>
+                  <h3
+                    className="text-4xl sm:text-5xl font-black tracking-tight"
+                    style={{ color: NAVY }}
+                  >
+                    10% Off.{" "}
+                    <span className="text-[#997819] font-light">
+                      Every single time.
+                    </span>
+                  </h3>
+                  <p className="text-base sm:text-lg text-slate-600 max-w-xl mx-auto font-normal leading-relaxed">
+                    Enjoy a 10% discount on your next renewal or security services.
+                    There is no cap on referrals; each successful introduction
+                    stacks your rewards up to a{" "}
+                    <span className="font-bold text-[#12066a]">
+                      maximum 50% discount
+                    </span>
+                    .
+                  </p>
+                </div>
               </div>
-              <h3
-                className="text-4xl sm:text-5xl font-black tracking-tight"
-                style={{ color: NAVY }}
-              >
-                10% Off.{" "}
-                <span className="text-[#997819] font-light">
-                  Every single time.
-                </span>
-              </h3>
-              <p className="text-base sm:text-lg text-slate-600 max-w-xl mx-auto font-normal leading-relaxed">
-                Enjoy a 10% discount on your next renewal or security services.
-                There is no cap on referrals; each successful introduction
-                stacks your rewards up to a{" "}
-                <span className="font-bold text-[#12066a]">
-                  maximum 50% discount
-                </span>
-                .
-              </p>
-            </div>
-          </div>
+
               {/* Quick Value Cards Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 text-left">
                 <div className="bg-white/90 border border-slate-200/80 p-5 rounded-2xl shadow-sm hover:border-[#997819]/40 transition-all space-y-2">
@@ -459,9 +461,7 @@ export default async function ReferralPage() {
             </div>
           )}
 
-         
-
-          {/* Step-by-Step Program Walkthrough - Moved right after referral box / logged-in state or placed prominently */}
+          {/* Step-by-Step Program Walkthrough */}
           <div className="space-y-8 pt-4">
             <div className="text-center max-w-xl mx-auto space-y-2">
               <span className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#997819]">

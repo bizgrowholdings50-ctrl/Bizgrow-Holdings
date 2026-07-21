@@ -18,9 +18,11 @@ export default function DashboardPage() {
   const [directReferralCount, setDirectReferralCount] = useState(0);
   const [partnerNetworkSize, setPartnerNetworkSize] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState("dashboard"); // "dashboard" or "overview"
+  const [activeTab, setActiveTab] = useState("dashboard");
 
   useEffect(() => {
+    let channel = null;
+
     async function loadDashboardData() {
       try {
         const {
@@ -34,7 +36,7 @@ export default function DashboardPage() {
 
         setUser(user);
 
-        // Fetch profile
+        // 1. Fetch profile
         let { data: profileData, error: profileErr } = await supabase
           .from("profiles")
           .select("full_name, email, avatar_url, referral_code")
@@ -44,44 +46,94 @@ export default function DashboardPage() {
         if (profileErr) setProfileError(true);
         setProfile(profileData);
 
-        // Fetch referrals
-        const { data: referralRows, error: referralError } = await supabase
-          .from("referrals")
-          .select("referred_user_id, created_at")
-          .eq("referrer_id", user.id)
-          .order("created_at", { ascending: false });
+        let referralRows = [];
 
-        if (!referralError && referralRows) {
+        // 2. Try fetching using the RPC function first
+        const { data: rpcData, error: rpcError } = await supabase
+          .rpc('get_user_referrals', { p_referrer_id: user.id });
+
+        if (!rpcError && rpcData && rpcData.length > 0) {
+          referralRows = rpcData;
+        } else {
+          // Fallback: Direct query with join if RPC fails or returns empty
+          const { data: fallbackData, error: fallbackError } = await supabase
+            .from("referrals")
+            .select(`
+              referred_user_id,
+              created_at,
+              profiles:referred_user_id (
+                id,
+                full_name,
+                email,
+                avatar_url
+              )
+            `)
+            .eq("referrer_id", user.id)
+            .order("created_at", { ascending: false });
+
+          if (!fallbackError && fallbackData) {
+            referralRows = fallbackData.map((item) => ({
+              id: item.referred_user_id,
+              full_name: item.profiles?.full_name || "Referred User",
+              email: item.profiles?.email || "",
+              avatar_url: item.profiles?.avatar_url || "",
+              created_at: item.created_at,
+            }));
+          }
+        }
+
+        if (referralRows && referralRows.length > 0) {
           setDirectReferralCount(referralRows.length);
           setPartnerNetworkSize(referralRows.length);
 
-          const referredIds = referralRows.map((ref) => ref.referred_user_id).filter(Boolean);
-
-          let profileMap = {};
-          if (referredIds.length) {
-            const { data: referredProfiles } = await supabase
-              .from("profiles")
-              .select("id, full_name, email, avatar_url")
-              .in("id", referredIds);
-
-            if (referredProfiles) {
-              profileMap = referredProfiles.reduce((acc, item) => {
-                if (item?.id) acc[item.id] = item;
-                return acc;
-              }, {});
-            }
-          }
-
           const formattedReferrals = referralRows.map((ref) => ({
-            id: ref.referred_user_id,
-            full_name: profileMap[ref.referred_user_id]?.full_name || "Referred User",
-            email: profileMap[ref.referred_user_id]?.email || "",
-            avatar_url: profileMap[ref.referred_user_id]?.avatar_url || "",
+            id: ref.id,
+            full_name: ref.full_name || "Referred User",
+            email: ref.email || "",
+            avatar_url: ref.avatar_url || "",
             created_at: ref.created_at,
           }));
 
           setDirectReferrals(formattedReferrals);
         }
+
+        // --- SUPABASE REALTIME SUBSCRIPTION ---
+        channel = supabase
+          .channel(`realtime-referrals-${user.id}`)
+          .on(
+            "postgres_changes",
+            {
+              event: "INSERT",
+              schema: "public",
+              table: "referrals",
+              filter: `referrer_id=eq.${user.id}`,
+            },
+            async (payload) => {
+              const newRef = payload.new;
+
+              await new Promise((resolve) => setTimeout(resolve, 500));
+
+              const { data: newProfile } = await supabase
+                .from("profiles")
+                .select("id, full_name, email, avatar_url")
+                .eq("id", newRef.referred_user_id)
+                .maybeSingle();
+
+              const formattedNewReferral = {
+                id: newRef.referred_user_id,
+                full_name: newProfile?.full_name || "Referred User",
+                email: newProfile?.email || "",
+                avatar_url: newProfile?.avatar_url || "",
+                created_at: newRef.created_at,
+              };
+
+              setDirectReferrals((prev) => [formattedNewReferral, ...prev]);
+              setDirectReferralCount((prev) => prev + 1);
+              setPartnerNetworkSize((prev) => prev + 1);
+            }
+          )
+          .subscribe();
+
       } catch (err) {
         console.error("Dashboard data load error:", err);
       } finally {
@@ -90,6 +142,12 @@ export default function DashboardPage() {
     }
 
     loadDashboardData();
+
+    return () => {
+      if (channel) {
+        supabase.removeChannel(channel);
+      }
+    };
   }, [supabase]);
 
   if (loading) {
@@ -303,10 +361,7 @@ export default function DashboardPage() {
               </div>
             </div>
           ) : (
-            /* Refined Overview Tab with Highlighted Key Program Rules */
             <div className="space-y-10">
-              
-              {/* Header / Intro Card */}
               <div className="bg-white/90 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 sm:p-12 shadow-sm relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-[#12066a]/5 to-transparent rounded-full pointer-events-none -mr-20 -mt-20" />
                 <div className="relative z-10 max-w-3xl space-y-4">
@@ -322,7 +377,6 @@ export default function DashboardPage() {
                 </div>
               </div>
 
-              {/* Highlighted Policy Banner Cards */}
               <div className="grid gap-6 md:grid-cols-2">
                 <div className="bg-gradient-to-br from-[#12066a]/5 via-white to-white border-2 border-[#12066a]/20 rounded-3xl p-8 shadow-sm space-y-3">
                   <div className="inline-block px-3 py-1 rounded-full bg-[#12066a] text-white text-[10px] font-extrabold uppercase tracking-widest">
@@ -349,7 +403,6 @@ export default function DashboardPage() {
                 </div>
               </div>
 
-              {/* Step-by-Step Workflow Cards */}
               <div className="grid gap-6 md:grid-cols-3">
                 <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 shadow-sm flex flex-col justify-between space-y-4">
                   <div>
@@ -403,7 +456,6 @@ export default function DashboardPage() {
                 </div>
               </div>
 
-              {/* FAQ / Key Terms Section */}
               <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 sm:p-10 shadow-sm space-y-6">
                 <h3 className="text-xl font-bold" style={{ color: NAVY }}>
                   Frequently Asked Questions
@@ -423,7 +475,6 @@ export default function DashboardPage() {
                   </div>
                 </div>
               </div>
-
             </div>
           )}
 
