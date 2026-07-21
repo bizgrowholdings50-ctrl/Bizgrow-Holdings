@@ -1,15 +1,35 @@
 ﻿import crypto from "crypto";
 import { cookies } from "next/headers";
+import Link from "next/link";
 import { createClient } from "../../utils/supabase/server";
-import Script from "next/script";
 import AvatarWithFallback from "../../components/AvatarWithFallback";
 import {
   GoogleLoginButton,
   LogoutButton,
   ReferralBox,
 } from "../../components/AuthButtons";
-import PartnerMetrics from "../../components/PartnerMetrics";
-import ReferralDashboardClient from "../../components/ReferralDashboardClient"; // Clean client wrapper for toggling views
+import {
+  ShieldCheck,
+  Users,
+  HardHat,
+  Award,
+  Leaf,
+  HeartPulse,
+  Construction,
+  Dog,
+  Building2,
+  Lock,
+  Fingerprint,
+  FileCheck,
+  Globe,
+  SearchCheck,
+  ShieldAlert,
+  Share2,
+  Headset,
+  Gift,
+  ArrowRight,
+  CheckCircle2,
+} from "lucide-react";
 
 // Ultra-Premium Brand Palette
 const NAVY = "#12066a";
@@ -48,7 +68,8 @@ function formatSupabaseError(error) {
     };
   }
 
-  const message = error.message || error.code || error.details || error.hint || String(error);
+  const message =
+    error.message || error.code || error.details || error.hint || String(error);
   return {
     message: message || null,
     code: error.code || null,
@@ -58,13 +79,18 @@ function formatSupabaseError(error) {
   };
 }
 
-async function ensureReferralCode(supabase, user, currentCode, existingProfile) {
+async function ensureReferralCode(
+  supabase,
+  user,
+  currentCode,
+  existingProfile
+) {
   const normalizedCode = currentCode?.trim();
   if (normalizedCode) {
     return normalizedCode;
   }
 
-  const referralCode = generateReferralCode(10);
+  const referralCode = generateReferralCode();
   const full_name =
     existingProfile?.full_name ||
     user?.user_metadata?.full_name ||
@@ -128,9 +154,6 @@ export default async function ReferralPage() {
   let profile = null;
   let profileError = false;
   let referrerName = "";
-  let directReferrals = [];
-  let directReferralCount = 0;
-  let partnerNetworkSize = 0;
 
   if (user) {
     let { data, error } = await supabase
@@ -140,7 +163,10 @@ export default async function ReferralPage() {
       .maybeSingle();
 
     if (hasSupabaseError(error)) {
-      console.error("Referral profile lookup failed:", formatSupabaseError(error));
+      console.error(
+        "Referral profile lookup failed:",
+        formatSupabaseError(error)
+      );
     }
 
     if (!data && user.email) {
@@ -183,69 +209,6 @@ export default async function ReferralPage() {
     } else {
       profileError = true;
     }
-
-    const { data: referralRows, error: referralError } = await supabase
-      .from("referrals")
-      .select("referred_user_id, created_at")
-      .eq("referrer_id", user.id)
-      .order("created_at", { ascending: false });
-
-    if (!referralError && referralRows) {
-      directReferralCount = referralRows.length;
-      partnerNetworkSize = directReferralCount;
-
-      const referredIds = referralRows
-        .map((ref) => ref.referred_user_id)
-        .filter(Boolean);
-
-      let profileMap = {};
-      if (referredIds.length) {
-      const { data: referredProfiles, error: referredProfilesError } = await supabase
-          .from("profiles")
-          .select("id, full_name, email, avatar_url")
-          .in("id", referredIds);
-
-        if (referredProfilesError) {
-          console.error(
-            "Referred profiles lookup failed:",
-            formatSupabaseError(referredProfilesError)
-          );
-        } else if (referredProfiles) {
-          profileMap = referredProfiles.reduce((acc, item) => {
-            if (item?.id) acc[item.id] = item;
-            return acc;
-          }, {});
-        }
-      }
-
-      directReferrals = referralRows.map((ref) => ({
-        id: ref.referred_user_id,
-        full_name: profileMap[ref.referred_user_id]?.full_name || "",
-        email: profileMap[ref.referred_user_id]?.email || "",
-        avatar_url: profileMap[ref.referred_user_id]?.avatar_url || "", // <-- Added here
-        created_at: ref.created_at,
-      }));
-
-      let currentQueue = referredIds.filter(Boolean);
-      const visited = new Set(currentQueue);
-
-      while (currentQueue.length) {
-        const { data: nextLevel, error: nextError } = await supabase
-          .from("referrals")
-          .select("referred_user_id")
-          .in("referrer_id", currentQueue);
-
-        if (nextError || !nextLevel?.length) break;
-
-        const nextIds = nextLevel
-          .map((ref) => ref.referred_user_id)
-          .filter((id) => id && !visited.has(id));
-
-        nextIds.forEach((id) => visited.add(id));
-        partnerNetworkSize += nextIds.length;
-        currentQueue = nextIds;
-      }
-    }
   } else if (referralCode) {
     const { data, error } = await supabase
       .from("profiles")
@@ -274,409 +237,441 @@ export default async function ReferralPage() {
   const avatarUrl =
     googleAvatarUrl ||
     profileAvatarUrl ||
-    `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(profile?.full_name || user?.email || "User")}&backgroundColor=12066a,997819`;
+    `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(
+      profile?.full_name || user?.email || "User"
+    )}&backgroundColor=12066a,997819`;
 
   return (
-    <main className="min-h-screen relative bg-[#fafafc] font-sans selection:bg-[#997819] selection:text-white pb-24">
-      {/* Ultra-Premium Ambient Background */}
+    <main className="min-h-screen mt-10 relative bg-[#fafafc] font-sans selection:bg-[#997819] selection:text-white pb-32">
+      {/* Ultra-Premium Ambient Background Layers */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-[#12066a]/[0.03] blur-[120px]" />
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-[#997819]/[0.04] blur-[120px]" />
+        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-[#12066a]/[0.03] blur-[140px]" />
+        <div className="absolute top-[30%] right-[-10%] w-[40%] h-[40%] rounded-full bg-[#997819]/[0.04] blur-[140px]" />
+        <div className="absolute bottom-[-5%] left-[20%] w-[45%] h-[45%] rounded-full bg-[#12066a]/[0.02] blur-[140px]" />
       </div>
 
-      <div className="mx-auto w-full max-w-6xl relative z-10 px-4 sm:px-6 lg:px-8 pt-20">
-        {!user ? (
-          // ==========================================================
-          // GUEST: ENTERPRISE PARTNER ACQUISITION LANDING
-          // ==========================================================
-          <div className="space-y-24 mt-10">
-            {/* Hero Section */}
-            <div className="text-center max-w-4xl mx-auto space-y-8">
-              <div className="inline-flex items-center gap-3 rounded-full pl-2 pr-4 py-1.5 bg-white border border-slate-200/60 shadow-sm backdrop-blur-md">
-                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-[#12066a]/10">
-                  <span
-                    className="w-2 h-2 rounded-full"
-                    style={{ backgroundColor: GOLD }}
-                  />
+      <div className="mx-auto w-full max-w-5xl relative z-10 px-4 sm:px-6 lg:px-8 pt-16">
+        {/* LOGGED-IN PARTNER QUICK-ACCESS BAR */}
+        {user && (
+          <div className="bg-white/95 backdrop-blur-2xl border border-[#997819]/30 rounded-3xl p-6 sm:px-8 shadow-[0_10px_30px_rgba(18,6,106,0.06)] flex flex-col lg:flex-row items-center justify-between gap-6 mb-12">
+            <div className="flex items-center gap-5 w-full lg:w-auto">
+              <div className="shrink-0 ring-4 ring-[#997819]/10 rounded-full">
+                <AvatarWithFallback
+                  src={avatarUrl}
+                  name={profile?.full_name || user?.email || "User"}
+                  email={user?.email}
+                  size="w-16 h-16"
+                  textSize="text-xl"
+                />
+              </div>
+              <div className="min-w-0">
+                <div className="flex flex-wrap items-center gap-2.5">
+                  <h3
+                    className="text-xl font-extrabold tracking-tight truncate"
+                    style={{ color: NAVY }}
+                  >
+                    Welcome back, {profile?.full_name || "Partner"}!
+                  </h3>
+                  <span className="bg-emerald-50 text-emerald-700 border border-emerald-200/80 text-[10px] px-3 py-1 rounded-full font-bold uppercase tracking-wider shrink-0 shadow-sm flex items-center gap-1">
+                    <CheckCircle2 className="w-3 h-3 text-emerald-600" /> Active
+                    Partner
+                  </span>
+                </div>
+                <p className="text-xs text-slate-500 font-medium mt-1 truncate">
+                  Your partner account is live, secure, and actively tracking.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3.5 w-full lg:w-auto justify-end shrink-0 pt-4 lg:pt-0 border-t lg:border-t-0 border-slate-100">
+              <Link
+                href="/referral-program/dashboard"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-extrabold text-xs uppercase tracking-wider text-white shadow-lg shadow-[#12066a]/20 transition-all hover:scale-[1.02] active:scale-[0.98]"
+                style={{ backgroundColor: NAVY }}
+              >
+                Go to Dashboard <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+              <div className="[&>button]:inline-flex [&>button]:items-center [&>button]:justify-center [&>button]:px-5 [&>button]:py-3 [&>button]:rounded-xl [&>button]:font-extrabold [&>button]:text-xs [&>button]:uppercase [&>button]:tracking-wider [&>button]:border [&>button]:border-slate-200 [&>button]:bg-white [&>button]:text-slate-700 [&>button]:shadow-sm [&>button]:transition-all hover:[&>button]:bg-slate-50 hover:[&>button]:border-slate-300">
+                <LogoutButton />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* User's Unique Link Box (When Logged In) */}
+        {user && profile?.referral_code && (
+          <div className="max-w-3xl mx-auto mb-16 bg-white/95 backdrop-blur-2xl border border-slate-200/80 rounded-3xl p-8 shadow-sm space-y-4">
+            <div className="text-center space-y-1">
+              <h3 className="text-xl font-extrabold" style={{ color: NAVY }}>
+                Your Unique Referral Link
+              </h3>
+              <p className="text-xs text-slate-500 font-normal">
+                Share this link directly with colleagues or businesses to begin
+                tracking.
+              </p>
+            </div>
+            <ReferralBox referralCode={profile.referral_code} />
+          </div>
+        )}
+
+        {/* GUIDED REFERRAL ONBOARDING CONTENT CONTAINER */}
+        <div className="space-y-20">
+          {/* Hero Header Section - Hidden when user is logged in */}
+          {!user && (
+            <div className="text-center max-w-3xl mx-auto space-y-6">
+              <div className="inline-flex items-center gap-2.5 rounded-full pl-3 pr-5 py-2 bg-white border border-[#997819]/30 shadow-sm backdrop-blur-md">
+                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-[#12066a]/10 text-[#12066a]">
+                  <Gift className="w-3.5 h-3.5 text-[#997819]" />
                 </span>
                 <span
-                  className="text-[11px] font-bold uppercase tracking-[0.25em]"
+                  className="text-xs font-bold uppercase tracking-[0.2em]"
                   style={{ color: NAVY }}
                 >
                   {referrerName
-                    ? `Private Invite: ${referrerName}`
+                    ? `🎉 You've Been Invited by ${referrerName}`
                     : "Bizgrow Partner Network"}
                 </span>
               </div>
 
-              <h1 className="text-5xl sm:text-7xl font-black tracking-tighter leading-[1.05] text-[#997819]">
-                Join our referral program <br />
+              <h1 className="text-4xl sm:text-6xl font-black tracking-tight leading-[1.1]">
+                <span className="text-[#997819]">Join our referral program</span>{" "}
+                <br />
                 <span className="bg-gradient-to-r from-[#12066a] via-[#12066a] to-[#997819] bg-clip-text text-transparent">
-                  and earn rewards!
+                  and earn elite rewards.
                 </span>
               </h1>
 
-              <p className="text-lg sm:text-2xl text-slate-600 font-light max-w-2xl mx-auto leading-relaxed">
-               We&apos;ve built our reputation through clients like you, and the best compliment you can give us is an introduction. Refer another security firm or business to BizGrow, and we&apos;ll reward you every time.
+              <p className="text-base sm:text-xl text-slate-600 font-normal max-w-2xl mx-auto leading-relaxed">
+                {referrerName
+                  ? `${referrerName} has invited you to join the BizGrow Referral Partner Program. Earn exclusive rewards simply by referring businesses that need compliance, certification, or security consultancy.`
+                  : "We've built our reputation through trusted clients and partners. Refer another security firm or business to BizGrow, and we'll reward you every single time."}
+              </p>
+ {/* Core Reward Architecture Highlight Card */}
+          <div className="max-w-3xl mx-auto">
+            <div className="relative group bg-white/90 backdrop-blur-2xl border-2 border-[#997819]/40 rounded-3xl p-8 sm:p-12 shadow-[0_20px_50px_rgba(153,120,25,0.08)] text-center space-y-5">
+              <div className="inline-flex items-center gap-2 bg-[#997819]/10 text-[#997819] text-[11px] font-extrabold uppercase tracking-[0.2em] px-4 py-1.5 rounded-full">
+                <Gift className="w-3.5 h-3.5" /> The Reward Architecture
+              </div>
+              <h3
+                className="text-4xl sm:text-5xl font-black tracking-tight"
+                style={{ color: NAVY }}
+              >
+                10% Off.{" "}
+                <span className="text-[#997819] font-light">
+                  Every single time.
+                </span>
+              </h3>
+              <p className="text-base sm:text-lg text-slate-600 max-w-xl mx-auto font-normal leading-relaxed">
+                Enjoy a 10% discount on your next renewal or security services.
+                There is no cap on referrals; each successful introduction
+                stacks your rewards up to a{" "}
+                <span className="font-bold text-[#12066a]">
+                  maximum 50% discount
+                </span>
+                .
               </p>
             </div>
-
-            {/* Split Architecture: Reward & Authentication */}
-            <div className="grid gap-6 md:grid-cols-[1.2fr_0.8fr]">
-              {/* The Value Proposition (Bento Card) */}
-              <div className="relative group bg-white/70 backdrop-blur-xl border border-[#997819] rounded-[2rem] p-8 sm:p-12 overflow-hidden transition-all duration-500 hover:shadow-[0_20px_60px_-15px_rgba(18,6,106,0.1)] hover:bg-white">
-                <div className="absolute top-0 right-0 p-8 opacity-10 transition-opacity group-hover:opacity-20">
-                  <svg
-                    width="120"
-                    height="120"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke={GOLD}
-                    strokeWidth="1"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-                  </svg>
-                </div>
-
-                <div className="relative z-10 h-full flex flex-col justify-between">
-                  <div className="space-y-4">
-                    <p className="text-xs font-bold uppercase tracking-widest text-slate-600">
-                      The Reward Architecture
-                    </p>
-                    <h3
-                      className="text-4xl sm:text-5xl font-black tracking-tight"
+          </div>
+              {/* Quick Value Cards Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 text-left">
+                <div className="bg-white/90 border border-slate-200/80 p-5 rounded-2xl shadow-sm hover:border-[#997819]/40 transition-all space-y-2">
+                  <div className="w-8 h-8 rounded-xl bg-[#997819]/10 flex items-center justify-center text-[#997819]">
+                    <Award className="w-4 h-4" />
+                  </div>
+                  <div>
+                    <div className="text-[11px] font-extrabold uppercase text-[#997819] tracking-wider mb-0.5">
+                      Instant Benefit
+                    </div>
+                    <div
+                      className="text-base font-extrabold"
                       style={{ color: NAVY }}
                     >
-                      15% Off. <br />
-                      <span className="text-[#997819] font-light">
-                        Every single time.
-                      </span>
-                    </h3>
-                    <p className="text-base text-slate-900 max-w-sm mt-4 font-light leading-relaxed">
-                      Enjoy a 15% discount on your next renewal or any other services. There is no cap on referrals; each successful one earns you an uncapped reward.
-                    </p>
+                      5% Discount
+                    </div>
                   </div>
-                </div>
-              </div>
-
-              {/* Secure Access Portal */}
-              <div className="bg-white/70 backdrop-blur-xl border border-[#997819] rounded-[2rem] p-8 sm:p-12 flex flex-col items-center justify-center text-center shadow-[0_8px_30px_rgb(0,0,0,0.02)]">
-                <div className="w-16 h-16 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center mb-6 shadow-sm">
-                  <svg
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke={NAVY}
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                  </svg>
-                </div>
-                <h3
-                  className="text-3xl font-bold tracking-tight mb-3"
-                  style={{ color: NAVY }}
-                >
-                  Enter the Portal
-                </h3>
-                <p className="text-md text-slate-700 mb-8 max-w-xs font-light">
-                  Authenticate securely to generate your unique partner link.
-                </p>
-                <div className="w-full max-w-[280px]">
-                  <GoogleLoginButton />
-                </div>
-              </div>
-            </div>
-
-            {/* How It Works Section (3-Step Process) */}
-            <div className="space-y-6 pt-4">
-              <div className="text-center max-w-xl mx-auto">
-                <span className="text-xs font-bold uppercase tracking-widest text-[#997819]">
-                  Simple Process
-                </span>
-                <h3 className="text-3xl font-bold mt-1" style={{ color: NAVY }}>
-                  How It Works
-                </h3>
-              </div>
-
-              <div className="grid gap-6 md:grid-cols-3">
-                <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 shadow-sm space-y-4">
-                  <div className="w-12 h-12 rounded-2xl bg-[#12066a]/5 flex items-center justify-center font-black text-lg text-[#12066a]">
-                    01
-                  </div>
-                  <h4 className="text-xl font-bold" style={{ color: NAVY }}>
-                    Share the referral
-                  </h4>
-                  <p className="text-xs sm:text-sm text-slate-500 font-light leading-relaxed">
-                    Share your unique referral link with your friends or business.
+                  <p className="text-xs text-slate-500 font-normal leading-relaxed">
+                    On your first compliance or certification service.
                   </p>
                 </div>
 
-                <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 shadow-sm space-y-4">
-                  <div className="w-12 h-12 rounded-2xl bg-[#12066a]/5 flex items-center justify-center font-black text-lg text-[#12066a]">
-                    02
+                <div className="bg-white/90 border border-slate-200/80 p-5 rounded-2xl shadow-sm hover:border-[#997819]/40 transition-all space-y-2">
+                  <div className="w-8 h-8 rounded-xl bg-[#12066a]/10 flex items-center justify-center text-[#12066a]">
+                    <ShieldCheck className="w-4 h-4" />
                   </div>
-                  <h4 className="text-xl font-bold" style={{ color: NAVY }}>
-                    We take it from there
-                  </h4>
-                  <p className="text-xs sm:text-sm text-slate-500 font-light leading-relaxed">
-                    Our team will reach out, handle the consultation, and guide them through the right compliance path, no effort needed from you.
+                  <div>
+                    <div className="text-[11px] font-extrabold uppercase text-[#997819] tracking-wider mb-0.5">
+                      Zero Fee
+                    </div>
+                    <div
+                      className="text-base font-extrabold"
+                      style={{ color: NAVY }}
+                    >
+                      Free & Lifetime
+                    </div>
+                  </div>
+                  <p className="text-xs text-slate-500 font-light leading-relaxed">
+                    Permanent partner status with no hidden obligations.
                   </p>
                 </div>
 
-                <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 shadow-sm space-y-4">
-                  <div className="w-12 h-12 rounded-2xl bg-[#12066a]/5 flex items-center justify-center font-black text-lg text-[#12066a]">
-                    03
+                <div className="bg-white/90 border border-slate-200/80 p-5 rounded-2xl shadow-sm hover:border-[#997819]/40 transition-all space-y-2">
+                  <div className="w-8 h-8 rounded-xl bg-[#997819]/10 flex items-center justify-center text-[#997819]">
+                    <Gift className="w-4 h-4" />
                   </div>
-                  <h4 className="text-xl font-bold" style={{ color: NAVY }}>
-                    You earn your reward
-                  </h4>
-                  <p className="text-xs sm:text-sm text-slate-500 font-light leading-relaxed">
-                    Once your referral signs up, you&apos;ll receive your 15% discount reward.
+                  <div>
+                    <div className="text-[11px] font-extrabold uppercase text-[#997819] tracking-wider mb-0.5">
+                      Uncapped Earnings
+                    </div>
+                    <div
+                      className="text-base font-extrabold"
+                      style={{ color: NAVY }}
+                    >
+                      15% Off Renewals
+                    </div>
+                  </div>
+                  <p className="text-xs text-slate-500 font-light leading-relaxed">
+                    Substantial savings on every successful business referral.
                   </p>
                 </div>
               </div>
-            </div>
 
-            {/* Applicable Services Showcase */}
-            <div className="pt-8">
-              <div className="flex flex-col sm:flex-row justify-between items-end mb-8 gap-4 px-2">
-                <div>
-                  <span className="text-xs font-bold uppercase tracking-widest text-[#997819]">
-                    Full Portfolio
-                  </span>
+              {/* Pre-login Google Authentication Box */}
+              <div className="pt-4 max-w-md mx-auto bg-white/95 backdrop-blur-2xl border border-slate-200/90 rounded-3xl p-8 shadow-[0_15px_40px_rgba(18,6,106,0.06)] space-y-5 text-center">
+                <div className="space-y-1.5">
                   <h3
-                    className="text-2xl font-bold tracking-tight"
+                    className="text-xl font-extrabold"
                     style={{ color: NAVY }}
                   >
-                    Our Services
+                    Before We Get Started...
                   </h3>
-                  <p className="text-slate-500 text-sm mt-1">
-                    Your 15% reward applies to all our security and compliance solutions.
+                  <p className="text-xs text-slate-500 font-normal leading-relaxed px-2">
+                    Sign in with Google to establish your secure partner account
+                    instantly. No password required.
                   </p>
                 </div>
-                <div
-                  className="text-xs font-bold uppercase tracking-widest"
-                  style={{ color: GOLD }}
-                >
-                  Bizgrow Holdings Ltd
+
+                <div className="pt-3 flex justify-center">
+                  <div className="w-full">
+                    <GoogleLoginButton />
+                  </div>
                 </div>
               </div>
+            </div>
+          )}
 
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                {[
-                  { title: "SIA ACS", desc: "Approved Contractor Scheme consultancy for security firms." },
-                  { title: "COP 119", desc: "Code of Practice for labour provision in security sectors." },
-                  { title: "SafeContractor", desc: "Health & Safety accreditation for UK contractors (SSIP)." },
-                  { title: "ISO 9001", desc: "Quality Management Systems for operational excellence." },
-                  { title: "ISO 14001", desc: "Environmental Management Standards for sustainable growth." },
-                  { title: "ISO 45001", desc: "Occupational Health and Safety management systems." },
-                  { title: "Cyber Essentials", desc: "Basic protection against common cyber threats." },
-                  { title: "BS 7858", desc: "Vetting and screening of personnel in security." },
-                ].map((item, i) => (
+         
+
+          {/* Step-by-Step Program Walkthrough - Moved right after referral box / logged-in state or placed prominently */}
+          <div className="space-y-8 pt-4">
+            <div className="text-center max-w-xl mx-auto space-y-2">
+              <span className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#997819]">
+                Structured Workflow
+              </span>
+              <h3
+                className="text-3xl font-black tracking-tight"
+                style={{ color: NAVY }}
+              >
+                How It Works in 4 Steps
+              </h3>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+              <div className="bg-white/90 backdrop-blur-xl border border-slate-200/80 rounded-3xl p-6 shadow-sm space-y-4 hover:border-[#997819]/50 transition-all">
+                <div className="w-12 h-12 rounded-2xl bg-[#12066a]/5 flex items-center justify-center text-[#12066a] border border-[#12066a]/10">
+                  <Share2 className="w-5 h-5 text-[#997819]" />
+                </div>
+                <h4 className="text-lg font-bold" style={{ color: NAVY }}>
+                  01. Share link
+                </h4>
+                <p className="text-xs text-slate-500 font-normal leading-relaxed">
+                  Provide your unique personal referral link to friends, peers,
+                  or businesses seeking compliance.
+                </p>
+              </div>
+
+              <div className="bg-white/90 backdrop-blur-xl border border-slate-200/80 rounded-3xl p-6 shadow-sm space-y-4 hover:border-[#997819]/50 transition-all">
+                <div className="w-12 h-12 rounded-2xl bg-[#12066a]/5 flex items-center justify-center text-[#12066a] border border-[#12066a]/10">
+                  <Users className="w-5 h-5 text-[#997819]" />
+                </div>
+                <h4 className="text-lg font-bold" style={{ color: NAVY }}>
+                  02. They register
+                </h4>
+                <p className="text-xs text-slate-500 font-normal leading-relaxed">
+                  Your referred party signs up through your link to instantly
+                  unlock partner status and welcome benefits.
+                </p>
+              </div>
+
+              <div className="bg-white/90 backdrop-blur-xl border border-slate-200/80 rounded-3xl p-6 shadow-sm space-y-4 hover:border-[#997819]/50 transition-all">
+                <div className="w-12 h-12 rounded-2xl bg-[#12066a]/5 flex items-center justify-center text-[#12066a] border border-[#12066a]/10">
+                  <Headset className="w-5 h-5 text-[#997819]" />
+                </div>
+                <h4 className="text-lg font-bold" style={{ color: NAVY }}>
+                  03. Consultation
+                </h4>
+                <p className="text-xs text-slate-500 font-normal leading-relaxed">
+                  Our expert compliance consultants contact them directly to
+                  handle technical advisory and onboarding.
+                </p>
+              </div>
+
+              <div className="bg-white/90 backdrop-blur-xl border border-slate-200/80 rounded-3xl p-6 shadow-sm space-y-4 hover:border-[#997819]/50 transition-all">
+                <div className="w-12 h-12 rounded-2xl bg-[#12066a]/5 flex items-center justify-center text-[#12066a] border border-[#12066a]/10">
+                  <Gift className="w-5 h-5 text-[#997819]" />
+                </div>
+                <h4 className="text-lg font-bold" style={{ color: NAVY }}>
+                  04. Earn rewards
+                </h4>
+                <p className="text-xs text-slate-500 font-normal leading-relaxed">
+                  Once they convert into a client, your discount rewards are
+                  automatically credited to your dashboard.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Complete 15 Services Showcase Portfolio */}
+          <div className="pt-10">
+            <div className="flex flex-col sm:flex-row justify-between items-end mb-8 gap-4 px-2">
+              <div>
+                <span className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#997819]">
+                  Full Portfolio
+                </span>
+                <h3
+                  className="text-3xl font-black tracking-tight mt-1"
+                  style={{ color: NAVY }}
+                >
+                  Covered Services
+                </h3>
+                <p className="text-slate-500 text-sm font-normal mt-1">
+                  Your 15% discount rewards apply across our complete suite of
+                  elite security and accreditation solutions.
+                </p>
+              </div>
+              <div
+                className="text-xs font-extrabold uppercase tracking-widest bg-white px-4 py-2 rounded-xl border border-slate-200/80 shadow-sm"
+                style={{ color: GOLD }}
+              >
+                Bizgrow Holdings Ltd
+              </div>
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {[
+                {
+                  title: "SIA ACS",
+                  desc: "Approved Contractor Scheme consultancy for security firms.",
+                  icon: ShieldCheck,
+                },
+                {
+                  title: "COP 119",
+                  desc: "Code of Practice for labour provision in security sectors.",
+                  icon: Users,
+                },
+                {
+                  title: "Safe Contractor",
+                  desc: "Health & Safety accreditation for UK contractors.",
+                  icon: HardHat,
+                },
+                {
+                  title: "ISO 9001",
+                  desc: "Quality Management Systems for operational excellence.",
+                  icon: Award,
+                },
+                {
+                  title: "ISO 14001",
+                  desc: "Environmental Management Standards for sustainable growth.",
+                  icon: Leaf,
+                },
+                {
+                  title: "ISO 45001",
+                  desc: "Occupational Health and Safety management systems.",
+                  icon: HeartPulse,
+                },
+                {
+                  title: "ConstructionLine",
+                  desc: "Gold & Silver membership audit support for construction.",
+                  icon: Construction,
+                },
+                {
+                  title: "NASDU",
+                  desc: "National Association of Security Dog Users compliance.",
+                  icon: Dog,
+                },
+                {
+                  title: "SMAS",
+                  desc: "Worksafe accreditation for SSIP H&S compliance.",
+                  icon: Building2,
+                },
+                {
+                  title: "Cyber Essentials",
+                  desc: "Basic protection against common cyber threats.",
+                  icon: Lock,
+                },
+                {
+                  title: "Cyber Essentials Plus",
+                  desc: "Verified technical audit for enhanced cyber security.",
+                  icon: Fingerprint,
+                },
+                {
+                  title: "CHAS Scheme",
+                  desc: "Contractors Health and Safety Assessment Scheme.",
+                  icon: FileCheck,
+                },
+                {
+                  title: "BS 10800",
+                  desc: "Standard for the provision of security services.",
+                  icon: Globe,
+                },
+                {
+                  title: "BS 7858",
+                  desc: "Engineering and screening of personnel in security.",
+                  icon: SearchCheck,
+                },
+                {
+                  title: "BS 7499",
+                  desc: "Static guarding and mobile patrol services code.",
+                  icon: ShieldAlert,
+                },
+              ].map((item, i) => {
+                const IconComponent = item.icon;
+                return (
                   <div
                     key={i}
-                    className="bg-transparent border border-slate-200/60 rounded-2xl p-6 transition-all hover:bg-white hover:border-[#997819] hover:shadow-sm group"
+                    className="bg-white/60 backdrop-blur-sm border border-slate-200/80 rounded-2xl p-6 transition-all hover:bg-white hover:border-[#997819]/60 hover:shadow-md group"
                   >
-                    <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center mb-4 group-hover:bg-[#12066a]/5 transition-colors">
-                      <div
-                        className="w-1.5 h-1.5 rounded-full"
-                        style={{ backgroundColor: GOLD }}
-                      />
+                    <div className="w-10 h-10 rounded-xl bg-[#12066a]/5 flex items-center justify-center mb-4 group-hover:bg-[#12066a]/10 transition-colors text-[#12066a]">
+                      <IconComponent className="w-5 h-5 text-[#997819]" />
                     </div>
                     <h4
-                      className="text-lg font-bold mb-1"
+                      className="text-base font-extrabold mb-1.5"
                       style={{ color: NAVY }}
                     >
                       {item.title}
                     </h4>
-                    <p className="text-xs text-slate-500 leading-relaxed font-light">
+                    <p className="text-xs text-slate-500 leading-relaxed font-normal">
                       {item.desc}
                     </p>
                   </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Footer Support Note */}
-            <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 text-center max-w-2xl mx-auto space-y-3">
-              <h4 className="text-lg font-bold" style={{ color: NAVY }}>
-                Not sure if someone qualifies?
-              </h4>
-              <p className="text-xs sm:text-sm text-slate-500 font-light">
-                Just ask us! Reach out to the team at <strong className="text-slate-700">Bizgrow Holdings Ltd</strong>, CEME Campus, Marsh Way, RM13 8EU.
-              </p>
+                );
+              })}
             </div>
           </div>
-        ) : (
-          // ==========================================================
-          // AUTHENTICATED: THE PARTNER DASHBOARD (WITH VIEW TOGGLE)
-          // ==========================================================
-          <ReferralDashboardClient
-            user={user}
-            profile={profile}
-            profileError={profileError}
-            avatarUrl={avatarUrl}
-            directReferralCount={directReferralCount}
-            partnerNetworkSize={partnerNetworkSize}
-            directReferrals={directReferrals}
-            NAVY={NAVY}
-            GOLD={GOLD}
-          >
-            {/* Overview View Content */}
-            <div className="space-y-16 mt-2">
-              <div className="text-center max-w-4xl mx-auto space-y-6">
-                <div className="inline-flex items-center gap-3 rounded-full pl-2 pr-4 py-1.5 bg-white border border-slate-200/60 shadow-sm backdrop-blur-md">
-                  <span className="flex items-center justify-center w-6 h-6 rounded-full bg-[#12066a]/10">
-                    <span
-                      className="w-2 h-2 rounded-full"
-                      style={{ backgroundColor: GOLD }}
-                    />
-                  </span>
-                  <span
-                    className="text-[11px] font-bold uppercase tracking-[0.25em]"
-                    style={{ color: NAVY }}
-                  >
-                    Bizgrow Partner Network Overview
-                  </span>
-                </div>
 
-                <h1 className="text-4xl sm:text-6xl font-black tracking-tighter leading-[1.05] text-[#997819]">
-                  Join our referral program <br />
-                  <span className="bg-gradient-to-r from-[#12066a] via-[#12066a] to-[#997819] bg-clip-text text-transparent">
-                    and earn rewards!
-                  </span>
-                </h1>
-
-                <p className="text-base sm:text-xl text-slate-600 font-light max-w-2xl mx-auto leading-relaxed">
-                  Hi, we&apos;ve built our reputation through clients like you. Refer another security firm to BizGrow, and we&apos;ll reward you every time.
-                </p>
-              </div>
-
-              {/* How It Works Section */}
-              <div className="space-y-6">
-                <div className="text-center max-w-xl mx-auto">
-                  <span className="text-xs font-bold uppercase tracking-widest text-[#997819]">
-                    Simple Process
-                  </span>
-                  <h3 className="text-3xl font-bold mt-1" style={{ color: NAVY }}>
-                    How It Works
-                  </h3>
-                </div>
-
-                <div className="grid gap-6 md:grid-cols-3">
-                  <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 shadow-sm space-y-4">
-                    <div className="w-12 h-12 rounded-2xl bg-[#12066a]/5 flex items-center justify-center font-black text-lg text-[#12066a]">
-                      01
-                    </div>
-                    <h4 className="text-xl font-bold" style={{ color: NAVY }}>
-                      Share the referral
-                    </h4>
-                    <p className="text-xs sm:text-sm text-slate-500 font-light leading-relaxed">
-                      Share your unique referral link with your friends or business.
-                    </p>
-                  </div>
-
-                  <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 shadow-sm space-y-4">
-                    <div className="w-12 h-12 rounded-2xl bg-[#12066a]/5 flex items-center justify-center font-black text-lg text-[#12066a]">
-                      02
-                    </div>
-                    <h4 className="text-xl font-bold" style={{ color: NAVY }}>
-                      We take it from there
-                    </h4>
-                    <p className="text-xs sm:text-sm text-slate-500 font-light leading-relaxed">
-                      Our team will reach out, handle the consultation, and guide them through the right compliance path, no effort needed from you.
-                    </p>
-                  </div>
-
-                  <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 shadow-sm space-y-4">
-                    <div className="w-12 h-12 rounded-2xl bg-[#12066a]/5 flex items-center justify-center font-black text-lg text-[#12066a]">
-                      03
-                    </div>
-                    <h4 className="text-xl font-bold" style={{ color: NAVY }}>
-                      You earn your reward
-                    </h4>
-                    <p className="text-xs sm:text-sm text-slate-500 font-light leading-relaxed">
-                      Once your referral signs up, you&apos;ll receive your 15% discount reward.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Applicable Services Showcase */}
-              <div className="space-y-6 pt-4">
-                <div className="flex flex-col sm:flex-row justify-between items-end gap-4 px-2">
-                  <div>
-                    <span className="text-xs font-bold uppercase tracking-widest text-[#997819]">
-                      Ecosystem Coverage
-                    </span>
-                    <h3 className="text-3xl font-bold mt-1" style={{ color: NAVY }}>
-                      Our Core Services
-                    </h3>
-                    <p className="text-slate-500 text-sm mt-1">
-                      Your 15% reward applies seamlessly to every accreditation and standard we offer.
-                    </p>
-                  </div>
-                  <div
-                    className="text-xs font-bold uppercase tracking-widest"
-                    style={{ color: GOLD }}
-                  >
-                    Bizgrow Holdings Ltd
-                  </div>
-                </div>
-
-                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                  {[
-                    { title: "SIA ACS", desc: "Approved Contractor Scheme consultancy for security firms." },
-                    { title: "COP 119", desc: "Code of Practice for labour provision in security sectors." },
-                    { title: "SafeContractor", desc: "Health & Safety accreditation for UK contractors (SSIP)." },
-                    { title: "ISO 9001", desc: "Quality Management Systems for operational excellence." },
-                    { title: "ISO 14001", desc: "Environmental Management Standards for sustainable growth." },
-                    { title: "ISO 45001", desc: "Occupational Health and Safety management systems." },
-                    { title: "Cyber Essentials", desc: "Basic protection against common cyber threats." },
-                    { title: "BS 7858", desc: "Vetting and screening of personnel in security." },
-                  ].map((item, i) => (
-                    <div
-                      key={i}
-                      className="bg-white/80 border border-slate-200/60 rounded-2xl p-6 transition-all hover:border-[#997819] hover:shadow-sm group"
-                    >
-                      <div className="w-9 h-9 rounded-xl bg-slate-100 flex items-center justify-center mb-4 group-hover:bg-[#12066a]/5 transition-colors">
-                        <div
-                          className="w-1.5 h-1.5 rounded-full"
-                          style={{ backgroundColor: GOLD }}
-                        />
-                      </div>
-                      <h4
-                        className="text-base font-bold mb-1"
-                        style={{ color: NAVY }}
-                      >
-                        {item.title}
-                      </h4>
-                      <p className="text-xs text-slate-500 leading-relaxed font-light">
-                        {item.desc}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Footer Support Note */}
-              <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 text-center max-w-2xl mx-auto space-y-3">
-                <h4 className="text-lg font-bold" style={{ color: NAVY }}>
-                  Not sure if someone qualifies?
-                </h4>
-                <p className="text-xs sm:text-sm text-slate-500 font-light">
-                  Just ask us! Reach out to the team at <strong className="text-slate-700">Bizgrow Holdings Ltd</strong>, CEME Campus, Marsh Way, RM13 8EU.
-                </p>
-              </div>
-            </div>
-          </ReferralDashboardClient>
-        )}
+          {/* Footer Contact Support Box */}
+          <div className="bg-white/90 backdrop-blur-2xl border border-slate-200/80 rounded-3xl p-8 text-center max-w-xl mx-auto space-y-3 shadow-sm">
+            <h4 className="text-lg font-bold" style={{ color: NAVY }}>
+              Have questions about qualification?
+            </h4>
+            <p className="text-xs text-slate-500 font-normal leading-relaxed">
+              Reach out directly to the compliance team at{" "}
+              <strong className="text-slate-700 font-semibold">
+                Bizgrow Holdings Ltd
+              </strong>
+              , CEME Campus, Marsh Way, RM13 8EU.
+            </p>
+          </div>
+        </div>
       </div>
     </main>
   );
