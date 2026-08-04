@@ -65,7 +65,7 @@ const SafeContractorPage = () => {
         </div>
 
         {/* Step 3: Actual Content (Top Layer) */}
-        <div className="max-w-7xl mx-auto px-6 mt-10 relative z-20 w-full">
+        <div className="max-w-7xl mx-auto px-6 mt-26 relative z-20 w-full">
           <div className="max-w-4xl">
             <FadeIn direction="right" duration="0.4">
               <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs md:text-sm">

@@ -35,7 +35,7 @@ const TestimonialsPage = () => {
 
         <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
           <FadeIn direction="up">
-            <span className="inline-block text-[#997819] font-black uppercase tracking-[0.5em] text-[10px] bg-white/5 px-8 py-3 rounded-full border border-white/10 mb-8 backdrop-blur-sm">
+            <span className="inline-block mt-10 text-[#997819] font-black uppercase tracking-[0.5em] text-[10px] bg-white/5 px-8 py-3 rounded-full border border-white/10 mb-8 backdrop-blur-sm">
               Global Trust & Excellence
             </span>
 

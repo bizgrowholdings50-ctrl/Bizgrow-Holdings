@@ -135,8 +135,7 @@ export default function Navbar() {
   ];
 
   return (
-    
-    <nav className="fixed top-17 inset-x-0 mx-4 xl:mx-auto rounded-4xl max-w-7xl z-[100] bg-white backdrop-blur-md border border-[#12066a] shadow-lg">
+  <nav className="relative md:fixed top-37 md:top-17 inset-x-0 mx-4 xl:mx-auto rounded-4xl max-w-7xl z-[100] bg-white backdrop-blur-md border border-[#12066a] shadow-lg mt-0 pt-0">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex py-3 items-center justify-between">
           <Link href="/">

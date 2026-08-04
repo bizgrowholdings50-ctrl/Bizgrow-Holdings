@@ -48,7 +48,7 @@ export default function HeroCarousel() {
 
   return (
     <section
-      className="relative w-full h-[90vh] xl:h-screen overflow-hidden bg-zinc-900"
+      className="relative w-full h-[100vh] xl:h-screen overflow-hidden bg-zinc-900"
       aria-label="Hero Carousel"
     >
       {slides.map((slide, index) => (

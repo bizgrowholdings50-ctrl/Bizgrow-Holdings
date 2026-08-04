@@ -40,7 +40,7 @@ const ComplianceConsultancyPage = () => {
         </div>
         <div className="max-w-7xl mx-auto px-6 mt-10 relative z-10 w-full">
           <FadeIn direction="up">
-            <span className="text-[#997819] font-bold uppercase tracking-[0.4em] text-sm mb-6 block">
+            <span className="text-[#997819] mt-10 font-bold uppercase tracking-[0.4em] text-sm mb-6 block">
               Strategic Industry Alignment
             </span>
             <h1 className="text-white text-5xl md:text-7xl font-black uppercase tracking-tighter leading-[0.9] mb-8">

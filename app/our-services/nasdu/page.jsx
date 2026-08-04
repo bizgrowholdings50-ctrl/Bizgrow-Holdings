@@ -58,12 +58,12 @@ const NASDUPage = () => {
           <div className="absolute inset-0 bg-radial-gradient from-transparent to-black/60 z-10" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 relative z-20 w-full pt-20">
+        <div className="max-w-7xl mx-auto mt-14 px-6 relative z-20 w-full pt-20">
           <div className="max-w-4xl">
             <FadeIn direction="right">
               <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-lg mb-8">
                 <ShieldCheck className="text-[#997819]" size={16} />
-                <span className="text-white font-black uppercase tracking-[0.3em] text-[10px]">
+                <span className="text-white  font-black uppercase tracking-[0.3em] text-[10px]">
                   UK K9 SECURITY STANDARD
                 </span>
               </div>

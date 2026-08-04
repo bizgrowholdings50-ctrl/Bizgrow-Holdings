@@ -52,7 +52,7 @@ const DiscountPage = () => {
   return (
     <div className="bg-zinc-50 min-h-screen">
       {/* 🔹 HERO SECTION (Matching image_99bd66.png - Perfected) */}
-      <section className="relative py-20 md:py-32 bg-[#12066a] overflow-hidden flex items-center justify-center min-h-[60vh] md:min-h-[70vh]">
+      <section className="relative py-20 md:py-40 bg-[#12066a] overflow-hidden flex items-center justify-center min-h-[60vh] md:min-h-[70vh]">
         {/* 🖼️ Background Pattern Layer */}
         <div className="absolute inset-0 opacity-10 bg-[url('/images/pattern.png')] bg-cover bg-center pointer-events-none" />
 

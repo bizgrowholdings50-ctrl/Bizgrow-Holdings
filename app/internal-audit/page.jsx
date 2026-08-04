@@ -35,7 +35,7 @@ const InternalAuditPage = () => {
 
         <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
           <FadeIn direction="up">
-            <span className="inline-block text-[#997819] font-black uppercase tracking-[0.5em] text-[10px] bg-white/5 px-6 py-2 rounded-full border border-white/10 mb-8">
+            <span className="inline-block mt-14 text-[#997819] font-black uppercase tracking-[0.5em] text-[10px] bg-white/5 px-6 py-2 rounded-full border border-white/10 mb-8">
               Stay Compliant
             </span>
             <h1 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-[0.85] mb-8">
@@ -44,7 +44,7 @@ const InternalAuditPage = () => {
                 Services for UK <br /> Businesses.
               </span>
             </h1>
-            <p className="text-blue-100/80 max-w-2xl text-lg md:text-xl mb-10 leading-relaxed">
+            <p className="text-blue-100/80 max-w-2xl text-lg md:text-xl mb-4 leading-relaxed">
               Ensure your business complies with UK regulatory standards with
               expert{" "}
               <Link

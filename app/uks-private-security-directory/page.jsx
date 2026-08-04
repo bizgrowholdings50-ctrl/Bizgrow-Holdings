@@ -41,7 +41,7 @@ const MarketingSolutionsPage = () => {
         </div>
         <div className="max-w-7xl mx-auto px-6 mt-12 relative z-20 w-full">
           <FadeIn direction="right">
-            <div className="inline-flex items-center gap-3 bg-[#997819]/20 border border-[#997819]/30 px-4 py-2 rounded-full mb-8">
+            <div className="inline-flex items-center mt-14 gap-3 bg-[#997819]/20 border border-[#997819]/30 px-4 py-2 rounded-full mb-8">
               <span className="text-[#997819] font-black uppercase tracking-[0.3em] text-[10px]">
                 TRUSTED SECURITY NETWORK
               </span>

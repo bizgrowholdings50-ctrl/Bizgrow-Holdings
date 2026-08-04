@@ -67,7 +67,7 @@ const BS10800Page = () => {
           </span>
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 relative z-20 w-full pt-20">
+        <div className="max-w-7xl mt-10 mx-auto px-6 relative z-20 w-full pt-20">
           <div className="max-w-4xl">
             <FadeIn direction="right" duration="0.4">
               <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-sm md:text-xs">

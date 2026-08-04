@@ -38,10 +38,10 @@ const SecurityStartupPage = () => {
 
         <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
           <FadeIn direction="up">
-            <span className="text-[#997819] mt-10 md:mt-0 font-black uppercase tracking-[0.4em] text-xs mb-6 block">
+            <span className="text-[#997819] mt-10 md:mt-16 font-black uppercase tracking-[0.4em] text-xs mb-6 block">
               SIA & ACS Compliance Experts
             </span>
-            <h1 className="text-3xl md:text-6xl font-black text-white leading-[0.9] tracking-tighter uppercase mb-8">
+            <h1 className="text-3xl md:text-6xl  font-black text-white leading-[0.9] tracking-tighter uppercase mb-8">
               Start and Scale Your <br className="hidden md:block" />
               <span className="text-[#997819]">Security Startup.</span>
             </h1>
