@@ -50,7 +50,7 @@ export default function ProfessionalAlertBar() {
 
       {/* Precise Prompt Text */}
       <span className="text-white text-xs sm:text-sm">
-        For Details Select Your Funnel Track 👉
+        Select your preffered Growth Track for details 👉
       </span>
 
       {/* Clean Track Buttons */}
