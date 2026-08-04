@@ -1,0 +1,214 @@
+import React from "react";
+import FadeIn from "@/components/MotionWrapper";
+import JsonLd from "@/components/JsonLd";
+import { contactPageSchema } from "@/lib/jsonSchemas";
+import ContactForm from "@/components/ContactForm";
+import { Mail, Phone, MapPin, Globe } from "lucide-react";
+
+export const metadata = {
+  title: "Contact Us | Security Business UK | BizGrow Holdings Ltd",
+  description:
+    "Contact Us with BizGrow Holdings for Expert Support in Compliance, ACS, ISO, and Business Growth Services for UK Security Businesses.",
+};
+
+const ContactPage = async ({ searchParams }) => {
+  const params = await searchParams;
+  
+  const hasCoupon = !!params?.coupon; // Link mein '?coupon=...' check karne ke liye
+  const hasReferral = !!params?.referral_code; // Link mein '?referral_code=...' check karne ke liye
+
+  // Agar dono mein se koi aik bhi mode active ho toh pure page par strict clean form load hoga
+  const isCampaignMode = hasCoupon || hasReferral;
+
+  return (
+    <>
+      <JsonLd schema={contactPageSchema} />
+      <main
+        className={`${isCampaignMode ? "bg-white" : "bg-[#f8fafc]"} text-zinc-900 overflow-x-hidden w-full relative min-h-screen`}
+      >
+        {/* 🔹 1. HERO HEADER - Coupon ya Referral campaign par bilkul hide rahega */}
+        {!isCampaignMode && (
+          <section className="relative h-screen w-full flex items-center bg-[#12066a] overflow-hidden">
+            <div
+              className="absolute inset-0 z-0 opacity-25"
+              style={{
+                backgroundImage: 'url("/10 Ways.jpg")',
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#12066a]/40 to-[#12066a] z-10" />
+
+            <div className="max-w-7xl mx-auto px-6 relative z-20 w-full pt-20">
+              <FadeIn direction="right" duration="0.8">
+                <span className="text-[#997819] font-black uppercase tracking-[0.5em] text-xs md:text-sm mb-6 inline-block bg-white/5 px-6 py-2.5 rounded-full backdrop-blur-md border border-white/10">
+                  Contact Strategy
+                </span>
+                <h1 className="text-6xl md:text-[8rem] font-black text-white tracking-tighter leading-[0.85] italic mb-8">
+                  Get In <span className="text-[#997819]">Touch.</span>
+                </h1>
+                <div className="w-24 h-2  bg-[#997819] rounded-full shadow-lg shadow-[#997819]/40" />
+              </FadeIn>
+            </div>
+          </section>
+        )}
+
+        {/* 🔹 2. MAIN HEADING SECTION */}
+        <section
+          className={`${isCampaignMode ? "pt-32 pb-12" : "py-24"} bg-white relative z-20 border-b border-slate-100`}
+        >
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="max-w-7xl text-center">
+              {/* 1. Main Heading (Dynamic) */}
+              <FadeIn direction="up" delay={0.2}>
+                <h2 className="text-[#12066a] text-xl font-black tracking-tighter leading-[0.9] mb-4 uppercase">
+                  {hasCoupon && "Exclusive Campaign Offer"}
+                  {hasReferral && "Exclusive Referral Program"}
+                  {!isCampaignMode && "Let's Build Your"}
+                </h2>
+              </FadeIn>
+
+              {/* 2. Sub-Heading (Dynamic) */}
+              <FadeIn direction="up" delay={0.4}>
+                <span className="text-[#997819] italic font-bold text-4xl md:text-6xl block mb-10 tracking-tight">
+                  {hasCoupon && "Accelerate Your Growth."}
+                  {hasReferral && "Welcome To BizGrow."}
+                  {!isCampaignMode && "Compliance & Growth Partner."}
+                </span>
+              </FadeIn>
+
+              {/* 3. Paragraph Description (Dynamic) */}
+              <div className="w-full flex justify-center">
+                <div className="max-w-3xl mx-auto">
+                  <FadeIn direction="up" delay={0.6}>
+                    <p className="text-zinc-600 text-lg md:text-lg font-medium leading-relaxed">
+                      {hasCoupon && (
+                        <>
+                          Your coupon code has been successfully applied! Secure
+                          your
+                          <span className="text-[#12066a] font-bold">
+                            {" "}
+                            strategic consultation{" "}
+                          </span>
+                          with the UK's leading compliance experts today. Fill
+                          out the form below to lock in your exclusive rate and
+                          fast-track your corporate growth.
+                        </>
+                      )}
+                      
+                      {hasReferral && (
+                        <>
+                          You have been successfully routed through our verified corporate referral program. 
+                          Submit your required parameters below to initiate a prioritised 
+                          <span className="text-[#12066a] font-bold">
+                            {" "}
+                            onboarding evaluation{" "}
+                          </span>
+                          with our core compliance management unit.
+                        </>
+                      )}
+
+                      {!isCampaignMode && (
+                        "Our expert team is dedicated to accelerating your security business growth within the UK market. Please utilise the form below or our contact details to initiate your strategic ACS, ISO, and compliance consultation"
+                      )}
+                    </p>
+                  </FadeIn>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 🔹 3. THE CONTACT CARD */}
+        <section
+          className={`relative z-30 ${isCampaignMode ? "pt-4 pb-24" : "-mt-16 pb-24"} px-4 sm:px-6`}
+        >
+          <div
+            className={`max-w-7xl mx-auto flex flex-col lg:flex-row items-stretch overflow-hidden
+              ${isCampaignMode 
+                ? "justify-center" 
+                : "bg-white rounded-[3rem] md:rounded-[4.5rem] shadow-[0_50px_100px_-20px_rgba(18,6,106,0.12)] border border-slate-100"
+              }`}
+          >
+            {/* LEFT SIDE DETAILS PANEL - Hidden on Coupon & Referral Campaigns */}
+            {!isCampaignMode && (
+              <div className="w-full lg:w-[38%] bg-[#12066a] p-12 md:p-20 text-white flex flex-col justify-between relative min-h-[600px]">
+                <div className="relative z-10">
+                  <h3 className="text-4xl font-black tracking-tighter italic mb-12">
+                    Our  Office<span className="text-[#997819]">.</span>
+                  </h3>
+
+                  <div className="space-y-10">
+                    {[
+                      { icon: <Phone size={22} />, label: "Call Us", val: "07898 205035" },
+                      { icon: <Mail size={22} />, label: "Email", val: "info@bizgrow-holdings.co.uk" },
+                      { icon: <MapPin size={22} />, label: "Location", val: "London, UK " },
+                    ].map((item, i) => (
+                      <div key={i} className="flex items-center gap-6 group">
+                        <div className="p-4 bg-white/5 rounded-2xl text-[#997819] group-hover:bg-[#997819] group-hover:text-white transition-all duration-300">
+                          {item.icon}
+                        </div>
+                        <div>
+                          <span className="block text-[10px] font-black uppercase tracking-widest text-[#997819]/80 mb-1">
+                            {item.label}
+                          </span>
+                          <p className="text-lg font-bold">{item.val}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="mt-16 pt-8 border-t border-white/10 flex items-center justify-between opacity-40">
+                  <p className="text-[10px] font-black uppercase tracking-[0.3em]">
+                    UK Registered Agency
+                  </p>
+                  <Globe size={24} />
+                </div>
+              </div>
+            )}
+
+            {/* RIGHT SIDE: Contact Form Layout */}
+            <div
+              className={`bg-white 
+                ${isCampaignMode
+                  ? "w-full max-w-2xl p-8 md:p-16 rounded-[2.5rem] shadow-[0_50px_100px_-20px_rgba(18,6,106,0.12)] border border-slate-100"
+                  : "w-full lg:w-[62%] p-10 md:p-24"
+                }`}
+            >
+              <ContactForm />
+            </div>
+          </div>
+        </section>
+
+        {/* 🔹 4. GOOGLE MAP SECTION - Hidden on Coupon & Referral Campaigns */}
+        {!isCampaignMode && (
+          <section className="max-w-7xl h-[500px] mx-auto px-4 sm:px-6 mb-24">
+            <div className="w-full h-full relative bg-slate-100 rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl shadow-[#12066a]/5 grayscale hover:grayscale-0 transition-all duration-1000 border border-white">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d378806.654908714!2d-0.14996898713739854!3d51.41092675832414!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a7efa6261bcd%3A0x776c571a5d1e67d7!2sBizgrow%20Holdings%20Ltd!5e0!3m2!1sen!2suk!4v1777457509732!5m2!1sen!2suk"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="BizGrow Office Location"
+                className="rounded-[2rem] md:rounded-[3rem]"
+              />
+              <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white/20 to-transparent pointer-events-none" />
+              <div className="absolute top-8 left-8 bg-white/90 backdrop-blur-md px-6 py-3 rounded-2xl shadow-lg border border-slate-100 flex items-center gap-3">
+                <div className="w-2 h-2 bg-[#997819] rounded-full animate-ping" />
+                <span className="text-[10px] font-black uppercase tracking-widest text-[#12066a]">
+                  Our Office
+                </span>
+              </div>
+            </div>
+          </section>
+        )}
+      </main>
+    </>
+  );
+};
+
+export default ContactPage;

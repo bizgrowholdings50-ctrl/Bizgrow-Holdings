@@ -1,0 +1,565 @@
+import React from "react";
+import Image from "next/image";
+import FadeIn from "@/components/MotionWrapper";
+import {
+  ShieldCheck,
+  Search,
+  UserCheck,
+  FileSearch,
+  CheckCircle2,
+  Lock,
+  History,
+  Fingerprint,
+  PhoneCall,
+  ArrowRight,
+} from "lucide-react";
+import Link from "next/link";
+import ServicesFaq from "@/components/ServicesFaq";
+
+export const metadata = {
+  title: "BS7858 Screening & Vetting | BizGrow Holdings UK",
+  description:
+    "Learn the BS7858 screening process for security staff. Ensure compliance, build trust, and protect your business with professional vetting.",
+};
+
+const bs7858Data = [
+  {
+    q: "What are the requirements for BS 7858 screening?",
+    a: "BS 7858 requires verification of identity, employment history, and criminal record checks going back at least five years. Reference checks and financial probity screening may also be required for higher-risk roles. The process ensures only trustworthy individuals work in security positions."
+  },
+  {
+    q: "What happens if a BS 7858 screening expires?",
+    a: "If BS 7858 screening expires, the individual may no longer meet contractual or client security requirements. Employers typically need to conduct rescreening to maintain compliance and avoid contract breaches. Expired screening can also affect a company's ACS or NSI accreditation status."
+  },
+  {
+    q: "What is BS 7858, and why is it important?",
+    a: "BS 7858 is the British Standard for security screening of personnel employed in security roles. It's important because it verifies an individual's background, reducing risks of theft, fraud, or misconduct. Compliance is often mandatory for SIA ACS and NSI-approved security companies."
+  },
+  {
+    q: "What documents are required for BS 7858 screening?",
+    a: "Required documents typically include proof of identity, address history, and employment references covering at least five years. Criminal record checks and financial checks may also be needed depending on the role. Gaps in employment history must be explained and, where possible, verified."
+  }
+];
+const BS7858Page = () => {
+  return (
+    <main className="bg-white text-zinc-900 overflow-hidden">
+      {/* 🔹 1. HERO SECTION (BizGrow Signature Style) */}
+      <section className="relative h-screen w-full flex items-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/bs7858-hero.webp" // Cinematic image of a background check or professional interview
+            alt="BS 7858 Screening and Vetting Standard"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-black/65" />
+        </div>
+
+        {/* Tactical Watermark */}
+        <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none select-none z-10">
+          <h2 className="text-[10rem] md:text-[18rem] font-black text-white/[0.07] leading-none uppercase tracking-tighter italic">
+            VETTED
+          </h2>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 relative z-20 w-full pt-20 text-center md:text-left">
+          <div className="max-w-4xl">
+            <FadeIn direction="right">
+              <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs md:text-xs">
+                THE UK STANDARD FOR SECURITY SCREENING
+              </span>
+            </FadeIn>
+
+            <FadeIn direction="right" delay={0.2}>
+              <h1 className="text-5xl md:text-7xl font-black text-white mt-6 leading-[1.1] tracking-tighter uppercase">
+                BS 7858 <br />
+                <span className="text-[#997819]">SCREENING & Vetting.</span>
+              </h1>
+            </FadeIn>
+
+            <FadeIn direction="right" delay={0.4}>
+              <p className="mt-10 text-blue-100/60 text-lg md:text-xl max-w-2xl leading-relaxed font-medium italic">
+                "Compliant employee screening for{" "}
+                <Link
+                  href="https://bizgrow-holdings.com/top-security-companies-trusted-protection-for-every-business/"
+                  className="text-[#997819] font-bold"
+                >
+                  UK security companies
+                </Link>{" "}
+                helps you meet BS 7858 requirements, reduce hiring risk, and
+                stay audit-ready for contracts,{" "}
+                <Link
+                  href="https://bizgrow-holdings.com/get-acs-accreditation-fast/"
+                  className="text-[#997819] font-bold"
+                >
+                  ACS
+                </Link>
+                , and client checks."
+              </p>
+            </FadeIn>
+            <FadeIn direction="right" duration="1.0">
+              <Link
+                href="/contact-us"
+                className="relative mt-4 group/btn overflow-hidden inline-flex items-center justify-center bg-[#997819] text-white px-6 md:px-12 py-5 md:py-6 rounded-2xl font-black uppercase tracking-[0.1em] md:tracking-[0.2em] text-[10px] md:text-xs transition-all duration-500 shadow-xl active:scale-95 w-full sm:w-auto text-center"
+              >
+                {/* Layer 1: Text */}
+                <span className="relative z-40 transition-colors duration-500 group-hover/btn:text-[#12066a] whitespace-nowrap">
+                  Book a Screening Consultation
+                </span>
+
+                {/* Layer 2: Animated Background */}
+                <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
+              </Link>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      {/* 🔹 2. THE VETTING FRAMEWORK (Core Pillars) */}
+      <section className="py-24 bg-zinc-50">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-5xl md:text-6xl font-black  text-[#12066a] tracking-tighter uppercase mb-6 leading-none text-center ">
+            VETTING
+            <span className="text-[#997819]"> PROTOCOL.</span>
+          </h2>
+          <p className="pb-6 md:mx-28 text-center">
+            <Link
+              href="https://bizgrow-holdings.com/bs-7858-screening-and-vetting-standards-requirements-process/"
+              className="text-[#997819] font-bold"
+            >
+              BS 7858
+            </Link>{" "}
+            sets the recognised UK standard for screening individuals working in
+            secure environments. The vetting process ensures personnel are
+            trustworthy, verified, and suitable for security-sensitive roles.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                t: "5-Year Employment History",
+                d: "Verify employment, education, and gaps for a reliable background check.",
+                icon: <History />,
+              },
+              {
+                t: "Identity Verification",
+                d: "Validation of ID documents, address history, and official ID to confirm true identity.",
+                icon: <Fingerprint />,
+              },
+              {
+                t: "Financial Background Checks",
+                d: "Conduct credit, bankruptcy, and CCJ checks for sensitive positions.",
+                icon: <Lock />,
+              },
+              {
+                t: "Criminal Record Screening",
+                d: (
+                  <>
+                    DBS or Basic Disclosure checks comply with{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/how-bizgrow-holdings-helps-security-companies-win-contracts-in-the-uk/"
+                      className="text-[#997819] font-bold"
+                    >
+                      UK security industry
+                    </Link>{" "}
+                    requirements.
+                  </>
+                ),
+                icon: <UserCheck />,
+              },
+              {
+                t: "Reference Verification",
+                d: "Independent references from previous employers to confirm employment history and professional conduct.",
+                icon: <FileSearch />,
+              },
+              {
+                t: "Right to Work Compliance",
+                d: "Verification of employee work authorisation in the UK per Home Office regulations",
+                icon: <Search />,
+              },
+            ].map((item, idx) => (
+              <div
+                key={idx}
+                className="bg-white p-10 rounded-[2.5rem] border border-zinc-200 hover:border-[#997819] hover:shadow-xl transition-all group"
+              >
+                <div className="text-[#997819] mb-6">{item.icon}</div>
+                <h3 className="font-black text-[#12066a] uppercase text-xs tracking-widest mb-3">
+                  {item.t}
+                </h3>
+                <p className="text-zinc-500 text-[13px] font-medium leading-relaxed">
+                  {item.d}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 🔹 3. WHY BS 7858 MATTERS (Strategic Value) */}
+      <section className="py-32 bg-white">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row gap-20 items-center">
+          <div className="lg:w-1/2">
+            <h2 className="text-4xl md:text-5xl font-black text-[#12066a] tracking-tighter uppercase mb-10 leading-tight">
+              Benefits of <br />{" "}
+              <span className="text-[#997819]">
+                BS7858 Screening and Vetting
+              </span>
+            </h2>
+
+            <div className="space-y-6">
+              {[
+                {
+                  t: "Build Client Trust",
+                  d: "Gives assurance that every member of staff has undergone thorough and reliable background screening.",
+                },
+                {
+                  t: "Risk Reduction",
+                  d: "Reduces the dangers of internal fraud, misconduct, and security breaches.",
+                },
+                {
+                  t: "Compliance with Regulations",
+                  d: (
+                    <>
+                      Ensures your hiring practices meet{" "}
+                      <Link
+                        href="https://bizgrow-holdings.com/top-sia-security-recruitment-agencies-in-the-uk/"
+                        className="text-[#997819] font-bold"
+                      >
+                        SIA requirements
+                      </Link>{" "}
+                      and recognised industry standards.
+                    </>
+                  ),
+                },
+                {
+                  t: "Improved Tender Success",
+                  d: (
+                    <>
+                      <Link
+                        href="https://bizgrow-holdings.com/why-is-bs-7858-screening-crucial-for-uk-security-businesses/"
+                        className="text-[#997819] font-bold"
+                      ></Link>
+                      BS7858 accreditation strengthens credibility and increases
+                      the likelihood of winning competitive contracts.
+                    </>
+                  ),
+                },
+              ].map((item, i) => (
+                <div
+                  key={i}
+                  className="flex items-start gap-4 bg-zinc-50 p-6 rounded-2xl border border-zinc-100 hover:border-[#997819]/30 transition-all group"
+                >
+                  <CheckCircle2
+                    className="text-[#997819] shrink-0 mt-1"
+                    size={22}
+                  />
+                  <div className="flex flex-col">
+                    <span className="font-black text-[#12066a] uppercase text-sm italic tracking-wide">
+                      {item.t}
+                    </span>
+                    <p className="text-zinc-500 text-xs font-medium mt-1 leading-relaxed">
+                      {item.d}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="lg:w-1/2 relative">
+            <div className="rounded-[4rem] overflow-hidden border-[15px] border-zinc-50 shadow-2xl">
+              <Image
+                src="/vetting-check.jpg"
+                alt="Benefits of BS7858 Screening and Vetting - BizGrow"
+                width={600}
+                height={600}
+                className="object-cover md:h-175"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 🔹 UNIFIED SECTION: COVERS & PROCEDURE combined */}
+      <section className="py-32 bg-[#12066a] relative overflow-hidden">
+        {/* Decorative background elements */}
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-white/[0.02] skew-x-12 transform origin-top-right pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <header className="mb-20">
+            <FadeIn direction="up">
+              <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs">
+                Technical Standard BS7858
+              </span>
+              <h2 className="text-5xl md:text-7xl font-black text-white mt-4 tracking-tighter uppercase leading-[0.9]">
+                BS7858 Screening <br />
+                <span className="text-[#997819]">& Vetting Framework.</span>
+              </h2>
+            </FadeIn>
+          </header>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+            {/* LEFT COLUMN: WHAT IT COVERS */}
+            <div className="space-y-10">
+              <div>
+                <h3 className="text-2xl font-black text-white uppercase italic tracking-tighter mb-4 border-l-4 border-[#997819] pl-6">
+                  BS7858 Screening and Vetting Covers:
+                </h3>
+                <p className="text-blue-100/50 text-sm leading-relaxed max-w-md">
+                  BS7858 is a recognised standard applied across industries such
+                  as security services, finance, and government, where
+                  trustworthiness and integrity of staff are essential.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-1 gap-3">
+                {[
+                  "Ongoing Monitoring Obligations",
+                  "Security Screening Process",
+                  "Purpose and Objectives",
+                  "Roles and Accountability",
+                  "Confidentiality & Data Protection",
+                  "Verification Standards",
+                  "Training and Awareness",
+                  "Appeals and Dispute Resolution",
+                  "Records & Documentation Mgmt",
+                ].map((item, i) => (
+                  <div
+                    key={i}
+                    className="flex items-center gap-3 bg-white/5 p-4 rounded-xl border border-white/10 hover:border-[#997819]/50 transition-all group"
+                  >
+                    <ShieldCheck
+                      className="text-[#997819] group-hover:scale-110 transition-transform"
+                      size={16}
+                    />
+                    <span className="text-white uppercase text-[10px] font-bold tracking-widest leading-tight">
+                      {item}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* RIGHT COLUMN: PROCEDURE STEPS (Responsive Gold Tag) */}
+            <div className="bg-white/5 backdrop-blur-md p-8 md:p-12 rounded-[3rem] border border-white/10 shadow-2xl relative mt-10 md:mt-0">
+              {/* Gold Tag: Responsive Position */}
+              <div className="flex justify-center md:absolute md:-top-6 md:-right-6 mb-6 md:mb-0">
+                <div className="bg-[#997819] text-white px-6 py-2 rounded-full font-black text-[10px] uppercase tracking-widest shadow-xl">
+                  The Process
+                </div>
+              </div>
+
+              <h3 className="text-2xl font-black text-white uppercase italic tracking-tighter mb-4 text-center">
+                Procedure for{" "}
+                <span className="text-[#997819]">
+                  BS7858 Screening and Vetting:
+                </span>
+              </h3>
+
+              <p className="text-blue-100/40 text-[10px] uppercase font-bold tracking-widest text-center mb-8">
+                Ensuring dependable & trustworthy personnel selection
+              </p>
+
+              <div className="space-y-4">
+                {[
+                  "Candidate consent and application",
+                  "Identity verification (Official Documents)",
+                  "Right to work confirmation",
+                  "Employment history checks (Min. 5 years)",
+                  "Reference verification",
+                  "Financial and credit checks",
+                  "Criminal record checks (DBS)",
+                  "Gap analysis in career or education",
+                  "Final review and approval",
+                  "Ongoing compliance & maintenance",
+                ].map((step, i) => (
+                  <div key={i} className="flex items-center gap-5 group">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full border border-[#997819]/50 text-[#997819] flex items-center justify-center font-black text-xs group-hover:bg-[#997819] group-hover:text-[#12066a] transition-all">
+                      {i + 1}
+                    </div>
+                    <div className="flex-grow border-b border-white/5 pb-3 group-last:border-none">
+                      <span className="text-blue-100/70 uppercase text-[11px] font-black tracking-tight group-hover:text-white transition-colors">
+                        {step}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* 🔹 4. COMPARISON: BASIC vs BS 7858 (Technical Section) */}
+      <section className="py-24 bg-white text-[#12066a]">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-center uppercase mb-2">
+            THE VETTING <span className="text-[#997819]">GAP.</span>
+          </h2>
+          <p className="text-black md:mx-28 my-10 text-center">
+            Not all background checks provide the same level of security. Basic
+            screening only verifies limited information, while{" "}
+            <Link
+              href="https://bizgrow-holdings.com/bs-7858-the-complete-guide/"
+              className="text-[#997819] mr-1 font-bold"
+            >
+              BS 7858 vetting
+            </Link>
+            provides a thorough background check for those in security-sensitive
+            roles.
+          </p>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="p-12 bg-[#12066a] border border-white/10 rounded-[3rem]">
+              <h3 className="text-white font-black text-2xl mb-6 flex items-center gap-3">
+                Standard Checks
+              </h3>
+              <ul className="space-y-4 text-blue-100/60 text-sm font-medium">
+                <li>● Basic identity verification</li>
+                <li>● Current address confirmation</li>
+                <li>● Basic criminal record disclosure</li>
+              </ul>
+            </div>
+            <div className="p-12 bg-[#997819] rounded-[3rem] text-white shadow-2xl">
+              <h4 className="font-black text-2xl mb-6">
+                BS 7858 Gold Standard
+              </h4>
+              <ul className="space-y-4 font-black uppercase text-xs tracking-widest">
+                <li>● Full 5-year employment and education history check</li>
+                <li>● Verification of gaps over 31 days</li>
+                <li>● CCJ and financial integrity checks</li>
+                <li>● Professional character references</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 🔹 5. VETTING JOURNEY (Step-by-Step) */}
+      <section className="py-32 bg-[#12066a]">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-6-xl font-black text-white tracking-tighter uppercase leading-none text-center">
+              SCREENING <span className="text-[#997819]">PHASES.</span>
+            </h2>
+            <p className="text-white my-6 md:mx-28">
+              BS 7858 vetting follows a structured process to verify the
+              identity, background, and integrity of individuals working in
+              security-sensitive roles.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                n: "01",
+                t: "Vetting Application",
+                d: "Collection of identity documents, address history, and employment records in line with BS 7858 requirements.",
+              },
+              {
+                n: "02",
+                t: "Background Review",
+                d: "Assessment of employment history, education, and investigation of unexplained gaps over 31 days.",
+              },
+              {
+                n: "03",
+                t: "Verification Checks",
+                d: "Reference checks, criminal record screening, and financial integrity verification were required.",
+              },
+              {
+                n: "04",
+                t: "Vetting Report",
+                d: (
+                  <>
+                    A complete screening record prepared to demonstrate{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/compliance-consultancies/"
+                      className="text-[#997819] font-bold"
+                    >
+                      compliance
+                    </Link>{" "}
+                    during SIA or client audits
+                  </>
+                ),
+              },
+            ].map((step, i) => (
+              <div
+                key={i}
+                className="bg-white p-10 rounded-[3rem] flex flex-col items-center text-center shadow-sm"
+              >
+                <span className="text-5xl font-black text-[#997819]/50 mb-6">
+                  {step.n}
+                </span>
+                <h3 className="font-black text-[#12066a] uppercase mb-3 tracking-tighter text-lg">
+                  {step.t}
+                </h3>
+                <p className="text-zinc-500 text-xs font-medium leading-relaxed">
+                  {step.d}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+     <ServicesFaq
+        faqs={bs7858Data}
+        title={
+          <>
+            BS 7858 <span className="text-[#997819]">FAQ's</span>
+          </>
+        }
+        subtitle="Questions & Answers"
+      />
+
+      {/* 🔹 7. CALL TO ACTION (Responsive Optimized) */}
+      <section className="py-12 md:py-24 px-4 md:px-6 bg-white relative">
+        <div className="max-w-7xl mx-auto relative rounded-[2rem] md:rounded-[4rem] overflow-hidden shadow-3xl">
+          {/* Image Background */}
+          <div
+            className="absolute inset-0 z-0 bg-cover bg-center"
+            style={{ backgroundImage: "url('/vetting-cta-bg.jpg')" }}
+          >
+            <div className="absolute inset-0 bg-[#12066a]/90 mix-blend-multiply" />
+          </div>
+
+          {/* Content */}
+          <div className="relative z-10 p-8 md:p-24 text-center flex flex-col items-center">
+            <h2 className="text-3xl sm:text-5xl lg:text-7xl font-black text-white tracking-tighter mb-6 md:mb-10 uppercase leading-[0.9]">
+              GET YOUR STAFF <br />
+              <span className="text-[#997819]">BS 7858 COMPLIANT.</span>
+            </h2>
+
+            <p className="text-blue-100/80 text-sm md:text-base mb-8 max-w-2xl mx-auto leading-relaxed">
+              Ensure your workforce meets the BS 7858 screening standard with
+              professional vetting and compliant documentation for
+              security-sensitive roles.
+            </p>
+
+            {/* Buttons */}
+            <div className="flex flex-col w-full sm:w-auto sm:flex-row gap-4">
+              <Link
+                href="/contact-us"
+                className="relative group/btn overflow-hidden inline-flex items-center justify-center gap-2 md:gap-3 bg-[#997819] text-white px-6 py-5 md:px-12 md:py-6 rounded-2xl font-black uppercase tracking-[0.05em] md:tracking-[0.2em] text-[10px] md:text-xs transition-all duration-700 w-full sm:w-auto text-center"
+              >
+                <span className="relative z-40 whitespace-nowrap flex items-center gap-2">
+                  Start Vetting Now
+                  <ArrowRight
+                    size={14}
+                    className="group-hover/btn:translate-x-2 transition-transform duration-500"
+                  />
+                </span>
+                <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-700 ease-out z-30" />
+              </Link>
+
+              <a
+                href="tel:+447898205035"
+                className="bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 py-5 md:px-8 md:py-6 rounded-2xl font-black uppercase tracking-[0.05em] md:tracking-[0.15em] text-[10px] md:text-xs flex items-center justify-center gap-2 w-full sm:w-auto"
+              >
+                <PhoneCall size={14} /> Call Specialist
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+};
+
+export default BS7858Page;

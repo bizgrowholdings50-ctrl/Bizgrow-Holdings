@@ -1,0 +1,686 @@
+import React from "react";
+import Image from "next/image";
+import FadeIn from "@/components/MotionWrapper";
+import {
+  ShieldCheck,
+  Building2,
+  Navigation,
+  CheckCircle2,
+  Clock,
+  MapPin,
+  FileText,
+  PhoneCall,
+  ArrowRight,
+  UserCheck,
+  ShieldAlert,
+  ArrowUpRight,
+} from "lucide-react";
+import Link from "next/link";
+import ServicesFaq from "@/components/ServicesFaq";
+
+export const metadata = {
+  title: "BS 7499 Certification for Static Guarding | BizGrow Holdings",
+  description:
+    "Get BS 7499 certification for static guarding services in the UK. BizGrow Holdings helps security companies achieve full compliance.",
+};
+
+const bs7499Data = [
+  {
+    q: "What is BS 7499, and why is it important for security companies?",
+    a: "BS 7499 is the British Standard for static guarding and mobile patrol services in the security industry. It's important because it sets benchmarks for service quality, staff competency, and operational procedures. Certification helps security companies win contracts and demonstrate professional credibility."
+  },
+  {
+    q: "What are common mistakes businesses make when implementing BS 7499?",
+    a: "Common mistakes include incomplete documentation, inconsistent staff training records, and poor risk assessment processes. Businesses often overlook regular internal audits needed to maintain compliance. Rushing implementation without expert guidance frequently leads to audit failures."
+  },
+  {
+    q: "How can I prepare my business for a BS 7499 assessment or audit?",
+    a: "Start by conducting a thorough gap analysis against the standard's requirements. Ensure all policies, training records, and operational procedures are properly documented and up to date. Partnering with a compliance consultant helps identify weak areas before the official audit."
+  },
+  {
+    q: "What are the key requirements of BS 7499?",
+    a: "BS 7499 requires documented operational procedures, trained and vetted security personnel, and robust quality management systems. Organisations must also demonstrate effective incident reporting and client communication processes. Regular internal audits are needed to maintain ongoing compliance."
+  }
+];
+
+const BS7499Page = () => {
+  return (
+    <main className="bg-white text-zinc-900 overflow-hidden">
+      {/* 🔹 1. HERO SECTION (BizGrow Signature Style) */}
+      <section className="relative h-screen w-full flex items-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/guarding-hero.jpg" // Image of a professional security guard at a high-end site
+            alt="BS 7499 Static Site Guarding Standard"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-black/70" />
+        </div>
+
+        {/* Tactical Watermark */}
+        <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none select-none z-10">
+          <span className="text-[10rem] md:text-[16rem] font-black text-white/[0.08] leading-none uppercase tracking-tighter">
+            GUARDING
+          </span>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 relative z-20 w-full pt-20">
+          <div className="max-w-4xl">
+            <FadeIn direction="right">
+              <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs md:text-sm">
+                Static Guarding & Mobile Patrols
+              </span>
+            </FadeIn>
+
+            <FadeIn direction="right" delay={0.2}>
+              <h1 className="text-5xl md:text-7xl font-black text-white mt-6 leading-[1.1] tracking-tighter uppercase">
+                BS 7499 <br />
+                <span className="text-[#997819]">OPERATIONS.</span>
+              </h1>
+            </FadeIn>
+
+            <FadeIn direction="right" delay={0.4}>
+              <p className="mt-10 text-blue-100/60 text-lg md:text-xl max-w-2xl leading-relaxed font-medium italic">
+                "The British Standard for professional static guarding services
+                establishes best practices for the management and delivery of
+                manned security operations."
+              </p>
+            </FadeIn>
+             <FadeIn direction="right" duration="1.0">
+              <Link href="/contact-us">
+                <button className="relative z-10 bg-[#997819] text-white px-16 py-6 my-4 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-3xl">
+                  Book a Consultation
+                </button>
+              </Link>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      {/* 🔹 2. OPERATIONAL STANDARDS (Core Focus) */}
+      <section className="py-24 bg-zinc-50">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-4xl md:text-6xl text-center font-black text-[#12066a] tracking-tighter uppercase mb-6 md:mb-16 leading-none">
+            SITE
+            <span className="text-[#997819] ml-3">PROTOCOLS.</span>
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              {
+                t: "Static Guarding",
+                d: "Professional management of security personnel deployed at fixed sites and controlled entry points.",
+                icon: <Building2 />,
+              },
+              {
+                t: "Mobile Patrols",
+                d: "Scheduled and random patrol visits to client premises to maintain a visible security presence and site monitoring.",
+                icon: <Navigation />,
+              },
+              {
+                t: "Assignment Instructions",
+                d: "Clear, site-specific instructions defining the duties, responsibilities, and procedures for security personnel.",
+                icon: <FileText />,
+              },
+              {
+                t: "Response Procedures",
+                d: "Structured protocols for responding to incidents, emergencies, and security breaches effectively.",
+                icon: <ShieldAlert />,
+              },
+              {
+                t: "Keyholding Integration",
+                d: "Secure management of keys and controlled access to client premises in line with recognised UK security practices.",
+                icon: <MapPin />,
+              },
+              {
+                t: "Duty Rostering",
+                d: "Efficient scheduling of security staff to ensure continuous coverage and compliant working hours.",
+                icon: <Clock />,
+              },
+            ].map((item, idx) => (
+              <div
+                key={idx}
+                className="bg-white p-10 rounded-[2.5rem] border border-zinc-200 hover:border-[#997819] hover:shadow-xl transition-all group"
+              >
+                <div className="text-[#997819] mb-6">{item.icon}</div>
+                <h3 className="font-black text-[#12066a] uppercase text-xs tracking-widest mb-3">
+                  {item.t}
+                </h3>
+                <p className="text-zinc-500 text-[13px] font-medium leading-relaxed">
+                  {item.d}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 🔹 3. THE BIZGROW ADVANTAGE (Why Us) */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row gap-20 items-center">
+          <div className="lg:w-1/2">
+            <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter uppercase mb-10 leading-tight">
+              Why <span className="text-[#997819]">BS 7499 </span> Certification
+              Matters
+            </h2>
+            <p className="text-zinc-500 font-medium mb-2 mt-0 text-md">
+              BS 7499 certification is an essential standard for{" "}
+              <Link
+                href="https://bizgrow-holdings.com/security-companies-are-considered-the-safest-choice/"
+                className="text-[#997819] font-bold"
+              >
+                security companies
+              </Link>{" "}
+              delivering static guarding services in the UK. It establishes
+              recognised best practices for the management, deployment, and
+              supervision of security personnel, ensuring that guarding
+              operations are carried out professionally and consistently. For
+              organisations providing manned guarding services, achieving BS
+              7499 certification demonstrates a clear commitment to quality,
+              operational control, and compliance with established UK security
+              industry standards.
+            </p>
+            <p className="text-zinc-500 font-medium  text-sm">
+              For clients, BS 7499 compliance assures that security operations
+              follow structured procedures, meet qualified personnel
+              requirements, and are supported by clearly documented assignment
+              instructions. Certification also strengthens credibility and
+              competitiveness within the{" "}
+              <Link
+                href="https://bizgrow-holdings.com/how-bizgrow-holdings-helps-security-companies-win-contracts-in-the-uk/"
+                className="text-[#997819] font-bold"
+              >
+                UK security
+              </Link>{" "}
+              services market.
+            </p>
+          </div>
+          <div className="lg:w-1/2 aspect-square relative rounded-[4rem] overflow-hidden shadow-2xl">
+            <Image
+              src="/t.jpg"
+              alt="Why BS 7499 Certification Matters"
+              width={600}
+              height={600}
+              className="object-cover h-full"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* 🔹 4. BS 7499 vs BS 10800 (Comparison) WITH PARALLAX */}
+      <section
+        className="py-24 relative overflow-hidden min-h-[600px] flex items-center bg-fixed bg-cover bg-center text-white"
+        style={{ backgroundImage: "url('/comparison.png')" }} // 👈 Apni image ka path yahan dalein
+      >
+        {/* Overlay: Image ke upar dark layer taaki text saaf nazar aaye */}
+        {/* 'bg-[#12066a]/90' opacity control karega, z-0 par */}
+        <div className="absolute inset-0 bg-[#12066a]/70 backdrop-blur-[1px] z-0"></div>
+
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <FadeIn direction="up">
+            <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-12">
+              THE SCOPE <span className="text-[#997819]">DIFFERENCE.</span>
+            </h2>
+          </FadeIn>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* BS 10800 Card */}
+            <FadeIn direction="left" delay={0.2}>
+              <div className="p-12 bg-white/5 border border-white/10 rounded-[3rem] backdrop-blur-md h-full">
+                <h3 className="text-white font-black text-2xl mb-6 tracking-tighter uppercase">
+                  BS 10800
+                </h3>
+                <p className="text-blue-100/70 text-sm font-medium leading-relaxed">
+                  Top-level management framework that oversees all security
+                  services provided by an organisation.
+                </p>
+              </div>
+            </FadeIn>
+
+            {/* BS 7499 Card (Highlighted) */}
+            <FadeIn direction="right" delay={0.4}>
+              <div className="p-12 bg-[#997819] rounded-[3rem] text-white shadow-2xl h-full flex flex-col justify-center">
+                <h3 className="font-black text-2xl mb-6 uppercase tracking-tighter">
+                  BS 7499
+                </h3>
+                <p className="font-bold text-sm leading-relaxed italic">
+                  Specific "On-Ground" operational code of practice specifically
+                  for static and mobile guarding activities.
+                </p>
+              </div>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+
+      {/* 🔹 NEW SECTION: KEY REQUIREMENTS OF BS 7499 */}
+      <section className="py-24 bg-white relative overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+            {/* Left Column: Context & Title */}
+            <FadeIn direction="right">
+              <div>
+                <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter uppercase leading-none mb-8">
+                  KEY 
+                  <span className="text-[#997819] ml-2">REQUIREMENTS.</span>
+                </h2>
+                <p className="text-zinc-600 font-medium text-lg leading-relaxed mb-6">
+                  BS 7499 sets out clear operational requirements for companies
+                  providing static guarding services in the UK, ensuring
+                  security operations are professionally managed and
+                  consistently delivered.
+                </p>
+                <div className="p-6 border-l-4 border-[#997819] bg-zinc-50 italic text-zinc-500 font-medium">
+                  "
+                  <Link href="/about-us" className="text-[#997819] font-bold">
+                    BizGrow Holdings
+                  </Link>{" "}
+                  supports security companies in implementing these standards to
+                  achieve effective and compliant manned guarding operations."
+                </div>
+              </div>
+            </FadeIn>
+
+            {/* Right Column: Key Points Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {[
+                {
+                  title: "Assignment Instructions",
+                  desc: (
+                    <>
+                      <Link
+                        href="https://bizgrow-holdings.com/site-specific-risk-assessment/"
+                        className="text-[#997819] font-bold"
+                      >
+                        Site-specific
+                      </Link>{" "}
+                      instructions defining security duties and procedures.
+                    </>
+                  ),
+                  icon: <FileText className="w-6 h-6" />,
+                },
+                {
+                  title: "Personnel Management",
+                  desc: (
+                    <>
+                      Proper recruitment,{" "}
+                      <Link
+                        href="https://bizgrow-holdings.com/bs-7858-screening-and-vetting-standards-requirements-process/"
+                        className="text-[#997819] font-bold"
+                      >
+                        vetting
+                      </Link>
+                      , training, and supervision of guards.
+                    </>
+                  ),
+                  icon: <UserCheck className="w-6 h-6" />,
+                },
+                {
+                  title: "Operational Procedures",
+                  desc: "Clear processes for site operations and incident reporting.",
+                  icon: <ShieldCheck className="w-6 h-6" />,
+                },
+                {
+                  title: "Compliance Monitoring",
+                  desc: (
+                    <>
+                      Maintaining records and monitoring{" "}
+                      <Link
+                        href="https://bizgrow-holdings.com/compliance-consultancies/"
+                        className="text-[#997819] font-bold"
+                      >
+                        compliance
+                      </Link>{" "}
+                      with BS 7499.
+                    </>
+                  ),
+                  icon: <CheckCircle2 className="w-6 h-6" />,
+                },
+              ].map((item, index) => (
+                <FadeIn key={index} direction="up" delay={index * 0.1}>
+                  <div className="h-full bg-zinc-50 p-8 rounded-[2rem] border border-zinc-100 hover:border-[#997819]/30 transition-all group hover:shadow-lg">
+                    <div className="w-12 h-12 rounded-xl bg-[#12066a] text-white flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                      {item.icon}
+                    </div>
+                    <h3 className="font-black text-[#12066a] uppercase text-xs tracking-widest mb-3">
+                      {item.title}
+                    </h3>
+                    <p className="text-zinc-500 text-xs font-medium leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </div>
+                </FadeIn>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 🔹 5. OUR AUDIT ROADMAP (Steps) */}
+      <section className="py-32 bg-zinc-50">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter uppercase leading-none text-center">
+              AUDIT <span className="text-[#997819]">PROCESS.</span>
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+            {[
+              {
+                n: "01",
+                t: "Site Survey",
+                d: "Reviewing existing Assignment Instructions and site logs.",
+              },
+              {
+                n: "02",
+                t: "System Build",
+                d: "Standardising patrol routes and emergency protocols.",
+              },
+              {
+                n: "03",
+                t: "Training",
+                d: "Inducting security staff into BS 7499 operational habits.",
+              },
+              {
+                n: "04",
+                t: "Compliance",
+                d: (
+                  <>
+                    Final{" "}
+                    <Link
+                      href="https://bizgrow-holdings.com/difference-between-internal-audit-and-external-audit/"
+                      className="text-[#997810] font-bold"
+                    >
+                      audit
+                    </Link>{" "}
+                    to ensure every site meets British Standards.
+                  </>
+                ),
+              },
+            ].map((step, i) => (
+              <div
+                key={i}
+                className="bg-white p-10 rounded-[3rem] flex flex-col items-center text-center shadow-sm"
+              >
+                <span className="text-5xl font-black text-[#997819]/50 mb-6">
+                  {step.n}
+                </span>
+                <h3 className="font-black text-[#12066a] uppercase mb-3 tracking-tighter text-lg">
+                  {step.t}
+                </h3>
+                <p className="text-zinc-500 text-xs font-medium leading-relaxed">
+                  {step.d}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 🔹 NEW SECTION: BENEFITS OF BS 7499 WITH PARALLAX */}
+      <section
+        className="py-32 relative overflow-hidden min-h-[800px] flex items-center bg-fixed bg-cover bg-center"
+        style={{ backgroundImage: "url('/detail-post.webp')" }}
+      >
+        {/* Overlay: Image ke upar dark layer taaki text chamke */}
+        {/* 'backdrop-blur' parallax ke saath milkar bahut premium lagta hai */}
+        <div className="absolute inset-0 bg-[#12066a]/85 backdrop-blur-[1px] z-0"></div>
+
+        {/* Decorative Background Text */}
+        <div className="absolute top-0 right-80 pointer-events-none select-none z-10">
+          <h2 className="text-[12rem] font-black text-white/[0.07] leading-none uppercase tracking-tighter -mr-20">
+            Benefits
+          </h2>
+        </div>
+
+        <div className="max-w-7xl mx-auto px-6 relative z-20">
+          <div className="text-center mb-20">
+            <FadeIn direction="up">
+              <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs">
+                Strategic Advantage
+              </span>
+              <h2 className="text-3xl md:text-7xl font-black text-white  tracking-tighter uppercase mt-4">
+                Benefits of <span className="text-[#997819]">BS 7499</span>{" "}
+                Certification
+              </h2>
+              <p className="mt-8 text-blue-100/80 text-lg max-w-3xl mx-auto font-medium leading-relaxed">
+                Achieving BS 7499 certification demonstrates that a security
+                company operates in line with recognised UK industry standards.
+                With expert guidance from{" "}
+                <Link
+                  href="https://bizgrow-holdings.com/our-mission/"
+                  className="text-[#997819] font-bold"
+                >
+                  BizGrow Holdings
+                </Link>
+                , you build a reputation of authority.
+              </p>
+            </FadeIn>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {[
+              {
+                title: "Improved Operational Standards",
+                desc: "Establishes clear procedures for managing and delivering professional guarding services across all sites.",
+                icon: <ShieldCheck className="w-8 h-8" />,
+              },
+              {
+                title: "Enhanced Client Confidence",
+                desc: "Demonstrates reliability and full compliance with recognised UK security standards to your stakeholders.",
+                icon: <UserCheck className="w-8 h-8" />,
+              },
+              {
+                title: "Competitive Advantage",
+                desc: (
+                  <>
+                    Helps{" "}
+                    <Link
+                      href="/how-bizgrow-holdings-helps-security-companies-win-contracts-in-the-uk/"
+                      className="text-[#997819] font-bold"
+                    >
+                      security companies
+                    </Link>{" "}
+                    stand out with an elite edge when bidding for high-value
+                    contracts and tenders.
+                  </>
+                ),
+                icon: <ArrowUpRight className="w-8 h-8" />,
+              },
+              {
+                title: "Stronger Compliance",
+                desc: "Ensures all security operations follow strictly documented processes aligned with BS 7499 requirements.",
+                icon: <FileText className="w-8 h-8" />,
+              },
+            ].map((benefit, idx) => (
+              <FadeIn key={idx} direction="up" delay={idx * 0.1}>
+                <div className="group bg-white/5 border border-white/10 p-10 rounded-[3rem] hover:bg-white hover:shadow-2xl transition-all duration-500 backdrop-blur-md">
+                  <div className="flex items-start gap-8">
+                    <div className="flex-shrink-0 w-16 h-16 rounded-2xl bg-[#997819]/20 flex items-center justify-center text-[#997819] group-hover:bg-[#12066a] group-hover:text-white transition-all duration-500">
+                      {benefit.icon}
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-black text-white group-hover:text-[#12066a] uppercase tracking-tighter mb-4 transition-colors">
+                        {benefit.title}
+                      </h3>
+                      <p className="text-blue-100/60 group-hover:text-zinc-500 font-medium text-sm leading-relaxed transition-colors">
+                        {benefit.desc}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 🔹 FINAL SECTION: CERTIFICATION JOURNEY */}
+      <section className="py-32 bg-zinc-50 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex flex-col lg:flex-row gap-20 items-center">
+            {/* Left Content Column */}
+            <div className="lg:w-1/2">
+              <FadeIn direction="right">
+                <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter uppercase leading-[0.9] mb-10">
+                  Get Certified <br />
+                  <span className="text-[#997819]">With BizGrow.</span>
+                </h2>
+                <p className="text-zinc-600 font-medium text-lg leading-relaxed mb-8">
+                  Achieving BS 7499 certification strengthens the credibility
+                  and operational standards of your security company. We provide
+                  expert guidance to help organisations implement the necessary
+                  processes for compliant static guarding operations.
+                </p>
+                <p className="text-zinc-500 font-medium text-md leading-relaxed mb-10 border-l-2 border-[#997819] pl-6 italic">
+                  "Our team supports security companies throughout the journey
+                  from gap analysis to final audit preparation ensuring you meet
+                  recognised UK security standards with confidence."
+                </p>
+
+                {/* Micro-Stats or Highlights */}
+                <div className="flex gap-10">
+                  <div>
+                    <h3 className="text-3xl font-black text-[#12066a]">100%</h3>
+                    <p className="text-xs uppercase tracking-widest font-bold text-[#997819]">
+                      Compliance
+                    </p>
+                  </div>
+                  <div className="w-[1px] bg-zinc-200" />
+                  <div>
+                    <h3 className="text-3xl font-black text-[#12066a]">
+                      Expert
+                    </h3>
+                    <p className="text-xs uppercase tracking-widest font-bold text-[#997819]">
+                      Gap Analysis
+                    </p>
+                  </div>
+                </div>
+              </FadeIn>
+            </div>
+
+            {/* Right Column: Visual Journey Steps */}
+            <div className="lg:w-1/2 w-full">
+              <div className="space-y-4">
+                {[
+                  {
+                    step: "Phase 01",
+                    title: "Gap Analysis",
+                    desc: "Identifying shortcomings in your current static guarding protocols.",
+                  },
+                  {
+                    step: "Phase 02",
+                    title: "Documentation",
+                    desc: "Developing site-specific Assignment Instructions and core policies.",
+                  },
+                  {
+                    step: "Phase 03",
+                    title: "Operational Readiness",
+                    desc: (
+                      <>
+                        <Link
+                          href="/training-moments"
+                          className="text-[#997819] font-bold"
+                        >
+                          Training
+                        </Link>{" "}
+                        personnel and aligning on-ground activities with BS
+                        7499.
+                      </>
+                    ),
+                  },
+                  {
+                    step: "Phase 04",
+                    title: "Audit Preparation",
+                    desc: "Final review to ensure your business is ready for UK certification.",
+                  },
+                ].map((item, idx) => (
+                  <FadeIn key={idx} direction="left" delay={idx * 0.1}>
+                    <div className="group bg-white p-8 rounded-[2rem] border border-zinc-200 hover:border-[#997819] transition-all duration-500 flex items-center gap-8">
+                      <div className="text-4xl font-black text-zinc-400 group-hover:text-[#997819] transition-colors">
+                        {idx + 1}
+                      </div>
+                      <div>
+                        <span className="text-[10px] font-black uppercase tracking-[0.3em] text-[#997819]">
+                          {item.step}
+                        </span>
+                        <h3 className="text-[#12066a] font-black uppercase text-sm tracking-tighter mt-1">
+                          {item.title}
+                        </h3>
+                        <p className="text-zinc-500 text-xs mt-2 font-medium">
+                          {item.desc}
+                        </p>
+                      </div>
+                    </div>
+                  </FadeIn>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+   <ServicesFaq
+        faqs={bs7499Data}
+        title={
+          <>
+            BS 7499 <span className="text-[#997819]">FAQ's</span>
+          </>
+        }
+        subtitle="Questions & Answers"
+      />
+
+      {/* 🔹 7. CALL TO ACTION (Fixed Parallax Style) */}
+      <section className="py-24 px-6 bg-white relative">
+        <div className="max-w-7xl mx-auto relative rounded-[4rem] overflow-hidden shadow-3xl group">
+          <div
+            className="absolute inset-0 z-0 bg-cover bg-center bg-fixed"
+            style={{ backgroundImage: "url('/guarding-cta.jpg')" }}
+          >
+            <div className="absolute inset-0 bg-[#12066a]/85 mix-blend-multiply" />
+          </div>
+
+          <div className="relative z-10 p-12 md:p-24 text-center flex flex-col items-center">
+            <h2 className="text-3xl md:text-6xl font-black text-white tracking-tighter mb-10 uppercase leading-[0.9]">
+              STANDARDISE YOUR <br />
+              <span className="text-[#997819]">GUARDING OPERATIONS.</span>
+            </h2>
+            <div className="flex flex-col sm:flex-row gap-6">
+              <Link
+                href="/contact-us"
+                className="relative group/btn overflow-hidden inline-flex items-center justify-center gap-2 md:gap-3 bg-[#997819] text-white 
+  px-6 py-5 md:px-16 md:py-6 rounded-2xl font-black uppercase 
+  tracking-[0.05em] md:tracking-[0.3em] text-[10px] md:text-xs 
+  transition-all duration-700 shadow-2xl active:scale-95 w-full sm:w-auto text-center"
+              >
+                <span className="relative z-40 flex items-center justify-center gap-2 md:gap-3 transition-colors duration-700 group-hover/btn:text-[#12066a] whitespace-nowrap">
+                  Audit My Operations
+                  <ArrowRight
+                    size={14}
+                    className="group-hover/btn:translate-x-2 transition-transform duration-500"
+                  />
+                </span>
+
+                <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-700 ease-out z-30" />
+              </Link>
+              <a
+                href="tel:+447898205035"
+                className="bg-white/10 backdrop-blur-md border border-white/20 text-white 
+  px-6 py-5 md:px-8 md:py-6 rounded-2xl font-black uppercase 
+  tracking-[0.05em] md:tracking-[0.15em] text-[10px] md:text-xs 
+  flex items-center justify-center gap-2 w-full sm:w-auto text-center"
+              >
+                {/* Yahan 'size' prop ko fix rakhein aur 'className' se styling manage karein */}
+                <PhoneCall className="w-3.5 h-3.5 md:w-4.5 md:h-4.5" />
+                <span className="whitespace-nowrap">Call Consultant</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+};
+
+export default BS7499Page;

@@ -1,0 +1,575 @@
+"use client"; // Client logic yahan shift ho gayi
+import { useState } from "react";
+import Image from "next/image";
+import FadeIn from "@/components/MotionWrapper";
+import {
+  ShieldCheck,
+  Award,
+  Users,
+  ArrowRight,
+  PhoneCall,
+  Search,
+  CheckCircle2,
+  AlertCircle,
+} from "lucide-react";
+import Link from "next/link";
+
+// Data Registry yahan rakhein
+const certificateData = [
+  {
+    id: "BG-06022401",
+    name: "Kamran Khan",
+    company: "JK 724 Security Services",
+    trainer: "Ms. Sabahat Haider",
+    date: "05/02/2024",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022402",
+    name: "Jalal Jalal",
+    company: "JK 724 Security Services",
+    trainer: "Mr. Qasim Moavia",
+    date: "N/A",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022403",
+    name: "Elena Naydenova",
+    company: "Elma Security",
+    trainer: "Ms. Sabahat Haider",
+    date: "05/02/2024",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022404",
+    name: "Mohammad Sardar",
+    company: "United FM Limited",
+    trainer: "Ms. Sabahat Haider",
+    date: "03/07/2023",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022405",
+    name: "Amna Yousaf",
+    company: "United FM Limited",
+    trainer: "Ms. Sabahat Haider",
+    date: "N/A",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022406",
+    name: "Ch. M. Mudassar Bashir",
+    company: "Charles Security Group Ltd",
+    trainer: "Ms. Sabahat Haider",
+    date: "01/05/2024",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022407",
+    name: "Neelam Iqbal",
+    company: "Charles Security Group Ltd",
+    trainer: "Ms. Sabahat Haider",
+    date: "N/A",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022408",
+    name: "M. Zakria",
+    company: "ZSS Facility Ltd",
+    trainer: "Ms. Sabahat Haider",
+    date: "10/03/2023",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022409",
+    name: "Shaheera Jannat",
+    company: "Cerberus Security Services Ltd",
+    trainer: "Ms. Sabahat Haider",
+    date: "15/03/2024",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022410",
+    name: "Rizwan Ali",
+    company: "Cerberus Security Services Ltd",
+    trainer: "Ms. Sabahat Haider",
+    date: "N/A",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022411",
+    name: "Javeria",
+    company: "Boro Protect Security Ltd",
+    trainer: "Ms. Sabahat Haider",
+    date: "10/04/2024",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022412",
+    name: "Zakria Shinwari",
+    company: "Boro Protect Security Ltd",
+    trainer: "Ms. Sabahat Haider",
+    date: "N/A",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022413",
+    name: "Dianne Calafatis",
+    company: "BizGrow Holdings Ltd",
+    trainer: "None",
+    date: "08/07/2022",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022414",
+    name: "Junaid Asim",
+    company: "Grizzlys Security Services Ltd",
+    trainer: "Ms. Sabahat Haider",
+    date: "05/12/2022",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022415",
+    name: "Aamir Ilyas Awan",
+    company: "Apex Security & K9 Limited",
+    trainer: "Ms. Sabahat Haider",
+    date: "10/05/2023",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022416",
+    name: "Mustafa-Ur-Rehman",
+    company: "Apex Security & K9 Limited",
+    trainer: "Ms. Sabahat Haider",
+    date: "N/A",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022417",
+    name: "M. Saqib",
+    company: "Apex Secure Ltd",
+    trainer: "Ms. Sabahat Haider",
+    date: "12/06/2023",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022418",
+    name: "Saad Ahmad",
+    company: "Apex Secure Ltd",
+    trainer: "Ms. Sabahat Haider",
+    date: "N/A",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022419",
+    name: "Shehzad Nazir",
+    company: "Progressive Group Services Ltd",
+    trainer: "Ms. Sabahat Haider",
+    date: "05/01/2026",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022420",
+    name: "Saleem Raza Malik",
+    company: "Comprehensive Service Ltd",
+    trainer: "Dr. Javed Iqbal",
+    date: "03/09/2024",
+    status: "Verified",
+  },
+  {
+    id: "BG-06022421",
+    name: "Mohammad Abdul Azhar",
+    company: "FBS Security Limited",
+    trainer: "Mr. Muhammad Qasim",
+    date: "05/06/2024",
+    status: "Sent",
+  },
+  {
+    id: "BG-06022422",
+    name: "Muhammad Khalid Farooq",
+    company: "Paramount BPO Ltd",
+    trainer: "Mr. Muhammad Qasim",
+    date: "12/06/2024",
+    status: "Training Certificate",
+  },
+  {
+    id: "BG-06022423",
+    name: "Muhammad Sabeeh",
+    company: "Pristine Facilities and Security Ltd",
+    trainer: "Mr. Muhammad Qasim",
+    date: "13/11/2024",
+    status: "Training Certificate",
+  },
+  {
+    id: "BG-06022424",
+    name: "Muhammad Bilal Ansari",
+    company: "MBS Security FM Ltd",
+    trainer: "Mr. Muhammad Qasim",
+    date: "13/11/2024",
+    status: "Training Certificate",
+  },
+  {
+    id: "BG-06022425",
+    name: "MUHAMMAD UBAIR KHAN",
+    company: "Pacific Business Solutions",
+    trainer: "Mr. Muhammad Qasim",
+    date: "07/10/2024",
+    status: "Training Certificate",
+  },
+  {
+    id: "BG-06022426",
+    name: "Jahanzeb Ehtesham",
+    company: "Pacific Business Solutions",
+    trainer: "Mr. Muhammad Qasim",
+    date: "12/11/2024",
+    status: "Training Certificate",
+  },
+  {
+    id: "BG-06022427",
+    name: "Waseem Akram",
+    company: "Dexter Multiservices Ltd",
+    trainer: "Mr. Muhammad Qasim",
+    date: "15/11/2024",
+    status: "Training Certificate",
+  },
+  {
+    id: "BG-06022428",
+    name: "Keyur KACHHADIYA",
+    company: "Immaculate & Co. Ltd",
+    trainer: "Mr. Muhammad Qasim",
+    date: "02/01/2025",
+    status: "Training Completed",
+  },
+  {
+    id: "BG-06022429",
+    name: "Gulfam Arshad",
+    company: "Bold Security Solutions Ltd",
+    trainer: "Mr. Muhammad Qasim",
+    date: "15/11/2024",
+    status: "Training Completed",
+  },
+  {
+    id: "BG-06022430",
+    name: "Muhammad Adnan Gondal",
+    company: "AR FM Ltd",
+    trainer: "Mr. Muhammad Qasim",
+    date: "09/10/2024",
+    status: "Training Completed",
+  },
+  {
+    id: "BG-06022431",
+    name: "Ishtiaq Hassan",
+    company: "Pearl Security Ltd",
+    trainer: "Mr. Muhammad Qasim",
+    date: "05/07/2024",
+    status: "Training Completed",
+  },
+  {
+    id: "BG-06022432",
+    name: "Asim Shah",
+    company: "Zee Security Solutions Ltd",
+    trainer: "Mr. Muhammad Qasim",
+    date: "01/06/2023",
+    status: "Training Completed",
+  },
+  {
+    id: "BG-06022433",
+    name: "Muhammad Tahseen",
+    company: "We Secure Ltd",
+    trainer: "Mr. Muhammad Qasim",
+    date: "28/08/2024",
+    status: "Training Certificate",
+  },
+  {
+    id: "BG-06022434",
+    name: "Roxana Popa",
+    company: "We Secure Ltd",
+    trainer: "Mr. Muhammad Qasim",
+    date: "07/12/2024",
+    status: "Training Certificate",
+  },
+  {
+    id: "BG-06022435",
+    name: "Hamza Tahir",
+    company: "We Secure Ltd",
+    trainer: "Mr. Muhammad Qasim",
+    date: "20/03/2025",
+    status: "Training Certificate",
+  },
+  {
+    id: "BG-06022437",
+    name: "Muhammad Sajid",
+    company: "Smart Guarding Services Ltd (SGS)",
+    trainer: "N/A",
+    date: "02/06/2025",
+    status: "Training Completed",
+  },
+];
+
+export default function CertificateVerifier() {
+  const [certId, setCertId] = useState("");
+  const [result, setResult] = useState(null);
+  const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleVerify = (e) => {
+    e.preventDefault();
+    setError("");
+    setResult(null);
+    setIsLoading(true);
+
+    if (!certId.trim()) {
+      setTimeout(() => {
+        setError("Please enter a valid Certificate ID to proceed.");
+        setIsLoading(false);
+      }, 500);
+      return;
+    }
+
+    setTimeout(() => {
+      const cleanId = certId.trim().toUpperCase();
+      const found = certificateData.find((item) => item.id === cleanId);
+      if (found) {
+        setResult(found);
+      } else {
+        setError(
+          "Invalid ID: We couldn't find any record matching this Certificate Number.",
+        );
+      }
+      setIsLoading(false);
+    }, 800);
+  };
+
+  return (
+    <main className="bg-white overflow-x-hidden">
+      {/* 🔹 1. HERO SECTION */}
+      <section className="relative h-[85dvh] w-full flex items-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/about-hero.webp"
+            alt="Verification"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-[#12066a]/85 backdrop-blur-[2px]" />
+        </div>
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+          <h2 className="text-[10rem] md:text-[18rem] font-black text-white/[0.05] leading-none uppercase tracking-tighter">
+            VERIFY
+          </h2>
+        </div>
+        <div className="max-w-7xl mx-auto px-6 relative z-20 w-full text-center">
+          <FadeIn direction="up">
+            <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs">
+              Official Portal
+            </span>
+            <h1 className="text-4xl md:text-7xl font-black text-white mt-6 uppercase">
+              Certificate <br />{" "}
+              <span className="text-[#997819]">Verification</span>
+            </h1>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* 🔹 2. SEARCH BOX */}
+      <section className="relative z-30 -mt-24 px-6 pb-20">
+        <div className="max-w-3xl mx-auto">
+          <FadeIn direction="up" delay={0.4}>
+            <div
+              className={`bg-white p-6 md:p-10 rounded-[3rem] shadow-2xl border transition-all duration-300 ${error ? "border-red-200" : "border-zinc-100"}`}
+            >
+              <form
+                onSubmit={handleVerify}
+                className="flex flex-col md:flex-row gap-4"
+              >
+                <div className="flex-1 space-y-2">
+                  <label className="text-[10px] font-black uppercase text-[#12066a] tracking-widest ml-2">
+                    Enter Certificate Number
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="e.g. BG-06022406"
+                    className={`w-full p-5 bg-zinc-50 border rounded-2xl outline-none font-bold transition-all ${error ? "border-red-300 focus:border-red-500" : "border-zinc-100 focus:border-[#997819]"}`}
+                    value={certId}
+                    onChange={(e) => {
+                      setCertId(e.target.value);
+                      setError("");
+                    }}
+                  />
+                </div>
+                <div className="flex items-end">
+                  <button
+                    disabled={isLoading}
+                    className="relative group/btn overflow-hidden w-full md:w-auto bg-[#12066a] text-white font-black uppercase tracking-widest px-10 py-5 rounded-2xl h-[62px] flex items-center justify-center gap-3 transition-all duration-500 shadow-xl active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {/* Layer 1: Text & Icon (Top Layer) */}
+                    <span className="relative z-40 flex items-center gap-3 transition-colors duration-500 group-hover/btn:text-white">
+                      {isLoading ? (
+                        "Checking..."
+                      ) : (
+                        <>
+                          <Search
+                            size={20}
+                            className="transition-transform duration-500 group-hover/btn:scale-110"
+                          />
+                          Verify
+                        </>
+                      )}
+                    </span>
+
+                    {/* Layer 2: Gold Animated Background (Middle Layer) */}
+                    {/* !isLoading check ensures background doesn't slide when disabled */}
+                    {!isLoading && (
+                      <div className="absolute inset-0 bg-[#997819] translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
+                    )}
+                  </button>
+                </div>
+              </form>
+
+              {error && (
+                <div className="mt-6 p-4 bg-red-50 text-red-700 rounded-2xl flex items-center gap-3">
+                  <AlertCircle size={20} />
+                  <span className="text-sm font-bold uppercase tracking-tight">
+                    {error}
+                  </span>
+                </div>
+              )}
+
+              {result && (
+                <div className="mt-10 p-8 bg-[#12066a] rounded-[2.5rem] text-white relative overflow-hidden animate-in zoom-in duration-500">
+                  <div className="absolute right-0 top-0 text-9xl font-black text-white/[0.03] uppercase pointer-events-none">
+                    VALID
+                  </div>
+
+                  <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-y-8 gap-x-12">
+                    <div>
+                      <p className="text-[#997819] text-[10px] font-black uppercase tracking-widest">
+                        Candidate Name
+                      </p>
+                      <p className="text-xl font-bold mt-1">{result.name}</p>
+                    </div>
+
+                    <div>
+                      <p className="text-[#997819] text-[10px] font-black uppercase tracking-widest">
+                        Verification Status
+                      </p>
+                      <p className="text-xl font-bold mt-1 flex items-center gap-2">
+                        <CheckCircle2 className="text-green-400" size={20} />
+                        Approved
+                      </p>
+                    </div>
+
+                    <div className="md:col-span-2 h-px bg-white/10 w-full" />
+
+                    <div>
+                      <p className="text-[#997819] text-[10px] font-black uppercase tracking-widest">
+                        Certificate Number
+                      </p>
+                      <p className="text-sm font-bold mt-1 opacity-80">
+                        {result.id}
+                      </p>
+                    </div>
+
+                    <div>
+                      <p className="text-[#997819] text-[10px] font-black uppercase tracking-widest">
+                        Issue Date
+                      </p>
+                      <p className="text-xl font-bold mt-1">
+                        {result.date !== "N/A" ? result.date : "Verified"}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* 🔹 3. INFORMATION SECTION */}
+      <section className="py-20 px-6 bg-white">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div>
+            <h2 className="text-4xl font-black text-[#12066a] uppercase leading-none">
+              Why verify <span className="text-[#997819]">Compliance?</span>
+            </h2>
+            <p className="mt-6 text-zinc-500 font-medium leading-relaxed">
+              In the UK security and construction industry, valid certification
+              is the difference between legal compliance and liability. BizGrow
+              Holdings ensures all candidates meet{" "}
+              <Link
+                href="https://bizgrow-holdings.com/bs-7858-the-complete-guide/"
+                className="text-[#997819] font-bold"
+              >
+                BS7858 standards
+              </Link>{" "}
+              and{" "}
+              <Link
+                href="https://bizgrow-holdings.com/difference-between-iso-9001-iso-14001-and-iso45001/"
+                className="text-[#997819] font-bold"
+              >
+                ISO
+              </Link>{" "}
+              requirements.
+            </p>
+            <div className="mt-8 space-y-4">
+              {[
+                "Real-time database access",
+                "ISO & UKAS Standard Validation",
+                "Anti-Fraudulent Protection",
+              ].map((text, i) => (
+                <div
+                  key={i}
+                  className="flex items-center gap-3 font-bold text-[#12066a]"
+                >
+                  <CheckCircle2 size={18} className="text-[#997819]" /> {text}
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="bg-[#12066a] p-12 rounded-[3rem] text-center">
+            <Award size={60} className="text-[#997819] mx-auto mb-6" />
+            <h3 className="text-white text-2xl font-black uppercase mb-4">
+              Request New Audit
+            </h3>
+            <Link
+              href="/contact-us"
+              className="relative group/btn overflow-hidden inline-flex items-center justify-center w-full bg-[#997819] text-white py-5 rounded-2xl font-black uppercase tracking-widest text-xs transition-all duration-500 shadow-xl active:scale-95"
+            >
+              {/* Layer 1: The Text (Top Layer) */}
+              <span className="relative z-40 transition-colors duration-500 group-hover/btn:text-[#12066a]">
+                Get Certified
+              </span>
+
+              {/* Layer 2: The Animated Background (Middle Layer) */}
+              <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* 🔹 4. FOOTER CTA */}
+      <section className="pb-24 px-6">
+        <div className="max-w-7xl mx-auto bg-[#12066a] p-12 md:rounded-full rounded-[3rem] flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="text-center md:text-left">
+            <h2 className="text-white text-2xl font-black uppercase">
+              Need Support?
+            </h2>
+            <p className="text-white/50 text-xs tracking-widest uppercase">
+              Contact our compliance helpdesk
+            </p>
+          </div>
+          <div className="flex gap-4">
+            <a
+              href="tel:+447898205035"
+              className="bg-white text-[#12066a] px-8 py-4 rounded-full font-black uppercase text-[10px] tracking-widest flex items-center gap-2"
+            >
+              <PhoneCall size={14} /> Call Experts
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}

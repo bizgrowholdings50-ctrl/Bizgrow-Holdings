@@ -1,0 +1,2 @@
+{"at":"2026-07-30T15:48:42.072Z","source":"stdout","detail":"[eve:dev] change detected (1 event: change .env), rebuilding authored artifacts..."}
+{"at":"2026-07-30T15:48:57.247Z","source":"stdout","detail":"[eve:dev] structural change detected, reloading Nitro worker..."}

@@ -1,0 +1,115 @@
+{
+  "agentRoot": "D:\\Webdevelopment\\bizgrow-holdings-nextjs\\.eve\\dev-runtime\\snapshots\\ms7ok5az-17574fa9-c21b-45b1-842c-b6b8cab1f14d\\source\\agent",
+  "appRoot": "D:\\Webdevelopment\\bizgrow-holdings-nextjs\\.eve\\dev-runtime\\snapshots\\ms7ok5az-17574fa9-c21b-45b1-842c-b6b8cab1f14d\\source",
+  "channels": [
+    {
+      "kind": "channel",
+      "name": "eve",
+      "logicalPath": "channels/eve.ts",
+      "method": "GET",
+      "urlPath": "/eve/v1/info",
+      "sourceId": "channels/eve.ts",
+      "sourceKind": "module",
+      "adapterKind": "http"
+    },
+    {
+      "kind": "channel",
+      "name": "eve",
+      "logicalPath": "channels/eve.ts",
+      "method": "POST",
+      "urlPath": "/eve/v1/session",
+      "sourceId": "channels/eve.ts",
+      "sourceKind": "module",
+      "adapterKind": "http"
+    },
+    {
+      "kind": "channel",
+      "name": "eve",
+      "logicalPath": "channels/eve.ts",
+      "method": "POST",
+      "urlPath": "/eve/v1/session/reset",
+      "sourceId": "channels/eve.ts",
+      "sourceKind": "module",
+      "adapterKind": "http"
+    },
+    {
+      "kind": "channel",
+      "name": "eve",
+      "logicalPath": "channels/eve.ts",
+      "method": "POST",
+      "urlPath": "/eve/v1/session/:sessionId",
+      "sourceId": "channels/eve.ts",
+      "sourceKind": "module",
+      "adapterKind": "http"
+    },
+    {
+      "kind": "channel",
+      "name": "eve",
+      "logicalPath": "channels/eve.ts",
+      "method": "POST",
+      "urlPath": "/eve/v1/session/:sessionId/cancel",
+      "sourceId": "channels/eve.ts",
+      "sourceKind": "module",
+      "adapterKind": "http"
+    },
+    {
+      "kind": "channel",
+      "name": "eve",
+      "logicalPath": "channels/eve.ts",
+      "method": "GET",
+      "urlPath": "/eve/v1/session/:sessionId/stream",
+      "sourceId": "channels/eve.ts",
+      "sourceKind": "module",
+      "adapterKind": "http"
+    }
+  ],
+  "connections": [],
+  "config": {
+    "compaction": {},
+    "model": {
+      "id": "google/gemini-2.5-flash",
+      "routing": {
+        "kind": "gateway",
+        "target": "google"
+      },
+      "contextWindowTokens": 1000000
+    },
+    "name": "bizgrow-holdings-nextjs",
+    "source": {
+      "sourceKind": "module",
+      "logicalPath": "agent.ts",
+      "sourceId": "agent.ts"
+    }
+  },
+  "diagnosticsSummary": {
+    "errors": 0,
+    "warnings": 0
+  },
+  "disabledFrameworkTools": [],
+  "dynamicInstructions": [],
+  "dynamicSkills": [],
+  "dynamicTools": [],
+  "hooks": [],
+  "remoteAgents": [],
+  "sandbox": null,
+  "sandboxWorkspaces": [],
+  "schedules": [],
+  "skills": [],
+  "tools": [],
+  "workspaceResourceRoot": {
+    "logicalPath": "workspace-resources/__root__",
+    "rootEntries": []
+  },
+  "instructions": {
+    "name": "instructions",
+    "logicalPath": "instructions.md",
+    "markdown": "# Role & Persona\nYou are the official AI Compliance & Advisory Assistant for Bizgrow Holdings. Your core expertise is guiding UK security contractors, guarding firms, and corporate businesses through UK industry accreditations and standards.\n\n# Bizgrow Holdings Official Services Catalog\nYou must only recommend and discuss the exact services offered on our platform:\n1. **SIA ACS (Approved Contractor Scheme):** Consultancy for security firms to meet Security Industry Authority standards.\n2. **COP 119:** Code of Practice for labour provision in security sectors.\n3. **SAFE CONTRACTOR:** Health & Safety accreditation for UK contractors.\n4. **ISO 9001:** Quality Management Systems for operational excellence.\n5. **ISO 14001:** Environmental Management Standards for sustainable growth.\n6. **ISO 45001:** Occupational Health and Safety management systems.\n7. **ConstructionLine:** Gold & Silver membership audit support for construction.\n8. **NASDU:** National Association of Security Dog Users compliance.\n9. **SMAS:** Worksafe accreditation for SSIP H&S compliance.\n10. **Cyber Essentials & Cyber Essentials Plus:** Basic protection and verified technical audits against common cyber threats.\n11. **CHAS SCHEME:** Contractors Health and Safety Assessment Scheme.\n12. **BS 10800:** Standard for the provision of security services.\n13. **BS 7858:** Vetting and screening of personnel in security.\n14. **BS 7499:** Static guarding and mobile patrol services code.\n\n# Core Rules & Guardrails\n1. **Consultative Guidance Only (No Free Work):** \n   - Explain what standard or accreditation they need based on their business type.\n   - Outline the high-level requirements and why it's legally/operationally vital.\n   - **DO NOT** write complete company policies, handbooks, vetting files, or risk assessments for them. \n\n2. **Always Drive to Conversion:**\n   - Whenever a client asks how to implement any of the above services or pass an upcoming audit, warn them about common pitfalls and strict documentation requirements.\n   - Conclude by urging them to book a consultation or fill out the Contact Us form on Bizgrow Holdings so our professional consultants can handle the heavy lifting.\n\n3. **Tone & Style:**\n   - Professional, authoritative, polite, and strictly tailored to the UK market. Keep answers clear and concise.",
+    "sourceId": "instructions.md",
+    "sourceKind": "markdown"
+  },
+  "kind": "eve-agent-compiled-manifest",
+  "extensionMounts": [],
+  "subagentEdges": [],
+  "subagents": [],
+  "version": 37
+}

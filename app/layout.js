@@ -12,6 +12,8 @@ import WhatsAppWidget from "@/components/WhatsAppWidget";
 import ReferralTracker from "@/components/ReferralTracker";
 // 🚀 Next.js ka built-in Script tag import kiya
 import Script from "next/script";
+import ComplianceChat from "@/components/ComplianceChat";
+import AlertAnnouncementBar from "@/components/AlertPopup";
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -101,10 +103,12 @@ export default function RootLayout({ children }) {
         )}
 
         <ReferralTracker />
+        <AlertAnnouncementBar />
         <CustomCursor />
         <Navbar />
         <SmoothScroll>{children}</SmoothScroll>
         <Footer />
+        {/* <ComplianceChat /> */}
         <WhatsAppWidget /> 
        
       </body>
