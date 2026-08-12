@@ -455,11 +455,12 @@ export default async function ReferralPage() {
                       className="text-base font-extrabold"
                       style={{ color: NAVY }}
                     >
-                      5% Discount
+                      5% FOR YOUR REFERRAL
                     </div>
                   </div>
-                  <p className="text-xs text-slate-500 font-normal leading-relaxed">
-                    On your first compliance or certification service.
+                  <p className="text-xs text-slate-800 font-normal leading-relaxed">
+                    Your referred business receives{" "}
+                    <b>5% off their first eligible service</b>
                   </p>
                 </div>
 
@@ -469,17 +470,18 @@ export default async function ReferralPage() {
                   </div>
                   <div>
                     <div className="text-[11px] font-extrabold uppercase text-[#997819] tracking-wider mb-0.5">
-                      Zero Fee
+                      You Will Get
                     </div>
                     <div
                       className="text-base font-extrabold"
                       style={{ color: NAVY }}
                     >
-                      Free & Lifetime
+                      10% FOR YOU
                     </div>
                   </div>
-                  <p className="text-xs text-slate-500 font-light leading-relaxed">
-                    Permanent partner status with no hidden obligations.
+                  <p className="text-xs text-slate-800 font-normal leading-relaxed">
+                    Earn <b>10% off</b> your next eligible BizGrow service for
+                    every successful referral
                   </p>
                 </div>
 
@@ -489,39 +491,128 @@ export default async function ReferralPage() {
                   </div>
                   <div>
                     <div className="text-[11px] font-extrabold uppercase text-[#997819] tracking-wider mb-0.5">
-                      Uncapped Earnings
+                      Maximum Reward
                     </div>
                     <div
                       className="text-base font-extrabold"
                       style={{ color: NAVY }}
                     >
-                      15% Off Renewals
+                      UP TO 50%
                     </div>
                   </div>
-                  <p className="text-xs text-slate-500 font-light leading-relaxed">
-                    Substantial savings on every successful business referral.
+                  <p className="text-xs text-slate-800 font-normal leading-relaxed">
+                    Earn up to <b>50% off your next service</b>, subject to the
+                    program limits.
                   </p>
                 </div>
               </div>
             </div>
           )}
 
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 my-8">
+            <div className="bg-white/90 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-6 sm:p-8 shadow-sm flex flex-col justify-between space-y-4 relative overflow-hidden group hover:border-[#12066a]/30 transition-all">
+              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-[#12066a]/5 to-transparent rounded-full pointer-events-none -mr-6 -mt-6" />
+              <div>
+                <span className="w-10 h-10 rounded-2xl bg-[#12066a]/10 text-[#12066a] flex items-center justify-center font-black text-lg mb-6 group-hover:bg-[#12066a] group-hover:text-white transition-colors">
+                  01
+                </span>
+                <h3 className="text-lg font-bold" style={{ color: NAVY }}>
+                  Get Your Referral Link
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-700 font-medium mt-2 leading-relaxed">
+                  Access your unique referral link from your BizGrow account.
+                </p>
+              </div>
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#997819]">
+                Quick Setup
+              </span>
+            </div>
+
+            <div className="bg-white/90 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-6 sm:p-8 shadow-sm flex flex-col justify-between space-y-4 relative overflow-hidden group hover:border-[#12066a]/30 transition-all">
+              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-[#12066a]/5 to-transparent rounded-full pointer-events-none -mr-6 -mt-6" />
+              <div>
+                <span className="w-10 h-10 rounded-2xl bg-[#12066a]/10 text-[#12066a] flex items-center justify-center font-black text-lg mb-6 group-hover:bg-[#12066a] group-hover:text-white transition-colors">
+                  02
+                </span>
+                <h3 className="text-lg font-bold" style={{ color: NAVY }}>
+                  Share With Your Network
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-700 font-medium mt-2 leading-relaxed">
+                  Send your link to security companies, contractors, business
+                  owners or anyone who could benefit from BizGrow.
+                </p>
+              </div>
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#997819]">
+                Expand Reach
+              </span>
+            </div>
+
+            <div className="bg-white/90 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-6 sm:p-8 shadow-sm flex flex-col justify-between space-y-4 relative overflow-hidden group hover:border-[#12066a]/30 transition-all">
+              <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-[#12066a]/5 to-transparent rounded-full pointer-events-none -mr-6 -mt-6" />
+              <div>
+                <span className="w-10 h-10 rounded-2xl bg-[#12066a]/10 text-[#12066a] flex items-center justify-center font-black text-lg mb-6 group-hover:bg-[#12066a] group-hover:text-white transition-colors">
+                  03
+                </span>
+                <h3 className="text-lg font-bold" style={{ color: NAVY }}>
+                  They Join & Become a Client
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-800 font-medium mt-2 leading-relaxed">
+                  Your referral registers through your link and completes their
+                  consultation and purchase with BizGrow.
+                </p>
+              </div>
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#997819]">
+                Verified Conversion
+              </span>
+            </div>
+
+            <div className="bg-gradient-to-br from-[#12066a]/5 via-white to-white border-2 border-[#12066a]/20 rounded-3xl p-6 sm:p-8 shadow-sm flex flex-col justify-between space-y-4 relative overflow-hidden">
+              <div>
+                <span className="w-10 h-10 rounded-2xl bg-[#12066a] text-white flex items-center justify-center font-black text-lg mb-6">
+                  04
+                </span>
+                <h3 className="text-lg font-bold" style={{ color: NAVY }}>
+                  You Both Get Rewarded
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-700 font-medium  mt-2 leading-relaxed">
+                  They receive{" "}
+                  <strong className="text-slate-900 font-semibold">
+                    5% off their first eligible service
+                  </strong>{" "}
+                  and you earn{" "}
+                  <strong className="text-slate-900 font-semibold">
+                    10% off your next eligible service.
+                  </strong>
+                </p>
+              </div>
+              <span className="text-[11px] font-bold uppercase tracking-wider text-[#997819]">
+                Mutual Perks
+              </span>
+            </div>
+          </div>
+
+          <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-2xl p-5 shadow-sm text-center max-w-xl mx-auto">
+            <p className="text-xs sm:text-sm text-slate-700 font-medium">
+              <strong className="text-red-600 font-bold">No purchase</strong> ={" "}
+              <span className="text-slate-900 font-semibold">
+                No referral reward.
+              </span>
+            </p>
+          </div>
+
           {/* Complete 15 Services Showcase Portfolio */}
           <div className="pt-10">
             <div className="flex flex-col sm:flex-row justify-between items-end mb-8 gap-4 px-2">
               <div>
-                <span className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#997819]">
-                  Full Portfolio
-                </span>
                 <h3
                   className="text-3xl font-black tracking-tight mt-1"
                   style={{ color: NAVY }}
                 >
-                  Covered Services
+                  Eligible BizGrow Services
                 </h3>
-                <p className="text-slate-500 text-sm font-normal mt-1">
-                  Your 15% discount rewards apply across our complete suite of
-                  elite security and accreditation solutions.
+                <p className="text-slate-800 text-sm font-normal mt-1">
+                  Your referral rewards can be used toward eligible BizGrow
+                  services, including:
                 </p>
               </div>
               <div
@@ -631,6 +722,12 @@ export default async function ReferralPage() {
                   </div>
                 );
               })}
+            </div>
+            <div className="flex items-center gap-3 bg-[#12066a] border-l-4 border-[#997819] px-6 py-4 rounded-r-2xl shadow-md my-4">
+              <p className="text-sm sm:text-base text-white font-medium tracking-wide">
+                Referral discounts are subject to eligibility, service terms and
+                reward limits.
+              </p>
             </div>
           </div>
 
