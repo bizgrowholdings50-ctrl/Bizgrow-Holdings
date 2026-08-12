@@ -24,7 +24,7 @@ export default function Footer() {
             <Image
               src="/logo.webp" // Apka logo path
               alt="BizGrow Holdings"
-              width={150}
+              width={100}
               height={50}
               className="brightness-0 invert"
               style={{ width: 'auto', height: 'auto' }}
