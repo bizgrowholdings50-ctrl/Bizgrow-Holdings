@@ -83,7 +83,7 @@ async function ensureReferralCode(
   supabase,
   user,
   currentCode,
-  existingProfile
+  existingProfile,
 ) {
   const normalizedCode = currentCode?.trim();
   if (normalizedCode) {
@@ -112,13 +112,13 @@ async function ensureReferralCode(
       avatar_url,
       referral_code: referralCode,
     },
-    { onConflict: "id" }
+    { onConflict: "id" },
   );
 
   if (hasSupabaseError(upsertError)) {
     console.error(
       "Unable to ensure referral code during upsert:",
-      formatSupabaseError(upsertError)
+      formatSupabaseError(upsertError),
     );
   }
 
@@ -131,7 +131,7 @@ async function ensureReferralCode(
   if (hasSupabaseError(selectError)) {
     console.error(
       "Unable to read referral code after upsert:",
-      formatSupabaseError(selectError)
+      formatSupabaseError(selectError),
     );
     return referralCode;
   }
@@ -165,7 +165,7 @@ export default async function ReferralPage() {
     if (hasSupabaseError(error)) {
       console.error(
         "Referral profile lookup failed:",
-        formatSupabaseError(error)
+        formatSupabaseError(error),
       );
     }
 
@@ -187,7 +187,7 @@ export default async function ReferralPage() {
       supabase,
       user,
       profile?.referral_code,
-      profile
+      profile,
     );
 
     if (ensuredCode) {
@@ -238,7 +238,7 @@ export default async function ReferralPage() {
     googleAvatarUrl ||
     profileAvatarUrl ||
     `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(
-      profile?.full_name || user?.email || "User"
+      profile?.full_name || user?.email || "User",
     )}&backgroundColor=12066a,997819`;
 
   return (
@@ -333,18 +333,33 @@ export default async function ReferralPage() {
                 </span>
               </div>
 
-              <h1 className="text-4xl sm:text-6xl font-black tracking-tight leading-[1.1]">
-                <span className="text-[#997819]">Join our referral program</span>{" "}
+              <h1 className="text-4xl sm:text-5xl font-serif font-black tracking-tight leading-[1.1]">
+                <span className="text-[#997819]">
+                  Join our referral program
+                </span>{" "}
                 <br />
                 <span className="bg-gradient-to-r from-[#12066a] via-[#12066a] to-[#997819] bg-clip-text text-transparent">
                   and earn elite rewards.
+                  <br />
+                  Refer a Business. Save on Your Next Service.
                 </span>
               </h1>
 
-              <p className="text-base sm:text-xl text-slate-600 font-normal max-w-2xl mx-auto leading-relaxed">
+              {/* Highlighted Badge */}
+              <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#12066a]/5 border border-[#12066a]/10">
+                <span className="text-sm sm:text-base font-bold text-[#12066a]">
+                  Give 5% off.
+                </span>
+                <span className="text-gray-400">|</span>
+                <span className="text-sm sm:text-base font-bold text-[#997819]">
+                  Earn 10% off on each referral.
+                </span>
+              </div>
+
+              <p className="mt-4 text-base sm:text-xl text-slate-600 font-normal max-w-2xl mx-auto leading-relaxed">
                 {referrerName
                   ? `${referrerName} has invited you to join the BizGrow Referral Partner Program. Earn exclusive rewards simply by referring businesses that need compliance, certification, or security consultancy.`
-                  : "We've built our reputation through trusted clients and partners. Refer another security firm or business to BizGrow, and we'll reward you every single time."}
+                  : "Refer another security company or business to BizGrow. When they become a paying client, they receive 5% off their first service, and you earn 10% off your next BizGrow service."}
               </p>
 
               {/* Core Reward Architecture Highlight Card */}
@@ -363,9 +378,9 @@ export default async function ReferralPage() {
                     </span>
                   </h3>
                   <p className="text-base sm:text-lg text-slate-600 max-w-xl mx-auto font-normal leading-relaxed">
-                    Enjoy a 10% discount on your next renewal or security services.
-                    There is no cap on referrals; each successful introduction
-                    stacks your rewards up to a{" "}
+                    Enjoy a 10% discount on your next renewal or security
+                    services. There is no cap on referrals; each successful
+                    introduction stacks your rewards up to a{" "}
                     <span className="font-bold text-[#12066a]">
                       maximum 50% discount
                     </span>

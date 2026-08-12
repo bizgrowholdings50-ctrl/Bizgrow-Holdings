@@ -46,7 +46,7 @@ export default function ProfessionalAlertBar() {
       <div className="flex flex-wrap items-center justify-center gap-2">
         <div className="flex items-center gap-1.5 bg-indigo-600/30 border border-[#997819] text-indigo-300 font-medium px-2.5 py-0.5 rounded-full text-[10px] sm:text-[11px] tracking-wide">
           <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-          <span className="text-white font-semibold">Free Webinar: 12th Aug, 8 PM UK</span>
+          <span className="text-white font-semibold">Free Webinar: 12th Aug , (8 PM BST) 2026</span>
         </div>
 
         <span className="text-white text-xs sm:text-sm font-medium">

@@ -257,7 +257,7 @@ export default function DashboardPage() {
                       Lifetime 10% Discount
                     </h3>
                     <p className="text-sm text-slate-600 font-light mt-3 leading-relaxed">
-                      Earn <strong className="text-slate-900 font-semibold">15% off</strong> on your renewals or compliance services when your referral successfully becomes our client. Accumulate up to a <strong className="text-[#997819] font-bold">maximum 50% cumulative discount cap</strong>.
+                      Earn <strong className="text-slate-900 font-semibold">10% off</strong> on your renewals or compliance services when your referral successfully becomes our client. Accumulate up to a <strong className="text-[#997819] font-bold">maximum 50% cumulative discount cap</strong>.
                     </p>
                   </div>
 
