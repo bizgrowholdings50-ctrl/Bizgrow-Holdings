@@ -361,121 +361,181 @@ export default function DashboardPage() {
               </div>
             </div>
           ) : (
-            <div className="space-y-10">
-              <div className="bg-white/90 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 sm:p-12 shadow-sm relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-[#12066a]/5 to-transparent rounded-full pointer-events-none -mr-20 -mt-20" />
-                <div className="relative z-10 max-w-3xl space-y-4">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#12066a]/5 text-[#12066a] text-[11px] font-extrabold uppercase tracking-wider">
-                    Program Guidelines & Milestones
-                  </div>
-                  <h1 className="text-3xl sm:text-4xl font-black tracking-tight" style={{ color: NAVY }}>
-                    How the Bizgrow Partner Network Works
-                  </h1>
-                  <p className="text-base text-slate-600 font-light leading-relaxed">
-                    Our partner program rewards real business connections transparently. Review the key rules below to maximize your service discounts.
-                  </p>
-                </div>
-              </div>
+           <div className="space-y-10">
+  <div className="bg-white/90 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 sm:p-12 shadow-sm relative overflow-hidden">
+    <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-[#12066a]/5 to-transparent rounded-full pointer-events-none -mr-20 -mt-20" />
+    <div className="relative z-10 max-w-3xl space-y-4">
+      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#12066a]/5 text-[#12066a] text-[11px] font-extrabold uppercase tracking-wider">
+        Program Guidelines & Milestones
+      </div>
+      <h1 className="text-3xl sm:text-4xl font-black tracking-tight" style={{ color: NAVY }}>
+        How the Bizgrow Partner Network Works
+      </h1>
+      <p className="text-base text-slate-600 font-light leading-relaxed">
+        Our partner program rewards real business connections transparently. Review the key rules below to maximize your service discounts.
+      </p>
+    </div>
+  </div>
 
-              <div className="grid gap-6 md:grid-cols-2">
-                <div className="bg-gradient-to-br from-[#12066a]/5 via-white to-white border-2 border-[#12066a]/20 rounded-3xl p-8 shadow-sm space-y-3">
-                  <div className="inline-block px-3 py-1 rounded-full bg-[#12066a] text-white text-[10px] font-extrabold uppercase tracking-widest">
-                    Activation Milestone
-                  </div>
-                  <h3 className="text-xl font-bold" style={{ color: NAVY }}>
-                    Reward Granted Upon Client Conversion
-                  </h3>
-                  <p className="text-sm text-slate-600 font-light leading-relaxed">
-                    Referrals must successfully convert and <strong className="text-slate-900 font-semibold">become our active client</strong> (completing a service or subscription contract) for your 10% discount reward to be unlocked and applied.
-                  </p>
-                </div>
+  <div className="grid gap-6 md:grid-cols-2">
+    <div className="bg-gradient-to-br from-[#12066a]/5 via-white to-white border-2 border-[#12066a]/20 rounded-3xl p-8 shadow-sm space-y-3">
+      <div className="inline-block px-3 py-1 rounded-full bg-[#12066a] text-white text-[10px] font-extrabold uppercase tracking-widest">
+        Activation Milestone
+      </div>
+      <h3 className="text-xl font-bold" style={{ color: NAVY }}>
+        Reward Granted Upon Client Conversion
+      </h3>
+      <p className="text-sm text-slate-600 font-light leading-relaxed">
+        Referrals must successfully convert and <strong className="text-slate-900 font-semibold">become our active client</strong> (completing a service or subscription contract) for your 10% discount reward to be unlocked and applied.
+      </p>
+    </div>
 
-                <div className="bg-gradient-to-br from-[#997819]/10 via-white to-white border-2 border-[#997819]/30 rounded-3xl p-8 shadow-sm space-y-3">
-                  <div className="inline-block px-3 py-1 rounded-full bg-[#997819] text-white text-[10px] font-extrabold uppercase tracking-widest">
-                    Maximum Savings Cap
-                  </div>
-                  <h3 className="text-xl font-bold" style={{ color: NAVY }}>
-                    Capped at a Maximum of 50% Off
-                  </h3>
-                  <p className="text-sm text-slate-600 font-light leading-relaxed">
-                    Each successful referral adds 10% off your services, up to a <strong className="text-[#997819] font-bold">maximum cumulative discount cap of 50%</strong> across your renewals and compliance packages.
-                  </p>
-                </div>
-              </div>
+    <div className="bg-gradient-to-br from-[#997819]/10 via-white to-white border-2 border-[#997819]/30 rounded-3xl p-8 shadow-sm space-y-3">
+      <div className="inline-block px-3 py-1 rounded-full bg-[#997819] text-white text-[10px] font-extrabold uppercase tracking-widest">
+        Maximum Savings Cap
+      </div>
+      <h3 className="text-xl font-bold" style={{ color: NAVY }}>
+        Capped at a Maximum of 50% Off
+      </h3>
+      <p className="text-sm text-slate-600 font-light leading-relaxed">
+        Each successful referral adds 10% off your services, up to a <strong className="text-[#997819] font-bold">maximum cumulative discount cap of 50%</strong> across your renewals and compliance packages.
+      </p>
+    </div>
+  </div>
 
-              <div className="grid gap-6 md:grid-cols-3">
-                <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 shadow-sm flex flex-col justify-between space-y-4">
-                  <div>
-                    <span className="w-10 h-10 rounded-2xl bg-[#12066a]/10 text-[#12066a] flex items-center justify-center font-black text-lg mb-6">
-                      01
-                    </span>
-                    <h3 className="text-lg font-bold" style={{ color: NAVY }}>
-                      Share Your Link
-                    </h3>
-                    <p className="text-xs sm:text-sm text-slate-600 font-light mt-2 leading-relaxed">
-                      Copy your unique referral link from your dashboard and introduce it to security firms or corporate partners.
-                    </p>
-                  </div>
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#997819]">
-                    Instant Tracking
-                  </span>
-                </div>
+  <div className="grid gap-6 md:grid-cols-3">
+    <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 shadow-sm flex flex-col justify-between space-y-4">
+      <div>
+        <span className="w-10 h-10 rounded-2xl bg-[#12066a]/10 text-[#12066a] flex items-center justify-center font-black text-lg mb-6">
+          01
+        </span>
+        <h3 className="text-lg font-bold" style={{ color: NAVY }}>
+          Share Your Link
+        </h3>
+        <p className="text-xs sm:text-sm text-slate-600 font-light mt-2 leading-relaxed">
+          Copy your unique referral link from your dashboard and introduce it to security firms or corporate partners.
+        </p>
+      </div>
+      <span className="text-[11px] font-bold uppercase tracking-wider text-[#997819]">
+        Instant Tracking
+      </span>
+    </div>
 
-                <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 shadow-sm flex flex-col justify-between space-y-4">
-                  <div>
-                    <span className="w-10 h-10 rounded-2xl bg-[#12066a]/10 text-[#12066a] flex items-center justify-center font-black text-lg mb-6">
-                      02
-                    </span>
-                    <h3 className="text-lg font-bold" style={{ color: NAVY }}>
-                      Client Activation
-                    </h3>
-                    <p className="text-xs sm:text-sm text-slate-600 font-light mt-2 leading-relaxed">
-                      Your referred peer signs up and completes their onboarding to officially become an active Bizgrow client.
-                    </p>
-                  </div>
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#997819]">
-                    Verified Milestone
-                  </span>
-                </div>
+    <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 shadow-sm flex flex-col justify-between space-y-4">
+      <div>
+        <span className="w-10 h-10 rounded-2xl bg-[#12066a]/10 text-[#12066a] flex items-center justify-center font-black text-lg mb-6">
+          02
+        </span>
+        <h3 className="text-lg font-bold" style={{ color: NAVY }}>
+          Client Activation
+        </h3>
+        <p className="text-xs sm:text-sm text-slate-600 font-light mt-2 leading-relaxed">
+          Your referred peer signs up and completes their onboarding to officially become an active Bizgrow client.
+        </p>
+      </div>
+      <span className="text-[11px] font-bold uppercase tracking-wider text-[#997819]">
+        Verified Milestone
+      </span>
+    </div>
 
-                <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 shadow-sm flex flex-col justify-between space-y-4">
-                  <div>
-                    <span className="w-10 h-10 rounded-2xl bg-[#12066a]/10 text-[#12066a] flex items-center justify-center font-black text-lg mb-6">
-                      03
-                    </span>
-                    <h3 className="text-lg font-bold" style={{ color: NAVY }}>
-                      Unlock Perks
-                    </h3>
-                    <p className="text-xs sm:text-sm text-slate-600 font-light mt-2 leading-relaxed">
-                      Receive your 10% discount automatically applied to your renewals, up to the maximum 50% threshold limit.
-                    </p>
-                  </div>
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-[#997819]">
-                    Auto-Applied
-                  </span>
-                </div>
-              </div>
+    <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 shadow-sm flex flex-col justify-between space-y-4">
+      <div>
+        <span className="w-10 h-10 rounded-2xl bg-[#12066a]/10 text-[#12066a] flex items-center justify-center font-black text-lg mb-6">
+          03
+        </span>
+        <h3 className="text-lg font-bold" style={{ color: NAVY }}>
+          Unlock Perks
+        </h3>
+        <p className="text-xs sm:text-sm text-slate-600 font-light mt-2 leading-relaxed">
+          Receive your 10% discount automatically applied to your renewals, up to the maximum 50% threshold limit.
+        </p>
+      </div>
+      <span className="text-[11px] font-bold uppercase tracking-wider text-[#997819]">
+        Auto-Applied
+      </span>
+    </div>
+  </div>
 
-              <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 sm:p-10 shadow-sm space-y-6">
-                <h3 className="text-xl font-bold" style={{ color: NAVY }}>
-                  Frequently Asked Questions
-                </h3>
-                <div className="grid gap-6 md:grid-cols-2 text-sm">
-                  <div className="space-y-2">
-                    <h4 className="font-bold text-slate-800">When exactly is the reward credited?</h4>
-                    <p className="text-slate-600 font-light leading-relaxed">
-                      The reward is validated and unlocked as soon as your referred peer officially converts and becomes our active client.
-                    </p>
-                  </div>
-                  <div className="space-y-2">
-                    <h4 className="font-bold text-slate-800">What is the highest discount I can accumulate?</h4>
-                    <p className="text-slate-600 font-light leading-relaxed">
-                      You can continue referring peers to earn 10% increments, subject to a strict maximum cumulative limit of 50% off your service renewals.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+  {/* Referral Program Rules Section */}
+ <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 sm:p-10 shadow-sm space-y-6">
+    <div className="flex flex-col space-y-2">
+      <span className="text-xs font-extrabold uppercase tracking-widest text-[#997819]">Terms & Conditions</span>
+      <h3 className="text-xl font-bold" style={{ color: NAVY }}>
+        Referral Program Rules
+      </h3>
+    </div>
+    <div className="grid gap-4 md:grid-cols-2 text-sm text-slate-800 font-medium">
+      <div className="flex gap-3 items-start bg-slate-50/50 p-4 rounded-2xl border border-slate-100">
+        <span className="font-bold text-[#12066a]">01.</span>
+        <p>Referral rewards apply only to <strong className="text-slate-900 font-bold">new businesses</strong> that have not previously purchased from BizGrow.</p>
+      </div>
+      <div className="flex gap-3 items-start bg-slate-50/50 p-4 rounded-2xl border border-slate-100">
+        <span className="font-bold text-[#12066a]">02.</span>
+        <p>The referred business must register using the unique referral link.</p>
+      </div>
+      <div className="flex gap-3 items-start bg-slate-50/50 p-4 rounded-2xl border border-slate-100">
+        <span className="font-bold text-[#12066a]">03.</span>
+        <p>The referred business must become a <strong className="text-slate-900 font-bold">BizGrow client</strong> and his payment is received for the referral to qualify.</p>
+      </div>
+      <div className="flex gap-3 items-start bg-slate-50/50 p-4 rounded-2xl border border-slate-100">
+        <span className="font-bold text-[#12066a]">04.</span>
+        <p>The 5% new-client discount applies to the referred client’s <strong className="text-slate-900 font-bold">first eligible purchase/service</strong>.</p>
+      </div>
+      <div className="flex gap-3 items-start bg-slate-50/50 p-4 rounded-2xl border border-slate-100">
+        <span className="font-bold text-[#12066a]">05.</span>
+        <p>The referring client receives 10% credit for each successful referral.</p>
+      </div>
+      <div className="flex gap-3 items-start bg-slate-50/50 p-4 rounded-2xl border border-slate-100">
+        <span className="font-bold text-[#12066a]">06.</span>
+        <p>Referral credit is applied to the referring client’s <strong className="text-slate-900 font-bold">next eligible purchase/service</strong>.</p>
+      </div>
+      <div className="flex gap-3 items-start bg-slate-50/50 p-4 rounded-2xl border border-slate-100">
+        <span className="font-bold text-[#12066a]">07.</span>
+        <p>Maximum referral reward is <strong className="text-slate-900 font-bold">50% or £1000</strong>, whichever comes first.</p>
+      </div>
+      <div className="flex gap-3 items-start bg-slate-50/50 p-4 rounded-2xl border border-slate-100">
+        <span className="font-bold text-[#12066a]">08.</span>
+        <p>Maximum of <strong className="text-slate-900 font-bold">5 successful referral rewards</strong> per referral cycle.</p>
+      </div>
+      <div className="flex gap-3 items-start bg-slate-50/50 p-4 rounded-2xl border border-slate-100">
+        <span className="font-bold text-[#12066a]">09.</span>
+        <p>Referral discounts cannot be exchanged for cash.</p>
+      </div>
+      <div className="flex gap-3 items-start bg-slate-50/50 p-4 rounded-2xl border border-slate-100">
+        <span className="font-bold text-[#12066a]">10.</span>
+        <p>Discounts cannot be combined with other promotional offers unless BizGrow agrees otherwise.</p>
+      </div>
+      <div className="flex gap-3 items-start bg-slate-50/50 p-4 rounded-2xl border border-slate-100">
+        <span className="font-bold text-[#12066a]">11.</span>
+        <p>Self-referrals, duplicate registrations and referrals between related entities may not qualify for rewards.</p>
+      </div>
+      <div className="flex gap-3 items-start bg-slate-50/50 p-4 rounded-2xl border border-slate-100">
+        <span className="font-bold text-[#12066a]">12.</span>
+        <p>BizGrow reserves the right to reject duplicate, fraudulent or self-referrals.</p>
+      </div>
+    </div>
+  </div>
+
+  <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 sm:p-10 shadow-sm space-y-6">
+    <h3 className="text-xl font-bold" style={{ color: NAVY }}>
+      Frequently Asked Questions
+    </h3>
+    <div className="grid gap-6 md:grid-cols-2 text-sm">
+      <div className="space-y-2">
+        <h4 className="font-bold text-slate-800">When exactly is the reward credited?</h4>
+        <p className="text-slate-600 font-light leading-relaxed">
+          The reward is validated and unlocked as soon as your referred peer officially converts and becomes our active client.
+        </p>
+      </div>
+      <div className="space-y-2">
+        <h4 className="font-bold text-slate-800">What is the highest discount I can accumulate?</h4>
+        <p className="text-slate-600 font-light leading-relaxed">
+          You can continue referring peers to earn 10% increments, subject to a strict maximum cumulative limit of 50% off your service renewals.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
           )}
 
         </div>
