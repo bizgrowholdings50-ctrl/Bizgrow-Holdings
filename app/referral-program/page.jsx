@@ -425,7 +425,7 @@ export default async function ReferralPage() {
                   </p>
                   <div className="flex items-center gap-3 bg-[#12066a] border-l-4 border-[#997819] px-6 py-4 rounded-r-2xl shadow-md my-4">
               <p className="text-sm sm:text-base text-white font-medium tracking-wide">
-                Referral rewards are subject to eligibility criteria and the Referral Program Terms & Conditions.
+                Referral rewards are subject to <span className="font-bold text-red-500">Minimum qualifying service value: £500 + VAT</span> and the Referral Program Terms & Conditions.
               </p>
             </div>
                 </div>
