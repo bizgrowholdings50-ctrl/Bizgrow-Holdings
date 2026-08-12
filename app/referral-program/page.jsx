@@ -372,23 +372,75 @@ export default async function ReferralPage() {
                     className="text-4xl sm:text-5xl font-black tracking-tight"
                     style={{ color: NAVY }}
                   >
-                    10% Off.{" "}
-                    <span className="text-[#997819] font-light">
-                      Every single time.
+                    10% Off{" "}
+                    <span className="text-[#997819] font-bold">
+                      for Every Successful Referral
                     </span>
                   </h3>
-                  <p className="text-base sm:text-lg text-slate-600 max-w-xl mx-auto font-normal leading-relaxed">
-                    Enjoy a 10% discount on your next renewal or security
-                    services. There is no cap on referrals; each successful
-                    introduction stacks your rewards up to a{" "}
-                    <span className="font-bold text-[#12066a]">
-                      maximum 50% discount
+                  <p className="text-sm sm:text-base text-slate-800 font-medium text-left space-y-2">
+                    <ul className="text-sm sm:text-base text-slate-800 font-medium max-w-md mx-auto space-y-3 list-none text-left">
+                      <li className="flex items-center justify-between border-b border-slate-200/60 pb-2">
+                        <span>Refer 1 business</span>
+                        <span className="font-bold text-[#12066a]">
+                          Get 10% off
+                        </span>
+                      </li>
+                      <li className="flex items-center justify-between border-b border-slate-200/60 pb-2">
+                        <span>Refer 2 businesses</span>
+                        <span className="font-bold text-[#12066a]">
+                          Get 20% off
+                        </span>
+                      </li>
+                      <li className="flex items-center justify-between border-b border-slate-200/60 pb-2">
+                        <span>Refer 3 businesses</span>
+                        <span className="font-bold text-[#12066a]">
+                          Get 30% off
+                        </span>
+                      </li>
+                      <li className="flex items-center justify-between border-b border-slate-200/60 pb-2">
+                        <span>Refer 4 businesses</span>
+                        <span className="font-bold text-[#12066a]">
+                          Get 40% off
+                        </span>
+                      </li>
+                      <li className="flex items-center justify-between pb-2">
+                        <span>Refer 5 businesses</span>
+                        <span className="font-bold text-[#997819]">
+                          Get 50% off
+                        </span>
+                      </li>
+                    </ul>
+                    <span className="block mt-4 text-center">
+                      Maximum reward:{" "}
+                      <strong className="font-bold" style={{ color: NAVY }}>
+                        50% off your next eligible BizGrow service, or £1000,
+                        whichever is reached first.
+                      </strong>
                     </span>
-                    .
                   </p>
                 </div>
               </div>
+              {/* Pre-login Google Authentication Box */}
+              <div className="pt-4 max-w-md mx-auto bg-white/95 backdrop-blur-2xl border border-slate-200/90 rounded-3xl p-8 shadow-[0_15px_40px_rgba(18,6,106,0.06)] space-y-5 text-center">
+                <div className="space-y-1.5">
+                  <h3
+                    className="text-xl font-extrabold"
+                    style={{ color: NAVY }}
+                  >
+                    START REFERRING
+                  </h3>
+                  <p className="text-sm text-slate-800 font-normal leading-relaxed px-2">
+                    Sign in with Google to establish your secure partner account
+                    instantly. No password required.
+                  </p>
+                </div>
 
+                <div className="pt-3 flex justify-center">
+                  <div className="w-full">
+                    <GoogleLoginButton />
+                  </div>
+                </div>
+              </div>
               {/* Quick Value Cards Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 text-left">
                 <div className="bg-white/90 border border-slate-200/80 p-5 rounded-2xl shadow-sm hover:border-[#997819]/40 transition-all space-y-2">
@@ -451,99 +503,8 @@ export default async function ReferralPage() {
                   </p>
                 </div>
               </div>
-
-              {/* Pre-login Google Authentication Box */}
-              <div className="pt-4 max-w-md mx-auto bg-white/95 backdrop-blur-2xl border border-slate-200/90 rounded-3xl p-8 shadow-[0_15px_40px_rgba(18,6,106,0.06)] space-y-5 text-center">
-                <div className="space-y-1.5">
-                  <h3
-                    className="text-xl font-extrabold"
-                    style={{ color: NAVY }}
-                  >
-                    Before We Get Started...
-                  </h3>
-                  <p className="text-xs text-slate-500 font-normal leading-relaxed px-2">
-                    Sign in with Google to establish your secure partner account
-                    instantly. No password required.
-                  </p>
-                </div>
-
-                <div className="pt-3 flex justify-center">
-                  <div className="w-full">
-                    <GoogleLoginButton />
-                  </div>
-                </div>
-              </div>
             </div>
           )}
-
-          {/* Step-by-Step Program Walkthrough */}
-          <div className="space-y-8 pt-4">
-            <div className="text-center max-w-xl mx-auto space-y-2">
-              <span className="text-xs font-extrabold uppercase tracking-[0.2em] text-[#997819]">
-                Structured Workflow
-              </span>
-              <h3
-                className="text-3xl font-black tracking-tight"
-                style={{ color: NAVY }}
-              >
-                How It Works in 4 Steps
-              </h3>
-            </div>
-
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-              <div className="bg-white/90 backdrop-blur-xl border border-slate-200/80 rounded-3xl p-6 shadow-sm space-y-4 hover:border-[#997819]/50 transition-all">
-                <div className="w-12 h-12 rounded-2xl bg-[#12066a]/5 flex items-center justify-center text-[#12066a] border border-[#12066a]/10">
-                  <Share2 className="w-5 h-5 text-[#997819]" />
-                </div>
-                <h4 className="text-lg font-bold" style={{ color: NAVY }}>
-                  01. Share link
-                </h4>
-                <p className="text-xs text-slate-500 font-normal leading-relaxed">
-                  Provide your unique personal referral link to friends, peers,
-                  or businesses seeking compliance.
-                </p>
-              </div>
-
-              <div className="bg-white/90 backdrop-blur-xl border border-slate-200/80 rounded-3xl p-6 shadow-sm space-y-4 hover:border-[#997819]/50 transition-all">
-                <div className="w-12 h-12 rounded-2xl bg-[#12066a]/5 flex items-center justify-center text-[#12066a] border border-[#12066a]/10">
-                  <Users className="w-5 h-5 text-[#997819]" />
-                </div>
-                <h4 className="text-lg font-bold" style={{ color: NAVY }}>
-                  02. They register
-                </h4>
-                <p className="text-xs text-slate-500 font-normal leading-relaxed">
-                  Your referred party signs up through your link to instantly
-                  unlock partner status and welcome benefits.
-                </p>
-              </div>
-
-              <div className="bg-white/90 backdrop-blur-xl border border-slate-200/80 rounded-3xl p-6 shadow-sm space-y-4 hover:border-[#997819]/50 transition-all">
-                <div className="w-12 h-12 rounded-2xl bg-[#12066a]/5 flex items-center justify-center text-[#12066a] border border-[#12066a]/10">
-                  <Headset className="w-5 h-5 text-[#997819]" />
-                </div>
-                <h4 className="text-lg font-bold" style={{ color: NAVY }}>
-                  03. Consultation
-                </h4>
-                <p className="text-xs text-slate-500 font-normal leading-relaxed">
-                  Our expert compliance consultants contact them directly to
-                  handle technical advisory and onboarding.
-                </p>
-              </div>
-
-              <div className="bg-white/90 backdrop-blur-xl border border-slate-200/80 rounded-3xl p-6 shadow-sm space-y-4 hover:border-[#997819]/50 transition-all">
-                <div className="w-12 h-12 rounded-2xl bg-[#12066a]/5 flex items-center justify-center text-[#12066a] border border-[#12066a]/10">
-                  <Gift className="w-5 h-5 text-[#997819]" />
-                </div>
-                <h4 className="text-lg font-bold" style={{ color: NAVY }}>
-                  04. Earn rewards
-                </h4>
-                <p className="text-xs text-slate-500 font-normal leading-relaxed">
-                  Once they convert into a client, your discount rewards are
-                  automatically credited to your dashboard.
-                </p>
-              </div>
-            </div>
-          </div>
 
           {/* Complete 15 Services Showcase Portfolio */}
           <div className="pt-10">
