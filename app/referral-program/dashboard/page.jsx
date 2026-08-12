@@ -250,14 +250,14 @@ export default function DashboardPage() {
                         Exclusive Benefit
                       </span>
                       <span className="px-2.5 py-1 rounded-full bg-[#12066a]/5 text-[#12066a] text-[10px] font-extrabold uppercase tracking-wider">
-                        Max 50% Cap
+                        Max £1000Cap
                       </span>
                     </div>
                     <h3 className="text-2xl font-bold tracking-tight" style={{ color: NAVY }}>
-                      Lifetime 10% Discount
+                      £125 Credit Discount
                     </h3>
                     <p className="text-sm text-slate-600 font-light mt-3 leading-relaxed">
-                      Earn <strong className="text-slate-900 font-semibold">10% off</strong> on your renewals or compliance services when your referral successfully becomes our client. Accumulate up to a <strong className="text-[#997819] font-bold">maximum 50% cumulative discount cap</strong>.
+                      Earn <strong className="text-slate-900 font-semibold">£125 Credit </strong> on your renewals or compliance services when your referral successfully becomes our client. Accumulate up to a <strong className="text-[#997819] font-bold">maximum £1000 cumulative discount cap</strong>.
                     </p>
                   </div>
 
@@ -386,7 +386,7 @@ export default function DashboardPage() {
         Reward Granted Upon Client Conversion
       </h3>
       <p className="text-sm text-slate-600 font-light leading-relaxed">
-        Referrals must successfully convert and <strong className="text-slate-900 font-semibold">become our active client</strong> (completing a service or subscription contract) for your 10% discount reward to be unlocked and applied.
+        Referrals must successfully convert and <strong className="text-slate-900 font-semibold">become our active client</strong> (completing a service or subscription contract) for your £125 Credit discount reward to be unlocked and applied.
       </p>
     </div>
 
@@ -395,10 +395,10 @@ export default function DashboardPage() {
         Maximum Savings Cap
       </div>
       <h3 className="text-xl font-bold" style={{ color: NAVY }}>
-        Capped at a Maximum of 50% Off
+        Capped at a Maximum of £1000
       </h3>
       <p className="text-sm text-slate-600 font-light leading-relaxed">
-        Each successful referral adds 10% off your services, up to a <strong className="text-[#997819] font-bold">maximum cumulative discount cap of 50%</strong> across your renewals and compliance packages.
+        Each successful referral adds £125 Credit  your services, up to a <strong className="text-[#997819] font-bold">maximum cumulative discount cap of £1000</strong> across your renewals and compliance packages.
       </p>
     </div>
   </div>
@@ -447,7 +447,7 @@ export default function DashboardPage() {
           Unlock Perks
         </h3>
         <p className="text-xs sm:text-sm text-slate-600 font-light mt-2 leading-relaxed">
-          Receive your 10% discount automatically applied to your renewals, up to the maximum 50% threshold limit.
+          Receive your £125 Credit discount automatically applied to your renewals, up to the maximum £1000threshold limit.
         </p>
       </div>
       <span className="text-[11px] font-bold uppercase tracking-wider text-[#997819]">
@@ -456,65 +456,155 @@ export default function DashboardPage() {
     </div>
   </div>
 
-  {/* Referral Program Rules Section */}
- <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 sm:p-10 shadow-sm space-y-6">
-    <div className="flex flex-col space-y-2">
-      <span className="text-xs font-extrabold uppercase tracking-widest text-[#997819]">Terms & Conditions</span>
-      <h3 className="text-xl font-bold" style={{ color: NAVY }}>
+{/* Referral Program Rules Section */}
+<div className="bg-gradient-to-b from-white/90 via-white/80 to-slate-50/50 backdrop-blur-2xl border border-slate-200/80 rounded-[2.5rem] p-8 sm:p-14 shadow-2xl shadow-slate-300/40 space-y-10 relative overflow-hidden">
+  {/* Premium ambient glows */}
+  <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-[#12066a]/10 via-[#997819]/5 to-transparent rounded-full pointer-events-none -mr-20 -mt-20 blur-3xl" />
+  <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-[#997819]/10 via-transparent to-transparent rounded-full pointer-events-none -ml-20 -mb-20 blur-3xl" />
+
+  <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 relative z-10 border-b border-slate-200/60 pb-8">
+    <div className="space-y-3">
+      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#997819]/10 border border-[#997819]/20">
+        <span className="w-2 h-2 rounded-full bg-[#997819] animate-pulse" />
+        <span className="text-[11px] font-black uppercase tracking-widest text-[#997819]">
+          Legal Guidelines & Transparency
+        </span>
+      </div>
+      <h3 className="text-2xl sm:text-4xl font-black tracking-tight" style={{ color: NAVY }}>
         Referral Program Rules
       </h3>
+      <p className="text-sm sm:text-base text-slate-600 font-medium max-w-xl">
+        Review our transparent terms and conditions for participating in the BizGrow mutual reward ecosystem.
+      </p>
     </div>
-    <div className="grid gap-4 md:grid-cols-2 text-sm text-slate-800 font-medium">
-      <div className="flex gap-3 items-start bg-slate-50/50 p-4 rounded-2xl border border-slate-100">
-        <span className="font-bold text-[#12066a]">01.</span>
-        <p>Referral rewards apply only to <strong className="text-slate-900 font-bold">new businesses</strong> that have not previously purchased from BizGrow.</p>
-      </div>
-      <div className="flex gap-3 items-start bg-slate-50/50 p-4 rounded-2xl border border-slate-100">
-        <span className="font-bold text-[#12066a]">02.</span>
-        <p>The referred business must register using the unique referral link.</p>
-      </div>
-      <div className="flex gap-3 items-start bg-slate-50/50 p-4 rounded-2xl border border-slate-100">
-        <span className="font-bold text-[#12066a]">03.</span>
-        <p>The referred business must become a <strong className="text-slate-900 font-bold">BizGrow client</strong> and his payment is received for the referral to qualify.</p>
-      </div>
-      <div className="flex gap-3 items-start bg-slate-50/50 p-4 rounded-2xl border border-slate-100">
-        <span className="font-bold text-[#12066a]">04.</span>
-        <p>The 5% new-client discount applies to the referred client’s <strong className="text-slate-900 font-bold">first eligible purchase/service</strong>.</p>
-      </div>
-      <div className="flex gap-3 items-start bg-slate-50/50 p-4 rounded-2xl border border-slate-100">
-        <span className="font-bold text-[#12066a]">05.</span>
-        <p>The referring client receives 10% credit for each successful referral.</p>
-      </div>
-      <div className="flex gap-3 items-start bg-slate-50/50 p-4 rounded-2xl border border-slate-100">
-        <span className="font-bold text-[#12066a]">06.</span>
-        <p>Referral credit is applied to the referring client’s <strong className="text-slate-900 font-bold">next eligible purchase/service</strong>.</p>
-      </div>
-      <div className="flex gap-3 items-start bg-slate-50/50 p-4 rounded-2xl border border-slate-100">
-        <span className="font-bold text-[#12066a]">07.</span>
-        <p>Maximum referral reward is <strong className="text-slate-900 font-bold">50% or £1000</strong>, whichever comes first.</p>
-      </div>
-      <div className="flex gap-3 items-start bg-slate-50/50 p-4 rounded-2xl border border-slate-100">
-        <span className="font-bold text-[#12066a]">08.</span>
-        <p>Maximum of <strong className="text-slate-900 font-bold">5 successful referral rewards</strong> per referral cycle.</p>
-      </div>
-      <div className="flex gap-3 items-start bg-slate-50/50 p-4 rounded-2xl border border-slate-100">
-        <span className="font-bold text-[#12066a]">09.</span>
-        <p>Referral discounts cannot be exchanged for cash.</p>
-      </div>
-      <div className="flex gap-3 items-start bg-slate-50/50 p-4 rounded-2xl border border-slate-100">
-        <span className="font-bold text-[#12066a]">10.</span>
-        <p>Discounts cannot be combined with other promotional offers unless BizGrow agrees otherwise.</p>
-      </div>
-      <div className="flex gap-3 items-start bg-slate-50/50 p-4 rounded-2xl border border-slate-100">
-        <span className="font-bold text-[#12066a]">11.</span>
-        <p>Self-referrals, duplicate registrations and referrals between related entities may not qualify for rewards.</p>
-      </div>
-      <div className="flex gap-3 items-start bg-slate-50/50 p-4 rounded-2xl border border-slate-100">
-        <span className="font-bold text-[#12066a]">12.</span>
-        <p>BizGrow reserves the right to reject duplicate, fraudulent or self-referrals.</p>
-      </div>
+    <div className="hidden lg:flex flex-col items-end justify-center text-right">
+      <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Effective Terms</span>
+      <span className="text-sm font-bold text-slate-700">12 Core Guidelines</span>
     </div>
   </div>
+
+  <div className="grid gap-5 md:grid-cols-2 text-sm text-slate-700 font-medium relative z-10">
+    <div className="flex gap-5 items-start bg-white/80 hover:bg-white hover:border-[#12066a]/40 hover:shadow-xl hover:shadow-[#12066a]/5 transition-all duration-300 p-6 rounded-3xl border border-slate-200/70 group relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-1.5 h-full bg-[#12066a]/20 group-hover:bg-[#12066a] transition-colors" />
+      <span className="font-black text-xs px-3 py-1.5 rounded-xl bg-[#12066a]/10 text-[#12066a] group-hover:bg-[#12066a] group-hover:text-white transition-all shadow-sm">
+        01
+      </span>
+      <p className="leading-relaxed pt-0.5">
+        Referral rewards apply only to <strong className="text-slate-900 font-bold">new businesses</strong> that have not previously purchased from BizGrow.
+      </p>
+    </div>
+
+    <div className="flex gap-5 items-start bg-white/80 hover:bg-white hover:border-[#12066a]/40 hover:shadow-xl hover:shadow-[#12066a]/5 transition-all duration-300 p-6 rounded-3xl border border-slate-200/70 group relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-1.5 h-full bg-[#12066a]/20 group-hover:bg-[#12066a] transition-colors" />
+      <span className="font-black text-xs px-3 py-1.5 rounded-xl bg-[#12066a]/10 text-[#12066a] group-hover:bg-[#12066a] group-hover:text-white transition-all shadow-sm">
+        02
+      </span>
+      <p className="leading-relaxed pt-0.5">
+        The referred business must register using your unique referral link.
+      </p>
+    </div>
+
+    <div className="flex gap-5 items-start bg-white/80 hover:bg-white hover:border-[#12066a]/40 hover:shadow-xl hover:shadow-[#12066a]/5 transition-all duration-300 p-6 rounded-3xl border border-slate-200/70 group relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-1.5 h-full bg-[#12066a]/20 group-hover:bg-[#12066a] transition-colors" />
+      <span className="font-black text-xs px-3 py-1.5 rounded-xl bg-[#12066a]/10 text-[#12066a] group-hover:bg-[#12066a] group-hover:text-white transition-all shadow-sm">
+        03
+      </span>
+      <p className="leading-relaxed pt-0.5">
+        The referred business must become a <strong className="text-slate-900 font-bold">BizGrow client</strong> and their payment must be received to qualify.
+      </p>
+    </div>
+
+    <div className="flex gap-5 items-start bg-white/80 hover:bg-white hover:border-[#12066a]/40 hover:shadow-xl hover:shadow-[#12066a]/5 transition-all duration-300 p-6 rounded-3xl border border-slate-200/70 group relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-1.5 h-full bg-[#12066a]/20 group-hover:bg-[#12066a] transition-colors" />
+      <span className="font-black text-xs px-3 py-1.5 rounded-xl bg-[#12066a]/10 text-[#12066a] group-hover:bg-[#12066a] group-hover:text-white transition-all shadow-sm">
+        04
+      </span>
+      <p className="leading-relaxed pt-0.5">
+        The 5% new-client discount applies to the referred client’s <strong className="text-slate-900 font-bold">first eligible purchase/service</strong>.
+      </p>
+    </div>
+
+    <div className="flex gap-5 items-start bg-white/80 hover:bg-white hover:border-[#12066a]/40 hover:shadow-xl hover:shadow-[#12066a]/5 transition-all duration-300 p-6 rounded-3xl border border-slate-200/70 group relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-1.5 h-full bg-[#997819]/30 group-hover:bg-[#997819] transition-colors" />
+      <span className="font-black text-xs px-3 py-1.5 rounded-xl bg-[#997819]/10 text-[#997819] group-hover:bg-[#997819] group-hover:text-white transition-all shadow-sm">
+        05
+      </span>
+      <p className="leading-relaxed pt-0.5">
+        The referring client receives <strong className="text-slate-900 font-bold">£125 Credit</strong> for each successful referral.
+      </p>
+    </div>
+
+    <div className="flex gap-5 items-start bg-white/80 hover:bg-white hover:border-[#12066a]/40 hover:shadow-xl hover:shadow-[#12066a]/5 transition-all duration-300 p-6 rounded-3xl border border-slate-200/70 group relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-1.5 h-full bg-[#12066a]/20 group-hover:bg-[#12066a] transition-colors" />
+      <span className="font-black text-xs px-3 py-1.5 rounded-xl bg-[#12066a]/10 text-[#12066a] group-hover:bg-[#12066a] group-hover:text-white transition-all shadow-sm">
+        06
+      </span>
+      <p className="leading-relaxed pt-0.5">
+        Referral credit is applied to the referring client’s <strong className="text-slate-900 font-bold">next eligible purchase/service</strong>.
+      </p>
+    </div>
+
+    <div className="flex gap-5 items-start bg-white/80 hover:bg-white hover:border-[#997819]/40 hover:shadow-xl hover:shadow-[#997819]/5 transition-all duration-300 p-6 rounded-3xl border border-slate-200/70 group relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-1.5 h-full bg-[#997819]/30 group-hover:bg-[#997819] transition-colors" />
+      <span className="font-black text-xs px-3 py-1.5 rounded-xl bg-[#997819]/10 text-[#997819] group-hover:bg-[#997819] group-hover:text-white transition-all shadow-sm">
+        07
+      </span>
+      <p className="leading-relaxed pt-0.5">
+        Maximum referral reward is <strong className="text-slate-900 font-bold">£1000</strong>, whichever limit is reached first.
+      </p>
+    </div>
+
+    <div className="flex gap-5 items-start bg-white/80 hover:bg-white hover:border-[#12066a]/40 hover:shadow-xl hover:shadow-[#12066a]/5 transition-all duration-300 p-6 rounded-3xl border border-slate-200/70 group relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-1.5 h-full bg-[#12066a]/20 group-hover:bg-[#12066a] transition-colors" />
+      <span className="font-black text-xs px-3 py-1.5 rounded-xl bg-[#12066a]/10 text-[#12066a] group-hover:bg-[#12066a] group-hover:text-white transition-all shadow-sm">
+        08
+      </span>
+      <p className="leading-relaxed pt-0.5">
+        Maximum of <strong className="text-slate-900 font-bold">5 successful referral rewards</strong> per referral cycle.
+      </p>
+    </div>
+
+    <div className="flex gap-5 items-start bg-white/80 hover:bg-white hover:border-[#12066a]/40 hover:shadow-xl hover:shadow-[#12066a]/5 transition-all duration-300 p-6 rounded-3xl border border-slate-200/70 group relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-1.5 h-full bg-[#12066a]/20 group-hover:bg-[#12066a] transition-colors" />
+      <span className="font-black text-xs px-3 py-1.5 rounded-xl bg-[#12066a]/10 text-[#12066a] group-hover:bg-[#12066a] group-hover:text-white transition-all shadow-sm">
+        09
+      </span>
+      <p className="leading-relaxed pt-0.5">
+        Referral discounts and credits cannot be exchanged for cash.
+      </p>
+    </div>
+
+    <div className="flex gap-5 items-start bg-white/80 hover:bg-white hover:border-[#12066a]/40 hover:shadow-xl hover:shadow-[#12066a]/5 transition-all duration-300 p-6 rounded-3xl border border-slate-200/70 group relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-1.5 h-full bg-[#12066a]/20 group-hover:bg-[#12066a] transition-colors" />
+      <span className="font-black text-xs px-3 py-1.5 rounded-xl bg-[#12066a]/10 text-[#12066a] group-hover:bg-[#12066a] group-hover:text-white transition-all shadow-sm">
+        10
+      </span>
+      <p className="leading-relaxed pt-0.5">
+        Discounts cannot be combined with other promotional offers unless BizGrow agrees otherwise.
+      </p>
+    </div>
+
+    <div className="flex gap-5 items-start bg-white/80 hover:bg-white hover:border-[#12066a]/40 hover:shadow-xl hover:shadow-[#12066a]/5 transition-all duration-300 p-6 rounded-3xl border border-slate-200/70 group relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-1.5 h-full bg-[#12066a]/20 group-hover:bg-[#12066a] transition-colors" />
+      <span className="font-black text-xs px-3 py-1.5 rounded-xl bg-[#12066a]/10 text-[#12066a] group-hover:bg-[#12066a] group-hover:text-white transition-all shadow-sm">
+        11
+      </span>
+      <p className="leading-relaxed pt-0.5">
+        Self-referrals, duplicate registrations and referrals between related entities do not qualify.
+      </p>
+    </div>
+
+    <div className="flex gap-5 items-start bg-white/80 hover:bg-white hover:border-[#12066a]/40 hover:shadow-xl hover:shadow-[#12066a]/5 transition-all duration-300 p-6 rounded-3xl border border-slate-200/70 group relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-1.5 h-full bg-[#12066a]/20 group-hover:bg-[#12066a] transition-colors" />
+      <span className="font-black text-xs px-3 py-1.5 rounded-xl bg-[#12066a]/10 text-[#12066a] group-hover:bg-[#12066a] group-hover:text-white transition-all shadow-sm">
+        12
+      </span>
+      <p className="leading-relaxed pt-0.5">
+        BizGrow reserves the right to reject duplicate, fraudulent or non-compliant referrals.
+      </p>
+    </div>
+  </div>
+</div>
 
   <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 sm:p-10 shadow-sm space-y-6">
     <h3 className="text-xl font-bold" style={{ color: NAVY }}>
@@ -530,7 +620,7 @@ export default function DashboardPage() {
       <div className="space-y-2">
         <h4 className="font-bold text-slate-800">What is the highest discount I can accumulate?</h4>
         <p className="text-slate-600 font-light leading-relaxed">
-          You can continue referring peers to earn 10% increments, subject to a strict maximum cumulative limit of 50% off your service renewals.
+          You can continue referring peers to earn £125 Credit increments, subject to a strict maximum cumulative limit of £1000 your service renewals.
         </p>
       </div>
     </div>
