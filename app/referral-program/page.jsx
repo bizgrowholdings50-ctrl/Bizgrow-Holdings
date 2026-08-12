@@ -245,8 +245,8 @@ export default async function ReferralPage() {
     <main className="min-h-screen mt-10 relative bg-[#fafafc] font-sans selection:bg-[#997819] selection:text-white pb-32">
       {/* Ultra-Premium Ambient Background Layers */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full bg-[#12066a]/[0.03] blur-[140px]" />
-        <div className="absolute top-[30%] right-[-10%] w-[40%] h-[40%] rounded-full bg-[#997819]/[0.04] blur-[140px]" />
+        <div className="absolute top-[-£125 Credit.] left-[-£125 Credit.] w-[50%] h-[50%] rounded-full bg-[#12066a]/[0.03] blur-[140px]" />
+        <div className="absolute top-[30%] right-[-£125 Credit.] w-[40%] h-[40%] rounded-full bg-[#997819]/[0.04] blur-[140px]" />
         <div className="absolute bottom-[-5%] left-[20%] w-[45%] h-[45%] rounded-full bg-[#12066a]/[0.02] blur-[140px]" />
       </div>
 
@@ -352,27 +352,33 @@ export default async function ReferralPage() {
                 </span>
                 <span className="text-gray-400">|</span>
                 <span className="text-sm sm:text-base font-bold text-[#997819]">
-                  Earn 10% off on each referral.
+                  Earn £125 Credits on each referral.
                 </span>
               </div>
 
               <p className="mt-4 text-base sm:text-xl text-slate-600 font-normal max-w-2xl mx-auto leading-relaxed">
                 {referrerName
                   ? `${referrerName} has invited you to join the BizGrow Referral Partner Program. Earn exclusive rewards simply by referring businesses that need compliance, certification, or security consultancy.`
-                  : "Refer another security company or business to BizGrow. When they become a paying client, they receive 5% off their first service, and you earn 10% off your next BizGrow service."}
+                  : "Refer another security company or business to BizGrow. When they become a paying client, they receive 5% off their first service, and you earn £125 Credits on your next BizGrow service."}
               </p>
+              <div className="flex w-md mx-auto items-center gap-3 bg-[#12066a] border-l-4 border-[#997819] px-4 py-4 rounded-r-2xl shadow-md my-4">
+                <p className="text-sm sm:text-base text-white font-medium tracking-wide">
+                  Earn up to £1,000 in referral credit every 12 months.
+                </p>
+              </div>
+
 
               {/* Core Reward Architecture Highlight Card */}
               <div className="max-w-3xl mx-auto">
                 <div className="relative group bg-white/90 backdrop-blur-2xl border-2 border-[#997819]/40 rounded-3xl p-8 sm:p-12 shadow-[0_20px_50px_rgba(153,120,25,0.08)] text-center space-y-5">
                   <div className="inline-flex items-center gap-2 bg-[#997819]/10 text-[#997819] text-[11px] font-extrabold uppercase tracking-[0.2em] px-4 py-1.5 rounded-full">
-                    <Gift className="w-3.5 h-3.5" /> The Reward Architecture
+                    <Gift className="w-3.5 h-3.5" /> The Reward Structure
                   </div>
                   <h3
                     className="text-4xl sm:text-5xl font-black tracking-tight"
                     style={{ color: NAVY }}
                   >
-                    10% Off{" "}
+                    £125 Credit{" "}
                     <span className="text-[#997819] font-bold">
                       for Every Successful Referral
                     </span>
@@ -382,44 +388,50 @@ export default async function ReferralPage() {
                       <li className="flex items-center justify-between border-b border-slate-200/60 pb-2">
                         <span>Refer 1 business</span>
                         <span className="font-bold text-[#12066a]">
-                          Get 10% off
+                          Get £125 off
                         </span>
                       </li>
                       <li className="flex items-center justify-between border-b border-slate-200/60 pb-2">
                         <span>Refer 2 businesses</span>
                         <span className="font-bold text-[#12066a]">
-                          Get 20% off
+                          Get £250 off
                         </span>
                       </li>
                       <li className="flex items-center justify-between border-b border-slate-200/60 pb-2">
                         <span>Refer 3 businesses</span>
                         <span className="font-bold text-[#12066a]">
-                          Get 30% off
+                          Get £375 off
                         </span>
                       </li>
                       <li className="flex items-center justify-between border-b border-slate-200/60 pb-2">
                         <span>Refer 4 businesses</span>
                         <span className="font-bold text-[#12066a]">
-                          Get 40% off
+                          Get £500 off
                         </span>
                       </li>
                       <li className="flex items-center justify-between pb-2">
                         <span>Refer 5 businesses</span>
-                        <span className="font-bold text-[#997819]">
-                          Get 50% off
+                        <span className="font-bold text-[#12066a]">
+                          Get £625 off
                         </span>
                       </li>
                     </ul>
                     <span className="block mt-4 text-center">
                       Maximum reward:{" "}
                       <strong className="font-bold" style={{ color: NAVY }}>
-                        50% off your next eligible BizGrow service, or £1000,
-                        whichever is reached first.
+                        Earn up to £1,000 in BizGrow referral credit during each 12-month referral period.
                       </strong>
                     </span>
                   </p>
+                  <div className="flex items-center gap-3 bg-[#12066a] border-l-4 border-[#997819] px-6 py-4 rounded-r-2xl shadow-md my-4">
+              <p className="text-sm sm:text-base text-white font-medium tracking-wide">
+                Referral rewards are subject to eligibility criteria and the Referral Program Terms & Conditions.
+              </p>
+            </div>
                 </div>
+                
               </div>
+              
               {/* Pre-login Google Authentication Box */}
               <div className="pt-4 max-w-md mx-auto bg-white/95 backdrop-blur-2xl border border-slate-200/90 rounded-3xl p-8 shadow-[0_15px_40px_rgba(18,6,106,0.06)] space-y-5 text-center">
                 <div className="space-y-1.5">
@@ -458,9 +470,8 @@ export default async function ReferralPage() {
                       5% FOR YOUR REFERRAL
                     </div>
                   </div>
-                  <p className="text-xs text-slate-800 font-normal leading-relaxed">
-                    Your referred business receives{" "}
-                    <b>5% off their first eligible service</b>
+                  <p className="text-sm text-slate-800 font-normal leading-relaxed">
+                    Your referred business receives <b>5% off their first eligible BizGrow service</b>, subject to a minimum service value of £500 + VAT.
                   </p>
                 </div>
 
@@ -476,12 +487,11 @@ export default async function ReferralPage() {
                       className="text-base font-extrabold"
                       style={{ color: NAVY }}
                     >
-                      10% FOR YOU
+                      £125 Credits FOR YOU
                     </div>
                   </div>
-                  <p className="text-xs text-slate-800 font-normal leading-relaxed">
-                    Earn <b>10% off</b> your next eligible BizGrow service for
-                    every successful referral
+                  <p className="text-sm text-slate-800 font-normal leading-relaxed">
+                  Earn <b>£125 BizGrow credit</b> every time your referral becomes a qualifying paying client.
                   </p>
                 </div>
 
@@ -497,12 +507,11 @@ export default async function ReferralPage() {
                       className="text-base font-extrabold"
                       style={{ color: NAVY }}
                     >
-                      UP TO 50%
+                      UP TO £1,000
                     </div>
                   </div>
-                  <p className="text-xs text-slate-800 font-normal leading-relaxed">
-                    Earn up to <b>50% off your next service</b>, subject to the
-                    program limits.
+                  <p className="text-sm text-slate-800 font-normal leading-relaxed">
+                    Earn up to <b>£1,000</b> in referral credit during each 12-month referral period.
                   </p>
                 </div>
               </div>
@@ -581,7 +590,7 @@ export default async function ReferralPage() {
                   </strong>{" "}
                   and you earn{" "}
                   <strong className="text-slate-900 font-semibold">
-                    10% off your next eligible service.
+                    £125 Credits on your next eligible service.
                   </strong>
                 </p>
               </div>
