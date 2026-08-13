@@ -103,7 +103,7 @@ export default function RootLayout({ children }) {
         )}
 
         <ReferralTracker />
-        <AlertAnnouncementBar />
+        
         <CustomCursor />
         <Navbar />
         <SmoothScroll>{children}</SmoothScroll>
