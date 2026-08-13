@@ -8,7 +8,7 @@ const slides = [
   {
     image: "/crousel1.webp",
     alt: "Business meeting in a modern office",
-    heading: "Smarter Strategy. Stronger Systems. Real Results.",
+    heading: "Smarter Strategy , Stronger Systems , Real Results.",
     subheading:
       "BizGrow Holdings delivers compliance-driven consultancy that helps UK businesses pass audits, win contracts, and grow with certainty.",
     buttonText: "Start Your Growth Journey",
@@ -77,7 +77,7 @@ export default function HeroCarousel() {
           {/* Content Section */}
           <div className="relative z-20 flex flex-col items-center justify-center h-full text-center text-white px-6 md:px-12">
             <span
-              className={`text-3xl md:text-6xl lg:text-7xl font-extrabold leading-tight mb-4 drop-shadow-lg max-w-5xl 
+              className={`text-3xl md:text-6xl lg:text-7xl font-serif font-extrabold leading-tight mb-4 drop-shadow-lg max-w-5xl 
   transition-[transform,opacity] duration-300 ease-out will-change-[transform,opacity]
   ${index === currentSlide ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
             >

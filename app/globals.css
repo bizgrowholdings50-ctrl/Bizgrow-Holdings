@@ -14,7 +14,17 @@ body {
   /* Font ko geist sans par set karein */
   font-family: var(--font-geist-sans), ui-sans-serif, system-ui;
 }
-
+/* Yahan par saari headings par font-serif apply ho jaye ga */
+h1, h2, h3, h4, h5, h6 {
+  font-family: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif !important;
+}
+/* Saare paragraphs (p) ke liye clean aur readable Inter style */
+p {
+  font-family: var(--font-inter), var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+ 
+  line-height: 1.5;
+  
+}
 html, body {
   width: 100%;
   max-width: 100%;
