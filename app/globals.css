@@ -35,6 +35,10 @@ html, body {
   -webkit-overflow-scrolling: touch;
 }
 
+body.modal-open {
+  overflow: hidden !important;
+}
+
 /* global.css ya aapki module file mein */
 
 .blog-content-flow {
