@@ -189,7 +189,7 @@ export default function DashboardPage() {
         } = await supabase
           .from("profiles")
           .select(
-            "full_name, email, avatar_url, referral_code"
+            "full_name, email, avatar_url, referral_code, company_name, contact_number"
           )
           .eq("id", user.id)
           .maybeSingle();
@@ -794,7 +794,7 @@ export default function DashboardPage() {
     );
 
     setCompanyName(
-      profile?.full_name || ""
+      profile?.company_name || ""
     );
 
     setContactName(
@@ -802,7 +802,9 @@ export default function DashboardPage() {
     );
 
     setPhone(
-      user?.user_metadata?.phone || ""
+      profile?.contact_number ||
+        user?.user_metadata?.phone ||
+        ""
     );
 
     setClaimNotes("");
