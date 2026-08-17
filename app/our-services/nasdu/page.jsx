@@ -80,7 +80,10 @@ const NASDUPage = () => {
                   BizGrow Holdings
                 </Link>{" "}
                 supports security companies in achieving NASDU accreditation for
-                professional dog handling and K9 operations. We help implement
+                professional dog handling and <Link href="/k9-security-services-in-the-uk/" className="text-[#997819] font-bold">
+                  K9 operations
+                </Link>
+                . We help implement
                 the policies and procedures required for recognised industry
                 compliance.
               </p>
@@ -260,7 +263,7 @@ const NASDUPage = () => {
               <span className="text-[#997819]"> UK Standards.</span>
             </h2>
             <p className="pb-4">
-              NASDU certification complements other UK security regulations,
+              NASDU certification complements other <Link href="/types-of-security-services-in-the-uk/" className="text-[#997819] font-bold">UK security</Link> regulations,
               helping businesses meet:
             </p>
             <div className="space-y-7">

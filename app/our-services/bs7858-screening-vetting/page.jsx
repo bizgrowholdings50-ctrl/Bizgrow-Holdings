@@ -306,7 +306,7 @@ const BS7858Page = () => {
                 </h3>
                 <p className="text-blue-100/50 text-sm leading-relaxed max-w-md">
                   BS7858 is a recognised standard applied across industries such
-                  as security services, finance, and government, where
+                  as <Link href="/types-of-security-services-in-the-uk/" className="text-[#997819] font-bold">security services</Link>, finance, and government, where
                   trustworthiness and integrity of staff are essential.
                 </p>
               </div>

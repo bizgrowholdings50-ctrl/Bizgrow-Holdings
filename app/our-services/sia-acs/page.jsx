@@ -86,7 +86,7 @@ const SIAACSPage = () => {
                 >
                   SIA ACS
                 </Link>{" "}
-                consultancy services designed to help UK security businesses
+                consultancy services designed to help <Link href="/types-of-security-services-in-the-uk/" className="text-[#997819] font-bold hover:underline">UK security</Link> businesses
                 meet assessment criteria and achieve successful accreditation.
               </p>
             </FadeIn>
