@@ -121,11 +121,9 @@ export default function DashboardPage() {
   const [phone, setPhone] = useState("");
   const [claimNotes, setClaimNotes] = useState("");
 
-  const [claimSubmitting, setClaimSubmitting] =
-    useState(false);
+  const [claimSubmitting, setClaimSubmitting] = useState(false);
   const [claimError, setClaimError] = useState("");
-  const [claimSuccess, setClaimSuccess] =
-    useState(false);
+  const [claimSuccess, setClaimSuccess] = useState(false);
 
   const refreshClaimHistory = async (userId) => {
     if (!userId) return [];
@@ -342,7 +340,6 @@ export default function DashboardPage() {
 
               setDirectReferrals(
                 (prev) => {
-                  // Prevent duplicate realtime entries
                   if (
                     prev.some(
                       (item) =>
@@ -438,6 +435,56 @@ export default function DashboardPage() {
   }, [supabase]);
 
   // ===========================================================
+  // CLAIM HISTORY LIVE SYNC (POLLING + TAB-FOCUS REFRESH)
+  //
+  // The Postgres realtime subscription above can sometimes miss
+  // or delay UPDATE events (e.g. if realtime replication isn't
+  // fully configured on the reward_claims table). This effect
+  // is a safety net: it periodically re-fetches claim history,
+  // and also refreshes instantly whenever the user switches back
+  // to this tab/window - so an admin's approve/reject shows up
+  // without the user needing to manually reload the page.
+  // ===========================================================
+
+  useEffect(() => {
+    if (!user?.id) return;
+
+    const intervalId = setInterval(() => {
+      refreshClaimHistory(user.id);
+    }, 10000);
+
+    const handleVisibilityOrFocus = () => {
+      if (document.visibilityState === "visible") {
+        refreshClaimHistory(user.id);
+      }
+    };
+
+    document.addEventListener(
+      "visibilitychange",
+      handleVisibilityOrFocus
+    );
+
+    window.addEventListener(
+      "focus",
+      handleVisibilityOrFocus
+    );
+
+    return () => {
+      clearInterval(intervalId);
+
+      document.removeEventListener(
+        "visibilitychange",
+        handleVisibilityOrFocus
+      );
+
+      window.removeEventListener(
+        "focus",
+        handleVisibilityOrFocus
+      );
+    };
+  }, [user?.id]);
+
+  // ===========================================================
   // MODAL SCROLL LOCK
   // ===========================================================
 
@@ -459,7 +506,6 @@ export default function DashboardPage() {
       touchAction: document.body.style.touchAction,
     };
 
-    // Lock background
     document.documentElement.style.overflow = "hidden";
     document.body.style.position = "fixed";
     document.body.style.top = `-${scrollY}px`;
@@ -696,19 +742,180 @@ export default function DashboardPage() {
       0
     );
 
+  // ===========================================================
+  // REWARD CYCLE / PROGRESS
+  // ===========================================================
+  //
+  // IMPORTANT:
+  // Progress is completely separate from claimed amount.
+  //
+  // Claiming £125/£250/etc. DOES NOT reduce progress.
+  //
+  // The cycle reaches 100% when 8 qualifying referrals
+  // (£125 x 8 = £1,000) are achieved.
+  //
+  // Once £1,000 is achieved, the achievement date becomes
+  // the cycle reset date. One year later a new cycle starts.
+  //
+  // ===========================================================
+
+  const sortedReferralDates = [
+    ...directReferrals,
+  ]
+    .filter((ref) => ref.created_at)
+    .sort(
+      (a, b) =>
+        new Date(a.created_at).getTime() -
+        new Date(b.created_at).getTime()
+    );
+
+  /**
+   * Finds the current reward cycle.
+   *
+   * Before the first £1,000 achievement:
+   * - all referrals count toward the current cycle.
+   *
+   * After £1,000 is achieved:
+   * - the 8th referral date becomes the achievement date.
+   * - the next cycle begins exactly one year later.
+   * - referrals before the new cycle start are not counted.
+   *
+   * This is calculated from referral dates, so no new database
+   * column is required.
+   */
+  const getRewardCycle = (referrals) => {
+    if (!referrals?.length) {
+      return {
+        cycleStartDate: null,
+        cycleAchievementDate: null,
+        cycleReferrals: [],
+        cycleCompleted: false,
+      };
+    }
+
+    const sorted = [...referrals]
+      .filter((ref) => ref.created_at)
+      .sort(
+        (a, b) =>
+          new Date(a.created_at).getTime() -
+          new Date(b.created_at).getTime()
+      );
+
+    let currentCycleStart = null;
+    let currentCycleReferrals = [];
+    let achievementDate = null;
+
+    for (let i = 0; i < sorted.length; i++) {
+      const referral = sorted[i];
+      const referralDate =
+        new Date(referral.created_at);
+
+      if (!currentCycleStart) {
+        currentCycleStart = referralDate;
+        currentCycleReferrals = [referral];
+      } else {
+        currentCycleReferrals.push(referral);
+      }
+
+      // Once 8 referrals are reached, £1,000 has been achieved.
+      if (
+        currentCycleReferrals.length >=
+        MAX_REFERRALS
+      ) {
+        achievementDate = new Date(
+          currentCycleReferrals[
+            MAX_REFERRALS - 1
+          ].created_at
+        );
+
+        const nextCycleStart =
+          new Date(achievementDate);
+
+        nextCycleStart.setFullYear(
+          nextCycleStart.getFullYear() +
+            REWARD_VALIDITY_YEARS
+        );
+
+        // If we have reached the next cycle,
+        // start counting referrals from there.
+        if (
+          referralDate >=
+          nextCycleStart
+        ) {
+          currentCycleStart =
+            nextCycleStart;
+
+          currentCycleReferrals = [
+            referral,
+          ];
+
+          achievementDate = null;
+        }
+      }
+    }
+
+    return {
+      cycleStartDate: currentCycleStart,
+      cycleAchievementDate:
+        achievementDate,
+      cycleReferrals:
+        currentCycleReferrals,
+      cycleCompleted:
+        currentCycleReferrals.length >=
+        MAX_REFERRALS,
+    };
+  };
+
+  const rewardCycle =
+    getRewardCycle(
+      sortedReferralDates
+    );
+
+  const cycleReferralCount =
+    rewardCycle.cycleReferrals.length;
+
+  /**
+   * Progress amount is based ONLY on referrals achieved
+   * in the current £1,000 cycle.
+   *
+   * It is intentionally NOT reduced by claims.
+   */
+  const cycleProgressAmount = Math.min(
+    cycleReferralCount *
+      REWARD_PER_REFERRAL,
+    MAX_REWARD
+  );
+
   const rewardProgress = Math.min(
-    (availableRewardAmount /
+    (cycleProgressAmount /
       MAX_REWARD) *
       100,
     100
   );
 
-  const claimedProgress = Math.min(
-    (totalClaimedAndPending /
-      MAX_REWARD) *
-      100,
-    100
-  );
+  const cycleAchievementDate =
+    rewardCycle.cycleAchievementDate;
+
+  const nextCycleResetDate =
+    cycleAchievementDate
+      ? (() => {
+          const next =
+            new Date(
+              cycleAchievementDate
+            );
+
+          next.setFullYear(
+            next.getFullYear() +
+              REWARD_VALIDITY_YEARS
+          );
+
+          return next;
+        })()
+      : null;
+
+  // ===========================================================
+  // EXPIRY / NEXT EXPIRY
+  // ===========================================================
 
   const getDaysRemaining = (date) => {
     if (!date) return 0;
@@ -1211,7 +1418,12 @@ export default function DashboardPage() {
 
                 </div>
 
-                {/* Progress */}
+                {/* =================================================
+                    PROGRESS
+                    IMPORTANT:
+                    This now uses cycleProgressAmount,
+                    NOT availableRewardAmount.
+                ================================================= */}
 
                 <div className="mt-7">
 
@@ -1219,8 +1431,8 @@ export default function DashboardPage() {
 
                     <span className="font-bold text-slate-600">
                       £
-                      {availableRewardAmount.toLocaleString()}{" "}
-                      available
+                      {cycleProgressAmount.toLocaleString()}{" "}
+                      achieved
                     </span>
 
                     <span className="font-black text-[#997819]">
@@ -1237,6 +1449,25 @@ export default function DashboardPage() {
                         width: `${rewardProgress}%`,
                       }}
                     />
+
+                  </div>
+
+                  <div className="flex items-center justify-between mt-2">
+
+                    <span className="text-[10px] text-slate-400">
+                      {cycleReferralCount} of{" "}
+                      {MAX_REFERRALS} referrals
+                    </span>
+
+                    {rewardCycle.cycleCompleted &&
+                      nextCycleResetDate && (
+                        <span className="text-[10px] font-semibold text-[#997819]">
+                          Cycle resets{" "}
+                          {formatDate(
+                            nextCycleResetDate
+                          )}
+                        </span>
+                      )}
 
                   </div>
 
@@ -1886,6 +2117,206 @@ export default function DashboardPage() {
 
               </div>
 
+              {/* =================================================
+                  PROGRAM RULES
+              ================================================= */}
+
+              <div className="bg-white/90 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 sm:p-10 shadow-sm">
+
+                <div className="mb-7">
+
+                  <span className="inline-flex px-3 py-1 rounded-full bg-[#997819]/10 text-[#997819] text-[10px] font-black uppercase tracking-widest">
+                    Referral Program Rules
+                  </span>
+
+                  <h2
+                    className="text-2xl sm:text-3xl font-black mt-3"
+                    style={{
+                      color: NAVY,
+                    }}
+                  >
+                    Referral Program Terms &
+                    Conditions
+                  </h2>
+
+                  <p className="text-sm text-slate-500 mt-2">
+                    Please review the following
+                    rules before participating in
+                    the Bizgrow Partner Referral
+                    Program.
+                  </p>
+
+                </div>
+
+                <div className="space-y-3">
+
+                  {[
+                    {
+                      number: 1,
+                      text: (
+                        <>
+                          Referral rewards apply
+                          only to{" "}
+                          <strong>
+                            new businesses
+                          </strong>{" "}
+                          that have not previously
+                          purchased from BizGrow.
+                        </>
+                      ),
+                    },
+                    {
+                      number: 2,
+                      text: (
+                        <>
+                          The referred business must
+                          register using the unique
+                          referral link.
+                        </>
+                      ),
+                    },
+                    {
+                      number: 3,
+                      text: (
+                        <>
+                          The referred business must
+                          become a{" "}
+                          <strong>
+                            BizGrow client
+                          </strong>{" "}
+                          and his payment is received
+                          for the referral to qualify.
+                        </>
+                      ),
+                    },
+                    {
+                      number: 4,
+                      text: (
+                        <>
+                          The 5% new-client discount
+                          applies to the referred
+                          client's{" "}
+                          <strong>
+                            first eligible
+                            purchase/service
+                          </strong>
+                          .
+                        </>
+                      ),
+                    },
+                    {
+                      number: 5,
+                      text: (
+                        <>
+                          The referring client receives
+                          10% credit for each successful
+                          referral.
+                        </>
+                      ),
+                    },
+                    {
+                      number: 6,
+                      text: (
+                        <>
+                          Referral credit is applied to
+                          the referring client's{" "}
+                          <strong>
+                            next eligible
+                            purchase/service
+                          </strong>
+                          .
+                        </>
+                      ),
+                    },
+                    {
+                      number: 7,
+                      text: (
+                        <>
+                          Maximum referral reward is{" "}
+                          <strong>
+                            50% or £1000
+                          </strong>
+                          , whichever comes first.
+                        </>
+                      ),
+                    },
+                    {
+                      number: 8,
+                      text: (
+                        <>
+                          Maximum of{" "}
+                          <strong>
+                            8 successful referral
+                            rewards
+                          </strong>{" "}
+                          per referral cycle.
+                        </>
+                      ),
+                    },
+                    {
+                      number: 9,
+                      text: (
+                        <>
+                          Referral discounts cannot
+                          be exchanged for cash.
+                        </>
+                      ),
+                    },
+                    {
+                      number: 10,
+                      text: (
+                        <>
+                          Discounts cannot be
+                          combined with other
+                          promotional offers unless
+                          BizGrow agrees otherwise.
+                        </>
+                      ),
+                    },
+                    {
+                      number: 11,
+                      text: (
+                        <>
+                          Self-referrals, duplicate
+                          registrations and referrals
+                          between related entities may
+                          not qualify for rewards.
+                        </>
+                      ),
+                    },
+                    {
+                      number: 12,
+                      text: (
+                        <>
+                          BizGrow reserves the right
+                          to reject duplicate,
+                          fraudulent or self-referrals.
+                        </>
+                      ),
+                    },
+                  ].map((rule) => (
+
+                    <div
+                      key={rule.number}
+                      className="flex gap-4 p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-100"
+                    >
+
+                      <div className="w-8 h-8 rounded-xl bg-[#12066a]/[0.06] text-[#12066a] flex items-center justify-center shrink-0 text-xs font-black">
+                        {rule.number}
+                      </div>
+
+                      <p className="text-sm text-slate-600 leading-relaxed">
+                        {rule.text}
+                      </p>
+
+                    </div>
+
+                  ))}
+
+                </div>
+
+              </div>
+
               <div className="bg-gradient-to-br from-white via-white to-[#997819]/5 border border-[#997819]/20 rounded-3xl p-8 shadow-sm">
 
                 <div className="flex gap-5">
@@ -2113,9 +2544,7 @@ export default function DashboardPage() {
 
                   )}
 
-                  {/* =================================================
-                      STEP 1
-                  ================================================= */}
+                  {/* STEP 1 */}
 
                   {claimStep ===
                     1 && (
@@ -2265,9 +2694,7 @@ export default function DashboardPage() {
 
                   )}
 
-                  {/* =================================================
-                      STEP 2
-                  ================================================= */}
+                  {/* STEP 2 */}
 
                   {claimStep ===
                     2 && (
@@ -2290,8 +2717,6 @@ export default function DashboardPage() {
                         </p>
 
                       </div>
-
-                      {/* Selected Service */}
 
                       <div className="p-4 rounded-2xl bg-[#12066a]/[0.035] border border-[#12066a]/10 mb-5">
 
@@ -2545,9 +2970,7 @@ export default function DashboardPage() {
 
                   )}
 
-                  {/* =================================================
-                      STEP 3
-                  ================================================= */}
+                  {/* STEP 3 */}
 
                   {claimStep ===
                     3 && (
