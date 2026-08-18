@@ -270,7 +270,7 @@ export default async function ReferralPage() {
                     className="text-xl font-extrabold tracking-tight truncate"
                     style={{ color: NAVY }}
                   >
-                    Welcome back, {profile?.full_name || "Partner"}!
+                    Welcome, {profile?.full_name || "Partner"}!
                   </h3>
                   <span className="bg-emerald-50 text-emerald-700 border border-emerald-200/80 text-[10px] px-3 py-1 rounded-full font-bold uppercase tracking-wider shrink-0 shadow-sm flex items-center gap-1">
                     <CheckCircle2 className="w-3 h-3 text-emerald-600" /> Active

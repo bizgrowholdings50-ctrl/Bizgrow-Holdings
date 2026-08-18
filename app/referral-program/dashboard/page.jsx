@@ -1589,8 +1589,8 @@ export default function DashboardPage() {
                       Ready to use your reward?
                     </p>
 
-                    <p className="text-[11px] text-slate-500 mt-1">
-                      Choose one compliance
+                    <p className="text-[11px] text-slate-600 mt-1">
+                      Choose your compliance
                       service and submit your
                       credit claim for review.
                     </p>
