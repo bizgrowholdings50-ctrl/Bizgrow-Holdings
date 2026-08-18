@@ -328,46 +328,70 @@ export default async function ReferralPage() {
                   style={{ color: NAVY }}
                 >
                   {referrerName
-                    ? `🎉 You've Been Invited by ${referrerName}`
+                    ? `🎉 You've Been Invited by ${referral.referred_name}`
                     : "Bizgrow Partner Network"}
                 </span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl font-serif font-black tracking-tight leading-[1.1]">
+              <h1 className="text-4xl sm:text-5xl  font-black tracking-tight leading-[1.1]">
                 <span className="text-[#997819]">
                   Join our referral program
                 </span>{" "}
                 <br />
                 <span className="bg-gradient-to-r from-[#12066a] via-[#12066a] to-[#997819] bg-clip-text text-transparent">
-                  and earn elite rewards.
-                  <br />
-                  Refer a Business. Save on Your Next Service.
+                  Refer a Business. Earn £125 credit on your Next Service.
                 </span>
               </h1>
 
               {/* Highlighted Badge */}
               <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#12066a]/5 border border-[#12066a]/10">
                 <span className="text-sm sm:text-base font-bold text-[#12066a]">
-                  Give 5% off.
+                  Your Friend Saves 5%.
                 </span>
                 <span className="text-gray-400">|</span>
                 <span className="text-sm sm:text-base font-bold text-[#997819]">
-                  Earn £125 Credits on each referral.
+                  You Earn £125 credit for each referral.
                 </span>
               </div>
 
               <p className="mt-4 text-base sm:text-xl text-slate-600 font-normal max-w-2xl mx-auto leading-relaxed">
                 {referrerName
                   ? `${referrerName} has invited you to join the BizGrow Referral Partner Program. Earn exclusive rewards simply by referring businesses that need compliance, certification, or security consultancy.`
-                  : "Refer another security company or business to BizGrow. When they become a paying client, they receive 5% off their first service, and you earn £125 Credits on your next BizGrow service."}
+                  : "Refer another security company or business to BizGrow. When they become a paying client, you earn £125 Credits on your next BizGrow service."}
               </p>
-              <div className="flex w-md mx-auto items-center gap-3 bg-[#12066a] border-l-4 border-[#997819] px-4 py-4 rounded-r-2xl shadow-md my-4">
-                <p className="text-sm sm:text-base text-white font-medium tracking-wide">
-                  Earn up to £1,000 in referral credit every 12 months.
-                </p>
-              </div>
 
-              {/* Core Reward Architecture Highlight Card */}
+              {/* Ready to Start Earning CTA Box */}
+              <div className="pt-4 max-w-md mx-auto bg-white/95 backdrop-blur-2xl border border-slate-200/90 rounded-3xl p-8 shadow-[0_15px_40px_rgba(18,6,106,0.06)] space-y-6 text-center">
+                <div className="space-y-2">
+                  <h3
+                    className="text-2xl font-extrabold tracking-tight"
+                    style={{ color: NAVY }}
+                  >
+                    Ready to Start Referring?
+                  </h3>
+                  <p className="text-sm text-slate-700 font-normal leading-relaxed px-2">
+                    Create your free BizGrow Partner account and get your unique
+                    referral link.
+                  </p>
+                </div>
+
+                <div className="flex justify-center w-full">
+                  <div className="w-full">
+                    <GoogleLoginButton />
+                  </div>
+                </div>
+
+                <div className="pt-1 flex flex-wrap items-center justify-center gap-2 text-xs font-medium text-slate-500">
+                  <span>Free to join</span>
+                  <span className="w-1 h-1 bg-slate-300 rounded-full"></span>
+                  <span>No upfront cost</span>
+                  <span className="w-1 h-1 bg-slate-300 rounded-full"></span>
+                  <span>Start referring immediately</span>
+                </div>
+              </div>
+             
+
+              {/* Core Reward Structure Highlight Card */}
               <div className="max-w-3xl mx-auto">
                 <div className="relative group bg-white/90 backdrop-blur-2xl border-2 border-[#997819]/40 rounded-3xl p-8 sm:p-12 shadow-[0_20px_50px_rgba(153,120,25,0.08)] text-center space-y-5">
                   <div className="inline-flex items-center gap-2 bg-[#997819]/10 text-[#997819] text-[11px] font-extrabold uppercase tracking-[0.2em] px-4 py-1.5 rounded-full">
@@ -405,13 +429,21 @@ export default async function ReferralPage() {
                       <li className="flex items-center justify-between border-b border-slate-200/60 pb-2">
                         <span>Refer 4 businesses</span>
                         <span className="font-bold text-[#12066a]">
-                          Get £650 off
+                          Get £500 off
+                        </span>
+                      </li>
+                      <li className="flex items-center mx-10 justify-between border-b border-slate-200/60 pb-2">
+                        <span>
+                          .
+                        </span>
+                        <span className="font-bold text-[#12066a]">
+                          .
                         </span>
                       </li>
                       <li className="flex items-center justify-between pb-2">
-                        <span>Refer 5 businesses</span>
+                        <span>Refer 8 businesses</span>
                         <span className="font-bold text-[#12066a]">
-                          Get £625 off
+                          Get £1000 off
                         </span>
                       </li>
                     </ul>
@@ -607,11 +639,11 @@ export default async function ReferralPage() {
                 <p className="text-xs sm:text-sm text-slate-700 font-medium  mt-2 leading-relaxed">
                   They receive{" "}
                   <strong className="text-slate-900 font-semibold">
-                    5% off their first eligible service
+                    5% off on their first service
                   </strong>{" "}
                   and you earn{" "}
                   <strong className="text-slate-900 font-semibold">
-                    £125 Credits on your next eligible service.
+                    £125 Credits on your next service.
                   </strong>
                 </p>
               </div>
@@ -671,20 +703,11 @@ export default async function ReferralPage() {
                   icon: HardHat,
                 },
                 {
-                  title: "ISO 9001",
-                  desc: "Quality Management Systems for operational excellence.",
+                  title: "ISO Standards",
+                  desc: "ISO 9001 , ISO 14001 & ISO 45001.",
                   icon: Award,
                 },
-                {
-                  title: "ISO 14001",
-                  desc: "Environmental Management Standards for sustainable growth.",
-                  icon: Leaf,
-                },
-                {
-                  title: "ISO 45001",
-                  desc: "Occupational Health and Safety management systems.",
-                  icon: HeartPulse,
-                },
+
                 {
                   title: "ConstructionLine",
                   desc: "Gold & Silver membership audit support for construction.",
@@ -705,30 +728,16 @@ export default async function ReferralPage() {
                   desc: "Basic protection against common cyber threats.",
                   icon: Lock,
                 },
-                {
-                  title: "Cyber Essentials Plus",
-                  desc: "Verified technical audit for enhanced cyber security.",
-                  icon: Fingerprint,
-                },
+
                 {
                   title: "CHAS Scheme",
                   desc: "Contractors Health and Safety Assessment Scheme.",
                   icon: FileCheck,
                 },
                 {
-                  title: "BS 10800",
-                  desc: "Standard for the provision of security services.",
+                  title: "BS Standards",
+                  desc: "BS 10800 , BS 7858 & BS 7499",
                   icon: Globe,
-                },
-                {
-                  title: "BS 7858",
-                  desc: "Engineering and screening of personnel in security.",
-                  icon: SearchCheck,
-                },
-                {
-                  title: "BS 7499",
-                  desc: "Static guarding and mobile patrol services code.",
-                  icon: ShieldAlert,
                 },
               ].map((item, i) => {
                 const IconComponent = item.icon;
@@ -754,25 +763,86 @@ export default async function ReferralPage() {
               })}
             </div>
             <div className="flex items-center gap-3 bg-[#12066a] border-l-4 border-[#997819] px-6 py-4 rounded-r-2xl shadow-md my-4">
-              <p className="text-sm sm:text-base text-white font-medium tracking-wide">
+              <p className="text-sm mx-auto sm:text-base text-white font-medium tracking-wide">
                 Referral discounts are subject to eligibility, service terms and
                 reward limits.
               </p>
             </div>
           </div>
+          {/* Last CTA */}
+          <div className="max-w-xs mx-auto bg-white border border-slate-200/90 rounded-2xl p-5 shadow-sm space-y-3.5 text-center">
+            <h3 className="text-base font-bold" style={{ color: NAVY }}>
+              GET MY REFERRAL LINK
+            </h3>
 
-          {/* Footer Contact Support Box */}
-          <div className="bg-white/90 backdrop-blur-2xl border border-slate-200/80 rounded-3xl p-8 text-center max-w-xl mx-auto space-y-3 shadow-sm">
-            <h4 className="text-lg font-bold" style={{ color: NAVY }}>
-              Have questions about qualification?
-            </h4>
-            <p className="text-xs text-slate-500 font-normal leading-relaxed">
-              Reach out directly to the compliance team at{" "}
-              <strong className="text-slate-700 font-semibold">
-                Bizgrow Holdings Ltd
-              </strong>
-              , CEME Campus, Marsh Way, RM13 8EU.
+            <GoogleLoginButton />
+
+            <p className="text-[11px] text-slate-600">
+              Free to join • Instant access
             </p>
+          </div>
+
+          {/* FAQ Section Component */}
+          <div className="max-w-2xl mx-auto space-y-6">
+            <h3
+              className="text-xl font-bold text-center"
+              style={{ color: NAVY }}
+            >
+              Frequently Asked Questions
+            </h3>
+
+            <div className="space-y-4">
+              <div className="bg-white/90 backdrop-blur-2xl border border-slate-200/80 rounded-2xl p-6 shadow-sm space-y-2">
+                <h4 className="text-sm font-semibold text-slate-900">
+                  How much does my referral receive?
+                </h4>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Your referred business receives 5% off its first eligible
+                  BizGrow service.
+                </p>
+              </div>
+
+              <div className="bg-white/90 backdrop-blur-2xl border border-slate-200/80 rounded-2xl p-6 shadow-sm space-y-2">
+                <h4 className="text-sm font-semibold text-slate-900">
+                  How much do I earn?
+                </h4>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  You receive £125 BizGrow Service Credit for each successful
+                  qualifying referral.
+                </p>
+              </div>
+
+              <div className="bg-white/90 backdrop-blur-2xl border border-slate-200/80 rounded-2xl p-6 shadow-sm space-y-2">
+                <h4 className="text-sm font-semibold text-slate-900">
+                  Is the £125 paid in cash?
+                </h4>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  No. The reward is BizGrow Service Credit toward your next
+                  eligible service.
+                </p>
+              </div>
+
+              <div className="bg-white/90 backdrop-blur-2xl border border-slate-200/80 rounded-2xl p-6 shadow-sm space-y-2">
+                <h4 className="text-sm font-semibold text-slate-900">
+                  What is the minimum qualifying purchase?
+                </h4>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  The referred business must purchase an eligible service valued
+                  at £650 + VAT or more.
+                </p>
+              </div>
+
+              <div className="bg-white/90 backdrop-blur-2xl border border-slate-200/80 rounded-2xl p-6 shadow-sm space-y-2">
+                <h4 className="text-sm font-semibold text-slate-900">
+                  How long can I earn rewards?
+                </h4>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  You can earn referral credit during your applicable 12-month
+                  referral period cycle, subject to the programme terms and
+                  maximum reward limit.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

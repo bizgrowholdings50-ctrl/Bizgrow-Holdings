@@ -202,7 +202,7 @@ export function GoogleLoginButton() {
             <path fill="#ea4335" d="M272.1 107.1c39.9-.6 78 14.6 106.8 40.9l80.2-80.2C408.3 24.7 344.6-.3 272.1 0 168 0 76.1 62.1 31.2 150.4l102.6 70.7c21.4-64.6 81.7-112.4 138.3-113z"/>
           </svg>
         </span>
-        {loading ? 'Redirecting...' : 'Continue with Google'}
+        {loading ? 'Loading...' : 'Continue with Google'}
       </button>
     </div>
   )

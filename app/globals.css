@@ -106,3 +106,54 @@ div.blog-content-flow a,
     color: #997819 !important;
     text-decoration: underline !important;
 }
+
+/* WordPress Table Layout Fixes */
+.blog-content-flow table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  margin-top: 2rem !important;
+  margin-bottom: 2rem !important;
+  font-family: var(--font-inter), var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif !important;
+  font-size: 1rem !important;
+  background-color: #ffffff !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 0.5rem !important;
+  overflow: hidden !important;
+}
+
+.blog-content-flow th, 
+.blog-content-flow td {
+  padding: 1rem 1.25rem !important;
+  text-align: left !important;
+  border-bottom: 1px solid #e5e7eb !important;
+}
+
+.blog-content-flow th {
+  background-color: #f8fafc !important;
+  color: #12066a !important; /* Brand Primary Color */
+  font-weight: 700 !important;
+  font-size: 1.05rem !important;
+}
+
+.blog-content-flow tr:last-child td {
+  border-bottom: none !important;
+}
+
+.blog-content-flow td {
+  color: #374151 !important;
+  line-height: 1.6 !important;
+}
+
+/* Responsive Table Wrapper for Mobile */
+.blog-content-flow table {
+  display: block !important;
+  overflow-x: auto !important;
+  white-space: nowrap !important;
+}
+
+@media (min-width: 768px) {
+  .blog-content-flow table {
+    display: table !important;
+    white-space: normal !important;
+  }
+}
