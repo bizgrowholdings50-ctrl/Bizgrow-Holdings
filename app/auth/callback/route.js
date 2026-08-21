@@ -11,7 +11,7 @@ function generateReferralCode() {
 
 // ============================================================
 // SERVICE ROLE ADMIN CLIENT
-// ============================================================
+// =========================================================
 
 function getAdminClient() {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
