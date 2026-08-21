@@ -25,7 +25,6 @@ import {
 } from "lucide-react";
 
 export const dynamic = "force-dynamic";
-export const revalidate = 0;
 
 const NAVY = "#12066a";
 const GOLD = "#997819";

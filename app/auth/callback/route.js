@@ -5,7 +5,7 @@ import { createClient } from "@/utils/supabase/server";
 import { createClient as createSupabaseAdmin } from "@supabase/supabase-js";
 import { cookies } from "next/headers";
 
-export const dynamic = "force-dynamic";
+
 
 function generateReferralCode() {
   return crypto.randomUUID().replace(/-/g, "").slice(0, 10).toUpperCase();
