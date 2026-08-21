@@ -130,9 +130,10 @@ export async function GET(request) {
     // ========================================================
     // CLIENT CONVERSIONS
     // ========================================================
-    // Note: referral_status column not in use, so we report 0
-    // This feature requires admin schema update to profiles table
-    const clients = [];
+    const { data: clients } = await adminSupabase
+      .from("referrals")
+      .select("id")
+      .eq("status", "completed");
 
     // ========================================================
     // CLAIMS BY STATUS
@@ -239,7 +240,7 @@ export async function GET(request) {
             uniqueReferrers,
           totalReferrals:
             allReferrals?.length || 0,
-          convertedClients: 0, // Requires referral_status column
+          convertedClients: clients?.length || 0,
           pendingClaims:
             pendingClaims?.length || 0,
           underReviewClaims:

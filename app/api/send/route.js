@@ -70,11 +70,16 @@ export async function POST(req) {
 
     // Identify if it's an internal string-matched referral submission
     const isReferralSubmission = sanitizedMessage?.startsWith("Referral Submission.");
+    const isNewReferralDiscount = sanitizedMessage?.startsWith("New Referral Client — 5% Discount Request");
 
     // Extractor for referrer name if present in structured message string
     let referrerName = "";
     if (isReferralSubmission && sanitizedMessage.includes("Who Referred:")) {
       referrerName = sanitizedMessage.split("Who Referred:")[1]?.trim() || "Unknown Referrer";
+    } else if (isNewReferralDiscount && sanitizedMessage.includes("Referrer Name:")) {
+      const lines = sanitizedMessage.split("\n");
+      const refLine = lines.find(line => line.includes("Referrer Name:"));
+      referrerName = refLine ? refLine.replace("Referrer Name:", "").trim() : "Unknown Referrer";
     }
 
     console.log("Contact form received:", {
@@ -136,7 +141,9 @@ export async function POST(req) {
 
     // ─── DYNAMIC SUBJECT LINE ───────────────────────────────────────────────
     let emailSubject = `New Inquiry: ${sanitizedService} from ${sanitizedName}`;
-    if (sanitizedCoupon) {
+    if (isNewReferralDiscount) {
+      emailSubject = `🤝 [REFERRAL DISCOUNT] New Referral Client — 5% Discount Request from ${sanitizedName}`;
+    } else if (sanitizedCoupon) {
       emailSubject = `💥 [OFFER ALERT - ${sanitizedCoupon}] New Inquiry from ${sanitizedName}`;
     } else if (isReferralSubmission) {
       emailSubject = `🤝 [REFERRAL LEAD] New Onboarding Inquiry from ${sanitizedName}`;
@@ -154,7 +161,7 @@ export async function POST(req) {
         html: `
           <div style="font-family: sans-serif; max-width: 600px; border: 1px solid #e0e0e0; padding: 30px; border-radius: 12px; color: #333;">
             <h2 style="color: #12066a; margin-top: 0;">
-              ${isReferralSubmission ? 'Referral Network Submission' : 'New Business Inquiry'}
+              ${isNewReferralDiscount ? 'New Referral Client — 5% Discount Request' : isReferralSubmission ? 'Referral Network Submission' : 'New Business Inquiry'}
             </h2>
             <p style="font-size: 16px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
               A new lead has been submitted through the <strong>BizGrow Holdings</strong> portal route.
@@ -189,7 +196,7 @@ export async function POST(req) {
               </tr>
               ` : ''}
 
-              ${isReferralSubmission ? `
+              ${(isReferralSubmission || isNewReferralDiscount) ? `
               <tr>
                 <td style="padding: 8px 0; font-weight: bold; color: #047857;">Who Referred:</td>
                 <td style="padding: 8px 0;">
@@ -217,7 +224,7 @@ export async function POST(req) {
       resend.emails.send({
         from: 'BizGrow Holdings <sales@bizgrow-holdings.net>', 
         to: [sanitizedEmail], 
-        subject: isReferralSubmission 
+        subject: (isReferralSubmission || isNewReferralDiscount)
           ? `Priority Onboarding: Thank you for connecting with BizGrow Holdings`
           : `Thank you for contacting BizGrow Holdings!`,
         html: `
@@ -225,7 +232,7 @@ export async function POST(req) {
             <h2 style="color: #12066a; margin-top: 0;">Thank You, ${sanitizedName}!</h2>
             
             <p style="font-size: 15px; line-height: 1.6;">
-              ${isReferralSubmission ? `
+              ${(isReferralSubmission || isNewReferralDiscount) ? `
                 We have successfully verified your routing through our trusted partner referral channel regarding your interest in <strong>${sanitizedService}</strong>. Your profile has been passed directly to our priority account managers.
               ` : `
                 We have successfully received your inquiry regarding <strong>${sanitizedService}</strong>. Our team is currently reviewing your details, and a representative will get in touch with you shortly.
@@ -242,7 +249,7 @@ export async function POST(req) {
             ` : ''}
 
             
-            ${isReferralSubmission ? `
+            ${(isReferralSubmission || isNewReferralDiscount) ? `
             <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 15px; border-radius: 8px; margin: 20px 0;">
               <p style="margin: 0; color: #166534; font-weight: bold; font-size: 14px;">
                 🤝 Referral Partner Confirmed: Account associated via reference of <span style="background: #d1fae5; padding: 2px 6px; border-radius: 4px;">${referrerName}</span>.

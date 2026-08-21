@@ -545,6 +545,10 @@ export async function POST(request) {
             return false;
           }
 
+          if (referral.status !== "completed") {
+            return false;
+          }
+
           const expiry =
             new Date(
               referral.created_at

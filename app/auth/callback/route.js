@@ -1,15 +1,61 @@
+
 import crypto from "crypto";
 import { NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/server";
+import { createClient as createSupabaseAdmin } from "@supabase/supabase-js";
 import { cookies } from "next/headers";
 
 function generateReferralCode() {
   return crypto.randomUUID().replace(/-/g, "").slice(0, 10).toUpperCase();
 }
 
+// ============================================================
+// SERVICE ROLE ADMIN CLIENT
+// ============================================================
+
+function getAdminClient() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+
+  if (!supabaseUrl) {
+    throw new Error("NEXT_PUBLIC_SUPABASE_URL is missing.");
+  }
+
+  if (!serviceRoleKey) {
+    throw new Error("SUPABASE_SERVICE_ROLE_KEY is missing.");
+  }
+
+  return createSupabaseAdmin(supabaseUrl, serviceRoleKey, {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false,
+    },
+  });
+}
+
+// ============================================================
+// SAFE INTERNAL REDIRECT
+// ============================================================
+
+function getSafeInternalPath(path, fallback) {
+  if (
+    typeof path === "string" &&
+    path.startsWith("/") &&
+    !path.startsWith("//")
+  ) {
+    return path;
+  }
+
+  return fallback;
+}
+
+// ============================================================
+// AUTH CALLBACK
+// ============================================================
+
 export async function GET(request) {
   console.log("======================================================");
-  console.log("STEP 1 - AUTH CALLBACK STARTED");
+  console.log("AUTH CALLBACK STARTED");
   console.log("URL:", request.url);
   console.log("======================================================");
 
@@ -18,94 +64,190 @@ export async function GET(request) {
 
     const code = searchParams.get("code");
     const refParam = searchParams.get("ref");
+    const requestedNext = searchParams.get("next");
 
-    // Cookie check karein taake agar query param miss bhi ho jaye toh cookie se pata chal jaye
+    // ========================================================
+    // READ REFERRAL COOKIE
+    // ========================================================
+
     const cookieStore = await cookies();
     const refCookie = cookieStore.get("bizgrow_referrer");
-    const hasReferral = Boolean(refParam || refCookie?.value);
 
-    // TARGET DECISION: Agar referral code mojood hai toh onboarding, warna default referral-program
-    const defaultNext = hasReferral ? "/onboarding" : "/referral-program";
-    const nextParam = searchParams.get("next") ?? defaultNext;
+    const cookieReferralCode = refCookie?.value?.trim() || "";
+    const queryReferralCode = refParam?.trim() || "";
 
-    console.log("STEP 2 - Query Parameters");
-    console.log({
-      codeExists: !!code,
-      code,
-      refParam,
-      hasReferral,
-      nextParam,
-      origin,
-    });
+    // Query parameter has priority over cookie.
+    const rawReferralCode =
+      queryReferralCode || cookieReferralCode;
 
-    if (!code) {
-      console.log("STEP 2 FAILED - No OAuth code found");
-      return NextResponse.redirect(`${origin}/referral-program`);
+    let referralCode = "";
+
+    try {
+      referralCode = rawReferralCode
+        ? decodeURIComponent(rawReferralCode).trim().toUpperCase()
+        : "";
+    } catch {
+      referralCode = rawReferralCode.trim().toUpperCase();
     }
 
-    console.log("STEP 3 - Creating Supabase Clients");
+    console.log("REFERRAL SOURCE:", {
+      queryReferralCode,
+      cookieReferralCode,
+      referralCode,
+    });
+
+    // ========================================================
+    // OAUTH CODE CHECK
+    // ========================================================
+
+    if (!code) {
+      console.error("No OAuth code found.");
+
+      return NextResponse.redirect(
+        new URL("/referral-program", origin)
+      );
+    }
+
+    // ========================================================
+    // CLIENTS
+    // ========================================================
 
     const authClient = await createClient();
-    const adminClient = await createClient(); 
+    const adminClient = getAdminClient();
 
-    console.log("STEP 3 SUCCESS");
-
-    console.log("STEP 4 - Exchange Code For Session");
+    // ========================================================
+    // EXCHANGE GOOGLE CODE FOR SESSION
+    // ========================================================
 
     const {
       data: { session },
       error: exchangeError,
     } = await authClient.auth.exchangeCodeForSession(code);
 
-    console.log("STEP 4 RESULT");
-    console.log({
-      exchangeError,
-      sessionExists: !!session,
-      userExists: !!session?.user,
-    });
-
     if (exchangeError || !session?.user) {
-      console.error("STEP 4 FAILED");
-      console.error(exchangeError);
+      console.error(
+        "OAuth exchange failed:",
+        exchangeError
+      );
 
-      return NextResponse.redirect(`${origin}/referral-program`);
+      return NextResponse.redirect(
+        new URL("/referral-program", origin)
+      );
     }
 
     const user = session.user;
 
-    console.log("STEP 5 - Logged In User");
-    console.log({
+    console.log("AUTHENTICATED USER:", {
       id: user.id,
       email: user.email,
-      metadata: user.user_metadata,
     });
 
-    // STEP 6 & 7 - Fetch Existing Profile or Generate Code
-    const rawReferrerCode = (refParam || refCookie?.value || "").trim();
-    const referrerCode = decodeURIComponent(rawReferrerCode).toUpperCase();
-
-    console.log("STEP 6 - Referral Source");
-    console.log({
-      refParam,
-      cookie: refCookie?.value,
-      rawReferrerCode,
-      referrerCode,
-    });
+    // ========================================================
+    // STEP 1
+    // CHECK EXISTING PROFILE
+    // ========================================================
 
     const {
       data: existingUser,
       error: existingUserError,
     } = await adminClient
       .from("profiles")
-      .select("id,email,referral_code")
+      .select(
+        "id,email,referral_code,partner_status"
+      )
       .eq("id", user.id)
       .maybeSingle();
 
-    const userReferralCode =
-      existingUser?.referral_code || generateReferralCode();
+    if (existingUserError) {
+      console.error(
+        "Existing profile lookup failed:",
+        existingUserError
+      );
 
-    // STEP 8 - Upsert Profile FIRST so the user officially exists in the database
-    console.log("STEP 8 - Upserting Profile");
+      return NextResponse.redirect(
+        new URL("/referral-program", origin)
+      );
+    }
+
+    const isNewProfile = !existingUser;
+
+    console.log("PROFILE STATUS:", {
+      isNewProfile,
+      existingPartnerStatus:
+        existingUser?.partner_status || null,
+    });
+
+    // ========================================================
+    // STEP 2
+    // GENERATE / KEEP REFERRAL CODE
+    // ========================================================
+
+    const userReferralCode =
+      existingUser?.referral_code ||
+      generateReferralCode();
+
+    // ========================================================
+    // STEP 3
+    // VERIFY REFERRER
+    // ========================================================
+
+    let verifiedReferrerId = null;
+    let verifiedReferrer = null;
+
+    if (
+      referralCode &&
+      referralCode !== userReferralCode
+    ) {
+      console.log(
+        "Checking referral code:",
+        referralCode
+      );
+
+      const {
+        data: referrer,
+        error: referrerError,
+      } = await adminClient
+        .from("profiles")
+        .select(
+          "id,email,referral_code"
+        )
+        .ilike(
+          "referral_code",
+          referralCode
+        )
+        .maybeSingle();
+
+      if (referrerError) {
+        console.error(
+          "Referrer lookup failed:",
+          referrerError
+        );
+      } else if (!referrer) {
+        console.log(
+          "Referral code is invalid. Treating signup as DIRECT signup."
+        );
+      } else if (referrer.id === user.id) {
+        console.log(
+          "Self-referral detected. Treating signup as DIRECT signup."
+        );
+      } else {
+        verifiedReferrer = referrer;
+        verifiedReferrerId = referrer.id;
+
+        console.log(
+          "VALID REFERRER FOUND:",
+          verifiedReferrer
+        );
+      }
+    }
+
+    // ========================================================
+    // STEP 4
+    // CREATE / UPDATE PROFILE
+    //
+    // IMPORTANT:
+    // partner_status is deliberately NOT included here.
+    // ========================================================
 
     const {
       data: profileUpsert,
@@ -126,141 +268,313 @@ export async function GET(request) {
           onConflict: "id",
         }
       )
-      .select();
+      .select(
+        "id,email,full_name,referral_code,partner_status"
+      );
 
-    console.log("STEP 8 RESULT");
-    console.log({
-      profileUpsert,
-      profileError,
-    });
+    if (profileError) {
+      console.error(
+        "Profile upsert failed:",
+        profileError
+      );
 
-    let clearCookie = false;
-    let verifiedReferrerId = null;
+      return NextResponse.redirect(
+        new URL("/referral-program", origin)
+      );
+    }
 
-    console.log("STEP 9 - Referral Decision");
-    console.log({
-      referrerCode,
-      userReferralCode,
-      sameCode: referrerCode === userReferralCode,
-    });
+    console.log(
+      "PROFILE UPSERT SUCCESS:",
+      profileUpsert
+    );
 
-    // STEP 10 - Handle Referral Tracking AFTER User Profile is Created
-    if (referrerCode && referrerCode !== userReferralCode) {
-      console.log("STEP 10 - Looking Up Referrer");
+    // ========================================================
+    // STEP 5
+    // CREATE REFERRAL ONLY FOR VALID REFERRAL SIGNUP
+    //
+    // Valid referral = PENDING
+    // ========================================================
+
+    let referralCreated = false;
+
+    if (verifiedReferrerId) {
+      console.log(
+        "Checking existing referral..."
+      );
 
       const {
-        data: referrer,
-        error: refLookupError,
+        data: existingReferral,
+        error: existingReferralError,
       } = await adminClient
-        .from("profiles")
-        .select("id,email,referral_code")
-        .ilike("referral_code", referrerCode)
+        .from("referrals")
+        .select(
+          "id,referrer_id,referred_user_id,status,created_at"
+        )
+        .eq(
+          "referred_user_id",
+          user.id
+        )
         .maybeSingle();
 
-      console.log("STEP 10 RESULT");
-      console.log({
-        referrer,
-        refLookupError,
-      });
+      if (existingReferralError) {
+        console.error(
+          "Existing referral lookup failed:",
+          existingReferralError
+        );
+      }
 
-      if (!referrer) {
-        console.log("STEP 10 STOP");
-        console.log("Reason: Referral code not found.");
-      } else if (referrer.id === user.id) {
-        console.log("STEP 10 STOP");
-        console.log("Reason: Self referral blocked.");
-      } else {
-        verifiedReferrerId = referrer.id;
+      if (!existingReferral) {
+        const referralPayload = {
+          referrer_id: verifiedReferrerId,
+          referred_user_id: user.id,
+          status: "pending",
+        };
 
-        console.log("STEP 11 - Checking Existing Referral");
+        console.log(
+          "Creating referral:",
+          referralPayload
+        );
 
         const {
-          data: existingRef,
-          error: existingRefError,
+          data: insertedReferral,
+          error: insertReferralError,
         } = await adminClient
           .from("referrals")
-          .select("*")
-          .eq("referred_user_id", user.id)
-          .maybeSingle();
+          .insert(referralPayload)
+          .select();
 
-        console.log("STEP 11 RESULT");
-        console.log({
-          existingRef,
-          existingRefError,
-        });
-
-        if (!existingRef) {
-          const payload = {
-            referrer_id: verifiedReferrerId,
-            referred_user_id: user.id,
-            status: "completed",
-          };
-
-          console.log("STEP 12 - INSERT PAYLOAD");
-          console.log(payload);
-
-          const {
-            data: insertedReferral,
-            error: insertError,
-          } = await adminClient
-            .from("referrals")
-            .insert(payload)
-            .select();
-
-          console.log("STEP 12 RESULT");
-          console.log({
-            insertedReferral,
-            insertError,
-          });
-
-          if (insertError) {
-            console.error("STEP 12 FAILED");
-            console.error(insertError);
-          } else {
-            console.log("STEP 12 SUCCESS");
-            clearCookie = true;
-          }
+        if (insertReferralError) {
+          console.error(
+            "Referral insert failed:",
+            insertReferralError
+          );
         } else {
-          console.log("STEP 11 STOP");
-          console.log("Reason: Referral already exists.");
-          clearCookie = true;
+          referralCreated = true;
+
+          console.log(
+            "REFERRAL CREATED:",
+            insertedReferral
+          );
         }
+      } else {
+        console.log(
+          "Referral already exists:",
+          existingReferral
+        );
       }
     }
 
-    console.log("STEP 13 - Preparing Redirect");
+    // ========================================================
+    // STEP 6
+    // SET PARTNER STATUS
+    //
+    // NEW USER:
+    //
+    // Referral URL -> pending
+    // Normal URL   -> approved
+    //
+    // EXISTING USER:
+    // Keep existing status unchanged.
+    // ========================================================
 
-    const response = NextResponse.redirect(
-      new URL(nextParam, origin)
-    );
+    let finalPartnerStatus =
+      existingUser?.partner_status || null;
 
-    if (clearCookie || refCookie) {
-      console.log("STEP 14 - Clearing Referral Cookie");
+    if (isNewProfile) {
+      finalPartnerStatus =
+        verifiedReferrerId
+          ? "pending"
+          : "approved";
 
-      response.cookies.set("bizgrow_referrer", "", {
-        maxAge: 0,
-        path: "/",
-      });
+      console.log(
+        "SETTING INITIAL PARTNER STATUS:",
+        {
+          initialPartnerStatus:
+            finalPartnerStatus,
+          verifiedReferrerId,
+          referralCreated,
+        }
+      );
+
+      const {
+        data: statusUpdate,
+        error: statusError,
+      } = await adminClient
+        .from("profiles")
+        .update({
+          partner_status:
+            finalPartnerStatus,
+        })
+        .eq("id", user.id)
+        .select(
+          "id,email,partner_status,referral_code"
+        )
+        .maybeSingle();
+
+      if (statusError) {
+        console.error(
+          "PARTNER STATUS UPDATE FAILED:",
+          statusError
+        );
+
+        return NextResponse.redirect(
+          new URL("/referral-program", origin)
+        );
+      }
+
+      finalPartnerStatus =
+        statusUpdate?.partner_status ||
+        finalPartnerStatus;
+
+      console.log(
+        "PARTNER STATUS UPDATED:",
+        statusUpdate
+      );
+    } else {
+      console.log(
+        "EXISTING USER - PARTNER STATUS LEFT UNCHANGED:",
+        existingUser?.partner_status
+      );
     }
 
-    console.log("STEP 15 - CALLBACK FINISHED SUCCESSFULLY");
-    console.log("======================================================");
+    // ========================================================
+    // STEP 7
+    // FINAL REDIRECT
+    //
+    // IMPORTANT FIX:
+    //
+    // DIRECT SIGNUP:
+    //   approved -> DASHBOARD
+    //
+    // REFERRAL SIGNUP:
+    //   pending -> ONBOARDING
+    //
+    // EXISTING APPROVED USER:
+    //   dashboard
+    //
+    // EXISTING PENDING USER:
+    //   onboarding
+    // ========================================================
+
+    let redirectPath = "/referral-program";
+
+    if (verifiedReferrerId) {
+      // Referral URL user
+      // Must remain pending/onboarding.
+      redirectPath = "/onboarding";
+    } else if (
+      finalPartnerStatus === "approved"
+    ) {
+      // Normal/direct signup
+      // Go directly to dashboard.
+      redirectPath =
+        "/referral-program/dashboard";
+    } else if (
+      requestedNext &&
+      finalPartnerStatus !== "pending"
+    ) {
+      // Only use requested next path when user
+      // isn't a pending referral.
+      redirectPath = getSafeInternalPath(
+        requestedNext,
+        "/referral-program/dashboard"
+      );
+    } else {
+      redirectPath = "/referral-program";
+    }
+
+    console.log(
+      "FINAL REDIRECT:",
+      {
+        redirectPath,
+        finalPartnerStatus,
+        verifiedReferrerId,
+        isNewProfile,
+      }
+    );
+
+    // ========================================================
+    // STEP 8
+    // CREATE REDIRECT RESPONSE
+    // ========================================================
+
+    const response = NextResponse.redirect(
+      new URL(redirectPath, origin)
+    );
+
+    // ========================================================
+    // STEP 9
+    // CLEAR REFERRAL COOKIE
+    //
+    // IMPORTANT:
+    // Only clear it after callback processing.
+    // ========================================================
+
+    if (refCookie) {
+      console.log(
+        "CLEARING bizgrow_referrer COOKIE"
+      );
+
+      response.cookies.set(
+        "bizgrow_referrer",
+        "",
+        {
+          maxAge: 0,
+          expires: new Date(0),
+          path: "/",
+        }
+      );
+    }
+
+    console.log(
+      "======================================================"
+    );
+    console.log(
+      "AUTH CALLBACK FINISHED SUCCESSFULLY"
+    );
+    console.log(
+      "FINAL REDIRECT:",
+      redirectPath
+    );
+    console.log(
+      "======================================================"
+    );
 
     return response;
-
   } catch (err) {
-    console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
-    console.log("TOP LEVEL EXCEPTION");
-    console.log("Name:", err?.name);
-    console.log("Message:", err?.message);
-    console.log("Stack:");
-    console.log(err?.stack);
-    console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");
+    console.error(
+      "======================================================"
+    );
+
+    console.error(
+      "AUTH CALLBACK TOP LEVEL ERROR"
+    );
+
+    console.error(
+      "Name:",
+      err?.name
+    );
+
+    console.error(
+      "Message:",
+      err?.message
+    );
+
+    console.error(
+      "Stack:",
+      err?.stack
+    );
+
+    console.error(
+      "======================================================"
+    );
 
     return NextResponse.json(
       {
         success: false,
-        error: err?.message,
+        error:
+          err?.message ||
+          "Authentication callback failed.",
       },
       {
         status: 500,
@@ -268,3 +582,4 @@ export async function GET(request) {
     );
   }
 }
+

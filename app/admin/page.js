@@ -54,6 +54,18 @@ export default function AdminDashboard() {
   const [selectedReferralStatus, setSelectedReferralStatus] = useState(null);
 
   // ========================================================
+  // PARTNER APPROVAL (USERS TABLE)
+  // ========================================================
+
+  const [approvingUserId, setApprovingUserId] = useState(null);
+
+  const [approveError, setApproveError] = useState("");
+
+  const [userSearchQuery, setUserSearchQuery] = useState("");
+
+  const [selectedPartnerStatus, setSelectedPartnerStatus] = useState(null);
+
+  // ========================================================
   // LOAD DATA
   // ========================================================
 
@@ -557,6 +569,52 @@ export default function AdminDashboard() {
   ]);
 
   // ========================================================
+  // FILTERED / SORTED USERS
+  //
+  // Newest users first (created_at descending), with optional
+  // search (name/email/company) and partner_status filter -
+  // so the admin can quickly find who's still pending.
+  // ========================================================
+
+  const filteredUsers = useMemo(() => {
+    const search = userSearchQuery.trim().toLowerCase();
+
+    return [...users]
+      .filter((u) => {
+        const matchesSearch = search
+          ? String(u.full_name || "")
+              .toLowerCase()
+              .includes(search) ||
+            String(u.email || "")
+              .toLowerCase()
+              .includes(search) ||
+            String(u.company_name || "")
+              .toLowerCase()
+              .includes(search)
+          : true;
+
+        const status = u.partner_status || "pending";
+
+        const matchesStatus = selectedPartnerStatus
+          ? status === selectedPartnerStatus
+          : true;
+
+        return matchesSearch && matchesStatus;
+      })
+      .sort((a, b) => {
+        const dateA = a.created_at
+          ? new Date(a.created_at).getTime()
+          : 0;
+
+        const dateB = b.created_at
+          ? new Date(b.created_at).getTime()
+          : 0;
+
+        return dateB - dateA;
+      });
+  }, [users, userSearchQuery, selectedPartnerStatus]);
+
+  // ========================================================
   // REFRESH CLAIMS
   // ========================================================
 
@@ -803,6 +861,79 @@ export default function AdminDashboard() {
       );
     } finally {
       setClaimApproving(false);
+    }
+  };
+
+  // ========================================================
+  // APPROVE PARTNER (USERS TABLE)
+  // ========================================================
+
+  const handleApprovePartner = async (userId) => {
+    if (!userId) return;
+
+    setApprovingUserId(userId);
+    setApproveError("");
+
+    console.log("APPROVING PARTNER:", userId);
+
+    try {
+      const response = await fetch(
+        "/api/admin/approve-partner",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId }),
+          cache: "no-store",
+        },
+      );
+
+      const result = await response.json().catch(() => ({}));
+
+      console.log("APPROVE PARTNER RESPONSE:", {
+        httpStatus: response.status,
+        ok: response.ok,
+        result,
+      });
+
+      if (!response.ok) {
+        throw new Error(
+          result?.error ||
+            result?.message ||
+            `Unable to approve partner (${response.status})`,
+        );
+      }
+
+      if (result?.success === false) {
+        throw new Error(
+          result?.error ||
+            result?.message ||
+            "Partner approval failed.",
+        );
+      }
+
+      // ====================================================
+      // UPDATE UI IMMEDIATELY
+      // ====================================================
+
+      setUsers((prevUsers) =>
+        prevUsers.map((u) =>
+          u.id === userId
+            ? { ...u, partner_status: "approved" }
+            : u,
+        ),
+      );
+
+      console.log("PARTNER APPROVED SUCCESSFULLY:", userId);
+    } catch (error) {
+      console.error("APPROVE PARTNER ERROR:", error);
+
+      setApproveError(
+        error?.message || "Failed to approve partner.",
+      );
+    } finally {
+      setApprovingUserId(null);
     }
   };
 
@@ -1524,10 +1655,58 @@ export default function AdminDashboard() {
                   </div>
                 )}
 
+                {approveError && (
+                  <div className="p-4 mb-4 bg-red-50 border border-red-200 rounded-xl">
+                    <p className="text-sm font-bold text-red-700">
+                      Partner Approval Error
+                    </p>
+
+                    <p className="text-xs text-red-600 mt-1">
+                      {approveError}
+                    </p>
+                  </div>
+                )}
+
+                <div className="space-y-4 mb-4">
+
+                  <input
+                    type="text"
+                    placeholder="Search by name, email or company..."
+                    value={userSearchQuery}
+                    onChange={(e) =>
+                      setUserSearchQuery(e.target.value)
+                    }
+                    className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#12066a]/20"
+                  />
+
+                  <div className="flex flex-wrap gap-2">
+                    {["pending", "approved"].map((status) => (
+                      <button
+                        key={status}
+                        onClick={() =>
+                          setSelectedPartnerStatus(
+                            selectedPartnerStatus === status
+                              ? null
+                              : status,
+                          )
+                        }
+                        className={`px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all ${
+                          selectedPartnerStatus === status
+                            ? "bg-[#12066a] text-white"
+                            : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                        }`}
+                      >
+                        {status}
+                      </button>
+                    ))}
+                  </div>
+
+                </div>
+
                 <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden">
 
                   <div className="overflow-x-auto">
-                    <table className="w-full min-w-[900px]">
+                    <table className="w-full min-w-[1050px]">
 
                       <thead className="bg-slate-50 border-b border-slate-200">
                         <tr>
@@ -1556,12 +1735,20 @@ export default function AdminDashboard() {
                             Amount
                           </th>
 
+                          <th className="px-6 py-4 text-center text-xs font-black uppercase tracking-wider text-slate-600">
+                            Partner Status
+                          </th>
+
+                          <th className="px-6 py-4 text-right text-xs font-black uppercase tracking-wider text-slate-600">
+                            Action
+                          </th>
+
                         </tr>
                       </thead>
 
                       <tbody className="divide-y divide-slate-100">
 
-                        {users.map(
+                        {filteredUsers.map(
                           (user) => (
                             <tr
                               key={
@@ -1622,6 +1809,47 @@ export default function AdminDashboard() {
                                 </span>
                               </td>
 
+                              <td className="px-6 py-4 text-center">
+                                <span
+                                  className={`px-3 py-1.5 rounded-full text-[9px] font-black uppercase ${
+                                    user.partner_status ===
+                                    "approved"
+                                      ? "bg-emerald-50 text-emerald-700"
+                                      : "bg-amber-50 text-amber-700"
+                                  }`}
+                                >
+                                  {user.partner_status ||
+                                    "pending"}
+                                </span>
+                              </td>
+
+                              <td className="px-6 py-4 text-right">
+                                {user.partner_status !==
+                                "approved" ? (
+                                  <button
+                                    onClick={() =>
+                                      handleApprovePartner(
+                                        user.id,
+                                      )
+                                    }
+                                    disabled={
+                                      approvingUserId ===
+                                      user.id
+                                    }
+                                    className="px-4 py-2 rounded-xl text-xs font-black uppercase bg-[#12066a] text-white hover:bg-[#0d0452] transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+                                  >
+                                    {approvingUserId ===
+                                    user.id
+                                      ? "Approving..."
+                                      : "Approve"}
+                                  </button>
+                                ) : (
+                                  <span className="text-xs font-bold text-emerald-600">
+                                    ✓ Approved
+                                  </span>
+                                )}
+                              </td>
+
                             </tr>
                           ),
                         )}
@@ -1630,7 +1858,7 @@ export default function AdminDashboard() {
                     </table>
                   </div>
 
-                  {users.length ===
+                  {filteredUsers.length ===
                     0 && (
                     <div className="p-8 text-center text-slate-500">
                       No users found

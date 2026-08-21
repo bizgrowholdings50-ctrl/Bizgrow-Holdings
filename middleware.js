@@ -13,9 +13,7 @@ export async function middleware(request) {
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
     {
       cookies: {
-        getAll() {
-          return request.cookies.getAll();
-        },
+        getAll() { return request.cookies.getAll(); },
         setAll(cookiesToSet) {
           cookiesToSet.forEach(({ name, value, options }) => {
             request.cookies.set(name, value);
@@ -27,37 +25,32 @@ export async function middleware(request) {
   );
 
   const pathname = request.nextUrl.pathname;
-
   const { data: { user } } = await supabase.auth.getUser();
 
-  // Protected paths check
-  if (!user && (pathname.startsWith('/admin') || pathname.startsWith('/referral-program/dashboard') || pathname.startsWith('/onboarding'))) {
+  // 1. Protected routes check (Unauthenticated users)
+  if (!user && (pathname.startsWith('/admin') || pathname.startsWith('/referral-program/dashboard'))) {
     return NextResponse.redirect(new URL('/', request.url));
   }
 
   if (user) {
     const { data: profile } = await supabase
       .from('profiles')
-      .select('role, onboarding_completed')
+      .select('role, partner_status') // onboarding_completed hata diya
       .eq('id', user.id)
       .maybeSingle();
 
     const role = profile?.role || '';
-    const onboardingDone = profile?.onboarding_completed ?? false;
+    const partnerStatus = profile?.partner_status || null;
 
-    // Admin Route Protection
+    // 2. Admin protection
     if (pathname.startsWith('/admin') && role !== 'admin') {
       return NextResponse.redirect(new URL('/referral-program/dashboard', request.url));
     }
 
-    // Referral Dashboard Protection - Agar onboarding complete nahi hai toh /onboarding par bhejo
-    if (pathname.startsWith('/referral-program/dashboard') && !onboardingDone) {
-      return NextResponse.redirect(new URL('/onboarding', request.url));
-    }
-
-    // Onboarding Protection - Agar onboarding ho chuki hai toh seedha dashboard par bhejo
-    if (pathname.startsWith('/onboarding') && onboardingDone) {
-      return NextResponse.redirect(new URL('/referral-program/dashboard', request.url));
+    // 3. Dashboard protection (NO ONBOARDING GATE)
+    // Sirf 'rejected' status walo ko dashboard se bahar nikalo
+    if (pathname.startsWith('/referral-program/dashboard') && partnerStatus === 'rejected') {
+      return NextResponse.redirect(new URL('/referral-program', request.url));
     }
   }
 
@@ -68,6 +61,6 @@ export const config = {
   matcher: [
     '/admin/:path*',
     '/referral-program/dashboard/:path*',
-    '/onboarding/:path*',
+    // '/onboarding/:path*'  <-- Ye hata diya kyunki ab iski zaroorat nahi
   ],
 };
