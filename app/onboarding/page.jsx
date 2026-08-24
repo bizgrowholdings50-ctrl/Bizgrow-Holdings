@@ -457,7 +457,7 @@ export default function OnboardingPage() {
                  *
                  * This is separate from partner_status.
                  */
-                status: "pending",
+                status: "completed",
               },
               {
                 onConflict: "referred_user_id",

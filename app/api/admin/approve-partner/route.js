@@ -1,9 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
-import { Resend } from "resend";
-
-// Resend client initialize karein (agar env variable mojood hai)
-const resend = new Resend(process.env.RESEND_API_KEY);
+import { sendEmail } from "@/utils/sendEmail";
 
 export async function POST(request) {
   try {
@@ -31,7 +28,21 @@ export async function POST(request) {
       auth: { autoRefreshToken: false, persistSession: false },
     });
 
-    // 1. Profile update karein aur user ki email/name fetch karein
+    // 1. Pehle check karein ke user ka current status kya hai (admin approval track karne ke liye)
+    const { data: existingUser, error: fetchError } = await supabaseAdmin
+      .from("profiles")
+      .select("partner_status, email, full_name")
+      .eq("id", userId)
+      .single();
+
+    if (fetchError || !existingUser) {
+      return NextResponse.json(
+        { success: false, error: "Partner not found" },
+        { status: 404 },
+      );
+    }
+
+    // 2. Profile update karein
     const { data: updatedProfile, error: updateError } = await supabaseAdmin
       .from("profiles")
       .update({
@@ -49,37 +60,43 @@ export async function POST(request) {
       );
     }
 
-    // 2. Email sent
-    if (updatedProfile?.email) {
-      try {
-        await resend.emails.send({
-          from: "BizGrow Holdings <onboarding@resend.dev>", // Apna verified domain yahan dalein
-          to: [updatedProfile.email],
-          subject: "Congratulations! Your Referral Partner Account is Approved",
-          html: `
-        <div style="font-family: Arial, sans-serif; padding: 20px; color: #333;">
-          <h2>Hello ${updatedProfile.full_name || "Partner"},</h2>
-          <p>Great news! Your application for the BizGrow Referral Partner Program has been <strong>approved</strong>.</p>
-          <p>You can now log in to your dashboard, access your unique referral links, and start tracking your earnings.</p>
-          <div style="margin: 30px 0;">
-            <a href="https://bizgrow-holdings.com/referral-program/dashboard" 
-               style="background-color: #000; color: #fff; padding: 12px 24px; text-decoration: none; border-radius: 5px;">
-              Access Your Dashboard
-            </a>
+    // 3. Sirf tab email bhejiye jab admin ne manually status ko 'approved' kiya ho 
+    // (Yaani pehle status 'approved' NA ho, maslan 'pending' ya kuch aur ho)
+    const wasAlreadyApproved = existingUser.partner_status === "approved";
+
+    if (!wasAlreadyApproved && updatedProfile?.email) {
+      const emailResult = await sendEmail({
+        to: updatedProfile.email,
+        subject: "Congratulations! Your Referral Partner Account is Approved",
+        html: `
+          <div style="font-family: Arial, sans-serif; padding: 20px; color: #333;">
+            <h2>Hello ${updatedProfile.full_name || "Partner"},</h2>
+            <p>Great news! Your application for the BizGrow Referral Partner Program has been <strong>approved</strong> by our admin team.</p>
+            <p>You can now log in to your dashboard, access your unique referral links, and start tracking your earnings.</p>
+            <div style="margin: 30px 0;">
+              <a href="https://bizgrow-holdings.com/referral-program/dashboard" 
+                 style="background-color: #000; color: #fff; padding: 12px 24px; text-decoration: none; border-radius: 5px;">
+                Access Your Dashboard
+              </a>
+            </div>
+            <p>Welcome aboard!<br/><strong>BizGrow Holdings Team</strong></p>
           </div>
-          <p>Welcome aboard!<br/><strong>BizGrow Holdings Team</strong></p>
-        </div>
-      `,
-        });
-      } catch (emailErr) {
-        console.error("Failed to send approval email:", emailErr);
+        `,
+      });
+
+      if (!emailResult.success) {
+        console.error("Resend Email Error:", emailResult.error);
+      } else {
+        console.log("Admin Approval Email Sent Successfully:", emailResult.data);
       }
+    } else {
+      console.log("Email skipped because partner was already approved.");
     }
 
     return NextResponse.json(
       {
         success: true,
-        message: "Partner approved successfully and email sent",
+        message: "Partner approved successfully",
         partner: updatedProfile,
       },
       { status: 200 },
