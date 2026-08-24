@@ -60,7 +60,7 @@ export async function POST(request) {
       );
     }
 
-    // 3. Sirf tab email bhejiye jab admin ne manually status ko 'approved' kiya ho 
+    // 3. Sirf tab email bhejiye jab admin ne manually status ko 'approved' kiya ho
     // (Yaani pehle status 'approved' NA ho, maslan 'pending' ya kuch aur ho)
     const wasAlreadyApproved = existingUser.partner_status === "approved";
 
@@ -68,26 +68,210 @@ export async function POST(request) {
       const emailResult = await sendEmail({
         to: updatedProfile.email,
         subject: "Congratulations! Your Referral Partner Account is Approved",
+
         html: `
-          <div style="font-family: Arial, sans-serif; padding: 20px; color: #333;">
-            <h2>Hello ${updatedProfile.full_name || "Partner"},</h2>
-            <p>Great news! Your application for the BizGrow Referral Partner Program has been <strong>approved</strong> by our admin team.</p>
-            <p>You can now log in to your dashboard, access your unique referral links, and start tracking your earnings.</p>
-            <div style="margin: 30px 0;">
-              <a href="https://bizgrow-holdings.com/referral-program/dashboard" 
-                 style="background-color: #000; color: #fff; padding: 12px 24px; text-decoration: none; border-radius: 5px;">
-                Access Your Dashboard
-              </a>
-            </div>
-            <p>Welcome aboard!<br/><strong>BizGrow Holdings Team</strong></p>
+  <div style="
+    margin: 0;
+    padding: 40px 20px;
+    background-color: #f7f7fa;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333333;
+  ">
+
+    <div style="
+      max-width: 620px;
+      margin: 0 auto;
+      background-color: #ffffff;
+      border: 1px solid #e5e5ec;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(18, 6, 106, 0.08);
+    ">
+
+      <!-- Header -->
+      <div style="
+        padding: 24px 30px;
+        background-color: #ffffff;
+        border-bottom: 1px solid #eeeeee;
+      ">
+        <div style="
+          font-size: 24px;
+          font-weight: 700;
+          color: #12066a;
+          letter-spacing: -0.5px;
+        ">
+          BizGrow Holdings
+        </div>
+
+        <div style="
+          margin-top: 5px;
+          font-size: 13px;
+          color: #777777;
+        ">
+          Referral Partner Network
+        </div>
+      </div>
+
+      <!-- Content -->
+      <div style="padding: 38px 30px 32px;">
+
+        <!-- Approval Badge -->
+        <div style="
+          display: inline-block;
+          padding: 7px 13px;
+          background-color: #f8f3e6;
+          border: 1px solid #d8bd68;
+          border-radius: 20px;
+          color: #997819;
+          font-size: 11px;
+          font-weight: 700;
+          letter-spacing: 0.8px;
+          text-transform: uppercase;
+        ">
+          Partner Account Approved
+        </div>
+
+        <!-- Heading -->
+        <h2 style="
+          margin: 20px 0 14px;
+          color: #12066a;
+          font-family: Georgia, 'Times New Roman', serif;
+          font-size: 30px;
+          line-height: 1.25;
+          font-weight: 700;
+        ">
+          Hello ${updatedProfile.full_name || "Partner"},
+        </h2>
+
+        <p style="
+          margin: 0 0 14px;
+          font-size: 15px;
+          line-height: 1.7;
+          color: #374151;
+        ">
+          Great news! Your application for the
+          <strong>BizGrow Referral Partner Program</strong>
+          has been <strong style="color:#15803d;">approved</strong>
+          by our admin team.
+        </p>
+
+        <p style="
+          margin: 0 0 24px;
+          font-size: 15px;
+          line-height: 1.7;
+          color: #4b5563;
+        ">
+          You can now log in to your dashboard, access your unique
+          referral links, and start tracking your earnings.
+        </p>
+
+        <!-- Status Box -->
+        <div style="
+          margin: 25px 0;
+          padding: 18px 20px;
+          background-color: #f8f9fc;
+          border-left: 4px solid #997819;
+          border-radius: 8px;
+        ">
+
+          <div style="
+            margin-bottom: 8px;
+            font-size: 15px;
+            font-weight: 700;
+            color: #111827;
+          ">
+            Account Status
           </div>
-        `,
+
+          <div style="
+            font-size: 14px;
+            line-height: 1.7;
+            color: #4b5563;
+          ">
+            Your BizGrow Partner account is now
+            <strong style="color:#15803d;">
+              Approved
+            </strong>
+            and your dashboard has been unlocked.
+          </div>
+
+        </div>
+
+        <!-- Button -->
+        <div style="
+          margin: 30px 0;
+          text-align: center;
+        ">
+          <a
+            href="https://bizgrow-holdings.com/referral-program/dashboard"
+            style="
+              display: inline-block;
+              background-color: #12066a;
+              color: #ffffff;
+              padding: 14px 28px;
+              text-decoration: none;
+              border-radius: 7px;
+              font-size: 15px;
+              font-weight: 700;
+              border: 1px solid #997819;
+            "
+          >
+            Access Your Dashboard
+          </a>
+        </div>
+
+        <p style="
+          margin: 0;
+          text-align: center;
+          font-size: 13px;
+          line-height: 1.6;
+          color: #777777;
+        ">
+          Welcome aboard! We're excited to have you as part of the
+          BizGrow Partner Network.
+        </p>
+
+      </div>
+
+      <!-- Footer -->
+      <div style="
+        padding: 20px 30px;
+        background-color: #fafafa;
+        border-top: 1px solid #eeeeee;
+        text-align: center;
+      ">
+
+        <div style="
+          font-size: 13px;
+          color: #777777;
+          margin-bottom: 6px;
+        ">
+          Welcome to the BizGrow Partner Network
+        </div>
+
+        <div style="
+          font-size: 14px;
+          font-weight: 700;
+          color: #12066a;
+        ">
+          BizGrow Holdings Team
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+`,
       });
 
       if (!emailResult.success) {
         console.error("Resend Email Error:", emailResult.error);
       } else {
-        console.log("Admin Approval Email Sent Successfully:", emailResult.data);
+        console.log(
+          "Admin Approval Email Sent Successfully:",
+          emailResult.data,
+        );
       }
     } else {
       console.log("Email skipped because partner was already approved.");
