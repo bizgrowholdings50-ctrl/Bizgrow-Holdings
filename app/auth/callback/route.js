@@ -5,7 +5,9 @@ import { createClient } from "@/utils/supabase/server";
 import { createClient as createSupabaseAdmin } from "@supabase/supabase-js";
 import { cookies } from "next/headers";
 
-
+// 👇 YE 2 LINES ADD KARNI HAIN — bas itna hi
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 function generateReferralCode() {
   return crypto.randomUUID().replace(/-/g, "").slice(0, 10).toUpperCase();

@@ -1,7 +1,7 @@
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 
-export async function createClient({ serviceRole = false } = {}) {
+export async function createClient({ serviceRole = false, cookieSink } = {}) {
   const cookieStore = typeof cookies === 'function' ? await cookies() : cookies
 
   console.log("==========================================");
@@ -72,6 +72,30 @@ export async function createClient({ serviceRole = false } = {}) {
       try {
         console.log("Setting Cookies:");
         console.dir(cookiesToSet, { depth: null });
+
+        // ------------------------------------------------------
+        // IMPORTANT (production fix):
+        //
+        // If a cookieSink array was provided by the caller (e.g.
+        // a route handler that is about to build its own
+        // NextResponse.redirect(...)), push the cookies there so
+        // the caller can attach them DIRECTLY to that exact
+        // response object via response.cookies.set(...).
+        //
+        // Relying only on cookieStore.set() below is NOT reliable
+        // in production/serverless: those mutations go onto the
+        // next/headers cookie store, which does not always get
+        // merged into a manually-constructed NextResponse that a
+        // route handler returns. That mismatch is what causes the
+        // "works on localhost, blank until refresh in production"
+        // bug for auth callback redirects.
+        // ------------------------------------------------------
+
+        if (cookieSink && Array.isArray(cookieSink)) {
+          cookiesToSet.forEach((cookie) => {
+            cookieSink.push(cookie);
+          });
+        }
 
         if (!cookieStore) return;
 
