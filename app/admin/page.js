@@ -1834,7 +1834,7 @@ useEffect(() => {
                           const status =
                             referral.referral_status ||
                             referral.status ||
-                            "pending";
+                            "completed";
 
                           return (
                             <tr
