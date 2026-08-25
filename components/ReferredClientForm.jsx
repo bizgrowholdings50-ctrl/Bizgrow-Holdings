@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Turnstile } from "@marsidev/react-turnstile";
 import { GoogleLoginButton } from "./AuthButtons";
 
 const NAVY = "#12066a";
@@ -34,7 +33,6 @@ export default function ReferredClientForm({
   const [number, setNumber] = useState(prefill.number || "");
   const [service, setService] = useState("");
   const [message, setMessage] = useState("");
-  const [captchaToken, setCaptchaToken] = useState(null);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -50,8 +48,6 @@ export default function ReferredClientForm({
     e.preventDefault();
     setLoading(true);
     setError("");
-
-  
 
     // Structure the message with referral details so the /api/send endpoint extracts it correctly
     const structuredMessage = `New Referral Client — 5% Discount Request
@@ -85,7 +81,6 @@ User Message: ${message || "No additional comments."}`;
           service: service,
           message: structuredMessage,
           coupon: "5% Referral Discount",
-          captchaToken,
         }),
       });
 
