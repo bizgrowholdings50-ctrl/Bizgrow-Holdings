@@ -45,15 +45,29 @@ export async function middleware(request) {
   // Ye checks ab page/component level par honge:
   //   - Admin check    -> /admin ke server component mein
   //   - Rejected check -> DashboardClient.jsx (locked screen)
-  //     mein already maujood hai
+  //      mein already maujood hai
   // ==========================================================
 
   if (
     !user &&
     (pathname.startsWith('/admin') ||
-      pathname.startsWith('/referral-program/dashboard'))
+      pathname.startsWith('/referral-program/dashboard') ||
+      pathname.startsWith('/onboarding'))
   ) {
     return NextResponse.redirect(new URL('/', request.url));
+  }
+
+  // Agar user logged in hai aur onboarding page par hai, toh check karein ke kahin pehle se onboarding complete to nahi
+  if (user && pathname.startsWith('/onboarding')) {
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('onboarding_completed')
+      .eq('id', user.id)
+      .single();
+
+    if (profile?.onboarding_completed) {
+      return NextResponse.redirect(new URL('/referral-program/dashboard', request.url));
+    }
   }
 
   return response;
@@ -63,5 +77,6 @@ export const config = {
   matcher: [
     '/admin/:path*',
     '/referral-program/dashboard/:path*',
+    '/onboarding/:path*',
   ],
 };

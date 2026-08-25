@@ -313,6 +313,306 @@ export default function AdminDashboard() {
     };
   }, []);
 
+
+
+ // ========================================================
+// REALTIME DATABASE UPDATES
+// ========================================================
+useEffect(() => {
+  let refreshTimer = null;
+
+  const refreshAdminData = async () => {
+    if (refreshTimer) {
+      clearTimeout(refreshTimer);
+    }
+
+    refreshTimer = setTimeout(async () => {
+      try {
+        console.log(
+          "REALTIME UPDATE DETECTED — REFRESHING ADMIN DATA"
+        );
+
+        // ====================================================
+        // METRICS
+        // ====================================================
+        try {
+          const metricsRes = await fetch(
+            "/api/admin/metrics",
+            {
+              cache: "no-store",
+            }
+          );
+
+          const metricsData =
+            await metricsRes
+              .json()
+              .catch(() => ({}));
+
+          if (
+            metricsRes.ok &&
+            metricsData.success
+          ) {
+            setMetrics(
+              metricsData.metrics
+            );
+          }
+        } catch (error) {
+          console.error(
+            "Realtime metrics refresh error:",
+            error
+          );
+        }
+
+        // ====================================================
+        // CLAIMS
+        // ====================================================
+        try {
+          const claimsRes = await fetch(
+            "/api/admin/claims",
+            {
+              cache: "no-store",
+            }
+          );
+
+          const claimsData =
+            await claimsRes
+              .json()
+              .catch(() => ({}));
+
+          let claimsList = [];
+
+          if (
+            Array.isArray(claimsData)
+          ) {
+            claimsList = claimsData;
+          } else if (
+            Array.isArray(
+              claimsData.claims
+            )
+          ) {
+            claimsList =
+              claimsData.claims;
+          } else if (
+            Array.isArray(
+              claimsData?.data?.claims
+            )
+          ) {
+            claimsList =
+              claimsData.data.claims;
+          }
+
+          setClaims(
+            claimsList
+          );
+        } catch (error) {
+          console.error(
+            "Realtime claims refresh error:",
+            error
+          );
+        }
+
+        // ====================================================
+        // REFERRAL NETWORK
+        // ====================================================
+        try {
+          const networkRes =
+            await fetch(
+              "/api/admin/referral-network",
+              {
+                cache: "no-store",
+              }
+            );
+
+          const networkData =
+            await networkRes
+              .json()
+              .catch(() => ({}));
+
+          let networkList = [];
+
+          if (
+            Array.isArray(networkData)
+          ) {
+            networkList =
+              networkData;
+          } else if (
+            Array.isArray(
+              networkData.network
+            )
+          ) {
+            networkList =
+              networkData.network;
+          } else if (
+            Array.isArray(
+              networkData?.data?.network
+            )
+          ) {
+            networkList =
+              networkData.data.network;
+          } else if (
+            Array.isArray(
+              networkData.referrals
+            )
+          ) {
+            networkList =
+              networkData.referrals;
+          }
+
+          setNetwork(
+            networkList
+          );
+        } catch (error) {
+          console.error(
+            "Realtime network refresh error:",
+            error
+          );
+        }
+
+        // ====================================================
+        // USERS
+        // ====================================================
+        try {
+          const usersRes = await fetch(
+            "/api/admin/users",
+            {
+              cache: "no-store",
+            }
+          );
+
+          const usersData =
+            await usersRes
+              .json()
+              .catch(() => ({}));
+
+          let usersList = [];
+
+          if (
+            Array.isArray(usersData)
+          ) {
+            usersList =
+              usersData;
+          } else if (
+            Array.isArray(
+              usersData.users
+            )
+          ) {
+            usersList =
+              usersData.users;
+          } else if (
+            Array.isArray(
+              usersData?.data?.users
+            )
+          ) {
+            usersList =
+              usersData.data.users;
+          }
+
+          setUsers(
+            usersList
+          );
+        } catch (error) {
+          console.error(
+            "Realtime users refresh error:",
+            error
+          );
+        }
+
+        console.log(
+          "ADMIN DATA REFRESHED FROM REALTIME"
+        );
+      } catch (error) {
+        console.error(
+          "Realtime admin refresh error:",
+          error
+        );
+      }
+    }, 300);
+  };
+
+  // ========================================================
+  // SUPABASE REALTIME CHANNEL
+  // ========================================================
+
+  const channel = supabase
+    .channel(
+      "admin-dashboard-realtime"
+    )
+    .on(
+      "postgres_changes",
+      {
+        event: "*",
+        schema: "public",
+        table: "profiles",
+      },
+      (payload) => {
+        console.log(
+          "REALTIME PROFILES UPDATE:",
+          payload
+        );
+
+        refreshAdminData();
+      }
+    )
+    .on(
+      "postgres_changes",
+      {
+        event: "*",
+        schema: "public",
+        table: "referrals",
+      },
+      (payload) => {
+        console.log(
+          "REALTIME REFERRALS UPDATE:",
+          payload
+        );
+
+        refreshAdminData();
+      }
+    )
+    .on(
+      "postgres_changes",
+      {
+        event: "*",
+        schema: "public",
+        table: "reward_claims",
+      },
+      (payload) => {
+        console.log(
+          "REALTIME CLAIM UPDATE:",
+          payload
+        );
+
+        refreshAdminData();
+      }
+    )
+    .subscribe((status) => {
+      console.log(
+        "ADMIN REALTIME STATUS:",
+        status
+      );
+    });
+
+  // ========================================================
+  // CLEANUP
+  // ========================================================
+
+  return () => {
+    if (refreshTimer) {
+      clearTimeout(
+        refreshTimer
+      );
+    }
+
+    supabase.removeChannel(
+      channel
+    );
+
+    console.log(
+      "ADMIN REALTIME CHANNEL REMOVED"
+    );
+  };
+}, []);
+
   // ========================================================
   // MODAL SCROLL LOCK
   // ========================================================

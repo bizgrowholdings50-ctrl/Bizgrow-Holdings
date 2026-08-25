@@ -161,7 +161,7 @@ export default function DashboardClient() {
         const { data: profileData, error: profileErr } = await supabase
           .from("profiles")
           .select(
-            "full_name, email, avatar_url, referral_code, company_name, contact_number, partner_status"
+            "full_name, email, avatar_url, referral_code, company_name, contact_number, partner_status",
           )
           .eq("id", user.id)
           .maybeSingle();
@@ -192,7 +192,7 @@ export default function DashboardClient() {
           "get_user_referrals",
           {
             p_referrer_id: user.id,
-          }
+          },
         );
 
         if (!rpcError && rpcData && rpcData.length > 0) {
@@ -210,7 +210,7 @@ export default function DashboardClient() {
                 email,
                 avatar_url
               )
-            `
+            `,
             )
             .eq("referrer_id", user.id)
             .order("created_at", {
@@ -287,7 +287,7 @@ export default function DashboardClient() {
 
               setDirectReferralCount((prev) => prev + 1);
               setPartnerNetworkSize((prev) => prev + 1);
-            }
+            },
           )
           .subscribe((status) => {
             console.log("Referral realtime status:", status);
@@ -311,11 +311,11 @@ export default function DashboardClient() {
               console.log(
                 "Reward claim realtime update:",
                 payload.eventType,
-                payload.new
+                payload.new,
               );
 
               await refreshClaimHistory(user.id);
-            }
+            },
           )
           .subscribe((status) => {
             console.log("Reward realtime status:", status);
@@ -479,7 +479,7 @@ export default function DashboardClient() {
     user?.user_metadata?.picture ||
     profile?.avatar_url ||
     `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(
-      profile?.full_name || user?.email || "User"
+      profile?.full_name || user?.email || "User",
     )}&backgroundColor=12066a,997819`;
 
   // ===========================================================
@@ -508,10 +508,7 @@ export default function DashboardClient() {
 
               <div>
                 <div className="flex items-center gap-2">
-                  <h2
-                    className="text-xl font-bold"
-                    style={{ color: NAVY }}
-                  >
+                  <h2 className="text-xl font-bold" style={{ color: NAVY }}>
                     {profile?.full_name || "Valued Partner"}
                   </h2>
                   <span className="text-[10px] bg-amber-50 text-amber-600 border border-amber-200 px-2 py-0.5 rounded-full font-medium">
@@ -654,11 +651,11 @@ export default function DashboardClient() {
   };
 
   const activeRewardReferrals = directReferrals.filter((ref) =>
-    isRewardActive(ref.created_at)
+    isRewardActive(ref.created_at),
   );
 
   const expiredRewardReferrals = directReferrals.filter(
-    (ref) => !isRewardActive(ref.created_at)
+    (ref) => !isRewardActive(ref.created_at),
   );
 
   const activeRewardCount = activeRewardReferrals.length;
@@ -667,12 +664,12 @@ export default function DashboardClient() {
 
   const earnedRewardAmount = Math.min(
     activeRewardCount * REWARD_PER_REFERRAL,
-    MAX_REWARD
+    MAX_REWARD,
   );
 
   const expiredRewardAmount = Math.min(
     expiredRewardCount * REWARD_PER_REFERRAL,
-    MAX_REWARD
+    MAX_REWARD,
   );
 
   // ===========================================================
@@ -684,13 +681,13 @@ export default function DashboardClient() {
       (claim) =>
         claim.status === "approved" ||
         claim.status === "completed" ||
-        claim.status === "claimed"
+        claim.status === "claimed",
     )
     .reduce((total, claim) => total + Number(claim.amount || 0), 0);
 
   const pendingClaimAmount = claimHistory
     .filter(
-      (claim) => claim.status === "pending" || claim.status === "under_review"
+      (claim) => claim.status === "pending" || claim.status === "under_review",
     )
     .reduce((total, claim) => total + Number(claim.amount || 0), 0);
 
@@ -700,7 +697,7 @@ export default function DashboardClient() {
 
   const availableRewardAmount = Math.max(
     Math.min(earnedRewardAmount, MAX_REWARD) - totalClaimedAndPending,
-    0
+    0,
   );
 
   // ===========================================================
@@ -711,8 +708,12 @@ export default function DashboardClient() {
     .filter((ref) => ref.created_at)
     .sort(
       (a, b) =>
-        new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+        new Date(a.created_at).getTime() - new Date(b.created_at).getTime(),
     );
+
+  // ===========================================================
+  // REWARD CYCLE / PROGRESS (Optimized & Based on 8th Referral)
+  // ===========================================================
 
   const getRewardCycle = (referrals) => {
     if (!referrals?.length) {
@@ -724,14 +725,15 @@ export default function DashboardClient() {
       };
     }
 
+    // Purane se naye ki taraf sort karein (Oldest to Newest)
     const sorted = [...referrals]
       .filter((ref) => ref.created_at)
       .sort(
         (a, b) =>
-          new Date(a.created_at).getTime() - new Date(b.created_at).getTime()
+          new Date(a.created_at).getTime() - new Date(b.created_at).getTime(),
       );
 
-    let currentCycleStart = null;
+    let currentCycleStart = new Date(sorted[0].created_at);
     let currentCycleReferrals = [];
     let achievementDate = null;
 
@@ -739,28 +741,28 @@ export default function DashboardClient() {
       const referral = sorted[i];
       const referralDate = new Date(referral.created_at);
 
-      if (!currentCycleStart) {
-        currentCycleStart = referralDate;
-        currentCycleReferrals = [referral];
-      } else {
+      // Agar hum naye cycle mein hain, toh check karein ke kya ye current cycle start ke baad ka hai?
+      if (referralDate >= currentCycleStart) {
         currentCycleReferrals.push(referral);
-      }
 
-      if (currentCycleReferrals.length >= MAX_REFERRALS) {
-        achievementDate = new Date(
-          currentCycleReferrals[MAX_REFERRALS - 1].created_at
-        );
+        // Jaise hi 8 referrals poore ho jayein
+        if (currentCycleReferrals.length === MAX_REFERRALS) {
+          achievementDate = new Date(referral.created_at); // Last (8th) referral ki date
 
-        const nextCycleStart = new Date(achievementDate);
+          // Agle cycle ki start date = 8th referral ki date + 1 saal (REWARD_VALIDITY_YEARS)
+          const nextCycleStart = new Date(achievementDate);
+          nextCycleStart.setFullYear(
+            nextCycleStart.getFullYear() + REWARD_VALIDITY_YEARS,
+          );
 
-        nextCycleStart.setFullYear(
-          nextCycleStart.getFullYear() + REWARD_VALIDITY_YEARS
-        );
-
-        if (referralDate >= nextCycleStart) {
-          currentCycleStart = nextCycleStart;
-          currentCycleReferrals = [referral];
-          achievementDate = null;
+          // Agar mazeed referrals hain, toh agle cycle ke liye variables update kar do
+          if (i < sorted.length - 1) {
+            currentCycleStart = nextCycleStart;
+            currentCycleReferrals = [];
+            achievementDate = null;
+          } else {
+            break; // Loop khatam agar mazeed referrals nahi hain
+          }
         }
       }
     }
@@ -779,12 +781,12 @@ export default function DashboardClient() {
 
   const cycleProgressAmount = Math.min(
     cycleReferralCount * REWARD_PER_REFERRAL,
-    MAX_REWARD
+    MAX_REWARD,
   );
 
   const rewardProgress = Math.min(
     (cycleProgressAmount / MAX_REWARD) * 100,
-    100
+    100,
   );
 
   const cycleAchievementDate = rewardCycle.cycleAchievementDate;
@@ -824,7 +826,7 @@ export default function DashboardClient() {
       ? [...activeRewardReferrals].sort(
           (a, b) =>
             getExpiryDate(a.created_at).getTime() -
-            getExpiryDate(b.created_at).getTime()
+            getExpiryDate(b.created_at).getTime(),
         )[0]
       : null;
 
@@ -980,7 +982,7 @@ export default function DashboardClient() {
         console.error("Non-JSON claim API response:", text);
 
         throw new Error(
-          `Claim API returned an invalid response (${response.status}).`
+          `Claim API returned an invalid response (${response.status}).`,
         );
       }
 
@@ -999,7 +1001,7 @@ export default function DashboardClient() {
       console.error("Claim submission error:", error);
 
       setClaimError(
-        error?.message || "Something went wrong. Please try again."
+        error?.message || "Something went wrong. Please try again.",
       );
     } finally {
       setClaimSubmitting(false);
@@ -1183,8 +1185,9 @@ export default function DashboardClient() {
                       Active Credits
                     </p>
 
+                    {/* Yahan earnedRewardAmount ki jagah availableRewardAmount kar dein */}
                     <p className="text-xl font-black text-[#12066a] mt-1">
-                      £{earnedRewardAmount.toLocaleString()}
+                      £{availableRewardAmount.toLocaleString()}
                     </p>
 
                     <p className="text-[10px] text-slate-500 mt-1">
@@ -1304,15 +1307,132 @@ export default function DashboardClient() {
               DASHBOARD
           ================================================= */}
 
+          {/* Referral Link */}
+          <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 shadow-sm">
+            <h3
+              className="text-xl font-bold mb-4"
+              style={{
+                color: NAVY,
+              }}
+            >
+              Your Unique Referral Link
+            </h3>
+
+            <ReferralBox referralCode={profile?.referral_code} />
+          </div>
+
           {activeTab === "dashboard" ? (
             <div className="space-y-12">
               <div className="grid gap-6 md:grid-cols-2">
-                <PartnerMetrics
-                  userId={user?.id}
-                  initialDirectCount={directReferralCount}
-                  initialNetworkSize={partnerNetworkSize}
-                  initialDirectReferrals={directReferrals}
-                />
+                {/* Partner Network Activity Table */}
+                <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 shadow-sm">
+                  <div className="flex items-center justify-between mb-6">
+                    <div>
+                      <h3
+                        className="text-xl font-bold"
+                        style={{
+                          color: NAVY,
+                        }}
+                      >
+                        Partner Network Activity
+                      </h3>
+
+                      <p className="text-xs text-slate-500 mt-1">
+                        Peers who joined using your referral link.
+                      </p>
+                    </div>
+
+                    <span className="px-3 py-1 rounded-full bg-slate-100 text-xs font-bold text-slate-600">
+                      {directReferrals.length} Total
+                    </span>
+                  </div>
+
+                  {directReferrals.length === 0 ? (
+                    <div className="text-center py-12 border-2 border-dashed border-slate-100 rounded-2xl">
+                      <p className="text-sm text-slate-400">
+                        No direct referrals recorded yet.
+                      </p>
+                    </div>
+                  ) : (
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-left border-collapse">
+                        <thead>
+                          <tr className="border-b border-slate-100 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                            <th className="pb-4">Partner Name</th>
+                            <th className="pb-4">Reward</th>
+                            <th className="pb-4 text-right">
+                              Joined / Reward Date
+                            </th>
+                          </tr>
+                        </thead>
+
+                        <tbody className="divide-y divide-slate-50">
+                          {directReferrals.map((ref) => {
+                            const expiryDate = getExpiryDate(ref.created_at);
+                            const active = isRewardActive(ref.created_at);
+                            const daysLeft = active
+                              ? getDaysRemaining(expiryDate)
+                              : 0;
+
+                            return (
+                              <tr key={ref.id}>
+                                <td className="py-4">
+                                  <div className="flex items-center gap-3">
+                                    <AvatarWithFallback
+                                      src={ref.avatar_url}
+                                      name={ref.full_name}
+                                      size="w-9 h-9"
+                                      textSize="text-xs"
+                                    />
+                                    <span className="text-sm font-medium text-slate-800">
+                                      {ref.full_name}
+                                    </span>
+                                  </div>
+                                </td>
+
+                                <td className="py-4">
+                                  <span
+                                    className={`px-0 py-1.5 rounded-full text-[11px] font-black uppercase ${
+                                      active
+                                        ? "bg-emerald-50 text-emerald-700"
+                                        : "bg-red-50 text-red-600"
+                                    }`}
+                                  >
+                                    £125 {active ? "Active" : "Expired"}
+                                  </span>
+
+                                  {active && (
+                                    <p className="text-[10px] font-bold text-slate-700 mt-1">
+                                      {daysLeft} days left
+                                    </p>
+                                  )}
+                                </td>
+
+                                <td className="py-4 text-right">
+                                  <div className="text-xs text-slate-600">
+                                    {new Date(
+                                      ref.created_at,
+                                    ).toLocaleDateString("en-GB", {
+                                      day: "numeric",
+                                      month: "short",
+                                      year: "numeric",
+                                    })}
+                                  </div>
+
+                                  <div className="text-[9px] mt-1 font-semibold text-[#997819]">
+                                    {active
+                                      ? `Expires ${formatDate(expiryDate)}`
+                                      : `Expired ${formatDate(expiryDate)}`}
+                                  </div>
+                                </td>
+                              </tr>
+                            );
+                          })}
+                        </tbody>
+                      </table>
+                    </div>
+                  )}
+                </div>
 
                 <div className="bg-white/85 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 shadow-sm">
                   <div className="flex items-center justify-between mb-2">
@@ -1352,23 +1472,7 @@ export default function DashboardClient() {
                 </div>
               </div>
 
-              {/* Referral Link */}
-
-              <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 shadow-sm">
-                <h3
-                  className="text-xl font-bold mb-4"
-                  style={{
-                    color: NAVY,
-                  }}
-                >
-                  Your Unique Referral Link
-                </h3>
-
-                <ReferralBox referralCode={profile?.referral_code} />
-              </div>
-
               {/* Claim History */}
-
               <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 shadow-sm">
                 <div className="flex items-center justify-between mb-6">
                   <div>
@@ -1417,7 +1521,7 @@ export default function DashboardClient() {
                                     day: "numeric",
                                     month: "short",
                                     year: "numeric",
-                                  }
+                                  },
                                 )
                               : ""}
                           </p>
@@ -1433,8 +1537,8 @@ export default function DashboardClient() {
                               claim.status === "approved"
                                 ? "bg-emerald-50 text-emerald-700"
                                 : claim.status === "rejected"
-                                ? "bg-red-50 text-red-600"
-                                : "bg-amber-50 text-amber-700"
+                                  ? "bg-red-50 text-red-600"
+                                  : "bg-amber-50 text-amber-700"
                             }`}
                           >
                             {claim.status}
@@ -1442,130 +1546,6 @@ export default function DashboardClient() {
                         </div>
                       </div>
                     ))}
-                  </div>
-                )}
-              </div>
-
-              {/* Referrals */}
-
-              <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 shadow-sm">
-                <div className="flex items-center justify-between mb-6">
-                  <div>
-                    <h3
-                      className="text-xl font-bold"
-                      style={{
-                        color: NAVY,
-                      }}
-                    >
-                      Partner Network Activity
-                    </h3>
-
-                    <p className="text-xs text-slate-500 mt-1">
-                      Peers who joined using your referral link.
-                    </p>
-                  </div>
-
-                  <span className="px-3 py-1 rounded-full bg-slate-100 text-xs font-bold text-slate-600">
-                    {directReferrals.length} Total
-                  </span>
-                </div>
-
-                {directReferrals.length === 0 ? (
-                  <div className="text-center py-12 border-2 border-dashed border-slate-100 rounded-2xl">
-                    <p className="text-sm text-slate-400">
-                      No direct referrals recorded yet.
-                    </p>
-                  </div>
-                ) : (
-                  <div className="overflow-x-auto">
-                    <table className="w-full text-left border-collapse">
-                      <thead>
-                        <tr className="border-b border-slate-100 text-[11px] font-bold uppercase tracking-wider text-slate-400">
-                          <th className="pb-4">Partner Name</th>
-
-                          <th className="pb-4">Email</th>
-
-                          <th className="pb-4">Reward</th>
-
-                          <th className="pb-4 text-right">
-                            Joined / Reward Date
-                          </th>
-                        </tr>
-                      </thead>
-
-                      <tbody className="divide-y divide-slate-50">
-                        {directReferrals.map((ref) => {
-                          const expiryDate = getExpiryDate(ref.created_at);
-
-                          const active = isRewardActive(ref.created_at);
-
-                          const daysLeft = active
-                            ? getDaysRemaining(expiryDate)
-                            : 0;
-
-                          return (
-                            <tr key={ref.id}>
-                              <td className="py-4">
-                                <div className="flex items-center gap-3">
-                                  <AvatarWithFallback
-                                    src={ref.avatar_url}
-                                    name={ref.full_name}
-                                    email={ref.email}
-                                    size="w-9 h-9"
-                                    textSize="text-xs"
-                                  />
-
-                                  <span className="text-sm font-medium text-slate-800">
-                                    {ref.full_name}
-                                  </span>
-                                </div>
-                              </td>
-
-                              <td className="py-4 text-sm text-slate-500">
-                                {ref.email}
-                              </td>
-
-                              <td className="py-4">
-                                <span
-                                  className={`px-3 py-1.5 rounded-full text-[9px] font-black uppercase ${
-                                    active
-                                      ? "bg-emerald-50 text-emerald-700"
-                                      : "bg-red-50 text-red-600"
-                                  }`}
-                                >
-                                  £125 {active ? "Active" : "Expired"}
-                                </span>
-
-                                {active && (
-                                  <p className="text-[9px] text-slate-400 mt-1">
-                                    {daysLeft} days left
-                                  </p>
-                                )}
-                              </td>
-
-                              <td className="py-4 text-right">
-                                <div className="text-xs text-slate-400">
-                                  {new Date(ref.created_at).toLocaleDateString(
-                                    "en-GB",
-                                    {
-                                      day: "numeric",
-                                      month: "short",
-                                      year: "numeric",
-                                    }
-                                  )}
-                                </div>
-
-                                <div className="text-[9px] mt-1 font-semibold text-[#997819]">
-                                  {active
-                                    ? `Expires ${formatDate(expiryDate)}`
-                                    : `Expired ${formatDate(expiryDate)}`}
-                                </div>
-                              </td>
-                            </tr>
-                          );
-                        })}
-                      </tbody>
-                    </table>
                   </div>
                 )}
               </div>
@@ -1950,7 +1930,7 @@ export default function DashboardClient() {
                       <div className="grid sm:grid-cols-2 gap-3">
                         {SERVICES.map((service) => {
                           const selected = selectedServices.some(
-                            (item) => item.name === service.name
+                            (item) => item.name === service.name,
                           );
 
                           return (
@@ -2074,7 +2054,7 @@ export default function DashboardClient() {
                           >
                             {[125, 250, 375, 500, 625, 750, 875, 1000]
                               .filter(
-                                (amount) => amount <= availableRewardAmount
+                                (amount) => amount <= availableRewardAmount,
                               )
                               .map((amount) => (
                                 <option key={amount} value={amount}>

@@ -116,7 +116,7 @@ export default function PartnerMetrics({ userId, initialDirectCount = 0, initial
             directReferrals.map((ref) => (
               <div key={ref.id} className="rounded-3xl border border-slate-200/70 bg-slate-50 p-4">
                 <p className="text-sm font-semibold text-slate-900">{ref.full_name}</p>
-                <p className="text-xs text-slate-500 mt-1 break-all">{ref.email}</p>
+               
               </div>
             ))
           ) : (

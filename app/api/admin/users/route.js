@@ -102,7 +102,8 @@ export async function GET() {
         contact_number,
         role,
         referral_code,
-        onboarding_completed
+        onboarding_completed,
+        partner_status
       `);
 
     if (profilesError) {

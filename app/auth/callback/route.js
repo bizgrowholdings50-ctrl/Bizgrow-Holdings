@@ -368,17 +368,9 @@ export async function GET(request) {
       }
     }
 
-    // ========================================================
+   // ========================================================
     // STEP 6
     // SET PARTNER STATUS
-    //
-    // NEW USER:
-    //
-    // Referral URL -> pending
-    // Normal URL   -> approved
-    //
-    // EXISTING USER:
-    // Keep existing status unchanged.
     // ========================================================
 
     let finalPartnerStatus =
@@ -444,47 +436,28 @@ export async function GET(request) {
     // ========================================================
     // STEP 7
     // FINAL REDIRECT
-    //
-    // IMPORTANT FIX:
-    //
-    // DIRECT SIGNUP:
-    //   approved -> DASHBOARD
-    //
-    // REFERRAL SIGNUP:
-    //   pending -> ONBOARDING
-    //
-    // EXISTING APPROVED USER:
-    //   dashboard
-    //
-    // EXISTING PENDING USER:
-    //   onboarding
     // ========================================================
 
     let redirectPath = "/referral-program";
 
     if (verifiedReferrerId) {
-      // Referral URL user
-      // Must remain pending/onboarding.
+      // Referral URL user - must go to onboarding
       redirectPath = "/onboarding";
     } else if (
       finalPartnerStatus === "approved"
     ) {
-      // Normal/direct signup
-      // Go directly to dashboard.
-      redirectPath =
-        "/referral-program/dashboard";
+      // Normal/direct signup - ab yeh bhi pehle onboarding par jayega
+      redirectPath = "/onboarding";
     } else if (
       requestedNext &&
       finalPartnerStatus !== "pending"
     ) {
-      // Only use requested next path when user
-      // isn't a pending referral.
       redirectPath = getSafeInternalPath(
         requestedNext,
         "/referral-program/dashboard"
       );
     } else {
-      redirectPath = "/referral-program";
+      redirectPath = "/onboarding";
     }
 
     console.log(
@@ -496,7 +469,7 @@ export async function GET(request) {
         isNewProfile,
       }
     );
-
+    
     // ========================================================
     // STEP 8
     // CREATE REDIRECT RESPONSE
