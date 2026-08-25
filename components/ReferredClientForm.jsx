@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { Turnstile } from "@marsidev/react-turnstile";
 import { GoogleLoginButton } from "./AuthButtons";
 
 const NAVY = "#12066a";
@@ -33,6 +34,7 @@ export default function ReferredClientForm({
   const [number, setNumber] = useState(prefill.number || "");
   const [service, setService] = useState("");
   const [message, setMessage] = useState("");
+  const [captchaToken, setCaptchaToken] = useState(null);
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -48,6 +50,12 @@ export default function ReferredClientForm({
     e.preventDefault();
     setLoading(true);
     setError("");
+
+    if (!captchaToken) {
+      setError("Please complete the verification captcha.");
+      setLoading(false);
+      return;
+    }
 
     // Structure the message with referral details so the /api/send endpoint extracts it correctly
     const structuredMessage = `New Referral Client — 5% Discount Request
@@ -81,6 +89,7 @@ User Message: ${message || "No additional comments."}`;
           service: service,
           message: structuredMessage,
           coupon: "5% Referral Discount",
+          captchaToken,
         }),
       });
 
@@ -138,9 +147,9 @@ User Message: ${message || "No additional comments."}`;
             </p>
             <p className="text-xs text-white leading-relaxed">
               Once your request is approved, your Partner Dashboard unlocks
-              automatically giving you your own unique referral link, real-time
-              tracking of everyone you refer, and £125 credit for every
-              successful referral (up to £1,000 per 12-month period).
+              automatically giving you your own unique referral link,
+              real-time tracking of everyone you refer, and £125 credit for
+              every successful referral (up to £1,000 per 12-month period).
             </p>
           </div>
 
@@ -252,9 +261,20 @@ User Message: ${message || "No additional comments."}`;
           />
         </div>
 
+        {/* Turnstile Captcha */}
+        <div className="flex justify-center py-2">
+          <Turnstile
+            siteKey={process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY}
+            onSuccess={(token) => setCaptchaToken(token)}
+            onExpire={() => setCaptchaToken(null)}
+            onError={() => setCaptchaToken(null)}
+            theme="light"
+          />
+        </div>
+
         <button
           type="submit"
-          disabled={loading}
+          disabled={loading || !captchaToken}
           className="w-full py-4 rounded-2xl text-white font-extrabold text-xs uppercase tracking-wider shadow-lg shadow-[#12066a]/10 transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed"
           style={{ backgroundColor: NAVY }}
         >
