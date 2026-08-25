@@ -261,16 +261,7 @@ User Message: ${message || "No additional comments."}`;
           />
         </div>
 
-        {/* Turnstile Captcha */}
-        <div className="flex justify-center py-2">
-          <Turnstile
-            siteKey={process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY}
-            onSuccess={(token) => setCaptchaToken(token)}
-            onExpire={() => setCaptchaToken(null)}
-            onError={() => setCaptchaToken(null)}
-            theme="light"
-          />
-        </div>
+       
 
         <button
           type="submit"
