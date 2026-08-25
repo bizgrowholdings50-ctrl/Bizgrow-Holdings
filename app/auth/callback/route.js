@@ -377,10 +377,9 @@ export async function GET(request) {
       existingUser?.partner_status || null;
 
     if (isNewProfile) {
-      finalPartnerStatus =
-        verifiedReferrerId
-          ? "pending"
-          : "approved";
+      // Yahan pehle condition thi, ab isay direct "pending" kar diya hai
+      // taake har naya user pehle pending ho aur onboarding par jaye
+      finalPartnerStatus = "pending";
 
       console.log(
         "SETTING INITIAL PARTNER STATUS:",
@@ -436,28 +435,47 @@ export async function GET(request) {
     // ========================================================
     // STEP 7
     // FINAL REDIRECT
+    //
+    // IMPORTANT FIX:
+    //
+    // DIRECT SIGNUP:
+    //   approved -> DASHBOARD
+    //
+    // REFERRAL SIGNUP:
+    //   pending -> ONBOARDING
+    //
+    // EXISTING APPROVED USER:
+    //   dashboard
+    //
+    // EXISTING PENDING USER:
+    //   onboarding
     // ========================================================
 
     let redirectPath = "/referral-program";
 
     if (verifiedReferrerId) {
-      // Referral URL user - must go to onboarding
+      // Referral URL user
+      // Must remain pending/onboarding.
       redirectPath = "/onboarding";
     } else if (
       finalPartnerStatus === "approved"
     ) {
-      // Normal/direct signup - ab yeh bhi pehle onboarding par jayega
-      redirectPath = "/onboarding";
+      // Normal/direct signup
+      // Go directly to dashboard.
+      redirectPath =
+        "/referral-program/dashboard";
     } else if (
       requestedNext &&
       finalPartnerStatus !== "pending"
     ) {
+      // Only use requested next path when user
+      // isn't a pending referral.
       redirectPath = getSafeInternalPath(
         requestedNext,
         "/referral-program/dashboard"
       );
     } else {
-      redirectPath = "/onboarding";
+      redirectPath = "/referral-program";
     }
 
     console.log(
@@ -469,7 +487,7 @@ export async function GET(request) {
         isNewProfile,
       }
     );
-    
+
     // ========================================================
     // STEP 8
     // CREATE REDIRECT RESPONSE

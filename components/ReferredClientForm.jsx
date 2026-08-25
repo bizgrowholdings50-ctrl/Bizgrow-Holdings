@@ -147,9 +147,9 @@ User Message: ${message || "No additional comments."}`;
             </p>
             <p className="text-xs text-white leading-relaxed">
               Once your request is approved, your Partner Dashboard unlocks
-              automatically giving you your own unique referral link,
-              real-time tracking of everyone you refer, and £125 credit for
-              every successful referral (up to £1,000 per 12-month period).
+              automatically giving you your own unique referral link, real-time
+              tracking of everyone you refer, and £125 credit for every
+              successful referral (up to £1,000 per 12-month period).
             </p>
           </div>
 
@@ -274,7 +274,7 @@ User Message: ${message || "No additional comments."}`;
 
         <button
           type="submit"
-          disabled={loading || !captchaToken}
+          disabled={loading}
           className="w-full py-4 rounded-2xl text-white font-extrabold text-xs uppercase tracking-wider shadow-lg shadow-[#12066a]/10 transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed"
           style={{ backgroundColor: NAVY }}
         >
