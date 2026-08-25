@@ -261,8 +261,6 @@ User Message: ${message || "No additional comments."}`;
           />
         </div>
 
-       
-
         <button
           type="submit"
           disabled={loading}
