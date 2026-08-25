@@ -51,11 +51,7 @@ export default function ReferredClientForm({
     setLoading(true);
     setError("");
 
-    if (!captchaToken) {
-      setError("Please complete the verification captcha.");
-      setLoading(false);
-      return;
-    }
+  
 
     // Structure the message with referral details so the /api/send endpoint extracts it correctly
     const structuredMessage = `New Referral Client — 5% Discount Request
