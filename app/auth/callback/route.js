@@ -463,7 +463,7 @@ export async function GET(request) {
       // Normal/direct signup
       // Go directly to dashboard.
       redirectPath =
-        "/referral-program/dashboard";
+        "/onboarding";
     } else if (
       requestedNext &&
       finalPartnerStatus !== "pending"

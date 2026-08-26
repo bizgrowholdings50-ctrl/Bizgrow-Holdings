@@ -136,20 +136,20 @@ User Message: ${message || "No additional comments."}`;
               <b>{email}</b> within 12–24 business hours.
             </p>
             <p>
-              • Once your compliance service (£650+ VAT) is purchased and
+              • Once your compliance service <span className="text-red-600">(Min £650+ VAT)</span> is purchased and
               payment is cleared, your Partner Dashboard will unlock.
             </p>
           </div>
 
           <div className="mt-5 bg-[#12066a] border border-amber-200 rounded-2xl p-4 text-left">
-            <p className="text-xs font-bold uppercase tracking-wider text-white mb-1">
+            <p className="text-xs font-bold uppercase tracking-wider text-red-500 mb-1">
               Your Dashboard is Locked
             </p>
             <p className="text-xs text-white leading-relaxed">
               Once your request is approved, your Partner Dashboard unlocks
               automatically giving you your own unique referral link,
-              real-time tracking of everyone you refer, and £125 credit for
-              every successful referral (up to £1,000 per 12-month period).
+              real-time tracking of everyone you refer, and <strong className="text-red-500">£125 credit</strong>  for
+              every successful referral <strong className="text-red-500">up to £1,000</strong> per (12-month period).
             </p>
           </div>
 
@@ -170,12 +170,9 @@ User Message: ${message || "No additional comments."}`;
     <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-[0_15px_40px_rgba(18,6,106,0.04)] max-w-xl mx-auto">
       <div className="text-center mb-8 space-y-2">
         <h3 className="text-2xl font-extrabold" style={{ color: NAVY }}>
-          Unlock 5% Discount
+          Choose Your Service
         </h3>
-        <p className="text-sm text-slate-600 font-medium leading-relaxed px-4">
-          Select your interest compliance service and submit your details to
-          notify our sales team.
-        </p>
+        
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-5 text-left">

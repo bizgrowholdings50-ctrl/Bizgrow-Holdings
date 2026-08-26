@@ -35,9 +35,7 @@ export default function OnboardingPage() {
     const safetyTimer = setTimeout(() => {
       setCheckingAuth((prev) => {
         if (prev) {
-          console.warn(
-            "Safety timeout triggered: Forcing loading to false"
-          );
+          console.warn("Safety timeout triggered: Forcing loading to false");
           return false;
         }
         return prev;
@@ -63,16 +61,13 @@ export default function OnboardingPage() {
             await supabase.auth.exchangeCodeForSession(authCode);
 
           if (exchangeError) {
-            console.error(
-              "Auth code exchange error:",
-              exchangeError
-            );
+            console.error("Auth code exchange error:", exchangeError);
           }
 
           window.history.replaceState(
             {},
             document.title,
-            window.location.pathname
+            window.location.pathname,
           );
         }
 
@@ -90,18 +85,14 @@ export default function OnboardingPage() {
           const match = document.cookie
             .split(";")
             .map((item) => item.trim())
-            .find((item) =>
-              item.startsWith("bizgrow_referrer=")
-            );
+            .find((item) => item.startsWith("bizgrow_referrer="));
 
           if (match) {
-            refCode = decodeURIComponent(
-              match.split("=")[1] || ""
-            ).trim();
+            refCode = decodeURIComponent(match.split("=")[1] || "").trim();
           }
         } else {
           document.cookie = `bizgrow_referrer=${encodeURIComponent(
-            refCode
+            refCode,
           )}; path=/; max-age=${60 * 60 * 24 * 7}; SameSite=Lax`;
         }
 
@@ -130,13 +121,8 @@ export default function OnboardingPage() {
         if (currentUser) {
           setUser(currentUser);
 
-          if (
-            currentUser.user_metadata?.full_name &&
-            !fullName
-          ) {
-            setFullName(
-              currentUser.user_metadata.full_name
-            );
+          if (currentUser.user_metadata?.full_name && !fullName) {
+            setFullName(currentUser.user_metadata.full_name);
           }
         }
 
@@ -171,10 +157,7 @@ export default function OnboardingPage() {
           }
         }
       } catch (err) {
-        console.error(
-          "Initialization error catch block:",
-          err
-        );
+        console.error("Initialization error catch block:", err);
       } finally {
         clearTimeout(safetyTimer);
         setCheckingAuth(false);
@@ -238,9 +221,7 @@ export default function OnboardingPage() {
       const activeUser = session?.user || user;
 
       if (!activeUser) {
-        setErrorMessage(
-          "User session not found. Please log in again."
-        );
+        setErrorMessage("User session not found. Please log in again.");
         setLoading(false);
         return;
       }
@@ -260,13 +241,11 @@ export default function OnboardingPage() {
         const match = document.cookie
           .split(";")
           .map((item) => item.trim())
-          .find((item) =>
-            item.startsWith("bizgrow_referrer=")
-          );
+          .find((item) => item.startsWith("bizgrow_referrer="));
 
         if (match) {
           finalReferralCode = decodeURIComponent(
-            match.split("=")[1] || ""
+            match.split("=")[1] || "",
           ).trim();
         }
       }
@@ -287,10 +266,7 @@ export default function OnboardingPage() {
           .maybeSingle();
 
       if (existingProfileError) {
-        console.warn(
-          "Could not read existing profile:",
-          existingProfileError
-        );
+        console.warn("Could not read existing profile:", existingProfileError);
       }
 
       /*
@@ -330,8 +306,7 @@ export default function OnboardingPage() {
          * Preserve an existing status if one already exists.
          * Otherwise keep the original behaviour: approved.
          */
-        partnerStatus =
-          existingProfile?.partner_status || "approved";
+        partnerStatus = existingProfile?.partner_status || "approved";
       }
 
       /*
@@ -397,7 +372,7 @@ export default function OnboardingPage() {
         throw new Error(
           profileError.message ||
             profileError.code ||
-            "Failed to save profile."
+            "Failed to save profile.",
         );
       }
 
@@ -441,10 +416,7 @@ export default function OnboardingPage() {
         /*
          * Don't create self-referral
          */
-        if (
-          referrerId &&
-          referrerId !== activeUser.id
-        ) {
+        if (referrerId && referrerId !== activeUser.id) {
           const { error: referralError } = await supabase
             .from("referrals")
             .upsert(
@@ -461,14 +433,11 @@ export default function OnboardingPage() {
               },
               {
                 onConflict: "referred_user_id",
-              }
+              },
             );
 
           if (referralError) {
-            console.warn(
-              "Referral relationship error:",
-              referralError
-            );
+            console.warn("Referral relationship error:", referralError);
           }
         }
       }
@@ -480,14 +449,11 @@ export default function OnboardingPage() {
        */
       setStep(2);
     } catch (err) {
-      console.error(
-        "Submission error:",
-        err
-      );
+      console.error("Submission error:", err);
 
       setErrorMessage(
         err?.message ||
-          "An unexpected error occurred while saving your profile."
+          "An unexpected error occurred while saving your profile.",
       );
     } finally {
       setLoading(false);
@@ -505,20 +471,15 @@ export default function OnboardingPage() {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-50 px-4 py-12">
+    <div className="flex min-h-screen mt-14 items-center justify-center bg-slate-50 px-4 py-12">
       <div className="w-full max-w-xl rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-
         {step === 1 && (
           <div className="space-y-6">
-
             <div className="text-center">
-
               {referrerName ? (
                 <div className="mb-4 inline-block rounded-full bg-amber-50 px-4 py-1.5 text-xs font-semibold text-amber-900 border border-amber-200">
                   🎉 You&apos;ve Been Invited by{" "}
-                  <span className="underline font-bold">
-                    {referrerName}
-                  </span>
+                  <span className="underline font-bold">{referrerName}</span>
                 </div>
               ) : (
                 <span
@@ -542,22 +503,17 @@ export default function OnboardingPage() {
                 </p>
 
                 <p className="text-xs text-slate-500 leading-relaxed">
-                  Please take a moment to provide a few quick
-                  details so we can configure your partner
-                  account and tailor your dashboard experience.
+                  Please take a moment to provide a few quick details so we can
+                  configure your partner account and tailor your dashboard
+                  experience.
                 </p>
               </div>
 
               <div className="mt-4 flex items-center justify-between text-xs font-medium text-slate-500 px-1">
-                <span>
-                  Step {subStep} of 6
-                </span>
+                <span>Step {subStep} of 6</span>
 
                 <span style={{ color: GOLD }}>
-                  {Math.round(
-                    (subStep / 6) * 100
-                  )}
-                  % Completed
+                  {Math.round((subStep / 6) * 100)}% Completed
                 </span>
               </div>
             </div>
@@ -579,7 +535,6 @@ export default function OnboardingPage() {
             )}
 
             <div className="py-2 min-h-[160px]">
-
               {subStep === 1 && (
                 <div className="space-y-3">
                   <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600">
@@ -590,9 +545,7 @@ export default function OnboardingPage() {
                     type="text"
                     required
                     value={fullName}
-                    onChange={(e) =>
-                      setFullName(e.target.value)
-                    }
+                    onChange={(e) => setFullName(e.target.value)}
                     placeholder="e.g. John Smith"
                     className="w-full rounded-xl border border-slate-200 px-4 py-3.5 text-sm text-slate-800 outline-none focus:border-[#997819] focus:ring-1 focus:ring-[#997819]"
                     autoFocus
@@ -610,9 +563,7 @@ export default function OnboardingPage() {
                     type="text"
                     required
                     value={companyName}
-                    onChange={(e) =>
-                      setCompanyName(e.target.value)
-                    }
+                    onChange={(e) => setCompanyName(e.target.value)}
                     placeholder="e.g. BizGrow Holdings"
                     className="w-full rounded-xl border border-slate-200 px-4 py-3.5 text-sm text-slate-800 outline-none focus:border-[#997819] focus:ring-1 focus:ring-[#997819]"
                     autoFocus
@@ -628,34 +579,20 @@ export default function OnboardingPage() {
 
                   <select
                     value={role}
-                    onChange={(e) =>
-                      setRole(e.target.value)
-                    }
+                    onChange={(e) => setRole(e.target.value)}
                     className="w-full rounded-xl border border-slate-200 px-4 py-3.5 text-sm text-slate-800 bg-white outline-none focus:border-[#997819] focus:ring-1 focus:ring-[#997819]"
                   >
-                    <option value="Business Owner">
-                      Business Owner
-                    </option>
+                    <option value="Business Owner">Business Owner</option>
 
-                    <option value="Director">
-                      Director
-                    </option>
+                    <option value="Director">Director</option>
 
-                    <option value="Manager">
-                      Manager
-                    </option>
+                    <option value="Manager">Manager</option>
 
-                    <option value="Consultant">
-                      Consultant
-                    </option>
+                    <option value="Consultant">Consultant</option>
 
-                    <option value="Employee">
-                      Employee
-                    </option>
+                    <option value="Employee">Employee</option>
 
-                    <option value="Other">
-                      Other
-                    </option>
+                    <option value="Other">Other</option>
                   </select>
                 </div>
               )}
@@ -669,7 +606,7 @@ export default function OnboardingPage() {
                   <div className="space-y-2.5 text-xs text-slate-700">
                     {[
                       "I own a business",
-                      "I know businesses that may need certifications",
+
                       "I'm interested in referrals",
                       "Just exploring",
                     ].map((opt) => (
@@ -680,12 +617,8 @@ export default function OnboardingPage() {
                         <input
                           type="radio"
                           name="bestDescribes"
-                          checked={
-                            bestDescribes === opt
-                          }
-                          onChange={() =>
-                            setBestDescribes(opt)
-                          }
+                          checked={bestDescribes === opt}
+                          onChange={() => setBestDescribes(opt)}
                           className="text-[#997819] focus:ring-[#997819]"
                         />
 
@@ -713,12 +646,8 @@ export default function OnboardingPage() {
                         <input
                           type="radio"
                           name="heardBefore"
-                          checked={
-                            heardBefore === ans
-                          }
-                          onChange={() =>
-                            setHeardBefore(ans)
-                          }
+                          checked={heardBefore === ans}
+                          onChange={() => setHeardBefore(ans)}
                           className="text-[#997819] focus:ring-[#997819]"
                         />
 
@@ -741,20 +670,16 @@ export default function OnboardingPage() {
                     type="text"
                     required
                     value={contactNumber}
-                    onChange={(e) =>
-                      setContactNumber(e.target.value)
-                    }
+                    onChange={(e) => setContactNumber(e.target.value)}
                     placeholder="e.g. +44 7123 456789"
                     className="w-full rounded-xl border border-slate-200 px-4 py-3.5 text-sm text-slate-800 outline-none focus:border-[#997819] focus:ring-1 focus:ring-[#997819]"
                     autoFocus
                   />
                 </div>
               )}
-
             </div>
 
             <div className="flex items-center gap-3 pt-4 border-t border-slate-100">
-
               {subStep > 1 && (
                 <button
                   type="button"
@@ -775,17 +700,15 @@ export default function OnboardingPage() {
                 {loading
                   ? "Saving Details..."
                   : subStep === 6
-                  ? "Complete Onboarding"
-                  : "Next Step"}
+                    ? "Complete Onboarding"
+                    : "Next Step"}
               </button>
-
             </div>
           </div>
         )}
 
         {step === 2 && (
           <div className="space-y-6 text-center">
-
             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100 font-bold text-xl">
               ✓
             </div>
@@ -799,9 +722,8 @@ export default function OnboardingPage() {
               </h1>
 
               <p className="mt-2 text-sm text-slate-600 leading-relaxed">
-                Your referral account has been successfully
-                created. Thank you for joining our Referral
-                Partner Program.
+                Your referral account has been successfully created. Thank you
+                for joining our Referral Partner Program.
               </p>
             </div>
 
@@ -813,10 +735,8 @@ export default function OnboardingPage() {
             >
               Go to Dashboard
             </button>
-
           </div>
         )}
-
       </div>
     </div>
   );

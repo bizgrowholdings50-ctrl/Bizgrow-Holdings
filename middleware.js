@@ -32,22 +32,7 @@ export async function middleware(request) {
     data: { user },
   } = await supabase.auth.getUser();
 
-  // ==========================================================
-  // AUTH CHECK ONLY — koi database (profiles table) query nahi
-  // ==========================================================
-  //
-  // IMPORTANT:
-  // Role-based (admin) aur partner_status-based (rejected)
-  // checks yahan se hata diye gaye hain taake middleware har
-  // request pe extra database round-trip na le — is se
-  // production mein slow/blank page ka masla ban raha tha.
-  //
-  // Ye checks ab page/component level par honge:
-  //   - Admin check    -> /admin ke server component mein
-  //   - Rejected check -> DashboardClient.jsx (locked screen)
-  //      mein already maujood hai
-  // ==========================================================
-
+  // 1. Agar user logged in nahi hai aur protected routes access kar raha hai
   if (
     !user &&
     (pathname.startsWith('/admin') ||
@@ -57,16 +42,32 @@ export async function middleware(request) {
     return NextResponse.redirect(new URL('/', request.url));
   }
 
-  // Agar user logged in hai aur onboarding page par hai, toh check karein ke kahin pehle se onboarding complete to nahi
-  if (user && pathname.startsWith('/onboarding')) {
-    const { data: profile } = await supabase
-      .from('profiles')
-      .select('onboarding_completed')
-      .eq('id', user.id)
-      .single();
+  // 2. Agar user logged in hai, toh profile data fetch karke checks perform karein
+  if (user) {
+    // Agar user /onboarding par hai aur onboarding pehle hi complete ho chuki hai
+    if (pathname.startsWith('/onboarding')) {
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('onboarding_completed')
+        .eq('id', user.id)
+        .single();
 
-    if (profile?.onboarding_completed) {
-      return NextResponse.redirect(new URL('/referral-program/dashboard', request.url));
+      if (profile?.onboarding_completed) {
+        return NextResponse.redirect(new URL('/referral-program/dashboard', request.url));
+      }
+    }
+
+    // Agar user /admin page access kar raha hai, toh sirf 'admin' role wale hi allow honge
+    if (pathname.startsWith('/admin')) {
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('role')
+        .eq('id', user.id)
+        .single();
+
+      if (profile?.role !== 'admin') {
+        return NextResponse.redirect(new URL('/', request.url));
+      }
     }
   }
 

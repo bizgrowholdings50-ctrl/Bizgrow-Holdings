@@ -8,6 +8,7 @@ import PartnerMetrics from "../../../components/PartnerMetrics";
 
 const NAVY = "#12066a";
 const GOLD = "#997819";
+const BLUE = "#2f6fed"; // accent used for the light icon-pill stat row
 
 const REWARD_PER_REFERRAL = 125;
 const MAX_REWARD = 1000;
@@ -459,9 +460,9 @@ export default function DashboardClient() {
 
   if (loading || statusLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#fafafc]">
+      <div className="min-h-screen flex items-center justify-center bg-[#f5f7fb]">
         <div className="text-center space-y-3">
-          <div className="w-8 h-8 border-4 border-[#12066a] border-t-transparent rounded-full animate-spin mx-auto" />
+          <div className="w-8 h-8 border-4 border-[#2f6fed] border-t-transparent rounded-full animate-spin mx-auto" />
           <p className="text-xs font-bold uppercase tracking-widest text-slate-400">
             Loading Dashboard...
           </p>
@@ -488,10 +489,10 @@ export default function DashboardClient() {
 
   if (partnerStatus === "pending") {
     return (
-      <div className="min-h-screen mt-6 relative bg-[#fafafc] font-sans pb-24">
+      <div className="min-h-screen mt-6 relative bg-[#f5f7fb] font-sans pb-24">
         <div className="mx-auto w-full max-w-6xl relative z-10 px-4 sm:px-6 lg:px-8 pt-20">
           {/* Header - same as main dashboard */}
-          <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-6 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-[0_1px_2px_rgba(15,23,42,0.04)] flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-4 w-full md:w-auto">
               <div className="relative">
                 <AvatarWithFallback
@@ -526,14 +527,12 @@ export default function DashboardClient() {
 
           {/* Locked Dashboard Content */}
           <div className="mt-12">
-            <div className="relative overflow-hidden bg-white/90 backdrop-blur-xl border border-slate-200/70 rounded-[2rem] p-8 sm:p-12 shadow-lg shadow-slate-200/30">
-              <div className="absolute inset-0 bg-gradient-to-r from-[#12066a]/[0.03] via-transparent to-[#997819]/[0.04] pointer-events-none" />
-
+            <div className="relative overflow-hidden bg-white border border-slate-200 rounded-[1.75rem] p-8 sm:p-12 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
               <div className="relative z-10 text-center max-w-2xl mx-auto">
                 {/* Lock Icon */}
-                <div className="w-20 h-20 rounded-full bg-[#12066a]/5 border border-[#12066a]/10 flex items-center justify-center mx-auto mb-6">
+                <div className="w-20 h-20 rounded-2xl bg-[#2f6fed]/10 border border-[#2f6fed]/15 flex items-center justify-center mx-auto mb-6">
                   <svg
-                    className="w-10 h-10 text-[#12066a]"
+                    className="w-10 h-10 text-[#2f6fed]"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -595,9 +594,9 @@ export default function DashboardClient() {
                   </div>
                 </div>
 
-                <div className="mt-8 p-5 rounded-2xl bg-[#12066a]/[0.03] border border-[#12066a]/10 max-w-lg mx-auto">
+                <div className="mt-8 p-5 rounded-2xl bg-[#2f6fed]/5 border border-[#2f6fed]/10 max-w-lg mx-auto">
                   <p className="text-xs text-slate-600 leading-relaxed">
-                    <span className="font-bold text-[#12066a]">Need help?</span>{" "}
+                    <span className="font-bold text-[#2f6fed]">Need help?</span>{" "}
                     If you have any questions about your application, please
                     contact our team at{" "}
                     <a
@@ -1013,14 +1012,14 @@ export default function DashboardClient() {
   // ===========================================================
 
   return (
-    <main className="min-h-screen mt-6 relative bg-[#fafafc] font-sans pb-24">
+    <main className="min-h-screen mt-6 relative bg-[#f5f7fb] font-sans pb-24">
       <div className="mx-auto w-full max-w-6xl relative z-10 px-4 sm:px-6 lg:px-8 pt-20">
-        <div className="space-y-12">
+        <div className="space-y-8">
           {/* =================================================
               HEADER
           ================================================= */}
 
-          <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-6 shadow-sm flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="bg-white border border-slate-200 rounded-3xl p-6 shadow-[0_1px_2px_rgba(15,23,42,0.04)] flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-4 w-full md:w-auto">
               <div className="relative">
                 <AvatarWithFallback
@@ -1039,12 +1038,9 @@ export default function DashboardClient() {
               <div>
                 <div className="flex items-center gap-2">
                   <h2
-                    className="text-xl font-bold"
-                    style={{
-                      color: NAVY,
-                    }}
+                    className="text-xl font-bold text-slate-800"
                   >
-                    {profile?.full_name || "Valued Partner"}
+                    Hello, {profile?.full_name?.split(" ")[0] || "Partner"}
                   </h2>
 
                   {profileError && (
@@ -1059,12 +1055,12 @@ export default function DashboardClient() {
             </div>
 
             <div className="flex items-center gap-3 w-full md:w-auto">
-              <div className="flex bg-slate-100/80 p-1 rounded-2xl">
+              <div className="flex bg-slate-100 p-1 rounded-2xl">
                 <button
                   onClick={() => setActiveTab("dashboard")}
                   className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
                     activeTab === "dashboard"
-                      ? "bg-white text-[#12066a] shadow-sm"
+                      ? "bg-white text-[#2f6fed] shadow-sm"
                       : "text-slate-500 hover:text-slate-800"
                   }`}
                 >
@@ -1075,7 +1071,7 @@ export default function DashboardClient() {
                   onClick={() => setActiveTab("overview")}
                   className={`px-4 py-2 rounded-xl text-xs font-bold transition-all ${
                     activeTab === "overview"
-                      ? "bg-white text-[#12066a] shadow-sm"
+                      ? "bg-white text-[#2f6fed] shadow-sm"
                       : "text-slate-500 hover:text-slate-800"
                   }`}
                 >
@@ -1088,211 +1084,208 @@ export default function DashboardClient() {
           </div>
 
           {/* =================================================
-              REWARD CARD
+              QUICK STATS — rounded icon-pill row
+              (same underlying figures as before, new look)
           ================================================= */}
 
           {activeTab === "dashboard" && (
-            <div className="relative overflow-hidden bg-white/90 backdrop-blur-xl border border-slate-200/70 rounded-[2rem] p-6 sm:p-8 shadow-lg shadow-slate-200/30">
-              <div className="absolute inset-0 bg-gradient-to-r from-[#12066a]/[0.035] via-transparent to-[#997819]/[0.045] pointer-events-none" />
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div className="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col items-center text-center gap-2 shadow-[0_1px_2px_rgba(15,23,42,0.04)] hover:shadow-md transition-shadow">
+                <div
+                  className="w-11 h-11 rounded-2xl flex items-center justify-center"
+                  style={{ backgroundColor: `${BLUE}1a` }}
+                >
+                  <svg className="w-5 h-5" style={{ color: BLUE }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V6m0 12v-2m9-4a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <p className="text-lg font-black text-slate-800 tabular-nums">
+                  £{availableRewardAmount.toLocaleString()}
+                </p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                  Available
+                </p>
+              </div>
 
-              <div className="relative z-10">
-                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
-                  <div>
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#997819]/10 border border-[#997819]/20 mb-3">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#997819] animate-pulse" />
+              <div className="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col items-center text-center gap-2 shadow-[0_1px_2px_rgba(15,23,42,0.04)] hover:shadow-md transition-shadow">
+                <div className="w-11 h-11 rounded-2xl bg-emerald-50 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <p className="text-lg font-black text-slate-800 tabular-nums">
+                  £{totalClaimedAmount.toLocaleString()}
+                </p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                  Claimed
+                </p>
+              </div>
 
-                      <span className="text-[10px] font-black uppercase tracking-[0.18em] text-[#997819]">
-                        Referral Reward
-                      </span>
+              <div className="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col items-center text-center gap-2 shadow-[0_1px_2px_rgba(15,23,42,0.04)] hover:shadow-md transition-shadow">
+                <div className="w-11 h-11 rounded-2xl bg-red-50 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                  </svg>
+                </div>
+                <p className="text-lg font-black text-slate-800 tabular-nums">
+                  £{expiredRewardAmount.toLocaleString()}
+                </p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                  Expired
+                </p>
+              </div>
+
+              <div className="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col items-center text-center gap-2 shadow-[0_1px_2px_rgba(15,23,42,0.04)] hover:shadow-md transition-shadow">
+                <div className="w-11 h-11 rounded-2xl bg-amber-50 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M12 6v6l4 2M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <p className="text-lg font-black text-slate-800 tabular-nums">
+                  {Math.round(rewardProgress)}%
+                </p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                  Progress
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* =================================================
+              REWARD CARD — light card with donut-style ring
+              instead of heavy gradient hero
+          ================================================= */}
+
+          {activeTab === "dashboard" && (
+            <div className="bg-white border border-slate-200 rounded-[1.75rem] shadow-[0_1px_2px_rgba(15,23,42,0.04)] overflow-hidden">
+              <div className="p-6 sm:p-8">
+                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+                  <div className="flex items-center gap-6">
+                    {/* Donut-style progress ring */}
+                    <div className="relative w-24 h-24 shrink-0">
+                      <svg viewBox="0 0 100 100" className="w-24 h-24 -rotate-90">
+                        <circle
+                          cx="50"
+                          cy="50"
+                          r="42"
+                          fill="none"
+                          stroke="#eef1f7"
+                          strokeWidth="10"
+                        />
+                        <circle
+                          cx="50"
+                          cy="50"
+                          r="42"
+                          fill="none"
+                          stroke={BLUE}
+                          strokeWidth="10"
+                          strokeLinecap="round"
+                          strokeDasharray={`${2 * Math.PI * 42}`}
+                          strokeDashoffset={`${
+                            2 * Math.PI * 42 * (1 - rewardProgress / 100)
+                          }`}
+                          style={{ transition: "stroke-dashoffset 0.7s ease" }}
+                        />
+                      </svg>
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="text-lg font-black text-slate-800">
+                          {Math.round(rewardProgress)}%
+                        </span>
+                      </div>
                     </div>
 
-                    <h3
-                      className="text-2xl sm:text-3xl font-black tracking-tight"
-                      style={{
-                        color: NAVY,
-                      }}
-                    >
-                      Your BizGrow referral credit
-                    </h3>
-
-                    <p className="text-sm text-slate-600 mt-1">
-                      Earn <strong>£125</strong>. BizGrow Service Credit for
-                      every successful referral, up to <strong>£1,000</strong>.
-                    </p>
-                  </div>
-
-                  <div className="flex items-center gap-4">
-                    <div className="text-right">
-                      <div className="text-4xl font-black text-[#12066a]">
-                        £{availableRewardAmount.toLocaleString()}
+                    <div>
+                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#2f6fed]/10 mb-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#2f6fed]" />
+                        <span className="text-[10px] font-black uppercase tracking-[0.18em] text-[#2f6fed]">
+                          Referral Reward
+                        </span>
                       </div>
 
-                      <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                      <h3 className="text-xl sm:text-2xl font-black tracking-tight text-slate-800">
+                        Your BizGrow referral credit
+                      </h3>
+
+                      <p className="text-sm text-slate-500 mt-1">
+                        £{cycleProgressAmount.toLocaleString()} of £1,000 &middot;{" "}
+                        {cycleReferralCount} of {MAX_REFERRALS} referrals
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-4 shrink-0">
+                    <div className="text-right">
+                      <div className="text-3xl font-black text-slate-800 tabular-nums">
+                        £{availableRewardAmount.toLocaleString()}
+                      </div>
+                      <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-1">
                         Available to claim
                       </div>
                     </div>
 
-                    <div className="w-14 h-14 rounded-2xl bg-[#12066a]/5 border border-[#12066a]/10 flex items-center justify-center">
-                      <span className="text-sm font-black text-[#997819]">
-                        {Math.round(rewardProgress)}%
-                      </span>
-                    </div>
+                    <button
+                      onClick={openClaimModal}
+                      disabled={availableRewardAmount < REWARD_PER_REFERRAL}
+                      className={`px-6 py-3.5 rounded-2xl text-xs font-black uppercase tracking-wider transition-all whitespace-nowrap ${
+                        availableRewardAmount >= REWARD_PER_REFERRAL
+                          ? "text-white shadow-lg"
+                          : "bg-slate-100 text-slate-400 cursor-not-allowed"
+                      }`}
+                      style={
+                        availableRewardAmount >= REWARD_PER_REFERRAL
+                          ? { backgroundColor: BLUE, boxShadow: `0 10px 25px -8px ${BLUE}66` }
+                          : undefined
+                      }
+                    >
+                      Claim Reward
+                    </button>
                   </div>
                 </div>
 
-                {/* =================================================
-                    PROGRESS
-                ================================================= */}
+                {rewardCycle.cycleCompleted && nextCycleResetDate && (
+                  <div className="mt-5 text-[11px] font-semibold text-amber-600 bg-amber-50 border border-amber-100 rounded-xl px-4 py-2 inline-flex">
+                    Cycle complete — resets {formatDate(nextCycleResetDate)}
+                  </div>
+                )}
 
-                <div className="mt-7">
-                  <div className="flex justify-between text-xs mb-2">
-                    <span className="font-bold text-slate-600">
-                      £{cycleProgressAmount.toLocaleString()} achieved
+                {/* Secondary detail chips */}
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <div className="px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-100 text-xs">
+                    <span className="text-green-600 font-bold uppercase tracking-wide text-[9px] mr-2">
+                      Active
                     </span>
-
-                    <span className="font-black text-[#997819]">
-                      £1,000 maximum
+                    <span className="font-black text-slate-700">
+                      {activeRewardCount} referral{activeRewardCount === 1 ? "" : "s"}
                     </span>
                   </div>
 
-                  <div className="h-3.5 rounded-full bg-slate-100 border border-slate-200 overflow-hidden">
-                    <div
-                      className="h-full rounded-full bg-gradient-to-r from-[#12066a] via-[#3d2d91] to-[#997819] transition-all duration-700"
-                      style={{
-                        width: `${rewardProgress}%`,
-                      }}
-                    />
-                  </div>
-
-                  <div className="flex items-center justify-between mt-2">
-                    <span className="text-[10px] text-slate-400">
-                      {cycleReferralCount} of {MAX_REFERRALS} referrals
+                  <div className="px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-100 text-xs">
+                    <span className="text-yellow-600 font-bold uppercase tracking-wide text-[9px] mr-2">
+                      Under review
                     </span>
-
-                    {rewardCycle.cycleCompleted && nextCycleResetDate && (
-                      <span className="text-[10px] font-semibold text-[#997819]">
-                        Cycle resets {formatDate(nextCycleResetDate)}
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                {/* Reward Summary */}
-
-                <div className="grid grid-cols-2 lg:grid-cols-5 gap-3 mt-6">
-                  <div className="p-4 rounded-2xl bg-[#12066a]/[0.035] border border-[#12066a]/10">
-                    <p className="text-[9px] font-black uppercase tracking-widest text-slate-400">
-                      Active Credits
-                    </p>
-
-                    {/* Yahan earnedRewardAmount ki jagah availableRewardAmount kar dein */}
-                    <p className="text-xl font-black text-[#12066a] mt-1">
-                      £{availableRewardAmount.toLocaleString()}
-                    </p>
-
-                    <p className="text-[10px] text-slate-500 mt-1">
-                      {activeRewardCount} active
-                    </p>
+                    <span className="font-black text-slate-700">
+                      £{pendingClaimAmount.toLocaleString()}
+                    </span>
                   </div>
 
-                  <div className="p-4 rounded-2xl bg-red-50/60 border border-red-100">
-                    <p className="text-[9px] font-black uppercase tracking-widest text-slate-400">
-                      Expired Credit
-                    </p>
-
-                    <p className="text-xl font-black text-red-600 mt-1">
-                      £{expiredRewardAmount.toLocaleString()}
-                    </p>
-
-                    <p className="text-[10px] text-slate-500 mt-1">
-                      {expiredRewardCount} expired
-                    </p>
+                  <div className="px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-100 text-xs">
+                    <span className="text-red-600 font-bold uppercase tracking-wide text-[9px] mr-2">
+                      Next expiry
+                    </span>
+                    <span className="font-black text-slate-700">
+                      {nextExpiryDate
+                        ? `${formatDate(nextExpiryDate)} (${daysUntilNextExpiry}d)`
+                        : "—"}
+                    </span>
                   </div>
-
-                  <div className="p-4 rounded-2xl bg-[#997819]/[0.045] border border-[#997819]/15">
-                    <p className="text-[9px] font-black uppercase tracking-widest text-slate-400">
-                      Claimed
-                    </p>
-
-                    <p className="text-xl font-black text-[#997819] mt-1">
-                      £{totalClaimedAmount.toLocaleString()}
-                    </p>
-
-                    {pendingClaimAmount > 0 && (
-                      <p className="text-[10px] text-slate-500 mt-1">
-                        £{pendingClaimAmount.toLocaleString()} under review
-                      </p>
-                    )}
-                  </div>
-
-                  <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
-                    <p className="text-[9px] font-black uppercase tracking-widest text-slate-400">
-                      Next Expiry
-                    </p>
-
-                    <p className="text-sm font-black text-slate-700 mt-2">
-                      {formatDate(nextExpiryDate)}
-                    </p>
-
-                    {nextExpiryDate && (
-                      <p className="text-[10px] text-slate-500 mt-1">
-                        {daysUntilNextExpiry} days remaining
-                      </p>
-                    )}
-                  </div>
-
-                  <div className="p-4 rounded-2xl bg-slate-50 border border-slate-200">
-                    <p className="text-[9px] font-black uppercase tracking-widest text-slate-400">
-                      Progress
-                    </p>
-
-                    <p className="text-xl font-black text-[#12066a] mt-1">
-                      {Math.round(rewardProgress)}%
-                    </p>
-
-                    <p className="text-[10px] text-slate-500 mt-1">
-                      toward £1,000
-                    </p>
-                  </div>
-                </div>
-
-                {/* Claim */}
-
-                <div className="mt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 rounded-2xl bg-[#12066a]/[0.025] border border-slate-200">
-                  <div>
-                    <p className="text-sm font-bold text-slate-700">
-                      Ready to use your reward?
-                    </p>
-
-                    <p className="text-[11px] text-slate-600 mt-1">
-                      Choose your compliance service and submit your credit
-                      claim for review.
-                    </p>
-                  </div>
-
-                  <button
-                    onClick={openClaimModal}
-                    disabled={availableRewardAmount < REWARD_PER_REFERRAL}
-                    className={`px-6 py-3 rounded-xl text-xs font-black uppercase tracking-wider transition-all ${
-                      availableRewardAmount >= REWARD_PER_REFERRAL
-                        ? "bg-[#12066a] text-white hover:bg-[#0d0452] shadow-lg shadow-[#12066a]/20"
-                        : "bg-slate-100 text-slate-400 cursor-not-allowed"
-                    }`}
-                  >
-                    Claim Reward
-                  </button>
                 </div>
 
                 {/* Expiry Notice */}
-
-                <div className="mt-5 px-4 py-3 rounded-2xl bg-amber-50/70 border border-amber-100">
-                  <p className="text-xs font-bold text-slate-700">
-                    Each referral credit is valid for 12 months.
-                  </p>
-
-                  <p className="text-[11px] text-slate-700 mt-1">
-                    Each £125 referral credit remains valid for{" "}
-                    <strong>
+                <div className="mt-6 px-4 py-3 rounded-xl bg-[#2f6fed]/5 border border-[#2f6fed]/10">
+                  <p className="text-[11px] text-slate-600 leading-relaxed">
+                    Each <strong className="text-slate-800">£125</strong>{" "}
+                    referral credit remains valid for{" "}
+                    <strong className="text-slate-800">
                       12 months from the date the qualifying referral is
                       recorded
                     </strong>
@@ -1307,33 +1300,24 @@ export default function DashboardClient() {
               DASHBOARD
           ================================================= */}
 
-          {/* Referral Link */}
-          <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 shadow-sm">
-            <h3
-              className="text-xl font-bold mb-4"
-              style={{
-                color: NAVY,
-              }}
-            >
-              Your Unique Referral Link
-            </h3>
-
-            <ReferralBox referralCode={profile?.referral_code} />
-          </div>
-
           {activeTab === "dashboard" ? (
-            <div className="space-y-12">
+            <div className="space-y-8">
+               {/* Referral Link */}
+              <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+                <h3 className="text-lg font-bold text-slate-800 mb-4">
+                  Your Unique Referral Link
+                </h3>
+
+                <ReferralBox referralCode={profile?.referral_code} />
+              </div>
               <div className="grid gap-6 md:grid-cols-2">
+
+                
                 {/* Partner Network Activity Table */}
-                <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 shadow-sm">
+                <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
                   <div className="flex items-center justify-between mb-6">
                     <div>
-                      <h3
-                        className="text-xl font-bold"
-                        style={{
-                          color: NAVY,
-                        }}
-                      >
+                      <h3 className="text-lg font-bold text-slate-800">
                         Partner Network Activity
                       </h3>
 
@@ -1394,15 +1378,15 @@ export default function DashboardClient() {
                                   <span
                                     className={`px-0 py-1.5 rounded-full text-[11px] font-black uppercase ${
                                       active
-                                        ? "bg-emerald-50 text-emerald-700"
-                                        : "bg-red-50 text-red-600"
+                                        ? "text-emerald-700"
+                                        : "text-red-600"
                                     }`}
                                   >
                                     £125 {active ? "Active" : "Expired"}
                                   </span>
 
                                   {active && (
-                                    <p className="text-[10px] font-bold text-slate-700 mt-1">
+                                    <p className="text-[10px] font-bold text-slate-500 mt-1">
                                       {daysLeft} days left
                                     </p>
                                   )}
@@ -1419,7 +1403,7 @@ export default function DashboardClient() {
                                     })}
                                   </div>
 
-                                  <div className="text-[9px] mt-1 font-semibold text-[#997819]">
+                                  <div className="text-[9px] mt-1 font-semibold text-slate-400">
                                     {active
                                       ? `Expires ${formatDate(expiryDate)}`
                                       : `Expired ${formatDate(expiryDate)}`}
@@ -1434,28 +1418,24 @@ export default function DashboardClient() {
                   )}
                 </div>
 
-                <div className="bg-white/85 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 shadow-sm">
+                <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
                   <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-bold uppercase tracking-widest text-[#997819]">
+                    <span className="text-xs font-bold uppercase tracking-widest text-[#2f6fed]">
                       Exclusive Benefit
                     </span>
 
-                    <span className="px-2.5 py-1 rounded-full bg-[#12066a]/5 text-[#12066a] text-[10px] font-extrabold uppercase">
+                    <span className="px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 text-[10px] font-extrabold uppercase">
                       Max £1000
                     </span>
                   </div>
 
-                  <h3
-                    className="text-2xl font-bold"
-                    style={{
-                      color: NAVY,
-                    }}
-                  >
+                  <h3 className="text-xl font-bold text-slate-800">
                     £125 Credit Discount
                   </h3>
 
-                  <p className="text-sm text-slate-600 font-light mt-3 leading-relaxed">
-                    Each successful referral earns <strong>£125 Credit</strong>{" "}
+                  <p className="text-sm text-slate-500 font-light mt-3 leading-relaxed">
+                    Each successful referral earns{" "}
+                    <strong className="text-slate-700">£125 Credit</strong>{" "}
                     that can be used towards eligible compliance services.
                   </p>
 
@@ -1463,7 +1443,7 @@ export default function DashboardClient() {
                     {SERVICES.map((service) => (
                       <span
                         key={service.name}
-                        className="bg-slate-50 px-2.5 py-2 rounded-lg border border-slate-100 text-[10px] font-medium text-slate-700"
+                        className="bg-slate-50 px-2.5 py-2 rounded-lg border border-slate-100 text-[10px] font-medium text-slate-600"
                       >
                         {service.name}
                       </span>
@@ -1472,16 +1452,13 @@ export default function DashboardClient() {
                 </div>
               </div>
 
+             
+
               {/* Claim History */}
-              <div className="bg-white/80 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 shadow-sm">
+              <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
                 <div className="flex items-center justify-between mb-6">
                   <div>
-                    <h3
-                      className="text-xl font-bold"
-                      style={{
-                        color: NAVY,
-                      }}
-                    >
+                    <h3 className="text-lg font-bold text-slate-800">
                       Reward Claim History
                     </h3>
 
@@ -1528,7 +1505,7 @@ export default function DashboardClient() {
                         </div>
 
                         <div className="flex items-center gap-4">
-                          <span className="font-black text-[#12066a]">
+                          <span className="font-black text-slate-800">
                             £{Number(claim.amount || 0).toLocaleString()}
                           </span>
 
@@ -1555,22 +1532,17 @@ export default function DashboardClient() {
                OVERVIEW
             ================================================= */
 
-            <div className="space-y-10">
-              <div className="bg-white/90 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 sm:p-12 shadow-sm">
-                <span className="inline-flex px-3 py-1 rounded-full bg-[#12066a]/5 text-[#12066a] text-[11px] font-extrabold uppercase tracking-wider">
+            <div className="space-y-8">
+              <div className="bg-white border border-slate-200 rounded-3xl p-8 sm:p-12 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
+                <span className="inline-flex px-3 py-1 rounded-full bg-[#2f6fed]/10 text-[#2f6fed] text-[11px] font-extrabold uppercase tracking-wider">
                   Program Guidelines
                 </span>
 
-                <h1
-                  className="text-3xl sm:text-4xl font-black tracking-tight mt-4"
-                  style={{
-                    color: NAVY,
-                  }}
-                >
+                <h1 className="text-3xl sm:text-4xl font-black tracking-tight mt-4 text-slate-800">
                   How the Bizgrow Partner Network Works
                 </h1>
 
-                <p className="text-base text-slate-600 mt-4 max-w-3xl leading-relaxed">
+                <p className="text-base text-slate-500 mt-4 max-w-3xl leading-relaxed">
                   Earn £125 BizGrow Service Credit for every successful
                   qualifying referral and use your accumulated credit toward
                   eligible BizGrow services.
@@ -1581,18 +1553,13 @@ export default function DashboardClient() {
                   PROGRAM RULES
               ================================================= */}
 
-              <div className="bg-white/90 backdrop-blur-xl border border-slate-200/60 rounded-3xl p-8 sm:p-10 shadow-sm">
+              <div className="bg-white border border-slate-200 rounded-3xl p-8 sm:p-10 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
                 <div className="mb-7">
-                  <span className="inline-flex px-3 py-1 rounded-full bg-[#997819]/10 text-[#997819] text-[10px] font-black uppercase tracking-widest">
+                  <span className="inline-flex px-3 py-1 rounded-full bg-slate-100 text-slate-600 text-[10px] font-black uppercase tracking-widest">
                     Referral Program Rules
                   </span>
 
-                  <h2
-                    className="text-2xl sm:text-3xl font-black mt-3"
-                    style={{
-                      color: NAVY,
-                    }}
-                  >
+                  <h2 className="text-2xl sm:text-3xl font-black mt-3 text-slate-800">
                     Referral Program Terms & Conditions
                   </h2>
 
@@ -1729,7 +1696,7 @@ export default function DashboardClient() {
                       key={rule.number}
                       className="flex gap-4 p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-100"
                     >
-                      <div className="w-8 h-8 rounded-xl bg-[#12066a]/[0.06] text-[#12066a] flex items-center justify-center shrink-0 text-xs font-black">
+                      <div className="w-8 h-8 rounded-xl bg-[#2f6fed]/10 text-[#2f6fed] flex items-center justify-center shrink-0 text-xs font-black">
                         {rule.number}
                       </div>
 
@@ -1741,27 +1708,22 @@ export default function DashboardClient() {
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-white via-white to-[#997819]/5 border border-[#997819]/20 rounded-3xl p-8 shadow-sm">
+              <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
                 <div className="flex gap-5">
-                  <div className="w-12 h-12 rounded-2xl bg-[#997819]/10 border border-[#997819]/20 flex items-center justify-center shrink-0">
-                    <span className="text-[#997819] text-xl">£</span>
+                  <div className="w-12 h-12 rounded-2xl bg-[#2f6fed]/10 flex items-center justify-center shrink-0">
+                    <span className="text-[#2f6fed] text-xl">£</span>
                   </div>
 
                   <div>
-                    <span className="text-[10px] font-black uppercase tracking-widest text-[#997819]">
+                    <span className="text-[10px] font-black uppercase tracking-widest text-[#2f6fed]">
                       12-Month Reward Validity
                     </span>
 
-                    <h3
-                      className="text-xl font-bold mt-1"
-                      style={{
-                        color: NAVY,
-                      }}
-                    >
+                    <h3 className="text-xl font-bold mt-1 text-slate-800">
                       Every £125 Credit has its own validity period
                     </h3>
 
-                    <p className="text-sm text-slate-600 mt-2 leading-relaxed">
+                    <p className="text-sm text-slate-500 mt-2 leading-relaxed">
                       Each successful referral earns £125 BizGrow Service
                       Credit. The credit is valid for 12 months from the date
                       the referral becomes eligible and is confirmed as
@@ -1788,7 +1750,7 @@ export default function DashboardClient() {
           {/* Backdrop */}
 
           <div
-            className="absolute inset-0 bg-[#12066a]/30 backdrop-blur-md"
+            className="absolute inset-0 bg-slate-900/30 backdrop-blur-md"
             onClick={closeClaimModal}
           />
 
@@ -1802,18 +1764,13 @@ export default function DashboardClient() {
               <>
                 {/* Modal Header */}
 
-                <div className="shrink-0 z-20 bg-white/95 backdrop-blur-xl border-b border-slate-100 px-6 sm:px-8 py-5 flex items-center justify-between">
+                <div className="shrink-0 z-20 bg-white border-b border-slate-100 px-6 sm:px-8 py-5 flex items-center justify-between">
                   <div>
-                    <span className="text-[9px] font-black uppercase tracking-[0.18em] text-[#997819]">
+                    <span className="text-[9px] font-black uppercase tracking-[0.18em] text-[#2f6fed]">
                       Reward Claim
                     </span>
 
-                    <h3
-                      className="text-xl sm:text-2xl font-black mt-1"
-                      style={{
-                        color: NAVY,
-                      }}
-                    >
+                    <h3 className="text-xl sm:text-2xl font-black mt-1 text-slate-800">
                       Use Your Reward Credit
                     </h3>
 
@@ -1854,14 +1811,14 @@ export default function DashboardClient() {
                             <div
                               className={`flex items-center gap-2 ${
                                 number <= claimStep
-                                  ? "text-[#12066a]"
+                                  ? "text-[#2f6fed]"
                                   : "text-slate-300"
                               }`}
                             >
                               <span
                                 className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-black ${
                                   number <= claimStep
-                                    ? "bg-[#12066a] text-white"
+                                    ? "bg-[#2f6fed] text-white"
                                     : "bg-slate-100 text-slate-400"
                                 }`}
                               >
@@ -1877,7 +1834,7 @@ export default function DashboardClient() {
                               <div
                                 className={`h-px flex-1 mx-3 ${
                                   number < claimStep
-                                    ? "bg-[#12066a]"
+                                    ? "bg-[#2f6fed]"
                                     : "bg-slate-200"
                                 }`}
                               />
@@ -1902,7 +1859,7 @@ export default function DashboardClient() {
                     <div className="px-6 sm:px-8 py-7">
                       <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-5">
                         <div>
-                          <p className="text-[9px] font-black uppercase tracking-widest text-[#997819]">
+                          <p className="text-[9px] font-black uppercase tracking-widest text-[#2f6fed]">
                             Step 1
                           </p>
 
@@ -1916,12 +1873,12 @@ export default function DashboardClient() {
                           </p>
                         </div>
 
-                        <div className="px-4 py-3 rounded-2xl bg-[#12066a]/[0.04] border border-[#12066a]/10">
+                        <div className="px-4 py-3 rounded-2xl bg-[#2f6fed]/5 border border-[#2f6fed]/10">
                           <p className="text-[9px] font-black uppercase tracking-widest text-slate-400">
                             Available Credit
                           </p>
 
-                          <p className="text-xl font-black text-[#12066a]">
+                          <p className="text-xl font-black text-slate-800">
                             £{availableRewardAmount.toLocaleString()}
                           </p>
                         </div>
@@ -1940,8 +1897,8 @@ export default function DashboardClient() {
                               onClick={() => toggleService(service)}
                               className={`text-left p-5 rounded-2xl border transition-all ${
                                 selected
-                                  ? "border-[#12066a] bg-[#12066a]/[0.045] shadow-md"
-                                  : "border-slate-200 bg-white hover:border-[#997819]/40 hover:shadow-sm"
+                                  ? "border-[#2f6fed] bg-[#2f6fed]/5 shadow-md"
+                                  : "border-slate-200 bg-white hover:border-slate-300 hover:shadow-sm"
                               }`}
                             >
                               <div className="flex items-start justify-between gap-3">
@@ -1958,7 +1915,7 @@ export default function DashboardClient() {
                                 <span
                                   className={`w-6 h-6 rounded-full border flex items-center justify-center shrink-0 ${
                                     selected
-                                      ? "border-[#12066a] bg-[#12066a] text-white"
+                                      ? "border-[#2f6fed] bg-[#2f6fed] text-white"
                                       : "border-slate-200 text-transparent"
                                   }`}
                                 >
@@ -1982,7 +1939,7 @@ export default function DashboardClient() {
                           disabled={selectedServices.length === 0}
                           className={`px-7 py-3 rounded-xl text-xs font-black shadow-lg transition-all ${
                             selectedServices.length > 0
-                              ? "bg-[#12066a] text-white shadow-[#12066a]/20"
+                              ? "bg-[#2f6fed] text-white"
                               : "bg-slate-100 text-slate-400 cursor-not-allowed shadow-none"
                           }`}
                         >
@@ -1997,7 +1954,7 @@ export default function DashboardClient() {
                   {claimStep === 2 && (
                     <div className="px-6 sm:px-8 py-7">
                       <div className="mb-6">
-                        <p className="text-[9px] font-black uppercase tracking-widest text-[#997819]">
+                        <p className="text-[9px] font-black uppercase tracking-widest text-[#2f6fed]">
                           Step 2
                         </p>
 
@@ -2010,7 +1967,7 @@ export default function DashboardClient() {
                         </p>
                       </div>
 
-                      <div className="p-4 rounded-2xl bg-[#12066a]/[0.035] border border-[#12066a]/10 mb-5">
+                      <div className="p-4 rounded-2xl bg-[#2f6fed]/5 border border-[#2f6fed]/10 mb-5">
                         <div className="flex items-start justify-between gap-4">
                           <div>
                             <p className="text-[9px] font-black uppercase tracking-widest text-slate-400">
@@ -2021,7 +1978,7 @@ export default function DashboardClient() {
                               {selectedServices.map((service) => (
                                 <span
                                   key={service.name}
-                                  className="px-3 py-1.5 rounded-full bg-white border border-[#12066a]/20 text-[11px] font-bold text-[#12066a]"
+                                  className="px-3 py-1.5 rounded-full bg-white border border-[#2f6fed]/20 text-[11px] font-bold text-[#2f6fed]"
                                 >
                                   {service.name}
                                 </span>
@@ -2032,7 +1989,7 @@ export default function DashboardClient() {
                           <button
                             type="button"
                             onClick={() => setClaimStep(1)}
-                            className="text-[10px] font-black uppercase tracking-wider text-[#997819] hover:underline shrink-0"
+                            className="text-[10px] font-black uppercase tracking-wider text-[#2f6fed] hover:underline shrink-0"
                           >
                             Change
                           </button>
@@ -2050,7 +2007,7 @@ export default function DashboardClient() {
                             onChange={(event) =>
                               setClaimAmount(Number(event.target.value))
                             }
-                            className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-sm font-bold text-slate-700 outline-none focus:border-[#12066a] focus:ring-2 focus:ring-[#12066a]/10"
+                            className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-sm font-bold text-slate-700 outline-none focus:border-[#2f6fed] focus:ring-2 focus:ring-[#2f6fed]/10"
                           >
                             {[125, 250, 375, 500, 625, 750, 875, 1000]
                               .filter(
@@ -2081,7 +2038,7 @@ export default function DashboardClient() {
                             onChange={(event) =>
                               setCompanyName(event.target.value)
                             }
-                            className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-sm text-slate-700 outline-none focus:border-[#12066a] focus:ring-2 focus:ring-[#12066a]/10"
+                            className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-sm text-slate-700 outline-none focus:border-[#2f6fed] focus:ring-2 focus:ring-[#2f6fed]/10"
                             placeholder="Your company name"
                           />
                         </div>
@@ -2097,7 +2054,7 @@ export default function DashboardClient() {
                             onChange={(event) =>
                               setContactName(event.target.value)
                             }
-                            className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-sm text-slate-700 outline-none focus:border-[#12066a] focus:ring-2 focus:ring-[#12066a]/10"
+                            className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-sm text-slate-700 outline-none focus:border-[#2f6fed] focus:ring-2 focus:ring-[#2f6fed]/10"
                             placeholder="Contact name"
                           />
                         </div>
@@ -2111,7 +2068,7 @@ export default function DashboardClient() {
                             type="tel"
                             value={phone}
                             onChange={(event) => setPhone(event.target.value)}
-                            className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-sm text-slate-700 outline-none focus:border-[#12066a] focus:ring-2 focus:ring-[#12066a]/10"
+                            className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-sm text-slate-700 outline-none focus:border-[#2f6fed] focus:ring-2 focus:ring-[#2f6fed]/10"
                             placeholder="+44..."
                           />
                         </div>
@@ -2127,7 +2084,7 @@ export default function DashboardClient() {
                               setClaimNotes(event.target.value)
                             }
                             rows={4}
-                            className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-sm text-slate-700 outline-none focus:border-[#12066a] focus:ring-2 focus:ring-[#12066a]/10 resize-none"
+                            className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-sm text-slate-700 outline-none focus:border-[#2f6fed] focus:ring-2 focus:ring-[#2f6fed]/10 resize-none"
                             placeholder="Tell our compliance team anything relevant to your request..."
                           />
                         </div>
@@ -2145,7 +2102,7 @@ export default function DashboardClient() {
                         <button
                           type="button"
                           onClick={goToReview}
-                          className="px-7 py-3 rounded-xl bg-[#12066a] text-white text-xs font-black shadow-lg shadow-[#12066a]/20"
+                          className="px-7 py-3 rounded-xl bg-[#2f6fed] text-white text-xs font-black"
                         >
                           Continue
                         </button>
@@ -2158,7 +2115,7 @@ export default function DashboardClient() {
                   {claimStep === 3 && (
                     <div className="px-6 sm:px-8 py-7">
                       <div className="mb-6">
-                        <p className="text-[9px] font-black uppercase tracking-widest text-[#997819]">
+                        <p className="text-[9px] font-black uppercase tracking-widest text-[#2f6fed]">
                           Step 3
                         </p>
 
@@ -2181,7 +2138,7 @@ export default function DashboardClient() {
                           </div>
 
                           <div className="p-5">
-                            <p className="text-xl font-black text-[#12066a]">
+                            <p className="text-xl font-black text-slate-800">
                               £{claimAmount.toLocaleString()}
                             </p>
                           </div>
@@ -2278,7 +2235,7 @@ export default function DashboardClient() {
                         <button
                           onClick={submitClaim}
                           disabled={claimSubmitting}
-                          className="px-7 py-3 rounded-xl bg-[#12066a] text-white text-xs font-black shadow-lg shadow-[#12066a]/20 disabled:opacity-60"
+                          className="px-7 py-3 rounded-xl bg-[#2f6fed] text-white text-xs font-black disabled:opacity-60"
                         >
                           {claimSubmitting ? "Submitting..." : "Submit Claim"}
                         </button>
@@ -2309,16 +2266,11 @@ export default function DashboardClient() {
                     <span className="text-3xl text-emerald-600">✓</span>
                   </div>
 
-                  <span className="inline-block mt-6 text-[10px] font-black uppercase tracking-[0.18em] text-[#997819]">
+                  <span className="inline-block mt-6 text-[10px] font-black uppercase tracking-[0.18em] text-[#2f6fed]">
                     Claim Received
                   </span>
 
-                  <h3
-                    className="text-3xl font-black mt-2"
-                    style={{
-                      color: NAVY,
-                    }}
-                  >
+                  <h3 className="text-3xl font-black mt-2 text-slate-800">
                     Your request has been received
                   </h3>
 
@@ -2337,7 +2289,7 @@ export default function DashboardClient() {
                     <div className="flex justify-between text-sm">
                       <span className="text-slate-500">Claim amount</span>
 
-                      <span className="font-black text-[#12066a]">
+                      <span className="font-black text-slate-800">
                         £{claimAmount}
                       </span>
                     </div>
@@ -2375,7 +2327,7 @@ export default function DashboardClient() {
 
                   <button
                     onClick={closeClaimModal}
-                    className="mt-7 px-7 py-3 rounded-xl bg-[#12066a] text-white text-xs font-black shadow-lg shadow-[#12066a]/20"
+                    className="mt-7 px-7 py-3 rounded-xl bg-[#2f6fed] text-white text-xs font-black"
                   >
                     Back to Dashboard
                   </button>

@@ -396,19 +396,22 @@ export function GoogleLoginButton() {
 
 export function LogoutButton() {
   const supabase = createClient();
-  const router = useRouter();
 
   const handleLogout = async () => {
     try {
+      // 1. Loading fallback ko hata dein agar DOM mein ho
+      const loadingElement = document.getElementById("bizgrow-loading-fallback");
+      if (loadingElement) {
+        loadingElement.remove();
+      }
+
+      // 2. Supabase sign out
       await supabase.auth.signOut();
 
-      router.replace("/referral-program");
-      router.refresh();
+      // 3. Hard reload to referral program page
+      window.location.href = "/referral-program";
     } catch (error) {
-      console.error(
-        "Logout failed:",
-        error
-      );
+      console.error("Logout failed:", error);
     }
   };
 
