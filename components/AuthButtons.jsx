@@ -194,6 +194,27 @@ export function ReferralCookieNotice() {
   );
 }
 
+export function LoginButton() {
+  const router = useRouter();
+
+  const handleLoginRedirect = () => {
+    // Agar aap direct Google login trigger karwana chahte hain toh yahan handleGoogleLogin call kar sakte hain, 
+    // warna agar login/auth page par bhejna hai toh router.push use karein:
+    router.push("/referral-program"); // ya apna login route path
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={handleLoginRedirect}
+      className="w-full rounded-2xl border border-slate-200 bg-[#12066a] px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-[#12066a]/90 active:scale-[0.99] shadow-sm"
+    >
+      Sign In
+    </button>
+  );
+}
+
+
 export function GoogleLoginButton() {
   const supabase = createClient();
 

@@ -881,14 +881,26 @@ export default async function ReferralPage() {
                   </span>
                 </h1>
 
-                <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#12066a]/5 border border-[#12066a]/10">
+                <div className="mt-4  inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#12066a]/5 border border-[#12066a]/10">
                   <span className="text-sm sm:text-base font-bold text-[#12066a]">
-                    5% Off First Service (£650+ VAT).
+                    5% Off First Service.
                   </span>
                 </div>
 
+                <div
+                  className="bg-[#12066a] w-md mx-auto  px-4 py-3 rounded-xl text-white text-xs shadow-sm"
+                  style={{
+                    borderLeftWidth: "4px",
+                    borderLeftColor: "#997819",
+                  }}
+                >
+                  <p className="italic">
+                    Minimum qualifying service value: £650 + VAT.
+                  </p>
+                </div>
+
                 <h3 className="text-3xl font-extrabold" style={{ color: NAVY }}>
-                 Simple Steps
+                  Simple Steps
                 </h3>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl mx-auto text-left pt-2">
@@ -931,7 +943,7 @@ export default async function ReferralPage() {
                     </p>
 
                     <p className="text-[11px] text-slate-500 leading-relaxed">
-                      Refer others and earn £125 per referral, up to £1,000.
+                      Once your qualifying purchase is confirmed, you’ll receive access to your referral dashboard and your unique referral link.
                     </p>
                   </div>
                 </div>
@@ -1546,7 +1558,18 @@ export default async function ReferralPage() {
                         successful qualifying referral.
                       </p>
                     </div>
+                    <div className="bg-white/90 backdrop-blur-2xl border border-slate-200/80 rounded-2xl p-6 shadow-sm space-y-2">
+                      <h4 className="text-sm font-semibold text-slate-900">
+                        Can I refer more than one business?
+                      </h4>
 
+                      <p className="text-xs text-slate-600 leading-relaxed">
+                        Yes. You can refer multiple businesses and earn £125
+                        BizGrow Referral Credit for each successful qualifying
+                        referral, up to the maximum programme reward limit of
+                        £1,000 within a 12-month period.
+                      </p>
+                    </div>
                     <div className="bg-white/90 backdrop-blur-2xl border border-slate-200/80 rounded-2xl p-6 shadow-sm space-y-2">
                       <h4 className="text-sm font-semibold text-slate-900">
                         Is the £125 paid in cash?

@@ -1037,9 +1037,7 @@ export default function DashboardClient() {
 
               <div>
                 <div className="flex items-center gap-2">
-                  <h2
-                    className="text-xl font-bold text-slate-800"
-                  >
+                  <h2 className="text-xl font-bold text-slate-800">
                     Hello, {profile?.full_name?.split(" ")[0] || "Partner"}
                   </h2>
 
@@ -1083,7 +1081,6 @@ export default function DashboardClient() {
             </div>
           </div>
 
-
           {/* =================================================
               REWARD CARD — light card with donut-style ring
               instead of heavy gradient hero
@@ -1096,7 +1093,10 @@ export default function DashboardClient() {
                   <div className="flex items-center gap-6">
                     {/* Donut-style progress ring */}
                     <div className="relative w-24 h-24 shrink-0">
-                      <svg viewBox="0 0 100 100" className="w-24 h-24 -rotate-90">
+                      <svg
+                        viewBox="0 0 100 100"
+                        className="w-24 h-24 -rotate-90"
+                      >
                         <circle
                           cx="50"
                           cy="50"
@@ -1140,8 +1140,9 @@ export default function DashboardClient() {
                       </h3>
 
                       <p className="text-sm text-slate-500 mt-1">
-                        £{cycleProgressAmount.toLocaleString()} of £1,000 &middot;{" "}
-                        {cycleReferralCount} of {MAX_REFERRALS} referrals
+                        £{cycleProgressAmount.toLocaleString()} of £1,000
+                        &middot; {cycleReferralCount} of {MAX_REFERRALS}{" "}
+                        referrals
                       </p>
                     </div>
                   </div>
@@ -1152,7 +1153,7 @@ export default function DashboardClient() {
                         £{availableRewardAmount.toLocaleString()}
                       </div>
                       <div className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mt-1">
-                        Available to claim
+                        Available Credits
                       </div>
                     </div>
 
@@ -1166,7 +1167,10 @@ export default function DashboardClient() {
                       }`}
                       style={
                         availableRewardAmount >= REWARD_PER_REFERRAL
-                          ? { backgroundColor: BLUE, boxShadow: `0 10px 25px -8px ${BLUE}66` }
+                          ? {
+                              backgroundColor: BLUE,
+                              boxShadow: `0 10px 25px -8px ${BLUE}66`,
+                            }
                           : undefined
                       }
                     >
@@ -1182,30 +1186,54 @@ export default function DashboardClient() {
                 )}
 
                 {/* Secondary detail chips */}
-                <div className="mt-6 mx-auto flex flex-wrap gap-3">
-                  <div className="px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-100 text-xs">
-                    <span className="text-green-600 font-bold uppercase tracking-wide text-[9px] mr-2">
+                <div className="mt-6 mx-auto flex flex-wrap items-center justify-center gap-3">
+                  {/* Active Pill */}
+                  <div className="flex items-center rounded-xl border border-emerald-100 bg-emerald-50/60 px-4 py-2.5 text-xs shadow-sm transition-all hover:shadow">
+                    <span className="mr-2 text-[9px] font-bold uppercase tracking-wide text-emerald-600">
                       Active
                     </span>
-                    <span className="font-black text-slate-700">
-                      {activeRewardCount} referral{activeRewardCount === 1 ? "" : "s"}
+                    <span className="font-black text-slate-800 tabular-nums">
+                      {activeRewardCount} referral
+                      {activeRewardCount === 1 ? "" : "s"}
                     </span>
                   </div>
 
-                  <div className="px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-100 text-xs">
-                    <span className="text-yellow-600 font-bold uppercase tracking-wide text-[9px] mr-2">
-                      Under review
+                  {/* Claimed Pill */}
+                  <div className="flex items-center rounded-xl border border-emerald-100 bg-emerald-50/60 px-4 py-2.5 text-xs shadow-sm transition-all hover:shadow">
+                    <span className="mr-2 text-[9px] font-bold uppercase tracking-wide text-emerald-600">
+                      Claimed
                     </span>
-                    <span className="font-black text-slate-700">
+                    <span className="font-black text-slate-800 tabular-nums">
+                      £{totalClaimedAmount.toLocaleString()}
+                    </span>
+                  </div>
+
+                  {/* Under Review Pill */}
+                  <div className="flex items-center rounded-xl border border-amber-100 bg-amber-50/60 px-4 py-2.5 text-xs shadow-sm transition-all hover:shadow">
+                    <span className="mr-2 text-[9px] font-bold uppercase tracking-wide text-amber-600">
+                      Under Review
+                    </span>
+                    <span className="font-black text-slate-800 tabular-nums">
                       £{pendingClaimAmount.toLocaleString()}
                     </span>
                   </div>
 
-                  <div className="px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-100 text-xs">
-                    <span className="text-red-600 font-bold uppercase tracking-wide text-[9px] mr-2">
-                      Next expiry
+                  {/* Expired Pill */}
+                  <div className="flex items-center rounded-xl border border-rose-100 bg-rose-50/60 px-4 py-2.5 text-xs shadow-sm transition-all hover:shadow">
+                    <span className="mr-2 text-[9px] font-bold uppercase tracking-wide text-rose-600">
+                      Expired
                     </span>
-                    <span className="font-black text-slate-700">
+                    <span className="font-black text-slate-800 tabular-nums">
+                      £{expiredRewardAmount.toLocaleString()}
+                    </span>
+                  </div>
+
+                  {/* Next Expiry Pill */}
+                  <div className="flex items-center rounded-xl border border-rose-100 bg-rose-50/60 px-4 py-2.5 text-xs shadow-sm transition-all hover:shadow">
+                    <span className="mr-2 text-[9px] font-bold uppercase tracking-wide text-rose-600">
+                      Next Expiry
+                    </span>
+                    <span className="font-black text-slate-800 tabular-nums">
                       {nextExpiryDate
                         ? `${formatDate(nextExpiryDate)} (${daysUntilNextExpiry}d)`
                         : "—"}
@@ -1215,21 +1243,19 @@ export default function DashboardClient() {
 
                 {/* Expiry Notice */}
                 <div className="mt-6 px-4 py-3 rounded-xl bg-[#2f6fed]/5 border border-[#2f6fed]/10">
-                <h3 className="text-lg font-bold text-[#12066a] mb-4">
-                  Your Unique Referral Link
-                </h3>
-                  <ReferralBox  referralCode={profile?.referral_code} />
-                  
+                  <h3 className="text-lg font-bold text-[#12066a] mb-4">
+                    Your Unique Referral Link
+                  </h3>
+                  <ReferralBox referralCode={profile?.referral_code} />
                 </div>
-                  <p className="text-[11px] mt-6 text-center text-slate-600 leading-relaxed">
-                    Each <strong className="text-slate-800">£125</strong>{" "}
-                    referral credit remains valid for{" "}
-                    <strong className="text-slate-800">
-                      12 months from the date the qualifying referral is
-                      recorded
-                    </strong>
-                    , unless otherwise stated in the programme terms.
-                  </p>
+                <p className="text-[11px] mt-6 text-center text-slate-600 leading-relaxed">
+                  Each <strong className="text-slate-800">£125</strong> referral
+                  credit remains valid for{" "}
+                  <strong className="text-slate-800">
+                    12 months from the date the qualifying referral is recorded
+                  </strong>
+                  , unless otherwise stated in the programme terms.
+                </p>
               </div>
             </div>
           )}
@@ -1239,68 +1265,7 @@ export default function DashboardClient() {
               (same underlying figures as before, new look)
           ================================================= */}
 
-          {activeTab === "dashboard" && (
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              <div className="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col items-center text-center gap-2 shadow-[0_1px_2px_rgba(15,23,42,0.04)] hover:shadow-md transition-shadow">
-                <div
-                  className="w-11 h-11 rounded-2xl flex items-center justify-center"
-                  style={{ backgroundColor: `${BLUE}1a` }}
-                >
-                  <svg className="w-5 h-5" style={{ color: BLUE }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V6m0 12v-2m9-4a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <p className="text-lg font-black text-slate-800 tabular-nums">
-                  £{availableRewardAmount.toLocaleString()}
-                </p>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
-                  Available
-                </p>
-              </div>
-
-              <div className="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col items-center text-center gap-2 shadow-[0_1px_2px_rgba(15,23,42,0.04)] hover:shadow-md transition-shadow">
-                <div className="w-11 h-11 rounded-2xl bg-emerald-50 flex items-center justify-center">
-                  <svg className="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <p className="text-lg font-black text-slate-800 tabular-nums">
-                  £{totalClaimedAmount.toLocaleString()}
-                </p>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
-                  Claimed
-                </p>
-              </div>
-
-              <div className="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col items-center text-center gap-2 shadow-[0_1px_2px_rgba(15,23,42,0.04)] hover:shadow-md transition-shadow">
-                <div className="w-11 h-11 rounded-2xl bg-red-50 flex items-center justify-center">
-                  <svg className="w-5 h-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
-                  </svg>
-                </div>
-                <p className="text-lg font-black text-slate-800 tabular-nums">
-                  £{expiredRewardAmount.toLocaleString()}
-                </p>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
-                  Expired
-                </p>
-              </div>
-
-              <div className="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col items-center text-center gap-2 shadow-[0_1px_2px_rgba(15,23,42,0.04)] hover:shadow-md transition-shadow">
-                <div className="w-11 h-11 rounded-2xl bg-amber-50 flex items-center justify-center">
-                  <svg className="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M12 6v6l4 2M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <p className="text-lg font-black text-slate-800 tabular-nums">
-                  {Math.round(rewardProgress)}%
-                </p>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
-                  Progress
-                </p>
-              </div>
-            </div>
-          )}
+       
 
           {/* =================================================
               DASHBOARD
@@ -1308,10 +1273,7 @@ export default function DashboardClient() {
 
           {activeTab === "dashboard" ? (
             <div className="space-y-8">
-              
               <div className="grid gap-6 md:grid-cols-2">
-
-                
                 {/* Partner Network Activity Table */}
                 <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
                   <div className="flex items-center justify-between mb-6">
@@ -1321,7 +1283,7 @@ export default function DashboardClient() {
                       </h3>
 
                       <p className="text-xs text-slate-500 mt-1">
-                        Peers who joined using your referral link.
+                        Businesses Referred By You.
                       </p>
                     </div>
 
@@ -1429,13 +1391,13 @@ export default function DashboardClient() {
                   </div>
 
                   <h3 className="text-xl font-bold text-slate-800">
-                    £125 Credit Discount
+                    £125 Bizgrow Credit
                   </h3>
 
                   <p className="text-sm text-slate-500 font-light mt-3 leading-relaxed">
-                    Each successful referral earns{" "}
-                    <strong className="text-slate-700">£125 Credit</strong>{" "}
-                    that can be used towards eligible compliance services.
+                    Each successful referral earns you{" "}
+                    <strong className="text-slate-700">£125 BizGrow Referral Credit</strong> that
+                    which can be used towards an eligible BizGrow service.
                   </p>
 
                   <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -1451,8 +1413,6 @@ export default function DashboardClient() {
                 </div>
               </div>
 
-             
-
               {/* Claim History */}
               <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
                 <div className="flex items-center justify-between mb-6">
@@ -1462,7 +1422,7 @@ export default function DashboardClient() {
                     </h3>
 
                     <p className="text-xs text-slate-500 mt-1">
-                      Track every reward credit request submitted for review.
+                      Track your referral credit redemption requests and their status
                     </p>
                   </div>
 
