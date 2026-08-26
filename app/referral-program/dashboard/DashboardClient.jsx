@@ -1075,7 +1075,7 @@ export default function DashboardClient() {
                       : "text-slate-500 hover:text-slate-800"
                   }`}
                 >
-                  Overview
+                  Guidelines
                 </button>
               </div>
 
@@ -1083,73 +1083,6 @@ export default function DashboardClient() {
             </div>
           </div>
 
-          {/* =================================================
-              QUICK STATS — rounded icon-pill row
-              (same underlying figures as before, new look)
-          ================================================= */}
-
-          {activeTab === "dashboard" && (
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-              <div className="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col items-center text-center gap-2 shadow-[0_1px_2px_rgba(15,23,42,0.04)] hover:shadow-md transition-shadow">
-                <div
-                  className="w-11 h-11 rounded-2xl flex items-center justify-center"
-                  style={{ backgroundColor: `${BLUE}1a` }}
-                >
-                  <svg className="w-5 h-5" style={{ color: BLUE }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V6m0 12v-2m9-4a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <p className="text-lg font-black text-slate-800 tabular-nums">
-                  £{availableRewardAmount.toLocaleString()}
-                </p>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
-                  Available
-                </p>
-              </div>
-
-              <div className="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col items-center text-center gap-2 shadow-[0_1px_2px_rgba(15,23,42,0.04)] hover:shadow-md transition-shadow">
-                <div className="w-11 h-11 rounded-2xl bg-emerald-50 flex items-center justify-center">
-                  <svg className="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <p className="text-lg font-black text-slate-800 tabular-nums">
-                  £{totalClaimedAmount.toLocaleString()}
-                </p>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
-                  Claimed
-                </p>
-              </div>
-
-              <div className="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col items-center text-center gap-2 shadow-[0_1px_2px_rgba(15,23,42,0.04)] hover:shadow-md transition-shadow">
-                <div className="w-11 h-11 rounded-2xl bg-red-50 flex items-center justify-center">
-                  <svg className="w-5 h-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
-                  </svg>
-                </div>
-                <p className="text-lg font-black text-slate-800 tabular-nums">
-                  £{expiredRewardAmount.toLocaleString()}
-                </p>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
-                  Expired
-                </p>
-              </div>
-
-              <div className="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col items-center text-center gap-2 shadow-[0_1px_2px_rgba(15,23,42,0.04)] hover:shadow-md transition-shadow">
-                <div className="w-11 h-11 rounded-2xl bg-amber-50 flex items-center justify-center">
-                  <svg className="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M12 6v6l4 2M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <p className="text-lg font-black text-slate-800 tabular-nums">
-                  {Math.round(rewardProgress)}%
-                </p>
-                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
-                  Progress
-                </p>
-              </div>
-            </div>
-          )}
 
           {/* =================================================
               REWARD CARD — light card with donut-style ring
@@ -1249,7 +1182,7 @@ export default function DashboardClient() {
                 )}
 
                 {/* Secondary detail chips */}
-                <div className="mt-6 flex flex-wrap gap-3">
+                <div className="mt-6 mx-auto flex flex-wrap gap-3">
                   <div className="px-4 py-2.5 rounded-xl bg-slate-50 border border-slate-100 text-xs">
                     <span className="text-green-600 font-bold uppercase tracking-wide text-[9px] mr-2">
                       Active
@@ -1282,7 +1215,13 @@ export default function DashboardClient() {
 
                 {/* Expiry Notice */}
                 <div className="mt-6 px-4 py-3 rounded-xl bg-[#2f6fed]/5 border border-[#2f6fed]/10">
-                  <p className="text-[11px] text-slate-600 leading-relaxed">
+                <h3 className="text-lg font-bold text-[#12066a] mb-4">
+                  Your Unique Referral Link
+                </h3>
+                  <ReferralBox  referralCode={profile?.referral_code} />
+                  
+                </div>
+                  <p className="text-[11px] mt-6 text-center text-slate-600 leading-relaxed">
                     Each <strong className="text-slate-800">£125</strong>{" "}
                     referral credit remains valid for{" "}
                     <strong className="text-slate-800">
@@ -1291,7 +1230,74 @@ export default function DashboardClient() {
                     </strong>
                     , unless otherwise stated in the programme terms.
                   </p>
+              </div>
+            </div>
+          )}
+
+          {/* =================================================
+              QUICK STATS — rounded icon-pill row
+              (same underlying figures as before, new look)
+          ================================================= */}
+
+          {activeTab === "dashboard" && (
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div className="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col items-center text-center gap-2 shadow-[0_1px_2px_rgba(15,23,42,0.04)] hover:shadow-md transition-shadow">
+                <div
+                  className="w-11 h-11 rounded-2xl flex items-center justify-center"
+                  style={{ backgroundColor: `${BLUE}1a` }}
+                >
+                  <svg className="w-5 h-5" style={{ color: BLUE }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V6m0 12v-2m9-4a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
                 </div>
+                <p className="text-lg font-black text-slate-800 tabular-nums">
+                  £{availableRewardAmount.toLocaleString()}
+                </p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                  Available
+                </p>
+              </div>
+
+              <div className="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col items-center text-center gap-2 shadow-[0_1px_2px_rgba(15,23,42,0.04)] hover:shadow-md transition-shadow">
+                <div className="w-11 h-11 rounded-2xl bg-emerald-50 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <p className="text-lg font-black text-slate-800 tabular-nums">
+                  £{totalClaimedAmount.toLocaleString()}
+                </p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                  Claimed
+                </p>
+              </div>
+
+              <div className="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col items-center text-center gap-2 shadow-[0_1px_2px_rgba(15,23,42,0.04)] hover:shadow-md transition-shadow">
+                <div className="w-11 h-11 rounded-2xl bg-red-50 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                  </svg>
+                </div>
+                <p className="text-lg font-black text-slate-800 tabular-nums">
+                  £{expiredRewardAmount.toLocaleString()}
+                </p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                  Expired
+                </p>
+              </div>
+
+              <div className="bg-white border border-slate-200 rounded-2xl p-5 flex flex-col items-center text-center gap-2 shadow-[0_1px_2px_rgba(15,23,42,0.04)] hover:shadow-md transition-shadow">
+                <div className="w-11 h-11 rounded-2xl bg-amber-50 flex items-center justify-center">
+                  <svg className="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M12 6v6l4 2M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <p className="text-lg font-black text-slate-800 tabular-nums">
+                  {Math.round(rewardProgress)}%
+                </p>
+                <p className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                  Progress
+                </p>
               </div>
             </div>
           )}
@@ -1302,14 +1308,7 @@ export default function DashboardClient() {
 
           {activeTab === "dashboard" ? (
             <div className="space-y-8">
-               {/* Referral Link */}
-              <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
-                <h3 className="text-lg font-bold text-slate-800 mb-4">
-                  Your Unique Referral Link
-                </h3>
-
-                <ReferralBox referralCode={profile?.referral_code} />
-              </div>
+              
               <div className="grid gap-6 md:grid-cols-2">
 
                 
@@ -1575,7 +1574,7 @@ export default function DashboardClient() {
                       number: 1,
                       text: (
                         <>
-                          Referral rewards apply only to{" "}
+                          Referral rewards apply 5% only to{" "}
                           <strong>new businesses</strong> that have not
                           previously purchased from BizGrow.
                         </>
@@ -1616,7 +1615,7 @@ export default function DashboardClient() {
                       number: 5,
                       text: (
                         <>
-                          The referring client receives 125 bizgrow credit for
+                          The referring client receives £125 bizgrow credit for
                           each successful referral.
                         </>
                       ),
