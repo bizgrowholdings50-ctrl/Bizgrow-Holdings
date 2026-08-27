@@ -21,6 +21,9 @@ import {
   FileCheck,
   Globe,
   Gift,
+  CheckCircle2,
+  FormInput,
+  PhoneCall,
 } from "lucide-react";
 
 export const dynamic = "force-dynamic";
@@ -752,8 +755,8 @@ export default async function ReferralPage() {
                     </p>
 
                     <p className="text-xs text-slate-500 leading-relaxed px-4">
-                      Once your first eligible service (£650) is purchased
-                      and payment is cleared, your account can be upgraded to an
+                      Once your first eligible service (£650) is purchased and
+                      payment is cleared, your account can be upgraded to an
                       Active Partner.
                     </p>
                   </div>
@@ -906,12 +909,12 @@ export default async function ReferralPage() {
                     </div>
 
                     <h1 className="text-4xl sm:text-6xl font-black tracking-tight leading-[1.08] text-white">
-                      Save 5% on Compliance
+                      Save 5% on 1st Compliance
                       <br />
-                      Services.Choose your service and
+                      Service.Choose your service and
                       <span className="italic font-serif font-medium text-[#c9a44a]">
                         {" "}
-                        unlock your reward.
+                        unlock your discount.
                       </span>
                     </h1>
 
@@ -923,15 +926,70 @@ export default async function ReferralPage() {
                       </div>
 
                       <div className="inline-flex items-center gap-2 bg-white text-[#12066a] px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-wider shadow-xl">
-                        Minimum Qualifying Value: £650 
+                        Minimum Qualifying Value: £650
                       </div>
                     </div>
                   </div>
                 </section>
+                <section className="text-center space-y-8 max-w-4xl mx-auto px-4 py-8">
+                  <div className="space-y-2">
+                    <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#997819]">
+                      Why Partner With Us
+                    </span>
+                    <h2
+                      className="text-2xl sm:text-3xl font-black"
+                      style={{ color: NAVY }}
+                    >
+                      Why Businesses Choose BizGrow
+                    </h2>
+                  </div>
 
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+                    {/* Feature 1 */}
+                    <div className="relative p-6 rounded-3xl bg-gradient-to-b from-slate-50 to-white border border-slate-100 shadow-sm space-y-3 group hover:border-[#997819]/40 transition-all">
+                      <div className="w-10 h-10 rounded-2xl bg-[#997819]/10 text-[#997819] flex items-center justify-center">
+                        <ShieldCheck className="w-5 h-5" />
+                      </div>
+                      <h3 className="text-sm font-extrabold text-slate-900">
+                        Expert Compliance Support
+                      </h3>
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        Practical guidance from experienced compliance
+                        specialists.
+                      </p>
+                    </div>
+
+                    {/* Feature 2 */}
+                    <div className="relative p-6 rounded-3xl bg-gradient-to-b from-slate-50 to-white border border-slate-100 shadow-sm space-y-3 group hover:border-[#997819]/40 transition-all">
+                      <div className="w-10 h-10 rounded-2xl bg-[#12066a]/10 text-[#12066a] flex items-center justify-center">
+                        <Building2 className="w-5 h-5" />
+                      </div>
+                      <h3 className="text-sm font-extrabold text-slate-900">
+                        Industry-Focused
+                      </h3>
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        Support designed for UK security businesses.
+                      </p>
+                    </div>
+
+                    {/* Feature 3 */}
+                    <div className="relative p-6 rounded-3xl bg-gradient-to-b from-slate-50 to-white border border-slate-100 shadow-sm space-y-3 group hover:border-[#997819]/40 transition-all">
+                      <div className="w-10 h-10 rounded-2xl bg-[#997819]/10 text-[#997819] flex items-center justify-center">
+                        <CheckCircle2 className="w-5 h-5" />
+                      </div>
+                      <h3 className="text-sm font-extrabold text-slate-900">
+                        End-to-End Guidance
+                      </h3>
+                      <p className="text-xs text-slate-500 leading-relaxed">
+                        From choosing the right accreditation to completing the
+                        process.
+                      </p>
+                    </div>
+                  </div>
+                </section>
                 {/* Steps + form stay in the light, editorial style below the hero */}
 
-                <div className="text-center max-w-3xl mx-auto space-y-7">
+                <div className="text-center max-w-4xl mx-auto space-y-8">
                   <div className="pt-2">
                     <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#997819]">
                       Simple Steps
@@ -945,54 +1003,112 @@ export default async function ReferralPage() {
                     </h3>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl mx-auto text-left pt-2">
-                    <div className="bg-white border border-slate-200/70 rounded-2xl p-4 space-y-1.5 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
-                      <span className="w-7 h-7 rounded-full bg-[#12066a]/10 text-[#12066a] flex items-center justify-center font-black text-xs">
-                        1
-                      </span>
+                  {/* Chevron Arrow Process Flow Container */}
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-0 max-w-3xl mx-auto text-left pt-2 relative">
+                    {/* STEP 1 */}
+                    <div className="relative group">
+                      {/* Background Accent Ribbon */}
+                      <div
+                        className="hidden md:block absolute -inset-x-1 -bottom-2 top-2 rounded-r-xl opacity-20 -z-10 transition-transform group-hover:translate-x-1"
+                        style={{ backgroundColor: GOLD }}
+                      />
 
-                      <p className="text-xs font-black text-slate-800">
-                        Choose your service
-                      </p>
+                      {/* Main Arrow Card */}
+                      <div className="bg-white border border-slate-200 p-5 space-y-2.5 shadow-sm transition-all relative z-10 md:[clip-path:polygon(0%_0%,_88%_0%,_100%_50%,_88%_100%,_0%_100%)] md:pr-10">
+                        <div className="flex items-center justify-between">
+                          <span
+                            className="text-[10px] font-black tracking-widest uppercase px-2 py-0.5 rounded"
+                            style={{
+                              backgroundColor: `${GOLD}15`,
+                              color: GOLD,
+                            }}
+                          >
+                            Step 01
+                          </span>
+                          <FormInput className="w-5 h-5 text-[#997819]" />
+                        </div>
 
-                      <p className="text-[11px] text-slate-500 leading-relaxed">
-                        Fill in the form below with the service you need.
-                      </p>
+                        <p className="text-xs font-black text-slate-800">
+                          Choose your service
+                        </p>
+
+                        <p className="text-[11px] text-slate-500 leading-relaxed pr-2">
+                          Fill in the form below with the service you need.
+                        </p>
+                      </div>
                     </div>
 
-                    <div className="bg-white border border-slate-200/70 rounded-2xl p-4 space-y-1.5 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
-                      <span className="w-7 h-7 rounded-full bg-[#12066a]/10 text-[#12066a] flex items-center justify-center font-black text-xs">
-                        2
-                      </span>
+                    {/* STEP 2 */}
+                    <div className="relative group md:-ml-4">
+                      {/* Background Accent Ribbon */}
+                      <div
+                        className="hidden md:block absolute -inset-x-1 -bottom-2 top-2 rounded-r-xl opacity-20 -z-10 transition-transform group-hover:translate-x-1"
+                        style={{ backgroundColor: NAVY }}
+                      />
 
-                      <p className="text-xs font-black text-slate-800">
-                        Our Bizgrow team reaches out
-                      </p>
+                      {/* Main Arrow Card */}
+                      <div className="bg-slate-50 border border-slate-200 p-5 space-y-2.5 shadow-sm transition-all relative z-20 md:[clip-path:polygon(0%_0%,_88%_0%,_100%_50%,_88%_100%,_0%_100%,_12%_50%)] md:pl-9 md:pr-10">
+                        <div className="flex items-center justify-between">
+                          <span
+                            className="text-[10px] font-black tracking-widest uppercase px-2 py-0.5 rounded text-white"
+                            style={{ backgroundColor: NAVY }}
+                          >
+                            Step 02
+                          </span>
+                          <PhoneCall
+                            className="w-5 h-5"
+                            style={{ color: NAVY }}
+                          />
+                        </div>
 
-                      <p className="text-[11px] text-slate-500 leading-relaxed">
-                        A BizGrow specialist will contact you to complete your
-                        service.
-                      </p>
+                        <p className="text-xs font-black text-slate-800">
+                          Speak With BizGrow
+                        </p>
+
+                        <p className="text-[11px] text-slate-500 leading-relaxed pr-2">
+                          A BizGrow specialist will contact you to complete your
+                          service.
+                        </p>
+                      </div>
                     </div>
 
-                    <div className="bg-white border border-slate-200/70 rounded-2xl p-4 space-y-1.5 shadow-[0_1px_2px_rgba(15,23,42,0.04)]">
-                      <span className="w-7 h-7 rounded-full bg-[#12066a]/10 text-[#12066a] flex items-center justify-center font-black text-xs">
-                        3
-                      </span>
+                    {/* STEP 3 */}
+                    <div className="relative group md:-ml-4">
+                      {/* Background Accent Ribbon */}
+                      <div
+                        className="hidden md:block absolute -inset-x-1 -bottom-2 top-2 rounded-r-xl opacity-20 -z-10 transition-transform group-hover:translate-x-1"
+                        style={{ backgroundColor: GOLD }}
+                      />
 
-                      <p className="text-xs font-black text-slate-800">
-                        Get your own dashboard
-                      </p>
+                      {/* Main Arrow Card */}
+                      <div className="bg-white border border-slate-200 p-5 space-y-2.5 shadow-sm transition-all relative z-30 md:[clip-path:polygon(0%_0%,_100%_0%,_100%_100%,_0%_100%,_12%_50%)] md:pl-9">
+                        <div className="flex items-center justify-between">
+                          <span
+                            className="text-[10px] font-black tracking-widest uppercase px-2 py-0.5 rounded"
+                            style={{
+                              backgroundColor: `${GOLD}15`,
+                              color: GOLD,
+                            }}
+                          >
+                            Step 03
+                          </span>
+                          <Gift className="w-5 h-5 text-[#997819]" />
+                        </div>
 
-                      <p className="text-[11px] text-slate-500 leading-relaxed">
-                        Once your qualifying purchase is confirmed, you'll
-                        receive access to your referral dashboard and your
-                        unique referral link.
-                      </p>
+                        <p className="text-xs font-black text-slate-800">
+                          Avail Your Discount
+                        </p>
+
+                        <p className="text-[11px] text-slate-500 leading-relaxed">
+                          Once your qualifying purchase is confirmed, you'll get
+                          your 5% discount applied.
+                        </p>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="pt-4 max-w-xl mx-auto">
+                  {/* Form Container */}
+                  <div className="pt-6 max-w-xl mx-auto">
                     <ReferredClientForm
                       referrerName={referrerName}
                       referrerCode={referralCode}
@@ -1007,7 +1123,7 @@ export default async function ReferralPage() {
             ===================================================== */}
 
                 {/* --- 1 HERO: Ultra-Premium with Background Image for Referral Program --- */}
-                <section className="relative left-1/2 right-1/2 -mx-[50vw] w-screen  min-h-[90vh] lg:h-screen flex items-center justify-center px-6 overflow-hidden bg-[#12066a]">
+                <section className="relative left-1/2 right-1/2 -mx-[50vw] w-screen h-screen flex items-center justify-center px-6 overflow-hidden bg-[#12066a]">
                   {/* --- Background Image Layer --- */}
                   <div className="absolute inset-0 z-0">
                     <img
@@ -1036,7 +1152,7 @@ export default async function ReferralPage() {
                       <div className="h-[1px] w-12 bg-[#997819]" />
                     </div>
 
-                    <h1 className="text-4xl md:text-5xl max-w-4xl mx-auto font-black uppercase tracking-tighter leading-[1.08] mb-4 text-white">
+                    <h1 className="text-2xl md:text-5xl max-w-4xl mx-auto font-black uppercase tracking-tighter leading-[1.08] mb-4 text-white">
                       Join our referral program Refer a Business. Earn £125
                       credit on your{" "}
                       <span className="text-[#997819] italic font-serif font-medium drop-shadow-xl ml-2 normal-case">
@@ -1046,9 +1162,9 @@ export default async function ReferralPage() {
 
                     <div className="flex flex-col items-center justify-center gap-8 mt-4">
                       <p className="max-w-xl text-center md:text-left text-sm md:text-base text-gray-300 border-l-0 md:border-l md:border-[#997819] md:pl-6 leading-relaxed font-medium">
-                        Refer another security company or business to
-                        BizGrow. When they become a paying client, you earn £125
-                        Credits on your next BizGrow service
+                        Refer another security company or business to BizGrow.
+                        When they become a paying client, you earn £125 Credits
+                        on your next BizGrow service
                       </p>
 
                       {/* Rewards Highlight Badge */}
@@ -1058,13 +1174,13 @@ export default async function ReferralPage() {
                         </span>
                         <span className="text-white/30">|</span>
                         <span className="text-sm sm:text-base font-bold text-[#c9a44a]">
-                          You Earn £125 credit for each referral
+                          You Earn £125 credit for each successful referral
                         </span>
                       </div>
                       {/* --- Single Compact Button with Subtext Inside --- */}
                       <div className="w-full max-w-sm mx-auto mt-2">
                         <div className="w-auto [&>button]:!w-full [&>button]:!bg-white [&>button]:!text-slate-900 [&>button]:!rounded-2xl [&>button]:!shadow-xl [&>button]:!py-4 [&>button]:!px-6 [&>button]:!flex [&>button]:!flex-col [&>button]:!items-center [&>button]:!justify-center [&>button]:!gap-0.5">
-                          <GoogleLoginButton  />
+                          <GoogleLoginButton />
                         </div>
                         <p className="text-[11px] text-center text-white/40 mt-2 font-medium">
                           Free to join &bull; No upfront cost
@@ -1114,7 +1230,7 @@ export default async function ReferralPage() {
                             Get £250 off
                           </span>
                         </li>
-                       
+
                         <li className="flex items-center justify-between border-b border-white/10 pb-2.5">
                           <span className="text-gray-300">
                             Refer 4 businesses
@@ -1123,7 +1239,7 @@ export default async function ReferralPage() {
                             Get £500 off
                           </span>
                         </li>
-                       
+
                         <li className="flex items-center justify-between pt-1">
                           <span className="text-gray-300 font-semibold">
                             Refer 8 businesses
@@ -1150,20 +1266,20 @@ export default async function ReferralPage() {
                       <p className="text-xs text-gray-200 font-medium leading-relaxed">
                         Referral rewards are subject to{" "}
                         <span className="font-bold text-amber-400">
-                          Minimum qualifying service value: £650 
+                          Minimum qualifying service value: £650
                         </span>{" "}
                         and T&Cs.
                       </p>
                     </div>
-                     {/* --- Single Compact Button with Subtext Inside --- */}
-                      <div className="w-full max-w-sm mx-auto mt-2">
-                        <div className="w-full [&>button]:!w-full [&>button]:!bg-white [&>button]:!text-slate-900 [&>button]:!rounded-2xl [&>button]:!shadow-xl [&>button]:!py-4 [&>button]:!px-6 [&>button]:!flex [&>button]:!flex-col [&>button]:!items-center [&>button]:!justify-center [&>button]:!gap-0.5">
-                          <GoogleLoginButton text="Start Referring" />
-                        </div>
-                        <p className="text-[11px] text-center text-white/40 mt-2 font-medium">
-                          Free to join &bull; No upfront cost
-                        </p>
+                    {/* --- Single Compact Button with Subtext Inside --- */}
+                    <div className="w-full max-w-sm mx-auto mt-2">
+                      <div className="w-full [&>button]:!w-full [&>button]:!bg-white [&>button]:!text-slate-900 [&>button]:!rounded-2xl [&>button]:!shadow-xl [&>button]:!py-4 [&>button]:!px-6 [&>button]:!flex [&>button]:!flex-col [&>button]:!items-center [&>button]:!justify-center [&>button]:!gap-0.5">
+                        <GoogleLoginButton text="Start Referring" />
                       </div>
+                      <p className="text-[11px] text-center text-white/40 mt-2 font-medium">
+                        Free to join &bull; No upfront cost
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1469,7 +1585,7 @@ export default async function ReferralPage() {
 
                     <div className="flex flex-col items-center justify-center pt-2">
                       <div className="w-full max-w-sm [&>button]:!w-full [&>button]:!flex [&>button]:!justify-center [&>button]:!py-4 [&>button]:!rounded-2xl [&>button]:!shadow-xl">
-                        <GoogleLoginButton  text="Get Your Referral Link"/>
+                        <GoogleLoginButton text="Get Your Referral Link" />
                       </div>
                       <p className="text-xs text-slate-400 font-medium mt-4 tracking-wide">
                         Free to join &bull; Instant access &bull; No upfront
@@ -1549,7 +1665,7 @@ export default async function ReferralPage() {
 
                       <p className="text-xs text-slate-500 leading-relaxed">
                         The referred business must purchase an eligible service
-                        valued at £650  or more.
+                        valued at £650 or more.
                       </p>
                     </div>
 

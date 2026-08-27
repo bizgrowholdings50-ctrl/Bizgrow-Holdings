@@ -189,7 +189,7 @@ export function ReferralCookieNotice() {
   return (
     <div className="mb-3 rounded-2xl border border-sky-200 bg-sky-50 px-4 py-3 text-sm text-sky-800 shadow-sm">
       <p className="font-semibold">
-        Complete the registration to join the network.
+        Create My BizGrow Account
       </p>
     </div>
   );

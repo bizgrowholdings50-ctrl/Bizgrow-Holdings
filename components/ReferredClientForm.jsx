@@ -35,7 +35,7 @@ export default function ReferredClientForm({
   const [service, setService] = useState("");
   const [message, setMessage] = useState("");
   const [captchaToken, setCaptchaToken] = useState(null);
-
+  const [formSubmitted, setFormSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
@@ -122,7 +122,7 @@ User Message: ${message || "No additional comments."}`;
 
         <div>
           <h3 className="text-2xl font-black" style={{ color: NAVY }}>
-            Inquiry Submitted Successfully!
+            Your Referral Request Has Been Received!
           </h3>
 
           <p className="text-sm text-slate-600 font-medium mt-3 leading-relaxed">
@@ -132,31 +132,69 @@ User Message: ${message || "No additional comments."}`;
 
           <div className="mt-4 bg-slate-50 border border-slate-100 p-4 rounded-2xl text-left text-xs text-slate-500 space-y-2 leading-relaxed">
             <p>
-              • A sales consultant will contact you at <b>{number}</b> or{" "}
-              <b>{email}</b> within 12–24 business hours.
+              •Our Sales Team will contact you within 12–24 business hours using
+              the contact details ({number} or {email}) you provided
             </p>
             <p>
-              • Once your compliance service <span className="text-red-600">(Min £650+ VAT)</span> is purchased and
-              payment is cleared, your Partner Dashboard will unlock.
+              • We’ll discuss your requirements, confirm eligibility and guide
+              you through the next steps and Your 5% referral discount will be
+              applied once your qualifyinh service is done.
             </p>
           </div>
 
           <div className="mt-5 bg-[#12066a] border border-amber-200 rounded-2xl p-4 text-left">
             <p className="text-xs font-bold uppercase tracking-wider text-red-500 mb-1">
-              Your Dashboard is Locked
+              Want to Earn £125 Too?
             </p>
             <p className="text-xs text-white leading-relaxed">
-              Once your request is approved, your Partner Dashboard unlocks
-              automatically giving you your own unique referral link,
-              real-time tracking of everyone you refer, and <strong className="text-red-500">£125 credit</strong>  for
-              every successful referral <strong className="text-red-500">up to £1,000</strong> per (12-month period).
+              Once you become a qualifying BizGrow client, you’ll unlock your
+              own Partner Dashboard where you can refer other businesses and
+              earn £125 for each successful referral.
             </p>
           </div>
+          <ul className="space-y-3 text-left text-sm text-slate-700 mt-5">
+            <li className="flex items-start gap-2.5">
+              <span className="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#997819]/10 text-[#997819]">
+                ✓
+              </span>
+              <span>
+                <strong>Your own unique referral link</strong>
+              </span>
+            </li>
 
+            <li className="flex items-start gap-2.5">
+              <span className="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#997819]/10 text-[#997819]">
+                ✓
+              </span>
+              <span>
+                <strong>Referral tracking</strong>
+              </span>
+            </li>
+
+            <li className="flex items-start gap-2.5">
+              <span className="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#997819]/10 text-[#997819]">
+                ✓
+              </span>
+              <span>
+                <strong>£125 credit for every successful referral</strong>
+              </span>
+            </li>
+
+            <li className="flex items-start gap-2.5">
+              <span className="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[#997819]/10 text-[#997819]">
+                ✓
+              </span>
+              <span>
+                <strong>
+                  The opportunity to build your own referral network
+                </strong>
+              </span>
+            </li>
+          </ul>
           <div className="mt-6 space-y-3">
-            <p className="text-xs text-slate-600 font-medium">
-              In the meantime, create your profile and complete onboarding so
-              you're ready to go the moment you're approved.
+            <p className="text-xs text-slate-600 font-medium text-left">
+              Get your profile ready while your referral request is being
+              reviewed
             </p>
 
             <GoogleLoginButton />
@@ -170,9 +208,8 @@ User Message: ${message || "No additional comments."}`;
     <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-[0_15px_40px_rgba(18,6,106,0.04)] max-w-xl mx-auto">
       <div className="text-center mb-8 space-y-2">
         <h3 className="text-2xl font-extrabold" style={{ color: NAVY }}>
-          Choose Your Service
+          Claim Your Exclusive Discount
         </h3>
-        
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-5 text-left">
