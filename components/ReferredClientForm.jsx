@@ -126,13 +126,13 @@ User Message: ${message || "No additional comments."}`;
           </h3>
 
           <p className="text-sm text-slate-600 font-medium mt-3 leading-relaxed">
-            Thank you! Your 5% discount inquiry for <b>{service}</b> has been
-            received. Our Sales Team is now reviewing your request.
+            Thank you! Your 5% discount request for <b>{service}</b> has been
+            received. Our Team is now reviewing your request.
           </p>
 
           <div className="mt-4 bg-slate-50 border border-slate-100 p-4 rounded-2xl text-left text-xs text-slate-500 space-y-2 leading-relaxed">
             <p>
-              •Our Sales Team will contact you within 12–24 business hours using
+              •Our Team will contact you within 12–24 business hours using
               the contact details ({number} or {email}) you provided
             </p>
             <p>
@@ -143,13 +143,12 @@ User Message: ${message || "No additional comments."}`;
           </div>
 
           <div className="mt-5 bg-[#12066a] border border-amber-200 rounded-2xl p-4 text-left">
-            <p className="text-xs font-bold uppercase tracking-wider text-red-500 mb-1">
+            <p className="text-xs font-bold uppercase tracking-wider text-white mb-1">
               Want to Earn £125 Too?
             </p>
             <p className="text-xs text-white leading-relaxed">
               Once you become a qualifying BizGrow client, you’ll unlock your
-              own Partner Dashboard where you can refer other businesses and
-              earn £125 for each successful referral.
+              own Partner Dashboard where you can refer other businesses and you will get
             </p>
           </div>
           <ul className="space-y-3 text-left text-sm text-slate-700 mt-5">
@@ -167,7 +166,7 @@ User Message: ${message || "No additional comments."}`;
                 ✓
               </span>
               <span>
-                <strong>Referral tracking</strong>
+                <strong>Referral tracking through your Partner Dashboard</strong>
               </span>
             </li>
 
@@ -197,7 +196,7 @@ User Message: ${message || "No additional comments."}`;
               reviewed
             </p>
 
-            <GoogleLoginButton />
+            <GoogleLoginButton text="Create My BizGrow Account"/>
           </div>
         </div>
       </div>
