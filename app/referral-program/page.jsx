@@ -1180,7 +1180,7 @@ export default async function ReferralPage() {
                       {/* --- Single Compact Button with Subtext Inside --- */}
                       <div className="w-full max-w-sm mx-auto mt-2">
                         <div className="w-auto [&>button]:!w-full [&>button]:!bg-white [&>button]:!text-slate-900 [&>button]:!rounded-2xl [&>button]:!shadow-xl [&>button]:!py-4 [&>button]:!px-6 [&>button]:!flex [&>button]:!flex-col [&>button]:!items-center [&>button]:!justify-center [&>button]:!gap-0.5">
-                          <GoogleLoginButton />
+                          <GoogleLoginButton text="Create My Referral Account" />
                         </div>
                         <p className="text-[11px] text-center text-white/40 mt-2 font-medium">
                           Free to join &bull; No upfront cost
