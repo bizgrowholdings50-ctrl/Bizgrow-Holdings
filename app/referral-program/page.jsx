@@ -752,7 +752,7 @@ export default async function ReferralPage() {
                     </p>
 
                     <p className="text-xs text-slate-500 leading-relaxed px-4">
-                      Once your first eligible service (£650+ VAT) is purchased
+                      Once your first eligible service (£650) is purchased
                       and payment is cleared, your account can be upgraded to an
                       Active Partner.
                     </p>
@@ -797,7 +797,7 @@ export default async function ReferralPage() {
                       </span>
                       . Select the compliance service you need below and get{" "}
                       <b className="text-[#997819]">5% off</b> your first
-                      eligible service (£650+ VAT).
+                      eligible service (£650).
                     </p>
                   </div>
 
@@ -923,7 +923,7 @@ export default async function ReferralPage() {
                       </div>
 
                       <div className="inline-flex items-center gap-2 bg-white text-[#12066a] px-6 py-2.5 rounded-full text-xs font-black uppercase tracking-wider shadow-xl">
-                        Minimum Qualifying Value: £650 + VAT
+                        Minimum Qualifying Value: £650 
                       </div>
                     </div>
                   </div>
@@ -1046,8 +1046,7 @@ export default async function ReferralPage() {
 
                     <div className="flex flex-col items-center justify-center gap-8 mt-4">
                       <p className="max-w-xl text-center md:text-left text-sm md:text-base text-gray-300 border-l-0 md:border-l md:border-[#997819] md:pl-6 leading-relaxed font-medium">
-                        Your Friend Saves 5%. | You Earn £125 credit for each
-                        referral. Refer another security company or business to
+                        Refer another security company or business to
                         BizGrow. When they become a paying client, you earn £125
                         Credits on your next BizGrow service
                       </p>
@@ -1151,7 +1150,7 @@ export default async function ReferralPage() {
                       <p className="text-xs text-gray-200 font-medium leading-relaxed">
                         Referral rewards are subject to{" "}
                         <span className="font-bold text-amber-400">
-                          Minimum qualifying service value: £650 + VAT
+                          Minimum qualifying service value: £650 
                         </span>{" "}
                         and T&Cs.
                       </p>
@@ -1550,7 +1549,7 @@ export default async function ReferralPage() {
 
                       <p className="text-xs text-slate-500 leading-relaxed">
                         The referred business must purchase an eligible service
-                        valued at £650 + VAT or more.
+                        valued at £650  or more.
                       </p>
                     </div>
 

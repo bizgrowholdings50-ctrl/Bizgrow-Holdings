@@ -7,12 +7,30 @@ import { useRouter } from "next/navigation";
 const NAVY = "#12066a";
 const GOLD = "#997819";
 
+// 🔑 Helper: jahan bhi user logged-in state mein hai, uska email save kar lein
+// taake agli dafa login pe Google account-chooser skip ho sake
+function cacheLoggedInEmail(supabase) {
+  if (typeof window === "undefined") return;
+
+  supabase.auth.getUser().then(({ data }) => {
+    const email = data?.user?.email;
+    if (email) {
+      localStorage.setItem("bizgrow_last_login_email", email);
+    }
+  });
+}
+
 export function ReferralBox({ referralCode }) {
   const [copied, setCopied] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
+
+    // ReferralBox sirf logged-in user ko dikhta hai (dashboard),
+    // isliye yahan email cache karna reliable jagah hai
+    const supabase = createClient();
+    cacheLoggedInEmail(supabase);
   }, []);
 
   const referralLink =
@@ -197,7 +215,7 @@ export function LoginButton() {
 
 export function GoogleLoginButton({
   text = "Continue with Google", // Default text agar koi aur prop na diya jaye
-  loadingText = "Redirecting...",
+  loadingText = "Loading...",
 }) {
   const supabase = createClient();
 
@@ -243,14 +261,37 @@ export function GoogleLoginButton({
             referralCode ? `?ref=${encodeURIComponent(referralCode)}` : ""
           }`;
 
+      // 🔑 Agar user pehle khud sign out kar chuka hai (hasSignedOut flag set hai)
+      // aur uska email humare paas cached hai, to Google ka account-chooser
+      // bilkul skip kar dein aur seedha usi account se silently login kar dein
+      const hasSignedOut =
+        typeof window !== "undefined" &&
+        localStorage.getItem("hasSignedOut") === "true";
+
+      const cachedEmail =
+        typeof window !== "undefined"
+          ? localStorage.getItem("bizgrow_last_login_email")
+          : null;
+
+      const queryParams = {
+        access_type: "offline",
+      };
+
+      if (hasSignedOut && cachedEmail) {
+        // Google ko exact account bata dein — chooser screen skip ho jayegi
+        queryParams.login_hint = cachedEmail;
+        queryParams.prompt = "none";
+      } else {
+        // Pehli dafa login: normal account-chooser dikhne dein
+        queryParams.prompt = "select_account";
+      }
+
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: "google",
 
         options: {
           redirectTo: callbackUrl,
-          queryParams: {
-            access_type: "offline",
-          },
+          queryParams,
         },
       });
 

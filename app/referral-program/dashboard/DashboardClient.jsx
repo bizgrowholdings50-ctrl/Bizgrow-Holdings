@@ -1555,7 +1555,7 @@ export default function DashboardClient() {
                         <>
                           The referred business must become a BizGrow paid
                           client for an eligible service with a minimum service
-                          value of <strong>£650 + VAT</strong> for the referral
+                          value of <strong>£650 </strong> for the referral
                           to qualify.
                         </>
                       ),
