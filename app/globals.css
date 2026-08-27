@@ -27,7 +27,7 @@ p {
 }
 html, body {
   width: 100%;
-  max-width: 100%;
+  max-width: 100vw; /* max-width ko 100vw kar dein taake viewport width lock rahay */
   overflow-x: hidden;
   overflow-y: auto;
   position: relative;

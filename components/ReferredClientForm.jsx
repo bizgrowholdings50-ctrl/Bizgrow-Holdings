@@ -275,7 +275,7 @@ User Message: ${message || "No additional comments."}`;
           className="w-full py-4 rounded-2xl text-white font-extrabold text-xs uppercase tracking-wider shadow-lg shadow-[#12066a]/10 transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed"
           style={{ backgroundColor: NAVY }}
         >
-          {loading ? "Submitting Details..." : "Request 5% Discount"}
+          {loading ? "Submitting Details..." : "Request My 5% Discount"}
         </button>
       </form>
     </div>
