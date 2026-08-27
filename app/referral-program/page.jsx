@@ -908,13 +908,12 @@ export default async function ReferralPage() {
                     <h1 className="text-4xl sm:text-6xl font-black tracking-tight leading-[1.08] text-white">
                       Save 5% on Compliance
                       <br />
-                      Services.Choose your service and 
+                      Services.Choose your service and
                       <span className="italic font-serif font-medium text-[#c9a44a]">
-                       {" "} unlock your reward.
+                        {" "}
+                        unlock your reward.
                       </span>
                     </h1>
-
-                 
 
                     <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
                       <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/10 border border-white/15 backdrop-blur-sm">
@@ -928,8 +927,6 @@ export default async function ReferralPage() {
                       </div>
                     </div>
                   </div>
-
-                
                 </section>
 
                 {/* Steps + form stay in the light, editorial style below the hero */}
@@ -1067,8 +1064,8 @@ export default async function ReferralPage() {
                       </div>
                       {/* --- Single Compact Button with Subtext Inside --- */}
                       <div className="w-full max-w-sm mx-auto mt-2">
-                        <div className="w-full [&>button]:!w-full [&>button]:!bg-white [&>button]:!text-slate-900 [&>button]:!rounded-2xl [&>button]:!shadow-xl [&>button]:!py-4 [&>button]:!px-6 [&>button]:!flex [&>button]:!flex-col [&>button]:!items-center [&>button]:!justify-center [&>button]:!gap-0.5">
-                          <GoogleLoginButton />
+                        <div className="w-auto [&>button]:!w-full [&>button]:!bg-white [&>button]:!text-slate-900 [&>button]:!rounded-2xl [&>button]:!shadow-xl [&>button]:!py-4 [&>button]:!px-6 [&>button]:!flex [&>button]:!flex-col [&>button]:!items-center [&>button]:!justify-center [&>button]:!gap-0.5">
+                          <GoogleLoginButton  />
                         </div>
                         <p className="text-[11px] text-center text-white/40 mt-2 font-medium">
                           Free to join &bull; No upfront cost
@@ -1078,8 +1075,98 @@ export default async function ReferralPage() {
                   </div>
 
                   {/* Bottom Decorative Line */}
-                  
                 </section>
+                {/*2 Core Reward Structure Highlight Card */}
+                <div className="max-w-7xl mx-auto px-4 sm:px-6">
+                  <div className="relative group bg-[#0c0628] border border-[#997819]/40 rounded-3xl p-6 sm:p-8 shadow-[0_20px_50px_rgba(0,0,0,0.6)] text-center space-y-6 overflow-hidden">
+                    {/* Subtle Glow */}
+                    <div className="absolute -top-20 -right-20 w-48 h-48 bg-[#997819]/10 rounded-full blur-2xl pointer-events-none"></div>
+
+                    {/* Badge */}
+                    <div className="inline-flex items-center gap-2 bg-[#997819]/15 border border-[#997819]/30 text-[#997819] text-[10px] font-extrabold uppercase tracking-[0.2em] px-3.5 py-1 rounded-full">
+                      <Gift className="w-3 h-3 text-[#997819]" /> The Reward
+                      Structure
+                    </div>
+
+                    {/* Heading - Balanced Font Size */}
+                    <h3 className="text-2xl sm:text-3xl font-black tracking-tight text-white">
+                      £125 Credit{" "}
+                      <span className="text-[#997819] font-bold">
+                        for Every Successful Referral
+                      </span>
+                    </h3>
+
+                    {/* Tiers List Container - Compact & Clean */}
+                    <div className="bg-black/40 border border-white/10 rounded-2xl p-4 sm:p-5 backdrop-blur-md">
+                      <ul className="text-sm text-gray-200 font-medium space-y-3 list-none text-left">
+                        <li className="flex items-center justify-between border-b border-white/10 pb-2.5">
+                          <span className="text-gray-300">
+                            Refer 1 business
+                          </span>
+                          <span className="font-bold text-gray-300 bg-[#997819]/10 px-2.5 py-0.5 rounded-md text-xs">
+                            Get £125 off
+                          </span>
+                        </li>
+                        <li className="flex items-center justify-between border-b border-white/10 pb-2.5">
+                          <span className="text-gray-300">
+                            Refer 2 businesses
+                          </span>
+                          <span className="font-bold text-gray-300 bg-[#997819]/10 px-2.5 py-0.5 rounded-md text-xs">
+                            Get £250 off
+                          </span>
+                        </li>
+                       
+                        <li className="flex items-center justify-between border-b border-white/10 pb-2.5">
+                          <span className="text-gray-300">
+                            Refer 4 businesses
+                          </span>
+                          <span className="font-bold text-gray-300 bg-[#997819]/10 px-2.5 py-0.5 rounded-md text-xs">
+                            Get £500 off
+                          </span>
+                        </li>
+                       
+                        <li className="flex items-center justify-between pt-1">
+                          <span className="text-gray-300 font-semibold">
+                            Refer 8 businesses
+                          </span>
+                          <span className="font-bold text-gray-300 bg-[#997819]/20 border border-[#997819]/40 px-2.5 py-0.5 rounded-md text-xs">
+                            Get £1000 off
+                          </span>
+                        </li>
+                      </ul>
+
+                      {/* Maximum Reward Text */}
+                      <div className="mt-4 pt-3 border-t border-white/10 text-center">
+                        <span className="text-xs text-gray-300">
+                          Maximum reward:{" "}
+                          <strong className="font-bold text-[#997819]">
+                            Earn up to £1,000 in credit per 12-month period.
+                          </strong>
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Notice Banner - Compact */}
+                    <div className="bg-[#12066a]/60 border border-[#997819]/30 border-l-4 border-l-[#997819] px-4 py-3 rounded-xl text-left">
+                      <p className="text-xs text-gray-200 font-medium leading-relaxed">
+                        Referral rewards are subject to{" "}
+                        <span className="font-bold text-amber-400">
+                          Minimum qualifying service value: £650 + VAT
+                        </span>{" "}
+                        and T&Cs.
+                      </p>
+                    </div>
+                     {/* --- Single Compact Button with Subtext Inside --- */}
+                      <div className="w-full max-w-sm mx-auto mt-2">
+                        <div className="w-full [&>button]:!w-full [&>button]:!bg-white [&>button]:!text-slate-900 [&>button]:!rounded-2xl [&>button]:!shadow-xl [&>button]:!py-4 [&>button]:!px-6 [&>button]:!flex [&>button]:!flex-col [&>button]:!items-center [&>button]:!justify-center [&>button]:!gap-0.5">
+                          <GoogleLoginButton text="Start Referring" />
+                        </div>
+                        <p className="text-[11px] text-center text-white/40 mt-2 font-medium">
+                          Free to join &bull; No upfront cost
+                        </p>
+                      </div>
+                  </div>
+                </div>
               </div>
             )}
 
@@ -1383,7 +1470,7 @@ export default async function ReferralPage() {
 
                     <div className="flex flex-col items-center justify-center pt-2">
                       <div className="w-full max-w-sm [&>button]:!w-full [&>button]:!flex [&>button]:!justify-center [&>button]:!py-4 [&>button]:!rounded-2xl [&>button]:!shadow-xl">
-                        <GoogleLoginButton />
+                        <GoogleLoginButton  text="Get Your Referral Link"/>
                       </div>
                       <p className="text-xs text-slate-400 font-medium mt-4 tracking-wide">
                         Free to join &bull; Instant access &bull; No upfront

@@ -198,9 +198,7 @@ export function LoginButton() {
   const router = useRouter();
 
   const handleLoginRedirect = () => {
-    // Agar aap direct Google login trigger karwana chahte hain toh yahan handleGoogleLogin call kar sakte hain, 
-    // warna agar login/auth page par bhejna hai toh router.push use karein:
-    router.push("/referral-program"); // ya apna login route path
+    router.push("/referral-program");
   };
 
   return (
@@ -214,11 +212,24 @@ export function LoginButton() {
   );
 }
 
-
-export function GoogleLoginButton() {
+export function GoogleLoginButton({
+  text = "Continue with Google", // Default text agar koi aur prop na diya jaye
+  loadingText = "Redirecting...",
+}) {
   const supabase = createClient();
 
   const [loading, setLoading] = useState(false);
+  const [buttonText, setButtonText] = useState(text);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const signedOut = localStorage.getItem("hasSignedOut");
+      // Sirf tab change hoga jab user sign out karke aaya ho AUR default "Continue with Google" wala button ho
+      if (signedOut === "true" && text === "Continue with Google") {
+        setButtonText("Login to your account");
+      }
+    }
+  }, [text]);
 
   const handleGoogleLogin = async () => {
     if (loading) return;
@@ -231,19 +242,6 @@ export function GoogleLoginButton() {
           ? window.location.origin
           : process.env.NEXT_PUBLIC_SITE_URL || "";
 
-      /*
-       * IMPORTANT:
-       *
-       * First check URL.
-       * Then cookie.
-       *
-       * This means a normal /referral-program URL
-       * is treated as a NORMAL signup.
-       *
-       * A URL containing ?ref=XXXX is treated
-       * as a REFERRAL signup.
-       */
-
       const queryReferralCode =
         getReferralQueryParam();
 
@@ -255,18 +253,10 @@ export function GoogleLoginButton() {
         cookieReferralCode ||
         "";
 
-      /*
-       * If referral code exists, save it.
-       */
       if (referralCode) {
         setReferralCookie(referralCode);
       }
 
-      /*
-       * ALWAYS send OAuth to callback.
-       *
-       * Referral code is only added when it actually exists.
-       */
       const callbackUrl = origin
         ? `${origin.replace(/\/+$/, "")}/auth/callback${
             referralCode
@@ -283,41 +273,6 @@ export function GoogleLoginButton() {
               : ""
           }`;
 
-      console.log(
-        "========== GOOGLE OAUTH =========="
-      );
-
-      console.log(
-        "Current origin:",
-        typeof window !== "undefined"
-          ? window.location.origin
-          : ""
-      );
-
-      console.log(
-        "Referral from URL:",
-        queryReferralCode
-      );
-
-      console.log(
-        "Referral from cookie:",
-        cookieReferralCode
-      );
-
-      console.log(
-        "Final referral code:",
-        referralCode
-      );
-
-      console.log(
-        "OAuth callback:",
-        callbackUrl
-      );
-
-      console.log(
-        "==================================="
-      );
-
       const { data, error } =
         await supabase.auth.signInWithOAuth({
           provider: "google",
@@ -327,7 +282,6 @@ export function GoogleLoginButton() {
 
             queryParams: {
               access_type: "offline",
-              prompt: "select_account",
             },
           },
         });
@@ -342,16 +296,6 @@ export function GoogleLoginButton() {
         return;
       }
 
-      console.log(
-        "Supabase OAuth URL:",
-        data?.url
-      );
-
-      /*
-       * Supabase normally redirects automatically.
-       * Keep explicit fallback for environments
-       * where it doesn't.
-       */
       if (data?.url) {
         window.location.assign(data.url);
         return;
@@ -378,7 +322,7 @@ export function GoogleLoginButton() {
         disabled={loading}
         className="flex w-full items-center justify-center gap-3 rounded-2xl border border-slate-200 bg-white px-5 py-3.5 font-semibold text-slate-900 shadow-sm transition duration-150 ease-in-out hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-70"
       >
-        <span className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-slate-50">
+        <span className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-slate-50 shrink-0">
           <svg
             viewBox="0 0 533.5 544.3"
             className="h-[18px] w-[18px]"
@@ -407,9 +351,7 @@ export function GoogleLoginButton() {
           </svg>
         </span>
 
-        {loading
-          ? "Redirecting..."
-          : "Continue with Google"}
+        <span>{loading ? loadingText : buttonText}</span>
       </button>
     </div>
   );
@@ -420,16 +362,17 @@ export function LogoutButton() {
 
   const handleLogout = async () => {
     try {
-      // 1. Loading fallback ko hata dein agar DOM mein ho
       const loadingElement = document.getElementById("bizgrow-loading-fallback");
       if (loadingElement) {
         loadingElement.remove();
       }
 
-      // 2. Supabase sign out
+      if (typeof window !== "undefined") {
+        localStorage.setItem("hasSignedOut", "true");
+      }
+
       await supabase.auth.signOut();
 
-      // 3. Hard reload to referral program page
       window.location.href = "/referral-program";
     } catch (error) {
       console.error("Logout failed:", error);
