@@ -62,10 +62,7 @@ export function ReferralBox({ referralCode }) {
 
           <div className="rounded-full border border-slate-200 p-2 text-slate-500">
             {copied ? (
-              <span
-                className="text-xs font-semibold"
-                style={{ color: GOLD }}
-              >
+              <span className="text-xs font-semibold" style={{ color: GOLD }}>
                 Copied!
               </span>
             ) : (
@@ -93,10 +90,7 @@ export function ReferralBox({ referralCode }) {
           Your code
         </p>
 
-        <p
-          className="mt-1 text-lg font-bold"
-          style={{ color: NAVY }}
-        >
+        <p className="mt-1 text-lg font-bold" style={{ color: NAVY }}>
           {referralCode || "—"}
         </p>
       </div>
@@ -116,12 +110,10 @@ function getReferralCookieValue() {
 
   try {
     return decodeURIComponent(
-      cookieValue.substring("bizgrow_referrer=".length)
+      cookieValue.substring("bizgrow_referrer=".length),
     ).trim();
   } catch {
-    return cookieValue
-      .substring("bizgrow_referrer=".length)
-      .trim();
+    return cookieValue.substring("bizgrow_referrer=".length).trim();
   }
 }
 
@@ -138,26 +130,20 @@ function setReferralCookie(referralCode) {
 
   const maxAge = 30 * 24 * 60 * 60;
 
-  const expires = new Date(
-    Date.now() + maxAge * 1000
-  ).toUTCString();
+  const expires = new Date(Date.now() + maxAge * 1000).toUTCString();
 
-  const isHttps =
-    window.location.protocol === "https:";
+  const isHttps = window.location.protocol === "https:";
 
   const secure = isHttps ? "; Secure" : "";
 
-  const sameSite = isHttps
-    ? "SameSite=None"
-    : "SameSite=Lax";
+  const sameSite = isHttps ? "SameSite=None" : "SameSite=Lax";
 
   const hostname = window.location.hostname;
 
   const cleanHostname = hostname.replace(/^www\./, "");
 
   const domain =
-    cleanHostname.includes(".") &&
-    !cleanHostname.includes("localhost")
+    cleanHostname.includes(".") && !cleanHostname.includes("localhost")
       ? `; Domain=.${cleanHostname}`
       : "";
 
@@ -172,13 +158,10 @@ function setReferralCookie(referralCode) {
 }
 
 export function ReferralCookieNotice() {
-  const [hasReferralCookie, setHasReferralCookie] =
-    useState(false);
+  const [hasReferralCookie, setHasReferralCookie] = useState(false);
 
   useEffect(() => {
-    const referral =
-      getReferralCookieValue() ||
-      getReferralQueryParam();
+    const referral = getReferralCookieValue() || getReferralQueryParam();
 
     setHasReferralCookie(Boolean(referral));
   }, []);
@@ -242,16 +225,11 @@ export function GoogleLoginButton({
           ? window.location.origin
           : process.env.NEXT_PUBLIC_SITE_URL || "";
 
-      const queryReferralCode =
-        getReferralQueryParam();
+      const queryReferralCode = getReferralQueryParam();
 
-      const cookieReferralCode =
-        getReferralCookieValue();
+      const cookieReferralCode = getReferralCookieValue();
 
-      const referralCode =
-        queryReferralCode ||
-        cookieReferralCode ||
-        "";
+      const referralCode = queryReferralCode || cookieReferralCode || "";
 
       if (referralCode) {
         setReferralCookie(referralCode);
@@ -259,38 +237,25 @@ export function GoogleLoginButton({
 
       const callbackUrl = origin
         ? `${origin.replace(/\/+$/, "")}/auth/callback${
-            referralCode
-              ? `?ref=${encodeURIComponent(
-                  referralCode
-                )}`
-              : ""
+            referralCode ? `?ref=${encodeURIComponent(referralCode)}` : ""
           }`
         : `/auth/callback${
-            referralCode
-              ? `?ref=${encodeURIComponent(
-                  referralCode
-                )}`
-              : ""
+            referralCode ? `?ref=${encodeURIComponent(referralCode)}` : ""
           }`;
 
-      const { data, error } =
-        await supabase.auth.signInWithOAuth({
-          provider: "google",
+      const { data, error } = await supabase.auth.signInWithOAuth({
+        provider: "google",
 
-          options: {
-            redirectTo: callbackUrl,
-
-            queryParams: {
-              access_type: "offline",
-            },
+        options: {
+          redirectTo: callbackUrl,
+          queryParams: {
+            access_type: "offline",
           },
-        });
+        },
+      });
 
       if (error) {
-        console.error(
-          "Google sign-in failed:",
-          error
-        );
+        console.error("Google sign-in failed:", error);
 
         setLoading(false);
         return;
@@ -303,10 +268,7 @@ export function GoogleLoginButton({
 
       setLoading(false);
     } catch (error) {
-      console.error(
-        "Exception during Google OAuth:",
-        error
-      );
+      console.error("Exception during Google OAuth:", error);
 
       setLoading(false);
     }
@@ -362,7 +324,9 @@ export function LogoutButton() {
 
   const handleLogout = async () => {
     try {
-      const loadingElement = document.getElementById("bizgrow-loading-fallback");
+      const loadingElement = document.getElementById(
+        "bizgrow-loading-fallback",
+      );
       if (loadingElement) {
         loadingElement.remove();
       }
