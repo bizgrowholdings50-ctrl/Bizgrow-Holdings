@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -43,7 +44,6 @@ function saveReferralOnboardingCookie(data) {
       .join("; ");
 
     // Also save in localStorage as a fallback.
-    // This does not change the main cookie flow.
     localStorage.setItem(
       REFERRAL_COOKIE_NAME,
       JSON.stringify(data),
@@ -65,6 +65,9 @@ export default function ReferredClientForm({
   onSuccess,
 }) {
   const [name, setName] = useState(prefill.name || "");
+  const [companyName, setCompanyName] = useState(
+    prefill.company_name || "",
+  );
   const [email, setEmail] = useState(prefill.email || "");
   const [number, setNumber] = useState(prefill.number || "");
   const [service, setService] = useState("");
@@ -76,6 +79,9 @@ export default function ReferredClientForm({
 
   useEffect(() => {
     if (prefill.name) setName(prefill.name);
+    if (prefill.company_name) {
+      setCompanyName(prefill.company_name);
+    }
     if (prefill.email) setEmail(prefill.email);
     if (prefill.number) setNumber(prefill.number);
   }, [prefill]);
@@ -92,6 +98,7 @@ export default function ReferredClientForm({
     }
 
     const cleanName = name.trim();
+    const cleanCompanyName = companyName.trim();
     const cleanEmail = email.trim();
     const cleanNumber = number.trim();
     const cleanMessage = message.trim();
@@ -99,6 +106,11 @@ export default function ReferredClientForm({
     const structuredMessage = `New Referral Client — 5% Discount Request
 Referrer Name: ${referrerName || "Unknown Referrer"}
 Referral Code: ${referrerCode || "Unknown Code"}
+Full Name: ${cleanName}
+Company Name: ${cleanCompanyName || "Not provided"}
+Email: ${cleanEmail}
+Phone: ${cleanNumber}
+Service: ${service}
 Discount Details: 5% off first eligible compliance service (£650+ VAT).
 User Message: ${cleanMessage || "No additional comments."}`;
 
@@ -107,8 +119,6 @@ User Message: ${cleanMessage || "No additional comments."}`;
        * ---------------------------------------------------------
        * EXISTING PROFILE UPDATE LOGIC
        * ---------------------------------------------------------
-       * Agar kisi existing authenticated user ka prefill.id hai,
-       * to purana behavior bilkul same rahega.
        */
       if (prefill.id) {
         const { createClient } = require("../utils/supabase/client");
@@ -118,6 +128,7 @@ User Message: ${cleanMessage || "No additional comments."}`;
           .from("profiles")
           .update({
             full_name: cleanName,
+            company_name: cleanCompanyName,
             email: cleanEmail,
             contact_number: cleanNumber,
             description_type: `Referred: ${service}`,
@@ -140,14 +151,10 @@ User Message: ${cleanMessage || "No additional comments."}`;
        * ---------------------------------------------------------
        * SAVE REFERRAL DETAILS FOR NEW USER
        * ---------------------------------------------------------
-       * New user ke case mein profile abhi exist nahi karti.
-       * Isliye details cookie mein temporarily save hongi.
-       *
-       * Google signup/login ke baad onboarding page is cookie
-       * ko read karke fields prefill kar sakta hai.
        */
       const referralOnboardingData = {
         name: cleanName,
+        company_name: cleanCompanyName,
         email: cleanEmail,
         number: cleanNumber,
         service: service,
@@ -163,7 +170,6 @@ User Message: ${cleanMessage || "No additional comments."}`;
        * ---------------------------------------------------------
        * SEND INQUIRY EMAIL
        * ---------------------------------------------------------
-       * Existing API flow bilkul same rakha gaya hai.
        */
       const res = await fetch("/api/send", {
         method: "POST",
@@ -172,6 +178,7 @@ User Message: ${cleanMessage || "No additional comments."}`;
         },
         body: JSON.stringify({
           name: cleanName,
+          company_name: cleanCompanyName,
           email: cleanEmail,
           number: cleanNumber,
           service: service,
@@ -192,9 +199,6 @@ User Message: ${cleanMessage || "No additional comments."}`;
 
       setSuccess(true);
 
-      /*
-       * Parent component ko bata dein ke form submit ho gaya.
-       */
       if (typeof onSuccess === "function") {
         onSuccess();
       }
@@ -317,7 +321,7 @@ User Message: ${cleanMessage || "No additional comments."}`;
               being reviewed
             </p>
 
-            <GoogleLoginButton text="Create My BizGrow Account" />
+            <GoogleLoginButton text="Create My BizGrow Referral Account" />
           </div>
         </div>
       </div>
@@ -358,6 +362,23 @@ User Message: ${cleanMessage || "No additional comments."}`;
             onChange={(e) => setName(e.target.value)}
             disabled={!!prefill.name}
             placeholder="e.g. John Doe"
+            className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm text-slate-800 outline-none focus:border-[#997819] focus:ring-1 focus:ring-[#997819] disabled:bg-slate-50 disabled:text-slate-500"
+          />
+        </div>
+
+        {/* Company Name */}
+        <div className="space-y-1.5">
+          <label className="block text-xs font-bold uppercase tracking-wider text-slate-500">
+            Company Name *
+          </label>
+
+          <input
+            type="text"
+            required
+            value={companyName}
+            onChange={(e) => setCompanyName(e.target.value)}
+            disabled={!!prefill.company_name}
+            placeholder="e.g. ABC Security Ltd"
             className="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm text-slate-800 outline-none focus:border-[#997819] focus:ring-1 focus:ring-[#997819] disabled:bg-slate-50 disabled:text-slate-500"
           />
         </div>
