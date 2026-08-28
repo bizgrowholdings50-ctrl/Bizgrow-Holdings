@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -6,6 +7,9 @@ import { useRouter } from "next/navigation";
 
 const NAVY = "#12066a";
 const GOLD = "#997819";
+
+const REFERRAL_ONBOARDING_COOKIE =
+  "bizgrow_referral_onboarding";
 
 export default function OnboardingPage() {
   const supabase = createClient();
@@ -18,50 +22,78 @@ export default function OnboardingPage() {
   const [step, setStep] = useState(1);
   const [subStep, setSubStep] = useState(1);
 
+  // ---------------------------------------------------------
   // Referrer tracking
+  // ---------------------------------------------------------
   const [referrerName, setReferrerName] = useState("");
   const [referralCode, setReferralCode] = useState("");
 
+  // ---------------------------------------------------------
+  // Referral form data
+  // ---------------------------------------------------------
+  const [referralService, setReferralService] = useState("");
+  const [referralMessage, setReferralMessage] = useState("");
+  const [hasReferralFormData, setHasReferralFormData] =
+    useState(false);
+
+  // ---------------------------------------------------------
   // Form Fields
+  // ---------------------------------------------------------
   const [fullName, setFullName] = useState("");
   const [companyName, setCompanyName] = useState("");
   const [role, setRole] = useState("Business Owner");
-  const [bestDescribes, setBestDescribes] = useState("I own a business");
-  const [heardBefore, setHeardBefore] = useState("No");
+  const [bestDescribes, setBestDescribes] = useState(
+    "I own a business",
+  );
   const [contactNumber, setContactNumber] = useState("");
+
   const [errorMessage, setErrorMessage] = useState("");
+
+  // =========================================================
+  // INITIAL AUTH + REFERRAL DATA
+  // =========================================================
 
   useEffect(() => {
     const safetyTimer = setTimeout(() => {
       setCheckingAuth((prev) => {
         if (prev) {
-          console.warn("Safety timeout triggered: Forcing loading to false");
+          console.warn(
+            "Safety timeout triggered: Forcing loading to false",
+          );
+
           return false;
         }
+
         return prev;
       });
     }, 3500);
 
     async function initAuth() {
       try {
-        const params = new URLSearchParams(window.location.search);
+        const params = new URLSearchParams(
+          window.location.search,
+        );
 
         const authCode = params.get("code");
 
         let ref0 = params.get("ref");
         let refCode = ref0 ? ref0.trim() : "";
 
-        /*
-         * ---------------------------------------------------------
-         * 1. Exchange Google/Auth callback code if present
-         * ---------------------------------------------------------
-         */
+        // =====================================================
+        // 1. Exchange Google/Auth callback code
+        // =====================================================
+
         if (authCode) {
           const { error: exchangeError } =
-            await supabase.auth.exchangeCodeForSession(authCode);
+            await supabase.auth.exchangeCodeForSession(
+              authCode,
+            );
 
           if (exchangeError) {
-            console.error("Auth code exchange error:", exchangeError);
+            console.error(
+              "Auth code exchange error:",
+              exchangeError,
+            );
           }
 
           window.history.replaceState(
@@ -71,24 +103,128 @@ export default function OnboardingPage() {
           );
         }
 
-        /*
-         * ---------------------------------------------------------
-         * 2. Referral tracking
-         *
-         * Priority:
-         * URL ?ref=CODE
-         * ↓
-         * referral cookie
-         * ---------------------------------------------------------
-         */
+        // =====================================================
+        // 2. Read referral onboarding cookie
+        // =====================================================
+
+        let referralFormData = null;
+
+        try {
+          const cookieMatch = document.cookie
+            .split(";")
+            .map((item) => item.trim())
+            .find(
+              (item) =>
+                item.startsWith(
+                  `${REFERRAL_ONBOARDING_COOKIE}=`,
+                ),
+            );
+
+          if (cookieMatch) {
+            const encodedValue = cookieMatch.substring(
+              `${REFERRAL_ONBOARDING_COOKIE}=`.length,
+            );
+
+            if (encodedValue) {
+              referralFormData = JSON.parse(
+                decodeURIComponent(encodedValue),
+              );
+            }
+          }
+
+          // Fallback to localStorage
+          if (!referralFormData) {
+            const localData = localStorage.getItem(
+              REFERRAL_ONBOARDING_COOKIE,
+            );
+
+            if (localData) {
+              referralFormData = JSON.parse(localData);
+            }
+          }
+        } catch (cookieError) {
+          console.error(
+            "Could not read referral onboarding data:",
+            cookieError,
+          );
+
+          referralFormData = null;
+        }
+
+        // =====================================================
+        // 3. Apply referral form data
+        // =====================================================
+
+        if (referralFormData) {
+          console.log(
+            "Referral onboarding data restored:",
+            referralFormData,
+          );
+
+          setHasReferralFormData(true);
+
+          // Full name from referral form
+          if (referralFormData.name) {
+            setFullName(
+              referralFormData.name.trim(),
+            );
+          }
+
+          // Phone from referral form
+          if (referralFormData.number) {
+            setContactNumber(
+              referralFormData.number.trim(),
+            );
+          }
+
+          // Service from referral form
+          if (referralFormData.service) {
+            setReferralService(
+              referralFormData.service.trim(),
+            );
+          }
+
+          // Message from referral form
+          if (referralFormData.message) {
+            setReferralMessage(
+              referralFormData.message.trim(),
+            );
+          }
+
+          // Referral code fallback
+          if (
+            referralFormData.referrerCode &&
+            !refCode
+          ) {
+            refCode =
+              referralFormData.referrerCode.trim();
+          }
+        }
+
+        // =====================================================
+        // 4. Referral tracking
+        //
+        // Priority:
+        // URL ?ref=CODE
+        // ↓
+        // referral onboarding cookie
+        // ↓
+        // referral cookie
+        // =====================================================
+
         if (!refCode) {
           const match = document.cookie
             .split(";")
             .map((item) => item.trim())
-            .find((item) => item.startsWith("bizgrow_referrer="));
+            .find(
+              (item) =>
+                item.startsWith("bizgrow_referrer="),
+            );
 
           if (match) {
-            refCode = decodeURIComponent(match.split("=")[1] || "").trim();
+            refCode = decodeURIComponent(
+              match.split("=")[1] || "",
+            ).trim();
           }
         } else {
           document.cookie = `bizgrow_referrer=${encodeURIComponent(
@@ -96,22 +232,14 @@ export default function OnboardingPage() {
           )}; path=/; max-age=${60 * 60 * 24 * 7}; SameSite=Lax`;
         }
 
-        /*
-         * Keep referral code in state.
-         *
-         * IMPORTANT:
-         * If the user came through a referral URL, this remains
-         * available after Google authentication/onboarding.
-         */
         if (refCode) {
           setReferralCode(refCode);
         }
 
-        /*
-         * ---------------------------------------------------------
-         * 3. Get current authenticated user
-         * ---------------------------------------------------------
-         */
+        // =====================================================
+        // 5. Get authenticated Google user
+        // =====================================================
+
         const {
           data: { session },
         } = await supabase.auth.getSession();
@@ -121,43 +249,69 @@ export default function OnboardingPage() {
         if (currentUser) {
           setUser(currentUser);
 
-          if (currentUser.user_metadata?.full_name && !fullName) {
-            setFullName(currentUser.user_metadata.full_name);
+          /*
+           * Full name priority:
+           *
+           * 1. Referral form name
+           * 2. Google account metadata name
+           *
+           * Email is NOT taken from referral cookie.
+           * Google/authenticated account email is used.
+           */
+
+          if (
+            !referralFormData?.name &&
+            currentUser.user_metadata?.full_name
+          ) {
+            setFullName(
+              currentUser.user_metadata.full_name,
+            );
           }
         }
 
-        /*
-         * ---------------------------------------------------------
-         * 4. Resolve Referrer Name
-         * ---------------------------------------------------------
-         */
+        // =====================================================
+        // 6. Resolve Referrer Name
+        // =====================================================
+
         if (refCode) {
-          let { data: referrerData } = await supabase
-            .from("profiles")
-            .select("full_name, id, referral_code")
-            .eq("referral_code", refCode)
-            .maybeSingle();
+          let { data: referrerData } =
+            await supabase
+              .from("profiles")
+              .select(
+                "full_name, id, referral_code",
+              )
+              .eq("referral_code", refCode)
+              .maybeSingle();
 
           /*
            * Fallback:
-           * ref value may be profile UUID instead of referral_code
+           * ref value may be profile UUID.
            */
+
           if (!referrerData) {
-            let { data: idData } = await supabase
-              .from("profiles")
-              .select("full_name, id, referral_code")
-              .eq("id", refCode)
-              .maybeSingle();
+            let { data: idData } =
+              await supabase
+                .from("profiles")
+                .select(
+                  "full_name, id, referral_code",
+                )
+                .eq("id", refCode)
+                .maybeSingle();
 
             referrerData = idData;
           }
 
           if (referrerData?.full_name) {
-            setReferrerName(referrerData.full_name);
+            setReferrerName(
+              referrerData.full_name,
+            );
           }
         }
       } catch (err) {
-        console.error("Initialization error catch block:", err);
+        console.error(
+          "Initialization error catch block:",
+          err,
+        );
       } finally {
         clearTimeout(safetyTimer);
         setCheckingAuth(false);
@@ -171,30 +325,53 @@ export default function OnboardingPage() {
     };
   }, [supabase]);
 
+  // =========================================================
+  // NEXT SUB STEP
+  // =========================================================
+
   const handleNextSubStep = () => {
     setErrorMessage("");
 
+    // Step 1
     if (subStep === 1 && !fullName.trim()) {
-      setErrorMessage("Please enter your full name.");
+      setErrorMessage(
+        "Please enter your full name.",
+      );
+
       return;
     }
 
+    // Step 2
     if (subStep === 2 && !companyName.trim()) {
-      setErrorMessage("Please enter your company name.");
+      setErrorMessage(
+        "Please enter your company name.",
+      );
+
       return;
     }
 
-    if (subStep === 6 && !contactNumber.trim()) {
-      setErrorMessage("Please enter your contact number.");
+    // Step 5
+    if (
+      subStep === 5 &&
+      !contactNumber.trim()
+    ) {
+      setErrorMessage(
+        "Please enter your contact number.",
+      );
+
       return;
     }
 
-    if (subStep < 6) {
+    if (subStep < 5) {
       setSubStep(subStep + 1);
     } else {
       handleSubmitOnboarding();
     }
   };
+
+  // =========================================================
+  // PREVIOUS SUB STEP
+  // =========================================================
 
   const handlePrevSubStep = () => {
     setErrorMessage("");
@@ -204,16 +381,19 @@ export default function OnboardingPage() {
     }
   };
 
+  // =========================================================
+  // SUBMIT ONBOARDING
+  // =========================================================
+
   const handleSubmitOnboarding = async () => {
     setLoading(true);
     setErrorMessage("");
 
     try {
-      /*
-       * ---------------------------------------------------------
-       * 1. Get authenticated user
-       * ---------------------------------------------------------
-       */
+      // =====================================================
+      // 1. Get authenticated user
+      // =====================================================
+
       const {
         data: { session },
       } = await supabase.auth.getSession();
@@ -221,74 +401,72 @@ export default function OnboardingPage() {
       const activeUser = session?.user || user;
 
       if (!activeUser) {
-        setErrorMessage("User session not found. Please log in again.");
+        setErrorMessage(
+          "User session not found. Please log in again.",
+        );
+
         setLoading(false);
+
         return;
       }
 
-      /*
-       * ---------------------------------------------------------
-       * 2. IMPORTANT:
-       * Re-check referral cookie before deciding partner_status.
-       *
-       * This protects the flow if the referral code was lost from
-       * React state during Google authentication/navigation.
-       * ---------------------------------------------------------
-       */
-      let finalReferralCode = referralCode?.trim() || "";
+      // =====================================================
+      // 2. Get final referral code
+      // =====================================================
+
+      let finalReferralCode =
+        referralCode?.trim() || "";
 
       if (!finalReferralCode) {
         const match = document.cookie
           .split(";")
           .map((item) => item.trim())
-          .find((item) => item.startsWith("bizgrow_referrer="));
+          .find(
+            (item) =>
+              item.startsWith(
+                "bizgrow_referrer=",
+              ),
+          );
 
         if (match) {
-          finalReferralCode = decodeURIComponent(
-            match.split("=")[1] || "",
-          ).trim();
+          finalReferralCode =
+            decodeURIComponent(
+              match.split("=")[1] || "",
+            ).trim();
         }
       }
 
-      /*
-       * ---------------------------------------------------------
-       * 3. Get existing profile first
-       *
-       * This is important because we DON'T want onboarding to
-       * accidentally overwrite an already approved account.
-       * ---------------------------------------------------------
-       */
-      const { data: existingProfile, error: existingProfileError } =
-        await supabase
-          .from("profiles")
-          .select("partner_status")
-          .eq("id", activeUser.id)
-          .maybeSingle();
+      // =====================================================
+      // 3. Get existing profile
+      // =====================================================
+
+      const {
+        data: existingProfile,
+        error: existingProfileError,
+      } = await supabase
+        .from("profiles")
+        .select("partner_status")
+        .eq("id", activeUser.id)
+        .maybeSingle();
 
       if (existingProfileError) {
-        console.warn("Could not read existing profile:", existingProfileError);
+        console.warn(
+          "Could not read existing profile:",
+          existingProfileError,
+        );
       }
 
-      /*
-       * ---------------------------------------------------------
-       * 4. Determine partner status
-       *
-       * REFERRAL USER:
-       *   New referred user => pending
-       *
-       * NORMAL USER:
-       *   Existing status is preserved.
-       *   New normal user => approved
-       *
-       * IMPORTANT:
-       * We never set a referred user to approved here.
-       * Admin approval is responsible for that.
-       * ---------------------------------------------------------
-       */
+      // =====================================================
+      // 4. Determine partner status
+      // =====================================================
+
       let partnerStatus;
 
       if (finalReferralCode) {
-        if (existingProfile?.partner_status === "approved") {
+        if (
+          existingProfile?.partner_status ===
+          "approved"
+        ) {
           /*
            * Never downgrade an already approved account.
            */
@@ -302,72 +480,99 @@ export default function OnboardingPage() {
       } else {
         /*
          * Normal/non-referred onboarding.
-         *
-         * Preserve an existing status if one already exists.
-         * Otherwise keep the original behaviour: approved.
          */
-        partnerStatus = existingProfile?.partner_status || "approved";
+        partnerStatus =
+          existingProfile?.partner_status ||
+          "approved";
       }
 
-      /*
-       * ---------------------------------------------------------
-       * 5. Generate referral code
-       * ---------------------------------------------------------
-       */
+      // =====================================================
+      // 5. Generate referral code
+      // =====================================================
+
       const generatedReferralCode = Math.random()
         .toString(36)
         .substring(2, 8)
         .toUpperCase();
 
-      /*
-       * ---------------------------------------------------------
-       * 6. Save profile
-       *
-       * IMPORTANT FIX:
-       *
-       * OLD CODE had:
-       *
-       * role,
-       * ...
-       * role: accountType,
-       *
-       * The second role overwrote the actual selected role.
-       *
-       * Now only the real role is saved.
-       * ---------------------------------------------------------
-       */
+      // =====================================================
+      // 6. Profile description
+      //
+      // Referral user:
+      // selected service from referral form
+      //
+      // Normal user:
+      // existing bestDescribes value
+      // =====================================================
+
+      const profileDescription =
+        hasReferralFormData &&
+        referralService?.trim()
+          ? `Referred: ${referralService.trim()}`
+          : bestDescribes;
+
+      // =====================================================
+      // 7. Save profile
+      // =====================================================
+
       const profilePayload = {
         id: activeUser.id,
 
+        /*
+         * Full name:
+         * Referral form → already populated
+         * Otherwise → manually entered / Google fallback
+         */
         full_name: fullName.trim(),
+
         company_name: companyName.trim(),
 
         role: role,
 
-        description_type: bestDescribes,
-        heard_before: heardBefore,
-        contact_number: contactNumber.trim(),
+        description_type:
+          profileDescription,
 
-        referral_code: generatedReferralCode,
+        /*
+         * Email:
+         * ONLY from authenticated Google/account user.
+         */
+        email:
+          activeUser.email ||
+          "",
 
-        partner_status: partnerStatus,
+        contact_number:
+          contactNumber.trim(),
+
+        referral_code:
+          generatedReferralCode,
+
+        partner_status:
+          partnerStatus,
 
         onboarding_completed: true,
 
-        updated_at: new Date().toISOString(),
+        updated_at:
+          new Date().toISOString(),
       };
 
-      const { error: profileError } = await supabase
+      const {
+        error: profileError,
+      } = await supabase
         .from("profiles")
         .upsert(profilePayload);
 
       if (profileError) {
-        console.error("SUPABASE PROFILE UPSERT ERROR:", {
-          message: profileError.message,
-          code: profileError.code,
-          details: profileError.details,
-          hint: profileError.hint,
-        });
+        console.error(
+          "SUPABASE PROFILE UPSERT ERROR:",
+          {
+            message:
+              profileError.message,
+            code: profileError.code,
+            details:
+              profileError.details,
+            hint: profileError.hint,
+          },
+        );
 
         throw new Error(
           profileError.message ||
@@ -376,80 +581,118 @@ export default function OnboardingPage() {
         );
       }
 
-      /*
-       * ---------------------------------------------------------
-       * 7. Referral user detected
-       *
-       * Create/update referral relationship.
-       * Existing referral logic remains intact.
-       * ---------------------------------------------------------
-       */
+      // =====================================================
+      // 8. Referral relationship
+      // =====================================================
+
       if (finalReferralCode) {
         let referrerId = null;
 
         /*
-         * Try referral code first
+         * Try referral code first.
          */
-        const { data: refByCode } = await supabase
+        const {
+          data: refByCode,
+        } = await supabase
           .from("profiles")
           .select("id")
-          .eq("referral_code", finalReferralCode)
+          .eq(
+            "referral_code",
+            finalReferralCode,
+          )
           .maybeSingle();
 
         if (refByCode) {
-          referrerId = refByCode.id;
+          referrerId =
+            refByCode.id;
         } else {
           /*
-           * Fallback: referral value may be profile ID
+           * Fallback:
+           * referral value may be profile ID.
            */
-          const { data: refById } = await supabase
+          const {
+            data: refById,
+          } = await supabase
             .from("profiles")
             .select("id")
-            .eq("id", finalReferralCode)
+            .eq(
+              "id",
+              finalReferralCode,
+            )
             .maybeSingle();
 
           if (refById) {
-            referrerId = refById.id;
+            referrerId =
+              refById.id;
           }
         }
 
         /*
-         * Don't create self-referral
+         * Don't create self-referral.
          */
-        if (referrerId && referrerId !== activeUser.id) {
-          const { error: referralError } = await supabase
+        if (
+          referrerId &&
+          referrerId !== activeUser.id
+        ) {
+          const {
+            error: referralError,
+          } = await supabase
             .from("referrals")
             .upsert(
               {
-                referrer_id: referrerId,
-                referred_user_id: activeUser.id,
+                referrer_id:
+                  referrerId,
+
+                referred_user_id:
+                  activeUser.id,
 
                 /*
-                 * Referred relationship remains pending.
-                 *
-                 * This is separate from partner_status.
+                 * Existing referral logic retained.
                  */
                 status: "completed",
               },
               {
-                onConflict: "referred_user_id",
+                onConflict:
+                  "referred_user_id",
               },
             );
 
           if (referralError) {
-            console.warn("Referral relationship error:", referralError);
+            console.warn(
+              "Referral relationship error:",
+              referralError,
+            );
           }
         }
       }
 
-      /*
-       * ---------------------------------------------------------
-       * 8. Move to success screen
-       * ---------------------------------------------------------
-       */
+      // =====================================================
+      // 9. Remove temporary referral data
+      // =====================================================
+
+      document.cookie = `${REFERRAL_ONBOARDING_COOKIE}=; path=/; max-age=0; SameSite=Lax`;
+
+      try {
+        localStorage.removeItem(
+          REFERRAL_ONBOARDING_COOKIE,
+        );
+      } catch (storageError) {
+        console.warn(
+          "Could not remove referral localStorage:",
+          storageError,
+        );
+      }
+
+      // =====================================================
+      // 10. Success
+      // =====================================================
+
       setStep(2);
     } catch (err) {
-      console.error("Submission error:", err);
+      console.error(
+        "Submission error:",
+        err,
+      );
 
       setErrorMessage(
         err?.message ||
@@ -459,6 +702,10 @@ export default function OnboardingPage() {
       setLoading(false);
     }
   };
+
+  // =========================================================
+  // LOADING
+  // =========================================================
 
   if (checkingAuth) {
     return (
@@ -470,21 +717,37 @@ export default function OnboardingPage() {
     );
   }
 
+  // =========================================================
+  // PAGE
+  // =========================================================
+
   return (
     <div className="flex min-h-screen mt-14 items-center justify-center bg-slate-50 px-4 py-12">
       <div className="w-full max-w-xl rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
+
+        {/* ===================================================
+            STEP 1 — ONBOARDING
+        =================================================== */}
+
         {step === 1 && (
           <div className="space-y-6">
+
+            {/* Header */}
             <div className="text-center">
+
               {referrerName ? (
                 <div className="mb-4 inline-block rounded-full bg-amber-50 px-4 py-1.5 text-xs font-semibold text-amber-900 border border-amber-200">
                   🎉 You&apos;ve Been Invited by{" "}
-                  <span className="underline font-bold">{referrerName}</span>
+                  <span className="underline font-bold">
+                    {referrerName}
+                  </span>
                 </div>
               ) : (
                 <span
                   className="inline-block rounded-full bg-amber-50 px-3 py-1 text-xs font-semibold"
-                  style={{ color: GOLD }}
+                  style={{
+                    color: GOLD,
+                  }}
                 >
                   BizGrow Referral Partner Program
                 </span>
@@ -492,51 +755,101 @@ export default function OnboardingPage() {
 
               <h1
                 className="mt-3 text-2xl font-bold tracking-tight"
-                style={{ color: NAVY }}
+                style={{
+                  color: NAVY,
+                }}
               >
                 Complete Your Profile Setup
               </h1>
 
               <div className="mt-3 rounded-2xl bg-slate-50 border border-slate-100 p-4 text-left">
+
                 <p className="text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">
                   Before We Get Started
                 </p>
 
                 <p className="text-xs text-slate-500 leading-relaxed">
-                  Please take a moment to provide a few quick details so we can
-                  configure your partner account and tailor your dashboard
+                  Please take a moment to provide a few
+                  quick details so we can configure your
+                  partner account and tailor your dashboard
                   experience.
                 </p>
+
               </div>
 
+              {/* Referral service information */}
+              {hasReferralFormData &&
+                referralService && (
+                  <div className="mt-4 rounded-2xl border border-[#997819]/20 bg-amber-50/60 p-4 text-left">
+
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-[#997819]">
+                      Your Referral Request
+                    </p>
+
+                    <p className="mt-1 text-sm font-bold text-[#12066a]">
+                      {referralService}
+                    </p>
+
+                    <p className="mt-1 text-[11px] text-slate-500">
+                      Your discount request details have
+                      been carried forward automatically.
+                    </p>
+
+                  </div>
+                )}
+
+              {/* Progress */}
               <div className="mt-4 flex items-center justify-between text-xs font-medium text-slate-500 px-1">
-                <span>Step {subStep} of 6</span>
 
-                <span style={{ color: GOLD }}>
-                  {Math.round((subStep / 6) * 100)}% Completed
+                <span>
+                  Step {subStep} of 5
                 </span>
+
+                <span
+                  style={{
+                    color: GOLD,
+                  }}
+                >
+                  {Math.round(
+                    (subStep / 5) * 100,
+                  )}
+                  % Completed
+                </span>
+
               </div>
+
             </div>
 
+            {/* Progress bar */}
             <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+
               <div
                 className="h-full transition-all duration-300"
                 style={{
-                  width: `${(subStep / 6) * 100}%`,
+                  width: `${(subStep / 5) * 100}%`,
                   backgroundColor: GOLD,
                 }}
               />
+
             </div>
 
+            {/* Error */}
             {errorMessage && (
               <div className="rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
                 {errorMessage}
               </div>
             )}
 
+            {/* =================================================
+                SUB STEPS
+            ================================================= */}
+
             <div className="py-2 min-h-[160px]">
+
+              {/* STEP 1 — FULL NAME */}
               {subStep === 1 && (
                 <div className="space-y-3">
+
                   <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600">
                     1. Your Full Name *
                   </label>
@@ -545,16 +858,31 @@ export default function OnboardingPage() {
                     type="text"
                     required
                     value={fullName}
-                    onChange={(e) => setFullName(e.target.value)}
+                    onChange={(e) =>
+                      setFullName(
+                        e.target.value,
+                      )
+                    }
                     placeholder="e.g. John Smith"
                     className="w-full rounded-xl border border-slate-200 px-4 py-3.5 text-sm text-slate-800 outline-none focus:border-[#997819] focus:ring-1 focus:ring-[#997819]"
                     autoFocus
                   />
+
+                  {hasReferralFormData &&
+                    fullName && (
+                      <p className="text-[11px] text-emerald-600 font-medium">
+                        ✓ Name from your referral form has
+                        been filled in automatically.
+                      </p>
+                    )}
+
                 </div>
               )}
 
+              {/* STEP 2 — COMPANY */}
               {subStep === 2 && (
                 <div className="space-y-3">
+
                   <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600">
                     2. Company Name *
                   </label>
@@ -563,50 +891,78 @@ export default function OnboardingPage() {
                     type="text"
                     required
                     value={companyName}
-                    onChange={(e) => setCompanyName(e.target.value)}
+                    onChange={(e) =>
+                      setCompanyName(
+                        e.target.value,
+                      )
+                    }
                     placeholder="e.g. BizGrow Holdings"
                     className="w-full rounded-xl border border-slate-200 px-4 py-3.5 text-sm text-slate-800 outline-none focus:border-[#997819] focus:ring-1 focus:ring-[#997819]"
                     autoFocus
                   />
+
                 </div>
               )}
 
+              {/* STEP 3 — ROLE */}
               {subStep === 3 && (
                 <div className="space-y-3">
+
                   <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600">
                     3. Your Role
                   </label>
 
                   <select
                     value={role}
-                    onChange={(e) => setRole(e.target.value)}
+                    onChange={(e) =>
+                      setRole(
+                        e.target.value,
+                      )
+                    }
                     className="w-full rounded-xl border border-slate-200 px-4 py-3.5 text-sm text-slate-800 bg-white outline-none focus:border-[#997819] focus:ring-1 focus:ring-[#997819]"
                   >
-                    <option value="Business Owner">Business Owner</option>
 
-                    <option value="Director">Director</option>
+                    <option value="Business Owner">
+                      Business Owner
+                    </option>
 
-                    <option value="Manager">Manager</option>
+                    <option value="Director">
+                      Director
+                    </option>
 
-                    <option value="Consultant">Consultant</option>
+                    <option value="Manager">
+                      Manager
+                    </option>
 
-                    <option value="Employee">Employee</option>
+                    <option value="Consultant">
+                      Consultant
+                    </option>
 
-                    <option value="Other">Other</option>
+                    <option value="Employee">
+                      Employee
+                    </option>
+
+                    <option value="Other">
+                      Other
+                    </option>
+
                   </select>
+
                 </div>
               )}
 
+              {/* STEP 4 — BEST DESCRIBES */}
               {subStep === 4 && (
                 <div className="space-y-3">
+
                   <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600">
                     4. Which best describes you?
                   </label>
 
                   <div className="space-y-2.5 text-xs text-slate-700">
+
                     {[
                       "I own a business",
-
                       "I'm interested in referrals",
                       "Just exploring",
                     ].map((opt) => (
@@ -614,76 +970,96 @@ export default function OnboardingPage() {
                         key={opt}
                         className="flex items-center gap-3 p-3 rounded-xl border border-slate-100 bg-slate-50 cursor-pointer hover:border-slate-200 transition"
                       >
+
                         <input
                           type="radio"
                           name="bestDescribes"
-                          checked={bestDescribes === opt}
-                          onChange={() => setBestDescribes(opt)}
+                          checked={
+                            bestDescribes ===
+                            opt
+                          }
+                          onChange={() =>
+                            setBestDescribes(
+                              opt,
+                            )
+                          }
                           className="text-[#997819] focus:ring-[#997819]"
                         />
 
                         <span className="font-medium text-slate-800">
                           {opt}
                         </span>
+
                       </label>
                     ))}
+
                   </div>
+
                 </div>
               )}
 
+              {/* STEP 5 — CONTACT NUMBER */}
               {subStep === 5 && (
                 <div className="space-y-3">
+
                   <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600">
-                    5. Have you heard about BizGrow before?
-                  </label>
-
-                  <div className="flex gap-4 text-xs text-slate-700">
-                    {["Yes", "No"].map((ans) => (
-                      <label
-                        key={ans}
-                        className="flex-1 flex items-center justify-center gap-2 p-4 rounded-xl border border-slate-100 bg-slate-50 cursor-pointer hover:border-slate-200 transition"
-                      >
-                        <input
-                          type="radio"
-                          name="heardBefore"
-                          checked={heardBefore === ans}
-                          onChange={() => setHeardBefore(ans)}
-                          className="text-[#997819] focus:ring-[#997819]"
-                        />
-
-                        <span className="font-medium text-slate-800">
-                          {ans}
-                        </span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {subStep === 6 && (
-                <div className="space-y-3">
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600">
-                    6. Contact Details / Phone Number *
+                    5. Contact Details / Phone Number *
                   </label>
 
                   <input
                     type="text"
                     required
                     value={contactNumber}
-                    onChange={(e) => setContactNumber(e.target.value)}
+                    onChange={(e) =>
+                      setContactNumber(
+                        e.target.value,
+                      )
+                    }
                     placeholder="e.g. +44 7123 456789"
                     className="w-full rounded-xl border border-slate-200 px-4 py-3.5 text-sm text-slate-800 outline-none focus:border-[#997819] focus:ring-1 focus:ring-[#997819]"
                     autoFocus
                   />
+
+                  {hasReferralFormData &&
+                    contactNumber && (
+                      <p className="text-[11px] text-emerald-600 font-medium">
+                        ✓ Phone number from your referral
+                        form has been filled in automatically.
+                      </p>
+                    )}
+
+                  {/* Authenticated email */}
+                  {user?.email && (
+                    <div className="rounded-xl bg-slate-50 border border-slate-100 p-3 mt-3">
+
+                      <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                        Account Email
+                      </p>
+
+                      <p className="mt-1 text-xs font-semibold text-slate-700">
+                        {user.email}
+                      </p>
+
+                    </div>
+                  )}
+
                 </div>
               )}
+
             </div>
 
+            {/* =================================================
+                BUTTONS
+            ================================================= */}
+
             <div className="flex items-center gap-3 pt-4 border-t border-slate-100">
+
               {subStep > 1 && (
                 <button
                   type="button"
-                  onClick={handlePrevSubStep}
+                  onClick={
+                    handlePrevSubStep
+                  }
                   className="px-5 py-3 rounded-xl border border-slate-200 text-xs font-semibold text-slate-600 hover:bg-slate-50 transition"
                 >
                   Back
@@ -693,51 +1069,76 @@ export default function OnboardingPage() {
               <button
                 type="button"
                 disabled={loading}
-                onClick={handleNextSubStep}
+                onClick={
+                  handleNextSubStep
+                }
                 className="flex-1 py-3.5 rounded-xl text-xs font-semibold text-white shadow-sm transition hover:opacity-95 disabled:opacity-70"
-                style={{ backgroundColor: NAVY }}
+                style={{
+                  backgroundColor: NAVY,
+                }}
               >
                 {loading
                   ? "Saving Details..."
-                  : subStep === 6
+                  : subStep === 5
                     ? "Complete Onboarding"
                     : "Next Step"}
               </button>
+
             </div>
+
           </div>
         )}
 
+        {/* =====================================================
+            SUCCESS
+        ===================================================== */}
+
         {step === 2 && (
           <div className="space-y-6 text-center">
+
             <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100 font-bold text-xl">
               ✓
             </div>
 
             <div>
+
               <h1
                 className="text-2xl font-bold tracking-tight"
-                style={{ color: NAVY }}
+                style={{
+                  color: NAVY,
+                }}
               >
                 Welcome to BizGrow!
               </h1>
 
               <p className="mt-2 text-sm text-slate-600 leading-relaxed">
-                Your referral account has been successfully created. Thank you
-                for joining our Referral Partner Program.
+                Your referral account has been successfully
+                created. Thank you for joining our Referral
+                Partner Program.
               </p>
+
             </div>
 
             <button
               type="button"
-              onClick={() => router.push("/referral-program/dashboard")}
+              onClick={() =>
+                router.push(
+                  "/referral-program/dashboard",
+                )
+              }
               className="w-full rounded-2xl py-3.5 text-sm font-semibold text-white shadow-sm transition hover:opacity-95"
-              style={{ backgroundColor: NAVY }}
+              style={{
+                backgroundColor: NAVY,
+              }}
             >
               Go to Dashboard
             </button>
+
           </div>
         )}
+
       </div>
     </div>
   );
 }
+

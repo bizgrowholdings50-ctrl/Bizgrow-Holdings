@@ -67,9 +67,10 @@ export async function POST(request) {
     if (!wasAlreadyApproved && updatedProfile?.email) {
       const emailResult = await sendEmail({
         to: updatedProfile.email,
-        subject: "Congratulations! Your BizGrow Referral Account Request Has Been Approved",
+        subject:
+          "Congratulations! Your BizGrow Referral Account Request Has Been Approved",
 
-      html: `
+        html: `
   <div style="
     margin: 0;
     padding: 40px 20px;
@@ -291,7 +292,8 @@ export async function POST(request) {
 
             const referrerEmailResult = await sendEmail({
               to: referrerProfile.email,
-              subject: "Great News! Your Referral Has Been Approved & Reward Unlocked",
+              subject:
+                "Great News! Your Referral Has Been Approved & Reward Unlocked",
               html: `
                 <div style="margin: 0; padding: 40px 20px; background-color: #f7f7fa; font-family: Arial, Helvetica, sans-serif; color: #333333;">
                   <div style="max-width: 620px; margin: 0 auto; background-color: #ffffff; border: 1px solid #e5e5ec; border-radius: 14px; overflow: hidden; box-shadow: 0 8px 30px rgba(18, 6, 106, 0.08);">
@@ -323,16 +325,21 @@ export async function POST(request) {
             });
 
             if (!referrerEmailResult.success) {
-              console.error("Resend Email Error (Referrer):", referrerEmailResult.error);
+              console.error(
+                "Resend Email Error (Referrer):",
+                referrerEmailResult.error,
+              );
             } else {
-              console.log("Referrer Notification Email Sent Successfully:", referrerEmailResult.data);
+              console.log(
+                "Referrer Notification Email Sent Successfully:",
+                referrerEmailResult.data,
+              );
             }
           }
         }
       } catch (referrerErr) {
         console.error("Error sending email to referrer:", referrerErr);
       }
-
     } else {
       console.log("Email skipped because partner was already approved.");
     }

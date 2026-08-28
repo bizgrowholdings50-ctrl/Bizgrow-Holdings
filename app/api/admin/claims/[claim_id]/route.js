@@ -1,22 +1,32 @@
+
 import { NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/server";
-import { createClient as createSupabaseAdmin } from "@supabase/supabase-js";
-import { Resend } from "resend";
+import {
+  createClient as createSupabaseAdmin,
+} from "@supabase/supabase-js";
+import { sendEmail } from "@/utils/sendEmail";
 
 // ============================================================
 // ADMIN SUPABASE CLIENT
 // ============================================================
 
 function getAdminClient() {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const supabaseUrl =
+    process.env.NEXT_PUBLIC_SUPABASE_URL;
+
+  const serviceRoleKey =
+    process.env.SUPABASE_SERVICE_ROLE_KEY;
 
   if (!supabaseUrl) {
-    throw new Error("NEXT_PUBLIC_SUPABASE_URL is missing.");
+    throw new Error(
+      "NEXT_PUBLIC_SUPABASE_URL is missing."
+    );
   }
 
   if (!serviceRoleKey) {
-    throw new Error("SUPABASE_SERVICE_ROLE_KEY is missing.");
+    throw new Error(
+      "SUPABASE_SERVICE_ROLE_KEY is missing."
+    );
   }
 
   return createSupabaseAdmin(
@@ -32,25 +42,14 @@ function getAdminClient() {
 }
 
 // ============================================================
-// RESEND CLIENT
-// ============================================================
-
-function getResendClient() {
-  const resendApiKey = process.env.RESEND_API_KEY;
-
-  if (!resendApiKey) {
-    throw new Error("RESEND_API_KEY is missing.");
-  }
-
-  return new Resend(resendApiKey);
-}
-
-// ============================================================
 // HTML ESCAPE
 // ============================================================
 
 function escapeHtml(value) {
-  if (value === null || value === undefined) {
+  if (
+    value === null ||
+    value === undefined
+  ) {
     return "";
   }
 
@@ -66,19 +65,29 @@ function escapeHtml(value) {
 // VERIFY ADMIN
 // ============================================================
 
-async function verifyAdmin(supabase, userId) {
+async function verifyAdmin(
+  supabase,
+  userId
+) {
   if (!userId) {
     return false;
   }
 
-  const { data: profile, error } = await supabase
+  const {
+    data: profile,
+    error,
+  } = await supabase
     .from("profiles")
     .select("role")
     .eq("id", userId)
     .maybeSingle();
 
   if (error) {
-    console.error("Admin verification error:", error);
+    console.error(
+      "Admin verification error:",
+      error
+    );
+
     return false;
   }
 
@@ -94,9 +103,12 @@ async function verifyAdmin(supabase, userId) {
 // 3. Supabase Auth email
 // ============================================================
 
-async function resolveClaimantEmail(adminSupabase, claim) {
+async function resolveClaimantEmail(
+  adminSupabase,
+  claim
+) {
   // ----------------------------------------------------------
-  // 1. reward_claims.email
+  // 1. CLAIM EMAIL
   // ----------------------------------------------------------
 
   const claimEmail =
@@ -112,7 +124,7 @@ async function resolveClaimantEmail(adminSupabase, claim) {
   }
 
   // ----------------------------------------------------------
-  // USER ID REQUIRED FOR FALLBACK
+  // USER ID
   // ----------------------------------------------------------
 
   const userId = claim?.user_id;
@@ -127,7 +139,7 @@ async function resolveClaimantEmail(adminSupabase, claim) {
   }
 
   // ----------------------------------------------------------
-  // 2. profiles.email
+  // 2. PROFILE EMAIL
   // ----------------------------------------------------------
 
   try {
@@ -173,9 +185,10 @@ async function resolveClaimantEmail(adminSupabase, claim) {
     const {
       data: authUserData,
       error: authUserError,
-    } = await adminSupabase.auth.admin.getUserById(
-      userId
-    );
+    } =
+      await adminSupabase.auth.admin.getUserById(
+        userId
+      );
 
     if (authUserError) {
       console.error(
@@ -184,7 +197,8 @@ async function resolveClaimantEmail(adminSupabase, claim) {
       );
     } else {
       const authEmail =
-        typeof authUserData?.user?.email === "string"
+        typeof authUserData?.user?.email ===
+        "string"
           ? authUserData.user.email.trim()
           : "";
 
@@ -215,34 +229,22 @@ async function resolveClaimantEmail(adminSupabase, claim) {
 }
 
 // ============================================================
-// SEND CLAIM STATUS EMAIL
+// SEND APPROVAL EMAIL
+//
+// IMPORTANT:
+// Uses existing working sendEmail() utility.
+// Sender is:
+// BizGrow Holdings <sales@bizgrow-holdings.net>
 // ============================================================
 
-async function sendClaimStatusEmail(
+async function sendApprovalEmail(
   claim,
-  status,
   adminSupabase
 ) {
   try {
-    // ----------------------------------------------------------
-    // EMAIL ONLY FOR APPROVED / REJECTED
-    // ----------------------------------------------------------
-
-    if (
-      status !== "approved" &&
-      status !== "rejected"
-    ) {
-      return {
-        success: true,
-        skipped: true,
-        reason:
-          "Email is only sent for approved or rejected claims.",
-      };
-    }
-
-    // ----------------------------------------------------------
-    // RESOLVE EMAIL
-    // ----------------------------------------------------------
+    // ========================================================
+    // RESOLVE RECIPIENT
+    // ========================================================
 
     const emailResolution =
       await resolveClaimantEmail(
@@ -252,18 +254,16 @@ async function sendClaimStatusEmail(
 
     if (!emailResolution.email) {
       console.error(
-        "Claim status email failed: no recipient email found.",
+        "APPROVAL EMAIL FAILED - NO EMAIL:",
         {
           claimId: claim?.id,
           userId: claim?.user_id,
-          status,
           error: emailResolution.error,
         }
       );
 
       return {
         success: false,
-        skipped: true,
         error:
           emailResolution.error ||
           "Claimant email is missing.",
@@ -273,725 +273,447 @@ async function sendClaimStatusEmail(
     const recipientEmail =
       emailResolution.email;
 
-    console.log(
-      "Claim status email recipient resolved:",
-      {
-        claimId: claim?.id,
-        userId: claim?.user_id,
-        source: emailResolution.source,
-        recipient: recipientEmail,
-      }
+    // ========================================================
+    // CLAIM DATA
+    // ========================================================
+
+    const amount = Number(
+      claim?.amount || 0
     );
 
-    // ----------------------------------------------------------
-    // RESEND
-    // ----------------------------------------------------------
+    const claimantName =
+      escapeHtml(
+        claim?.contact_name ||
+          "there"
+      );
 
-    const resend = getResendClient();
+    const serviceName =
+      escapeHtml(
+        claim?.service_name ||
+          "your selected service"
+      );
 
-    const fromEmail =
-      process.env.CLAIM_EMAIL_FROM ||
-      "BizGrow Holdings <noreply@bizgrow-holdings.com>";
+    const companyName =
+      escapeHtml(
+        claim?.company_name || ""
+      );
 
     const siteUrl =
       process.env.NEXT_PUBLIC_SITE_URL ||
       "https://bizgrow-holdings.com";
 
-    // ----------------------------------------------------------
-    // CLAIM DATA
-    // ----------------------------------------------------------
+    // ========================================================
+    // EMAIL HTML
+    // ========================================================
 
-    const amount = Number(claim.amount || 0);
+    const emailHtml = `
+<!DOCTYPE html>
+<html>
 
-    const claimantName = escapeHtml(
-      claim.contact_name || "there"
-    );
+<head>
+  <meta charset="UTF-8" />
 
-    const serviceName = escapeHtml(
-      claim.service_name || "your selected service"
-    );
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
 
-    const companyName = escapeHtml(
-      claim.company_name || ""
-    );
+  <title>
+    Referral Reward Approved
+  </title>
+</head>
 
-    // ==========================================================
-    // APPROVED EMAIL
-    // ==========================================================
+<body
+  style="
+    margin:0;
+    padding:0;
+    background:#f8fafc;
+    font-family:Arial,Helvetica,sans-serif;
+  "
+>
 
-    if (status === "approved") {
-      const { data, error } =
-        await resend.emails.send({
-          from: fromEmail,
+  <div
+    style="
+      max-width:650px;
+      margin:0 auto;
+      padding:40px 20px;
+    "
+  >
 
-          to: [recipientEmail],
+    <div
+      style="
+        background:#ffffff;
+        border:1px solid #e2e8f0;
+        border-radius:16px;
+        overflow:hidden;
+      "
+    >
 
-          subject:
-            "Your BizGrow Referral Reward Has Been Approved",
+      <!-- HEADER -->
 
-          html: `
-            <!DOCTYPE html>
-            <html>
-              <head>
-                <meta charset="UTF-8" />
-                <meta
-                  name="viewport"
-                  content="width=device-width, initial-scale=1.0"
-                />
-                <title>
-                  Referral Reward Approved
-                </title>
-              </head>
+      <div
+        style="
+          background:#12066a;
+          padding:30px 35px;
+          text-align:center;
+        "
+      >
 
-              <body
-                style="
-                  margin:0;
-                  padding:0;
-                  background:#f8fafc;
-                  font-family:Arial,Helvetica,sans-serif;
-                "
-              >
+        <h1
+          style="
+            margin:0;
+            color:#ffffff;
+            font-size:26px;
+            font-weight:700;
+          "
+        >
+          Reward Approved
+        </h1>
 
-                <div
-                  style="
-                    max-width:650px;
-                    margin:0 auto;
-                    padding:40px 20px;
-                  "
-                >
+        <p
+          style="
+            margin:10px 0 0;
+            color:#ddd8f5;
+            font-size:14px;
+          "
+        >
+          BizGrow Referral Programme
+        </p>
 
-                  <div
+      </div>
+
+      <!-- CONTENT -->
+
+      <div style="padding:35px;">
+
+        <p
+          style="
+            margin:0 0 18px;
+            color:#1e293b;
+            font-size:16px;
+            line-height:1.7;
+          "
+        >
+          Hi ${claimantName},
+        </p>
+
+        <p
+          style="
+            margin:0 0 18px;
+            color:#475569;
+            font-size:15px;
+            line-height:1.7;
+          "
+        >
+          Great news! Your referral reward
+          claim has been
+          <strong style="color:#059669;">
+            approved
+          </strong>
+          by the BizGrow team.
+        </p>
+
+        <!-- CLAIM DETAILS -->
+
+        <div
+          style="
+            margin:25px 0;
+            padding:24px;
+            background:#f8fafc;
+            border:1px solid #e2e8f0;
+            border-radius:12px;
+          "
+        >
+
+          <!-- AMOUNT -->
+
+          <div style="margin-bottom:18px;">
+
+            <span
+              style="
+                display:block;
+                color:#64748b;
+                font-size:12px;
+                font-weight:700;
+                text-transform:uppercase;
+              "
+            >
+              Approved Reward
+            </span>
+
+            <span
+              style="
+                display:block;
+                margin-top:5px;
+                color:#12066a;
+                font-size:30px;
+                font-weight:800;
+              "
+            >
+              £${amount.toLocaleString("en-GB")}
+            </span>
+
+          </div>
+
+          <!-- SERVICE -->
+
+          <div style="margin-bottom:18px;">
+
+            <span
+              style="
+                display:block;
+                color:#64748b;
+                font-size:12px;
+                font-weight:700;
+                text-transform:uppercase;
+              "
+            >
+              Service
+            </span>
+
+            <span
+              style="
+                display:block;
+                margin-top:5px;
+                color:#1e293b;
+                font-size:15px;
+                font-weight:600;
+              "
+            >
+              ${serviceName}
+            </span>
+
+          </div>
+
+          <!-- COMPANY -->
+
+          ${
+            companyName
+              ? `
+                <div>
+
+                  <span
                     style="
-                      background:#ffffff;
-                      border:1px solid #e2e8f0;
-                      border-radius:16px;
-                      overflow:hidden;
+                      display:block;
+                      color:#64748b;
+                      font-size:12px;
+                      font-weight:700;
+                      text-transform:uppercase;
                     "
                   >
+                    Company
+                  </span>
 
-                    <div
-                      style="
-                        background:#12066a;
-                        padding:30px 35px;
-                        text-align:center;
-                      "
-                    >
-
-                      <h1
-                        style="
-                          margin:0;
-                          color:#ffffff;
-                          font-size:26px;
-                          font-weight:700;
-                        "
-                      >
-                        Reward Approved
-                      </h1>
-
-                      <p
-                        style="
-                          margin:10px 0 0;
-                          color:#ddd8f5;
-                          font-size:14px;
-                        "
-                      >
-                        BizGrow Referral Programme
-                      </p>
-
-                    </div>
-
-                    <div style="padding:35px;">
-
-                      <p
-                        style="
-                          margin:0 0 18px;
-                          color:#1e293b;
-                          font-size:16px;
-                          line-height:1.7;
-                        "
-                      >
-                        Hi ${claimantName},
-                      </p>
-
-                      <p
-                        style="
-                          margin:0 0 18px;
-                          color:#475569;
-                          font-size:15px;
-                          line-height:1.7;
-                        "
-                      >
-                        Great news! Your referral reward
-                        claim has been
-                        <strong style="color:#059669;">
-                          approved
-                        </strong>
-                        by the BizGrow team.
-                      </p>
-
-                      <div
-                        style="
-                          margin:25px 0;
-                          padding:24px;
-                          background:#f8fafc;
-                          border:1px solid #e2e8f0;
-                          border-radius:12px;
-                        "
-                      >
-
-                        <div style="margin-bottom:14px;">
-
-                          <span
-                            style="
-                              display:block;
-                              color:#64748b;
-                              font-size:12px;
-                              font-weight:700;
-                              text-transform:uppercase;
-                            "
-                          >
-                            Approved Reward
-                          </span>
-
-                          <span
-                            style="
-                              display:block;
-                              margin-top:5px;
-                              color:#12066a;
-                              font-size:30px;
-                              font-weight:800;
-                            "
-                          >
-                            £${amount.toLocaleString("en-GB")}
-                          </span>
-
-                        </div>
-
-                        <div style="margin-bottom:14px;">
-
-                          <span
-                            style="
-                              display:block;
-                              color:#64748b;
-                              font-size:12px;
-                              font-weight:700;
-                              text-transform:uppercase;
-                            "
-                          >
-                            Service
-                          </span>
-
-                          <span
-                            style="
-                              display:block;
-                              margin-top:5px;
-                              color:#1e293b;
-                              font-size:15px;
-                              font-weight:600;
-                            "
-                          >
-                            ${serviceName}
-                          </span>
-
-                        </div>
-
-                        ${
-                          companyName
-                            ? `
-                              <div>
-
-                                <span
-                                  style="
-                                    display:block;
-                                    color:#64748b;
-                                    font-size:12px;
-                                    font-weight:700;
-                                    text-transform:uppercase;
-                                  "
-                                >
-                                  Company
-                                </span>
-
-                                <span
-                                  style="
-                                    display:block;
-                                    margin-top:5px;
-                                    color:#1e293b;
-                                    font-size:15px;
-                                    font-weight:600;
-                                  "
-                                >
-                                  ${companyName}
-                                </span>
-
-                              </div>
-                            `
-                            : ""
-                        }
-
-                      </div>
-
-                      <p
-                        style="
-                          margin:0 0 18px;
-                          color:#475569;
-                          font-size:15px;
-                          line-height:1.7;
-                        "
-                      >
-                        Your reward has now been approved.
-                        Our team will proceed with the next
-                        steps for your selected service.
-                      </p>
-
-                      <p
-                        style="
-                          margin:0 0 25px;
-                          color:#475569;
-                          font-size:15px;
-                          line-height:1.7;
-                        "
-                      >
-                        If you have any questions, please
-                        contact the BizGrow team and we will
-                        be happy to assist you.
-                      </p>
-
-                      <div
-                        style="
-                          text-align:center;
-                          margin:30px 0;
-                        "
-                      >
-
-                        <a
-                          href="${siteUrl}/referral-program/"
-                          style="
-                            display:inline-block;
-                            background:#12066a;
-                            color:#ffffff;
-                            text-decoration:none;
-                            padding:14px 28px;
-                            border-radius:8px;
-                            font-size:14px;
-                            font-weight:700;
-                          "
-                        >
-                          View Referral Dashboard
-                        </a>
-
-                      </div>
-
-                      <p
-                        style="
-                          margin:30px 0 0;
-                          color:#64748b;
-                          font-size:13px;
-                          line-height:1.6;
-                        "
-                      >
-                        Thank you for being part of the
-                        BizGrow Referral Programme.
-                      </p>
-
-                    </div>
-
-                    <div
-                      style="
-                        background:#f8fafc;
-                        border-top:1px solid #e2e8f0;
-                        padding:20px 35px;
-                        text-align:center;
-                      "
-                    >
-
-                      <p
-                        style="
-                          margin:0;
-                          color:#94a3b8;
-                          font-size:12px;
-                        "
-                      >
-                        © ${new Date().getFullYear()}
-                        BizGrow Holdings.
-                        All rights reserved.
-                      </p>
-
-                    </div>
-
-                  </div>
+                  <span
+                    style="
+                      display:block;
+                      margin-top:5px;
+                      color:#1e293b;
+                      font-size:15px;
+                      font-weight:600;
+                    "
+                  >
+                    ${companyName}
+                  </span>
 
                 </div>
+              `
+              : ""
+          }
 
-              </body>
-            </html>
-          `,
-        });
+        </div>
 
-      if (error) {
-        console.error(
-          "APPROVED CLAIM EMAIL ERROR:",
-          error
-        );
+        <p
+          style="
+            margin:0 0 18px;
+            color:#475569;
+            font-size:15px;
+            line-height:1.7;
+          "
+        >
+          Your reward has now been approved.
+          Our team will proceed with the next
+          steps for your selected service.
+        </p>
 
-        return {
-          success: false,
-          error:
-            error.message ||
-            "Failed to send approval email.",
-        };
-      }
+        <p
+          style="
+            margin:0 0 25px;
+            color:#475569;
+            font-size:15px;
+            line-height:1.7;
+          "
+        >
+          If you have any questions, please
+          contact the BizGrow team and we will
+          be happy to assist you.
+        </p>
 
-      console.log(
-        "APPROVED CLAIM EMAIL SENT SUCCESSFULLY:",
-        {
-          claimId: claim.id,
-          recipient: recipientEmail,
-          emailId: data?.id || null,
-          source: emailResolution.source,
-        }
+        <!-- BUTTON -->
+
+        <div
+          style="
+            text-align:center;
+            margin:30px 0;
+          "
+        >
+
+          <a
+            href="${siteUrl}/referral-program/"
+            style="
+              display:inline-block;
+              background:#12066a;
+              color:#ffffff;
+              text-decoration:none;
+              padding:14px 28px;
+              border-radius:8px;
+              font-size:14px;
+              font-weight:700;
+            "
+          >
+            View Referral Dashboard
+          </a>
+
+        </div>
+
+        <p
+          style="
+            margin:30px 0 0;
+            color:#64748b;
+            font-size:13px;
+            line-height:1.6;
+          "
+        >
+          Thank you for being part of the
+          BizGrow Referral Programme.
+        </p>
+
+      </div>
+
+      <!-- FOOTER -->
+
+      <div
+        style="
+          background:#f8fafc;
+          border-top:1px solid #e2e8f0;
+          padding:20px 35px;
+          text-align:center;
+        "
+      >
+
+        <p
+          style="
+            margin:0;
+            color:#94a3b8;
+            font-size:12px;
+          "
+        >
+          © ${new Date().getFullYear()}
+          BizGrow Holdings.
+          All rights reserved.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+
+</html>
+`;
+
+    // ========================================================
+    // SEND USING YOUR WORKING EMAIL UTILITY
+    // ========================================================
+
+    console.log(
+      "================================================"
+    );
+
+    console.log(
+      "SENDING APPROVAL EMAIL THROUGH sendEmail()"
+    );
+
+    console.log({
+      claimId: claim?.id,
+      userId: claim?.user_id,
+      recipient: recipientEmail,
+      source: emailResolution.source,
+      status: claim?.status,
+    });
+
+    console.log(
+      "================================================"
+    );
+
+    const result = await sendEmail({
+      to: recipientEmail,
+
+      subject:
+        "Your BizGrow Referral Reward Has Been Approved",
+
+      html: emailHtml,
+    });
+
+    // ========================================================
+    // EMAIL FAILED
+    // ========================================================
+
+    if (!result?.success) {
+      console.error(
+        "APPROVAL EMAIL FAILED:",
+        result?.error
       );
 
       return {
-        success: true,
-        emailId: data?.id || null,
+        success: false,
         recipient: recipientEmail,
         source: emailResolution.source,
+        error:
+          result?.error?.message ||
+          result?.error ||
+          "Email utility failed to send approval email.",
       };
     }
 
-    // ==========================================================
-    // REJECTED EMAIL
-    // ==========================================================
+    // ========================================================
+    // EMAIL SUCCESS
+    // ========================================================
 
-    if (status === "rejected") {
-      const { data, error } =
-        await resend.emails.send({
-          from: fromEmail,
+    const emailId =
+      result?.data?.id || null;
 
-          to: [recipientEmail],
+    console.log(
+      "================================================"
+    );
 
-          subject:
-            "Update Regarding Your BizGrow Referral Reward Claim",
+    console.log(
+      "APPROVAL EMAIL SENT SUCCESSFULLY"
+    );
 
-          html: `
-            <!DOCTYPE html>
-            <html>
-              <head>
-                <meta charset="UTF-8" />
-                <meta
-                  name="viewport"
-                  content="width=device-width, initial-scale=1.0"
-                />
-                <title>
-                  Referral Reward Claim Update
-                </title>
-              </head>
+    console.log({
+      claimId: claim?.id,
+      recipient: recipientEmail,
+      source: emailResolution.source,
+      emailId,
+    });
 
-              <body
-                style="
-                  margin:0;
-                  padding:0;
-                  background:#f8fafc;
-                  font-family:Arial,Helvetica,sans-serif;
-                "
-              >
-
-                <div
-                  style="
-                    max-width:650px;
-                    margin:0 auto;
-                    padding:40px 20px;
-                  "
-                >
-
-                  <div
-                    style="
-                      background:#ffffff;
-                      border:1px solid #e2e8f0;
-                      border-radius:16px;
-                      overflow:hidden;
-                    "
-                  >
-
-                    <div
-                      style="
-                        background:#12066a;
-                        padding:30px 35px;
-                        text-align:center;
-                      "
-                    >
-
-                      <h1
-                        style="
-                          margin:0;
-                          color:#ffffff;
-                          font-size:26px;
-                          font-weight:700;
-                        "
-                      >
-                        Claim Update
-                      </h1>
-
-                      <p
-                        style="
-                          margin:10px 0 0;
-                          color:#ddd8f5;
-                          font-size:14px;
-                        "
-                      >
-                        BizGrow Referral Programme
-                      </p>
-
-                    </div>
-
-                    <div style="padding:35px;">
-
-                      <p
-                        style="
-                          margin:0 0 18px;
-                          color:#1e293b;
-                          font-size:16px;
-                          line-height:1.7;
-                        "
-                      >
-                        Hi ${claimantName},
-                      </p>
-
-                      <p
-                        style="
-                          margin:0 0 18px;
-                          color:#475569;
-                          font-size:15px;
-                          line-height:1.7;
-                        "
-                      >
-                        Thank you for submitting your
-                        referral reward claim.
-                        After reviewing your claim, we're
-                        unable to approve it at this time.
-                      </p>
-
-                      <div
-                        style="
-                          margin:25px 0;
-                          padding:24px;
-                          background:#fef2f2;
-                          border:1px solid #fecaca;
-                          border-radius:12px;
-                        "
-                      >
-
-                        <div style="margin-bottom:14px;">
-
-                          <span
-                            style="
-                              display:block;
-                              color:#64748b;
-                              font-size:12px;
-                              font-weight:700;
-                              text-transform:uppercase;
-                            "
-                          >
-                            Claim Status
-                          </span>
-
-                          <span
-                            style="
-                              display:block;
-                              margin-top:5px;
-                              color:#dc2626;
-                              font-size:20px;
-                              font-weight:800;
-                            "
-                          >
-                            Rejected
-                          </span>
-
-                        </div>
-
-                        <div style="margin-bottom:14px;">
-
-                          <span
-                            style="
-                              display:block;
-                              color:#64748b;
-                              font-size:12px;
-                              font-weight:700;
-                              text-transform:uppercase;
-                            "
-                          >
-                            Claim Amount
-                          </span>
-
-                          <span
-                            style="
-                              display:block;
-                              margin-top:5px;
-                              color:#12066a;
-                              font-size:24px;
-                              font-weight:800;
-                            "
-                          >
-                            £${amount.toLocaleString("en-GB")}
-                          </span>
-
-                        </div>
-
-                        <div>
-
-                          <span
-                            style="
-                              display:block;
-                              color:#64748b;
-                              font-size:12px;
-                              font-weight:700;
-                              text-transform:uppercase;
-                            "
-                          >
-                            Service
-                          </span>
-
-                          <span
-                            style="
-                              display:block;
-                              margin-top:5px;
-                              color:#1e293b;
-                              font-size:15px;
-                              font-weight:600;
-                            "
-                          >
-                            ${serviceName}
-                          </span>
-
-                        </div>
-
-                      </div>
-
-                      <p
-                        style="
-                          margin:0 0 18px;
-                          color:#475569;
-                          font-size:15px;
-                          line-height:1.7;
-                        "
-                      >
-                        If you believe this decision was
-                        made in error or you would like
-                        further information, please contact
-                        the BizGrow team.
-                      </p>
-
-                      <div
-                        style="
-                          text-align:center;
-                          margin:30px 0;
-                        "
-                      >
-
-                        <a
-                          href="${siteUrl}/referral-program/"
-                          style="
-                            display:inline-block;
-                            background:#12066a;
-                            color:#ffffff;
-                            text-decoration:none;
-                            padding:14px 28px;
-                            border-radius:8px;
-                            font-size:14px;
-                            font-weight:700;
-                          "
-                        >
-                          View Referral Dashboard
-                        </a>
-
-                      </div>
-
-                      <p
-                        style="
-                          margin:30px 0 0;
-                          color:#64748b;
-                          font-size:13px;
-                          line-height:1.6;
-                        "
-                      >
-                        If you have any questions about your
-                        claim, please contact our team.
-                      </p>
-
-                    </div>
-
-                    <div
-                      style="
-                        background:#f8fafc;
-                        border-top:1px solid #e2e8f0;
-                        padding:20px 35px;
-                        text-align:center;
-                      "
-                    >
-
-                      <p
-                        style="
-                          margin:0;
-                          color:#94a3b8;
-                          font-size:12px;
-                        "
-                      >
-                        © ${new Date().getFullYear()}
-                        BizGrow Holdings.
-                        All rights reserved.
-                      </p>
-
-                    </div>
-
-                  </div>
-
-                </div>
-
-              </body>
-            </html>
-          `,
-        });
-
-      if (error) {
-        console.error(
-          "REJECTED CLAIM EMAIL ERROR:",
-          error
-        );
-
-        return {
-          success: false,
-          error:
-            error.message ||
-            "Failed to send rejection email.",
-        };
-      }
-
-      console.log(
-        "REJECTED CLAIM EMAIL SENT SUCCESSFULLY:",
-        {
-          claimId: claim.id,
-          recipient: recipientEmail,
-          emailId: data?.id || null,
-          source: emailResolution.source,
-        }
-      );
-
-      return {
-        success: true,
-        emailId: data?.id || null,
-        recipient: recipientEmail,
-        source: emailResolution.source,
-      };
-    }
+    console.log(
+      "================================================"
+    );
 
     return {
       success: true,
-      skipped: true,
+      recipient: recipientEmail,
+      source: emailResolution.source,
+      emailId,
     };
+
   } catch (error) {
     console.error(
-      "Claim status email exception:",
+      "APPROVAL EMAIL EXCEPTION:",
       error
     );
 
@@ -999,7 +721,7 @@ async function sendClaimStatusEmail(
       success: false,
       error:
         error?.message ||
-        "Claim status email could not be sent.",
+        "Approval email could not be sent.",
     };
   }
 }
@@ -1008,20 +730,28 @@ async function sendClaimStatusEmail(
 // POST - UPDATE CLAIM STATUS
 // ============================================================
 
-export async function POST(request, { params }) {
+export async function POST(
+  request,
+  { params }
+) {
   try {
     // ========================================================
     // AUTHENTICATION
     // ========================================================
 
-    const supabase = await createClient();
+    const supabase =
+      await createClient();
 
     const {
       data: { user },
       error: authError,
-    } = await supabase.auth.getUser();
+    } =
+      await supabase.auth.getUser();
 
-    if (authError || !user) {
+    if (
+      authError ||
+      !user
+    ) {
       return NextResponse.json(
         {
           success: false,
@@ -1035,44 +765,49 @@ export async function POST(request, { params }) {
     // ADMIN CHECK
     // ========================================================
 
-    const isAdmin = await verifyAdmin(
-      supabase,
-      user.id
-    );
+    const isAdmin =
+      await verifyAdmin(
+        supabase,
+        user.id
+      );
 
     if (!isAdmin) {
       return NextResponse.json(
         {
           success: false,
-          error: "Admin access required",
+          error:
+            "Admin access required",
         },
         { status: 403 }
       );
     }
 
     // ========================================================
-    // ADMIN SUPABASE CLIENT
+    // ADMIN SUPABASE
     // ========================================================
 
-    const adminSupabase = getAdminClient();
+    const adminSupabase =
+      getAdminClient();
 
     // ========================================================
-    // GET CLAIM ID
+    // CLAIM ID
     // ========================================================
 
-    const resolvedParams = await params;
+    const resolvedParams =
+      await params;
 
     const routeClaimId =
       resolvedParams?.claimId;
 
     // ========================================================
-    // READ REQUEST BODY
+    // REQUEST BODY
     // ========================================================
 
     let body = {};
 
     try {
-      body = await request.json();
+      body =
+        await request.json();
     } catch {
       body = {};
     }
@@ -1084,7 +819,8 @@ export async function POST(request, { params }) {
       body?.new_status;
 
     const claimId =
-      routeClaimId || bodyClaimId;
+      routeClaimId ||
+      bodyClaimId;
 
     // ========================================================
     // VALIDATE CLAIM ID
@@ -1094,7 +830,8 @@ export async function POST(request, { params }) {
       return NextResponse.json(
         {
           success: false,
-          error: "claim_id is required",
+          error:
+            "claim_id is required",
         },
         { status: 400 }
       );
@@ -1115,7 +852,9 @@ export async function POST(request, { params }) {
 
     if (
       !newStatus ||
-      !allowedStatuses.includes(newStatus)
+      !allowedStatuses.includes(
+        newStatus
+      )
     ) {
       return NextResponse.json(
         {
@@ -1129,33 +868,35 @@ export async function POST(request, { params }) {
 
     // ========================================================
     // GET CURRENT CLAIM
-    // IMPORTANT:
-    // TABLE = reward_claims
     // ========================================================
 
     const {
       data: currentClaim,
       error: claimError,
-    } = await adminSupabase
-      .from("reward_claims")
-      .select(
-        `
-          id,
-          user_id,
-          amount,
-          status,
-          service_name,
-          company_name,
-          contact_name,
-          phone,
-          email,
-          notes,
-          created_at,
-          updated_at
-        `
-      )
-      .eq("id", claimId)
-      .maybeSingle();
+    } =
+      await adminSupabase
+        .from("reward_claims")
+        .select(
+          `
+            id,
+            user_id,
+            amount,
+            status,
+            service_name,
+            company_name,
+            contact_name,
+            phone,
+            email,
+            notes,
+            claim_reference,
+            created_at,
+            reviewed_at,
+            completed_at,
+            updated_at
+          `
+        )
+        .eq("id", claimId)
+        .maybeSingle();
 
     if (claimError) {
       console.error(
@@ -1178,14 +919,15 @@ export async function POST(request, { params }) {
       return NextResponse.json(
         {
           success: false,
-          error: "Claim not found",
+          error:
+            "Claim not found",
         },
         { status: 404 }
       );
     }
 
     // ========================================================
-    // PREVENT SAME STATUS UPDATE
+    // PREVENT SAME STATUS
     // ========================================================
 
     if (
@@ -1206,24 +948,36 @@ export async function POST(request, { params }) {
     // APPROVAL VALIDATION
     // ========================================================
 
-    if (newStatus === "approved") {
-      const REWARD_PER_REFERRAL = 125;
-      const MAX_REWARD = 1000;
-      const REWARD_VALIDITY_YEARS = 1;
+    if (
+      newStatus ===
+      "approved"
+    ) {
+      const REWARD_PER_REFERRAL =
+        125;
+
+      const MAX_REWARD =
+        1000;
+
+      const REWARD_VALIDITY_YEARS =
+        1;
 
       const claimAmount =
         Number(
-          currentClaim.amount || 0
+          currentClaim.amount ||
+            0
         );
 
       if (
-        !Number.isFinite(claimAmount) ||
+        !Number.isFinite(
+          claimAmount
+        ) ||
         claimAmount <= 0
       ) {
         return NextResponse.json(
           {
             success: false,
-            error: "Invalid claim amount",
+            error:
+              "Invalid claim amount",
           },
           { status: 400 }
         );
@@ -1231,20 +985,22 @@ export async function POST(request, { params }) {
 
       // ======================================================
       // GET REFERRALS
-      // IMPORTANT:
-      // TABLE = referrals
       // ======================================================
 
       const {
         data: referrals,
-        error: referralsError,
-      } = await adminSupabase
-        .from("referrals")
-        .select("id, created_at")
-        .eq(
-          "referrer_id",
-          currentClaim.user_id
-        );
+        error:
+          referralsError,
+      } =
+        await adminSupabase
+          .from("referrals")
+          .select(
+            "id, created_at"
+          )
+          .eq(
+            "referrer_id",
+            currentClaim.user_id
+          );
 
       if (referralsError) {
         console.error(
@@ -1263,34 +1019,38 @@ export async function POST(request, { params }) {
       }
 
       // ======================================================
-      // CHECK NON-EXPIRED REFERRALS
+      // VALID REFERRALS
       // ======================================================
 
-      const now = new Date();
+      const now =
+        new Date();
 
       const validReferrals =
-        (referrals || []).filter(
-          (referral) => {
-            if (!referral?.created_at) {
-              return false;
-            }
+        (referrals || [])
+          .filter(
+            (referral) => {
+              if (
+                !referral?.created_at
+              ) {
+                return false;
+              }
 
-            const expiry =
-              new Date(
-                referral.created_at
+              const expiry =
+                new Date(
+                  referral.created_at
+                );
+
+              expiry.setFullYear(
+                expiry.getFullYear() +
+                  REWARD_VALIDITY_YEARS
               );
 
-            expiry.setFullYear(
-              expiry.getFullYear() +
-                REWARD_VALIDITY_YEARS
-            );
-
-            return now < expiry;
-          }
-        );
+              return now < expiry;
+            }
+          );
 
       // ======================================================
-      // TOTAL EARNED REWARD
+      // EARNED REWARD
       // ======================================================
 
       const earnedReward =
@@ -1301,25 +1061,27 @@ export async function POST(request, { params }) {
         );
 
       // ======================================================
-      // GET OTHER CLAIMS
-      // IMPORTANT:
-      // TABLE = reward_claims
+      // PREVIOUS CLAIMS
       // ======================================================
 
       const {
         data: previousClaims,
         error:
           previousClaimsError,
-      } = await adminSupabase
-        .from("reward_claims")
-        .select(
-          "id, amount, status"
-        )
-        .eq(
-          "user_id",
-          currentClaim.user_id
-        )
-        .neq("id", claimId);
+      } =
+        await adminSupabase
+          .from("reward_claims")
+          .select(
+            "id, amount, status"
+          )
+          .eq(
+            "user_id",
+            currentClaim.user_id
+          )
+          .neq(
+            "id",
+            claimId
+          );
 
       if (previousClaimsError) {
         console.error(
@@ -1362,7 +1124,7 @@ export async function POST(request, { params }) {
           );
 
       // ======================================================
-      // OTHER PENDING CLAIMS
+      // PENDING CLAIMS
       // ======================================================
 
       const pendingClaimAmount =
@@ -1396,7 +1158,7 @@ export async function POST(request, { params }) {
         );
 
       // ======================================================
-      // CHECK CLAIM AMOUNT
+      // CLAIM AMOUNT VALIDATION
       // ======================================================
 
       if (
@@ -1434,41 +1196,69 @@ export async function POST(request, { params }) {
     }
 
     // ========================================================
-    // UPDATE CLAIM STATUS
-    // IMPORTANT:
-    // TABLE = reward_claims
+    // UPDATE DATA
     // ========================================================
+
+    const nowIso =
+      new Date().toISOString();
 
     const updateData = {
       status: newStatus,
-      updated_at:
-        new Date().toISOString(),
+      updated_at: nowIso,
     };
+
+    if (
+      newStatus ===
+        "approved" ||
+      newStatus ===
+        "rejected"
+    ) {
+      updateData.reviewed_at =
+        nowIso;
+    }
+
+    if (
+      newStatus ===
+        "completed" ||
+      newStatus ===
+        "claimed"
+    ) {
+      updateData.completed_at =
+        nowIso;
+    }
+
+    // ========================================================
+    // UPDATE CLAIM
+    // ========================================================
 
     const {
       data: updatedClaim,
       error: updateError,
-    } = await adminSupabase
-      .from("reward_claims")
-      .update(updateData)
-      .eq("id", claimId)
-      .select(
-        `
-          id,
-          user_id,
-          service_name,
-          company_name,
-          contact_name,
-          phone,
-          email,
-          notes,
-          amount,
-          status,
-          created_at,
-          updated_at
-        `
-      )
-      .single();
+    } =
+      await adminSupabase
+        .from("reward_claims")
+        .update(updateData)
+        .eq("id", claimId)
+        .select(
+          `
+            id,
+            user_id,
+            service_name,
+            company_name,
+            contact_name,
+            phone,
+            email,
+            notes,
+            amount,
+            status,
+            claim_reference,
+            created_at,
+            reviewed_at,
+            completed_at,
+            updated_at
+          `
+        )
+        .single();
 
     if (updateError) {
       console.error(
@@ -1488,76 +1278,73 @@ export async function POST(request, { params }) {
     }
 
     // ========================================================
-    // SEND EMAIL AFTER SUCCESSFUL DB UPDATE
+    // APPROVAL EMAIL
     //
-    // approved -> EMAIL
-    // rejected -> EMAIL
-    //
-    // pending -> NO EMAIL
-    // under_review -> NO EMAIL
-    // completed -> NO EMAIL
-    // claimed -> NO EMAIL
+    // ONLY after database confirms approved.
     // ========================================================
 
     let emailResult = null;
 
-    const shouldSendEmail =
-      newStatus === "approved" ||
-      newStatus === "rejected";
-
-    if (shouldSendEmail) {
+    if (
+      updatedClaim?.status ===
+      "approved"
+    ) {
       console.log(
-        "Sending claim status email...",
-        {
-          claimId: updatedClaim.id,
-          status: updatedClaim.status,
-          claimEmail:
-            updatedClaim.email || null,
-          userId:
-            updatedClaim.user_id,
-        }
+        "================================================"
+      );
+
+      console.log(
+        "CLAIM DATABASE UPDATE CONFIRMED AS APPROVED"
+      );
+
+      console.log({
+        claimId:
+          updatedClaim.id,
+        email:
+          updatedClaim.email,
+        amount:
+          updatedClaim.amount,
+      });
+
+      console.log(
+        "STARTING APPROVAL EMAIL..."
+      );
+
+      console.log(
+        "================================================"
       );
 
       emailResult =
-        await sendClaimStatusEmail(
+        await sendApprovalEmail(
           updatedClaim,
-          newStatus,
           adminSupabase
         );
 
-      if (emailResult.success) {
+      if (
+        emailResult?.success
+      ) {
         console.log(
-          "Claim status email sent successfully.",
-          {
-            claimId: updatedClaim.id,
-            status: newStatus,
-            recipient:
-              emailResult.recipient ||
-              null,
-            source:
-              emailResult.source ||
-              null,
-            emailId:
-              emailResult.emailId ||
-              null,
-          }
+          "APPROVAL EMAIL SENT:",
+          emailResult
         );
       } else {
         console.error(
-          "Claim status email FAILED.",
-          {
-            claimId: updatedClaim.id,
-            status: newStatus,
-            error:
-              emailResult.error ||
-              "Unknown email error",
-          }
+          "APPROVAL EMAIL FAILED:",
+          emailResult
         );
       }
-    } else {
+    }
+
+    // ========================================================
+    // REJECTED
+    // ========================================================
+
+    if (
+      updatedClaim?.status ===
+      "rejected"
+    ) {
       console.log(
-        "No email required for claim status:",
-        newStatus
+        "Claim rejected. No approval email will be sent."
       );
     }
 
@@ -1573,27 +1360,23 @@ export async function POST(request, { params }) {
       "ADMIN CLAIM STATUS UPDATE"
     );
 
-    console.log(
-      "========================================"
-    );
-
     console.log({
       claimId,
 
       previousStatus:
         currentClaim.status,
 
-      newStatus,
+      newStatus:
+        updatedClaim.status,
 
       adminId:
         user.id,
 
       claimAmount:
-        currentClaim.amount,
+        updatedClaim.amount,
 
       recipient:
         emailResult?.recipient ||
-        updatedClaim.email ||
         null,
 
       emailSource:
@@ -1601,7 +1384,8 @@ export async function POST(request, { params }) {
         null,
 
       emailRequired:
-        shouldSendEmail,
+        updatedClaim.status ===
+        "approved",
 
       emailSent:
         emailResult?.success ||
@@ -1634,49 +1418,47 @@ export async function POST(request, { params }) {
         success: true,
 
         message:
-          "Claim status updated successfully",
+          updatedClaim.status ===
+          "approved"
+            ? emailResult?.success
+              ? "Claim approved and approval email sent successfully."
+              : "Claim approved, but approval email could not be sent."
+            : "Claim status updated successfully.",
 
         claim:
           updatedClaim,
 
-        email:
-          shouldSendEmail
-            ? {
-                required: true,
+        email: {
+          required:
+            updatedClaim.status ===
+            "approved",
 
-                sent:
-                  emailResult?.success ||
-                  false,
+          sent:
+            emailResult?.success ||
+            false,
 
-                recipient:
-                  emailResult?.recipient ||
-                  null,
+          recipient:
+            emailResult?.recipient ||
+            null,
 
-                source:
-                  emailResult?.source ||
-                  null,
+          source:
+            emailResult?.source ||
+            null,
 
-                emailId:
-                  emailResult?.emailId ||
-                  null,
+          emailId:
+            emailResult?.emailId ||
+            null,
 
-                error:
-                  emailResult?.success
-                    ? null
-                    : emailResult?.error ||
-                      "Email could not be sent.",
-              }
-            : {
-                required: false,
-                sent: false,
-                recipient: null,
-                source: null,
-                emailId: null,
-                error: null,
-              },
+          error:
+            emailResult?.success
+              ? null
+              : emailResult?.error ||
+                null,
+        },
       },
       { status: 200 }
     );
+
   } catch (error) {
     console.error(
       "Admin claim update API error:",
