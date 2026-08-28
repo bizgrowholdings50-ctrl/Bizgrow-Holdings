@@ -700,10 +700,10 @@ export default function DashboardClient() {
                     If you have any questions about your application, please
                     contact our team at{" "}
                     <a
-                      href="mailto:partners@bizgrow.co.uk"
+                      href="mailto:sales@bizgrow-holdings.net"
                       className="text-[#997819] font-semibold hover:underline"
                     >
-                      partners@bizgrow.co.uk
+                      sales@bizgrow-holdings.net
                     </a>
                     .
                   </p>
