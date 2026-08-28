@@ -12,7 +12,6 @@ export default function AdminDashboard() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState("dashboard");
-  
 
   // ========================================================
   // DATA
@@ -141,9 +140,7 @@ export default function AdminDashboard() {
 
           if (claimsData.success === false) {
             throw new Error(
-              claimsData?.error ||
-                claimsData?.message ||
-                "Claims API failed",
+              claimsData?.error || claimsData?.message || "Claims API failed",
             );
           }
 
@@ -164,9 +161,7 @@ export default function AdminDashboard() {
           console.error("Claims loading error:", error);
 
           setClaims([]);
-          setClaimsError(
-            error?.message || "Unable to load claims.",
-          );
+          setClaimsError(error?.message || "Unable to load claims.");
         }
 
         // ====================================================
@@ -176,19 +171,13 @@ export default function AdminDashboard() {
         try {
           setNetworkError("");
 
-          const networkRes = await fetch(
-            "/api/admin/referral-network",
-            {
-              cache: "no-store",
-            },
-          );
+          const networkRes = await fetch("/api/admin/referral-network", {
+            cache: "no-store",
+          });
 
           const networkData = await networkRes.json().catch(() => ({}));
 
-          console.log(
-            "ADMIN REFERRAL NETWORK RESPONSE:",
-            networkData,
-          );
+          console.log("ADMIN REFERRAL NETWORK RESPONSE:", networkData);
 
           if (!networkRes.ok) {
             throw new Error(
@@ -220,21 +209,12 @@ export default function AdminDashboard() {
 
           setNetwork(networkList);
 
-          console.log(
-            "NORMALIZED NETWORK:",
-            networkList,
-          );
+          console.log("NORMALIZED NETWORK:", networkList);
         } catch (error) {
-          console.error(
-            "Referral network loading error:",
-            error,
-          );
+          console.error("Referral network loading error:", error);
 
           setNetwork([]);
-          setNetworkError(
-            error?.message ||
-              "Unable to load referral network.",
-          );
+          setNetworkError(error?.message || "Unable to load referral network.");
         }
 
         // ====================================================
@@ -250,10 +230,7 @@ export default function AdminDashboard() {
 
           const usersData = await usersRes.json().catch(() => ({}));
 
-          console.log(
-            "ADMIN USERS RESPONSE:",
-            usersData,
-          );
+          console.log("ADMIN USERS RESPONSE:", usersData);
 
           if (!usersRes.ok) {
             throw new Error(
@@ -265,9 +242,7 @@ export default function AdminDashboard() {
 
           if (usersData.success === false) {
             throw new Error(
-              usersData?.error ||
-                usersData?.message ||
-                "Users API failed",
+              usersData?.error || usersData?.message || "Users API failed",
             );
           }
 
@@ -283,22 +258,13 @@ export default function AdminDashboard() {
 
           setUsers(usersList);
         } catch (error) {
-          console.error(
-            "Users loading error:",
-            error,
-          );
+          console.error("Users loading error:", error);
 
           setUsers([]);
-          setUsersError(
-            error?.message ||
-              "Unable to load users.",
-          );
+          setUsersError(error?.message || "Unable to load users.");
         }
       } catch (error) {
-        console.error(
-          "Admin dashboard load error:",
-          error,
-        );
+        console.error("Admin dashboard load error:", error);
       } finally {
         if (mounted) {
           setLoading(false);
@@ -313,321 +279,198 @@ export default function AdminDashboard() {
     };
   }, []);
 
+  // ========================================================
+  // REALTIME DATABASE UPDATES
+  // ========================================================
+  useEffect(() => {
+    let refreshTimer = null;
 
+    const refreshAdminData = async () => {
+      if (refreshTimer) {
+        clearTimeout(refreshTimer);
+      }
 
- // ========================================================
-// REALTIME DATABASE UPDATES
-// ========================================================
-useEffect(() => {
-  let refreshTimer = null;
-
-  const refreshAdminData = async () => {
-    if (refreshTimer) {
-      clearTimeout(refreshTimer);
-    }
-
-    refreshTimer = setTimeout(async () => {
-      try {
-        console.log(
-          "REALTIME UPDATE DETECTED — REFRESHING ADMIN DATA"
-        );
-
-        // ====================================================
-        // METRICS
-        // ====================================================
+      refreshTimer = setTimeout(async () => {
         try {
-          const metricsRes = await fetch(
-            "/api/admin/metrics",
-            {
+          console.log("REALTIME UPDATE DETECTED — REFRESHING ADMIN DATA");
+
+          // ====================================================
+          // METRICS
+          // ====================================================
+          try {
+            const metricsRes = await fetch("/api/admin/metrics", {
               cache: "no-store",
+            });
+
+            const metricsData = await metricsRes.json().catch(() => ({}));
+
+            if (metricsRes.ok && metricsData.success) {
+              setMetrics(metricsData.metrics);
             }
-          );
-
-          const metricsData =
-            await metricsRes
-              .json()
-              .catch(() => ({}));
-
-          if (
-            metricsRes.ok &&
-            metricsData.success
-          ) {
-            setMetrics(
-              metricsData.metrics
-            );
+          } catch (error) {
+            console.error("Realtime metrics refresh error:", error);
           }
-        } catch (error) {
-          console.error(
-            "Realtime metrics refresh error:",
-            error
-          );
-        }
 
-        // ====================================================
-        // CLAIMS
-        // ====================================================
-        try {
-          const claimsRes = await fetch(
-            "/api/admin/claims",
-            {
+          // ====================================================
+          // CLAIMS
+          // ====================================================
+          try {
+            const claimsRes = await fetch("/api/admin/claims", {
               cache: "no-store",
+            });
+
+            const claimsData = await claimsRes.json().catch(() => ({}));
+
+            let claimsList = [];
+
+            if (Array.isArray(claimsData)) {
+              claimsList = claimsData;
+            } else if (Array.isArray(claimsData.claims)) {
+              claimsList = claimsData.claims;
+            } else if (Array.isArray(claimsData?.data?.claims)) {
+              claimsList = claimsData.data.claims;
             }
-          );
 
-          const claimsData =
-            await claimsRes
-              .json()
-              .catch(() => ({}));
-
-          let claimsList = [];
-
-          if (
-            Array.isArray(claimsData)
-          ) {
-            claimsList = claimsData;
-          } else if (
-            Array.isArray(
-              claimsData.claims
-            )
-          ) {
-            claimsList =
-              claimsData.claims;
-          } else if (
-            Array.isArray(
-              claimsData?.data?.claims
-            )
-          ) {
-            claimsList =
-              claimsData.data.claims;
+            setClaims(claimsList);
+          } catch (error) {
+            console.error("Realtime claims refresh error:", error);
           }
 
-          setClaims(
-            claimsList
-          );
-        } catch (error) {
-          console.error(
-            "Realtime claims refresh error:",
-            error
-          );
-        }
-
-        // ====================================================
-        // REFERRAL NETWORK
-        // ====================================================
-        try {
-          const networkRes =
-            await fetch(
-              "/api/admin/referral-network",
-              {
-                cache: "no-store",
-              }
-            );
-
-          const networkData =
-            await networkRes
-              .json()
-              .catch(() => ({}));
-
-          let networkList = [];
-
-          if (
-            Array.isArray(networkData)
-          ) {
-            networkList =
-              networkData;
-          } else if (
-            Array.isArray(
-              networkData.network
-            )
-          ) {
-            networkList =
-              networkData.network;
-          } else if (
-            Array.isArray(
-              networkData?.data?.network
-            )
-          ) {
-            networkList =
-              networkData.data.network;
-          } else if (
-            Array.isArray(
-              networkData.referrals
-            )
-          ) {
-            networkList =
-              networkData.referrals;
-          }
-
-          setNetwork(
-            networkList
-          );
-        } catch (error) {
-          console.error(
-            "Realtime network refresh error:",
-            error
-          );
-        }
-
-        // ====================================================
-        // USERS
-        // ====================================================
-        try {
-          const usersRes = await fetch(
-            "/api/admin/users",
-            {
+          // ====================================================
+          // REFERRAL NETWORK
+          // ====================================================
+          try {
+            const networkRes = await fetch("/api/admin/referral-network", {
               cache: "no-store",
+            });
+
+            const networkData = await networkRes.json().catch(() => ({}));
+
+            let networkList = [];
+
+            if (Array.isArray(networkData)) {
+              networkList = networkData;
+            } else if (Array.isArray(networkData.network)) {
+              networkList = networkData.network;
+            } else if (Array.isArray(networkData?.data?.network)) {
+              networkList = networkData.data.network;
+            } else if (Array.isArray(networkData.referrals)) {
+              networkList = networkData.referrals;
             }
-          );
 
-          const usersData =
-            await usersRes
-              .json()
-              .catch(() => ({}));
-
-          let usersList = [];
-
-          if (
-            Array.isArray(usersData)
-          ) {
-            usersList =
-              usersData;
-          } else if (
-            Array.isArray(
-              usersData.users
-            )
-          ) {
-            usersList =
-              usersData.users;
-          } else if (
-            Array.isArray(
-              usersData?.data?.users
-            )
-          ) {
-            usersList =
-              usersData.data.users;
+            setNetwork(networkList);
+          } catch (error) {
+            console.error("Realtime network refresh error:", error);
           }
 
-          setUsers(
-            usersList
-          );
+          // ====================================================
+          // USERS
+          // ====================================================
+          try {
+            const usersRes = await fetch("/api/admin/users", {
+              cache: "no-store",
+            });
+
+            const usersData = await usersRes.json().catch(() => ({}));
+
+            let usersList = [];
+
+            if (Array.isArray(usersData)) {
+              usersList = usersData;
+            } else if (Array.isArray(usersData.users)) {
+              usersList = usersData.users;
+            } else if (Array.isArray(usersData?.data?.users)) {
+              usersList = usersData.data.users;
+            }
+
+            setUsers(usersList);
+          } catch (error) {
+            console.error("Realtime users refresh error:", error);
+          }
+
+          console.log("ADMIN DATA REFRESHED FROM REALTIME");
         } catch (error) {
-          console.error(
-            "Realtime users refresh error:",
-            error
-          );
+          console.error("Realtime admin refresh error:", error);
         }
+      }, 300);
+    };
 
-        console.log(
-          "ADMIN DATA REFRESHED FROM REALTIME"
-        );
-      } catch (error) {
-        console.error(
-          "Realtime admin refresh error:",
-          error
-        );
+    // ========================================================
+    // SUPABASE REALTIME CHANNEL
+    // ========================================================
+
+    const channel = supabase
+      .channel("admin-dashboard-realtime")
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "profiles",
+        },
+        (payload) => {
+          console.log("REALTIME PROFILES UPDATE:", payload);
+
+          refreshAdminData();
+        },
+      )
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "referrals",
+        },
+        (payload) => {
+          console.log("REALTIME REFERRALS UPDATE:", payload);
+
+          refreshAdminData();
+        },
+      )
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "reward_claims",
+        },
+        (payload) => {
+          console.log("REALTIME CLAIM UPDATE:", payload);
+
+          refreshAdminData();
+        },
+      )
+      .subscribe((status) => {
+        console.log("ADMIN REALTIME STATUS:", status);
+      });
+
+    // ========================================================
+    // CLEANUP
+    // ========================================================
+
+    return () => {
+      if (refreshTimer) {
+        clearTimeout(refreshTimer);
       }
-    }, 300);
-  };
 
-  // ========================================================
-  // SUPABASE REALTIME CHANNEL
-  // ========================================================
+      supabase.removeChannel(channel);
 
-  const channel = supabase
-    .channel(
-      "admin-dashboard-realtime"
-    )
-    .on(
-      "postgres_changes",
-      {
-        event: "*",
-        schema: "public",
-        table: "profiles",
-      },
-      (payload) => {
-        console.log(
-          "REALTIME PROFILES UPDATE:",
-          payload
-        );
-
-        refreshAdminData();
-      }
-    )
-    .on(
-      "postgres_changes",
-      {
-        event: "*",
-        schema: "public",
-        table: "referrals",
-      },
-      (payload) => {
-        console.log(
-          "REALTIME REFERRALS UPDATE:",
-          payload
-        );
-
-        refreshAdminData();
-      }
-    )
-    .on(
-      "postgres_changes",
-      {
-        event: "*",
-        schema: "public",
-        table: "reward_claims",
-      },
-      (payload) => {
-        console.log(
-          "REALTIME CLAIM UPDATE:",
-          payload
-        );
-
-        refreshAdminData();
-      }
-    )
-    .subscribe((status) => {
-      console.log(
-        "ADMIN REALTIME STATUS:",
-        status
-      );
-    });
-
-  // ========================================================
-  // CLEANUP
-  // ========================================================
-
-  return () => {
-    if (refreshTimer) {
-      clearTimeout(
-        refreshTimer
-      );
-    }
-
-    supabase.removeChannel(
-      channel
-    );
-
-    console.log(
-      "ADMIN REALTIME CHANNEL REMOVED"
-    );
-  };
-}, []);
+      console.log("ADMIN REALTIME CHANNEL REMOVED");
+    };
+  }, []);
 
   // ========================================================
   // MODAL SCROLL LOCK
   // ========================================================
 
   useEffect(() => {
-    const isModalOpen = Boolean(
-      selectedReferral || selectedClaim,
-    );
+    const isModalOpen = Boolean(selectedReferral || selectedClaim);
 
     if (!isModalOpen) return;
 
     const scrollY = window.scrollY;
 
-    const previousHtmlOverflow =
-      document.documentElement.style.overflow;
+    const previousHtmlOverflow = document.documentElement.style.overflow;
 
     const previousBodyStyles = {
       position: document.body.style.position,
@@ -660,65 +503,41 @@ useEffect(() => {
         window.__lenis.stop();
       }
     } catch (error) {
-      console.warn(
-        "Unable to pause Lenis:",
-        error,
-      );
+      console.warn("Unable to pause Lenis:", error);
     }
 
     const preventBackgroundTouch = (event) => {
-      if (
-        !event.target.closest(
-          "[data-modal-scroll]",
-        )
-      ) {
+      if (!event.target.closest("[data-modal-scroll]")) {
         event.preventDefault();
       }
     };
 
-    document.addEventListener(
-      "touchmove",
-      preventBackgroundTouch,
-      {
-        passive: false,
-      },
-    );
+    document.addEventListener("touchmove", preventBackgroundTouch, {
+      passive: false,
+    });
 
     return () => {
-      document.documentElement.style.overflow =
-        previousHtmlOverflow;
+      document.documentElement.style.overflow = previousHtmlOverflow;
 
-      document.body.style.position =
-        previousBodyStyles.position;
+      document.body.style.position = previousBodyStyles.position;
 
-      document.body.style.top =
-        previousBodyStyles.top;
+      document.body.style.top = previousBodyStyles.top;
 
-      document.body.style.left =
-        previousBodyStyles.left;
+      document.body.style.left = previousBodyStyles.left;
 
-      document.body.style.right =
-        previousBodyStyles.right;
+      document.body.style.right = previousBodyStyles.right;
 
-      document.body.style.width =
-        previousBodyStyles.width;
+      document.body.style.width = previousBodyStyles.width;
 
-      document.body.style.overflow =
-        previousBodyStyles.overflow;
+      document.body.style.overflow = previousBodyStyles.overflow;
 
-      document.body.style.touchAction =
-        previousBodyStyles.touchAction;
+      document.body.style.touchAction = previousBodyStyles.touchAction;
 
-      document.body.classList.remove(
-        "modal-open",
-      );
+      document.body.classList.remove("modal-open");
 
       window.scrollTo(0, scrollY);
 
-      document.removeEventListener(
-        "touchmove",
-        preventBackgroundTouch,
-      );
+      document.removeEventListener("touchmove", preventBackgroundTouch);
 
       try {
         if (window.lenis) {
@@ -729,10 +548,7 @@ useEffect(() => {
           window.__lenis.start();
         }
       } catch (error) {
-        console.warn(
-          "Unable to resume Lenis:",
-          error,
-        );
+        console.warn("Unable to resume Lenis:", error);
       }
     };
   }, [selectedReferral, selectedClaim]);
@@ -756,22 +572,13 @@ useEffect(() => {
           rows.push({
             ...referral,
 
-            referrer_name:
-              item.full_name ||
-              item.name ||
-              "Unknown",
+            referrer_name: item.full_name || item.name || "Unknown",
 
-            referrer_email:
-              item.email ||
-              "—",
+            referrer_email: item.email || "—",
 
-            referrer_code:
-              item.referral_code ||
-              "—",
+            referrer_code: item.referral_code || "—",
 
-            referrer_id:
-              item.id ||
-              null,
+            referrer_id: item.id || null,
           });
         });
 
@@ -788,19 +595,12 @@ useEffect(() => {
           ...item,
 
           referrer_name:
-            item.referrer_name ||
-            item.referrer?.full_name ||
-            "Unknown",
+            item.referrer_name || item.referrer?.full_name || "Unknown",
 
-          referrer_email:
-            item.referrer_email ||
-            item.referrer?.email ||
-            "—",
+          referrer_email: item.referrer_email || item.referrer?.email || "—",
 
           referrer_code:
-            item.referrer_code ||
-            item.referrer?.referral_code ||
-            "—",
+            item.referrer_code || item.referrer?.referral_code || "—",
         });
       }
     });
@@ -813,8 +613,7 @@ useEffect(() => {
   // ========================================================
 
   const filteredReferralRows = useMemo(() => {
-    const search =
-      referralSearchQuery.trim().toLowerCase();
+    const search = referralSearchQuery.trim().toLowerCase();
 
     return referralRows.filter((referral) => {
       const referredName = String(
@@ -825,20 +624,12 @@ useEffect(() => {
       ).toLowerCase();
 
       const referredEmail = String(
-        referral.referred_email ||
-          referral.referred?.email ||
-          "",
+        referral.referred_email || referral.referred?.email || "",
       ).toLowerCase();
 
-      const referrerName = String(
-        referral.referrer_name ||
-          "",
-      ).toLowerCase();
+      const referrerName = String(referral.referrer_name || "").toLowerCase();
 
-      const referrerEmail = String(
-        referral.referrer_email ||
-          "",
-      ).toLowerCase();
+      const referrerEmail = String(referral.referrer_email || "").toLowerCase();
 
       const matchesSearch = search
         ? referredName.includes(search) ||
@@ -847,26 +638,15 @@ useEffect(() => {
           referrerEmail.includes(search)
         : true;
 
-      const status =
-        referral.referral_status ||
-        referral.status ||
-        "pending";
+      const status = referral.referral_status || referral.status || "pending";
 
-      const matchesStatus =
-        selectedReferralStatus
-          ? status === selectedReferralStatus
-          : true;
+      const matchesStatus = selectedReferralStatus
+        ? status === selectedReferralStatus
+        : true;
 
-      return (
-        matchesSearch &&
-        matchesStatus
-      );
+      return matchesSearch && matchesStatus;
     });
-  }, [
-    referralRows,
-    referralSearchQuery,
-    selectedReferralStatus,
-  ]);
+  }, [referralRows, referralSearchQuery, selectedReferralStatus]);
 
   // ========================================================
   // FILTERED / SORTED USERS
@@ -902,13 +682,9 @@ useEffect(() => {
         return matchesSearch && matchesStatus;
       })
       .sort((a, b) => {
-        const dateA = a.created_at
-          ? new Date(a.created_at).getTime()
-          : 0;
+        const dateA = a.created_at ? new Date(a.created_at).getTime() : 0;
 
-        const dateB = b.created_at
-          ? new Date(b.created_at).getTime()
-          : 0;
+        const dateB = b.created_at ? new Date(b.created_at).getTime() : 0;
 
         return dateB - dateA;
       });
@@ -922,22 +698,13 @@ useEffect(() => {
     try {
       setClaimsError("");
 
-      const response = await fetch(
-        "/api/admin/claims",
-        {
-          cache: "no-store",
-        },
-      );
+      const response = await fetch("/api/admin/claims", {
+        cache: "no-store",
+      });
 
-      const data =
-        await response
-          .json()
-          .catch(() => ({}));
+      const data = await response.json().catch(() => ({}));
 
-      console.log(
-        "REFRESH CLAIMS RESPONSE:",
-        data,
-      );
+      console.log("REFRESH CLAIMS RESPONSE:", data);
 
       if (!response.ok) {
         throw new Error(
@@ -953,28 +720,17 @@ useEffect(() => {
         list = data;
       } else if (Array.isArray(data.claims)) {
         list = data.claims;
-      } else if (
-        Array.isArray(
-          data?.data?.claims,
-        )
-      ) {
-        list =
-          data.data.claims;
+      } else if (Array.isArray(data?.data?.claims)) {
+        list = data.data.claims;
       }
 
       setClaims(list);
 
       return list;
     } catch (error) {
-      console.error(
-        "Refresh claims error:",
-        error,
-      );
+      console.error("Refresh claims error:", error);
 
-      setClaimsError(
-        error?.message ||
-          "Unable to refresh claims.",
-      );
+      setClaimsError(error?.message || "Unable to refresh claims.");
 
       return [];
     }
@@ -984,73 +740,49 @@ useEffect(() => {
   // APPROVE / UPDATE CLAIM
   // ========================================================
 
-  const approveClaim = async (
-    claimId,
-    status,
-  ) => {
+  const approveClaim = async (claimId, status) => {
     if (!claimId) {
-      setClaimApprovalError(
-        "Claim ID is missing.",
-      );
+      setClaimApprovalError("Claim ID is missing.");
       return;
     }
 
     if (!status) {
-      setClaimApprovalError(
-        "Please select a status.",
-      );
+      setClaimApprovalError("Please select a status.");
       return;
     }
 
     setClaimApprovalError("");
     setClaimApproving(true);
 
-    console.log(
-      "UPDATING CLAIM:",
-      {
-        claimId,
-        status,
-      },
-    );
+    console.log("UPDATING CLAIM:", {
+      claimId,
+      status,
+    });
 
     try {
       // ====================================================
       // UPDATE CLAIM IN DATABASE
       // ====================================================
 
-      const response =
-        await fetch(
-          `/api/admin/claims/${claimId}`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type":
-                "application/json",
-            },
-            body: JSON.stringify({
-              claim_id:
-                claimId,
-              new_status:
-                status,
-            }),
-            cache: "no-store",
-          },
-        );
-
-      const result =
-        await response
-          .json()
-          .catch(() => ({}));
-
-      console.log(
-        "CLAIM UPDATE RESPONSE:",
-        {
-          httpStatus:
-            response.status,
-          ok: response.ok,
-          result,
+      const response = await fetch(`/api/admin/claims/${claimId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify({
+          claim_id: claimId,
+          new_status: status,
+        }),
+        cache: "no-store",
+      });
+
+      const result = await response.json().catch(() => ({}));
+
+      console.log("CLAIM UPDATE RESPONSE:", {
+        httpStatus: response.status,
+        ok: response.ok,
+        result,
+      });
 
       if (!response.ok) {
         throw new Error(
@@ -1060,13 +792,9 @@ useEffect(() => {
         );
       }
 
-      if (
-        result?.success === false
-      ) {
+      if (result?.success === false) {
         throw new Error(
-          result?.error ||
-            result?.message ||
-            "Claim update failed.",
+          result?.error || result?.message || "Claim update failed.",
         );
       }
 
@@ -1074,18 +802,15 @@ useEffect(() => {
       // UPDATE UI IMMEDIATELY
       // ====================================================
 
-      setClaims(
-        (prevClaims) =>
-          prevClaims.map(
-            (claim) =>
-              claim.id === claimId
-                ? {
-                    ...claim,
-                    status:
-                      status,
-                  }
-                : claim,
-          ),
+      setClaims((prevClaims) =>
+        prevClaims.map((claim) =>
+          claim.id === claimId
+            ? {
+                ...claim,
+                status: status,
+              }
+            : claim,
+        ),
       );
 
       // ====================================================
@@ -1099,35 +824,17 @@ useEffect(() => {
       // ====================================================
 
       try {
-        const metricsRes =
-          await fetch(
-            "/api/admin/metrics",
-            {
-              cache:
-                "no-store",
-            },
-          );
+        const metricsRes = await fetch("/api/admin/metrics", {
+          cache: "no-store",
+        });
 
-        const metricsData =
-          await metricsRes
-            .json()
-            .catch(
-              () => ({}),
-            );
+        const metricsData = await metricsRes.json().catch(() => ({}));
 
-        if (
-          metricsRes.ok &&
-          metricsData.success
-        ) {
-          setMetrics(
-            metricsData.metrics,
-          );
+        if (metricsRes.ok && metricsData.success) {
+          setMetrics(metricsData.metrics);
         }
       } catch (error) {
-        console.error(
-          "Metrics refresh error:",
-          error,
-        );
+        console.error("Metrics refresh error:", error);
       }
 
       // ====================================================
@@ -1136,29 +843,18 @@ useEffect(() => {
 
       setSelectedClaim(null);
 
-      setClaimApprovalStatus(
-        "under_review",
-      );
+      setClaimApprovalStatus("under_review");
 
       setClaimApprovalError("");
 
-      console.log(
-        "CLAIM STATUS UPDATED SUCCESSFULLY:",
-        {
-          claimId,
-          status,
-        },
-      );
+      console.log("CLAIM STATUS UPDATED SUCCESSFULLY:", {
+        claimId,
+        status,
+      });
     } catch (error) {
-      console.error(
-        "CLAIM UPDATE ERROR:",
-        error,
-      );
+      console.error("CLAIM UPDATE ERROR:", error);
 
-      setClaimApprovalError(
-        error?.message ||
-          "Failed to update claim.",
-      );
+      setClaimApprovalError(error?.message || "Failed to update claim.");
     } finally {
       setClaimApproving(false);
     }
@@ -1177,17 +873,14 @@ useEffect(() => {
     console.log("APPROVING PARTNER:", userId);
 
     try {
-      const response = await fetch(
-        "/api/admin/approve-partner",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ userId }),
-          cache: "no-store",
+      const response = await fetch("/api/admin/approve-partner", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
         },
-      );
+        body: JSON.stringify({ userId }),
+        cache: "no-store",
+      });
 
       const result = await response.json().catch(() => ({}));
 
@@ -1207,9 +900,7 @@ useEffect(() => {
 
       if (result?.success === false) {
         throw new Error(
-          result?.error ||
-            result?.message ||
-            "Partner approval failed.",
+          result?.error || result?.message || "Partner approval failed.",
         );
       }
 
@@ -1219,9 +910,7 @@ useEffect(() => {
 
       setUsers((prevUsers) =>
         prevUsers.map((u) =>
-          u.id === userId
-            ? { ...u, partner_status: "approved" }
-            : u,
+          u.id === userId ? { ...u, partner_status: "approved" } : u,
         ),
       );
 
@@ -1229,9 +918,7 @@ useEffect(() => {
     } catch (error) {
       console.error("APPROVE PARTNER ERROR:", error);
 
-      setApproveError(
-        error?.message || "Failed to approve partner.",
-      );
+      setApproveError(error?.message || "Failed to approve partner.");
     } finally {
       setApprovingUserId(null);
     }
@@ -1263,7 +950,6 @@ useEffect(() => {
     <main className="min-h-screen bg-[#fafafc] mt-14 pb-24">
       <div className="mx-auto w-full max-w-7xl relative z-10 px-4 sm:px-6 lg:px-8 pt-12">
         <div className="space-y-8">
-
           {/* ==================================================
               HEADER
           ================================================== */}
@@ -1290,24 +976,17 @@ useEffect(() => {
           ================================================== */}
 
           <div className="flex gap-2 border-b border-slate-200">
-            {[
-              "dashboard",
-              "claims",
-              "referral-network",
-            ].map((tab) => (
+            {["dashboard", "claims", "referral-network"].map((tab) => (
               <button
                 key={tab}
-                onClick={() =>
-                  setActiveTab(tab)
-                }
+                onClick={() => setActiveTab(tab)}
                 className={`px-6 py-4 border-b-2 font-bold uppercase text-xs tracking-wider transition-all ${
                   activeTab === tab
                     ? "border-[#12066a] text-[#12066a]"
                     : "border-transparent text-slate-500 hover:text-slate-800"
                 }`}
               >
-                {tab ===
-                "dashboard"
+                {tab === "dashboard"
                   ? "Summary"
                   : tab === "claims"
                     ? "Claims"
@@ -1320,74 +999,62 @@ useEffect(() => {
               DASHBOARD TAB
           ================================================== */}
 
-          {activeTab ===
-            "dashboard" && (
+          {activeTab === "dashboard" && (
             <div className="space-y-6">
-
               {metrics && (
                 <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
-
+                  {/* Total Users */}
                   <div className="bg-white border border-slate-200 rounded-2xl p-6">
                     <p className="text-[9px] font-black uppercase tracking-widest text-slate-400">
                       Total Users
                     </p>
-
                     <p className="text-3xl font-black text-[#12066a] mt-2">
-                      {metrics.totalUsers ??
-                        0}
+                      {metrics.totalUsers ?? 0}
                     </p>
                   </div>
 
+                  {/* Referrers */}
                   <div className="bg-white border border-slate-200 rounded-2xl p-6">
                     <p className="text-[9px] font-black uppercase tracking-widest text-slate-400">
                       Referrers
                     </p>
-
                     <p className="text-3xl font-black text-[#12066a] mt-2">
-                      {metrics.totalReferrers ??
-                        0}
+                      {metrics.totalReferrers ?? 0}
                     </p>
                   </div>
 
+                  {/* Total Referrals */}
                   <div className="bg-white border border-slate-200 rounded-2xl p-6">
                     <p className="text-[9px] font-black uppercase tracking-widest text-slate-400">
                       Total Referrals
                     </p>
-
                     <p className="text-3xl font-black text-[#12066a] mt-2">
-                      {metrics.totalReferrals ??
-                        0}
+                      {metrics.totalReferrals ?? 0}
                     </p>
                   </div>
-
+                  {/* Approved Partners */}
                   <div className="bg-white border border-slate-200 rounded-2xl p-6">
                     <p className="text-[9px] font-black uppercase tracking-widest text-slate-400">
-                      Pending Claims
+                      Approved Partners
                     </p>
-
+                    <p className="text-3xl font-black text-emerald-600 mt-2">
+                      {metrics.approvedPartners ?? 0}
+                    </p>
+                  </div>
+                  {/* Pending Partner Approvals */}
+                  <div className="bg-white border border-slate-200 rounded-2xl p-6">
+                    <p className="text-[9px] font-black uppercase tracking-widest text-slate-400">
+                      Pending Partner Approvals
+                    </p>
                     <p className="text-3xl font-black text-amber-600 mt-2">
-                      {metrics.pendingClaims ??
-                        0}
+                      {metrics.pendingPartnerApprovals ?? 0}
                     </p>
                   </div>
-
-                  <div className="bg-white border border-slate-200 rounded-2xl p-6">
-                    <p className="text-[9px] font-black uppercase tracking-widest text-slate-400">
-                      Under Review
-                    </p>
-
-                    <p className="text-3xl font-black text-orange-600 mt-2">
-                      {metrics.underReviewClaims ??
-                        0}
-                    </p>
-                  </div>
-
                 </div>
               )}
 
               {metrics && (
                 <div className="bg-white border border-slate-200 rounded-2xl p-8">
-
                   <h3
                     className="text-xl font-bold mb-6"
                     style={{
@@ -1399,10 +1066,18 @@ useEffect(() => {
 
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
 
+                     <div className="text-center p-4 bg-emerald-50 border border-emerald-100 rounded-xl">
+                      <p className="text-2xl font-black text-emerald-600">
+                        {metrics.approvedClaims ?? 0}
+                      </p>
+
+                      <p className="text-xs font-bold text-emerald-700 mt-1">
+                        Approved
+                      </p>
+                    </div>
                     <div className="text-center p-4 bg-amber-50 border border-amber-100 rounded-xl">
                       <p className="text-2xl font-black text-amber-600">
-                        {metrics.pendingClaims ??
-                          0}
+                        {metrics.pendingClaims ?? 0}
                       </p>
 
                       <p className="text-xs font-bold text-amber-700 mt-1">
@@ -1412,8 +1087,7 @@ useEffect(() => {
 
                     <div className="text-center p-4 bg-orange-50 border border-orange-100 rounded-xl">
                       <p className="text-2xl font-black text-orange-600">
-                        {metrics.underReviewClaims ??
-                          0}
+                        {metrics.underReviewClaims ?? 0}
                       </p>
 
                       <p className="text-xs font-bold text-orange-700 mt-1">
@@ -1421,35 +1095,23 @@ useEffect(() => {
                       </p>
                     </div>
 
-                    <div className="text-center p-4 bg-emerald-50 border border-emerald-100 rounded-xl">
-                      <p className="text-2xl font-black text-emerald-600">
-                        {metrics.approvedClaims ??
-                          0}
-                      </p>
-
-                      <p className="text-xs font-bold text-emerald-700 mt-1">
-                        Approved
-                      </p>
-                    </div>
+                   
 
                     <div className="text-center p-4 bg-red-50 border border-red-100 rounded-xl">
                       <p className="text-2xl font-black text-red-600">
-                        {metrics.rejectedClaims ??
-                          0}
+                        {metrics.rejectedClaims ?? 0}
                       </p>
 
                       <p className="text-xs font-bold text-red-700 mt-1">
                         Rejected
                       </p>
                     </div>
-
                   </div>
                 </div>
               )}
 
               {metrics && (
                 <div className="bg-white border border-slate-200 rounded-2xl p-8">
-
                   <h3
                     className="text-xl font-bold mb-6"
                     style={{
@@ -1460,7 +1122,6 @@ useEffect(() => {
                   </h3>
 
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-
                     <div className="p-6 bg-emerald-50 border border-emerald-100 rounded-xl">
                       <p className="text-xs font-bold text-emerald-700 uppercase">
                         Claimed
@@ -1469,8 +1130,7 @@ useEffect(() => {
                       <p className="text-3xl font-black text-emerald-600 mt-2">
                         £
                         {Number(
-                          metrics.totalClaimedAmount ||
-                            0,
+                          metrics.totalClaimedAmount || 0,
                         ).toLocaleString()}
                       </p>
                     </div>
@@ -1483,8 +1143,7 @@ useEffect(() => {
                       <p className="text-3xl font-black text-amber-600 mt-2">
                         £
                         {Number(
-                          metrics.totalPendingAmount ||
-                            0,
+                          metrics.totalPendingAmount || 0,
                         ).toLocaleString()}
                       </p>
                     </div>
@@ -1497,16 +1156,13 @@ useEffect(() => {
                       <p className="text-3xl font-black text-blue-600 mt-2">
                         £
                         {Number(
-                          metrics.totalApprovedAmount ||
-                            0,
+                          metrics.totalApprovedAmount || 0,
                         ).toLocaleString()}
                       </p>
                     </div>
-
                   </div>
                 </div>
               )}
-
             </div>
           )}
 
@@ -1514,40 +1170,28 @@ useEffect(() => {
               CLAIMS TAB
           ================================================== */}
 
-          {activeTab ===
-            "claims" && (
+          {activeTab === "claims" && (
             <div className="space-y-6">
-
               <div className="flex flex-wrap gap-2">
-                {[
-                  "pending",
-                  "under_review",
-                  "approved",
-                  "rejected",
-                ].map((status) => (
-                  <button
-                    key={status}
-                    onClick={() =>
-                      setSelectedClaimStatus(
-                        selectedClaimStatus ===
-                          status
-                          ? null
-                          : status,
-                      )
-                    }
-                    className={`px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all ${
-                      selectedClaimStatus ===
-                      status
-                        ? "bg-[#12066a] text-white"
-                        : "bg-slate-100 text-slate-600 hover:bg-slate-200"
-                    }`}
-                  >
-                    {status.replace(
-                      "_",
-                      " ",
-                    )}
-                  </button>
-                ))}
+                {["pending", "under_review", "approved", "rejected"].map(
+                  (status) => (
+                    <button
+                      key={status}
+                      onClick={() =>
+                        setSelectedClaimStatus(
+                          selectedClaimStatus === status ? null : status,
+                        )
+                      }
+                      className={`px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all ${
+                        selectedClaimStatus === status
+                          ? "bg-[#12066a] text-white"
+                          : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                      }`}
+                    >
+                      {status.replace("_", " ")}
+                    </button>
+                  ),
+                )}
               </div>
 
               {claimsError && (
@@ -1556,20 +1200,15 @@ useEffect(() => {
                     Claims API Error
                   </p>
 
-                  <p className="text-xs text-red-600 mt-1">
-                    {claimsError}
-                  </p>
+                  <p className="text-xs text-red-600 mt-1">{claimsError}</p>
                 </div>
               )}
 
               <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden">
-
                 <div className="overflow-x-auto">
                   <table className="w-full min-w-[900px]">
-
                     <thead className="bg-slate-50 border-b border-slate-200">
                       <tr>
-
                         <th className="px-6 py-4 text-left text-xs font-black uppercase tracking-wider text-slate-600">
                           Claimant
                         </th>
@@ -1593,17 +1232,14 @@ useEffect(() => {
                         <th className="px-6 py-4 text-right text-xs font-black uppercase tracking-wider text-slate-600">
                           Action
                         </th>
-
                       </tr>
                     </thead>
 
                     <tbody className="divide-y divide-slate-100">
-
                       {claims
                         .filter((claim) =>
                           selectedClaimStatus
-                            ? claim.status ===
-                              selectedClaimStatus
+                            ? claim.status === selectedClaimStatus
                             : true,
                         )
                         .map((claim) => (
@@ -1611,7 +1247,6 @@ useEffect(() => {
                             key={claim.id}
                             className="hover:bg-slate-50 transition-colors"
                           >
-
                             <td className="px-6 py-4">
                               <div className="text-sm font-bold text-slate-800">
                                 {claim.profiles?.full_name ||
@@ -1620,59 +1255,45 @@ useEffect(() => {
                               </div>
 
                               <div className="text-xs text-slate-500">
-                                {claim.profiles?.email ||
-                                  claim.email ||
-                                  "—"}
+                                {claim.profiles?.email || claim.email || "—"}
                               </div>
                             </td>
 
                             <td className="px-6 py-4">
                               <div className="text-sm font-bold text-slate-700">
-                                {claim.service_name ||
-                                  "—"}
+                                {claim.service_name || "—"}
                               </div>
 
                               <div className="text-xs text-slate-500">
-                                {claim.company_name ||
-                                  "—"}
+                                {claim.company_name || "—"}
                               </div>
                             </td>
 
                             <td className="px-6 py-4">
                               <span className="font-black text-[#12066a]">
-                                £
-                                {Number(
-                                  claim.amount ||
-                                    0,
-                                ).toLocaleString()}
+                                £{Number(claim.amount || 0).toLocaleString()}
                               </span>
                             </td>
 
                             <td className="px-6 py-4">
                               <span
                                 className={`px-3 py-1.5 rounded-full text-[9px] font-black uppercase ${
-                                  claim.status ===
-                                  "approved"
+                                  claim.status === "approved"
                                     ? "bg-emerald-50 text-emerald-700"
-                                    : claim.status ===
-                                        "rejected"
+                                    : claim.status === "rejected"
                                       ? "bg-red-50 text-red-600"
-                                      : claim.status ===
-                                          "under_review"
+                                      : claim.status === "under_review"
                                         ? "bg-orange-50 text-orange-700"
                                         : "bg-amber-50 text-amber-700"
                                 }`}
                               >
-                                {claim.status ||
-                                  "pending"}
+                                {claim.status || "pending"}
                               </span>
                             </td>
 
                             <td className="px-6 py-4 text-xs text-slate-500">
                               {claim.created_at
-                                ? new Date(
-                                    claim.created_at,
-                                  ).toLocaleDateString(
+                                ? new Date(claim.created_at).toLocaleDateString(
                                     "en-GB",
                                   )
                                 : "—"}
@@ -1681,43 +1302,32 @@ useEffect(() => {
                             <td className="px-6 py-4 text-right">
                               <button
                                 onClick={() => {
-                                  setSelectedClaim(
-                                    claim,
-                                  );
+                                  setSelectedClaim(claim);
 
                                   setClaimApprovalStatus(
-                                    claim.status ||
-                                      "under_review",
+                                    claim.status || "under_review",
                                   );
 
-                                  setClaimApprovalError(
-                                    "",
-                                  );
+                                  setClaimApprovalError("");
                                 }}
                                 className="text-[#12066a] text-xs font-black hover:underline"
                               >
                                 View
                               </button>
                             </td>
-
                           </tr>
                         ))}
-
                     </tbody>
                   </table>
                 </div>
 
                 {claims.filter((c) =>
-                  selectedClaimStatus
-                    ? c.status ===
-                      selectedClaimStatus
-                    : true,
+                  selectedClaimStatus ? c.status === selectedClaimStatus : true,
                 ).length === 0 && (
                   <div className="p-8 text-center text-slate-500">
                     No claims found
                   </div>
                 )}
-
               </div>
             </div>
           )}
@@ -1726,42 +1336,28 @@ useEffect(() => {
               REFERRAL NETWORK TAB
           ================================================== */}
 
-          {activeTab ===
-            "referral-network" && (
+          {activeTab === "referral-network" && (
             <div className="space-y-6">
-
               <div className="space-y-4">
-
                 <input
                   type="text"
                   placeholder="Search by name or email..."
                   value={referralSearchQuery}
-                  onChange={(e) =>
-                    setReferralSearchQuery(
-                      e.target.value,
-                    )
-                  }
+                  onChange={(e) => setReferralSearchQuery(e.target.value)}
                   className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#12066a]/20"
                 />
 
                 <div className="flex flex-wrap gap-2">
-                  {[
-                    "pending",
-                    "completed",
-                  ].map((status) => (
+                  {["pending", "completed"].map((status) => (
                     <button
                       key={status}
                       onClick={() =>
                         setSelectedReferralStatus(
-                          selectedReferralStatus ===
-                            status
-                            ? null
-                            : status,
+                          selectedReferralStatus === status ? null : status,
                         )
                       }
                       className={`px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all ${
-                        selectedReferralStatus ===
-                        status
+                        selectedReferralStatus === status
                           ? "bg-[#12066a] text-white"
                           : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                       }`}
@@ -1770,7 +1366,6 @@ useEffect(() => {
                     </button>
                   ))}
                 </div>
-
               </div>
 
               {networkError && (
@@ -1779,20 +1374,15 @@ useEffect(() => {
                     Referral Network API Error
                   </p>
 
-                  <p className="text-xs text-red-600 mt-1">
-                    {networkError}
-                  </p>
+                  <p className="text-xs text-red-600 mt-1">{networkError}</p>
                 </div>
               )}
 
               <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden">
-
                 <div className="overflow-x-auto">
                   <table className="w-full min-w-[900px]">
-
                     <thead className="bg-slate-50 border-b border-slate-200">
                       <tr>
-
                         <th className="px-6 py-4 text-left text-xs font-black uppercase tracking-wider text-slate-600">
                           Referrer
                         </th>
@@ -1805,127 +1395,89 @@ useEffect(() => {
                           Date
                         </th>
 
-                        <th className="px-6 py-4 text-left text-xs font-black uppercase tracking-wider text-slate-600">
-                          Status
-                        </th>
-
                         <th className="px-6 py-4 text-right text-xs font-black uppercase tracking-wider text-slate-600">
                           Action
                         </th>
-
                       </tr>
                     </thead>
 
                     <tbody className="divide-y divide-slate-100">
+                      {filteredReferralRows.map((referral) => {
+                        const referredName =
+                          referral.referred_name ||
+                          referral.referred_user_name ||
+                          referral.referred?.full_name ||
+                          "Unknown";
 
-                      {filteredReferralRows.map(
-                        (referral) => {
-                          const referredName =
-                            referral.referred_name ||
-                            referral.referred_user_name ||
-                            referral.referred?.full_name ||
-                            "Unknown";
+                        const referredEmail =
+                          referral.referred_email ||
+                          referral.referred?.email ||
+                          "—";
 
-                          const referredEmail =
-                            referral.referred_email ||
-                            referral.referred?.email ||
-                            "—";
+                        const status =
+                          referral.referral_status ||
+                          referral.status ||
+                          "completed";
 
-                          const status =
-                            referral.referral_status ||
-                            referral.status ||
-                            "completed";
+                        return (
+                          <tr
+                            key={referral.id}
+                            className="hover:bg-slate-50 transition-colors"
+                          >
+                            <td className="px-6 py-4">
+                              <div className="text-sm font-bold text-slate-800">
+                                {referral.referrer_name || "Unknown"}
+                              </div>
 
-                          return (
-                            <tr
-                              key={
-                                referral.id
-                              }
-                              className="hover:bg-slate-50 transition-colors"
-                            >
+                              <div className="text-xs text-slate-500">
+                                {referral.referrer_email || "—"}
+                              </div>
+                            </td>
 
-                              <td className="px-6 py-4">
-                                <div className="text-sm font-bold text-slate-800">
-                                  {referral.referrer_name ||
-                                    "Unknown"}
-                                </div>
+                            <td className="px-6 py-4">
+                              <div className="text-sm font-bold text-slate-800">
+                                {referredName}
+                              </div>
 
-                                <div className="text-xs text-slate-500">
-                                  {referral.referrer_email ||
-                                    "—"}
-                                </div>
-                              </td>
+                              <div className="text-xs text-slate-500">
+                                {referredEmail}
+                              </div>
+                            </td>
 
-                              <td className="px-6 py-4">
-                                <div className="text-sm font-bold text-slate-800">
-                                  {referredName}
-                                </div>
+                            <td className="px-6 py-4 text-xs text-slate-500">
+                              {referral.created_at
+                                ? new Date(
+                                    referral.created_at,
+                                  ).toLocaleDateString("en-GB")
+                                : "—"}
+                            </td>
 
-                                <div className="text-xs text-slate-500">
-                                  {referredEmail}
-                                </div>
-                              </td>
-
-                              <td className="px-6 py-4 text-xs text-slate-500">
-                                {referral.created_at
-                                  ? new Date(
-                                      referral.created_at,
-                                    ).toLocaleDateString(
-                                      "en-GB",
-                                    )
-                                  : "—"}
-                              </td>
-
-                              <td className="px-6 py-4">
-                                <span
-                                  className={`px-3 py-1.5 rounded-full text-[9px] font-black uppercase ${
-                                    status ===
-                                    "completed"
-                                      ? "bg-emerald-50 text-emerald-700"
-                                      : "bg-amber-50 text-amber-700"
-                                  }`}
-                                >
-                                  {status}
-                                </span>
-                              </td>
-
-                              <td className="px-6 py-4 text-right">
-                                <button
-                                  onClick={() =>
-                                    setSelectedReferral(
-                                      {
-                                        ...referral,
-                                        referred_name:
-                                          referredName,
-                                        referred_email:
-                                          referredEmail,
-                                        referral_status:
-                                          status,
-                                      },
-                                    )
-                                  }
-                                  className="text-[#12066a] text-xs font-black hover:underline"
-                                >
-                                  Details
-                                </button>
-                              </td>
-
-                            </tr>
-                          );
-                        },
-                      )}
-
+                            <td className="px-6 py-4 text-right">
+                              <button
+                                onClick={() =>
+                                  setSelectedReferral({
+                                    ...referral,
+                                    referred_name: referredName,
+                                    referred_email: referredEmail,
+                                  })
+                                }
+                                className="text-[#12066a] text-xs font-black hover:underline"
+                              >
+                                Details
+                              </button>
+                            </td>
+                          </tr>
+                        );
+                      })}
                     </tbody>
                   </table>
                 </div>
 
-                {filteredReferralRows.length ===
-                  0 && (
+                {filteredReferralRows.length === 0 && (
                   <div className="p-8 text-center text-slate-500">
                     No referrals found
                   </div>
                 )}
-
               </div>
 
               {/* ==================================================
@@ -1933,7 +1485,6 @@ useEffect(() => {
               ================================================== */}
 
               <div className="border-t border-slate-200 pt-8">
-
                 <h2
                   className="text-2xl font-black mb-6"
                   style={{
@@ -1949,9 +1500,7 @@ useEffect(() => {
                       Users API Error
                     </p>
 
-                    <p className="text-xs text-red-600 mt-1">
-                      {usersError}
-                    </p>
+                    <p className="text-xs text-red-600 mt-1">{usersError}</p>
                   </div>
                 )}
 
@@ -1961,21 +1510,16 @@ useEffect(() => {
                       Partner Approval Error
                     </p>
 
-                    <p className="text-xs text-red-600 mt-1">
-                      {approveError}
-                    </p>
+                    <p className="text-xs text-red-600 mt-1">{approveError}</p>
                   </div>
                 )}
 
                 <div className="space-y-4 mb-4">
-
                   <input
                     type="text"
                     placeholder="Search by name, email or company..."
                     value={userSearchQuery}
-                    onChange={(e) =>
-                      setUserSearchQuery(e.target.value)
-                    }
+                    onChange={(e) => setUserSearchQuery(e.target.value)}
                     className="w-full px-4 py-3 border border-slate-200 rounded-xl text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#12066a]/20"
                   />
 
@@ -1985,9 +1529,7 @@ useEffect(() => {
                         key={status}
                         onClick={() =>
                           setSelectedPartnerStatus(
-                            selectedPartnerStatus === status
-                              ? null
-                              : status,
+                            selectedPartnerStatus === status ? null : status,
                           )
                         }
                         className={`px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all ${
@@ -2000,17 +1542,13 @@ useEffect(() => {
                       </button>
                     ))}
                   </div>
-
                 </div>
 
                 <div className="bg-white border border-slate-200 rounded-2xl overflow-hidden">
-
                   <div className="overflow-x-auto">
                     <table className="w-full min-w-[1050px]">
-
                       <thead className="bg-slate-50 border-b border-slate-200">
                         <tr>
-
                           <th className="px-6 py-4 text-left text-xs font-black uppercase tracking-wider text-slate-600">
                             Name
                           </th>
@@ -2042,135 +1580,102 @@ useEffect(() => {
                           <th className="px-6 py-4 text-right text-xs font-black uppercase tracking-wider text-slate-600">
                             Action
                           </th>
-
                         </tr>
                       </thead>
 
                       <tbody className="divide-y divide-slate-100">
+                        {filteredUsers.map((user) => (
+                          <tr
+                            key={user.id}
+                            className="hover:bg-slate-50 transition-colors"
+                          >
+                            <td className="px-6 py-4">
+                              <div className="text-sm font-bold text-slate-800">
+                                {user.full_name || "—"}
+                              </div>
 
-                        {filteredUsers.map(
-                          (user) => (
-                            <tr
-                              key={
-                                user.id
-                              }
-                              className="hover:bg-slate-50 transition-colors"
-                            >
+                              <div className="text-xs text-slate-500">
+                                {user.email || "—"}
+                              </div>
+                            </td>
 
-                              <td className="px-6 py-4">
-                                <div className="text-sm font-bold text-slate-800">
-                                  {user.full_name ||
-                                    "—"}
-                                </div>
+                            <td className="px-6 py-4">
+                              <div className="text-sm text-slate-700">
+                                {user.company_name || "—"}
+                              </div>
+                            </td>
 
-                                <div className="text-xs text-slate-500">
-                                  {user.email ||
-                                    "—"}
-                                </div>
-                              </td>
+                            <td className="px-6 py-4 text-center">
+                              <span className="px-2 py-1 rounded-full text-[9px] font-black bg-slate-100 text-slate-600">
+                                {user.role || "user"}
+                              </span>
+                            </td>
 
-                              <td className="px-6 py-4">
-                                <div className="text-sm text-slate-700">
-                                  {user.company_name ||
-                                    "—"}
-                                </div>
-                              </td>
+                            <td className="px-6 py-4 text-center">
+                              <span className="font-bold text-[#12066a]">
+                                {user.referral_count ?? 0}
+                              </span>
+                            </td>
 
-                              <td className="px-6 py-4 text-center">
-                                <span className="px-2 py-1 rounded-full text-[9px] font-black bg-slate-100 text-slate-600">
-                                  {user.role ||
-                                    "user"}
-                                </span>
-                              </td>
+                            <td className="px-6 py-4 text-center">
+                              <span className="font-bold text-slate-800">
+                                {user.claims?.total_claims ?? 0}
+                              </span>
+                            </td>
 
-                              <td className="px-6 py-4 text-center">
-                                <span className="font-bold text-[#12066a]">
-                                  {user.referral_count ??
-                                    0}
-                                </span>
-                              </td>
+                            <td className="px-6 py-4 text-right">
+                              <span className="font-bold text-[#12066a]">
+                                £
+                                {Number(
+                                  user.claims?.total_amount || 0,
+                                ).toLocaleString()}
+                              </span>
+                            </td>
 
-                              <td className="px-6 py-4 text-center">
-                                <span className="font-bold text-slate-800">
-                                  {user.claims
-                                    ?.total_claims ??
-                                    0}
-                                </span>
-                              </td>
+                            <td className="px-6 py-4 text-center">
+                              <span
+                                className={`px-3 py-1.5 rounded-full text-[9px] font-black uppercase ${
+                                  user.partner_status === "approved"
+                                    ? "bg-emerald-50 text-emerald-700"
+                                    : "bg-amber-50 text-amber-700"
+                                }`}
+                              >
+                                {user.partner_status || "pending"}
+                              </span>
+                            </td>
 
-                              <td className="px-6 py-4 text-right">
-                                <span className="font-bold text-[#12066a]">
-                                  £
-                                  {Number(
-                                    user.claims
-                                      ?.total_amount ||
-                                      0,
-                                  ).toLocaleString()}
-                                </span>
-                              </td>
-
-                              <td className="px-6 py-4 text-center">
-                                <span
-                                  className={`px-3 py-1.5 rounded-full text-[9px] font-black uppercase ${
-                                    user.partner_status ===
-                                    "approved"
-                                      ? "bg-emerald-50 text-emerald-700"
-                                      : "bg-amber-50 text-amber-700"
-                                  }`}
+                            <td className="px-6 py-4 text-right">
+                              {user.partner_status !== "approved" ? (
+                                <button
+                                  onClick={() => handleApprovePartner(user.id)}
+                                  disabled={approvingUserId === user.id}
+                                  className="px-4 py-2 rounded-xl text-xs font-black uppercase bg-[#12066a] text-white hover:bg-[#0d0452] transition-all disabled:opacity-60 disabled:cursor-not-allowed"
                                 >
-                                  {user.partner_status ||
-                                    "pending"}
+                                  {approvingUserId === user.id
+                                    ? "Approving..."
+                                    : "Approve"}
+                                </button>
+                              ) : (
+                                <span className="text-xs font-bold text-emerald-600">
+                                  ✓ Approved
                                 </span>
-                              </td>
-
-                              <td className="px-6 py-4 text-right">
-                                {user.partner_status !==
-                                "approved" ? (
-                                  <button
-                                    onClick={() =>
-                                      handleApprovePartner(
-                                        user.id,
-                                      )
-                                    }
-                                    disabled={
-                                      approvingUserId ===
-                                      user.id
-                                    }
-                                    className="px-4 py-2 rounded-xl text-xs font-black uppercase bg-[#12066a] text-white hover:bg-[#0d0452] transition-all disabled:opacity-60 disabled:cursor-not-allowed"
-                                  >
-                                    {approvingUserId ===
-                                    user.id
-                                      ? "Approving..."
-                                      : "Approve"}
-                                  </button>
-                                ) : (
-                                  <span className="text-xs font-bold text-emerald-600">
-                                    ✓ Approved
-                                  </span>
-                                )}
-                              </td>
-
-                            </tr>
-                          ),
-                        )}
-
+                              )}
+                            </td>
+                          </tr>
+                        ))}
                       </tbody>
                     </table>
                   </div>
 
-                  {filteredUsers.length ===
-                    0 && (
+                  {filteredUsers.length === 0 && (
                     <div className="p-8 text-center text-slate-500">
                       No users found
                     </div>
                   )}
-
                 </div>
               </div>
-
             </div>
           )}
-
         </div>
       </div>
 
@@ -2181,30 +1686,21 @@ useEffect(() => {
       {selectedReferral && (
         <div
           className="fixed inset-0 z-[100000] flex items-center justify-center p-4 bg-[#12066a]/30 backdrop-blur-sm"
-          onClick={() =>
-            setSelectedReferral(null)
-          }
+          onClick={() => setSelectedReferral(null)}
         >
           <div
             data-modal-scroll
             data-lenis-prevent
             className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto overscroll-contain"
             style={{
-              WebkitOverflowScrolling:
-                "touch",
-              overscrollBehavior:
-                "contain",
-              touchAction:
-                "pan-y",
+              WebkitOverflowScrolling: "touch",
+              overscrollBehavior: "contain",
+              touchAction: "pan-y",
             }}
-            onClick={(e) =>
-              e.stopPropagation()
-            }
+            onClick={(e) => e.stopPropagation()}
           >
             <div className="p-8 space-y-6">
-
               <div className="flex items-center justify-between">
-
                 <h2
                   className="text-2xl font-black"
                   style={{
@@ -2215,47 +1711,32 @@ useEffect(() => {
                 </h2>
 
                 <button
-                  onClick={() =>
-                    setSelectedReferral(
-                      null,
-                    )
-                  }
+                  onClick={() => setSelectedReferral(null)}
                   className="text-slate-400 hover:text-slate-600"
                 >
                   ✕
                 </button>
-
               </div>
 
               {/* Referrer */}
 
               <div className="border-t border-slate-200 pt-4">
-
-                <h3 className="font-bold text-slate-800 mb-3">
-                  Referrer
-                </h3>
+                <h3 className="font-bold text-slate-800 mb-3">Referrer</h3>
 
                 <div className="space-y-2 text-sm bg-slate-50 p-4 rounded-lg">
-
                   <div>
-                    <span className="text-slate-600 font-bold">
-                      Name:{" "}
-                    </span>
+                    <span className="text-slate-600 font-bold">Name: </span>
 
                     <span className="text-slate-800">
-                      {selectedReferral.referrer_name ||
-                        "—"}
+                      {selectedReferral.referrer_name || "—"}
                     </span>
                   </div>
 
                   <div>
-                    <span className="text-slate-600 font-bold">
-                      Email:{" "}
-                    </span>
+                    <span className="text-slate-600 font-bold">Email: </span>
 
                     <span className="text-slate-800">
-                      {selectedReferral.referrer_email ||
-                        "—"}
+                      {selectedReferral.referrer_email || "—"}
                     </span>
                   </div>
 
@@ -2265,54 +1746,39 @@ useEffect(() => {
                     </span>
 
                     <code className="bg-white px-2 py-1 rounded text-[#12066a] font-bold">
-                      {selectedReferral.referrer_code ||
-                        "—"}
+                      {selectedReferral.referrer_code || "—"}
                     </code>
                   </div>
-
                 </div>
               </div>
 
               {/* Referred User */}
 
               <div className="border-t border-slate-200 pt-4">
-
-                <h3 className="font-bold text-slate-800 mb-3">
-                  Referred User
-                </h3>
+                <h3 className="font-bold text-slate-800 mb-3">Referred User</h3>
 
                 <div className="space-y-2 text-sm bg-emerald-50 p-4 rounded-lg">
-
                   <div>
-                    <span className="text-slate-600 font-bold">
-                      Name:{" "}
-                    </span>
+                    <span className="text-slate-600 font-bold">Name: </span>
 
                     <span className="text-slate-800">
-                      {selectedReferral.referred_name ||
-                        "—"}
+                      {selectedReferral.referred_name || "—"}
                     </span>
                   </div>
 
                   <div>
-                    <span className="text-slate-600 font-bold">
-                      Email:{" "}
-                    </span>
+                    <span className="text-slate-600 font-bold">Email: </span>
 
                     <span className="text-slate-800">
-                      {selectedReferral.referred_email ||
-                        "—"}
+                      {selectedReferral.referred_email || "—"}
                     </span>
                   </div>
 
                   <div>
-                    <span className="text-slate-600 font-bold">
-                      Company:{" "}
-                    </span>
+                    <span className="text-slate-600 font-bold">Company: </span>
 
                     <span className="text-slate-800">
-                      {selectedReferral.referred_company ||
-                        "—"}
+                      {selectedReferral.referred_company || "—"}
                     </span>
                   </div>
 
@@ -2333,68 +1799,8 @@ useEffect(() => {
                         : "Pending"}
                     </span>
                   </div>
-
                 </div>
               </div>
-
-              {/* Referral Info */}
-
-              <div className="border-t border-slate-200 pt-4">
-
-                <h3 className="font-bold text-slate-800 mb-3">
-                  Referral
-                </h3>
-
-                <div className="space-y-2 text-sm bg-slate-50 p-4 rounded-lg">
-
-                  <div>
-                    <span className="text-slate-600 font-bold">
-                      Referral ID:{" "}
-                    </span>
-
-                    <code className="text-[#12066a] font-mono break-all">
-                      {selectedReferral.id ||
-                        "—"}
-                    </code>
-                  </div>
-
-                  <div>
-                    <span className="text-slate-600 font-bold">
-                      Date:{" "}
-                    </span>
-
-                    <span className="text-slate-800">
-                      {selectedReferral.created_at
-                        ? new Date(
-                            selectedReferral.created_at,
-                          ).toLocaleDateString(
-                            "en-GB",
-                          )
-                        : "—"}
-                    </span>
-                  </div>
-
-                  <div>
-                    <span className="text-slate-600 font-bold">
-                      Status:{" "}
-                    </span>
-
-                    <span
-                      className={`px-3 py-1 rounded-full text-xs font-black ${
-                        selectedReferral.referral_status ===
-                        "completed"
-                          ? "bg-emerald-50 text-emerald-700"
-                          : "bg-amber-50 text-amber-700"
-                      }`}
-                    >
-                      {selectedReferral.referral_status ||
-                        "pending"}
-                    </span>
-                  </div>
-
-                </div>
-              </div>
-
             </div>
           </div>
         </div>
@@ -2407,30 +1813,21 @@ useEffect(() => {
       {selectedClaim && (
         <div
           className="fixed inset-0 z-[100000] flex items-center justify-center p-4 bg-[#12066a]/30 backdrop-blur-sm"
-          onClick={() =>
-            setSelectedClaim(null)
-          }
+          onClick={() => setSelectedClaim(null)}
         >
           <div
             data-modal-scroll
             data-lenis-prevent
             className="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto overscroll-contain"
             style={{
-              WebkitOverflowScrolling:
-                "touch",
-              overscrollBehavior:
-                "contain",
-              touchAction:
-                "pan-y",
+              WebkitOverflowScrolling: "touch",
+              overscrollBehavior: "contain",
+              touchAction: "pan-y",
             }}
-            onClick={(e) =>
-              e.stopPropagation()
-            }
+            onClick={(e) => e.stopPropagation()}
           >
             <div className="p-8 space-y-6">
-
               <div className="flex items-center justify-between">
-
                 <h2
                   className="text-2xl font-black"
                   style={{
@@ -2441,24 +1838,17 @@ useEffect(() => {
                 </h2>
 
                 <button
-                  onClick={() =>
-                    setSelectedClaim(
-                      null,
-                    )
-                  }
+                  onClick={() => setSelectedClaim(null)}
                   className="text-slate-400 hover:text-slate-600"
                 >
                   ✕
                 </button>
-
               </div>
 
               {/* Claim Info */}
 
               <div className="bg-slate-50 p-4 rounded-xl space-y-3 border border-slate-100">
-
                 <div className="flex justify-between gap-4">
-
                   <span className="text-sm font-bold text-slate-600">
                     Claim ID
                   </span>
@@ -2466,124 +1856,92 @@ useEffect(() => {
                   <span className="text-sm text-slate-800 font-mono break-all text-right">
                     {selectedClaim.id}
                   </span>
-
                 </div>
 
                 <div className="flex justify-between">
-
                   <span className="text-sm font-bold text-slate-600">
                     Amount
                   </span>
 
                   <span className="text-lg font-black text-[#12066a]">
-                    £
-                    {Number(
-                      selectedClaim.amount ||
-                        0,
-                    ).toLocaleString()}
+                    £{Number(selectedClaim.amount || 0).toLocaleString()}
                   </span>
-
                 </div>
 
                 <div className="flex justify-between items-center">
-
                   <span className="text-sm font-bold text-slate-600">
                     Status
                   </span>
 
                   <span
                     className={`px-3 py-1 rounded-full text-xs font-black ${
-                      selectedClaim.status ===
-                      "approved"
+                      selectedClaim.status === "approved"
                         ? "bg-emerald-50 text-emerald-700"
-                        : selectedClaim.status ===
-                            "rejected"
+                        : selectedClaim.status === "rejected"
                           ? "bg-red-50 text-red-600"
-                          : selectedClaim.status ===
-                              "under_review"
+                          : selectedClaim.status === "under_review"
                             ? "bg-orange-50 text-orange-700"
                             : "bg-amber-50 text-amber-700"
                     }`}
                   >
                     {selectedClaim.status}
                   </span>
-
                 </div>
 
                 <div className="flex justify-between">
-
                   <span className="text-sm font-bold text-slate-600">
                     Submitted
                   </span>
 
                   <span className="text-sm text-slate-800">
                     {selectedClaim.created_at
-                      ? new Date(
-                          selectedClaim.created_at,
-                        ).toLocaleDateString(
+                      ? new Date(selectedClaim.created_at).toLocaleDateString(
                           "en-GB",
                         )
                       : "—"}
                   </span>
-
                 </div>
-
               </div>
 
               {/* Service Details */}
 
               <div className="border-t border-slate-200 pt-4">
-
                 <h3 className="font-bold text-slate-800 mb-3">
                   Service Details
                 </h3>
 
                 <div className="space-y-2 text-sm">
-
                   <div>
-                    <span className="text-slate-600 font-bold">
-                      Service:{" "}
-                    </span>
+                    <span className="text-slate-600 font-bold">Service: </span>
 
                     <span className="text-slate-800">
-                      {selectedClaim.service_name ||
-                        "—"}
+                      {selectedClaim.service_name || "—"}
                     </span>
                   </div>
 
                   <div>
-                    <span className="text-slate-600 font-bold">
-                      Company:{" "}
-                    </span>
+                    <span className="text-slate-600 font-bold">Company: </span>
 
                     <span className="text-slate-800">
-                      {selectedClaim.company_name ||
-                        "—"}
+                      {selectedClaim.company_name || "—"}
                     </span>
                   </div>
 
                   <div>
-                    <span className="text-slate-600 font-bold">
-                      Contact:{" "}
-                    </span>
+                    <span className="text-slate-600 font-bold">Contact: </span>
 
                     <span className="text-slate-800">
-                      {selectedClaim.contact_name ||
-                        "—"}
+                      {selectedClaim.contact_name || "—"}
                     </span>
                   </div>
 
                   <div>
-                    <span className="text-slate-600 font-bold">
-                      Phone:{" "}
-                    </span>
+                    <span className="text-slate-600 font-bold">Phone: </span>
 
                     <span className="text-slate-800">
-                      {selectedClaim.phone ||
-                        "—"}
+                      {selectedClaim.phone || "—"}
                     </span>
                   </div>
-
                 </div>
               </div>
 
@@ -2591,7 +1949,6 @@ useEffect(() => {
 
               {selectedClaim.notes && (
                 <div className="border-t border-slate-200 pt-4">
-
                   <h3 className="font-bold text-slate-800 mb-2">
                     Claimant Notes
                   </h3>
@@ -2599,7 +1956,6 @@ useEffect(() => {
                   <p className="text-sm text-slate-600 bg-slate-50 p-4 rounded-lg whitespace-pre-wrap">
                     {selectedClaim.notes}
                   </p>
-
                 </div>
               )}
 
@@ -2607,124 +1963,77 @@ useEffect(() => {
                   ADMIN ACTIONS
               ================================================== */}
 
-              {selectedClaim.status !==
-                "approved" &&
-                selectedClaim.status !==
-                  "rejected" && (
-                <div className="border-t border-slate-200 pt-4">
+              {selectedClaim.status !== "approved" &&
+                selectedClaim.status !== "rejected" && (
+                  <div className="border-t border-slate-200 pt-4">
+                    <h3 className="font-bold text-slate-800 mb-3">
+                      Admin Actions
+                    </h3>
 
-                  <h3 className="font-bold text-slate-800 mb-3">
-                    Admin Actions
-                  </h3>
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-xs font-bold text-slate-600 mb-2 uppercase">
+                          Update Status
+                        </label>
 
-                  <div className="space-y-4">
+                        <select
+                          value={claimApprovalStatus}
+                          onChange={(e) => {
+                            setClaimApprovalStatus(e.target.value);
 
-                    <div>
+                            setClaimApprovalError("");
+                          }}
+                          disabled={claimApproving}
+                          className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm font-bold bg-white disabled:bg-slate-100"
+                        >
+                          <option value="pending">Pending</option>
 
-                      <label className="block text-xs font-bold text-slate-600 mb-2 uppercase">
-                        Update Status
-                      </label>
+                          <option value="under_review">Under Review</option>
 
-                      <select
-                        value={
-                          claimApprovalStatus
-                        }
-                        onChange={(e) => {
-                          setClaimApprovalStatus(
-                            e.target
-                              .value,
-                          );
+                          <option value="approved">Approved</option>
 
-                          setClaimApprovalError(
-                            "",
-                          );
-                        }}
-                        disabled={
-                          claimApproving
-                        }
-                        className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm font-bold bg-white disabled:bg-slate-100"
-                      >
-
-                        <option value="pending">
-                          Pending
-                        </option>
-
-                        <option value="under_review">
-                          Under Review
-                        </option>
-
-                        <option value="approved">
-                          Approved
-                        </option>
-
-                        <option value="rejected">
-                          Rejected
-                        </option>
-
-                      </select>
-
-                    </div>
-
-                    {claimApprovalError && (
-                      <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-
-                        <p className="text-xs font-black uppercase text-red-700">
-                          Update Failed
-                        </p>
-
-                        <p className="text-sm font-bold text-red-600 mt-1">
-                          {
-                            claimApprovalError
-                          }
-                        </p>
-
+                          <option value="rejected">Rejected</option>
+                        </select>
                       </div>
-                    )}
 
-                    <div className="flex gap-3">
+                      {claimApprovalError && (
+                        <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+                          <p className="text-xs font-black uppercase text-red-700">
+                            Update Failed
+                          </p>
 
-                      <button
-                        onClick={() =>
-                          approveClaim(
-                            selectedClaim.id,
-                            claimApprovalStatus,
-                          )
-                        }
-                        disabled={
-                          claimApproving
-                        }
-                        className="flex-1 px-4 py-3 bg-[#12066a] text-white font-bold rounded-lg hover:bg-[#0d0452] disabled:opacity-60 disabled:cursor-not-allowed"
-                      >
-                        {claimApproving
-                          ? "Updating..."
-                          : "Update Claim"}
-                      </button>
+                          <p className="text-sm font-bold text-red-600 mt-1">
+                            {claimApprovalError}
+                          </p>
+                        </div>
+                      )}
 
-                      <button
-                        onClick={() =>
-                          setSelectedClaim(
-                            null,
-                          )
-                        }
-                        disabled={
-                          claimApproving
-                        }
-                        className="flex-1 px-4 py-3 bg-slate-100 text-slate-600 font-bold rounded-lg hover:bg-slate-200 disabled:opacity-60 disabled:cursor-not-allowed"
-                      >
-                        Cancel
-                      </button>
+                      <div className="flex gap-3">
+                        <button
+                          onClick={() =>
+                            approveClaim(selectedClaim.id, claimApprovalStatus)
+                          }
+                          disabled={claimApproving}
+                          className="flex-1 px-4 py-3 bg-[#12066a] text-white font-bold rounded-lg hover:bg-[#0d0452] disabled:opacity-60 disabled:cursor-not-allowed"
+                        >
+                          {claimApproving ? "Updating..." : "Update Claim"}
+                        </button>
 
+                        <button
+                          onClick={() => setSelectedClaim(null)}
+                          disabled={claimApproving}
+                          className="flex-1 px-4 py-3 bg-slate-100 text-slate-600 font-bold rounded-lg hover:bg-slate-200 disabled:opacity-60 disabled:cursor-not-allowed"
+                        >
+                          Cancel
+                        </button>
+                      </div>
                     </div>
-
                   </div>
-                </div>
-              )}
-
+                )}
             </div>
           </div>
         </div>
       )}
-
     </main>
   );
 }

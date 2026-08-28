@@ -28,6 +28,7 @@ export default function ReferredClientForm({
   referrerName,
   referrerCode,
   prefill = {},
+  onSuccess, // <--- Naya prop yahan receive karein
 }) {
   const [name, setName] = useState(prefill.name || "");
   const [email, setEmail] = useState(prefill.email || "");
@@ -35,7 +36,6 @@ export default function ReferredClientForm({
   const [service, setService] = useState("");
   const [message, setMessage] = useState("");
   const [captchaToken, setCaptchaToken] = useState(null);
-  const [formSubmitted, setFormSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
@@ -57,7 +57,6 @@ export default function ReferredClientForm({
       return;
     }
 
-    // Structure the message with referral details so the /api/send endpoint extracts it correctly
     const structuredMessage = `New Referral Client — 5% Discount Request
 Referrer Name: ${referrerName || "Unknown Referrer"}
 Referral Code: ${referrerCode || "Unknown Code"}
@@ -85,7 +84,7 @@ User Message: ${message || "No additional comments."}`;
         body: JSON.stringify({
           name: name.trim(),
           email: email.trim(),
-          number: number.trim(),
+            number: number.trim(),
           service: service,
           message: structuredMessage,
           coupon: "5% Referral Discount",
@@ -102,6 +101,12 @@ User Message: ${message || "No additional comments."}`;
       }
 
       setSuccess(true);
+      
+      // <--- Parent component ko bata dein ke form submit ho gaya hai
+      if (typeof onSuccess === "function") {
+        onSuccess();
+      }
+
     } catch (err) {
       console.error("Referred client form error:", err);
       setError(
@@ -115,7 +120,7 @@ User Message: ${message || "No additional comments."}`;
 
   if (success) {
     return (
-      <div className="bg-white border border-[#997819]/30 rounded-3xl p-8 text-center space-y-6 shadow-lg shadow-[#12066a]/5 max-w-xl mx-auto">
+      <div className="bg-white border mt-22 border-[#997819]/30 rounded-3xl p-8 text-center space-y-6 shadow-lg shadow-[#12066a]/5 max-w-xl mx-auto">
         <div className="w-16 h-16 bg-amber-100 text-[#997819] rounded-full flex items-center justify-center font-bold text-2xl mx-auto border border-amber-400">
           ⌛
         </div>
@@ -132,13 +137,13 @@ User Message: ${message || "No additional comments."}`;
 
           <div className="mt-4 bg-slate-50 border border-slate-100 p-4 rounded-2xl text-left text-xs text-slate-500 space-y-2 leading-relaxed">
             <p>
-              •Our Team will contact you within 12–24 business hours using
+              • Our Team will contact you within 12–24 business hours using
               the contact details ({number} or {email}) you provided
             </p>
             <p>
               • We’ll discuss your requirements, confirm eligibility and guide
               you through the next steps and Your 5% referral discount will be
-              applied once your qualifyinh service is done.
+              applied once your qualifying service is done.
             </p>
           </div>
 

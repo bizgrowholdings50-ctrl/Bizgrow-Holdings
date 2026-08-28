@@ -366,12 +366,30 @@ export function LogoutButton() {
       const loadingElement = document.getElementById(
         "bizgrow-loading-fallback",
       );
+
       if (loadingElement) {
         loadingElement.remove();
       }
 
       if (typeof window !== "undefined") {
+        // Keep cached Google login email
         localStorage.setItem("hasSignedOut", "true");
+
+        // Clear referral cookie ONLY
+        document.cookie =
+          "bizgrow_referrer=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+
+        // Clear domain cookie as well for production
+        const hostname = window.location.hostname;
+        const cleanHostname = hostname.replace(/^www\./, "");
+
+        if (
+          cleanHostname.includes(".") &&
+          !cleanHostname.includes("localhost")
+        ) {
+          document.cookie =
+            `bizgrow_referrer=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; Domain=.${cleanHostname};`;
+        }
       }
 
       await supabase.auth.signOut();

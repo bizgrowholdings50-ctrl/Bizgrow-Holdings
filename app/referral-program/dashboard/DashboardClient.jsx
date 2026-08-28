@@ -89,6 +89,13 @@ export default function DashboardClient() {
 
   const [directReferrals, setDirectReferrals] = useState([]);
   const [directReferralCount, setDirectReferralCount] = useState(0);
+  const approvedReferralCount = directReferrals.filter(
+    (ref) => ref.partner_status === "approved",
+  ).length;
+
+  const pendingReferralCount = directReferrals.filter(
+    (ref) => ref.partner_status === "pending",
+  ).length;
   const [partnerNetworkSize, setPartnerNetworkSize] = useState(0);
 
   const [claimHistory, setClaimHistory] = useState([]);
@@ -141,6 +148,7 @@ export default function DashboardClient() {
   useEffect(() => {
     let referralsChannel = null;
     let claimsChannel = null;
+    let profilesChannel = null;
 
     async function loadDashboardData() {
       try {
@@ -209,7 +217,8 @@ export default function DashboardClient() {
                 id,
                 full_name,
                 email,
-                avatar_url
+                avatar_url,
+                partner_status
               )
             `,
             )
@@ -224,8 +233,57 @@ export default function DashboardClient() {
               full_name: item.profiles?.full_name || "Referred User",
               email: item.profiles?.email || "",
               avatar_url: item.profiles?.avatar_url || "",
+              partner_status: item.profiles?.partner_status || "pending",
               created_at: item.created_at,
             }));
+          }
+        }
+
+        // =====================================================
+        // IMPORTANT FIX:
+        //
+        // The get_user_referrals RPC path above does not
+        // necessarily return partner_status for each referred
+        // user (it was written before per-referral approval
+        // tracking existed). Without this, a referral that has
+        // actually been approved by an admin would still be
+        // treated as unapproved here, keeping its £125 credit
+        // permanently locked even after approval.
+        //
+        // To make this reliable regardless of which path
+        // populated referralRows, we always re-fetch the current
+        // partner_status for every referred user directly from
+        // profiles and merge it in. This guarantees that as soon
+        // as a specific referral's partner_status flips to
+        // "approved", that referral's £125 becomes available -
+        // independent of any other still-pending referrals.
+        // =====================================================
+
+        if (referralRows && referralRows.length > 0) {
+          const referredIds = referralRows.map((row) => row.id).filter(Boolean);
+
+          if (referredIds.length > 0) {
+            const { data: statusRows, error: statusRowsError } = await supabase
+              .from("profiles")
+              .select("id, partner_status")
+              .in("id", referredIds);
+
+            if (statusRowsError) {
+              console.error(
+                "Unable to refresh per-referral partner_status:",
+                statusRowsError,
+              );
+            } else if (statusRows) {
+              const statusMap = new Map(
+                statusRows.map((row) => [row.id, row.partner_status]),
+              );
+
+              referralRows = referralRows.map((row) => ({
+                ...row,
+                partner_status:
+                  statusMap.get(row.id) || row.partner_status || "pending",
+              }));
+            }
           }
         }
 
@@ -266,7 +324,7 @@ export default function DashboardClient() {
 
               const { data: newProfile } = await supabase
                 .from("profiles")
-                .select("id, full_name, email, avatar_url")
+                .select("id, full_name, email, avatar_url, partner_status")
                 .eq("id", newRef.referred_user_id)
                 .maybeSingle();
 
@@ -275,6 +333,7 @@ export default function DashboardClient() {
                 full_name: newProfile?.full_name || "Referred User",
                 email: newProfile?.email || "",
                 avatar_url: newProfile?.avatar_url || "",
+                partner_status: newProfile?.partner_status || "pending",
                 created_at: newRef.created_at,
               };
 
@@ -292,6 +351,44 @@ export default function DashboardClient() {
           )
           .subscribe((status) => {
             console.log("Referral realtime status:", status);
+          });
+
+        // =====================================================
+        // REALTIME PROFILES (Yeh add karna zaroori hai)
+        // =====================================================
+
+        profilesChannel = supabase
+          .channel(`realtime-profiles-${user.id}`)
+          .on(
+            "postgres_changes",
+            {
+              event: "UPDATE",
+              schema: "public",
+              table: "profiles",
+            },
+            async (payload) => {
+              const updatedProfile = payload.new;
+
+              // Agar kisi referred user ka partner_status change ho toh list update ho jaye
+              setDirectReferrals((prev) =>
+                prev.map((ref) => {
+                  if (ref.id === updatedProfile.id) {
+                    return {
+                      ...ref,
+                      full_name: updatedProfile.full_name || ref.full_name,
+                      email: updatedProfile.email || ref.email,
+                      avatar_url: updatedProfile.avatar_url || ref.avatar_url,
+                      partner_status:
+                        updatedProfile.partner_status || ref.partner_status,
+                    };
+                  }
+                  return ref;
+                }),
+              );
+            },
+          )
+          .subscribe((status) => {
+            console.log("Profiles realtime status:", status);
           });
 
         // =====================================================
@@ -330,10 +427,13 @@ export default function DashboardClient() {
     }
 
     loadDashboardData();
-
     return () => {
       if (referralsChannel) {
         supabase.removeChannel(referralsChannel);
+      }
+
+      if (profilesChannel) {
+        supabase.removeChannel(profilesChannel);
       }
 
       if (claimsChannel) {
@@ -648,12 +748,15 @@ export default function DashboardClient() {
 
     return now < expiryDate;
   };
+  const approvedReferrals = directReferrals.filter(
+    (ref) => ref.partner_status === "approved",
+  );
 
-  const activeRewardReferrals = directReferrals.filter((ref) =>
+  const activeRewardReferrals = approvedReferrals.filter((ref) =>
     isRewardActive(ref.created_at),
   );
 
-  const expiredRewardReferrals = directReferrals.filter(
+  const expiredRewardReferrals = approvedReferrals.filter(
     (ref) => !isRewardActive(ref.created_at),
   );
 
@@ -1157,25 +1260,45 @@ export default function DashboardClient() {
                       </div>
                     </div>
 
-                    <button
-                      onClick={openClaimModal}
-                      disabled={availableRewardAmount < REWARD_PER_REFERRAL}
-                      className={`px-6 py-3.5 rounded-2xl text-xs font-black uppercase tracking-wider transition-all whitespace-nowrap ${
-                        availableRewardAmount >= REWARD_PER_REFERRAL
-                          ? "text-white shadow-lg"
-                          : "bg-slate-100 text-slate-400 cursor-not-allowed"
-                      }`}
-                      style={
-                        availableRewardAmount >= REWARD_PER_REFERRAL
-                          ? {
-                              backgroundColor: BLUE,
-                              boxShadow: `0 10px 25px -8px ${BLUE}66`,
-                            }
-                          : undefined
-                      }
-                    >
-                      Claim Reward
-                    </button>
+                    <div className="flex flex-col items-end">
+                      <button
+                        onClick={openClaimModal}
+                        disabled={availableRewardAmount < REWARD_PER_REFERRAL}
+                        className={`px-6 py-3.5 rounded-2xl text-xs font-black uppercase tracking-wider transition-all whitespace-nowrap ${
+                          availableRewardAmount >= REWARD_PER_REFERRAL
+                            ? "text-white shadow-lg"
+                            : "bg-slate-100 text-slate-400 cursor-not-allowed"
+                        }`}
+                        style={
+                          availableRewardAmount >= REWARD_PER_REFERRAL
+                            ? {
+                                backgroundColor: BLUE,
+                                boxShadow: `0 10px 25px -8px ${BLUE}66`,
+                              }
+                            : undefined
+                        }
+                      >
+                        {availableRewardAmount >= REWARD_PER_REFERRAL
+                          ? "Claim Reward"
+                          : directReferralCount > 0
+                            ? "Referral Pending"
+                            : "No Referrals Yet"}
+                      </button>
+
+                      {availableRewardAmount < REWARD_PER_REFERRAL &&
+                        directReferralCount > 0 && (
+                          <div className="mt-2.5 max-w-[230px] text-center -mr-6">
+                            <p className="text-[10px] font-bold leading-relaxed text-slate-600">
+                              Your referral has been recorded.
+                              <span className="block">
+                                Your referral credit will become available once
+                                your referral is approved and becomes a BizGrow
+                                client.
+                              </span>
+                            </p>
+                          </div>
+                        )}
+                    </div>
                   </div>
                 </div>
 
@@ -1190,11 +1313,33 @@ export default function DashboardClient() {
                   {/* Active Pill */}
                   <div className="flex items-center rounded-xl border border-emerald-100 bg-emerald-50/60 px-4 py-2.5 text-xs shadow-sm transition-all hover:shadow">
                     <span className="mr-2 text-[9px] font-bold uppercase tracking-wide text-emerald-600">
-                      Active
+                      Total
                     </span>
                     <span className="font-black text-slate-800 tabular-nums">
-                      {activeRewardCount} referral
+                      {directReferrals.length} referral
                       {activeRewardCount === 1 ? "" : "s"}
+                    </span>
+                  </div>
+
+                  {/* APPROVED REFERRALS */}
+                  <div className="flex items-center rounded-xl border border-emerald-100 bg-emerald-50/60 px-4 py-2.5 text-xs shadow-sm transition-all hover:shadow">
+                    <span className="mr-2 text-[9px] font-bold uppercase tracking-wide text-emerald-600">
+                      Approved
+                    </span>
+                    <span className="font-black text-slate-800 tabular-nums">
+                      {approvedReferralCount}{" "}
+                      {approvedReferralCount === 1 ? "referral" : "referrals"}
+                    </span>
+                  </div>
+
+                  {/* PENDING REFERRALS */}
+                  <div className="flex items-center rounded-xl border border-amber-100 bg-amber-50/60 px-4 py-2.5 text-xs shadow-sm transition-all hover:shadow">
+                    <span className="mr-2 text-[9px] font-bold uppercase tracking-wide text-amber-600">
+                      Pending
+                    </span>
+                    <span className="font-black text-slate-800 tabular-nums">
+                      {pendingReferralCount}{" "}
+                      {pendingReferralCount === 1 ? "referral" : "referrals"}
                     </span>
                   </div>
 
@@ -1265,8 +1410,6 @@ export default function DashboardClient() {
               (same underlying figures as before, new look)
           ================================================= */}
 
-       
-
           {/* =================================================
               DASHBOARD
           ================================================= */}
@@ -1314,7 +1457,9 @@ export default function DashboardClient() {
                         <tbody className="divide-y divide-slate-50">
                           {directReferrals.map((ref) => {
                             const expiryDate = getExpiryDate(ref.created_at);
-                            const active = isRewardActive(ref.created_at);
+                            const active =
+                              ref.partner_status === "approved" &&
+                              isRewardActive(ref.created_at);
                             const daysLeft = active
                               ? getDaysRemaining(expiryDate)
                               : 0;
@@ -1338,12 +1483,19 @@ export default function DashboardClient() {
                                 <td className="py-4">
                                   <span
                                     className={`px-0 py-1.5 rounded-full text-[11px] font-black uppercase ${
-                                      active
-                                        ? "text-emerald-700"
-                                        : "text-red-600"
+                                      ref.partner_status !== "approved"
+                                        ? "text-amber-600"
+                                        : active
+                                          ? "text-emerald-700"
+                                          : "text-red-600"
                                     }`}
                                   >
-                                    £125 {active ? "Active" : "Expired"}
+                                    £125{" "}
+                                    {ref.partner_status !== "approved"
+                                      ? "Pending"
+                                      : active
+                                        ? "Active"
+                                        : "Expired"}
                                   </span>
 
                                   {active && (
@@ -1365,9 +1517,11 @@ export default function DashboardClient() {
                                   </div>
 
                                   <div className="text-[9px] mt-1 font-semibold text-slate-400">
-                                    {active
-                                      ? `Expires ${formatDate(expiryDate)}`
-                                      : `Expired ${formatDate(expiryDate)}`}
+                                    {ref.partner_status !== "approved"
+                                      ? "Awaiting approval"
+                                      : active
+                                        ? `Expires ${formatDate(expiryDate)}`
+                                        : `Expired ${formatDate(expiryDate)}`}
                                   </div>
                                 </td>
                               </tr>
@@ -1396,8 +1550,10 @@ export default function DashboardClient() {
 
                   <p className="text-sm text-slate-500 font-light mt-3 leading-relaxed">
                     Each successful referral earns you{" "}
-                    <strong className="text-slate-700">£125 BizGrow Referral Credit</strong> that
-                    which can be used towards an eligible BizGrow service.
+                    <strong className="text-slate-700">
+                      £125 BizGrow Referral Credit
+                    </strong>{" "}
+                    that which can be used towards an eligible BizGrow service.
                   </p>
 
                   <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -1422,7 +1578,8 @@ export default function DashboardClient() {
                     </h3>
 
                     <p className="text-xs text-slate-500 mt-1">
-                      Track your referral credit redemption requests and their status
+                      Track your referral credit redemption requests and their
+                      status
                     </p>
                   </div>
 
@@ -1555,8 +1712,8 @@ export default function DashboardClient() {
                         <>
                           The referred business must become a BizGrow paid
                           client for an eligible service with a minimum service
-                          value of <strong>£650 </strong> for the referral
-                          to qualify.
+                          value of <strong>£650 </strong> for the referral to
+                          qualify.
                         </>
                       ),
                     },
