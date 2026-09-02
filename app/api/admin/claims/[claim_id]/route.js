@@ -319,7 +319,7 @@ async function sendApprovalEmail(
   />
 
   <title>
-    Referral Reward Approved
+    
   </title>
 </head>
 

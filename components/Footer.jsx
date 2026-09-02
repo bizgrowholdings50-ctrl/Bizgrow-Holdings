@@ -123,6 +123,7 @@ export default function Footer() {
                   name: "Private Security Startup",
                   link: "/private-security-startup",
                 },
+                { name: "Referral Program", link: "/referral-program" },
                 { name: "QMS Software", link: "/qms-software" },
                 { name: "Internal Audit", link: "/internal-audit" },
                 { name: "Discount Offers", link: "/discount-offers" },
