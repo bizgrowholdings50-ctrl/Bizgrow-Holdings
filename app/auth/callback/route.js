@@ -1,4 +1,3 @@
-
 import crypto from "crypto";
 import { NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/server";
@@ -149,6 +148,10 @@ export async function GET(request) {
     // ========================================================
     // STEP 1
     // CHECK EXISTING PROFILE
+    //
+    // IMPORTANT FIX:
+    // We now also select full_name here, so STEP 4 can decide
+    // whether it is safe to touch that column at all.
     // ========================================================
 
     const {
@@ -157,7 +160,7 @@ export async function GET(request) {
     } = await adminClient
       .from("profiles")
       .select(
-        "id,email,referral_code,partner_status"
+        "id,email,full_name,referral_code,partner_status"
       )
       .eq("id", user.id)
       .maybeSingle();
@@ -251,7 +254,56 @@ export async function GET(request) {
     //
     // IMPORTANT:
     // partner_status is deliberately NOT included here.
-    // ========================================================
+    //
+    // ======================================================
+    // BUG FIX (full_name being overwritten with "Partner"):
+    //
+    // Previously this upsert ALWAYS sent a full_name value
+    // (falling back to "Partner" when the OAuth/session
+    // metadata had no name — which is normal for email/magic
+    // link logins). Because this route runs on EVERY login,
+    // not just signup, that meant a returning user's real,
+    // previously-saved full_name got clobbered back to
+    // "Partner" every single time they logged in without
+    // Google metadata attached.
+    //
+    // Fix: only put full_name in the upsert payload when we
+    // actually have a real name to write:
+    //   - It's a brand new profile (always safe to seed it,
+    //     "Partner" is an acceptable first-time default), OR
+    //   - The auth provider metadata has a real name for this
+    //     login (e.g. Google login has full_name/name), so it's
+    //     safe (and often more accurate) to refresh it.
+    //
+    // If neither is true (existing profile + no metadata name,
+    // e.g. a returning magic-link user), we simply omit
+    // full_name from the payload so Postgres leaves the
+    // existing column value untouched.
+    // ======================================================
+
+    const metadataFullName =
+      user.user_metadata?.full_name ||
+      user.user_metadata?.name ||
+      null;
+
+    const profilePayload = {
+      id: user.id,
+      email: user.email,
+      referral_code: userReferralCode,
+    };
+
+    if (isNewProfile) {
+      // Brand new profile: always seed a full_name, falling
+      // back to "Partner" only because there is no existing
+      // value to protect.
+      profilePayload.full_name = metadataFullName || "Partner";
+    } else if (metadataFullName) {
+      // Existing profile, but this login gave us a real name
+      // (e.g. Google) — safe to refresh it.
+      profilePayload.full_name = metadataFullName;
+    }
+    // else: existing profile + no metadata name -> do NOT
+    // include full_name at all, so the column is left alone.
 
     const {
       data: profileUpsert,
@@ -259,15 +311,7 @@ export async function GET(request) {
     } = await adminClient
       .from("profiles")
       .upsert(
-        {
-          id: user.id,
-          email: user.email,
-          full_name:
-            user.user_metadata?.full_name ||
-            user.user_metadata?.name ||
-            "Partner",
-          referral_code: userReferralCode,
-        },
+        profilePayload,
         {
           onConflict: "id",
         }
@@ -577,4 +621,3 @@ export async function GET(request) {
     );
   }
 }
-

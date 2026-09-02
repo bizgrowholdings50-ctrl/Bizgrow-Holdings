@@ -7,228 +7,582 @@ import { useRouter } from "next/navigation";
 const NAVY = "#12066a";
 const GOLD = "#997819";
 
-// 🔑 Helper: jahan bhi user logged-in state mein hai, uska email save kar lein
-// taake agli dafa login pe Google account-chooser skip ho sake
-function cacheLoggedInEmail(supabase) {
-  if (typeof window === "undefined") return;
+// ============================================================
+// AUTH MEMORY COOKIES
+// ============================================================
 
-  supabase.auth.getUser().then(({ data }) => {
-    const email = data?.user?.email;
-    if (email) {
-      localStorage.setItem("bizgrow_last_login_email", email);
-    }
-  });
+function setAuthCookie(name, value, days = 365) {
+  if (typeof document === "undefined") return;
+
+  const maxAge = days * 24 * 60 * 60;
+
+  document.cookie =
+    `${name}=${encodeURIComponent(value)}` +
+    `; path=/` +
+    `; max-age=${maxAge}` +
+    `; SameSite=Lax` +
+    (window.location.protocol === "https:"
+      ? "; Secure"
+      : "");
 }
+
+function getAuthCookie(name) {
+  if (typeof document === "undefined") return null;
+
+  const cookies = document.cookie.split("; ");
+
+  const cookie = cookies.find((item) =>
+    item.startsWith(`${name}=`)
+  );
+
+  if (!cookie) return null;
+
+  return decodeURIComponent(
+    cookie.substring(name.length + 1)
+  );
+}
+
+// ============================================================
+// REFERRAL COOKIE HELPERS
+// ============================================================
+
+function getReferralCookieValue() {
+  if (typeof document === "undefined") return null;
+
+  const cookies = document.cookie.split("; ");
+
+  const cookie = cookies.find((item) =>
+    item.startsWith("bizgrow_referrer=")
+  );
+
+  if (!cookie) return null;
+
+  return decodeURIComponent(
+    cookie.substring("bizgrow_referrer=".length)
+  );
+}
+
+function getReferralQueryParam() {
+  if (typeof window === "undefined") return null;
+
+  const params = new URLSearchParams(
+    window.location.search
+  );
+
+  return params.get("ref");
+}
+
+function setReferralCookie(referralCode) {
+  if (
+    typeof document === "undefined" ||
+    !referralCode
+  ) {
+    return;
+  }
+
+  const hostname = window.location.hostname;
+
+  const isLocalhost =
+    hostname === "localhost" ||
+    hostname === "127.0.0.1";
+
+  const secure =
+    window.location.protocol === "https:";
+
+  let cookie =
+    `bizgrow_referrer=${encodeURIComponent(
+      referralCode
+    )}` +
+    `; path=/` +
+    `; max-age=${30 * 24 * 60 * 60}` +
+    `; SameSite=${secure ? "None" : "Lax"}`;
+
+  if (secure && !isLocalhost) {
+    cookie += `; Secure; Domain=.${hostname}`;
+  }
+
+  document.cookie = cookie;
+}
+
+// ============================================================
+// REFERRAL BOX
+// IMPORTANT: EXPORTED BECAUSE DASHBOARD USES IT
+// ============================================================
 
 export function ReferralBox({ referralCode }) {
   const [copied, setCopied] = useState(false);
-  const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    setMounted(true);
-
-    // ReferralBox sirf logged-in user ko dikhta hai (dashboard),
-    // isliye yahan email cache karna reliable jagah hai
-    const supabase = createClient();
-    cacheLoggedInEmail(supabase);
-  }, []);
+  if (!referralCode) return null;
 
   const referralLink =
-    mounted && referralCode && referralCode !== "—"
-      ? `${window.location.origin}/referral-program/?ref=${referralCode}`
+    typeof window !== "undefined"
+      ? `${window.location.origin}/referral-program?ref=${referralCode}`
       : "";
 
-  const handleCopy = async () => {
-    if (!referralLink) return;
-
+  const copyReferralLink = async () => {
     try {
-      await navigator.clipboard.writeText(referralLink);
+      await navigator.clipboard.writeText(
+        referralLink
+      );
+
       setCopied(true);
 
       window.setTimeout(() => {
         setCopied(false);
-      }, 1800);
+      }, 2000);
     } catch (error) {
-      console.error("Failed to copy referral link:", error);
+      console.error(
+        "Failed to copy referral link:",
+        error
+      );
     }
   };
 
   return (
-    <div className="space-y-3">
-      <button
-        type="button"
-        onClick={handleCopy}
-        disabled={!referralLink}
-        className="w-full rounded-2xl border border-slate-200 bg-white p-5 text-left shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-[#997819] hover:shadow-md disabled:cursor-not-allowed disabled:opacity-70"
-        style={{
-          borderColor: copied ? GOLD : "#e2e8f0",
-        }}
-      >
-        <div className="flex items-start justify-between gap-3">
-          <div className="min-w-0">
-            <p
-              className="text-[11px] font-semibold uppercase tracking-[0.24em]"
-              style={{ color: GOLD }}
-            >
-              Referral Link
-            </p>
+    <div className="mt-4 rounded-2xl border border-slate-200 bg-white p-4">
+      <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-500">
+        Your Referral Link
+      </p>
 
-            <p className="mt-2 break-all text-sm font-semibold text-slate-800">
-              {referralLink || "Your referral code is being prepared…"}
-            </p>
-          </div>
+      <div className="flex items-center gap-2">
+        <input
+          type="text"
+          value={referralLink}
+          readOnly
+          className="min-w-0 flex-1 rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-600 outline-none"
+        />
 
-          <div className="rounded-full border border-slate-200 p-2 text-slate-500">
-            {copied ? (
-              <span className="text-xs font-semibold" style={{ color: GOLD }}>
-                Copied!
-              </span>
-            ) : (
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"
-                />
-              </svg>
-            )}
-          </div>
-        </div>
-      </button>
-
-      <div className="rounded-xl bg-slate-50 px-4 py-3 text-center">
-        <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-500">
-          Your code
-        </p>
-
-        <p className="mt-1 text-lg font-bold" style={{ color: NAVY }}>
-          {referralCode || "—"}
-        </p>
+        <button
+          type="button"
+          onClick={copyReferralLink}
+          className="shrink-0 rounded-xl px-4 py-2 text-xs font-semibold text-white transition hover:opacity-90"
+          style={{
+            backgroundColor: NAVY,
+          }}
+        >
+          {copied ? "Copied" : "Copy"}
+        </button>
       </div>
     </div>
   );
 }
 
-function getReferralCookieValue() {
-  if (typeof document === "undefined") return "";
-
-  const cookieValue = document.cookie
-    .split(";")
-    .map((item) => item.trim())
-    .find((item) => item.startsWith("bizgrow_referrer="));
-
-  if (!cookieValue) return "";
-
-  try {
-    return decodeURIComponent(
-      cookieValue.substring("bizgrow_referrer=".length),
-    ).trim();
-  } catch {
-    return cookieValue.substring("bizgrow_referrer=".length).trim();
-  }
-}
-
-function getReferralQueryParam() {
-  if (typeof window === "undefined") return "";
-
-  const params = new URLSearchParams(window.location.search);
-
-  return params.get("ref")?.trim() || "";
-}
-
-function setReferralCookie(referralCode) {
-  if (typeof document === "undefined" || !referralCode) return;
-
-  const maxAge = 30 * 24 * 60 * 60;
-
-  const expires = new Date(Date.now() + maxAge * 1000).toUTCString();
-
-  const isHttps = window.location.protocol === "https:";
-
-  const secure = isHttps ? "; Secure" : "";
-
-  const sameSite = isHttps ? "SameSite=None" : "SameSite=Lax";
-
-  const hostname = window.location.hostname;
-
-  const cleanHostname = hostname.replace(/^www\./, "");
-
-  const domain =
-    cleanHostname.includes(".") && !cleanHostname.includes("localhost")
-      ? `; Domain=.${cleanHostname}`
-      : "";
-
-  document.cookie =
-    `bizgrow_referrer=${encodeURIComponent(referralCode)}; ` +
-    `expires=${expires}; ` +
-    `max-age=${maxAge}; ` +
-    `path=/; ` +
-    `${sameSite}` +
-    `${secure}` +
-    `${domain}`;
-}
+// ============================================================
+// REFERRAL COOKIE NOTICE
+// ============================================================
 
 export function ReferralCookieNotice() {
-  const [hasReferralCookie, setHasReferralCookie] = useState(false);
+  const [referralCode, setReferralCode] =
+    useState(null);
 
   useEffect(() => {
-    const referral = getReferralCookieValue() || getReferralQueryParam();
+    const queryReferral =
+      getReferralQueryParam();
 
-    setHasReferralCookie(Boolean(referral));
+    const cookieReferral =
+      getReferralCookieValue();
+
+    const code =
+      queryReferral || cookieReferral;
+
+    if (code) {
+      setReferralCode(code);
+
+      if (queryReferral) {
+        setReferralCookie(queryReferral);
+      }
+    }
   }, []);
 
-  if (!hasReferralCookie) return null;
+  if (!referralCode) return null;
 
   return (
-    <div >
-      
+    <div className="fixed bottom-5 left-5 right-5 z-[9998] mx-auto max-w-md rounded-2xl border border-slate-200 bg-white p-4 shadow-xl">
+      <p className="text-sm font-semibold text-slate-800">
+        Referral link detected
+      </p>
+
+      <p className="mt-1 text-xs leading-relaxed text-slate-500">
+        Your referral information has been saved
+        and will remain available during your signup.
+      </p>
     </div>
   );
 }
 
+// ============================================================
+// LOGIN BUTTON
+// ============================================================
+
 export function LoginButton() {
   const router = useRouter();
-
-  const handleLoginRedirect = () => {
-    router.push("/referral-program");
-  };
-
-  return (
-    <button
-      type="button"
-      onClick={handleLoginRedirect}
-      className="w-full rounded-2xl border border-slate-200 bg-[#12066a] px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-[#12066a]/90 active:scale-[0.99] shadow-sm"
-    >
-      Sign In
-    </button>
-  );
-}
-
-export function GoogleLoginButton({
-  text = "Continue with Google", // Default text agar koi aur prop na diya jaye
-  loadingText = "Loading...",
-}) {
   const supabase = createClient();
 
   const [loading, setLoading] = useState(false);
-  const [buttonText, setButtonText] = useState(text);
+  const [toast, setToast] = useState(null);
+
+  // ----------------------------------------------------------
+  // MODERN TOAST
+  // ----------------------------------------------------------
+
+  const showToast = (
+    message,
+    type = "success"
+  ) => {
+    setToast({
+      message,
+      type,
+    });
+
+    window.setTimeout(() => {
+      setToast(null);
+    }, 5000);
+  };
+
+  // ----------------------------------------------------------
+  // LOGIN
+  // ----------------------------------------------------------
+
+  const handleLogin = async () => {
+    // FIX #1: agar already loading hai to dubara mat chalao.
+    // Yehi guard duplicate magic-link requests (double click / re-render)
+    // rokta hai.
+    if (loading) return;
+
+    setLoading(true);
+
+    try {
+      // ======================================================
+      // ALWAYS CHECK REAL SUPABASE SESSION FIRST
+      // ======================================================
+
+      const {
+        data: { session },
+        error: sessionError,
+      } = await supabase.auth.getSession();
+
+      if (sessionError) {
+        console.error(
+          "Session check error:",
+          sessionError
+        );
+      }
+
+      // ======================================================
+      // REAL SESSION EXISTS
+      // DO NOT SEND MAGIC LINK
+      // ======================================================
+
+      if (session) {
+        router.push(
+          "/referral-program/dashboard"
+        );
+
+        // FIX #2 (main "stuck on loading" bug):
+        // router.push() sirf navigation *request* karta hai,
+        // component turant unmount nahi hota (especially agar
+        // middleware/redirect thora slow ho ya wapas isi route
+        // pe land ho jaye). Us waqt tak button "Please wait..."
+        // par attka reh jata tha kyunki loading kabhi false
+        // set hi nahi hua tha.
+        setLoading(false);
+
+        return;
+      }
+
+      // ======================================================
+      // NO REAL SESSION
+      // CHECK REMEMBERED LOGIN METHOD
+      // ======================================================
+
+      const lastLoginMethod =
+        getAuthCookie(
+          "bizgrow_last_login_method"
+        );
+
+      const lastLoginEmail =
+        getAuthCookie(
+          "bizgrow_last_login_email"
+        );
+
+      // ======================================================
+      // PREVIOUS LOGIN WAS GOOGLE
+      // ======================================================
+
+      if (lastLoginMethod === "google") {
+        const referralCode =
+          getReferralCookieValue() ||
+          getReferralQueryParam();
+
+        if (referralCode) {
+          setReferralCookie(
+            referralCode
+          );
+        }
+
+        const origin =
+          window.location.origin;
+
+        const { error } =
+          await supabase.auth.signInWithOAuth(
+            {
+              provider: "google",
+              options: {
+                redirectTo:
+                  `${origin}/auth/callback`,
+                queryParams: {
+                  access_type: "offline",
+                  prompt: "select_account",
+                },
+              },
+            }
+          );
+
+        if (error) {
+          console.error(
+            "Google login error:",
+            error
+          );
+
+          showToast(
+            "Unable to start Google login. Please try again.",
+            "error"
+          );
+
+          setLoading(false);
+        }
+
+        // NOTE: agar error nahi aya, browser Google pe redirect
+        // ho raha hai, is liye loading true rehna theek hai —
+        // page khud navigate away kar jayega.
+
+        return;
+      }
+
+      // ======================================================
+      // PREVIOUS LOGIN WAS EMAIL
+      //
+      // IMPORTANT:
+      // We only reach here after getSession() confirmed
+      // that there is NO active Supabase session.
+      // ======================================================
+
+      if (
+        lastLoginMethod === "email" &&
+        lastLoginEmail
+      ) {
+        const referralCode =
+          getReferralCookieValue() ||
+          getReferralQueryParam();
+
+        if (referralCode) {
+          setReferralCookie(
+            referralCode
+          );
+        }
+
+        const origin =
+          window.location.origin;
+
+        const { error } =
+          await supabase.auth.signInWithOtp(
+            {
+              email: lastLoginEmail,
+              options: {
+                emailRedirectTo:
+                  `${origin}/auth/callback`,
+              },
+            }
+          );
+
+        if (error) {
+          console.error(
+            "Magic link error:",
+            error
+          );
+
+          showToast(
+            "Unable to send the login link. Please try again.",
+            "error"
+          );
+
+          setLoading(false);
+
+          return;
+        }
+
+        // ====================================================
+        // MODERN TOAST
+        // NO DEFAULT BROWSER ALERT
+        // ====================================================
+
+        showToast(
+          `Login link sent to ${lastLoginEmail}. Check your email to continue.`,
+          "success"
+        );
+
+        setLoading(false);
+
+        return;
+      }
+
+      // ======================================================
+      // NO REMEMBERED LOGIN
+      // ======================================================
+
+      router.push("/referral-program");
+
+      // FIX #3: yahan bhi wahi masla tha jo #2 mein tha.
+      setLoading(false);
+    } catch (error) {
+      console.error(
+        "Login error:",
+        error
+      );
+
+      showToast(
+        "Something went wrong. Please try again.",
+        "error"
+      );
+
+      setLoading(false);
+    }
+  };
+
+  return (
+    <>
+      <button
+        type="button"
+        onClick={handleLogin}
+        disabled={loading}
+        className="inline-flex items-center justify-center rounded-full px-7 py-3 text-sm font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+        style={{
+          backgroundColor: NAVY,
+        }}
+      >
+        {loading
+          ? "Please wait..."
+          : "Login"}
+      </button>
+
+      {/* ======================================================
+          MODERN TOAST
+      ====================================================== */}
+
+      {toast && (
+        <div
+          className="fixed bottom-5 right-5 z-[9999] w-[calc(100%-2.5rem)] max-w-sm rounded-2xl border border-slate-200 bg-white px-5 py-4 shadow-2xl"
+          role="status"
+        >
+          <div className="flex items-start gap-3">
+            <div
+              className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-sm font-bold ${
+                toast.type === "error"
+                  ? "bg-red-50 text-red-600"
+                  : "bg-green-50 text-green-600"
+              }`}
+            >
+              {toast.type === "error"
+                ? "!"
+                : "✓"}
+            </div>
+
+            <div className="min-w-0 flex-1">
+              <p className="text-sm font-bold text-slate-800">
+                {toast.type === "error"
+                  ? "Something went wrong"
+                  : "Login link sent"}
+              </p>
+
+              <p className="mt-1 text-xs leading-relaxed text-slate-500">
+                {toast.message}
+              </p>
+            </div>
+
+            <button
+              type="button"
+              onClick={() =>
+                setToast(null)
+              }
+              className="text-lg leading-none text-slate-400 transition hover:text-slate-700"
+              aria-label="Close notification"
+            >
+              ×
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+// ============================================================
+// GOOGLE LOGIN BUTTON
+// ============================================================
+
+export function GoogleLoginButton() {
+  const supabase = createClient();
+
+  const [loading, setLoading] =
+    useState(false);
+
+  const [email, setEmail] =
+    useState("");
+
+  const [emailSent, setEmailSent] =
+    useState(false);
+
+  const [showEmailLogin, setShowEmailLogin] =
+    useState(false);
+
+  // ==========================================================
+  // IMPORTANT:
+  //
+  // Start as TRUE so returning users immediately see
+  // the single Login button.
+  //
+  // After hydration, useEffect checks cookies.
+  // If this is a genuinely first-time user, it switches
+  // to Google + Email options.
+  //
+  // This prevents the unwanted:
+  // Google button -> Email button -> Login button
+  // flash after logout.
+  // ==========================================================
+
+  const [rememberedLogin, setRememberedLogin] =
+    useState(true);
+
+  // ----------------------------------------------------------
+  // CHECK REMEMBERED LOGIN
+  // ----------------------------------------------------------
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const signedOut = localStorage.getItem("hasSignedOut");
-      // Sirf tab change hoga jab user sign out karke aaya ho AUR default "Continue with Google" wala button ho
-      if (signedOut === "true" && text === "Continue with Google") {
-        setButtonText("Login to your account");
-      }
-    }
-  }, [text]);
+    const lastLoginMethod =
+      getAuthCookie(
+        "bizgrow_last_login_method"
+      );
+
+    const lastLoginEmail =
+      getAuthCookie(
+        "bizgrow_last_login_email"
+      );
+
+    const hasRememberedLogin =
+      lastLoginMethod === "google" ||
+      (
+        lastLoginMethod === "email" &&
+        !!lastLoginEmail
+      );
+
+    setRememberedLogin(
+      hasRememberedLogin
+    );
+  }, []);
+
+  // ==========================================================
+  // GOOGLE LOGIN
+  // ==========================================================
 
   const handleGoogleLogin = async () => {
     if (loading) return;
@@ -236,167 +590,409 @@ export function GoogleLoginButton({
     setLoading(true);
 
     try {
-      const origin =
-        typeof window !== "undefined"
-          ? window.location.origin
-          : process.env.NEXT_PUBLIC_SITE_URL || "";
+      // Remember Google
+      setAuthCookie(
+        "bizgrow_last_login_method",
+        "google"
+      );
 
-      const queryReferralCode = getReferralQueryParam();
-
-      const cookieReferralCode = getReferralCookieValue();
-
-      const referralCode = queryReferralCode || cookieReferralCode || "";
+      // Preserve referral
+      const referralCode =
+        getReferralCookieValue() ||
+        getReferralQueryParam();
 
       if (referralCode) {
-        setReferralCookie(referralCode);
+        setReferralCookie(
+          referralCode
+        );
       }
 
-      const callbackUrl = origin
-        ? `${origin.replace(/\/+$/, "")}/auth/callback${
-            referralCode ? `?ref=${encodeURIComponent(referralCode)}` : ""
-          }`
-        : `/auth/callback${
-            referralCode ? `?ref=${encodeURIComponent(referralCode)}` : ""
-          }`;
+      const origin =
+        window.location.origin;
 
-      // 🔑 Agar user pehle khud sign out kar chuka hai (hasSignedOut flag set hai)
-      // aur uska email humare paas cached hai, to Google ka account-chooser
-      // bilkul skip kar dein aur seedha usi account se silently login kar dein
-      const hasSignedOut =
-        typeof window !== "undefined" &&
-        localStorage.getItem("hasSignedOut") === "true";
-
-      const cachedEmail =
-        typeof window !== "undefined"
-          ? localStorage.getItem("bizgrow_last_login_email")
-          : null;
-
-      const queryParams = {
-        access_type: "offline",
-      };
-
-      if (hasSignedOut && cachedEmail) {
-        // Google ko exact account bata dein — chooser screen skip ho jayegi
-        queryParams.login_hint = cachedEmail;
-        queryParams.prompt = "none";
-      } else {
-        // Pehli dafa login: normal account-chooser dikhne dein
-        queryParams.prompt = "select_account";
-      }
-
-      const { data, error } = await supabase.auth.signInWithOAuth({
-        provider: "google",
-
-        options: {
-          redirectTo: callbackUrl,
-          queryParams,
-        },
-      });
+      const { error } =
+        await supabase.auth.signInWithOAuth(
+          {
+            provider: "google",
+            options: {
+              redirectTo:
+                `${origin}/auth/callback`,
+              queryParams: {
+                access_type: "offline",
+                prompt: "select_account",
+              },
+            },
+          }
+        );
 
       if (error) {
-        console.error("Google sign-in failed:", error);
+        console.error(
+          "Google login error:",
+          error
+        );
 
         setLoading(false);
-        return;
       }
-
-      if (data?.url) {
-        window.location.assign(data.url);
-        return;
-      }
-
-      setLoading(false);
     } catch (error) {
-      console.error("Exception during Google OAuth:", error);
+      console.error(
+        "Google login error:",
+        error
+      );
 
       setLoading(false);
     }
   };
 
+  // ==========================================================
+  // EMAIL LOGIN
+  // ==========================================================
+
+  const handleEmailLogin = async (
+    event
+  ) => {
+    event.preventDefault();
+
+    if (
+      loading ||
+      !email.trim()
+    ) {
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const cleanEmail =
+        email.trim();
+
+      // Remember email login
+      setAuthCookie(
+        "bizgrow_last_login_method",
+        "email"
+      );
+
+      setAuthCookie(
+        "bizgrow_last_login_email",
+        cleanEmail
+      );
+
+      // Preserve referral
+      const referralCode =
+        getReferralCookieValue() ||
+        getReferralQueryParam();
+
+      if (referralCode) {
+        setReferralCookie(
+          referralCode
+        );
+      }
+
+      const origin =
+        window.location.origin;
+
+      const { error } =
+        await supabase.auth.signInWithOtp(
+          {
+            email: cleanEmail,
+            options: {
+              emailRedirectTo:
+                `${origin}/auth/callback`,
+              shouldCreateUser: true,
+            },
+          }
+        );
+
+      if (error) {
+        console.error(
+          "Email login error:",
+          error
+        );
+
+        setLoading(false);
+
+        return;
+      }
+
+      setEmailSent(true);
+      setLoading(false);
+    } catch (error) {
+      console.error(
+        "Email login error:",
+        error
+      );
+
+      setLoading(false);
+    }
+  };
+
+  // ==========================================================
+  // PREVIOUSLY LOGGED-IN USER
+  // SHOW ONLY ONE LOGIN BUTTON
+  // ==========================================================
+
+  if (rememberedLogin) {
+    return <LoginButton />;
+  }
+
+  // ==========================================================
+  // EMAIL SENT SCREEN
+  // ==========================================================
+
+  if (emailSent) {
+    return (
+      <div className="w-full max-w-md rounded-3xl border border-slate-200 bg-white p-7 shadow-xl">
+        <div className="text-center">
+          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-green-50 text-2xl text-green-600">
+            ✓
+          </div>
+
+          <h3 className="mt-4 text-xl font-bold text-slate-900">
+            Check your email
+          </h3>
+
+          <p className="mt-2 text-sm leading-relaxed text-slate-500">
+            We sent a verification link to{" "}
+            <span className="font-semibold text-slate-700">
+              {email}
+            </span>
+            .
+          </p>
+
+          <p className="mt-2 text-xs text-slate-600">
+            Click the link in your email to
+            continue.
+          </p>
+
+          <button
+            type="button"
+            onClick={() => {
+              setEmailSent(false);
+              setEmail("");
+            }}
+            className="mt-5 text-sm font-semibold underline"
+            style={{
+              color: NAVY,
+            }}
+          >
+            Use a different email
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // ==========================================================
+  // EMAIL LOGIN FORM
+  // ==========================================================
+
+  if (showEmailLogin) {
+    return (
+      <div className="w-full max-w-md">
+        <form
+          onSubmit={handleEmailLogin}
+          className="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl"
+        >
+          <h3 className="text-lg font-bold text-slate-900">
+            Continue with email
+          </h3>
+
+          <p className="mt-1 text-sm text-slate-500">
+            We will send you a secure login link.
+          </p>
+
+          <input
+            type="email"
+            value={email}
+            onChange={(event) =>
+              setEmail(event.target.value)
+            }
+            placeholder="Enter your email"
+            required
+            className="mt-5 w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none transition focus:border-slate-400"
+          />
+
+          <button
+            type="submit"
+            disabled={loading}
+            className="mt-4 w-full rounded-xl px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+            style={{
+              backgroundColor: NAVY,
+            }}
+          >
+            {loading
+              ? "Sending..."
+              : "Send Login Link"}
+          </button>
+
+          <button
+            type="button"
+            onClick={() =>
+              setShowEmailLogin(false)
+            }
+            className="mt-3 w-full text-sm font-medium text-slate-500 hover:text-slate-800"
+          >
+            Back
+          </button>
+        </form>
+      </div>
+    );
+  }
+
+  // ==========================================================
+  // FIRST-TIME USER
+  // GOOGLE + EMAIL
+  // ==========================================================
+
   return (
-    <div className="w-full">
-      <ReferralCookieNotice />
+    <div className="flex w-full max-w-md flex-col gap-4">
+      {/* GOOGLE */}
 
       <button
         type="button"
         onClick={handleGoogleLogin}
         disabled={loading}
-        className="flex w-full items-center justify-center gap-3 rounded-2xl border border-slate-200 bg-white px-5 py-3.5 font-semibold text-slate-900 shadow-sm transition duration-150 ease-in-out hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-70"
+        className="flex w-full items-center justify-center gap-3 rounded-full border border-slate-200 bg-white px-6 py-3.5 text-sm font-semibold text-slate-800 shadow-sm transition hover:shadow-md disabled:cursor-not-allowed disabled:opacity-60"
       >
-        <span className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-slate-50 shrink-0">
-          <svg
-            viewBox="0 0 533.5 544.3"
-            className="h-[18px] w-[18px]"
-            aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fill="#4285f4"
-              d="M533.5 278.4c0-17.4-1.6-34.1-4.6-50.4H272.1v95.4h147.1c-6.3 34.4-25.3 63.5-54 83.1v68.8h87.4c51.2-47.1 80.9-116.4 80.9-196.9z"
-            />
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            fill="#4285F4"
+            d="M21.35 12.27c0-.79-.07-1.55-.23-2.27H12v4.3h5.22a4.46 4.46 0 0 1-1.94 2.92v2.42h3.14c1.84-1.69 2.93-4.18 2.93-7.37Z"
+          />
 
-            <path
-              fill="#34a853"
-              d="M272.1 544.3c73.4 0 135-24.2 180-65.8l-87.4-68.8c-24.3 16.3-55.5 25.9-92.6 25.9-71 0-131.2-47.9-152.7-112.4H31.2v70.7c44.8 88.3 136.7 150.4 240.9 150.4z"
-            />
+          <path
+            fill="#34A853"
+            d="M12 21.5c2.63 0 4.84-.87 6.45-2.36l-3.14-2.42c-.87.58-1.98.92-3.31.92-2.54 0-4.7-1.72-5.47-4.03H3.29v2.5A9.75 9.75 0 0 0 12 21.5Z"
+          />
 
-            <path
-              fill="#fbbc04"
-              d="M119.4 323.2c-10.4-30.7-10.4-63.8 0-94.5V158c-32.8 65.7-32.8 143.4 0 209.1l102.6-43.9z"
-            />
+          <path
+            fill="#FBBC05"
+            d="M6.53 13.61A5.86 5.86 0 0 1 6.23 12c0-.56.1-1.1.3-1.61V7.89H3.29A9.76 9.76 0 0 0 2.25 12c0 1.57.38 3.05 1.04 4.11l3.24-2.5Z"
+          />
 
-            <path
-              fill="#ea4335"
-              d="M272.1 107.1c39.9-.6 78 14.6 106.8 40.9l80.2-80.2C408.3 24.7 344.6-.3 272.1 0 168 0 76.1 62.1 31.2 150.4l102.6 70.7c21.4-64.6 81.7-112.4 138.3-113z"
-            />
-          </svg>
+          <path
+            fill="#EA4335"
+            d="M12 6.36c1.43 0 2.72.49 3.73 1.46l2.8-2.8C16.84 3.46 14.63 2.5 12 2.5a9.75 9.75 0 0 0-8.71 5.39l3.24 2.5c.77-2.31 2.93-4.03 5.47-4.03Z"
+          />
+        </svg>
+
+        {loading
+          ? "Connecting..."
+          : "Continue with Google"}
+      </button>
+
+      {/* OR */}
+
+      <div className="flex items-center gap-3">
+        <div className="h-px flex-1 bg-slate-200" />
+
+        <span className="text-xs font-medium uppercase tracking-wide text-slate-400">
+          OR
         </span>
 
-        <span>{loading ? loadingText : buttonText}</span>
+        <div className="h-px flex-1 bg-slate-200" />
+      </div>
+
+      {/* EMAIL */}
+
+      <button
+        type="button"
+        onClick={() =>
+          setShowEmailLogin(true)
+        }
+        className="w-full rounded-full border px-6 py-3.5 text-sm font-semibold transition bg-slate-50"
+        style={{
+          borderColor: GOLD,
+          color: NAVY,
+        }}
+      >
+        Continue with Email
       </button>
     </div>
   );
 }
 
+// ============================================================
+// LOGOUT BUTTON
+// ============================================================
+
 export function LogoutButton() {
+  const router = useRouter();
   const supabase = createClient();
 
+  const [loading, setLoading] =
+    useState(false);
+
   const handleLogout = async () => {
+    if (loading) return;
+
+    setLoading(true);
+
     try {
-      const loadingElement = document.getElementById(
-        "bizgrow-loading-fallback",
-      );
+      // ======================================================
+      // REMOVE REFERRAL COOKIE ONLY
+      //
+      // DO NOT REMOVE:
+      // bizgrow_last_login_method
+      // bizgrow_last_login_email
+      // ======================================================
 
-      if (loadingElement) {
-        loadingElement.remove();
+      document.cookie =
+        "bizgrow_referrer=; path=/; max-age=0; SameSite=Lax";
+
+      // ======================================================
+      // DESTROY REAL SUPABASE SESSION
+      //
+      // THIS IS THE ONLY signOut() CALL.
+      // ======================================================
+
+      const { error } =
+        await supabase.auth.signOut();
+
+      if (error) {
+        console.error(
+          "Supabase sign out error:",
+          error
+        );
+
+        setLoading(false);
+
+        return;
       }
 
-      if (typeof window !== "undefined") {
-        // Keep cached Google login email
-        localStorage.setItem("hasSignedOut", "true");
-
-        // Clear referral cookie ONLY
-        document.cookie =
-          "bizgrow_referrer=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-
-        // Clear domain cookie as well for production
-        const hostname = window.location.hostname;
-        const cleanHostname = hostname.replace(/^www\./, "");
-
-        if (
-          cleanHostname.includes(".") &&
-          !cleanHostname.includes("localhost")
-        ) {
-          document.cookie =
-            `bizgrow_referrer=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; Domain=.${cleanHostname};`;
-        }
-      }
-
-      await supabase.auth.signOut();
+      // ======================================================
+      // SIGNOUT COMPLETED
+      // NOW GO TO REFERRAL PROGRAM
+      //
+      // FIX (best solution for the stuck-loading issue):
+      // Instead of router.replace() + router.refresh() (which
+      // only ask Next.js to navigate/re-render client-side and
+      // can leave this component mounted with stale state),
+      // we do a full hard redirect. This:
+      //   - always leaves this page/component entirely, so
+      //     "loading" state can never get stuck
+      //   - guarantees a completely fresh page load with no
+      //     leftover client-side state (old user data, realtime
+      //     subscriptions, cached hooks, etc.)
+      //   - matches what signOut() actually did: a real,
+      //     full session change, not just a client route change
+      //
+      // No setLoading(false) needed here — the whole page is
+      // about to be replaced anyway.
+      // ======================================================
 
       window.location.href = "/referral-program";
     } catch (error) {
-      console.error("Logout failed:", error);
+      console.error(
+        "Logout error:",
+        error
+      );
+
+      setLoading(false);
     }
   };
 
@@ -404,12 +1000,12 @@ export function LogoutButton() {
     <button
       type="button"
       onClick={handleLogout}
-      className="w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm font-semibold text-slate-700 transition-all hover:bg-slate-50 active:scale-[0.99]"
-      style={{
-        borderColor: `${GOLD}33`,
-      }}
+      disabled={loading}
+      className="rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-60"
     >
-      Sign Out
+      {loading
+        ? "Signing out..."
+        : "Logout"}
     </button>
   );
 }

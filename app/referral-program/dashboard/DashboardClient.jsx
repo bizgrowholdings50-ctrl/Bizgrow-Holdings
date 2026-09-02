@@ -1141,7 +1141,7 @@ export default function DashboardClient() {
               <div>
                 <div className="flex items-center gap-2">
                   <h2 className="text-xl font-bold text-slate-800">
-                    Hello, {profile?.full_name?.split(" ")[0] || "Partner"}
+                    Hello, {profile?.full_name?.split(" ")[0] || " "}
                   </h2>
 
                   {profileError && (

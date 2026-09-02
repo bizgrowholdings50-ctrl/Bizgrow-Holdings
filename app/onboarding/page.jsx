@@ -823,7 +823,7 @@ export default function OnboardingPage() {
                 BUTTONS
             ================================================= */}
 
-            <div className="flex items-center gap-3 pt-4 border-t border-slate-100">
+            <div className="flex items-center gap-3 -mt-6 border-t border-slate-100">
               {subStep > 1 && (
                 <button
                   type="button"

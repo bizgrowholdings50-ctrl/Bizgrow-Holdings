@@ -218,7 +218,7 @@ User Message: ${cleanMessage || "No additional comments."}`;
   };
 
   if (success) {
-    return (
+  return (
       <div className="bg-white border mt-22 border-[#997819]/30 rounded-3xl p-8 text-center space-y-6 shadow-lg shadow-[#12066a]/5 max-w-xl mx-auto">
         <div className="w-16 h-16 bg-amber-100 text-[#997819] rounded-full flex items-center justify-center font-bold text-2xl mx-auto border border-amber-400">
           ⌛
@@ -315,8 +315,9 @@ User Message: ${cleanMessage || "No additional comments."}`;
             </li>
           </ul>
 
-          <div className="mt-6 space-y-3">
-            <p className="text-xs text-slate-600 font-medium text-left">
+          {/* Yahan classes update ki hain center alignment ke liye */}
+          <div className="mt-6 space-y-3 flex flex-col items-center">
+            <p className="text-xs text-slate-600 font-medium text-center">
               Get your profile ready while your referral request is
               being reviewed
             </p>
@@ -325,7 +326,7 @@ User Message: ${cleanMessage || "No additional comments."}`;
           </div>
         </div>
       </div>
-    );
+  );
   }
 
   return (

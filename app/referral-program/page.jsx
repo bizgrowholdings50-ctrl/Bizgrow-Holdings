@@ -887,7 +887,7 @@ export default async function ReferralPage() {
             ===================================================== */}
 
                 {/* --- 1 HERO: Ultra-Premium with Background Image for Referral Program --- */}
-                <section className="relative left-1/2 right-1/2 -mx-[50vw] w-screen h-screen flex items-center justify-center px-6 overflow-hidden bg-[#12066a]">
+                <section className="relative left-1/2 right-1/2 -mx-[50vw] w-screen h-[140vh] flex items-center justify-center px-6 overflow-hidden bg-[#12066a]">
                   {/* --- Background Image Layer --- */}
                   <div className="absolute inset-0 z-0">
                     <img
@@ -907,7 +907,7 @@ export default async function ReferralPage() {
                   </div>
 
                   {/* --- Content Layer --- */}
-                  <div className="max-w-7xl mt-22 mx-auto text-center relative z-20">
+                  <div className="max-w-7xl -mt-10 mx-auto text-center relative z-20">
                     <div className="mb-6 flex items-center justify-center gap-4">
                       <div className="h-[1px] w-12 bg-[#997819]" />
                       <span className="text-[#997819] text-[11px] font-black uppercase tracking-[0.5em] drop-shadow-md">
