@@ -27,6 +27,7 @@ import {
   PhoneCall,
 } from "lucide-react";
 import ReferredLandingContent from "@/components/ReferredLandingContent";
+import ReferralPageLoader from "@/components/ReferralPageLoader";
 
 export const dynamic = "force-dynamic";
 
@@ -587,59 +588,7 @@ export default async function ReferralPage() {
 
   return (
     <main className="min-h-screen relative bg-[#fcfcfd] font-sans selection:bg-[#997819] selection:text-white pb-32 overflow-x-hidden">
-      {/* LOADING TEXT - shows immediately, hidden once real content paints */}
-      <div
-        style={{
-          position: "fixed",
-          inset: 0,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "#fcfcfd",
-          zIndex: 9999,
-        }}
-        id="bizgrow-loading-fallback"
-      >
-        <p
-          style={{
-            fontSize: "13px",
-            fontWeight: 700,
-            textTransform: "uppercase",
-            letterSpacing: "0.1em",
-            color: "#94a3b8",
-          }}
-        >
-          Loading...
-        </p>
-      </div>
-
-      {/* AUTO-RELOAD SCRIPT */}
-      <script
-        dangerouslySetInnerHTML={{
-          __html: `
-    (function() {
-      try {
-        var reloadKey = "bizgrow_referral_reload";
-        var alreadyReloaded = sessionStorage.getItem(reloadKey);
-
-        if (!alreadyReloaded) {
-          setTimeout(function() {
-            sessionStorage.setItem(reloadKey, "true");
-            window.location.reload();
-          }, 2000);
-        } else {
-          sessionStorage.removeItem(reloadKey);
-
-          // Hide the loading overlay once we know this is
-          // the post-reload (real) render.
-          var overlay = document.getElementById("bizgrow-loading-fallback");
-          if (overlay) overlay.style.display = "none";
-        }
-      } catch (e) {}
-    })();
-  `,
-        }}
-      />
+      <ReferralPageLoader />
 
       {/* BACKGROUND */}
 

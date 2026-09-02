@@ -4,17 +4,28 @@ import { createClient } from "@/utils/supabase/server";
 import { createClient as createSupabaseAdmin } from "@supabase/supabase-js";
 import { cookies } from "next/headers";
 
-// 👇 YE 2 LINES ADD KARNI HAIN — bas itna hi
+// ============================================================
+// FORCE DYNAMIC
+// ============================================================
+
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
+// ============================================================
+// GENERATE REFERRAL CODE
+// ============================================================
+
 function generateReferralCode() {
-  return crypto.randomUUID().replace(/-/g, "").slice(0, 10).toUpperCase();
+  return crypto
+    .randomUUID()
+    .replace(/-/g, "")
+    .slice(0, 10)
+    .toUpperCase();
 }
 
 // ============================================================
 // SERVICE ROLE ADMIN CLIENT
-// =========================================================
+// ============================================================
 
 function getAdminClient() {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -28,12 +39,16 @@ function getAdminClient() {
     throw new Error("SUPABASE_SERVICE_ROLE_KEY is missing.");
   }
 
-  return createSupabaseAdmin(supabaseUrl, serviceRoleKey, {
-    auth: {
-      autoRefreshToken: false,
-      persistSession: false,
-    },
-  });
+  return createSupabaseAdmin(
+    supabaseUrl,
+    serviceRoleKey,
+    {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false,
+      },
+    }
+  );
 }
 
 // ============================================================
@@ -76,8 +91,11 @@ export async function GET(request) {
     const cookieStore = await cookies();
     const refCookie = cookieStore.get("bizgrow_referrer");
 
-    const cookieReferralCode = refCookie?.value?.trim() || "";
-    const queryReferralCode = refParam?.trim() || "";
+    const cookieReferralCode =
+      refCookie?.value?.trim() || "";
+
+    const queryReferralCode =
+      refParam?.trim() || "";
 
     // Query parameter has priority over cookie.
     const rawReferralCode =
@@ -87,10 +105,14 @@ export async function GET(request) {
 
     try {
       referralCode = rawReferralCode
-        ? decodeURIComponent(rawReferralCode).trim().toUpperCase()
+        ? decodeURIComponent(rawReferralCode)
+            .trim()
+            .toUpperCase()
         : "";
     } catch {
-      referralCode = rawReferralCode.trim().toUpperCase();
+      referralCode = rawReferralCode
+        .trim()
+        .toUpperCase();
     }
 
     console.log("REFERRAL SOURCE:", {
@@ -103,42 +125,70 @@ export async function GET(request) {
     // OAUTH CODE CHECK
     // ========================================================
 
-    if (!code) {
-      console.error("No OAuth code found.");
-
-      return NextResponse.redirect(
-        new URL("/referral-program", origin)
-      );
-    }
-
-    // ========================================================
-    // CLIENTS
-    // ========================================================
-
     const authClient = await createClient();
     const adminClient = getAdminClient();
 
-    // ========================================================
-    // EXCHANGE GOOGLE CODE FOR SESSION
-    // ========================================================
+    let user = null;
 
-    const {
-      data: { session },
-      error: exchangeError,
-    } = await authClient.auth.exchangeCodeForSession(code);
+    if (code) {
+      // ------------------------------------------------------
+      // CASE 1: OAuth code present
+      // Google login, ya email confirmation link
+      // jisme Supabase code deta hai
+      // ------------------------------------------------------
 
-    if (exchangeError || !session?.user) {
-      console.error(
-        "OAuth exchange failed:",
-        exchangeError
-      );
+      const {
+        data: { session },
+        error: exchangeError,
+      } = await authClient.auth.exchangeCodeForSession(code);
 
-      return NextResponse.redirect(
-        new URL("/referral-program", origin)
-      );
+      if (exchangeError || !session?.user) {
+        console.error(
+          "OAuth exchange failed:",
+          exchangeError
+        );
+
+        return NextResponse.redirect(
+          new URL(
+            "/referral-program",
+            origin
+          )
+        );
+      }
+
+      user = session.user;
+    } else {
+      // ------------------------------------------------------
+      // CASE 2: No code, but session already exists
+      // Email/password signup jab confirmation OFF ho,
+      // signInWithPassword ke turant baad bhi
+      // ------------------------------------------------------
+
+      const {
+        data: {
+          user: existingSessionUser,
+        },
+        error: getUserError,
+      } = await authClient.auth.getUser();
+
+      if (
+        getUserError ||
+        !existingSessionUser
+      ) {
+        console.error(
+          "No OAuth code and no active session found."
+        );
+
+        return NextResponse.redirect(
+          new URL(
+            "/referral-program",
+            origin
+          )
+        );
+      }
+
+      user = existingSessionUser;
     }
-
-    const user = session.user;
 
     console.log("AUTHENTICATED USER:", {
       id: user.id,
@@ -148,10 +198,6 @@ export async function GET(request) {
     // ========================================================
     // STEP 1
     // CHECK EXISTING PROFILE
-    //
-    // IMPORTANT FIX:
-    // We now also select full_name here, so STEP 4 can decide
-    // whether it is safe to touch that column at all.
     // ========================================================
 
     const {
@@ -172,7 +218,10 @@ export async function GET(request) {
       );
 
       return NextResponse.redirect(
-        new URL("/referral-program", origin)
+        new URL(
+          "/referral-program",
+          origin
+        )
       );
     }
 
@@ -254,32 +303,7 @@ export async function GET(request) {
     //
     // IMPORTANT:
     // partner_status is deliberately NOT included here.
-    //
-    // ======================================================
-    // BUG FIX (full_name being overwritten with "Partner"):
-    //
-    // Previously this upsert ALWAYS sent a full_name value
-    // (falling back to "Partner" when the OAuth/session
-    // metadata had no name — which is normal for email/magic
-    // link logins). Because this route runs on EVERY login,
-    // not just signup, that meant a returning user's real,
-    // previously-saved full_name got clobbered back to
-    // "Partner" every single time they logged in without
-    // Google metadata attached.
-    //
-    // Fix: only put full_name in the upsert payload when we
-    // actually have a real name to write:
-    //   - It's a brand new profile (always safe to seed it,
-    //     "Partner" is an acceptable first-time default), OR
-    //   - The auth provider metadata has a real name for this
-    //     login (e.g. Google login has full_name/name), so it's
-    //     safe (and often more accurate) to refresh it.
-    //
-    // If neither is true (existing profile + no metadata name,
-    // e.g. a returning magic-link user), we simply omit
-    // full_name from the payload so Postgres leaves the
-    // existing column value untouched.
-    // ======================================================
+    // ========================================================
 
     const metadataFullName =
       user.user_metadata?.full_name ||
@@ -292,18 +316,23 @@ export async function GET(request) {
       referral_code: userReferralCode,
     };
 
+    // ========================================================
+    // FULL NAME PROTECTION
+    // ========================================================
+
     if (isNewProfile) {
-      // Brand new profile: always seed a full_name, falling
-      // back to "Partner" only because there is no existing
-      // value to protect.
-      profilePayload.full_name = metadataFullName || "Partner";
+      // Brand new profile:
+      // Seed a name, falling back to Partner.
+
+      profilePayload.full_name =
+        metadataFullName || "Partner";
     } else if (metadataFullName) {
-      // Existing profile, but this login gave us a real name
-      // (e.g. Google) — safe to refresh it.
-      profilePayload.full_name = metadataFullName;
+      // Existing profile with real metadata name:
+      // Safe to refresh.
+
+      profilePayload.full_name =
+        metadataFullName;
     }
-    // else: existing profile + no metadata name -> do NOT
-    // include full_name at all, so the column is left alone.
 
     const {
       data: profileUpsert,
@@ -327,7 +356,10 @@ export async function GET(request) {
       );
 
       return NextResponse.redirect(
-        new URL("/referral-program", origin)
+        new URL(
+          "/referral-program",
+          origin
+        )
       );
     }
 
@@ -373,8 +405,10 @@ export async function GET(request) {
 
       if (!existingReferral) {
         const referralPayload = {
-          referrer_id: verifiedReferrerId,
-          referred_user_id: user.id,
+          referrer_id:
+            verifiedReferrerId,
+          referred_user_id:
+            user.id,
           status: "pending",
         };
 
@@ -412,26 +446,52 @@ export async function GET(request) {
       }
     }
 
-   // ========================================================
+    // ========================================================
     // STEP 6
     // SET PARTNER STATUS
+    //
+    // IMPORTANT LOGIC:
+    //
+    // NEW DIRECT USER:
+    //   approved
+    //
+    // NEW REFERRAL USER:
+    //   pending
+    //
+    // EXISTING USER:
+    //   KEEP EXISTING STATUS
     // ========================================================
 
     let finalPartnerStatus =
       existingUser?.partner_status || null;
 
     if (isNewProfile) {
-      // Yahan pehle condition thi, ab isay direct "pending" kar diya hai
-      // taake har naya user pehle pending ho aur onboarding par jaye
-      finalPartnerStatus = "pending";
+      // ------------------------------------------------------
+      // THIS IS THE IMPORTANT FIX
+      //
+      // Valid referral -> pending
+      // No valid referral -> approved
+      // ------------------------------------------------------
+
+      finalPartnerStatus =
+        verifiedReferrerId
+          ? "pending"
+          : "approved";
 
       console.log(
         "SETTING INITIAL PARTNER STATUS:",
         {
           initialPartnerStatus:
             finalPartnerStatus,
+
           verifiedReferrerId,
+
           referralCreated,
+
+          signupType:
+            verifiedReferrerId
+              ? "REFERRAL"
+              : "DIRECT",
         }
       );
 
@@ -457,7 +517,10 @@ export async function GET(request) {
         );
 
         return NextResponse.redirect(
-          new URL("/referral-program", origin)
+          new URL(
+            "/referral-program",
+            origin
+          )
         );
       }
 
@@ -470,6 +533,11 @@ export async function GET(request) {
         statusUpdate
       );
     } else {
+      // ------------------------------------------------------
+      // EXISTING USER:
+      // DO NOT CHANGE PARTNER STATUS
+      // ------------------------------------------------------
+
       console.log(
         "EXISTING USER - PARTNER STATUS LEFT UNCHANGED:",
         existingUser?.partner_status
@@ -479,8 +547,6 @@ export async function GET(request) {
     // ========================================================
     // STEP 7
     // FINAL REDIRECT
-    //
-    // IMPORTANT FIX:
     //
     // DIRECT SIGNUP:
     //   approved -> DASHBOARD
@@ -492,34 +558,59 @@ export async function GET(request) {
     //   dashboard
     //
     // EXISTING PENDING USER:
-    //   onboarding
+    //   referral program / pending flow
     // ========================================================
 
-    let redirectPath = "/referral-program";
+    let redirectPath =
+      "/referral-program";
+
+    // --------------------------------------------------------
+    // VALID REFERRAL
+    // --------------------------------------------------------
 
     if (verifiedReferrerId) {
-      // Referral URL user
-      // Must remain pending/onboarding.
+      // Referral user:
+      // Must go through onboarding.
+
       redirectPath = "/onboarding";
-    } else if (
+    }
+
+    // --------------------------------------------------------
+    // APPROVED USER
+    // --------------------------------------------------------
+
+    else if (
       finalPartnerStatus === "approved"
     ) {
-      // Normal/direct signup
+      // Direct / approved user:
       // Go directly to dashboard.
+
       redirectPath =
-        "/onboarding";
-    } else if (
+        "/referral-program/dashboard";
+    }
+
+    // --------------------------------------------------------
+    // REQUESTED NEXT
+    // --------------------------------------------------------
+
+    else if (
       requestedNext &&
       finalPartnerStatus !== "pending"
     ) {
-      // Only use requested next path when user
-      // isn't a pending referral.
-      redirectPath = getSafeInternalPath(
-        requestedNext,
-        "/referral-program/dashboard"
-      );
-    } else {
-      redirectPath = "/referral-program";
+      redirectPath =
+        getSafeInternalPath(
+          requestedNext,
+          "/referral-program/dashboard"
+        );
+    }
+
+    // --------------------------------------------------------
+    // FALLBACK
+    // --------------------------------------------------------
+
+    else {
+      redirectPath =
+        "/referral-program";
     }
 
     console.log(
@@ -537,16 +628,47 @@ export async function GET(request) {
     // CREATE REDIRECT RESPONSE
     // ========================================================
 
-    const response = NextResponse.redirect(
-      new URL(redirectPath, origin)
-    );
+    const response =
+      NextResponse.redirect(
+        new URL(
+          redirectPath,
+          origin
+        )
+      );
+
+    // ========================================================
+    // REMEMBER SUCCESSFUL GOOGLE LOGIN
+    //
+    // IMPORTANT:
+    // This cookie is written ONLY after the OAuth callback
+    // has successfully exchanged the code for a valid session
+    // AND all callback processing has completed.
+    //
+    // If the user clicks Back from Google's account picker,
+    // this callback is never reached, so Google is NOT saved
+    // as a new login method.
+    // ========================================================
+
+    if (code) {
+      response.cookies.set(
+        "bizgrow_last_login_method",
+        "google",
+        {
+          maxAge: 365 * 24 * 60 * 60,
+          path: "/",
+          sameSite: "lax",
+          secure:
+            process.env.NODE_ENV === "production",
+        }
+      );
+    }
 
     // ========================================================
     // STEP 9
     // CLEAR REFERRAL COOKIE
     //
     // IMPORTANT:
-    // Only clear it after callback processing.
+    // Only clear after callback processing.
     // ========================================================
 
     if (refCookie) {
@@ -565,16 +687,28 @@ export async function GET(request) {
       );
     }
 
+    // ========================================================
+    // DONE
+    // ========================================================
+
     console.log(
       "======================================================"
     );
+
     console.log(
       "AUTH CALLBACK FINISHED SUCCESSFULLY"
     );
+
     console.log(
       "FINAL REDIRECT:",
       redirectPath
     );
+
+    console.log(
+      "FINAL PARTNER STATUS:",
+      finalPartnerStatus
+    );
+
     console.log(
       "======================================================"
     );
