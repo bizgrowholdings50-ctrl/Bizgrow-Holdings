@@ -21,7 +21,7 @@ const SERVICES = [
     description: "Approved Contractor Scheme consultancy for security firms.",
   },
   {
-    name: "COP 119",
+    name: "BS 10119 / COP 119",
     description: "Code of Practice for labour provision in security sectors.",
   },
   {
@@ -1280,13 +1280,13 @@ export default function DashboardClient() {
                       >
                         {availableRewardAmount >= REWARD_PER_REFERRAL
                           ? "Claim Reward"
-                          : directReferralCount > 0
+                          : pendingReferralCount > 0
                             ? "Referral Pending"
                             : "No Referrals Yet"}
                       </button>
 
                       {availableRewardAmount < REWARD_PER_REFERRAL &&
-                        directReferralCount > 0 && (
+                        pendingReferralCount > 0 && (
                           <div className="mt-2.5 max-w-[230px] text-center -mr-6">
                             <p className="text-[10px] font-bold leading-relaxed text-slate-600">
                               Your referral has been recorded.

@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, useEffect } from "react";
@@ -10,7 +9,7 @@ const GOLD = "#997819";
 
 const SERVICES = [
   "SIA ACS Consultancy",
-  "COP 119 Compliance",
+  "BS 10119 / COP 119",
   "Safe Contractor Accreditation",
   "ISO 9001 Quality Management",
   "ISO 14001 Environmental Management",
@@ -85,6 +84,27 @@ export default function ReferredClientForm({
     if (prefill.email) setEmail(prefill.email);
     if (prefill.number) setNumber(prefill.number);
   }, [prefill]);
+
+  // ============================================================
+  // SCROLL TO TOP ON SUCCESS
+  //
+  // IMPORTANT:
+  // Jab form submit hone ke baad success screen dikhti hai,
+  // browser apni purani scroll position pe hi reh jata hai
+  // (jo form ke bottom ke aas paas hoti hai). Isse content
+  // "push" hota mehsoos hota hai aur user ko manually scroll
+  // up karna padta hai. Ye effect success hote hi page ko
+  // smoothly top pe le aata hai.
+  // ============================================================
+
+  useEffect(() => {
+    if (success) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  }, [success]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -491,4 +511,3 @@ User Message: ${cleanMessage || "No additional comments."}`;
     </div>
   );
 }
-

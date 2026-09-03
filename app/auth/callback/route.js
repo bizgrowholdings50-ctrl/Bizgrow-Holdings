@@ -28,15 +28,22 @@ function generateReferralCode() {
 // ============================================================
 
 function getAdminClient() {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  const supabaseUrl =
+    process.env.NEXT_PUBLIC_SUPABASE_URL;
+
+  const serviceRoleKey =
+    process.env.SUPABASE_SERVICE_ROLE_KEY;
 
   if (!supabaseUrl) {
-    throw new Error("NEXT_PUBLIC_SUPABASE_URL is missing.");
+    throw new Error(
+      "NEXT_PUBLIC_SUPABASE_URL is missing."
+    );
   }
 
   if (!serviceRoleKey) {
-    throw new Error("SUPABASE_SERVICE_ROLE_KEY is missing.");
+    throw new Error(
+      "SUPABASE_SERVICE_ROLE_KEY is missing."
+    );
   }
 
   return createSupabaseAdmin(
@@ -55,7 +62,10 @@ function getAdminClient() {
 // SAFE INTERNAL REDIRECT
 // ============================================================
 
-function getSafeInternalPath(path, fallback) {
+function getSafeInternalPath(
+  path,
+  fallback
+) {
   if (
     typeof path === "string" &&
     path.startsWith("/") &&
@@ -72,77 +82,214 @@ function getSafeInternalPath(path, fallback) {
 // ============================================================
 
 export async function GET(request) {
-  console.log("======================================================");
-  console.log("AUTH CALLBACK STARTED");
-  console.log("URL:", request.url);
-  console.log("======================================================");
+  console.log(
+    "======================================================"
+  );
+
+  console.log(
+    "AUTH CALLBACK STARTED"
+  );
+
+  console.log(
+    "URL:",
+    request.url
+  );
+
+  console.log(
+    "======================================================"
+  );
 
   try {
-    const { searchParams, origin } = new URL(request.url);
+    const {
+      searchParams,
+      origin,
+    } = new URL(request.url);
 
-    const code = searchParams.get("code");
-    const refParam = searchParams.get("ref");
-    const requestedNext = searchParams.get("next");
+    const code =
+      searchParams.get("code");
+
+    const refParam =
+      searchParams.get("ref");
+
+    const requestedNext =
+      searchParams.get("next");
+
+    // ========================================================
+    // PASSWORD RESET CALLBACK
+    // ========================================================
+    //
+    // IMPORTANT:
+    //
+    // Password reset also returns a Supabase `code`.
+    // We MUST NOT send that code through the normal
+    // Google/referral/profile flow.
+    //
+    // Password reset URL:
+    //
+    // /auth/callback?code=XXXX&next=/auth/reset-password
+    //
+    // We exchange the code here and establish the session.
+    // Then we redirect to the actual reset-password page.
+    // ========================================================
+
+    if (
+      code &&
+      requestedNext ===
+        "/auth/reset-password"
+    ) {
+      console.log(
+        "======================================================"
+      );
+
+      console.log(
+        "PASSWORD RESET CALLBACK DETECTED"
+      );
+
+      console.log(
+        "======================================================"
+      );
+
+      const resetAuthClient =
+        await createClient();
+
+      const {
+        data: {
+          session,
+        },
+        error:
+          resetExchangeError,
+      } =
+        await resetAuthClient.auth.exchangeCodeForSession(
+          code
+        );
+
+      if (
+        resetExchangeError ||
+        !session?.user
+      ) {
+        console.error(
+          "PASSWORD RESET CODE EXCHANGE FAILED:",
+          resetExchangeError
+        );
+
+        return NextResponse.redirect(
+          new URL(
+            "/auth/reset-password?error=reset_failed",
+            origin
+          )
+        );
+      }
+
+      console.log(
+        "PASSWORD RESET SESSION CREATED:",
+        {
+          userId:
+            session.user.id,
+
+          email:
+            session.user.email,
+        }
+      );
+
+      console.log(
+        "REDIRECTING TO PASSWORD RESET PAGE"
+      );
+
+      return NextResponse.redirect(
+        new URL(
+          "/auth/reset-password",
+          origin
+        )
+      );
+    }
 
     // ========================================================
     // READ REFERRAL COOKIE
     // ========================================================
 
-    const cookieStore = await cookies();
-    const refCookie = cookieStore.get("bizgrow_referrer");
+    const cookieStore =
+      await cookies();
+
+    const refCookie =
+      cookieStore.get(
+        "bizgrow_referrer"
+      );
 
     const cookieReferralCode =
-      refCookie?.value?.trim() || "";
+      refCookie?.value?.trim() ||
+      "";
 
     const queryReferralCode =
       refParam?.trim() || "";
 
     // Query parameter has priority over cookie.
     const rawReferralCode =
-      queryReferralCode || cookieReferralCode;
+      queryReferralCode ||
+      cookieReferralCode;
 
     let referralCode = "";
 
     try {
       referralCode = rawReferralCode
-        ? decodeURIComponent(rawReferralCode)
+        ? decodeURIComponent(
+            rawReferralCode
+          )
             .trim()
             .toUpperCase()
         : "";
     } catch {
-      referralCode = rawReferralCode
-        .trim()
-        .toUpperCase();
+      referralCode =
+        rawReferralCode
+          .trim()
+          .toUpperCase();
     }
 
-    console.log("REFERRAL SOURCE:", {
-      queryReferralCode,
-      cookieReferralCode,
-      referralCode,
-    });
+    console.log(
+      "REFERRAL SOURCE:",
+      {
+        queryReferralCode,
+        cookieReferralCode,
+        referralCode,
+      }
+    );
 
     // ========================================================
     // OAUTH CODE CHECK
     // ========================================================
 
-    const authClient = await createClient();
-    const adminClient = getAdminClient();
+    const authClient =
+      await createClient();
+
+    const adminClient =
+      getAdminClient();
 
     let user = null;
 
     if (code) {
       // ------------------------------------------------------
       // CASE 1: OAuth code present
-      // Google login, ya email confirmation link
-      // jisme Supabase code deta hai
+      //
+      // Google login ya email confirmation link
+      // jisme Supabase code deta hai.
+      //
+      // PASSWORD RESET IS ALREADY HANDLED ABOVE.
       // ------------------------------------------------------
 
       const {
-        data: { session },
-        error: exchangeError,
-      } = await authClient.auth.exchangeCodeForSession(code);
+        data: {
+          session,
+        },
+        error:
+          exchangeError,
+      } =
+        await authClient.auth.exchangeCodeForSession(
+          code
+        );
 
-      if (exchangeError || !session?.user) {
+      if (
+        exchangeError ||
+        !session?.user
+      ) {
         console.error(
           "OAuth exchange failed:",
           exchangeError
@@ -156,20 +303,25 @@ export async function GET(request) {
         );
       }
 
-      user = session.user;
+      user =
+        session.user;
     } else {
       // ------------------------------------------------------
       // CASE 2: No code, but session already exists
+      //
       // Email/password signup jab confirmation OFF ho,
-      // signInWithPassword ke turant baad bhi
+      // signInWithPassword ke turant baad bhi.
       // ------------------------------------------------------
 
       const {
         data: {
-          user: existingSessionUser,
+          user:
+            existingSessionUser,
         },
-        error: getUserError,
-      } = await authClient.auth.getUser();
+        error:
+          getUserError,
+      } =
+        await authClient.auth.getUser();
 
       if (
         getUserError ||
@@ -187,13 +339,17 @@ export async function GET(request) {
         );
       }
 
-      user = existingSessionUser;
+      user =
+        existingSessionUser;
     }
 
-    console.log("AUTHENTICATED USER:", {
-      id: user.id,
-      email: user.email,
-    });
+    console.log(
+      "AUTHENTICATED USER:",
+      {
+        id: user.id,
+        email: user.email,
+      }
+    );
 
     // ========================================================
     // STEP 1
@@ -202,14 +358,16 @@ export async function GET(request) {
 
     const {
       data: existingUser,
-      error: existingUserError,
-    } = await adminClient
-      .from("profiles")
-      .select(
-        "id,email,full_name,referral_code,partner_status"
-      )
-      .eq("id", user.id)
-      .maybeSingle();
+      error:
+        existingUserError,
+    } =
+      await adminClient
+        .from("profiles")
+        .select(
+          "id,email,full_name,referral_code,partner_status"
+        )
+        .eq("id", user.id)
+        .maybeSingle();
 
     if (existingUserError) {
       console.error(
@@ -225,13 +383,18 @@ export async function GET(request) {
       );
     }
 
-    const isNewProfile = !existingUser;
+    const isNewProfile =
+      !existingUser;
 
-    console.log("PROFILE STATUS:", {
-      isNewProfile,
-      existingPartnerStatus:
-        existingUser?.partner_status || null,
-    });
+    console.log(
+      "PROFILE STATUS:",
+      {
+        isNewProfile,
+        existingPartnerStatus:
+          existingUser?.partner_status ||
+          null,
+      }
+    );
 
     // ========================================================
     // STEP 2
@@ -247,12 +410,16 @@ export async function GET(request) {
     // VERIFY REFERRER
     // ========================================================
 
-    let verifiedReferrerId = null;
-    let verifiedReferrer = null;
+    let verifiedReferrerId =
+      null;
+
+    let verifiedReferrer =
+      null;
 
     if (
       referralCode &&
-      referralCode !== userReferralCode
+      referralCode !==
+        userReferralCode
     ) {
       console.log(
         "Checking referral code:",
@@ -261,17 +428,19 @@ export async function GET(request) {
 
       const {
         data: referrer,
-        error: referrerError,
-      } = await adminClient
-        .from("profiles")
-        .select(
-          "id,email,referral_code"
-        )
-        .ilike(
-          "referral_code",
-          referralCode
-        )
-        .maybeSingle();
+        error:
+          referrerError,
+      } =
+        await adminClient
+          .from("profiles")
+          .select(
+            "id,email,referral_code"
+          )
+          .ilike(
+            "referral_code",
+            referralCode
+          )
+          .maybeSingle();
 
       if (referrerError) {
         console.error(
@@ -282,13 +451,18 @@ export async function GET(request) {
         console.log(
           "Referral code is invalid. Treating signup as DIRECT signup."
         );
-      } else if (referrer.id === user.id) {
+      } else if (
+        referrer.id === user.id
+      ) {
         console.log(
           "Self-referral detected. Treating signup as DIRECT signup."
         );
       } else {
-        verifiedReferrer = referrer;
-        verifiedReferrerId = referrer.id;
+        verifiedReferrer =
+          referrer;
+
+        verifiedReferrerId =
+          referrer.id;
 
         console.log(
           "VALID REFERRER FOUND:",
@@ -306,14 +480,16 @@ export async function GET(request) {
     // ========================================================
 
     const metadataFullName =
-      user.user_metadata?.full_name ||
+      user.user_metadata
+        ?.full_name ||
       user.user_metadata?.name ||
       null;
 
     const profilePayload = {
       id: user.id,
       email: user.email,
-      referral_code: userReferralCode,
+      referral_code:
+        userReferralCode,
     };
 
     // ========================================================
@@ -325,8 +501,11 @@ export async function GET(request) {
       // Seed a name, falling back to Partner.
 
       profilePayload.full_name =
-        metadataFullName || "Partner";
-    } else if (metadataFullName) {
+        metadataFullName ||
+        "Partner";
+    } else if (
+      metadataFullName
+    ) {
       // Existing profile with real metadata name:
       // Safe to refresh.
 
@@ -337,17 +516,18 @@ export async function GET(request) {
     const {
       data: profileUpsert,
       error: profileError,
-    } = await adminClient
-      .from("profiles")
-      .upsert(
-        profilePayload,
-        {
-          onConflict: "id",
-        }
-      )
-      .select(
-        "id,email,full_name,referral_code,partner_status"
-      );
+    } =
+      await adminClient
+        .from("profiles")
+        .upsert(
+          profilePayload,
+          {
+            onConflict: "id",
+          }
+        )
+        .select(
+          "id,email,full_name,referral_code,partner_status"
+        );
 
     if (profileError) {
       console.error(
@@ -375,28 +555,36 @@ export async function GET(request) {
     // Valid referral = PENDING
     // ========================================================
 
-    let referralCreated = false;
+    let referralCreated =
+      false;
 
-    if (verifiedReferrerId) {
+    if (
+      verifiedReferrerId
+    ) {
       console.log(
         "Checking existing referral..."
       );
 
       const {
-        data: existingReferral,
-        error: existingReferralError,
-      } = await adminClient
-        .from("referrals")
-        .select(
-          "id,referrer_id,referred_user_id,status,created_at"
-        )
-        .eq(
-          "referred_user_id",
-          user.id
-        )
-        .maybeSingle();
+        data:
+          existingReferral,
+        error:
+          existingReferralError,
+      } =
+        await adminClient
+          .from("referrals")
+          .select(
+            "id,referrer_id,referred_user_id,status,created_at"
+          )
+          .eq(
+            "referred_user_id",
+            user.id
+          )
+          .maybeSingle();
 
-      if (existingReferralError) {
+      if (
+        existingReferralError
+      ) {
         console.error(
           "Existing referral lookup failed:",
           existingReferralError
@@ -407,8 +595,10 @@ export async function GET(request) {
         const referralPayload = {
           referrer_id:
             verifiedReferrerId,
+
           referred_user_id:
             user.id,
+
           status: "pending",
         };
 
@@ -418,20 +608,28 @@ export async function GET(request) {
         );
 
         const {
-          data: insertedReferral,
-          error: insertReferralError,
-        } = await adminClient
-          .from("referrals")
-          .insert(referralPayload)
-          .select();
+          data:
+            insertedReferral,
+          error:
+            insertReferralError,
+        } =
+          await adminClient
+            .from("referrals")
+            .insert(
+              referralPayload
+            )
+            .select();
 
-        if (insertReferralError) {
+        if (
+          insertReferralError
+        ) {
           console.error(
             "Referral insert failed:",
             insertReferralError
           );
         } else {
-          referralCreated = true;
+          referralCreated =
+            true;
 
           console.log(
             "REFERRAL CREATED:",
@@ -450,8 +648,6 @@ export async function GET(request) {
     // STEP 6
     // SET PARTNER STATUS
     //
-    // IMPORTANT LOGIC:
-    //
     // NEW DIRECT USER:
     //   approved
     //
@@ -463,11 +659,12 @@ export async function GET(request) {
     // ========================================================
 
     let finalPartnerStatus =
-      existingUser?.partner_status || null;
+      existingUser?.partner_status ||
+      null;
 
     if (isNewProfile) {
       // ------------------------------------------------------
-      // THIS IS THE IMPORTANT FIX
+      // IMPORTANT FIX
       //
       // Valid referral -> pending
       // No valid referral -> approved
@@ -498,17 +695,18 @@ export async function GET(request) {
       const {
         data: statusUpdate,
         error: statusError,
-      } = await adminClient
-        .from("profiles")
-        .update({
-          partner_status:
-            finalPartnerStatus,
-        })
-        .eq("id", user.id)
-        .select(
-          "id,email,partner_status,referral_code"
-        )
-        .maybeSingle();
+      } =
+        await adminClient
+          .from("profiles")
+          .update({
+            partner_status:
+              finalPartnerStatus,
+          })
+          .eq("id", user.id)
+          .select(
+            "id,email,partner_status,referral_code"
+          )
+          .maybeSingle();
 
       if (statusError) {
         console.error(
@@ -568,11 +766,11 @@ export async function GET(request) {
     // VALID REFERRAL
     // --------------------------------------------------------
 
-    if (verifiedReferrerId) {
-      // Referral user:
-      // Must go through onboarding.
-
-      redirectPath = "/onboarding";
+    if (
+      verifiedReferrerId
+    ) {
+      redirectPath =
+        "/onboarding";
     }
 
     // --------------------------------------------------------
@@ -580,11 +778,9 @@ export async function GET(request) {
     // --------------------------------------------------------
 
     else if (
-      finalPartnerStatus === "approved"
+      finalPartnerStatus ===
+      "approved"
     ) {
-      // Direct / approved user:
-      // Go directly to dashboard.
-
       redirectPath =
         "/referral-program/dashboard";
     }
@@ -595,7 +791,8 @@ export async function GET(request) {
 
     else if (
       requestedNext &&
-      finalPartnerStatus !== "pending"
+      finalPartnerStatus !==
+        "pending"
     ) {
       redirectPath =
         getSafeInternalPath(
@@ -640,13 +837,11 @@ export async function GET(request) {
     // REMEMBER SUCCESSFUL GOOGLE LOGIN
     //
     // IMPORTANT:
-    // This cookie is written ONLY after the OAuth callback
-    // has successfully exchanged the code for a valid session
-    // AND all callback processing has completed.
+    // This only runs for the NORMAL auth callback.
     //
-    // If the user clicks Back from Google's account picker,
-    // this callback is never reached, so Google is NOT saved
-    // as a new login method.
+    // Password reset already returned above,
+    // therefore password reset NEVER writes
+    // Google as the last login method.
     // ========================================================
 
     if (code) {
@@ -654,11 +849,19 @@ export async function GET(request) {
         "bizgrow_last_login_method",
         "google",
         {
-          maxAge: 365 * 24 * 60 * 60,
+          maxAge:
+            365 *
+            24 *
+            60 *
+            60,
+
           path: "/",
+
           sameSite: "lax",
+
           secure:
-            process.env.NODE_ENV === "production",
+            process.env.NODE_ENV ===
+            "production",
         }
       );
     }

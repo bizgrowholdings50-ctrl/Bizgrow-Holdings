@@ -271,6 +271,26 @@ export default function OnboardingPage() {
   }, [supabase]);
 
   // =========================================================
+  // SCROLL TO TOP ON SUCCESS STEP
+  //
+  // IMPORTANT:
+  // Jab onboarding complete hone ke baad step 2 (Welcome
+  // screen) dikhti hai, page apni purani scroll position pe
+  // reh jata hai (jo form ke bottom ke aas paas hoti hai).
+  // Ye effect step 2 pe aate hi page ko smoothly top pe le
+  // aata hai.
+  // =========================================================
+
+  useEffect(() => {
+    if (step === 2) {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  }, [step]);
+
+  // =========================================================
   // NEXT SUB STEP
   // =========================================================
 

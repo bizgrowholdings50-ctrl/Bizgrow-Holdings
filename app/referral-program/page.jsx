@@ -651,7 +651,7 @@ export default async function ReferralPage() {
           isReferralUser &&
           isReferredClient &&
           referralStatus !== "completed" && (
-            <div className="bg-white border border-slate-200/70 rounded-[1.75rem] p-6 sm:p-10 shadow-[0_1px_2px_rgba(15,23,42,0.04),0_24px_55px_-30px_rgba(18,6,106,0.3)] mb-14 space-y-8 max-w-4xl mx-auto">
+            <div className="bg-white border border-slate-200/70 rounded-[1.75rem] p-6 sm:p-10 shadow-[0_1px_2px_rgba(15,23,42,0.04),0_24px_55px_-30px_rgba(18,6,106,0.3)]  space-y-8 max-w-4xl mx-auto">
               <div className="flex flex-col sm:flex-row items-center justify-between gap-6 border-b border-slate-100 pb-6">
                 <div className="flex items-center gap-5 w-full sm:w-auto">
                   <div className="shrink-0 ring-4 ring-[#997819]/10 rounded-full">
@@ -686,56 +686,7 @@ export default async function ReferralPage() {
                 </div>
               </div>
 
-              {profile?.description_type &&
-              profile.description_type.startsWith("Referred:") ? (
-                <div className="space-y-6 text-center max-w-xl mx-auto py-4">
-                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-amber-50 text-[#997819] border border-[#997819]/20 font-bold text-xl">
-                    ⌛
-                  </div>
-
-                  <div className="space-y-3">
-                    <h4
-                      className="text-2xl font-black tracking-tight"
-                      style={{
-                        color: NAVY,
-                      }}
-                    >
-                      Partner Dashboard Pending
-                    </h4>
-
-                    <p className="text-sm text-slate-600 font-medium leading-relaxed">
-                      Complete your first eligible service and your Partner
-                      Dashboard will become available.
-                    </p>
-
-                    <p className="text-xs text-slate-500 leading-relaxed px-4">
-                      Once your first eligible service (£650) is purchased and
-                      payment is cleared, your account can be upgraded to an
-                      Active Partner.
-                    </p>
-                  </div>
-
-                  <div className="bg-slate-50 border border-slate-100 p-5 rounded-2xl text-left text-xs text-slate-600 space-y-2">
-                    <p className="font-black text-slate-700 uppercase tracking-wider mb-1">
-                      Inquiry Status
-                    </p>
-
-                    <p>
-                      Selected Service:{" "}
-                      <b className="text-slate-800">
-                        {profile.description_type.replace("Referred: ", "")}
-                      </b>
-                    </p>
-
-                    <p>
-                      Status:{" "}
-                      <b className="text-slate-800">
-                        Awaiting Service Purchase &amp; Payment Clearance
-                      </b>
-                    </p>
-                  </div>
-                </div>
-              ) : (
+              
                 <div className="space-y-8">
                   <div className="text-center max-w-xl mx-auto space-y-2">
                     <h4
@@ -814,7 +765,7 @@ export default async function ReferralPage() {
                     }}
                   />
                 </div>
-              )}
+             
             </div>
           )}
 
@@ -1193,7 +1144,7 @@ export default async function ReferralPage() {
                         icon: ShieldCheck,
                       },
                       {
-                        title: "COP 119",
+                        title: "BS 10119 / COP 119",
                         desc: "Code of Practice for labour provision in security sectors.",
                         icon: Users,
                       },
@@ -1227,7 +1178,12 @@ export default async function ReferralPage() {
                         desc: "Basic protection against common cyber threats.",
                         icon: Lock,
                       },
-                      {
+                       {
+                        title: "Cyber Essentials Plus",
+                        desc: "Independently audited verification of your cyber security controls.",
+                        icon: Lock,
+                      },
+                      { 
                         title: "CHAS Scheme",
                         desc: "Contractors Health and Safety Assessment Scheme.",
                         icon: FileCheck,

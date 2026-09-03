@@ -440,8 +440,6 @@ export function LoginButton() {
           );
         }
 
-        
-
         const origin =
           window.location.origin;
 
@@ -749,7 +747,10 @@ export function LoginButton() {
 
               <button
                 type="submit"
-                disabled={resetLoading}
+                disabled={
+                  resetLoading ||
+                  !resetEmail.trim()
+                }
                 className="mt-4 w-full rounded-xl px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
                 style={{
                   backgroundColor: NAVY,
@@ -820,7 +821,6 @@ export function LoginButton() {
   //
   // IMPORTANT:
   // Show ONLY Login button first.
-  // Form appears after clicking Login.
   // ==========================================================
 
   if (
@@ -829,89 +829,21 @@ export function LoginButton() {
   ) {
     return (
       <div className="w-full max-w-md">
-        {!email && setEmail(rememberedEmail)}
-
-        <form
-          onSubmit={handlePasswordLogin}
-          className="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl"
+        <button
+          type="button"
+          onClick={() => {
+            setEmail(rememberedEmail);
+            setPassword("");
+            setErrorMessage("");
+          }}
+          disabled={loading}
+          className="flex w-full items-center justify-center rounded-full px-6 py-3.5 text-sm font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+          style={{
+            backgroundColor: NAVY,
+          }}
         >
-          <h3 className="text-lg font-bold text-slate-900">
-            Login
-          </h3>
-
-          <p className="mt-1 text-sm text-slate-500">
-            Continue with your email and password.
-          </p>
-
-          <input
-            type="email"
-            value={email}
-            onChange={(event) =>
-              setEmail(
-                event.target.value
-              )
-            }
-            placeholder="Email"
-            autoComplete="username"
-            required
-            disabled={loading}
-            className="mt-5 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none transition focus:border-slate-400 disabled:bg-slate-50"
-          />
-
-          <div className="mt-3">
-            <PasswordField
-              value={password}
-              onChange={(event) =>
-                setPassword(
-                  event.target.value
-                )
-              }
-              placeholder="Password"
-              autoComplete="current-password"
-              disabled={loading}
-              minLength={6}
-              name="password"
-            />
-          </div>
-
-          {errorMessage && (
-            <div className="mt-3 rounded-xl bg-red-50 px-4 py-3 text-xs leading-relaxed text-red-600">
-              {errorMessage}
-            </div>
-          )}
-
-          <button
-            type="submit"
-            disabled={
-              loading ||
-              !email.trim() ||
-              !password
-            }
-            className="mt-4 w-full rounded-xl px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
-            style={{
-              backgroundColor: NAVY,
-            }}
-          >
-            {loading
-              ? "Logging in..."
-              : "Login"}
-          </button>
-
-          <button
-            type="button"
-            onClick={() => {
-              setShowForgotPassword(true);
-              setResetEmail(email);
-              setErrorMessage("");
-            }}
-            className="mt-4 w-full text-sm font-semibold transition hover:underline"
-            style={{
-              color: NAVY,
-            }}
-          >
-            Forgot password?
-          </button>
-        </form>
+          Login
+        </button>
       </div>
     );
   }
@@ -939,22 +871,6 @@ export function LoginButton() {
 
 // ============================================================
 // GOOGLE LOGIN BUTTON
-//
-// IMPORTANT NEW BEHAVIOUR:
-// This component ALSO remembers the last login method.
-//
-// Therefore NO PAGE.JSX CHANGE is required if your page
-// currently renders <GoogleLoginButton />.
-//
-// Google remembered:
-//     [ Login ]
-//
-// Email remembered:
-//     [ Login ]
-//     -> click -> email/password form
-//
-// Unknown:
-//     Google + Continue with Email
 // ============================================================
 
 export function GoogleLoginButton({
@@ -982,6 +898,22 @@ export function GoogleLoginButton({
 
   const [errorMessage, setErrorMessage] =
     useState("");
+
+  // ==========================================================
+  // FORGOT PASSWORD
+  // ==========================================================
+
+  const [showForgotPassword, setShowForgotPassword] =
+    useState(false);
+
+  const [resetEmail, setResetEmail] =
+    useState("");
+
+  const [resetSent, setResetSent] =
+    useState(false);
+
+  const [resetLoading, setResetLoading] =
+    useState(false);
 
   // ==========================================================
   // REMEMBERED AUTH METHOD
@@ -1022,6 +954,11 @@ export function GoogleLoginButton({
 
   // ==========================================================
   // GOOGLE LOGIN
+  // IMPORTANT:
+  // DO NOT REMEMBER GOOGLE HERE.
+  //
+  // Google is remembered ONLY after successful
+  // callback in /auth/callback.
   // ==========================================================
 
   const handleGoogleLogin = async () => {
@@ -1040,11 +977,6 @@ export function GoogleLoginButton({
           referralCode
         );
       }
-
-      // IMPORTANT:
-      // Remember Google BEFORE leaving the site.
-      // We never store a password.
-    
 
       const origin =
         window.location.origin;
@@ -1133,7 +1065,6 @@ export function GoogleLoginButton({
         return;
       }
 
-      // Remember METHOD + EMAIL only.
       setAuthCookie(
         "bizgrow_last_login_method",
         "email"
@@ -1193,13 +1124,6 @@ export function GoogleLoginButton({
         return;
       }
 
-      // ========================================================
-      // CONFIRM EMAIL IS OFF
-      //
-      // Normally Supabase returns a session here.
-      // No fake "check your email" screen.
-      // ========================================================
-
       if (!data?.session) {
         setPassword("");
         setConfirmPassword("");
@@ -1218,7 +1142,6 @@ export function GoogleLoginButton({
       setPassword("");
       setConfirmPassword("");
 
-      // Existing signup callback flow.
       window.location.href =
         "/auth/callback";
     } catch (error) {
@@ -1259,7 +1182,6 @@ export function GoogleLoginButton({
       const cleanEmail =
         email.trim().toLowerCase();
 
-      // Remember METHOD + EMAIL only.
       setAuthCookie(
         "bizgrow_last_login_method",
         "email"
@@ -1324,6 +1246,70 @@ export function GoogleLoginButton({
   };
 
   // ==========================================================
+  // FORGOT PASSWORD
+  // ==========================================================
+
+const handleForgotPassword = async (event) => {
+  event.preventDefault();
+
+  if (
+    resetLoading ||
+    !resetEmail.trim()
+  ) {
+    return;
+  }
+
+  setResetLoading(true);
+  setErrorMessage("");
+
+  try {
+    const cleanEmail =
+      resetEmail.trim().toLowerCase();
+
+    const origin =
+      window.location.origin;
+
+    const { error } =
+      await supabase.auth.resetPasswordForEmail(
+        cleanEmail,
+        {
+          redirectTo:
+            `${origin}/auth/callback?next=/auth/reset-password`,
+        }
+      );
+
+    if (error) {
+      console.error(
+        "Password reset error:",
+        error
+      );
+
+      setErrorMessage(
+        error.message ||
+          "Unable to send password reset email."
+      );
+
+      setResetLoading(false);
+      return;
+    }
+
+    setResetSent(true);
+    setResetLoading(false);
+  } catch (error) {
+    console.error(
+      "Password reset error:",
+      error
+    );
+
+    setErrorMessage(
+      "Unable to send password reset email."
+    );
+
+    setResetLoading(false);
+  }
+};
+
+  // ==========================================================
   // WAIT FOR AUTH MEMORY
   // ==========================================================
 
@@ -1344,7 +1330,6 @@ export function GoogleLoginButton({
 
   // ==========================================================
   // REMEMBERED GOOGLE USER
-  //
   // ONLY ONE LOGIN BUTTON
   // ==========================================================
 
@@ -1378,9 +1363,7 @@ export function GoogleLoginButton({
 
   // ==========================================================
   // REMEMBERED EMAIL USER
-  //
-  // ONLY ONE LOGIN BUTTON FIRST.
-  // Clicking it opens the email login form.
+  // ONLY ONE LOGIN BUTTON FIRST
   // ==========================================================
 
   if (
@@ -1396,6 +1379,7 @@ export function GoogleLoginButton({
             setEmail(
               rememberedEmail
             );
+
             setEmailMode("login");
             setPassword("");
             setConfirmPassword("");
@@ -1410,6 +1394,112 @@ export function GoogleLoginButton({
         >
           Login
         </button>
+      </div>
+    );
+  }
+
+  // ==========================================================
+  // FORGOT PASSWORD FORM
+  // ==========================================================
+
+  if (showForgotPassword) {
+    return (
+      <div className="w-full max-w-md">
+        <form
+          onSubmit={handleForgotPassword}
+          className="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl"
+        >
+          <h3 className="text-lg font-bold text-slate-900">
+            Reset your password
+          </h3>
+
+          <p className="mt-1 text-sm leading-relaxed text-slate-500">
+            Enter your email and we&apos;ll send
+            you a password reset link.
+          </p>
+
+          {resetSent ? (
+            <>
+              <div className="mt-5 rounded-2xl bg-green-50 p-4">
+                <p className="text-sm font-semibold text-green-700">
+                  Reset email sent
+                </p>
+
+                <p className="mt-1 text-xs leading-relaxed text-green-600">
+                  Check your email for the password
+                  reset link.
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setShowForgotPassword(false);
+                  setResetSent(false);
+                  setResetEmail("");
+                  setErrorMessage("");
+                  setEmailMode("login");
+                  setShowEmailLogin(true);
+                }}
+                className="mt-5 w-full rounded-xl border border-slate-200 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+              >
+                Back to Login
+              </button>
+            </>
+          ) : (
+            <>
+              <input
+                type="email"
+                value={resetEmail}
+                onChange={(event) =>
+                  setResetEmail(
+                    event.target.value
+                  )
+                }
+                placeholder="Enter your email"
+                autoComplete="email"
+                required
+                disabled={resetLoading}
+                className="mt-5 w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition placeholder:text-slate-400 focus:border-slate-400 disabled:bg-slate-50"
+              />
+
+              <button
+                type="submit"
+                disabled={
+                  resetLoading ||
+                  !resetEmail.trim()
+                }
+                className="mt-4 w-full rounded-xl px-5 py-3 text-sm font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+                style={{
+                  backgroundColor: NAVY,
+                }}
+              >
+                {resetLoading
+                  ? "Sending..."
+                  : "Send Reset Link"}
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setShowForgotPassword(false);
+                  setResetSent(false);
+                  setResetEmail("");
+                  setErrorMessage("");
+                }}
+                className="mt-3 w-full text-sm font-medium text-slate-500 hover:text-slate-800"
+              >
+                Back to Login
+              </button>
+            </>
+          )}
+
+          {errorMessage && (
+            <div className="mt-4 rounded-xl bg-red-50 px-4 py-3 text-xs leading-relaxed text-red-600">
+              {errorMessage}
+            </div>
+          )}
+        </form>
       </div>
     );
   }
@@ -1480,6 +1570,27 @@ export function GoogleLoginButton({
             />
           </div>
 
+          {!isSignup && (
+            <button
+              type="button"
+              onClick={() => {
+                setResetEmail(
+                  email.trim()
+                );
+
+                setResetSent(false);
+                setErrorMessage("");
+                setShowForgotPassword(true);
+              }}
+              className="mt-3 w-full text-right text-sm font-semibold hover:underline"
+              style={{
+                color: NAVY,
+              }}
+            >
+              Forgot password?
+            </button>
+          )}
+
           {isSignup && (
             <div className="mt-3">
               <PasswordField
@@ -1531,8 +1642,6 @@ export function GoogleLoginButton({
             <button
               type="button"
               onClick={() => {
-                // Keep remembered email.
-                // Only hide the form.
                 setShowEmailLogin(false);
                 setPassword("");
                 setErrorMessage("");
@@ -1603,91 +1712,103 @@ export function GoogleLoginButton({
   // ==========================================================
   // INITIAL AUTH OPTIONS
   //
-  // Only for users with NO remembered login method.
+  // EMAIL FIRST
+  // OR
+  // GOOGLE SECOND
   // ==========================================================
 
   return (
-   <div className="flex w-full max-w-md flex-col gap-4">
+    <div className="flex w-full max-w-md flex-col gap-4">
 
-  {/* EMAIL */}
-  <button
-    type="button"
-    onClick={() => {
-      setShowEmailLogin(true);
-      setEmailMode("signup");
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
-      setErrorMessage("");
-    }}
-    className="w-full rounded-full border px-6 py-3.5 text-sm font-semibold transition hover:bg-slate-100"
-    style={{
-      borderColor: GOLD,
-      color: NAVY,
-      backgroundColor: "#f8fafc",
-    }}
-  >
-    {text}
-  </button>
+      {/* =====================================================
+          EMAIL — PRIMARY OPTION
+          ===================================================== */}
 
-  {/* OR */}
-  <div className="flex items-center gap-3">
-    <div className="h-px flex-1 bg-slate-200" />
+      <button
+        type="button"
+        onClick={() => {
+          setShowEmailLogin(true);
+          setEmailMode("signup");
+          setEmail("");
+          setPassword("");
+          setConfirmPassword("");
+          setErrorMessage("");
+        }}
+        className="w-full rounded-full border px-6 py-3.5 text-sm font-semibold transition hover:bg-slate-100"
+        style={{
+          borderColor: GOLD,
+          color: NAVY,
+          backgroundColor: "#f8fafc",
+        }}
+      >
+        {text}
+      </button>
 
-    <span className="text-xs font-medium uppercase tracking-wide text-slate-400">
-      OR
-    </span>
+      {/* =====================================================
+          OR
+          ===================================================== */}
 
-    <div className="h-px flex-1 bg-slate-200" />
-  </div>
+      <div className="flex items-center gap-3">
+        <div className="h-px flex-1 bg-slate-200" />
 
-  {/* GOOGLE */}
-  <button
-    type="button"
-    onClick={handleGoogleLogin}
-    disabled={loading}
-    className="flex w-full items-center justify-center gap-3 rounded-full border border-slate-200 bg-white px-6 py-3.5 text-sm font-semibold text-slate-800 shadow-sm transition hover:shadow-md disabled:cursor-not-allowed disabled:opacity-60"
-  >
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-    >
-      <path
-        fill="#4285F4"
-        d="M21.35 12.27c0-.79-.07-1.55-.23-2.27H12v4.3h5.22a4.46 4.46 0 0 1-1.94 2.92v2.42h3.14c1.84-1.69 2.93-4.18 2.93-7.37Z"
-      />
+        <span className="text-xs font-medium uppercase tracking-wide text-slate-400">
+          OR
+        </span>
 
-      <path
-        fill="#34A853"
-        d="M12 21.5c2.63 0 4.84-.87 6.45-2.36l-3.14-2.42c-.87.58-1.98.92-3.31.92-2.54 0-4.7-1.72-5.47-4.03H3.29v2.5A9.75 9.75 0 0 0 12 21.5Z"
-      />
+        <div className="h-px flex-1 bg-slate-200" />
+      </div>
 
-      <path
-        fill="#FBBC05"
-        d="M6.53 13.61A5.86 5.86 0 0 1 6.23 12c0-.56.1-1.1.3-1.61V7.89H3.29A9.76 9.76 0 0 0 2.25 12c0 1.57.38 3.05 1.04 4.11l3.24-2.5Z"
-      />
+      {/* =====================================================
+          GOOGLE — SECONDARY OPTION
+          ===================================================== */}
 
-      <path
-        fill="#EA4335"
-        d="M12 6.36c1.43 0 2.72.49 3.73 1.46l2.8-2.8C16.84 3.46 14.63 2.5 12 2.5a9.75 9.75 0 0 0-8.71 5.39l3.24 2.5 3.24-2.5c.77-2.31 2.93-4.03 5.47-4.03Z"
-      />
-    </svg>
+      <button
+        type="button"
+        onClick={handleGoogleLogin}
+        disabled={loading}
+        className="flex w-full items-center justify-center gap-3 rounded-full border border-slate-200 bg-white px-6 py-3.5 text-sm font-semibold text-slate-800 shadow-sm transition hover:shadow-md disabled:cursor-not-allowed disabled:opacity-60"
+      >
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            fill="#4285F4"
+            d="M21.35 12.27c0-.79-.07-1.55-.23-2.27H12v4.3h5.22a4.46 4.46 0 0 1-1.94 2.92v2.42h3.14c1.84-1.69 2.93-4.18 2.93-7.37Z"
+          />
 
-    {loading
-      ? "Connecting..."
-      : "Continue with Google"}
-  </button>
+          <path
+            fill="#34A853"
+            d="M12 21.5c2.63 0 4.84-.87 6.45-2.36l-3.14-2.42c-.87.58-1.98.92-3.31.92-2.54 0-4.7-1.72-5.47-4.03H3.29v2.5A9.75 9.75 0 0 0 12 21.5Z"
+          />
 
-  {/* ERROR */}
-  {errorMessage && (
-    <div className="rounded-xl bg-red-50 px-4 py-3 text-xs leading-relaxed text-red-600">
-      {errorMessage}
+          <path
+            fill="#FBBC05"
+            d="M6.53 13.61A5.86 5.86 0 0 1 6.23 12c0-.56.1-1.1.3-1.61V7.89H3.29A9.76 9.76 0 0 0 2.25 12c0 1.57.38 3.05 1.04 4.11l3.24-2.5Z"
+          />
+
+          <path
+            fill="#EA4335"
+            d="M12 6.36c1.43 0 2.72.49 3.73 1.46l2.8-2.8C16.84 3.46 14.63 2.5 12 2.5a9.75 9.75 0 0 0-8.71 5.39l3.24 2.5 3.24-2.5c.77-2.31 2.93-4.03 5.47-4.03Z"
+          />
+        </svg>
+
+        {loading
+          ? "Connecting..."
+          : "Continue with Google"}
+      </button>
+
+      {/* ERROR */}
+
+      {errorMessage && (
+        <div className="rounded-xl bg-red-50 px-4 py-3 text-xs leading-relaxed text-red-600">
+          {errorMessage}
+        </div>
+      )}
+
     </div>
-  )}
-
-</div>
   );
 }
 
@@ -1736,7 +1857,6 @@ export function LogoutButton() {
         return;
       }
 
-      // Full navigation.
       window.location.href =
         "/referral-program";
     } catch (error) {
