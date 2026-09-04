@@ -8,27 +8,30 @@ const slides = [
   {
     image: "/crousel1.webp",
     alt: "Business meeting in a modern office",
-    heading: "Smarter Strategy , Stronger Systems , Real Results.",
+    eyebrow: "UK PRIVATE SECURITY COMPLIANCE",
+    heading: "UK Security Compliance Experts",
     subheading:
-      "BizGrow Holdings delivers compliance-driven consultancy that helps UK businesses pass audits, win contracts, and grow with certainty.",
-    buttonText: "Start Your Growth Journey",
+      "Specialist consultancy for private security companies seeking SIA ACS, ISO certification and industry accreditation with practical systems designed for successful audits and long-term compliance.",
+    buttonText: "Explore Security Compliance",
     buttonLink: "/contact-us/",
   },
   {
     image: "/home-compliance.jpg",
     alt: "Team collaboration around a whiteboard",
-    heading: "Compliance Clear. Certification Achievable.",
+    eyebrow: "SIA ACS • ISO • INDUSTRY ACCREDITATIONS",
+    heading: "SIA ACS & ISO Certification Specialists",
     subheading:
-      "Helping UK businesses achieve ISO certification, regulatory approval, and audit-ready systems with clarity, confidence, and control.",
+      "Supporting UK security businesses with ACS preparation, ISO 9001, ISO 14001, ISO 45001, COP 119, BS 7858, SafeContractor and wider compliance requirements.",
     buttonText: "Explore Our Certification",
     buttonLink: "/our-services/",
   },
   {
     image: "/coursel2-og.webp",
     alt: "Laptop showing business analytics",
-    heading: "Clarity in Strategy. Confidence in Compliance.",
+    eyebrow: "AUDIT READINESS • COMPLIANCE • BUSINESS GROWTH",
+    heading: "13+ Years of Security Compliance Experience",
     subheading:
-      "Supporting UK organisations with innovative yet practical solutions that improve performance and future-proof operations.",
+      "Helping security companies build audit-ready systems, strengthen compliance and meet the standards required to compete for bigger contracts.",
     buttonText: "Explore Our Insights",
     buttonLink: "/blogs",
   },
@@ -102,12 +105,21 @@ export default function HeroCarousel() {
           <div className="relative z-20 flex flex-col items-center justify-center h-full text-center text-white px-6 md:px-12">
             {/* Decorative accent line */}
             <div
-              className={`h-[3px] w-16 bg-[#D4AF37] mb-6 rounded-full transition-all duration-700 delay-100
-                ${index === currentSlide ? "opacity-100 scale-100" : "opacity-0 scale-50"}`}
-            />
+              className={`mb-6 px-4 py-2 border border-[#D4AF37]/60 rounded-full
+    text-[#D4AF37] text-xs md:text-sm font-bold tracking-[2px]
+    bg-black/20 backdrop-blur-sm
+    transition-all duration-700 delay-100
+    ${
+      index === currentSlide
+        ? "opacity-100 translate-y-0"
+        : "opacity-0 translate-y-4"
+    }`}
+            >
+              {slide.eyebrow}
+            </div>
 
             <span
-              className={`text-3xl md:text-6xl lg:text-7xl font-serif font-extrabold leading-tight mb-4 max-w-5xl tracking-tight
+              className={`text-3xl md:text-6xl lg:text-6xl font-serif font-extrabold leading-tight mb-4 max-w-5xl tracking-tight
                 drop-shadow-[0_4px_24px_rgba(0,0,0,0.55)]
                 transition-[transform,opacity] duration-700 ease-out will-change-[transform,opacity]
                 ${index === currentSlide ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"}`}
@@ -116,7 +128,7 @@ export default function HeroCarousel() {
             </span>
 
             <p
-              className={`text-lg md:text-xl lg:text-2xl font-medium mb-8 max-w-3xl leading-relaxed text-white/90
+              className={`text-lg md:text-xl lg:text-lg font-medium mb-8 max-w-3xl leading-relaxed text-white/90
                 transition-[transform,opacity] duration-700 delay-150 ease-out
                 ${index === currentSlide ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"}`}
             >

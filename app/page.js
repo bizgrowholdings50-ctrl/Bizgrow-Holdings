@@ -8,8 +8,10 @@ import {
   Globe2,
   PhoneCall,
   ArrowRight,
+  Home,
 } from "lucide-react";
 import HorizontalServices from "@/components/HorizontalProcess";
+import HomeTestimonial from "@/components/HomeTestimonial";
 import JsonLd from "@/components/JsonLd";
 import { organizationSchema } from "@/lib/jsonSchemas";
 
@@ -58,19 +60,20 @@ const steps = [
 const reviews = [
   {
     name: "Keyur Kachhadiya",
-    role: "Immaculate & Co. Ltd",
+    role: "Director, Immaculate & Co. Ltd",
     text: "We had an excellent experience with BIZGrow Holding during our COP119 audit. Their team was professional, efficient, and highly knowledgeable, making the entire process smooth and well-structured. The guidance provided was invaluable, and their attention to detail ensured a thorough assessment. We highly recommend their services to any business looking for reliable audit and accreditation support.",
+  },
+   {
+    name: "Shehzad Nazir",
+    role: "Director, Progressive Group Services Ltd",
+    text: "We’ve worked with Bizgrow Holdings Ltd for over two years and their support has been outstanding. They have successfully guided us through two ACS audits and COP119 compliance, providing expert advice and practical solutions throughout.Professional, knowledgeable, and always responsive. I would highly recommend Bizgrow Holdings Ltd to any security company looking for compliance and business support",
   },
   {
     name: "Denzil Fernandes",
-    role: "Jehovah Jireh Security Services Ltd",
+    role: "Director, Jehovah Jireh Security Services Ltd",
     text: "Bizgrow has been helpful since day one until the last They did their level best in completing my process going out of limit I'm very thankful and grateful for their support and hard work It looked so difficult in beginning but because of their excellent service I was able to",
   },
-  {
-    name: "Muhammad Saqib",
-    role: "CEO, TechLogix",
-    text: "I must say my experience with Bizgrow was outstanding, the staff took time to understand my needs thoroughly, communication has been a very strong point, team was always available to answer questions, provide updates and offer insights. I will definitely be returning to them for future needs",
-  },
+ 
 ];
 
 export const metadata = {
@@ -160,7 +163,7 @@ export default function HomePage() {
             </div>
             {/* Experience Badge */}
             <div className="absolute -bottom-10 right-10 bg-[#997819] p-8 rounded-[2rem] text-white hidden md:block shadow-xl">
-              <div className="text-4xl font-black">10+</div>
+              <div className="text-4xl font-black">13+</div>
               <div className="text-xs uppercase font-bold tracking-widest">
                 Years Experience
               </div>
@@ -230,7 +233,7 @@ export default function HomePage() {
         <div className="hidden md:block absolute inset-0 bg-black/70 backdrop-blur-[1px]" />
         <div
           aria-hidden="true"
-          className="absolute top-10 lg:right-8 xl:right-20 md:right-0 text-[4rem] md:text-[15rem] lg:text-[10rem] font-black text-white/60 md:text-white/20 select-none leading-none -translate-y-1/4"
+          className="absolute top-10  lg:right-8 xl:right-20 md:right-0 text-[4rem] md:text-[15rem] lg:text-[10rem] font-black text-white/60 md:text-white/20 select-none leading-none -translate-y-1/4"
         >
           BIZGROW
         </div>
@@ -272,29 +275,9 @@ export default function HomePage() {
       </section>
 
       {/* 6. TESTIMONIALS */}
-      <section className="py-32 bg-zinc-50 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            {reviews.map((rev, i) => (
-              <FadeIn key={i} delay={i * 0.2}>
-                <div className="p-12 rounded-[3.5rem] bg-white shadow-xl border border-zinc-300 flex flex-col justify-between h-full hover:border-[#997819] transition-transform  group">
-                  <p className="text-[#12066a] font-medium leading-relaxed italic mb-10 text-lg">
-                    "{rev.text}"
-                  </p>
-                  <div>
-                    <h4 className="font-black text-[#12066a] text-xl uppercase italic">
-                      {rev.name}
-                    </h4>
-                    <p className="text-[#997819] text-xs font-bold uppercase tracking-widest mt-1">
-                      {rev.role}
-                    </p>
-                  </div>
-                </div>
-              </FadeIn>
-            ))}
-          </div>
-        </div>
-      </section>
+     
+        <HomeTestimonial />
+      
 
       {/* 7 CTA Section with Background Parallax & Watermark */}
       <section className="py-20 px-6 bg-white overflow-hidden">
