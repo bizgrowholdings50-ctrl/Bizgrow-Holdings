@@ -699,13 +699,13 @@ export default function DashboardClient() {
                     <span className="font-bold text-[#2f6fed]">Need help?</span>{" "}
                     If you have any questions about your application, please
                     contact our team at{" "}
-                    <a
+                    
                       href="mailto:sales@bizgrow-holdings.net"
                       className="text-[#997819] font-semibold hover:underline"
-                    >
+                    <a>
                       sales@bizgrow-holdings.net
                     </a>
-                    .
+                    
                   </p>
                 </div>
 
@@ -800,6 +800,32 @@ export default function DashboardClient() {
   const availableRewardAmount = Math.max(
     Math.min(earnedRewardAmount, MAX_REWARD) - totalClaimedAndPending,
     0,
+  );
+
+  // ===========================================================
+  // CLAIMED REFERRAL TRACKING (FIFO)
+  //
+  // IMPORTANT:
+  // Individual claims are not linked to a specific referral in
+  // the database - only a total claimed/pending amount exists.
+  // To avoid showing "Active" on a referral whose credit has
+  // already been used, we treat the oldest approved referrals
+  // as "claimed first" (FIFO), based on how many £125 slots
+  // have been claimed or are under review.
+  // ===========================================================
+
+  const claimedSlots = Math.min(
+    Math.floor(totalClaimedAndPending / REWARD_PER_REFERRAL),
+    approvedReferrals.length,
+  );
+
+  const sortedApprovedByDate = [...approvedReferrals].sort(
+    (a, b) =>
+      new Date(a.created_at).getTime() - new Date(b.created_at).getTime(),
+  );
+
+  const claimedReferralIds = new Set(
+    sortedApprovedByDate.slice(0, claimedSlots).map((ref) => ref.id),
   );
 
   // ===========================================================
@@ -1373,17 +1399,19 @@ export default function DashboardClient() {
                     </span>
                   </div>
 
-                  {/* Next Expiry Pill */}
-                  <div className="flex items-center rounded-xl border border-rose-100 bg-rose-50/60 px-4 py-2.5 text-xs shadow-sm transition-all hover:shadow">
-                    <span className="mr-2 text-[9px] font-bold uppercase tracking-wide text-rose-600">
-                      Next Expiry
-                    </span>
-                    <span className="font-black text-slate-800 tabular-nums">
-                      {nextExpiryDate
-                        ? `${formatDate(nextExpiryDate)} (${daysUntilNextExpiry}d)`
-                        : "—"}
-                    </span>
-                  </div>
+                  {/* Next Expiry Pill - only show if there's unclaimed credit remaining */}
+                  {availableRewardAmount > 0 && (
+                    <div className="flex items-center rounded-xl border border-rose-100 bg-rose-50/60 px-4 py-2.5 text-xs shadow-sm transition-all hover:shadow">
+                      <span className="mr-2 text-[9px] font-bold uppercase tracking-wide text-rose-600">
+                        Next Expiry
+                      </span>
+                      <span className="font-black text-slate-800 tabular-nums">
+                        {nextExpiryDate
+                          ? `${formatDate(nextExpiryDate)} (${daysUntilNextExpiry}d)`
+                          : "—"}
+                      </span>
+                    </div>
+                  )}
                 </div>
 
                 {/* Expiry Notice */}
@@ -1463,6 +1491,7 @@ export default function DashboardClient() {
                             const daysLeft = active
                               ? getDaysRemaining(expiryDate)
                               : 0;
+                            const isClaimed = claimedReferralIds.has(ref.id);
 
                             return (
                               <tr key={ref.id}>
@@ -1485,20 +1514,24 @@ export default function DashboardClient() {
                                     className={`px-0 py-1.5 rounded-full text-[11px] font-black uppercase ${
                                       ref.partner_status !== "approved"
                                         ? "text-amber-600"
-                                        : active
-                                          ? "text-emerald-700"
-                                          : "text-red-600"
+                                        : isClaimed
+                                          ? "text-slate-500"
+                                          : active
+                                            ? "text-emerald-700"
+                                            : "text-red-600"
                                     }`}
                                   >
                                     £125{" "}
                                     {ref.partner_status !== "approved"
                                       ? "Pending"
-                                      : active
-                                        ? "Active"
-                                        : "Expired"}
+                                      : isClaimed
+                                        ? "Claimed"
+                                        : active
+                                          ? "Active"
+                                          : "Expired"}
                                   </span>
 
-                                  {active && (
+                                  {active && !isClaimed && (
                                     <p className="text-[10px] font-bold text-slate-500 mt-1">
                                       {daysLeft} days left
                                     </p>
@@ -1519,9 +1552,11 @@ export default function DashboardClient() {
                                   <div className="text-[9px] mt-1 font-semibold text-slate-400">
                                     {ref.partner_status !== "approved"
                                       ? "Awaiting approval"
-                                      : active
-                                        ? `Expires ${formatDate(expiryDate)}`
-                                        : `Expired ${formatDate(expiryDate)}`}
+                                      : isClaimed
+                                        ? "Credit claimed"
+                                        : active
+                                          ? `Expires ${formatDate(expiryDate)}`
+                                          : `Expired ${formatDate(expiryDate)}`}
                                   </div>
                                 </td>
                               </tr>

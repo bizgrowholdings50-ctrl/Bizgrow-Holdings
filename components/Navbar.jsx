@@ -21,6 +21,7 @@ import {
   ShieldAlert,
   FileCheck,
   Building2,
+  ChevronRight,
 } from "lucide-react";
 
 export default function Navbar() {
@@ -134,11 +135,17 @@ export default function Navbar() {
     },
   ];
 
+  const navLinks = [
+    { label: "Home", href: "/" },
+    { label: "About", href: "/about-us" },
+    { label: "IT Solutions", href: "/it-services" },
+  ];
+
   return (
-  <nav className="fixed top-6 inset-x-0 mx-4 xl:mx-auto rounded-4xl max-w-7xl z-[100] bg-white backdrop-blur-md border border-[#12066a] shadow-lg mt-0 pt-0">
+    <nav className="fixed top-6 inset-x-0 mx-4 xl:mx-auto rounded-4xl max-w-7xl z-[100] bg-white/95 backdrop-blur-xl border border-[#12066a] shadow-[0_8px_30px_-8px_rgba(18,6,106,0.25)] mt-0 pt-0 transition-shadow duration-300">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex py-3 items-center justify-between">
-          <Link href="/">
+          <Link href="/" className="transition-transform duration-300 hover:scale-[1.03]">
             <Image
               src="/bizgrow_logo.png"
               alt="BizGrow Holdings Logo"
@@ -151,19 +158,16 @@ export default function Navbar() {
 
           {/* DESKTOP MENU */}
           <div className="hidden xl:flex items-center gap-10 text-sm font-semibold text-black">
-            <Link href="/" className="hover:text-[#997819] transition">
-              Home
-            </Link>
-            <Link href="/about-us" className="hover:text-[#997819] transition">
-              About
-            </Link>
-
-            <Link
-              href="/it-services"
-              className="hover:text-[#997819] transition"
-            >
-              IT Solutions
-            </Link>
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="group relative py-1 transition-colors duration-300 hover:text-[#997819]"
+              >
+                {link.label}
+                <span className="absolute left-0 -bottom-0.5 h-[2px] w-0 bg-[#997819] transition-all duration-300 ease-out group-hover:w-full" />
+              </Link>
+            ))}
 
             <div
               className="relative"
@@ -172,13 +176,13 @@ export default function Navbar() {
             >
               <Link href="/our-services">
                 <button
-                  className=" flex items-center gap-1 text-black hover:text-[#997819] outline-none"
+                  className="group relative flex items-center gap-1 py-1 text-black hover:text-[#997819] outline-none transition-colors duration-300"
                   aria-expanded={open}
                   aria-haspopup="true"
                 >
                   Services
                   <svg
-                    className={`w-4 h-4 transition-transform ${
+                    className={`w-4 h-4 transition-transform duration-300 ${
                       open ? "rotate-180" : ""
                     }`}
                     viewBox="0 0 24 24"
@@ -193,73 +197,108 @@ export default function Navbar() {
                       d="M19 9l-7 7-7-7"
                     />
                   </svg>
+                  <span className="absolute left-0 -bottom-0.5 h-[2px] w-0 bg-[#997819] transition-all duration-300 ease-out group-hover:w-full" />
                 </button>
               </Link>
               <AnimatePresence>
                 {open && (
                   <motion.div
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 15 }}
-                    className="absolute left-1/2 -translate-x-1/2 mt-4 w-[720px] rounded-2xl bg-white  backdrop-blur-xl border border-black shadow-2xl"
+                    initial={{ opacity: 0, y: 12, scale: 0.98 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 12, scale: 0.98 }}
+                    transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                    className="absolute left-1/2 -translate-x-1/2 mt-4 w-[720px] rounded-2xl bg-white/98 backdrop-blur-xl border border-black/10 shadow-[0_25px_60px_-15px_rgba(18,6,106,0.35)] overflow-hidden"
                   >
+                    {/* Subtle top accent */}
+                    <div className="h-[3px] w-full bg-gradient-to-r from-[#12066a] via-[#997819] to-[#12066a]" />
+
                     <div className="grid grid-cols-3 gap-2 p-4">
                       {services.map((s, i) => (
-                        <Link
+                        <motion.div
                           key={i}
-                          href={s.href}
-                          className="group flex gap-4 p-3 rounded-xl hover:bg-black/5 dark:hover:bg-white/5 transition"
+                          initial={{ opacity: 0, y: 8 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.25, delay: i * 0.02 }}
                         >
-                          <div className="text-[#12066a] text-lg mt-1">
-                            {s.icon}
-                          </div>
-                          <div>
-                            <h4 className="text-black text-sm font-semibold group-hover:text-[#12066a]">
-                              {s.title}
-                            </h4>
-                            <p className="text-[10px] text-gray-500 leading-tight">
-                              {s.description}
-                            </p>
-                          </div>
-                        </Link>
+                          <Link
+                            href={s.href}
+                            className="group/item flex gap-4 p-3 rounded-xl hover:bg-[#12066a]/5 transition-colors duration-200"
+                          >
+                            <div className="shrink-0 w-9 h-9 rounded-lg bg-[#12066a]/8 text-[#12066a] flex items-center justify-center text-lg transition-all duration-300 group-hover/item:bg-[#12066a] group-hover/item:text-white group-hover/item:scale-110">
+                              {s.icon}
+                            </div>
+                            <div>
+                              <h4 className="text-black text-sm font-semibold group-hover/item:text-[#12066a] transition-colors duration-200">
+                                {s.title}
+                              </h4>
+                              <p className="text-[10px] text-gray-500 leading-tight mt-0.5">
+                                {s.description}
+                              </p>
+                            </div>
+                          </Link>
+                        </motion.div>
                       ))}
                     </div>
                   </motion.div>
                 )}
               </AnimatePresence>
             </div>
+
             <Link
               href="/training-moments"
-              className="hover:text-[#997819]  transition"
+              className="group relative py-1 transition-colors duration-300 hover:text-[#997819]"
             >
               Workshop Training
+              <span className="absolute left-0 -bottom-0.5 h-[2px] w-0 bg-[#997819] transition-all duration-300 ease-out group-hover:w-full" />
             </Link>
             <Link
               href="/testimonials-reviews"
-              className="hover:text-[#997819]  transition"
+              className="group relative py-1 transition-colors duration-300 hover:text-[#997819]"
             >
               Testimonials
+              <span className="absolute left-0 -bottom-0.5 h-[2px] w-0 bg-[#997819] transition-all duration-300 ease-out group-hover:w-full" />
             </Link>
 
-            <Link href="/blogs" className="hover:text-[#997819] transition">
+            <Link
+              href="/blogs"
+              className="group relative py-1 transition-colors duration-300 hover:text-[#997819]"
+            >
               Blogs
+              <span className="absolute left-0 -bottom-0.5 h-[2px] w-0 bg-[#997819] transition-all duration-300 ease-out group-hover:w-full" />
             </Link>
           </div>
 
           {/* THEME & MOBILE BUTTON */}
           <div className="flex items-center gap-4">
             <Link href="/contact-us" className="hidden md:block">
-              <button className="text-white font-semibold border border-[#997819] bg-[#12066a] px-6 py-2.5 rounded-2xl hover:bg-[#1a0a8a] transition-all">
-                Contact Us
+              <button className="group relative overflow-hidden text-white font-semibold border border-[#997819] bg-[#12066a] px-6 py-2.5 rounded-2xl transition-all duration-300 hover:shadow-lg hover:shadow-[#12066a]/30 active:scale-95">
+                <span className="relative z-10">Contact Us</span>
+                <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out bg-gradient-to-r from-transparent via-white/25 to-transparent" />
               </button>
             </Link>
+
+            {/* Morphing hamburger / close icon */}
             <button
               aria-label={mobileOpen ? "Close Menu" : "Open Menu"}
               aria-expanded={mobileOpen}
               onClick={() => setMobileOpen(!mobileOpen)}
-              className="xl:hidden text-black text-2xl mx-4 p-2"
+              className="xl:hidden relative w-9 h-9 mx-2 flex items-center justify-center"
             >
-              {mobileOpen ? "✕" : "☰"}
+              <span
+                className={`absolute h-[2px] w-6 bg-black rounded-full transition-all duration-300 ${
+                  mobileOpen ? "rotate-45" : "-translate-y-2"
+                }`}
+              />
+              <span
+                className={`absolute h-[2px] w-6 bg-black rounded-full transition-all duration-300 ${
+                  mobileOpen ? "opacity-0" : "opacity-100"
+                }`}
+              />
+              <span
+                className={`absolute h-[2px] w-6 bg-black rounded-full transition-all duration-300 ${
+                  mobileOpen ? "-rotate-45" : "translate-y-2"
+                }`}
+              />
             </button>
           </div>
         </div>
@@ -268,101 +307,173 @@ export default function Navbar() {
       {/* MOBILE DRAWER */}
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ type: "tween", duration: 0.3 }}
-            className="fixed top-0 left-0 w-full h-screen bg-white z-[60] overflow-y-auto outline-none"
-          >
-            <div className="flex items-center justify-between  px-6 h-16 border-b border-white/10 sticky top-0 bg-[#12066a] z-10">
-              <Image
-                src="/logo.webp"
-                alt="BizGrow Digital Logo"
-                width={100}
-                height={35}
-                style={{ width: "auto", height: "auto" }}
-              />
-              <button
-                aria-label="Close menu"
-                onClick={() => setMobileOpen(false)}
-                className="text-white text-3xl"
-              >
-                ✕
-              </button>
-            </div>
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[55]"
+              onClick={() => setMobileOpen(false)}
+            />
 
-            <div className="px-6 py-8 pb-12 flex flex-col space-y-6">
-              <Link
-                href="/"
-                onClick={() => setMobileOpen(false)}
-                className="text-xl font-medium text-black"
-              >
-                Home
-              </Link>
-              <Link
-                href="/about-us"
-                onClick={() => setMobileOpen(false)}
-                className="text-xl font-medium text-black"
-              >
-                About
-              </Link>
-
-              {/* Services Section */}
-              <div className="space-y-4">
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "tween", duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              className="fixed top-0 left-0 w-full h-screen bg-white z-[60] overflow-y-auto outline-none shadow-2xl"
+            >
+              <div className="flex items-center justify-between px-6 h-16 border-b border-white/10 sticky top-0 bg-[#12066a] z-10">
+                <Image
+                  src="/logo.webp"
+                  alt="BizGrow Digital Logo"
+                  width={100}
+                  height={35}
+                  style={{ width: "auto", height: "auto" }}
+                />
                 <button
-                  aria-label="Toggle services list"
-                  aria-expanded={mobileServicesOpen}
-                  onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                  className="w-full flex justify-between items-center text-xl font-medium text-black"
+                  aria-label="Close menu"
+                  onClick={() => setMobileOpen(false)}
+                  className="relative w-9 h-9 flex items-center justify-center text-white transition-transform duration-300 hover:rotate-90"
                 >
-                  Services
-                  <span
-                    className={`text-[#12066a] transition-transform ${
-                      mobileServicesOpen ? "rotate-180" : ""
-                    }`}
-                  >
-                    ▼
-                  </span>
+                  <span className="absolute h-[2px] w-6 bg-white rounded-full rotate-45" />
+                  <span className="absolute h-[2px] w-6 bg-white rounded-full -rotate-45" />
                 </button>
-
-                <AnimatePresence>
-                  {mobileServicesOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      className="flex flex-col space-y-2 pl-4 border-l border-gray-200"
-                    >
-                      {services.map((service, i) => (
-                        <Link
-                          key={i}
-                          href={service.href}
-                          onClick={() => setMobileOpen(false)}
-                          className="flex items-center gap-4 py-3 border-b border-gray-100 last:border-0"
-                        >
-                          <div className="text-[#12066a] text-lg">
-                            {service.icon}
-                          </div>
-                          <span className="text-black text-base font-semibold">
-                            {service.title}
-                          </span>
-                        </Link>
-                      ))}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
               </div>
 
-              <Link
-                href="/blogs"
-                onClick={() => setMobileOpen(false)}
-                className="text-xl font-medium text-black"
+              <motion.div
+                initial="hidden"
+                animate="visible"
+                variants={{
+                  hidden: {},
+                  visible: {
+                    transition: { staggerChildren: 0.06, delayChildren: 0.1 },
+                  },
+                }}
+                className="px-6 py-8 pb-12 flex flex-col space-y-6"
               >
-                Blogs
-              </Link>
-            </div>
-          </motion.div>
+                <motion.div
+                  variants={{
+                    hidden: { opacity: 0, x: 20 },
+                    visible: { opacity: 1, x: 0 },
+                  }}
+                >
+                  <Link
+                    href="/"
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center justify-between text-xl font-medium text-black py-1 transition-colors duration-200 hover:text-[#997819]"
+                  >
+                    Home
+                    <ChevronRight className="w-4 h-4 text-gray-300" />
+                  </Link>
+                </motion.div>
+
+                <motion.div
+                  variants={{
+                    hidden: { opacity: 0, x: 20 },
+                    visible: { opacity: 1, x: 0 },
+                  }}
+                >
+                  <Link
+                    href="/about-us"
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center justify-between text-xl font-medium text-black py-1 transition-colors duration-200 hover:text-[#997819]"
+                  >
+                    About
+                    <ChevronRight className="w-4 h-4 text-gray-300" />
+                  </Link>
+                </motion.div>
+
+                {/* Services Section */}
+                <motion.div
+                  variants={{
+                    hidden: { opacity: 0, x: 20 },
+                    visible: { opacity: 1, x: 0 },
+                  }}
+                  className="space-y-4"
+                >
+                  <button
+                    aria-label="Toggle services list"
+                    aria-expanded={mobileServicesOpen}
+                    onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                    className="w-full flex justify-between items-center text-xl font-medium text-black py-1"
+                  >
+                    Services
+                    <span
+                      className={`text-[#12066a] transition-transform duration-300 ${
+                        mobileServicesOpen ? "rotate-180" : ""
+                      }`}
+                    >
+                      ▼
+                    </span>
+                  </button>
+
+                  <AnimatePresence>
+                    {mobileServicesOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                        className="flex flex-col space-y-1 pl-4 border-l-2 border-[#12066a]/10"
+                      >
+                        {services.map((service, i) => (
+                          <Link
+                            key={i}
+                            href={service.href}
+                            onClick={() => setMobileOpen(false)}
+                            className="group flex items-center gap-4 py-3 border-b border-gray-100 last:border-0 transition-colors duration-200"
+                          >
+                            <div className="shrink-0 w-8 h-8 rounded-lg bg-[#12066a]/8 text-[#12066a] flex items-center justify-center text-base transition-all duration-300 group-hover:bg-[#12066a] group-hover:text-white">
+                              {service.icon}
+                            </div>
+                            <span className="text-black text-base font-semibold group-hover:text-[#12066a] transition-colors duration-200">
+                              {service.title}
+                            </span>
+                          </Link>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+
+                <motion.div
+                  variants={{
+                    hidden: { opacity: 0, x: 20 },
+                    visible: { opacity: 1, x: 0 },
+                  }}
+                >
+                  <Link
+                    href="/blogs"
+                    onClick={() => setMobileOpen(false)}
+                    className="flex items-center justify-between text-xl font-medium text-black py-1 transition-colors duration-200 hover:text-[#997819]"
+                  >
+                    Blogs
+                    <ChevronRight className="w-4 h-4 text-gray-300" />
+                  </Link>
+                </motion.div>
+
+                <motion.div
+                  variants={{
+                    hidden: { opacity: 0, x: 20 },
+                    visible: { opacity: 1, x: 0 },
+                  }}
+                  className="pt-2"
+                >
+                  <Link
+                    href="/contact-us"
+                    onClick={() => setMobileOpen(false)}
+                    className="group relative overflow-hidden flex items-center justify-center w-full text-white font-semibold border border-[#997819] bg-[#12066a] px-6 py-3.5 rounded-2xl transition-all duration-300 active:scale-95"
+                  >
+                    <span className="relative z-10">Contact Us</span>
+                    <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-out bg-gradient-to-r from-transparent via-white/25 to-transparent" />
+                  </Link>
+                </motion.div>
+              </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </nav>

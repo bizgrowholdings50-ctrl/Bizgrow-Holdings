@@ -27,7 +27,7 @@ export default function Footer() {
               width={100}
               height={50}
               className="brightness-0 invert"
-              style={{ width: 'auto', height: 'auto' }}
+              style={{ width: "auto", height: "auto" }}
             />
             <p className="text-blue-100/70 text-sm leading-relaxed">
               Empowering businesses through strategic consultancy,
@@ -93,7 +93,11 @@ export default function Footer() {
               ].map((item) => (
                 <li key={item}>
                   <Link
-                    href={item === "Home" ? "/" : `/${item.toLowerCase().replace(" ", "-")}`} // 👈 Home fix
+                    href={
+                      item === "Home"
+                        ? "/"
+                        : `/${item.toLowerCase().replace(" ", "-")}`
+                    } // 👈 Home fix
                     className="text-blue-100/70 hover:text-white hover:pl-2 transition-all duration-300  flex items-center gap-2"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-[#EAB308]" />{" "}
@@ -123,7 +127,7 @@ export default function Footer() {
                   name: "Private Security Startup",
                   link: "/private-security-startup",
                 },
-                { name: "Referral Program", link: "/referral-program" },
+
                 { name: "QMS Software", link: "/qms-software" },
                 { name: "Internal Audit", link: "/internal-audit" },
                 { name: "Discount Offers", link: "/discount-offers" },
@@ -136,7 +140,6 @@ export default function Footer() {
                   name: "Corporate Training and Coaching",
                   link: "/corporate-training-and-coaching",
                 },
-                
               ].map((item) => (
                 <li key={item.name}>
                   <Link
@@ -176,7 +179,7 @@ export default function Footer() {
                     Emails
                   </p>
                   <p className="text-sm">info@bizgrow-holdings.co.uk</p>
-                    <p className="text-sm">sales@bizgrow-holdings.net</p>
+                  <p className="text-sm">sales@bizgrow-holdings.net</p>
                 </div>
               </div>
               <div className="flex gap-4 items-start">

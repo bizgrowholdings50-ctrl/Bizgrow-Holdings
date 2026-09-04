@@ -57,19 +57,19 @@ const steps = [
 
 const reviews = [
   {
-    name: "John Smith",
-    role: "Director, Shield Security",
-    text: "BizGrow Holdings made our ISO 9001 certification process straightforward and structured. Their team guided us step by step from gap analysis to final audit.",
+    name: "Keyur Kachhadiya",
+    role: "Immaculate & Co. Ltd",
+    text: "We had an excellent experience with BIZGrow Holding during our COP119 audit. Their team was professional, efficient, and highly knowledgeable, making the entire process smooth and well-structured. The guidance provided was invaluable, and their attention to detail ensured a thorough assessment. We highly recommend their services to any business looking for reliable audit and accreditation support.",
   },
   {
-    name: "Sarah Ahmed",
-    role: "Operations Manager",
-    text: "Their compliance expertise helped us secure contracts we were previously losing. BizGrow helped us strengthen our policies and audit documentation.",
+    name: "Denzil Fernandes",
+    role: "Jehovah Jireh Security Services Ltd",
+    text: "Bizgrow has been helpful since day one until the last They did their level best in completing my process going out of limit I'm very thankful and grateful for their support and hard work It looked so difficult in beginning but because of their excellent service I was able to",
   },
   {
-    name: "David Warner",
+    name: "Muhammad Saqib",
     role: "CEO, TechLogix",
-    text: "Professional, practical, and results-driven consultancy. BizGrow Holdings built a system that actually works in our daily operations.",
+    text: "I must say my experience with Bizgrow was outstanding, the staff took time to understand my needs thoroughly, communication has been a very strong point, team was always available to answer questions, provide updates and offer insights. I will definitely be returning to them for future needs",
   },
 ];
 
