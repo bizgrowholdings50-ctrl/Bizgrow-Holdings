@@ -221,58 +221,58 @@ export default function HomePage() {
       {/* 4. HORIZONTAL SERVICES (GSAP PINNED SECTION) */}
       <HorizontalServices />
 
-      <section className="py-24 max-h-screen xl:h-screen bg-[#12066a] relative overflow-hidden">
-        {/* Decorative Background Text */}
-        <Image
-          src="/experts-home.jpg"
-          alt="BizGrow operational excellence roadmap"
-          fill
-          className="object-cover hidden md:block"
-        />
-        {/* Black Overlay Effect */}
-        <div className="hidden md:block absolute inset-0 bg-black/70 backdrop-blur-[1px]" />
-        <div
-          aria-hidden="true"
-          className="absolute top-10  lg:right-8 xl:right-20 md:right-0 text-[4rem] md:text-[15rem] lg:text-[10rem] font-black text-white/60 md:text-white/20 select-none leading-none -translate-y-1/4"
-        >
-          BIZGROW
+      <section className="py-16 md:py-24 xl:h-screen bg-[#12066a] relative overflow-hidden">
+      {/* Decorative Background Text */}
+      <Image
+        src="/experts-home.jpg"
+        alt="BizGrow operational excellence roadmap"
+        fill
+        className="object-cover hidden md:block"
+      />
+      {/* Black Overlay Effect */}
+      <div className="hidden md:block absolute inset-0 bg-black/70 backdrop-blur-[1px]" />
+      <div
+        aria-hidden="true"
+        className="absolute top-6 right-0 md:top-10 lg:right-8 xl:right-20 text-[3.5rem] sm:text-[5rem] md:text-[15rem] lg:text-[10rem] font-black text-white/60 md:text-white/20 select-none leading-none -translate-y-1/4 whitespace-nowrap"
+      >
+        BIZGROW
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="mb-10 md:mb-20">
+          <span className="text-[#D4AF37] font-black uppercase tracking-[0.3em] text-xs">
+            Our Roadmap
+          </span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mt-4">
+            The Path to{" "}
+            <span className="text-[#997819]">Operational Excellence</span>
+          </h2>
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="mb-20">
-            <span className="text-[#D4AF37] font-black uppercase tracking-[0.3em] text-xs">
-              Our Roadmap
-            </span>
-            <h2 className="text-4xl md:text-5xl font-black text-white mt-4">
-              The Path to{" "}
-              <span className="text-[#997819]">Operational Excellence</span>
-            </h2>
-          </div>
-
-          <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-            {steps.map((step, i) => (
-              <FadeIn key={i} delay={i * 0.2} direction="right">
-                <div className="relative group">
-                  {/* Step Number */}
-                  <div className="text-6xl font-black text-white group-hover:text-[#997819] transition-colors duration-500 mb-4">
-                    {step.num}
-                  </div>
-
-                  {/* Line Decor */}
-                  <div className="w-12 h-1 bg-[#997819] mb-6 group-hover:w-24 transition-all duration-500" />
-
-                  <h3 className="text-xl font-bold text-white mb-3 tracking-tight">
-                    {step.title}
-                  </h3>
-                  <p className="text-blue-100/70 text-sm leading-relaxed font-medium">
-                    {step.desc}
-                  </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
+          {steps.map((step, i) => (
+            <FadeIn key={i} delay={i * 0.2} direction="right">
+              <div className="relative group">
+                {/* Step Number */}
+                <div className="text-4xl sm:text-5xl md:text-6xl font-black text-white group-hover:text-[#997819] transition-colors duration-500 mb-3 md:mb-4">
+                  {step.num}
                 </div>
-              </FadeIn>
-            ))}
-          </div>
+
+                {/* Line Decor */}
+                <div className="w-10 md:w-12 h-1 bg-[#997819] mb-4 md:mb-6 group-hover:w-24 transition-all duration-500" />
+
+                <h3 className="text-lg sm:text-xl font-bold text-white mb-2 md:mb-3 tracking-tight">
+                  {step.title}
+                </h3>
+                <p className="text-blue-100/70 text-sm leading-relaxed font-medium">
+                  {step.desc}
+                </p>
+              </div>
+            </FadeIn>
+          ))}
         </div>
-      </section>
+      </div>
+    </section>
 
       {/* 6. TESTIMONIALS */}
      

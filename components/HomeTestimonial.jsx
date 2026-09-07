@@ -1,7 +1,9 @@
 "use client";
+
 import { useState, useEffect } from "react";
-import { Quote } from "lucide-react";
+import { Quote, ArrowRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const reviews = [
   {
@@ -24,34 +26,42 @@ const reviews = [
   },
 ];
 
+
 export default function HomeTestimonial() {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
+
   const total = reviews.length;
 
   useEffect(() => {
     if (paused) return;
+
     const timer = setInterval(() => {
       setActive((prev) => (prev + 1) % total);
     }, 5000);
+
     return () => clearInterval(timer);
   }, [paused, total]);
 
   const getCardStyle = (offset) => {
-    if (offset === 0)
+    if (offset === 0) {
       return {
         transform: "translateX(0%) scale(1) rotate(0deg)",
         opacity: 1,
         zIndex: 30,
         filter: "blur(0px)",
       };
-    if (offset === 1)
+    }
+
+    if (offset === 1) {
       return {
         transform: "translateX(58%) scale(0.82) rotate(8deg)",
         opacity: 0.55,
         zIndex: 10,
         filter: "blur(1.5px)",
       };
+    }
+
     return {
       transform: "translateX(-58%) scale(0.82) rotate(-8deg)",
       opacity: 0.55,
@@ -62,22 +72,30 @@ export default function HomeTestimonial() {
 
   return (
     <div
-      className="relative py-32 px-6 overflow-hidden -mx-6 bg-white"
+      className="relative py-16 px-6 overflow-hidden -mx-6 bg-white"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <div className="max-w-5xl mx-auto text-center mb-10">
+      {/* Heading */}
+      <div className="max-w-5xl mx-auto text-center mb-6">
         <h2 className="text-4xl md:text-5xl font-black text-[#12066a]">
           What our clients say
         </h2>
-        <div className="w-16 h-px bg-[#997819] mx-auto mt-6" />
+        <div className="w-16 h-px bg-[#997819] mx-auto mt-4" />
       </div>
 
-      <div className="relative h-[440px] max-w-lg mx-auto">
+      {/* Testimonial Cards */}
+      <div className="relative h-[340px] max-w-lg mx-auto">
         {reviews.map((rev, i) => {
           let offset = (i - active + total) % total;
-          if (offset === total - 1) offset = -1;
-          if (Math.abs(offset) > 1) return null;
+
+          if (offset === total - 1) {
+            offset = -1;
+          }
+
+          if (Math.abs(offset) > 1) {
+            return null;
+          }
 
           const style = getCardStyle(offset);
           const isActive = offset === 0;
@@ -92,13 +110,14 @@ export default function HomeTestimonial() {
               style={style}
             >
               <div
-                className={`rounded-[2rem] p-7 md:p-8 border ${
+                className={`rounded-[2rem] p-6 md:p-7 border ${
                   isActive
                     ? "bg-white border-zinc-200 shadow-[0_30px_60px_-15px_rgba(18,6,106,0.18)]"
                     : "bg-zinc-50 border-zinc-100"
                 }`}
               >
-                <div className="flex items-center justify-between mb-6">
+                {/* Logo + Quote */}
+                <div className="flex items-center justify-between mb-4">
                   <div className="w-12 h-12 rounded-full overflow-hidden border border-zinc-200 relative flex items-center justify-center bg-zinc-50">
                     <Image
                       src={rev.logo}
@@ -110,11 +129,12 @@ export default function HomeTestimonial() {
                   <Quote className="w-5 h-5 text-[#997819]" />
                 </div>
 
+                {/* Review */}
                 <p
-                  className="text-zinc-600 text-sm leading-relaxed mb-8"
+                  className="text-zinc-600 text-sm leading-relaxed mb-6"
                   style={{
                     display: "-webkit-box",
-                    WebkitLineClamp: 6,
+                    WebkitLineClamp: 5,
                     WebkitBoxOrient: "vertical",
                     overflow: "hidden",
                   }}
@@ -122,17 +142,23 @@ export default function HomeTestimonial() {
                   {rev.text}
                 </p>
 
+                {/* Client */}
                 <h4 className="font-bold text-[#12066a] text-base">
                   {rev.name}
                 </h4>
-                <p className="text-zinc-500 text-sm mt-0.5">{rev.role}</p>
+                <p className="text-zinc-500 text-sm mt-0.5">
+                  {rev.role}
+                </p>
               </div>
             </div>
           );
         })}
       </div>
 
-      <div className="flex justify-center gap-2 -mt-12">
+      
+
+      {/* Slider Dots */}
+      <div className="flex justify-center gap-2">
         {reviews.map((_, i) => (
           <button
             key={i}
@@ -144,6 +170,17 @@ export default function HomeTestimonial() {
           />
         ))}
       </div>
+      {/* View All Testimonials Button */}
+      <div className="w-full flex justify-center mt-10">
+        <Link
+          href="/testimonials-reviews/"
+          className="group inline-flex items-center justify-center gap-2 px-6 py-2.5 rounded-full bg-[#12066a] text-white font-semibold text-sm transition-all duration-300 hover:bg-[#997819] hover:-translate-y-0.5 shadow-sm hover:shadow-md"
+        >
+          View All Testimonials
+          <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+        </Link>
+      </div>
+      
     </div>
   );
 }
