@@ -6,34 +6,34 @@ import Link from "next/link";
 
 const slides = [
   {
-    image: "/crousel1.webp",
+    image: "/growth-s.jpg",
     alt: "Business meeting in a modern office",
     eyebrow: "UK PRIVATE SECURITY COMPLIANCE",
-    heading: "UK Security Compliance Experts",
+    heading: "Leading Security Compliance Experts In the UK",
     subheading:
-      "Specialist consultancy for private security companies seeking SIA ACS, ISO certification and industry accreditation with practical systems designed for successful audits and long-term compliance.",
+      "We support private security, construction, and cleaning companies in getting SIA ACS, ISO, and other industry certifications. Our practical systems help you pass audits with confidence and stay compliant for years to come.",
     buttonText: "Explore Security Compliance",
     buttonLink: "/contact-us/",
   },
   {
-    image: "/home-compliance.jpg",
+    image: "/every-standard.jpg",
     alt: "Team collaboration around a whiteboard",
     eyebrow: "SIA ACS • ISO • INDUSTRY ACCREDITATIONS",
-    heading: "SIA ACS & ISO Certification Specialists",
+    heading: "Every Standard You Need, Handled Properly",
     subheading:
-      "Supporting UK security businesses with ACS preparation, ISO 9001, ISO 14001, ISO 45001, COP 119, BS 7858, SafeContractor and wider compliance requirements.",
+      "SIA ACS preparation, ISO 9001, ISO 14001, ISO 45001, BS 10199, BS 7858, and SafeContractor all managed by one expert team, in a way that suits your business.",
     buttonText: "Explore Our Certification",
     buttonLink: "/our-services/",
   },
   {
-    image: "/coursel2-og.webp",
+    image: "/leadings.jpg",
     alt: "Laptop showing business analytics",
     eyebrow: "AUDIT READINESS • COMPLIANCE • BUSINESS GROWTH",
-    heading: "13+ Years of Security Compliance Experience",
+    heading: "13+ Years of Certification Success",
     subheading:
       "Helping security companies build audit-ready systems, strengthen compliance and meet the standards required to compete for bigger contracts.",
-    buttonText: "Explore Our Insights",
-    buttonLink: "/blogs",
+    buttonText: "Explore Training & Insights",
+    buttonLink: "/training-moments/",
   },
 ];
 
@@ -96,8 +96,8 @@ export default function HeroCarousel() {
             </div>
 
             {/* Layered premium overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80 z-10" />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent z-10" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#12066a]/70 via-black/50 to-black/80 z-10" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[black]/60 via-transparent to-transparent z-10" />
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.45)_100%)] z-10" />
           </div>
 

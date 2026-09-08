@@ -143,9 +143,9 @@ export default function HomeTestimonial() {
                 </p>
 
                 {/* Client */}
-                <h4 className="font-bold text-[#12066a] text-base">
+                <h3 className="font-bold text-[#12066a] text-base">
                   {rev.name}
-                </h4>
+                </h3>
                 <p className="text-zinc-500 text-sm mt-0.5">
                   {rev.role}
                 </p>
