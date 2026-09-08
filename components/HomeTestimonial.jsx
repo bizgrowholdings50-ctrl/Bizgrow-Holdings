@@ -9,7 +9,7 @@ const reviews = [
   {
     name: "Keyur Kachhadiya",
     role: "Immaculate & Co. Ltd",
-    logo: "/IMMACULATE & CO. LTD Logo.jpg", // Update path as per your public folder structure
+    logo: "/immaculate.jpg", // Update path as per your public folder structure
     text: "We had an excellent experience with BIZGrow Holding during our COP119 audit. Their team was professional, efficient, and highly knowledgeable, making the entire process smooth and well-structured. The guidance provided was invaluable, and their attention to detail ensured a thorough assessment. We highly recommend their services to any business looking for reliable audit and accreditation support.",
   },
   {
