@@ -142,9 +142,9 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed top-6 inset-x-0 mx-4 xl:mx-auto rounded-4xl max-w-7xl z-[100] bg-white/95 backdrop-blur-xl border border-[#12066a] shadow-[0_8px_30px_-8px_rgba(18,6,106,0.25)] mt-0 pt-0 transition-shadow duration-300">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex py-3 items-center justify-between">
+  <nav className="fixed top-4 inset-x-0 mx-3 sm:mx-4 xl:mx-auto rounded-3xl xl:rounded-4xl max-w-7xl z-[100] bg-white/95 backdrop-blur-xl border border-[#12066a]/20 shadow-[0_8px_30px_-8px_rgba(18,6,106,0.25)] transition-shadow duration-300">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <div className="flex py-3 items-center justify-between">
           <Link href="/" className="transition-transform duration-300 hover:scale-[1.03]">
             <Image
               src="/bizgrow_logo.png"

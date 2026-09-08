@@ -83,7 +83,7 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased relative overflow-x-hidden`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
         {isProduction && <Analytics />}
         {isProduction && <SpeedInsights />}
@@ -105,9 +105,11 @@ export default function RootLayout({ children }) {
         <ReferralTracker />
         
         <CustomCursor />
+        <div className="relative w-full overflow-x-clip">
         <Navbar />
         <SmoothScroll>{children}</SmoothScroll>
         <Footer />
+         </div>
         {/* <ComplianceChat /> */}
         <WhatsAppWidget /> 
        

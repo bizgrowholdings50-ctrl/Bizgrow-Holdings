@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 import HorizontalServices from "@/components/HorizontalProcess";
 import HomeTestimonial from "@/components/HomeTestimonial";
+import OurClients from "@/components/OurClients";
 import JsonLd from "@/components/JsonLd";
 import { organizationSchema } from "@/lib/jsonSchemas";
 
@@ -72,109 +73,6 @@ const reviews = [
     name: "Denzil Fernandes",
     role: "Director, Jehovah Jireh Security Services Ltd",
     text: "Bizgrow has been helpful since day one until the last They did their level best in completing my process going out of limit I'm very thankful and grateful for their support and hard work It looked so difficult in beginning but because of their excellent service I was able to",
-  },
-];
-
-const clients = [
-  {
-    name: "Guardnwatch",
-    logo: "/guardnwatch.png",
-    alt: "Guardnwatch | BizGrow Client",
-  },
-  {
-    name: "Guarding Professionals",
-    logo: "/guarding-professionals-removebg.png",
-    alt: "Guarding Professionals | BizGrow Client",
-  },
-  {
-    name: "MBS Security FM",
-    logo: "/mbs-security.png",
-    alt: "MBS Security FM | BizGrow Client",
-  },
-  {
-    name: "Blue Nine",
-    logo: "/Blue_Nine.png",
-    alt: "Blue Nine | BizGrow Client",
-  },
-  {
-    name: "BNK Services",
-    logo: "/bnk-services.png",
-    alt: "BNK Services | BizGrow Client",
-  },
-  {
-    name: "Cerberus Security",
-    logo: "/cerberus.png",
-    alt: "Cerberus Security | BizGrow Client",
-  },
-  {
-    name: "Vigilant Business Solutions",
-    logo: "/vigilant.png",
-    alt: "Vigilant Business Solutions | BizGrow Client",
-  },
-  {
-    name: "Z.A.M FM LTD",
-    logo: "/zam-fm.png",
-    alt: "Z.A.M FM LTD | BizGrow Client",
-  },
-  {
-    name: "Brites Security Solutions",
-    logo: "/brites.png",
-    alt: "Brites Security Solutions | BizGrow Client",
-  },
-  {
-    name: "Krypton Group",
-    logo: "/krypton.png",
-    alt: "Krypton Group | BizGrow Client",
-  },
-  {
-    name: "Marshall Security Services",
-    logo: "/marshall.png",
-    alt: "Marshall Security Services | BizGrow Client",
-  },
-  {
-    name: "Rawal Veritas LTD",
-    logo: "/rawal.png",
-    alt: "Rawal Veritas LTD | BizGrow Client",
-  },
-  {
-    name: "ZSS Security",
-    logo: "/zss-removebg.png",
-    alt: "ZSS Security | BizGrow Client",
-  },
-  {
-    name: "Pacific",
-    logo: "/pacific-removebg.png",
-    alt: "Pacific | BizGrow Client",
-  },
-  { name: "G4D", logo: "/g4d.png", alt: "G4D | BizGrow Client" },
-  {
-    name: "MTK Group",
-    logo: "/patriot-removebg.png",
-    alt: "MTK Group | BizGrow Client",
-  },
-  {
-    name: "Comprehensive Security",
-    logo: "/Comprehensive-removebg.png",
-    alt: "Comprehensive Security | BizGrow Client",
-  },
-  {
-    name: "Supreme Security",
-    logo: "/supreme.png",
-    alt: "Supreme Security | BizGrow Client",
-  },
-  { name: "Elma", logo: "/elma02-removebg.png", alt: "Elma | BizGrow Client" },
-  { name: "Akita", logo: "/akita.png", alt: "Akita | BizGrow Client" },
-  { name: "Mountain", logo: "/mountain.png", alt: "Mountain | BizGrow Client" },
-  { name: "Jehova", logo: "/jehova-bg.png", alt: "Jehova | BizGrow Client" },
-  {
-    name: "Security Jobs",
-    logo: "/security-jobs-removebg.png",
-    alt: "Security Jobs | BizGrow Client",
-  },
-  {
-    name: "Great Guard",
-    logo: "/aamir-apex-removebg.png",
-    alt: "Great Guard | BizGrow Client",
   },
 ];
 
@@ -381,64 +279,8 @@ export default function HomePage() {
 
         <HomeTestimonial />
 
-        {/* 7. CLIENTS SECTION */}
-        <section className="relative py-24 px-6 bg-slate-50 border-y border-slate-200 overflow-hidden">
-          <div className="relative max-w-7xl mx-auto text-center">
-            <FadeIn>
-              <span className="inline-flex items-center gap-2 text-[#997819] font-black uppercase tracking-[0.3em] text-xs">
-                <span className="h-px w-8 bg-[#997819]" />
-                Experts in Growing Private Security Businesses
-                <span className="h-px w-8 bg-[#997819]" />
-              </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#12066a] mt-3 mb-3">
-                OUR VALUABLE CLIENTS
-              </h2>
-              <p className="text-slate-500 font-medium mb-14">
-                Our private security companies clients across the UK
-              </p>
-            </FadeIn>
-
-            {/* Hairline-grid "wall" — no individual card shadows, unified border look */}
-            <FadeIn direction="up">
-              <div
-                className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6
-                   rounded-4xl overflow-hidden border border-slate-200 bg-white
-                   shadow-[0_1px_3px_rgba(0,0,0,0.02)]"
-              >
-                {clients.map((client, idx) => (
-                  <div
-                    key={idx}
-                    className="group relative flex items-center justify-center h-28
-                       border-slate-200
-                       [&:not(:nth-child(6n))]:border-r
-                       [&:not(:nth-last-child(-n+6))]:border-b
-                       md:[&:not(:nth-child(4n))]:border-r md:[&:nth-child(4n)]:border-r-0
-                       sm:[&:not(:nth-child(3n))]:border-r sm:[&:nth-child(3n)]:border-r-0
-                       overflow-hidden transition-colors duration-300"
-                  >
-                    {/* Diagonal shine sweep on hover */}
-                    <div
-                      className="absolute inset-0 -translate-x-full group-hover:translate-x-full
-                         transition-transform duration-700 ease-out pointer-events-none"
-                      style={{
-                        background:
-                          "linear-gradient(115deg, transparent 40%, rgba(153,120,25,0.12) 50%, transparent 60%)",
-                      }}
-                    />
-                    <div className="relative w-full h-full  p-6">
-                      <Image
-                        src={client.logo}
-                        alt={client.alt}
-                        fill
-                        className="object-contain p-4  transition-transform duration-300 group-hover:scale-[1.06]"
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </FadeIn>
-          </div>
-        </section>
+        {/* 7. CLIENTS SECTION — Premium Marquee */}
+        <OurClients  />
 
         {/* 8 CTA Section with Background Parallax & Watermark */}
         <section className="py-20 px-6 bg-white overflow-hidden">

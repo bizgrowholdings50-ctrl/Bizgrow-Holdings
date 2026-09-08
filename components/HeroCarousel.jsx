@@ -26,8 +26,8 @@ const slides = [
     buttonLink: "/our-services/",
   },
   {
-    image: "/leadings.jpg",
-    alt: "Laptop showing business analytics",
+    image: "/leadings.jpg", 
+    alt: "Laptop showing business analytics", 
     eyebrow: "AUDIT READINESS • COMPLIANCE • BUSINESS GROWTH",
     heading: "13+ Years of Certification Success",
     subheading:
