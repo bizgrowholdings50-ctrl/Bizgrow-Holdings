@@ -21,7 +21,7 @@ const slides = [
     eyebrow: "SIA ACS • ISO • INDUSTRY ACCREDITATIONS",
     heading: "Every Standard You Need, Handled Properly",
     subheading:
-      "SIA ACS preparation, ISO 9001, ISO 14001, ISO 45001, BS 10199, BS 7858, and SafeContractor all managed by one expert team, in a way that suits your business.",
+      "SIA ACS preparation, ISO 9001, ISO 14001, ISO 45001, BS 10119, BS 7858, and SafeContractor all managed by one expert team, in a way that suits your business.",
     buttonText: "Explore Our Certification",
     buttonLink: "/our-services/",
   },
