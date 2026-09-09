@@ -99,7 +99,7 @@ const categories = [
     id: "management",
     number: "02",
     eyebrow: "ISO & Management Systems",
-    title: "Quality & Management",
+    title: "ISO Consultancy",
     description:
       "Implement practical management systems that improve consistency, performance and business confidence.",
     icon: BadgeCheck,

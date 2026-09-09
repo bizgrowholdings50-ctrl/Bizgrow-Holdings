@@ -6,7 +6,8 @@ import {
   Award, 
   FileText, 
   Lock,
-  Compass,
+  Play,
+  Pause,
   ArrowDown
 } from "lucide-react";
 
@@ -14,6 +15,7 @@ const HorizontalProcess = () => {
   const targetRef = useRef(null);
   const [isVertical, setIsVertical] = useState(false);
   const [scrollPercent, setScrollPercent] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
@@ -35,8 +37,37 @@ const HorizontalProcess = () => {
     return scrollYProgress.onChange((latest) => {
       const percent = Math.min(Math.max(Math.round(latest * 100), 0), 100);
       setScrollPercent(percent);
+      if (latest >= 0.99 && isAutoPlaying) {
+        setIsAutoPlaying(false);
+      }
     });
-  }, [scrollYProgress]);
+  }, [scrollYProgress, isAutoPlaying]);
+
+  useEffect(() => {
+    let animationFrameId;
+    if (isAutoPlaying && targetRef.current) {
+      const element = targetRef.current;
+      
+      const scrollStep = () => {
+        const currentScroll = window.scrollY;
+        const targetTop = element.offsetTop;
+        const sectionHeight = element.offsetHeight;
+        
+        if (currentScroll >= targetTop - 50 && currentScroll < targetTop + sectionHeight - window.innerHeight) {
+          window.scrollBy({ top: 1.2, behavior: "auto" });
+        } else if (currentScroll < targetTop) {
+          window.scrollTo({ top: targetTop, behavior: "smooth" });
+        }
+        
+        if (isAutoPlaying) {
+          animationFrameId = requestAnimationFrame(scrollStep);
+        }
+      };
+
+      animationFrameId = requestAnimationFrame(scrollStep);
+    }
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [isAutoPlaying]);
 
   const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 70,
@@ -50,8 +81,7 @@ const HorizontalProcess = () => {
     ["0vw", "0vw", "-100vw", "-100vw", "-200vw", "-200vw", "-300vw", "-300vw"]
   );
 
-  // SVG Donut Circle stroke-dashoffset calculation
-  const circumference = 2 * Math.PI * 18; // radius = 18
+  const circumference = 2 * Math.PI * 18;
   const strokeDashoffset = useTransform(
     smoothProgress,
     [0, 1],
@@ -126,28 +156,42 @@ const HorizontalProcess = () => {
             className="absolute bottom-10 left-1/2 -translate-x-1/2 z-40 hidden md:flex items-center gap-3 bg-[#12066a]/40 backdrop-blur-xl border border-[#997819]/50 px-6 py-3 rounded-full shadow-[0_0_300px_rgba(153,120,25,0.25)] pointer-events-none"
           >
             <div className="w-8 h-8 rounded-full bg-[#997819]/20 text-[#997819] flex items-center justify-center border border-[#997819]/40">
-              <Compass className="w-4 h-4 animate-spin" style={{ animationDuration: "10s" }} />
+              <ArrowDown className="w-4 h-4 animate-bounce" />
             </div>
             <div className="flex flex-col">
               <span className="text-xs font-bold uppercase tracking-widest text-white flex items-center gap-1.5">
                 Interactive Journey <span className="text-[#997819]">Active</span>
               </span>
               <span className="text-[11px] text-zinc-300 font-medium">
-                Scroll down continuously to explore sections horizontally
+                Scroll down or use auto-play to explore sections
               </span>
             </div>
-            <ArrowDown className="w-4 h-4 text-[#997819] animate-bounce ml-2" />
           </motion.div>
         )}
 
-        {/* Bottom Donut Circular Progress Indicator */}
+        {/* Bottom Progress Bar with Play/Pause & Subtext */}
         {!isVertical && (
-          <div className="absolute bottom-8 left-12 lg:left-24 z-30 hidden md:flex items-center gap-4 text-zinc-300 bg-[#12066a]/70 backdrop-blur-md px-5 py-2 rounded-full border border-white/15 shadow-lg">
-            <span className="text-xs font-bold tracking-wider uppercase text-white">
-              Section Progress
-            </span>
-            <div className="w-[1px] h-5 bg-white/20" />
-            <div className="relative flex items-center justify-center w-10 h-10">
+          <div className="absolute bottom-8 left-12 lg:left-24 z-30 hidden md:flex items-center gap-4 text-zinc-300 bg-[#12066a]/80 backdrop-blur-md px-5 py-2.5 rounded-full border border-white/15 shadow-xl">
+            <button 
+              onClick={() => setIsAutoPlaying(!isAutoPlaying)}
+              className="w-7 h-7 rounded-full bg-[#997819] text-[#12066a] flex items-center justify-center hover:scale-105 transition-transform cursor-pointer shadow shrink-0"
+              title={isAutoPlaying ? "Pause Auto-Scroll" : "Start Auto-Scroll"}
+            >
+              {isAutoPlaying ? <Pause className="w-3.5 h-3.5 fill-current" /> : <Play className="w-3.5 h-3.5 fill-current ml-0.5" />}
+            </button>
+
+            <div className="flex flex-col">
+              <span className="text-xs font-bold tracking-wider uppercase text-[#997819]">
+                {isAutoPlaying ? "Playing Story..." : "Section Progress"}
+              </span>
+              <span className="text-[10px] text-zinc-400 font-medium">
+                Click the play btn for auto storytelling
+              </span>
+            </div>
+
+            <div className="w-[1px] h-7 bg-white/20 mx-1" />
+
+            <div className="relative flex items-center justify-center w-10 h-10 shrink-0">
               <svg className="w-10 h-10 transform -rotate-90">
                 <circle
                   cx="20"
