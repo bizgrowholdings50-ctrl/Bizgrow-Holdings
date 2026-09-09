@@ -13,7 +13,7 @@ import {
 const HorizontalProcess = () => {
   const targetRef = useRef(null);
   const [isVertical, setIsVertical] = useState(false);
-  const [activeIdx, setActiveIdx] = useState(0);
+  const [scrollPercent, setScrollPercent] = useState(0);
 
   useEffect(() => {
     const handleResize = () => {
@@ -33,10 +33,8 @@ const HorizontalProcess = () => {
 
   useEffect(() => {
     return scrollYProgress.onChange((latest) => {
-      if (latest < 0.25) setActiveIdx(0);
-      else if (latest < 0.5) setActiveIdx(1);
-      else if (latest < 0.75) setActiveIdx(2);
-      else setActiveIdx(3);
+      const percent = Math.min(Math.max(Math.round(latest * 100), 0), 100);
+      setScrollPercent(percent);
     });
   }, [scrollYProgress]);
 
@@ -52,7 +50,14 @@ const HorizontalProcess = () => {
     ["0vw", "0vw", "-100vw", "-100vw", "-200vw", "-200vw", "-300vw", "-300vw"]
   );
 
-  // Elite animation trigger: Fades in nicely when the scroll locks at the start
+  // SVG Donut Circle stroke-dashoffset calculation
+  const circumference = 2 * Math.PI * 18; // radius = 18
+  const strokeDashoffset = useTransform(
+    smoothProgress,
+    [0, 1],
+    [circumference, 0]
+  );
+
   const promptOpacity = useTransform(smoothProgress, [0.01, 0.06, 0.18, 0.24], [0, 1, 1, 0]);
   const promptScale = useTransform(smoothProgress, [0.01, 0.06], [0.9, 1]);
 
@@ -114,7 +119,7 @@ const HorizontalProcess = () => {
             : "relative"
         }`}
       >
-        {/* Elite Cinematic Scroll Message Popup (Triggers instantly upon scroll lock) */}
+        {/* Elite Cinematic Scroll Message Popup */}
         {!isVertical && (
           <motion.div 
             style={{ opacity: promptOpacity, scale: promptScale }}
@@ -135,24 +140,39 @@ const HorizontalProcess = () => {
           </motion.div>
         )}
 
-        {/* Bottom Progress Indicators for Navigation Context */}
+        {/* Bottom Donut Circular Progress Indicator */}
         {!isVertical && (
-          <div className="absolute bottom-8 left-12 lg:left-24 z-30 hidden md:flex items-center gap-4 text-zinc-300 bg-[#12066a]/70 backdrop-blur-md px-5 py-2.5 rounded-full border border-white/15 shadow-lg">
-            <span className="text-xs font-semibold tracking-wider uppercase text-[#997819]">
-              Progress
+          <div className="absolute bottom-8 left-12 lg:left-24 z-30 hidden md:flex items-center gap-4 text-zinc-300 bg-[#12066a]/70 backdrop-blur-md px-5 py-2 rounded-full border border-white/15 shadow-lg">
+            <span className="text-xs font-bold tracking-wider uppercase text-white">
+              Section Progress
             </span>
-            <div className="w-[1px] h-4 bg-white/20" />
-            <div className="flex items-center gap-1.5">
-              {sections.map((_, idx) => (
-                <div
-                  key={idx}
-                  className={`transition-all duration-300 rounded-full ${
-                    activeIdx === idx 
-                      ? "w-6 h-1.5 bg-[#997819]" 
-                      : "w-1.5 h-1.5 bg-white/40"
-                  }`}
+            <div className="w-[1px] h-5 bg-white/20" />
+            <div className="relative flex items-center justify-center w-10 h-10">
+              <svg className="w-10 h-10 transform -rotate-90">
+                <circle
+                  cx="20"
+                  cy="20"
+                  r="18"
+                  stroke="currentColor"
+                  strokeWidth="3"
+                  className="text-white/10"
+                  fill="transparent"
                 />
-              ))}
+                <motion.circle
+                  cx="20"
+                  cy="20"
+                  r="18"
+                  stroke="#997819"
+                  strokeWidth="3"
+                  strokeDasharray={circumference}
+                  style={{ strokeDashoffset }}
+                  strokeLinecap="round"
+                  fill="transparent"
+                />
+              </svg>
+              <div className="absolute inset-0 flex items-center justify-center text-[10px] font-mono font-bold text-white">
+                {scrollPercent}%
+              </div>
             </div>
           </div>
         )}
