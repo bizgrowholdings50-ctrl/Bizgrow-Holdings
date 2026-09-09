@@ -1,14 +1,14 @@
 "use client";
 import { motion, useTransform, useScroll, useSpring } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import { 
-  ShieldCheck, 
-  Award, 
-  FileText, 
+import {
+  ShieldCheck,
+  Award,
+  FileText,
   Lock,
   Play,
   Pause,
-  ArrowDown
+  ArrowDown,
 } from "lucide-react";
 
 const HorizontalProcess = () => {
@@ -19,7 +19,9 @@ const HorizontalProcess = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      const isTabletTouch = window.matchMedia("(pointer: coarse) and (max-width: 1366px)").matches;
+      const isTabletTouch = window.matchMedia(
+        "(pointer: coarse) and (max-width: 1366px)",
+      ).matches;
       setIsVertical(isTabletTouch || window.innerWidth <= 1025);
     };
 
@@ -47,18 +49,21 @@ const HorizontalProcess = () => {
     let animationFrameId;
     if (isAutoPlaying && targetRef.current) {
       const element = targetRef.current;
-      
+
       const scrollStep = () => {
         const currentScroll = window.scrollY;
         const targetTop = element.offsetTop;
         const sectionHeight = element.offsetHeight;
-        
-        if (currentScroll >= targetTop - 50 && currentScroll < targetTop + sectionHeight - window.innerHeight) {
+
+        if (
+          currentScroll >= targetTop - 50 &&
+          currentScroll < targetTop + sectionHeight - window.innerHeight
+        ) {
           window.scrollBy({ top: 1.2, behavior: "auto" });
         } else if (currentScroll < targetTop) {
           window.scrollTo({ top: targetTop, behavior: "smooth" });
         }
-        
+
         if (isAutoPlaying) {
           animationFrameId = requestAnimationFrame(scrollStep);
         }
@@ -78,17 +83,21 @@ const HorizontalProcess = () => {
   const x = useTransform(
     smoothProgress,
     [0, 0.05, 0.2, 0.4, 0.55, 0.75, 0.85, 1],
-    ["0vw", "0vw", "-100vw", "-100vw", "-200vw", "-200vw", "-300vw", "-300vw"]
+    ["0vw", "0vw", "-100vw", "-100vw", "-200vw", "-200vw", "-300vw", "-300vw"],
   );
 
   const circumference = 2 * Math.PI * 18;
   const strokeDashoffset = useTransform(
     smoothProgress,
     [0, 1],
-    [circumference, 0]
+    [circumference, 0],
   );
 
-  const promptOpacity = useTransform(smoothProgress, [0.01, 0.06, 0.18, 0.24], [0, 1, 1, 0]);
+  const promptOpacity = useTransform(
+    smoothProgress,
+    [0.01, 0.06, 0.18, 0.24],
+    [0, 1, 1, 0],
+  );
   const promptScale = useTransform(smoothProgress, [0.01, 0.06], [0.9, 1]);
 
   const sections = [
@@ -96,50 +105,66 @@ const HorizontalProcess = () => {
       id: "01",
       tag: "Security Standards",
       title: "Security Accreditation",
-      description: "Build credibility, strengthen your operational compliance and meet recognised UK security benchmarks.",
+      description:
+        "Build credibility, strengthen your operational compliance and meet recognised UK security benchmarks.",
       bgImage: "/bff32405515f5c8002a7bed0ada4c092.jpg",
       highlightText: "SIA ACS & Vetting Compliance",
       icon: ShieldCheck,
-      details: "Comprehensive framework alignment designed to elevate private security operational trust and credentials across the UK market."
+      details:
+        "Comprehensive framework alignment designed to elevate private security operational trust and credentials across the UK market.",
     },
     {
       id: "02",
       tag: "Quality Frameworks",
       title: "Quality & Management",
-      description: "Implement structured management systems that improve consistency, corporate performance, and business confidence.",
+      description:
+        "Implement structured management systems that improve consistency, corporate performance, and business confidence.",
       bgImage: "/Quality-Management.jpg",
       highlightText: "ISO 9001, 14001 & 45001",
       icon: Award,
-      details: "Drive organizational excellence, environmental responsibility, and robust occupational safety standards systematically."
+      details:
+        "Drive organizational excellence, environmental responsibility, and robust occupational safety standards systematically.",
     },
     {
       id: "03",
       tag: "Contractor Compliance",
       title: "Health & Safety",
-      description: "Strengthen contractor credentials and prepare your organisation for elite, verified UK safety accreditations.",
+      description:
+        "Strengthen contractor credentials and prepare your organisation for elite, verified UK safety accreditations.",
       bgImage: "/Healt & Safety.jpg",
       highlightText: "CHAS, SafeContractor & Constructionline",
       icon: FileText,
-      details: "Seamless documentation and audit readiness to clear pre-qualification barriers and secure high-value contracts."
+      details:
+        "Seamless documentation and audit readiness to clear pre-qualification barriers and secure high-value contracts.",
     },
     {
       id: "04",
       tag: "Digital Protection",
       title: "Cyber Security",
-      description: "Demonstrate rigorous digital resilience and ensure your organization protects sensitive data against modern threats.",
+      description:
+        "Demonstrate rigorous digital resilience and ensure your organization protects sensitive data against modern threats.",
       bgImage: "/Cyber-Security.jpg",
       highlightText: "Cyber Essentials & Plus",
       icon: Lock,
-      details: "Independent technical verification and security controls that provide instant assurance to your enterprise clients."
+      details:
+        "Independent technical verification and security controls that provide instant assurance to your enterprise clients.",
     },
   ];
 
-  const sectionHeightVh = isVertical === false ? (sections.length + 1) * 100 : "auto";
+  const sectionHeightVh =
+    isVertical === false ? (sections.length + 1) * 100 : "auto";
 
   return (
     <section
       ref={targetRef}
-      style={{ height: isVertical === null ? "100vh" : (isVertical ? "auto" : `${sectionHeightVh}vh`) }}
+      style={{
+        height:
+          isVertical === null
+            ? "100vh"
+            : isVertical
+              ? "auto"
+              : `${sectionHeightVh}vh`,
+      }}
       className="relative bg-[#12066a] overflow-visible py-16 lg:py-0 min-h-screen"
     >
       <div
@@ -151,72 +176,122 @@ const HorizontalProcess = () => {
       >
         {/* Elite Cinematic Scroll Message Popup */}
         {!isVertical && (
-          <motion.div 
+          <motion.div
             style={{ opacity: promptOpacity, scale: promptScale }}
-            className="absolute bottom-10 left-1/2 -translate-x-1/2 z-40 hidden md:flex items-center gap-3 bg-[#12066a]/40 backdrop-blur-xl border border-[#997819]/50 px-6 py-3 rounded-full shadow-[0_0_300px_rgba(153,120,25,0.25)] pointer-events-none"
+            className="
+      absolute bottom-24 left-1/2 -translate-x-1/2
+      z-40 hidden md:flex
+      items-center gap-2
+      text-white/80
+      pointer-events-none
+    "
           >
-            <div className="w-8 h-8 rounded-full bg-[#997819]/20 text-[#997819] flex items-center justify-center border border-[#997819]/40">
-              <ArrowDown className="w-4 h-4 animate-bounce" />
-            </div>
-            <div className="flex flex-col">
-              <span className="text-xs font-bold uppercase tracking-widest text-white flex items-center gap-1.5">
-                Interactive Journey <span className="text-[#997819]">Active</span>
+            <ArrowDown className="w-4 h-4 text-[#997819] animate-bounce" />
+
+            <span className="text-[11px] font-semibold tracking-wide">
+              Scroll to explore
+              <span className="text-white/40 mx-2">or</span>
+              <span className="text-[#997819]">
+                play to watch automatically
               </span>
-              <span className="text-[11px] text-zinc-300 font-medium">
-                Scroll down or use auto-play to explore sections
-              </span>
-            </div>
+            </span>
           </motion.div>
         )}
 
         {/* Bottom Progress Bar with Play/Pause & Subtext */}
+        {/* Interactive Controls */}
         {!isVertical && (
-          <div className="absolute bottom-8 left-12 lg:left-24 z-30 hidden md:flex items-center gap-4 text-zinc-300 bg-[#12066a]/80 backdrop-blur-md px-5 py-2.5 rounded-full border border-white/15 shadow-xl">
-            <button 
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 hidden md:flex items-center gap-3">
+            {/* Auto-play CTA */}
+            <button
               onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-              className="w-7 h-7 rounded-full bg-[#997819] text-[#12066a] flex items-center justify-center hover:scale-105 transition-transform cursor-pointer shadow shrink-0"
-              title={isAutoPlaying ? "Pause Auto-Scroll" : "Start Auto-Scroll"}
+              className={`
+        group relative flex items-center gap-3
+        px-4 py-2.5 rounded-full
+        bg-[#12066a]/90 backdrop-blur-xl
+        border border-[#997819]/50
+        shadow-[0_8px_30px_rgba(0,0,0,0.25)]
+        transition-all duration-300
+        hover:border-[#997819]
+        hover:bg-[#12066a]
+      `}
+              title={
+                isAutoPlaying
+                  ? "Pause automatic scrolling"
+                  : "Explore automatically"
+              }
             >
-              {isAutoPlaying ? <Pause className="w-3.5 h-3.5 fill-current" /> : <Play className="w-3.5 h-3.5 fill-current ml-0.5" />}
+              {/* Attention Ring */}
+              {!isAutoPlaying && scrollPercent < 10 && (
+                <span className="absolute inset-0 rounded-full border border-[#997819]/60 animate-ping opacity-30 pointer-events-none" />
+              )}
+
+              {/* Play Icon */}
+              <span
+                className="
+          w-9 h-9 rounded-full
+          bg-[#997819]
+          text-[#12066a]
+          flex items-center justify-center
+          shadow-lg
+          transition-transform duration-300
+          group-hover:scale-105
+        "
+              >
+                {isAutoPlaying ? (
+                  <Pause className="w-4 h-4 fill-current" />
+                ) : (
+                  <Play className="w-4 h-4 fill-current ml-0.5" />
+                )}
+              </span>
+
+              {/* CTA Text */}
+              <span className="flex flex-col text-left leading-tight pr-2">
+                <span className="text-[10px] uppercase tracking-[0.18em] font-bold text-[#997819]">
+                  {isAutoPlaying ? "Auto-play active" : "Interactive journey"}
+                </span>
+
+                <span className="text-xs font-semibold text-white">
+                  {isAutoPlaying ? "Pause experience" : "Explore automatically"}
+                </span>
+              </span>
             </button>
 
-            <div className="flex flex-col">
-              <span className="text-xs font-bold tracking-wider uppercase text-[#997819]">
-                {isAutoPlaying ? "Playing Story..." : "Section Progress"}
-              </span>
-              <span className="text-[10px] text-zinc-400 font-medium">
-                Click the play btn for auto storytelling
-              </span>
-            </div>
-
-            <div className="w-[1px] h-7 bg-white/20 mx-1" />
-
-            <div className="relative flex items-center justify-center w-10 h-10 shrink-0">
-              <svg className="w-10 h-10 transform -rotate-90">
+            {/* Progress */}
+            <div className="relative flex items-center justify-center w-12 h-12">
+              <svg className="absolute inset-0 w-12 h-12 -rotate-90">
                 <circle
-                  cx="20"
-                  cy="20"
-                  r="18"
+                  cx="24"
+                  cy="24"
+                  r="21"
                   stroke="currentColor"
-                  strokeWidth="3"
+                  strokeWidth="2"
                   className="text-white/10"
                   fill="transparent"
                 />
+
                 <motion.circle
-                  cx="20"
-                  cy="20"
-                  r="18"
+                  cx="24"
+                  cy="24"
+                  r="21"
                   stroke="#997819"
-                  strokeWidth="3"
-                  strokeDasharray={circumference}
-                  style={{ strokeDashoffset }}
+                  strokeWidth="2.5"
+                  strokeDasharray={2 * Math.PI * 21}
+                  style={{
+                    strokeDashoffset: useTransform(
+                      smoothProgress,
+                      [0, 1],
+                      [2 * Math.PI * 21, 0],
+                    ),
+                  }}
                   strokeLinecap="round"
                   fill="transparent"
                 />
               </svg>
-              <div className="absolute inset-0 flex items-center justify-center text-[10px] font-mono font-bold text-white">
+
+              <span className="text-[10px] font-bold text-white font-mono">
                 {scrollPercent}%
-              </div>
+              </span>
             </div>
           </div>
         )}
@@ -243,9 +318,9 @@ const HorizontalProcess = () => {
               >
                 {/* Background Image with brand color overlay */}
                 <div className="absolute inset-0 z-0 overflow-hidden">
-                  <img 
-                    src={item.bgImage} 
-                    alt={item.title} 
+                  <img
+                    src={item.bgImage}
+                    alt={item.title}
                     className="w-full h-full object-cover object-center filter brightness-[0.55] contrast-105 scale-105"
                   />
                   <div className="absolute inset-0 bg-[#12066a]/40 mix-blend-multiply" />
@@ -255,7 +330,9 @@ const HorizontalProcess = () => {
                 {/* Left Column - Category Title & Info */}
                 <div className="z-10 w-full lg:w-[38%] mb-8 lg:mb-0 text-center lg:text-left">
                   <div className="flex items-center justify-center lg:justify-start gap-3 mb-3">
-                    <span className="text-[#997819] font-mono font-bold text-sm tracking-widest">{item.id}</span>
+                    <span className="text-[#997819] font-mono font-bold text-sm tracking-widest">
+                      {item.id}
+                    </span>
                     <span className="w-8 h-[1px] bg-[#997819]/70" />
                     <span className="text-zinc-200 font-bold tracking-widest uppercase text-xs">
                       {item.tag}
@@ -274,7 +351,6 @@ const HorizontalProcess = () => {
                 {/* Right Column - Single Refined Focal Card */}
                 <div className="w-full lg:w-[52%] relative z-10">
                   <div className="bg-[#12066a]/70 backdrop-blur-xl border border-white/15 rounded-[2.5rem] p-8 md:p-10 shadow-2xl relative overflow-hidden group">
-                    
                     {/* Background Watermark ID */}
                     <div className="absolute -top-6 -right-4 text-[11rem] font-black text-white/[0.03] z-0 select-none pointer-events-none leading-none">
                       {item.id}
@@ -300,14 +376,15 @@ const HorizontalProcess = () => {
 
                     <div className="mt-8 pt-5 border-t border-white/10 flex items-center justify-between text-xs font-semibold text-zinc-300">
                       <span className="flex items-center gap-2">
-                        <span className="w-2 h-2 rounded-full bg-[#997819]" /> PROFESSIONAL CONSULTANCY
+                        <span className="w-2 h-2 rounded-full bg-[#997819]" />{" "}
+                        PROFESSIONAL CONSULTANCY
                       </span>
-                      <span className="text-white bg-white/10 px-3 py-1 rounded-md border border-white/10">UK WIDE</span>
+                      <span className="text-white bg-white/10 px-3 py-1 rounded-md border border-white/10">
+                        UK WIDE
+                      </span>
                     </div>
-
                   </div>
                 </div>
-
               </div>
             );
           })}

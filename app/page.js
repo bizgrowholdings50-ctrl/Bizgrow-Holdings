@@ -181,43 +181,40 @@ export default function HomePage() {
                 Our
                 <span className="text-[#997819]"> Approach</span>
               </h1>
+
               <div className="mt-8 space-y-6 text-zinc-600 leading-relaxed font-medium">
                 <p>
-                  We follow a structured approach with clients, i.e. We start by
-                  meeting with your management team to fully understand your
-                  goals, challenges, and{" "}
-                  <Link
-                    href="/compliance-consultancies/"
-                    className="text-[#997819] font-bold"
-                  >
-                    compliance
-                  </Link>{" "}
-                  needs. Then, we work side-by-side to design and implement the
-                  most effective, tailored solution through every phase:
+                  We take a practical, hands-on approach to compliance and
+                  accreditation. We begin by understanding your business,
+                  identifying where you currently stand, and assessing the
+                  requirements relevant to your industry and goals. From there,
+                  we work alongside your team to prepare the systems,
+                  documentation, and processes needed to move forward with
+                  confidence.
                 </p>
 
                 <ul className="space-y-4 pt-4">
                   {[
-                    "Strategic & Project Planning",
-                    "Stakeholder Engagement",
-                    "Project Kick-off",
-                    "Staff Training on Latest Industry Standards",
-                    "Post-Implementation Support",
-                    "Internal Audits & Performance Checks",
-                    "Implementation of Quality Management Systems (QMS)",
+                    "Compliance Gap Assessment & Action Planning",
+                    "Management Systems, QMS & Documentation",
+                    "Implementation Support & Staff Guidance",
+                    "Internal Reviews & Audit Readiness",
+                    "Certification & Accreditation Support",
                   ].map((item, i) => (
                     <li
                       key={i}
                       className="flex items-center gap-3 text-[#12066a] font-bold"
                     >
-                      <CheckCircle2 className="text-[#997819]" size={20} />{" "}
+                      <CheckCircle2 className="text-[#997819]" size={20} />
                       {item}
                     </li>
                   ))}
                 </ul>
+
                 <p className="font-bold text-black">
-                  Your growth is our goal, and compliance is just the
-                  beginning.{" "}
+                  Our goal is simple: to help your business meet the right
+                  standards, achieve certification with confidence, and remain
+                  compliant as you grow.
                 </p>
               </div>
             </FadeIn>
@@ -326,7 +323,8 @@ export default function HomePage() {
               <div className="text-center lg:text-left max-w-2xl">
                 {/* SEO FIX: Use <h2> if <h1> is already used in Hero, or keep <h2> for hierarchy */}
                 <h2 className="text-[32px] md:text-6xl text-center font-black text-white leading-tight">
-                 Let’s Get Your Business <span className="text-[#D4AF37]">Audit-Ready Today.</span>
+                  Let’s Get Your Business{" "}
+                  <span className="text-[#D4AF37]">Audit-Ready Today.</span>
                 </h2>
                 <p className="text-blue-100/80 text-center mt-6 text-sm md:text-lg font-medium">
                   Our compliance experts support UK organisations with SIA ACS
