@@ -13,12 +13,7 @@ import { useRef } from "react";
 import Image from "next/image";
 import FadeIn from "./MotionWrapper";
 
-// Infinite wrap helper
-function wrap(min, max, v) {
-  const rangeSize = max - min;
 
-  return ((((v - min) % rangeSize) + rangeSize) % rangeSize) + min;
-}
 
 const clients = [
   {
@@ -142,6 +137,15 @@ const clients = [
     alt: "Great Guard | BizGrow Client",
   },
 ];
+
+// Infinite wrap helpers
+function wrap(min, max, v) {
+  const rangeSize = max - min;
+
+  return ((((v - min) % rangeSize) + rangeSize) % rangeSize) + min;
+}
+
+
 
 function ClientsMarquee({ clients, baseVelocity = 2 }) {
   const baseX = useMotionValue(0);
