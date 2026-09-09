@@ -56,11 +56,7 @@ const clients = [
     logo: "/zam-fm.png",
     alt: "Z.A.M FM LTD | BizGrow Client",
   },
-  {
-    name: "Brites Security Solutions",
-    logo: "/brites.png",
-    alt: "Brites Security Solutions | BizGrow Client",
-  },
+  
   {
     name: "Krypton Group",
     logo: "/krypton.png",
