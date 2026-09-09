@@ -66,6 +66,11 @@ const nextConfig = {
         protocol: "https",
         hostname: "lh3.googleusercontent.com",
       },
+      // 🚀 Pinterest images support karne ke liye yeh add karein:
+      {
+        protocol: "https",
+        hostname: "*.pinimg.com",
+      },
     ],
   },
 

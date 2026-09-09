@@ -15,49 +15,54 @@ import HomeTestimonial from "@/components/HomeTestimonial";
 import OurClients from "@/components/OurClients";
 import JsonLd from "@/components/JsonLd";
 import { organizationSchema } from "@/lib/jsonSchemas";
+import ServicesFaq from "@/components/ServicesFaq";
 
 const steps = [
   {
     num: "01",
-    title: "Consultation",
-    desc: "Understanding Your Business & Compliance Position",
+    title: "Assess & Plan",
+    desc: "We check where your business stands today, find any gaps, review your paperwork, and guide you on what to do next.",
   },
   {
     num: "02",
-    title: "Strategy",
-    desc: "Building a Clear Certification & Compliance Roadmap",
+    title: "Build the Strategy",
+    desc: "We set up your documentation and QMS portal, walk you through a clear step-by-step process, and train you on assessment documents.",
   },
   {
     num: "03",
-    title: "Implementation",
-    desc: (
-      <>
-        System Development,{" "}
-        <Link
-          href="/corporate-training-and-coaching/"
-          className="text-[#997819] font-bold"
-        >
-          Training
-        </Link>{" "}
-        & Operational Alignment
-      </>
-    ),
+    title: "Audit & Certification",
+    desc: "We run your internal audit first to catch anything early, then stand by you through the external audit with fast-track guidance.",
   },
   {
     num: "04",
-    title: "Certification",
-    desc: (
-      <>
-        Final{" "}
-        <Link href="/internal-audit/" className="text-[#997819] font-bold">
-          Audit
-        </Link>{" "}
-        Support & Long-Term Compliance Success
-      </>
-    ),
+    title: "Ongoing Support & Growth",
+    desc: "Get a dedicated project manager and 12 months of reliable customer support and advice to help you keep improving.",
   },
 ];
 
+const homeFaqs = [
+  {
+    q: "How is Bizgrow different from a regular compliance consultant?",
+    a: "We plan across certifications from the start, so paperwork built for one standard carries into the next — instead of starting from scratch every time.",
+  },
+  {
+    q: "Which certifications do you help with?",
+    a: "SIA ACS, ISO 9001/14001/45001, BS 7858, CHAS, SafeContractor, Constructionline, and other industry certifications for security, construction, and cleaning companies.",
+  },
+
+  {
+    q: "Do you help with staff vetting too?",
+    a: "Yes — full BS 7858 vetting support, from documentation to ongoing file maintenance.",
+  },
+  {
+    q: "Do you only help with first-time certification, or renewals too?",
+    a: "Both. We also manage surveillance audits, renewals, and keep your policies current so nothing lapses.",
+  },
+  {
+    q: "What happens after I get certified?",
+    a: "You get 12 months of ongoing support, plus advice to keep improving and stay ready for renewal audits.",
+  },
+];
 const reviews = [
   {
     name: "Keyur Kachhadiya",
@@ -222,55 +227,58 @@ export default function HomePage() {
         {/* 4. HORIZONTAL SERVICES (GSAP PINNED SECTION) */}
         <HorizontalServices />
 
-        <section className="py-16 md:py-24 xl:h-screen bg-[#12066a] relative overflow-hidden">
-          {/* Decorative Background Text */}
+        {/* Our Process */}
+        <section className="py-20 md:py-28 bg-[#12066a] relative overflow-hidden">
+          {/* Decorative Background Image */}
           <Image
             src="/experts-home.jpg"
             alt="BizGrow operational excellence roadmap"
             fill
-            className="object-cover hidden md:block"
+            className="object-cover hidden md:block opacity-40"
           />
-          {/* Black Overlay Effect */}
-          <div className="hidden md:block absolute inset-0 bg-black/70 backdrop-blur-[1px]" />
-          <div
-            aria-hidden="true"
-            className="absolute top-6 right-0 md:top-10 lg:right-8 xl:right-20 text-[3.5rem] sm:text-[5rem] md:text-[15rem] lg:text-[10rem] font-black text-white/60 md:text-white/20 select-none leading-none -translate-y-1/4 whitespace-nowrap"
-          >
-            BIZGROW
-          </div>
+          <div className="hidden md:block absolute inset-0 bg-[#12066a]/90 backdrop-blur-[2px]" />
 
           <div className="max-w-7xl mx-auto px-6 relative z-10">
-            <div className="mb-10 md:mb-20">
-              <span className="text-[#D4AF37] font-black uppercase tracking-[0.3em] text-xs">
-                Our Roadmap
+            {/* Section Heading */}
+            <div className="text-center max-w-2xl mx-auto mb-16 md:mb-20">
+              <span className="text-[#997819] font-black uppercase tracking-[0.3em] text-xs">
+                How It Works
               </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mt-4">
-                The Path to{" "}
-                <span className="text-[#997819]">Operational Excellence</span>
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mt-3 mb-4">
+                A Proven Methodology From Zero To{" "}
+                <span className="text-[#997819]">Audit-Ready</span>
               </h2>
+              <p className="text-blue-100/70 text-sm sm:text-base font-medium">
+                A proven, step-by-step methodology that takes you from zero to
+                audit-ready with one team managing every stage.
+              </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
-              {steps.map((step, i) => (
-                <FadeIn key={i} delay={i * 0.2} direction="right">
-                  <div className="relative group">
-                    {/* Step Number */}
-                    <div className="text-4xl sm:text-5xl md:text-6xl font-black text-white group-hover:text-[#997819] transition-colors duration-500 mb-3 md:mb-4">
-                      {step.num}
+            {/* Steps Horizontal Flow Layout */}
+            <div className="relative">
+              {/* Connecting Line for Desktop */}
+              <div className="hidden lg:block absolute top-[40px] left-[10%] right-[10%] h-0.5 bg-white/10 z-0" />
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
+                {steps.map((step, i) => (
+                  <FadeIn key={i} delay={i * 0.15} direction="up">
+                    <div className="flex flex-col items-center text-center group">
+                      {/* Number Box */}
+                      <div className="w-20 h-20 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-2xl font-black text-[#997819] group-hover:bg-[#997819] group-hover:text-white group-hover:border-[#997819] transition-all duration-500 shadow-lg mb-6 relative">
+                        {step.num}
+                      </div>
+
+                      {/* Content */}
+                      <h3 className="text-lg sm:text-xl font-bold text-white mb-2 tracking-tight">
+                        {step.title}
+                      </h3>
+                      <p className="text-white/90 text-sm leading-relaxed font-light">
+                        {step.desc}
+                      </p>
                     </div>
-
-                    {/* Line Decor */}
-                    <div className="w-10 md:w-12 h-1 bg-[#997819] mb-4 md:mb-6 group-hover:w-24 transition-all duration-500" />
-
-                    <h3 className="text-lg sm:text-xl font-bold text-white mb-2 md:mb-3 tracking-tight">
-                      {step.title}
-                    </h3>
-                    <p className="text-blue-100/70 text-sm leading-relaxed font-medium">
-                      {step.desc}
-                    </p>
-                  </div>
-                </FadeIn>
-              ))}
+                  </FadeIn>
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -280,7 +288,13 @@ export default function HomePage() {
         <HomeTestimonial />
 
         {/* 7. CLIENTS SECTION — Premium Marquee */}
-        <OurClients  />
+        <OurClients />
+
+        <ServicesFaq
+          faqs={homeFaqs}
+          title="Frequently Asked Questions"
+          subtitle="Got Questions? We've Got Answers"
+        />
 
         {/* 8 CTA Section with Background Parallax & Watermark */}
         <section className="py-20 px-6 bg-white overflow-hidden">
@@ -312,8 +326,7 @@ export default function HomePage() {
               <div className="text-center lg:text-left max-w-2xl">
                 {/* SEO FIX: Use <h2> if <h1> is already used in Hero, or keep <h2> for hierarchy */}
                 <h2 className="text-[32px] md:text-6xl text-center font-black text-white leading-tight">
-                  Ready to Secure Your
-                  <span className="text-[#D4AF37]"> Business Future?</span>
+                 Let’s Get Your Business <span className="text-[#D4AF37]">Audit-Ready Today.</span>
                 </h2>
                 <p className="text-blue-100/80 text-center mt-6 text-sm md:text-lg font-medium">
                   Our compliance experts support UK organisations with SIA ACS

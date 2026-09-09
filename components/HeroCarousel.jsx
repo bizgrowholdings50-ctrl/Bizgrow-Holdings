@@ -8,7 +8,7 @@ const slides = [
   {
     image: "/growth-s.jpg",
     alt: "Business meeting in a modern office",
-    eyebrow: "UK PRIVATE SECURITY COMPLIANCE",
+    eyebrow: "Compliance Doesn’t Have to Be Complicated",
     heading: "Leading Security Compliance Experts In the UK",
     subheading:
       "We support private security, construction, and cleaning companies in getting SIA ACS, ISO, and other industry certifications. Our practical systems help you pass audits with confidence and stay compliant for years to come.",

@@ -1,20 +1,22 @@
 "use client";
 import { motion, useTransform, useScroll, useSpring } from "framer-motion";
 import { useRef, useState, useEffect } from "react";
-import FadeIn from "./MotionWrapper";
-import Link from "next/link";
-import Image from "next/image";
+import { 
+  ShieldCheck, 
+  Award, 
+  FileText, 
+  Lock,
+  Compass,
+  ArrowDown
+} from "lucide-react";
 
 const HorizontalProcess = () => {
   const targetRef = useRef(null);
-  
-  // FIX: Breakpoint 1100px kiya hai taake iPad Pro (1024px) par bhi vertical layout aaye
-  const [isVertical, setIsVertical] = useState(null);
+  const [isVertical, setIsVertical] = useState(false);
+  const [activeIdx, setActiveIdx] = useState(0);
 
-useEffect(() => {
+  useEffect(() => {
     const handleResize = () => {
-      // Logic: Agar screen 1025px se choti hai, toh vertical mode on ho jayega.
-      // iPad Pro (1024px) ab is category mein aa jayega.
       const isTabletTouch = window.matchMedia("(pointer: coarse) and (max-width: 1366px)").matches;
       setIsVertical(isTabletTouch || window.innerWidth <= 1025);
     };
@@ -23,10 +25,20 @@ useEffect(() => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
   const { scrollYProgress } = useScroll({
     target: targetRef,
     offset: ["start start", "end end"],
   });
+
+  useEffect(() => {
+    return scrollYProgress.onChange((latest) => {
+      if (latest < 0.25) setActiveIdx(0);
+      else if (latest < 0.5) setActiveIdx(1);
+      else if (latest < 0.75) setActiveIdx(2);
+      else setActiveIdx(3);
+    });
+  }, [scrollYProgress]);
 
   const smoothProgress = useSpring(scrollYProgress, {
     stiffness: 70,
@@ -40,42 +52,50 @@ useEffect(() => {
     ["0vw", "0vw", "-100vw", "-100vw", "-200vw", "-200vw", "-300vw", "-300vw"]
   );
 
+  // Elite animation trigger: Fades in nicely when the scroll locks at the start
+  const promptOpacity = useTransform(smoothProgress, [0.01, 0.06, 0.18, 0.24], [0, 1, 1, 0]);
+  const promptScale = useTransform(smoothProgress, [0.01, 0.06], [0.9, 1]);
+
   const sections = [
     {
       id: "01",
-      tag: "Support",
-      title: "SIA ACS",
-      img: "/sia-home.jpg",
-      alt: "SIA ACS Consultancy Services - BizGrow Holdings",
-      description:
-        <>Achieve and maintain <Link href="/our-services/sia-acs/" className="text-[#D4AF37] font-bold">Approved Contractor Scheme</Link> status with expert guidance.</>
+      tag: "Security Standards",
+      title: "Security Accreditation",
+      description: "Build credibility, strengthen your operational compliance and meet recognised UK security benchmarks.",
+      bgImage: "/bff32405515f5c8002a7bed0ada4c092.jpg",
+      highlightText: "SIA ACS & Vetting Compliance",
+      icon: ShieldCheck,
+      details: "Comprehensive framework alignment designed to elevate private security operational trust and credentials across the UK market."
     },
     {
       id: "02",
-      tag: "Certification",
-      title: "ISO",
-      img: "/iso-home.webp",
-      alt: "ISO 9001 14001 45001 Certification - BizGrow Holdings",
-      description:
-        <>Streamline your business with <Link href="/our-services/iso-9001/" className="text-[#D4AF37] font-bold">ISO 9001</Link>, <Link href="/our-services/iso-14001/" className="text-[#D4AF37] font-bold">14001</Link>, and <Link href="/our-services/iso-45001/" className="text-[#D4AF37] font-bold">45001 </Link>certifications.</>,
+      tag: "Quality Frameworks",
+      title: "Quality & Management",
+      description: "Implement structured management systems that improve consistency, corporate performance, and business confidence.",
+      bgImage: "/Quality-Management.jpg",
+      highlightText: "ISO 9001, 14001 & 45001",
+      icon: Award,
+      details: "Drive organizational excellence, environmental responsibility, and robust occupational safety standards systematically."
     },
     {
       id: "03",
-      tag: "Consultancy",
-      title: "Business",
-      img: "/consultancy-home.jpg",
-      alt: "Business Strategic Planning Consultancy - BizGrow Holdings",
-      description:
-        "Strategic planning to help your company scale and improve efficiency.",
+      tag: "Contractor Compliance",
+      title: "Health & Safety",
+      description: "Strengthen contractor credentials and prepare your organisation for elite, verified UK safety accreditations.",
+      bgImage: "/Healt & Safety.jpg",
+      highlightText: "CHAS, SafeContractor & Constructionline",
+      icon: FileText,
+      details: "Seamless documentation and audit readiness to clear pre-qualification barriers and secure high-value contracts."
     },
     {
       id: "04",
-      tag: "Development",
-      title: "Training",
-      img: "/business.jpg",
-      alt: "Professional Development Training - BizGrow Holdings",
-      description:
-        "Equipping your team with professional, industry-approved training for lasting performance.",
+      tag: "Digital Protection",
+      title: "Cyber Security",
+      description: "Demonstrate rigorous digital resilience and ensure your organization protects sensitive data against modern threats.",
+      bgImage: "/Cyber-Security.jpg",
+      highlightText: "Cyber Essentials & Plus",
+      icon: Lock,
+      details: "Independent technical verification and security controls that provide instant assurance to your enterprise clients."
     },
   ];
 
@@ -85,90 +105,148 @@ useEffect(() => {
     <section
       ref={targetRef}
       style={{ height: isVertical === null ? "100vh" : (isVertical ? "auto" : `${sectionHeightVh}vh`) }}
-      className="relative bg-white overflow-visible py-16 lg:py-0 min-h-screen"
+      className="relative bg-[#12066a] overflow-visible py-16 lg:py-0 min-h-screen"
     >
       <div
         className={`${
           isVertical === false
-            ? "sticky top-10 h-screen w-full flex items-center overflow-clip"
+            ? "sticky top-0 h-screen w-full flex items-center overflow-clip"
             : "relative"
         }`}
       >
-        <div
-          className={`${
-            isVertical
-              ? "relative mb-16"
-              : "absolute top-20 left-0 w-full z-20 pointer-events-none"
-          }`}
-        >
-          <div className="text-center px-4">
-            <FadeIn direction="up">
-              <h2 className="text-[#D4AF37] font-extrabold tracking-[0.2em] text-xs md:text-lg  lg:text-xl mb-2 uppercase">
-                Comprehensive Solutions
-              </h2>
-            </FadeIn>
-            <FadeIn direction="up" delay={0.2}>
-              <h2 className="text-3xl md:text-5xl lg:text-7xl xl:text-5xl font-black text-[#12066a] uppercase italic">
-                Tailored consultancy services
-              </h2>
-            </FadeIn>
-            <div className="w-12 h-1 bg-[#D4AF37] mx-auto mt-4 rounded-full" />
+        {/* Elite Cinematic Scroll Message Popup (Triggers instantly upon scroll lock) */}
+        {!isVertical && (
+          <motion.div 
+            style={{ opacity: promptOpacity, scale: promptScale }}
+            className="absolute bottom-10 left-1/2 -translate-x-1/2 z-40 hidden md:flex items-center gap-3 bg-[#12066a]/40 backdrop-blur-xl border border-[#997819]/50 px-6 py-3 rounded-full shadow-[0_0_300px_rgba(153,120,25,0.25)] pointer-events-none"
+          >
+            <div className="w-8 h-8 rounded-full bg-[#997819]/20 text-[#997819] flex items-center justify-center border border-[#997819]/40">
+              <Compass className="w-4 h-4 animate-spin" style={{ animationDuration: "10s" }} />
+            </div>
+            <div className="flex flex-col">
+              <span className="text-xs font-bold uppercase tracking-widest text-white flex items-center gap-1.5">
+                Interactive Journey <span className="text-[#997819]">Active</span>
+              </span>
+              <span className="text-[11px] text-zinc-300 font-medium">
+                Scroll down continuously to explore sections horizontally
+              </span>
+            </div>
+            <ArrowDown className="w-4 h-4 text-[#997819] animate-bounce ml-2" />
+          </motion.div>
+        )}
+
+        {/* Bottom Progress Indicators for Navigation Context */}
+        {!isVertical && (
+          <div className="absolute bottom-8 left-12 lg:left-24 z-30 hidden md:flex items-center gap-4 text-zinc-300 bg-[#12066a]/70 backdrop-blur-md px-5 py-2.5 rounded-full border border-white/15 shadow-lg">
+            <span className="text-xs font-semibold tracking-wider uppercase text-[#997819]">
+              Progress
+            </span>
+            <div className="w-[1px] h-4 bg-white/20" />
+            <div className="flex items-center gap-1.5">
+              {sections.map((_, idx) => (
+                <div
+                  key={idx}
+                  className={`transition-all duration-300 rounded-full ${
+                    activeIdx === idx 
+                      ? "w-6 h-1.5 bg-[#997819]" 
+                      : "w-1.5 h-1.5 bg-white/40"
+                  }`}
+                />
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         <motion.div
           style={{ x: isVertical ? 0 : x }}
           className={`flex ${
             isVertical
-              ? "flex-col px-6 gap-24 sm:gap-32"
-              : "will-change-transform"
+              ? "flex-col px-6 gap-20"
+              : "will-change-transform items-center"
           }`}
         >
-          {sections.map((item, index) => (
-            <div
-              key={item.id}
-              className={`relative shrink-0 flex flex-col xl:flex-row items-center justify-between 
-              ${
-                isVertical
-                  ? "w-full max-w-4xl mx-auto"
-                  : "h-screen w-screen px-20 lg:pt-32"
-              }`}
-            >
-              <div className="z-10 w-full xl:w-1/2 mb-10 lg:mb-0 text-center lg:text-left">
-                <FadeIn direction={isVertical ? "up" : "right"}>
-                  <span className="text-[#D4AF37] font-bold tracking-[0.3em] uppercase text-sm">
-                    {item.tag}
-                  </span>
-                </FadeIn>
-                <FadeIn direction={isVertical ? "up" : "right"} delay={0.2}>
-                  <h3 className="text-5xl sm:text-7xl lg:text-[7rem] xl:text-[5rem] font-black text-[#12066a] leading-none mt-4 uppercase italic">
+          {sections.map((item) => {
+            const MainIcon = item.icon;
+            return (
+              <div
+                key={item.id}
+                className={`relative shrink-0 flex flex-col lg:flex-row items-center justify-between 
+                ${
+                  isVertical
+                    ? "w-full max-w-5xl mx-auto py-12"
+                    : "h-screen w-screen px-12 lg:px-24"
+                }`}
+              >
+                {/* Background Image with brand color overlay */}
+                <div className="absolute inset-0 z-0 overflow-hidden">
+                  <img 
+                    src={item.bgImage} 
+                    alt={item.title} 
+                    className="w-full h-full object-cover object-center filter brightness-[0.55] contrast-105 scale-105"
+                  />
+                  <div className="absolute inset-0 bg-[#12066a]/40 mix-blend-multiply" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#12066a]/95 via-[#12066a]/30 to-transparent" />
+                </div>
+
+                {/* Left Column - Category Title & Info */}
+                <div className="z-10 w-full lg:w-[38%] mb-8 lg:mb-0 text-center lg:text-left">
+                  <div className="flex items-center justify-center lg:justify-start gap-3 mb-3">
+                    <span className="text-[#997819] font-mono font-bold text-sm tracking-widest">{item.id}</span>
+                    <span className="w-8 h-[1px] bg-[#997819]/70" />
+                    <span className="text-zinc-200 font-bold tracking-widest uppercase text-xs">
+                      {item.tag}
+                    </span>
+                  </div>
+
+                  <h3 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-none drop-shadow-md">
                     {item.title}
                   </h3>
-                </FadeIn>
-                <FadeIn direction={isVertical ? "up" : "right"} delay={0.4}>
-                  <p className="mt-6 text-lg text-zinc-600 max-w-md mx-auto lg:mx-0 leading-relaxed font-medium">
+
+                  <p className="mt-4 text-sm md:text-base text-zinc-200 leading-relaxed font-medium max-w-md mx-auto lg:mx-0 drop-shadow">
                     {item.description}
                   </p>
-                </FadeIn>
-              </div>
-
-              {/* FIX: Image height adjusted for tablets and desktop balance */}
-              <div className="w-full xl:w-[45%] h-[35vh] md:h-[40vh] md:my-8 lg:h-[45vh] relative">
-                <Image
-                  src={item.img}
-                  alt={item.alt}
-                  fill
-                  quality={75}
-                  sizes="(max-width: 1024px) 90vw, 45vw"
-                  priority={index === 0}
-                  className="object-cover rounded-[3rem] shadow-2xl relative z-10 border-2 border-zinc-50"
-                />
-                <div className="absolute -bottom-10 -left-10 text-[10rem] lg:text-[14rem] font-black text-[#12066a]/5 z-0 select-none italic">
-                  {item.id}
                 </div>
+
+                {/* Right Column - Single Refined Focal Card */}
+                <div className="w-full lg:w-[52%] relative z-10">
+                  <div className="bg-[#12066a]/70 backdrop-blur-xl border border-white/15 rounded-[2.5rem] p-8 md:p-10 shadow-2xl relative overflow-hidden group">
+                    
+                    {/* Background Watermark ID */}
+                    <div className="absolute -top-6 -right-4 text-[11rem] font-black text-white/[0.03] z-0 select-none pointer-events-none leading-none">
+                      {item.id}
+                    </div>
+
+                    <div className="relative z-10 flex flex-col gap-6">
+                      <div className="w-14 h-14 rounded-2xl bg-white/10 text-[#997819] flex items-center justify-center shadow-inner border border-white/10 group-hover:bg-[#997819] group-hover:text-[#12066a] transition-all duration-300">
+                        <MainIcon className="w-7 h-7" />
+                      </div>
+
+                      <div>
+                        <span className="text-[#997819] font-mono font-bold text-xs uppercase tracking-wider block mb-1">
+                          Core Focus Area
+                        </span>
+                        <h4 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                          {item.highlightText}
+                        </h4>
+                        <p className="text-sm text-zinc-300 mt-3 leading-relaxed font-normal">
+                          {item.details}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="mt-8 pt-5 border-t border-white/10 flex items-center justify-between text-xs font-semibold text-zinc-300">
+                      <span className="flex items-center gap-2">
+                        <span className="w-2 h-2 rounded-full bg-[#997819]" /> PROFESSIONAL CONSULTANCY
+                      </span>
+                      <span className="text-white bg-white/10 px-3 py-1 rounded-md border border-white/10">UK WIDE</span>
+                    </div>
+
+                  </div>
+                </div>
+
               </div>
-            </div>
-          ))}
+            );
+          })}
         </motion.div>
       </div>
     </section>

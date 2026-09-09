@@ -79,7 +79,7 @@ export default function HomeTestimonial() {
       {/* Heading */}
       <div className="max-w-5xl mx-auto text-center mb-6">
         <h2 className="text-4xl md:text-5xl font-black text-[#12066a]">
-          What our clients say
+          What Our Clients Say
         </h2>
         <div className="w-16 h-px bg-[#997819] mx-auto mt-4" />
       </div>

@@ -13,8 +13,6 @@ import { useRef } from "react";
 import Image from "next/image";
 import FadeIn from "./MotionWrapper";
 
-
-
 const clients = [
   {
     name: "Guardnwatch",
@@ -56,7 +54,7 @@ const clients = [
     logo: "/zam-fm.png",
     alt: "Z.A.M FM LTD | BizGrow Client",
   },
-  
+
   {
     name: "Krypton Group",
     logo: "/krypton.png",
@@ -141,8 +139,6 @@ function wrap(min, max, v) {
   return ((((v - min) % rangeSize) + rangeSize) % rangeSize) + min;
 }
 
-
-
 function ClientsMarquee({ clients, baseVelocity = 2 }) {
   const baseX = useMotionValue(0);
   const hoveredCard = useRef(false);
@@ -212,8 +208,6 @@ function ClientsMarquee({ clients, baseVelocity = 2 }) {
                          hover:border-[#997819]/30 hover:-translate-y-1
                          transition-all duration-300"
           >
-           
-
             <div className="relative w-full h-full p-6">
               <Image
                 src={client.logo}
