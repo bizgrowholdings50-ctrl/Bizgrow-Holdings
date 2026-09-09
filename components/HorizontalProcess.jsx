@@ -90,7 +90,7 @@ useEffect(() => {
       <div
         className={`${
           isVertical === false
-            ? "sticky top-10 h-screen w-full flex items-center overflow-hidden"
+            ? "sticky top-10 h-screen w-full flex items-center overflow-clip"
             : "relative"
         }`}
       >

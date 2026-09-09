@@ -105,7 +105,8 @@ export default function RootLayout({ children }) {
         <ReferralTracker />
         
         <CustomCursor />
-        <div className="relative w-full overflow-x-clip">
+        {/* Keep this ancestor overflow-visible so descendant position: sticky uses the page scroll context. */}
+        <div className="relative w-full">
         <Navbar />
         <SmoothScroll>{children}</SmoothScroll>
         <Footer />
