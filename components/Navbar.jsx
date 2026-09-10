@@ -469,11 +469,12 @@ export default function Navbar() {
                     flex-col
                     items-center
                     justify-center
-                    gap-1
-                    h-[54px]
-                    min-w-[72px]
-                    px-3
-                    rounded-2xl
+                    gap-0.5
+                    h-[52px]
+                    min-w-[64px]
+                    px-4
+                    py-2
+                    rounded-full
                     transition-all
                     duration-300
                     ${
@@ -488,7 +489,7 @@ export default function Navbar() {
                       className="
                         absolute
                         inset-0
-                        rounded-2xl
+                        rounded-full
                         border-2
                         border-[#997819]
                         shadow-[0_0_0_4px_rgba(153,120,25,0.08)]
@@ -502,6 +503,8 @@ export default function Navbar() {
                       z-10
                       flex
                       items-center
+                      justify-center
+                      h-[19px]
                       gap-1
                       transition-all
                       duration-300
@@ -513,11 +516,11 @@ export default function Navbar() {
                     `}
                   >
                     <BriefcaseBusiness
-                      size={20}
+                      size={19}
                       strokeWidth={isServicesActive || servicesOpen ? 2.2 : 1.8}
                     />
                     <ChevronDown
-                      size={12}
+                      size={11}
                       className={`
                         transition-transform
                         duration-300
@@ -530,15 +533,16 @@ export default function Navbar() {
                     className={`
                       relative
                       z-10
-                      text-[10px]
+                      text-[11px]
                       font-bold
                       tracking-wide
+                      whitespace-nowrap
                       transition-colors
                       duration-300
                       ${
                         isServicesActive || servicesOpen
                           ? "text-[#12066a]"
-                          : "text-black/70 text-[10px]  text-[9.5px] font-bold group-hover:text-[#12066a]/70"
+                          : "text-black/70 group-hover:text-[#12066a]/70"
                       }
                     `}
                   >
@@ -659,11 +663,11 @@ export default function Navbar() {
 
                             <p
                               className="
-                                mt-3
-                                text-[11px]
-                                leading-[1.65]
+                                mt-3.5
+                                text-[12px]
+                                leading-[1.7]
                                 text-black/60
-                                max-w-[220px]
+                                max-w-[225px]
                               "
                             >
                               Specialist consultancy supporting UK businesses
@@ -703,7 +707,7 @@ export default function Navbar() {
                                         ${
                                           isActive
                                             ? "bg-[#12066a] text-white shadow-[0_9px_24px_rgba(18,6,106,0.15)]"
-                                            : "text-black/65 hover:bg-white hover:text-[#12066a]"
+                                            : "text-black/75 hover:bg-white hover:text-[#12066a]"
                                         }
                                       `}
                                   >
@@ -739,12 +743,12 @@ export default function Navbar() {
                                           duration-200
                                           ${
                                             isActive
-                                              ? "bg-white/[0.10] border-white/[0.10] text-[#997819]"
-                                              : "bg-white border-black/[0.06] text-[#12066a]"
+                                              ? "bg-white/[0.14] border-white/[0.14] text-[#e4c77a]"
+                                              : "bg-white border-black/[0.08] text-[#12066a]"
                                           }
                                         `}
                                     >
-                                      <Icon size={16} strokeWidth={1.6} />
+                                      <Icon size={16} strokeWidth={1.9} />
                                     </span>
 
                                     <span className="flex-1 min-w-0">
@@ -770,11 +774,11 @@ export default function Navbar() {
                                             mt-1
                                             text-[8px]
                                             uppercase
-                                            tracking-[0.10em]
+                                            tracking-normal
                                             ${
                                               isActive
-                                                ? "text-white/40"
-                                                : "text-black/30"
+                                                ? "text-white/65"
+                                                : "text-black/90"
                                             }
                                           `}
                                       >
@@ -837,7 +841,7 @@ export default function Navbar() {
                                   block
                                   mt-1
                                   text-[8px]
-                                  text-black/30
+                                  text-black
                                 "
                               >
                                 Explore our full consultancy offering
@@ -873,7 +877,7 @@ export default function Navbar() {
 
                         <div
                           className="
-                            p-8
+                            p-7
                             bg-white
                           "
                         >
@@ -905,7 +909,7 @@ export default function Navbar() {
                                   items-start
                                   justify-between
                                   gap-6
-                                  pb-6
+                                  pb-5
                                   border-b
                                   border-black/[0.07]
                                 "
@@ -962,7 +966,7 @@ export default function Navbar() {
                                     className="
                                       mt-3
                                       max-w-[490px]
-                                      text-[11px]
+                                      text-[11.5px]
                                       leading-[1.65]
                                       text-black/60
                                     "
@@ -975,11 +979,11 @@ export default function Navbar() {
                                   className="
                                     hidden
                                     sm:block
-                                    text-[68px]
+                                    text-[52px]
                                     leading-none
                                     font-bold
                                     tracking-[-0.10em]
-                                    text-[#12066a]/[0.045]
+                                    text-[#12066a]/[0.06]
                                     select-none
                                   "
                                 >
@@ -998,7 +1002,7 @@ export default function Navbar() {
                                       : "grid-cols-1"
                                   }
                                   gap-x-8
-                                  mt-2
+                                  mt-1
                                 `}
                               >
                                 {selectedCategory.services.map((service) => {
@@ -1015,7 +1019,7 @@ export default function Navbar() {
                                           flex
                                           items-center
                                           gap-3.5
-                                          py-4
+                                          py-3.5
                                           border-b
                                           border-black/[0.065]
                                         "
@@ -1031,9 +1035,9 @@ export default function Navbar() {
                                             flex
                                             items-center
                                             justify-center
-                                            bg-[#12066a]/[0.045]
+                                            bg-[#12066a]/[0.08]
                                             border
-                                            border-[#12066a]/[0.05]
+                                            border-[#12066a]/[0.08]
                                             text-[#12066a]
                                             transition-all
                                             duration-300
@@ -1043,7 +1047,7 @@ export default function Navbar() {
                                             group-hover:shadow-[0_6px_16px_rgba(18,6,106,0.16)]
                                           "
                                       >
-                                        <Icon size={15} strokeWidth={1.6} />
+                                        <Icon size={15} strokeWidth={1.9} />
                                       </span>
 
                                       {/* TEXT */}
@@ -1119,7 +1123,7 @@ export default function Navbar() {
                                   items-center
                                   justify-between
                                   gap-4
-                                  pt-5
+                                  pt-4
                                 "
                               >
                                 <span
@@ -1189,21 +1193,38 @@ export default function Navbar() {
               xl:flex
               shrink-0
               group
+              relative
               items-center
               gap-2
               h-[48px]
               px-5
               rounded-full
+              overflow-hidden
               bg-[#12066a]
               text-white
               transition-all
               duration-300
-              hover:bg-[#997819]
-              hover:shadow-[0_9px_28px_rgba(18,6,106,0.23)]
+              hover:shadow-[0_9px_28px_rgba(18,6,106,0.28)]
             "
           >
             <span
               className="
+                absolute
+                inset-0
+                bg-gradient-to-r
+                from-[#997819]
+                to-[#b8974a]
+                opacity-0
+                transition-opacity
+                duration-300
+                group-hover:opacity-100
+              "
+            />
+
+            <span
+              className="
+                relative
+                z-10
                 text-[10.5px]
                 font-bold
                 uppercase
@@ -1217,6 +1238,8 @@ export default function Navbar() {
               size={15}
               strokeWidth={1.8}
               className="
+                relative
+                z-10
                 transition-transform
                 duration-300
                 group-hover:translate-x-0.5
@@ -1396,7 +1419,7 @@ export default function Navbar() {
                     className="
                       mt-3
                       max-w-[310px]
-                      text-[11px]
+                      text-[11.5px]
                       leading-[1.65]
                       text-black/40
                     "
@@ -1552,20 +1575,19 @@ export default function Navbar() {
                                   <span
                                     className="
                                         flex-1
-                                            flex-1
-                                            text-left
+                                        text-left
                                       "
-                                      >
-                                        <span className="block text-[14px] font-bold leading-tight text-black">
-                                          {category.title}
-                                        </span>
-                                        <span className="mt-0.5 block text-[9px] font-bold uppercase tracking-[0.12em] text-[#997819]">
-                                          {category.eyebrow}
-                                        </span>
+                                  >
+                                    <span className="block text-[14px] font-bold leading-tight text-black">
+                                      {category.title}
+                                    </span>
+                                    <span className="mt-0.5 block text-[9px] font-bold uppercase tracking-[0.12em] text-[#997819]">
+                                      {category.eyebrow}
+                                    </span>
                                   </span>
 
                                   <ChevronDown
-                                        size={17}
+                                    size={17}
                                     className={`
                                         text-black/55
                                         transition-transform
@@ -1792,10 +1814,6 @@ export default function Navbar() {
 }
 
 /* =========================================================
-   DESKTOP NAV ITEM — Pinterest-style icon-top, active border/glow
-========================================================= */
-
-/* =========================================================
    DESKTOP NAV ITEM — Water-fill effect on active
 ========================================================= */
 
@@ -1825,7 +1843,7 @@ function PremiumNavLink({ item, isActive }) {
     >
       {/* Border appears only while hovering. */}
       <span
-        className={`
+        className="
           absolute
           inset-0
           rounded-full
@@ -1835,7 +1853,7 @@ function PremiumNavLink({ item, isActive }) {
           pointer-events-none
           z-20
           border-transparent group-hover:border-[#997819]/40
-        `}
+        "
       />
 
       {/* Hover-only subtle tint */}
@@ -1850,40 +1868,41 @@ function PremiumNavLink({ item, isActive }) {
 
       {/* Icon */}
       <span
-        className={`
+        className="
           relative
           z-10
+          flex
+          items-center
+          justify-center
+          h-[19px]
           transition-all
           duration-300
           text-[#997819] group-hover:text-[#12066a]
-        `}
+        "
       >
-        <Icon
-          size={19}
-          strokeWidth={1.8}
-          fill="none"
-        />
+        <Icon size={19} strokeWidth={1.8} fill="none" />
       </span>
 
       {/* Label */}
       <span
-        className={`
+        className="
           relative
           z-10
-          text-[9.5px]
+          text-[11px]
           font-bold
           tracking-wide
           whitespace-nowrap
           transition-colors
           duration-300
           text-black/70 group-hover:text-[#12066a]/70
-        `}
+        "
       >
         {item.label}
       </span>
     </Link>
   );
 }
+
 /* =========================================================
    MOBILE LINK
 ========================================================= */

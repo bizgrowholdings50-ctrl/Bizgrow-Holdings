@@ -54,7 +54,6 @@ const clients = [
     logo: "/zam-fm.png",
     alt: "Z.A.M FM LTD | BizGrow Client",
   },
-
   {
     name: "Krypton Group",
     logo: "/krypton.png",
@@ -135,7 +134,6 @@ const clients = [
 // Infinite wrap helpers
 function wrap(min, max, v) {
   const rangeSize = max - min;
-
   return ((((v - min) % rangeSize) + rangeSize) % rangeSize) + min;
 }
 
@@ -160,22 +158,16 @@ function ClientsMarquee({ clients, baseVelocity = 2 }) {
   const x = useTransform(baseX, (v) => `${wrap(-25, 0, v)}%`);
 
   useAnimationFrame((t, delta) => {
-    // Pause ONLY when a logo/card is hovered
     if (hoveredCard.current) return;
 
     const velocity = velocityFactor.get();
-
-    // Normal continuous movement
     let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
 
-    // Only change direction when there is meaningful scroll movement
     if (Math.abs(velocity) > 0.05) {
       directionFactor.current = velocity < 0 ? -1 : 1;
     }
 
-    // Subtle scroll influence
     const scrollInfluence = Math.min(Math.abs(velocity), 1.5);
-
     moveBy += directionFactor.current * moveBy * scrollInfluence * 0.35;
 
     baseX.set(baseX.get() + moveBy);
@@ -202,11 +194,11 @@ function ClientsMarquee({ clients, baseVelocity = 2 }) {
               hoveredCard.current = false;
             }}
             className="group relative flex items-center justify-center
-                         h-28 w-48 shrink-0 rounded-2xl bg-white border border-slate-200
-                         shadow-[0_1px_3px_rgba(0,0,0,0.03)]
-                         hover:shadow-[0_8px_24px_-8px_rgba(18,6,106,0.15)]
-                         hover:border-[#997819]/30 hover:-translate-y-1
-                         transition-all duration-300"
+                       h-28 w-48 shrink-0 rounded-2xl bg-white border border-white/20
+                       shadow-[0_4px_20px_rgba(0,0,0,0.15)]
+                       hover:shadow-[0_8px_30px_rgba(153,120,25,0.3)]
+                       hover:border-[#997819] hover:-translate-y-1
+                       transition-all duration-300"
           >
             <div className="relative w-full h-full p-6">
               <Image
@@ -214,8 +206,8 @@ function ClientsMarquee({ clients, baseVelocity = 2 }) {
                 alt={client.alt}
                 fill
                 className="object-contain p-4
-                             transition-transform duration-300
-                             group-hover:scale-[1.06]"
+                           transition-transform duration-300
+                           group-hover:scale-[1.08]"
               />
             </div>
           </div>
@@ -227,8 +219,11 @@ function ClientsMarquee({ clients, baseVelocity = 2 }) {
 
 export default function ClientsSection() {
   return (
-    <section className="relative py-24 px-6 bg-slate-50 border-y border-slate-200 overflow-hidden">
-      <div className="relative max-w-7xl mx-auto text-center">
+    <section className="relative py-24 px-6 bg-gradient-to-b from-[#12066a] via-[#170880] to-[#12066a] border-y border-[#997819]/30 overflow-hidden shadow-2xl">
+      {/* Decorative Glow Background */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-[#997819]/10 blur-[120px] pointer-events-none rounded-full" />
+
+      <div className="relative max-w-7xl mx-auto text-center z-10">
         <FadeIn>
           <span className="inline-flex items-center gap-2 text-[#997819] font-black uppercase tracking-[0.3em] text-xs">
             <span className="h-px w-8 bg-[#997819]" />
@@ -236,17 +231,17 @@ export default function ClientsSection() {
             <span className="h-px w-8 bg-[#997819]" />
           </span>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#12066a] mt-3 mb-3">
-            OUR VALUABLE CLIENTS
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mt-3 mb-3 tracking-tight">
+            OUR VALUABLE <span className="text-[#997819]">CLIENTS</span>
           </h2>
 
-          <p className="text-slate-500 font-medium mb-16">
-            Our private security companies clients across the UK
+          <p className="text-blue-200/80 font-medium mb-16 max-w-xl mx-auto text-sm sm:text-base">
+            Proudly partnering with leading private security companies across the UK
           </p>
         </FadeIn>
       </div>
 
-      <FadeIn direction="up">
+      <FadeIn direction="up" className="relative z-10">
         <ClientsMarquee clients={clients} baseVelocity={1} />
       </FadeIn>
     </section>

@@ -188,11 +188,11 @@ const HorizontalProcess = () => {
           >
             <ArrowDown className="w-4 h-4 text-[#997819] animate-bounce" />
 
-            <span className="text-[11px] font-semibold tracking-wide">
+            <span className="text-[13px] font-semibold tracking-wide">
               Scroll to explore
               <span className="text-white/40 mx-2">or</span>
               <span className="text-[#997819]">
-                play to watch automatically
+                click play button to proceed automatically
               </span>
             </span>
           </motion.div>

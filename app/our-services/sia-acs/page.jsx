@@ -129,7 +129,7 @@ const SIAACSPage = () => {
                   <p>
                     Our consultancy is built on structured compliance
                     implementation, not generic templates. We help you meet all
-                    88{" "}
+                    78{" "}
                     <Link
                       href="https://bizgrow-holdings.com/get-acs-accreditation-fast/"
                       className="text-[#997819] font-bold hover:underline"
@@ -149,7 +149,7 @@ const SIAACSPage = () => {
               <ul className="space-y-4" role="list">
                 {[
                   "Self-Assessment Workbook (SAW) preparation",
-                  "Performance Indicator alignment (88 criteria)",
+                  "Performance Indicator alignment (78 criteria)",
                   "Workforce screening compliance",
                   {
                     text: "Risk management systems",

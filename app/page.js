@@ -94,57 +94,61 @@ export default function HomePage() {
       <main className="min-h-screen bg-white selection:bg-[#997819] selection:text-white">
         {/* 1. HERO SECTION */}
         <HeroCarousel />
-
-        {/* 2 About Us  */}
-        <section className="relative mt-10 z-30 px-6 bg-white">
+        {/* 2 Stats */}
+        <section className="relative z-30 w-full bg-white px-6 py-10 md:py-14 border-b border-slate-100 shadow-sm">
           <div className="max-w-7xl mx-auto">
-            <div className="bg-[#12066a] rounded-[3rem] p-8 md:p-12 shadow-2xl flex flex-col md:flex-row items-start justify-between gap-12 border-4 border-white">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-10">
               {/* Stat 1 */}
-              <div className="flex items-center gap-5">
-                <div className="bg-white/10 p-4 rounded-2xl">
-                  <Trophy className="text-white w-8 h-8" />
+              <div className="flex items-center gap-5 w-full md:w-auto justify-center md:justify-start">
+                <div className="bg-[#12066a]/5 border border-[#12066a]/10 p-4 rounded-2xl shadow-sm">
+                  <Trophy className="text-[#997819] w-8 h-8" />
                 </div>
+
                 <div>
-                  <span className="text-white text-3xl font-black leading-none">
+                  <span className="text-[#12066a] text-3xl font-black tracking-tight leading-none">
                     100+
                   </span>
-                  <p className="text-blue-200 text-xs font-bold uppercase tracking-widest mt-1">
+                  <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest mt-1">
                     Successful Audits
                   </p>
                 </div>
               </div>
 
               {/* Stat 2 */}
-              <div className="flex items-center gap-5">
-                <div className="bg-white/10 p-4 rounded-2xl">
-                  <CheckCircle2 className="text-white w-8 h-8" />
+              <div className="flex items-center gap-5 w-full md:w-auto justify-center md:justify-start">
+                <div className="bg-[#12066a]/5 border border-[#12066a]/10 p-4 rounded-2xl shadow-sm">
+                  <CheckCircle2 className="text-[#997819] w-8 h-8" />
                 </div>
+
                 <div>
-                  <span className="text-white text-3xl font-black  leading-none">
+                  <span className="text-[#12066a] text-3xl font-black tracking-tight leading-none">
                     99%
                   </span>
-                  <p className="text-blue-200 text-xs font-bold uppercase tracking-widest mt-1">
+                  <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest mt-1">
                     Pass Rate
                   </p>
                 </div>
               </div>
 
               {/* Stat 3 */}
-              <div className="flex items-center gap-5">
-                <div className="bg-white/10 p-4 rounded-2xl">
-                  <Globe2 className="text-white w-8 h-8" />
+              <div className="flex items-center gap-5 w-full md:w-auto justify-center md:justify-start">
+                <div className="bg-[#12066a]/5 border border-[#12066a]/10 p-4 rounded-2xl shadow-sm">
+                  <Globe2 className="text-[#997819] w-8 h-8" />
                 </div>
+
                 <div>
-                  <span className="text-white text-3xl font-black  leading-none">
+                  <span className="text-[#12066a] text-3xl font-black tracking-tight leading-none">
                     UK Wide
                   </span>
-                  <p className="text-blue-200 text-xs font-bold uppercase tracking-widest mt-1">
+                  <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest mt-1">
                     Coverage
                   </p>
                 </div>
               </div>
-              <Link href="/contact-us" className="md:hidden xl:block">
-                <button className="bg-white text-[#12066a] px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-blue-50 transition-all shadow-lg active:scale-95">
+
+              {/* CTA */}
+              <Link href="/contact-us" className="hidden xl:block">
+                <button className="bg-[#12066a] text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-[#997819] transition-all shadow-md active:scale-95">
                   Book a Free Consultation
                 </button>
               </Link>
@@ -152,16 +156,18 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* 3 Stats  */}
+        {/* 4. HORIZONTAL SERVICES (GSAP PINNED SECTION) */}
+        <HorizontalServices />
+
+        {/* 3 Our Approach */}
         <section className="py-14 px-6">
-          {/* Yahan changes kiye hain: flex-col-reverse se mobile par content upar aur image niche ho jayegi */}
           <div className="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row gap-16 items-center">
-            {/* Image Section (Ab ye mobile par niche dikhega) */}
+            {/* Image Section */}
             <FadeIn direction="left" className="relative w-full lg:w-1/2">
               <div className="aspect-square relative rounded-[3rem] overflow-hidden shadow-2xl">
                 <Image
                   src="/our-approach-home.jpg"
-                  alt="Our Approach - BizGrow Holdings Ltd"
+                  alt="Our Approach - BizGrow Holdings Ltd"
                   fill
                   className="object-cover"
                 />
@@ -175,54 +181,68 @@ export default function HomePage() {
               </div>
             </FadeIn>
 
-            {/* Content Section (Ab ye mobile par upar dikhega) */}
+            {/* Content Section */}
             <FadeIn direction="right" className="w-full lg:w-1/2">
               <h1 className="text-4xl md:text-5xl font-black text-[#12066a] leading-tight">
                 Our
                 <span className="text-[#997819]"> Approach</span>
               </h1>
-
               <div className="mt-8 space-y-6 text-zinc-600 leading-relaxed font-medium">
                 <p>
-                  We take a practical, hands-on approach to compliance and
-                  accreditation. We begin by understanding your business,
-                  identifying where you currently stand, and assessing the
-                  requirements relevant to your industry and goals. From there,
-                  we work alongside your team to prepare the systems,
-                  documentation, and processes needed to move forward with
-                  confidence.
+                  At BizGrow Holdings, we believe true corporate resilience goes
+                  beyond standard paperwork. We partner closely with your
+                  leadership team to evaluate operational baselines and
+                  long-term goals, embedding regulatory{" "}
+                  <Link
+                    href="/compliance-consultancies/"
+                    className="text-[#997819] font-bold"
+                  >
+                    compliance
+                  </Link>{" "}
+                  deep into your company culture.
                 </p>
 
-                <ul className="space-y-4 pt-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                   {[
-                    "Compliance Gap Assessment & Action Planning",
-                    "Management Systems, QMS & Documentation",
-                    "Implementation Support & Staff Guidance",
-                    "Internal Reviews & Audit Readiness",
-                    "Certification & Accreditation Support",
+                    {
+                      title: "Consultative Partnership",
+                      desc: "Working hand-in-hand with management.",
+                    },
+                    {
+                      title: "Tailored Frameworks",
+                      desc: "Designed specifically for UK standards.",
+                    },
+                    {
+                      title: "Culture of Quality",
+                      desc: "Embedding QMS into daily operations.",
+                    },
+                    {
+                      title: "Risk Mitigation",
+                      desc: "Proactive identification of compliance gaps.",
+                    },
                   ].map((item, i) => (
-                    <li
+                    <div
                       key={i}
-                      className="flex items-center gap-3 text-[#12066a] font-bold"
+                      className="bg-[#12066a]/[0.03] border border-[#12066a]/10 p-5 rounded-2xl"
                     >
-                      <CheckCircle2 className="text-[#997819]" size={20} />
-                      {item}
-                    </li>
+                      <h4 className="text-[#12066a] font-black text-base mb-1">
+                        {item.title}
+                      </h4>
+                      <p className="text-zinc-500 text-xs leading-relaxed">
+                        {item.desc}
+                      </p>
+                    </div>
                   ))}
-                </ul>
+                </div>
 
-                <p className="font-bold text-black">
-                  Our goal is simple: to help your business meet the right
-                  standards, achieve certification with confidence, and remain
-                  compliant as you grow.
+                <p className="font-bold text-black pt-2">
+                  Your corporate growth is our core goal, and absolute
+                  compliance is just the beginning.
                 </p>
               </div>
             </FadeIn>
           </div>
         </section>
-
-        {/* 4. HORIZONTAL SERVICES (GSAP PINNED SECTION) */}
-        <HorizontalServices />
 
         {/* Our Process */}
         <section className="py-20 md:py-28 bg-[#12066a] relative overflow-hidden">
