@@ -4,7 +4,7 @@ import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import FadeIn from "@/components/MotionWrapper";
 
-const ServicesFaq = ({ faqs = [], title = "FAQs", subtitle = "Questions & Answers" }) => {
+const ServicesFaq = ({ faqs = [], title = "FAQs" }) => {
   const [openIndex, setOpenIndex] = useState(null);
 
   const toggleFaq = (index) => {
@@ -38,9 +38,7 @@ const ServicesFaq = ({ faqs = [], title = "FAQs", subtitle = "Questions & Answer
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-16">
           <FadeIn direction="up">
-            <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs mb-4 block">
-              {subtitle}
-            </span>
+           
             <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter">
               {title}
             </h2>

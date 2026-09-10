@@ -217,9 +217,6 @@ export default function HomePage() {
         <section className="py-20 md:py-28 bg-[#12066a] relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             <div className="text-center max-w-2xl mx-auto mb-16 md:mb-20">
-              <span className="text-[#D4AF37] font-black uppercase tracking-[0.3em] text-xs">
-                Our Approach
-              </span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mt-3 mb-4">
                 A Proven Methodology From Zero To{" "}
                 <span className="text-[#D4AF37]">Audit-Ready</span>
@@ -236,32 +233,47 @@ export default function HomePage() {
                 return (
                   <div
                     key={i}
-                    className="group relative flex flex-col justify-between rounded-[2.5rem] p-8 overflow-hidden bg-[#12066a] border border-white/15 shadow-xl hover:-translate-y-2 hover:border-[#D4AF37]/50 transition-all duration-500"
-                    style={{ minHeight: "380px" }}
+                    className="group relative flex flex-col rounded-[2rem] p-7 overflow-hidden bg-[#12066a] border border-white/15 shadow-xl hover:-translate-y-2 hover:border-[#D4AF37]/50 hover:shadow-[0_25px_50px_-15px_rgba(212,175,55,0.25)] transition-all duration-500"
                   >
+                    {/* Background image */}
                     <div
                       className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 opacity-30 group-hover:opacity-20"
                       style={{ backgroundImage: `url(${step.bgImage})` }}
                     />
                     <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#12066a] via-[#12066a]/90 to-[#12066a]/70" />
 
-                    <div className="relative z-20 flex items-center justify-between mb-8">
-                      <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-[#D4AF37] backdrop-blur-md shadow-inner group-hover:bg-[#D4AF37] group-hover:text-[#12066a] transition-all duration-300">
-                        <StepIcon className="w-7 h-7" />
+                    {/* Step connector line (desktop only) */}
+                    {i < steps.length - 1 && (
+                      <div className="hidden lg:block absolute top-14 -right-4 w-8 h-[2px] bg-gradient-to-r from-[#D4AF37]/40 to-transparent z-30" />
+                    )}
+
+                    {/* Top row: Icon + Number */}
+                    <div className="relative z-20 flex items-center justify-between mb-5">
+                      <div className="w-12 h-12 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-[#D4AF37] backdrop-blur-md shadow-inner group-hover:bg-[#D4AF37] group-hover:text-[#12066a] group-hover:scale-105 transition-all duration-300">
+                        <StepIcon className="w-6 h-6" />
                       </div>
-                      <div className="w-10 h-10 rounded-full bg-white/10 text-white flex items-center justify-center font-black text-xs border border-white/10">
+                      <div className="w-9 h-9 rounded-full bg-white/10 text-white flex items-center justify-center font-black text-xs border border-white/10 group-hover:border-[#D4AF37]/50 group-hover:text-[#D4AF37] transition-all duration-300">
                         {step.num}
                       </div>
                     </div>
 
-                    <div className="relative z-20">
-                      <h3 className="text-xl font-bold text-white mb-3 tracking-tight">
+                    {/* Content */}
+                    <div className="relative z-20 flex-1">
+                      <h3 className="text-lg font-bold text-white mb-2.5 tracking-tight group-hover:text-[#D4AF37] transition-colors duration-300">
                         {step.title}
                       </h3>
-                      <p className="text-blue-100/80 text-sm leading-relaxed font-normal">
+                      <p className="text-blue-100/75 text-sm leading-relaxed font-normal">
                         {step.desc}
                       </p>
                     </div>
+
+                    {/* Bottom accent line */}
+                    <div className="relative z-20 mt-5 pt-4 border-t border-white/10">
+                      <div className="h-[3px] w-8 bg-[#D4AF37]/60 rounded-full group-hover:w-14 transition-all duration-500" />
+                    </div>
+
+                    {/* Corner glow on hover */}
+                    <div className="absolute -bottom-16 -right-16 w-40 h-40 bg-[#D4AF37]/10 rounded-full blur-[70px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
                   </div>
                 );
               })}
@@ -276,11 +288,7 @@ export default function HomePage() {
         {/* 7. CLIENTS SECTION — Premium Marquee */}
         <OurClients />
 
-        <ServicesFaq
-          faqs={homeFaqs}
-          title="Frequently Asked Questions"
-          subtitle="Got Questions? We've Got Answers"
-        />
+        <ServicesFaq faqs={homeFaqs} title="Frequently Asked Questions" />
 
         {/* 8 CTA Section with Background Parallax & Watermark */}
         <section className="py-20 px-6 bg-white overflow-hidden">

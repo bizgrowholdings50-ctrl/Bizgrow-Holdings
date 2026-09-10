@@ -39,9 +39,7 @@ const ServicesGrid = () => {
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
         <div className="text-center mb-16">
-          <span className="text-[#997819] font-black uppercase tracking-[0.3em] text-[10px]">
-            Our Expertise
-          </span>
+          
 
           <h2 className="text-[#12066a] text-3xl md:text-5xl lg:text-6xl font-black tracking-tight mt-3 mb-4">
             What We <span className="text-[#997819]">Deliver</span>
