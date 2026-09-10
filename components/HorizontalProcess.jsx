@@ -174,12 +174,40 @@ const HorizontalProcess = () => {
             : "relative"
         }`}
       >
+        {/* Section Heading */}
+        <div
+          className={`
+            ${
+              isVertical
+                ? "relative pt-14 pb-2 px-6"
+                : "absolute top-24 lg:top-28 left-0 right-0 z-30"
+            }
+            flex
+            flex-col
+            items-center
+            text-center
+            pointer-events-none
+          `}
+        >
+          <div className="flex items-center gap-3 -mb-1">
+            <span className="w-8 h-[1px] bg-[#997819]/70" />
+            <span className="text-[#997819] font-bold tracking-[0.22em] uppercase text-[11px]">
+              Our Expertise
+            </span>
+            <span className="w-8 h-[1px] bg-[#997819]/70" />
+          </div>
+
+          <h2 className="text-white text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight max-w-xl">
+            Compliance, Mapped Out Step By Step
+          </h2>
+        </div>
+
         {/* Elite Cinematic Scroll Message Popup */}
         {!isVertical && (
           <motion.div
             style={{ opacity: promptOpacity, scale: promptScale }}
             className="
-      absolute bottom-24 left-1/2 -translate-x-1/2
+      absolute bottom-18 left-1/2 -translate-x-1/2
       z-40 hidden md:flex
       items-center gap-2
       text-white/80
@@ -201,7 +229,7 @@ const HorizontalProcess = () => {
         {/* Bottom Progress Bar with Play/Pause & Subtext */}
         {/* Interactive Controls */}
         {!isVertical && (
-          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 hidden md:flex items-center gap-3">
+          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-30 hidden md:flex items-center gap-3">
             {/* Auto-play CTA */}
             <button
               onClick={() => setIsAutoPlaying(!isAutoPlaying)}
@@ -313,7 +341,7 @@ const HorizontalProcess = () => {
                 ${
                   isVertical
                     ? "w-full max-w-5xl mx-auto py-12"
-                    : "h-screen w-screen px-12 lg:px-24"
+                    : "h-screen w-screen px-12 lg:px-24 pt-20 lg:pt-16"
                 }`}
               >
                 {/* Background Image with brand color overlay */}
@@ -328,7 +356,7 @@ const HorizontalProcess = () => {
                 </div>
 
                 {/* Left Column - Category Title & Info */}
-                <div className="z-10 w-full lg:w-[38%] mb-8 lg:mb-0 text-center lg:text-left">
+                <div className="z-10 w-full lg:w-[38%] mb-6 lg:mb-0 text-center lg:text-left">
                   <div className="flex items-center justify-center lg:justify-start gap-3 mb-3">
                     <span className="text-[#997819] font-mono font-bold text-sm tracking-widest">
                       {item.id}
@@ -374,7 +402,7 @@ const HorizontalProcess = () => {
                       </div>
                     </div>
 
-                    <div className="mt-8 pt-5 border-t border-white/10 flex items-center justify-between text-xs font-semibold text-zinc-300">
+                    <div className="mt-2 pt-5 border-t border-white/10 flex items-center justify-between text-xs font-semibold text-zinc-300">
                       <span className="flex items-center gap-2">
                         <span className="w-2 h-2 rounded-full bg-[#997819]" />{" "}
                         PROFESSIONAL CONSULTANCY
