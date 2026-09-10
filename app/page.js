@@ -16,36 +16,33 @@ import OurClients from "@/components/OurClients";
 import JsonLd from "@/components/JsonLd";
 import { organizationSchema } from "@/lib/jsonSchemas";
 import ServicesFaq from "@/components/ServicesFaq";
-import {
-  ShieldCheck,
-  Award,
-  FileText,
-  Lock,
-  Play,
-  Pause,
-  ArrowDown,
-} from "lucide-react";
+import { ShieldCheck, Award, FileText, Lock } from "lucide-react";
+import HomeServices from "@/components/HomeServices";
 
 const steps = [
   {
     num: "01",
     title: "Assess & Plan",
     desc: "We check where your business stands today, find any gaps, review your paperwork, and guide you on what to do next.",
+    icon: FileText,
   },
   {
     num: "02",
     title: "Build the Strategy",
     desc: "We set up your documentation and QMS portal, walk you through a clear step-by-step process, and train you on assessment documents.",
+    icon: ShieldCheck,
   },
   {
     num: "03",
     title: "Audit & Certification",
     desc: "We run your internal audit first to catch anything early, then stand by you through the external audit with fast-track guidance.",
+    icon: CheckCircle2,
   },
   {
     num: "04",
     title: "Ongoing Support & Growth",
     desc: "Get a dedicated project manager and 12 months of reliable customer support and advice to help you keep improving.",
+    icon: Trophy,
   },
 ];
 
@@ -156,60 +153,56 @@ export default function HomePage() {
         {/* 1. HERO SECTION */}
         <HeroCarousel />
         {/* 2 Stats */}
-        <section className="relative z-30 w-full bg-white px-6 py-10 md:py-14 border-b border-slate-100 shadow-sm">
-          <div className="max-w-7xl mx-auto">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-10">
-              {/* Stat 1 */}
-              <div className="flex items-center gap-5 w-full md:w-auto justify-center md:justify-start">
-                <div className="bg-[#12066a]/5 border border-[#12066a]/10 p-4 rounded-2xl shadow-sm">
-                  <Trophy className="text-[#997819] w-8 h-8" />
-                </div>
 
+        <section className="relative mt-10 z-30 px-6 bg-white">
+          <div className="max-w-7xl mx-auto">
+            <div className="bg-[#12066a] rounded-[3rem] p-8 md:p-12 shadow-2xl flex flex-col md:flex-row items-start justify-between gap-12 border-4 border-white">
+              {/* Stat 1 */}
+              <div className="flex items-center gap-5">
+                <div className="bg-white/10 p-4 rounded-2xl">
+                  <Trophy className="text-white w-8 h-8" />
+                </div>
                 <div>
-                  <span className="text-[#12066a] text-3xl font-black tracking-tight leading-none">
+                  <span className="text-white text-3xl font-black leading-none">
                     100+
                   </span>
-                  <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest mt-1">
+                  <p className="text-blue-200 text-xs font-bold uppercase tracking-widest mt-1">
                     Successful Audits
                   </p>
                 </div>
               </div>
 
               {/* Stat 2 */}
-              <div className="flex items-center gap-5 w-full md:w-auto justify-center md:justify-start">
-                <div className="bg-[#12066a]/5 border border-[#12066a]/10 p-4 rounded-2xl shadow-sm">
-                  <CheckCircle2 className="text-[#997819] w-8 h-8" />
+              <div className="flex items-center gap-5">
+                <div className="bg-white/10 p-4 rounded-2xl">
+                  <CheckCircle2 className="text-white w-8 h-8" />
                 </div>
-
                 <div>
-                  <span className="text-[#12066a] text-3xl font-black tracking-tight leading-none">
+                  <span className="text-white text-3xl font-black  leading-none">
                     99%
                   </span>
-                  <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest mt-1">
+                  <p className="text-blue-200 text-xs font-bold uppercase tracking-widest mt-1">
                     Pass Rate
                   </p>
                 </div>
               </div>
 
               {/* Stat 3 */}
-              <div className="flex items-center gap-5 w-full md:w-auto justify-center md:justify-start">
-                <div className="bg-[#12066a]/5 border border-[#12066a]/10 p-4 rounded-2xl shadow-sm">
-                  <Globe2 className="text-[#997819] w-8 h-8" />
+              <div className="flex items-center gap-5">
+                <div className="bg-white/10 p-4 rounded-2xl">
+                  <Globe2 className="text-white w-8 h-8" />
                 </div>
-
                 <div>
-                  <span className="text-[#12066a] text-3xl font-black tracking-tight leading-none">
+                  <span className="text-white text-3xl font-black  leading-none">
                     UK Wide
                   </span>
-                  <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest mt-1">
+                  <p className="text-blue-200 text-xs font-bold uppercase tracking-widest mt-1">
                     Coverage
                   </p>
                 </div>
               </div>
-
-              {/* CTA */}
-              <Link href="/contact-us" className="hidden xl:block">
-                <button className="bg-[#12066a] text-white px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-[#997819] transition-all shadow-md active:scale-95">
+              <Link href="/contact-us" className="md:hidden xl:block">
+                <button className="bg-white text-[#12066a] px-8 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-blue-50 transition-all shadow-lg active:scale-95">
                   Book a Free Consultation
                 </button>
               </Link>
@@ -218,62 +211,60 @@ export default function HomePage() {
         </section>
 
         {/* 4. HORIZONTAL SERVICES (GSAP PINNED SECTION) */}
-        <HorizontalServices />
-
-      
+        <HomeServices />
 
         {/* Our Process */}
-        <section className="py-20 md:py-28 bg-white relative overflow-hidden">
+        <section className="py-20 md:py-28 bg-[#12066a] relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 relative z-10">
-            {/* Section Heading */}
             <div className="text-center max-w-2xl mx-auto mb-16 md:mb-20">
-              <span className="text-[#997819] font-black uppercase tracking-[0.3em] text-xs">
+              <span className="text-[#D4AF37] font-black uppercase tracking-[0.3em] text-xs">
                 Our Approach
               </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#12066a] mt-3 mb-4">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mt-3 mb-4">
                 A Proven Methodology From Zero To{" "}
-                <span className="text-[#997819]">Audit-Ready</span>
+                <span className="text-[#D4AF37]">Audit-Ready</span>
               </h2>
-              <p className="text-zinc-600 text-sm sm:text-base font-medium">
+              <p className="text-blue-100/80 text-sm sm:text-base font-medium">
                 A proven, step-by-step methodology that takes you from zero to
                 audit-ready with one team managing every stage.
               </p>
             </div>
 
-            {/* Steps Horizontal Flow Layout */}
-            <div className="relative">
-              {/* Connecting Line for Desktop */}
-              <div className="hidden lg:block absolute top-[40px] left-[10%] right-[10%] h-0.5 bg-slate-200 z-0" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
+              {steps.map((step, i) => {
+                const StepIcon = step.icon;
+                return (
+                  <div
+                    key={i}
+                    className="group relative flex flex-col justify-between rounded-[2.5rem] p-8 overflow-hidden bg-[#12066a] border border-white/15 shadow-xl hover:-translate-y-2 hover:border-[#D4AF37]/50 transition-all duration-500"
+                    style={{ minHeight: "380px" }}
+                  >
+                    <div
+                      className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 opacity-30 group-hover:opacity-20"
+                      style={{ backgroundImage: `url(${step.bgImage})` }}
+                    />
+                    <div className="absolute inset-0 z-10 bg-gradient-to-t from-[#12066a] via-[#12066a]/90 to-[#12066a]/70" />
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
-                {steps.map((step, i) => {
-                  const StepIcon =
-                    [ShieldCheck, Award, FileText, Lock][i] || ShieldCheck;
-                  return (
-                    <FadeIn key={i} delay={i * 0.15} direction="up">
-                      <div className="flex flex-col items-center text-center group bg-slate-50 border border-slate-200/80 rounded-[2.5rem] p-8 shadow-lg hover:shadow-xl hover:border-[#997819]/40 transition-all duration-300 relative overflow-hidden">
-                        {/* Top-Right Corner Number Badge */}
-                        <div className="absolute top-5 right-5 w-11 h-11 rounded-full bg-[#12066a] text-[#D4AF37] flex items-center justify-center font-black text-xs shadow-md z-20">
-                          {step.num}
-                        </div>
-
-                        {/* Centered Box Icon */}
-                        <div className="w-16 h-16 rounded-2xl bg-white border border-slate-200 flex items-center justify-center text-[#997819] group-hover:bg-[#12066a] group-hover:text-[#D4AF37] group-hover:border-[#12066a] transition-all duration-500 shadow-sm mb-6 relative z-10">
-                          <StepIcon className="w-8 h-8" />
-                        </div>
-
-                        {/* Content */}
-                        <h3 className="text-lg sm:text-xl font-bold text-[#12066a] mb-2 tracking-tight relative z-10">
-                          {step.title}
-                        </h3>
-                        <p className="text-zinc-600 text-sm leading-relaxed font-light relative z-10">
-                          {step.desc}
-                        </p>
+                    <div className="relative z-20 flex items-center justify-between mb-8">
+                      <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-[#D4AF37] backdrop-blur-md shadow-inner group-hover:bg-[#D4AF37] group-hover:text-[#12066a] transition-all duration-300">
+                        <StepIcon className="w-7 h-7" />
                       </div>
-                    </FadeIn>
-                  );
-                })}
-              </div>
+                      <div className="w-10 h-10 rounded-full bg-white/10 text-white flex items-center justify-center font-black text-xs border border-white/10">
+                        {step.num}
+                      </div>
+                    </div>
+
+                    <div className="relative z-20">
+                      <h3 className="text-xl font-bold text-white mb-3 tracking-tight">
+                        {step.title}
+                      </h3>
+                      <p className="text-blue-100/80 text-sm leading-relaxed font-normal">
+                        {step.desc}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </section>

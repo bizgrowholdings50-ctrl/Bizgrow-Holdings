@@ -35,18 +35,18 @@ const TestimonialsPage = () => {
 
         <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
           <FadeIn direction="up">
-            <span className="inline-block mt-10 text-[#997819] font-black uppercase tracking-[0.5em] text-[10px] bg-white/5 px-8 py-3 rounded-full border border-white/10 mb-8 backdrop-blur-sm">
+            <span className="inline-block mt-10 text-white font-black uppercase tracking-[0.5em] text-[10px] bg-white/5 px-8 py-3 rounded-full border border-white mb-8 backdrop-blur-sm">
               Global Trust & Excellence
             </span>
 
             <h1 className="text-6xl md:text-9xl font-black text-white tracking-tighter leading-[0.8] mb-8 uppercase">
-              Proven <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#997819] via-[#d4af37] to-[#997819]">
+              Proven 
+              <span className="text-transparent bg-clip-text ml-8 bg-gradient-to-r from-[#997819] via-[#d4af37] to-[#997819]">
                 Impact
               </span>
             </h1>
 
-            <p className="text-blue-100/70 max-w-2xl mx-auto text-lg md:text-xl font-medium leading-relaxed drop-shadow-lg">
+            <p className="text-white max-w-2xl mx-auto text-lg font-medium leading-relaxed drop-shadow-lg">
               Real stories from our partners at BizGrow Holdings. We
               don't just deliver results; we build legacies.
             </p>
