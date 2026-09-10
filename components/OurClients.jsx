@@ -225,14 +225,14 @@ export default function ClientsSection() {
 
       <div className="relative max-w-7xl mx-auto text-center z-10">
         <FadeIn>
-          <span className="inline-flex items-center gap-2 text-[#997819] font-black uppercase tracking-[0.3em] text-xs">
+          <span className="inline-flex items-center gap-2 text-[#D4AF37] font-black uppercase tracking-[0.3em] text-xs">
             <span className="h-px w-8 bg-[#997819]" />
             Experts in Growing Private Security Businesses
             <span className="h-px w-8 bg-[#997819]" />
           </span>
 
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mt-3 mb-3 tracking-tight">
-            OUR VALUABLE <span className="text-[#997819]">CLIENTS</span>
+          <h2 className="text-3xl sm:text-4xl md:text-6xl font-black text-white mt-3 mb-3 tracking-tight">
+            Our Valuable <span className="text-[#997819]">Clients</span>
           </h2>
 
           <p className="text-blue-200/80 font-medium mb-16 max-w-xl mx-auto text-sm sm:text-base">

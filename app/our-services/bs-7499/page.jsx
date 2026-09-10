@@ -56,7 +56,7 @@ const BS7499Page = () => {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-black/70" />
+          <div className="absolute inset-0 bg-black/80" />
         </div>
 
         {/* Tactical Watermark */}

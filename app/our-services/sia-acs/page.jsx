@@ -41,7 +41,7 @@ const SIAACSPage = () => {
   return (
     <main className="bg-white text-zinc-900">
       {/* 🔹 1. HERO SECTION */}
-      <section className="relative h-screen w-full flex items-center overflow-hidden">
+      <section className="relative h-screen texct  w-full flex items-center overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
             src="/sia-acs-hero.jpg"
@@ -51,7 +51,7 @@ const SIAACSPage = () => {
             priority
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-black/65 backdrop-blur-[1px]" />
+          <div className="absolute inset-0 bg-black/80 backdrop-blur-[1px]" />
         </div>
 
         {/* Large Watermark */}
@@ -77,7 +77,7 @@ const SIAACSPage = () => {
             </FadeIn>
 
             <FadeIn direction="right" duration="0.8">
-              <p className="mt-8 text-blue-100/80 text-lg md:text-xl max-w-2xl leading-relaxed font-medium">
+              <p className="mt-8 text-blue-100/80 text-lg  max-w-2xl leading-relaxed font-medium">
                 BizGrow Holdings provides specialist{" "}
                 <Link
                   href="https://bizgrow-holdings.com/top-sia-security-recruitment-agencies-in-the-uk/"
@@ -86,8 +86,15 @@ const SIAACSPage = () => {
                 >
                   SIA ACS
                 </Link>{" "}
-                consultancy services designed to help <Link href="/types-of-security-services-in-the-uk/" className="text-[#997819] font-bold hover:underline">UK security</Link> businesses
-                meet assessment criteria and achieve successful accreditation.
+                consultancy services designed to help{" "}
+                <Link
+                  href="/types-of-security-services-in-the-uk/"
+                  className="text-[#997819] font-bold hover:underline"
+                >
+                  UK security
+                </Link>{" "}
+                businesses meet assessment criteria and achieve successful
+                accreditation.
               </p>
             </FadeIn>
 
@@ -104,16 +111,16 @@ const SIAACSPage = () => {
       {/* 🔹 2. DEEP INTRO & FOCUS AREAS */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid xl:grid-cols-12 gap-16 items-start">
-            <div className="lg:col-span-8">
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+            <div className="lg:col-span-7">
               <FadeIn direction="right">
-                <h2 className="text-4xl md:text-5xl font-black text-[#12066a] tracking-tighter mb-8">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#12066a] tracking-tight mb-8 leading-[1.15]">
                   Excellence in the{" "}
                   <span className="text-[#997819]">
                     Approved Contractor Scheme
                   </span>
                 </h2>
-                <div className="space-y-6 text-zinc-600 text-lg leading-relaxed font-medium">
+                <div className="space-y-6 text-zinc-600 text-base md:text-lg leading-relaxed font-medium">
                   <p>
                     The Security Industry Authority{" "}
                     <Link
@@ -142,8 +149,8 @@ const SIAACSPage = () => {
               </FadeIn>
             </div>
 
-            <div className="lg:col-span-8 xl:col-span-4 bg-[#12066a] p-10 rounded-[3rem] border border-zinc-100 shadow-sm">
-              <h3 className="text-white font-black uppercase tracking-widest text-md mb-6">
+            <div className="lg:col-span-5 bg-[#12066a] p-8 md:p-10 rounded-[2.5rem] border border-zinc-100 shadow-xl">
+              <h3 className="text-white font-black uppercase tracking-widest text-sm md:text-md mb-6">
                 ACS Compliance Focus Areas:
               </h3>
               <ul className="space-y-4" role="list">
@@ -166,10 +173,10 @@ const SIAACSPage = () => {
                   >
                     <CheckCircle2
                       size={22}
-                      className="text-[#997819] flex-shrink-0 mt-1"
+                      className="text-[#997819] flex-shrink-0 mt-0.5"
                       aria-hidden="true"
                     />
-                    <span className="text-lg">
+                    <span className="text-base md:text-lg">
                       {typeof item === "string" ? (
                         item
                       ) : (
@@ -308,7 +315,7 @@ const SIAACSPage = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             <FadeIn direction="left">
-              <h2 className="text-4xl md:text-7xl font-black tracking-tighter mb-10 leading-none">
+              <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-10 leading-none">
                 Our ACS Success <br />{" "}
                 <span className="text-[#997819]">Framework.</span>
               </h2>
@@ -347,7 +354,7 @@ const SIAACSPage = () => {
           </div>
         </div>
       </section>
-      
+
       <ServicesFaq
         faqs={siaAcsData}
         title={

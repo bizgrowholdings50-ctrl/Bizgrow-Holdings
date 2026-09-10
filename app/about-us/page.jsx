@@ -198,7 +198,7 @@ export default function AboutUs() {
       <section className="py-14 bg-zinc-50 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black text-[#12066a]">
+            <h2 className="text-4xl md:text-5xl font-black text-[#12066a]">
               Our Core Values That{" "}
               <span className="text-[#997819]">Define Us</span>
             </h2>

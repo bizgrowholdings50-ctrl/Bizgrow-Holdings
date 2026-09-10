@@ -80,9 +80,9 @@ const HorizontalProcess = () => {
     restDelta: 0.001,
   });
 
-  const x = useTransform(
+const x = useTransform(
     smoothProgress,
-    [0, 0.05, 0.2, 0.4, 0.55, 0.75, 0.85, 1],
+    [0, 0.12, 0.28, 0.42, 0.58, 0.75, 0.88, 1], 
     ["0vw", "0vw", "-100vw", "-100vw", "-200vw", "-200vw", "-300vw", "-300vw"],
   );
 
@@ -123,7 +123,7 @@ const HorizontalProcess = () => {
       highlightText: "ISO 9001, 14001 & 45001",
       icon: Award,
       details:
-        "Drive organizational excellence, environmental responsibility, and robust occupational safety standards systematically.",
+        "Drive organisational excellence, environmental responsibility, and robust occupational safety standards systematically.",
     },
     {
       id: "03",
@@ -142,7 +142,7 @@ const HorizontalProcess = () => {
       tag: "Digital Protection",
       title: "Cyber Security",
       description:
-        "Demonstrate rigorous digital resilience and ensure your organization protects sensitive data against modern threats.",
+        "Demonstrate rigorous digital resilience and ensure your organisation protects sensitive data against modern threats.",
       bgImage: "/Cyber-Security.jpg",
       highlightText: "Cyber Essentials & Plus",
       icon: Lock,
@@ -190,15 +190,15 @@ const HorizontalProcess = () => {
           `}
         >
           <div className="flex items-center gap-3 -mb-1">
-            <span className="w-8 h-[1px] bg-[#997819]/70" />
-            <span className="text-[#997819] font-bold tracking-[0.22em] uppercase text-[11px]">
+            <span className="w-8 h-[1px] -mt-3  bg-[#997819]/70" />
+            <span className="text-[#D4AF37] -mt-3 font-bold tracking-[0.22em] uppercase text-[12px] mb-2">
               Our Expertise
             </span>
-            <span className="w-8 h-[1px] bg-[#997819]/70" />
+            <span className="w-8 h-[1px] -mt-3  bg-[#997819]/70" />
           </div>
 
-          <h2 className="text-white text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight max-w-xl">
-            Compliance, Mapped Out Step By Step
+          <h2 className="text-white text-2xl sm:text-3xl lg:text-5xl font-black tracking-tight max-w-xl">
+            The Services We Deliver
           </h2>
         </div>
 
@@ -358,7 +358,7 @@ const HorizontalProcess = () => {
                 {/* Left Column - Category Title & Info */}
                 <div className="z-10 w-full lg:w-[38%] mb-6 lg:mb-0 text-center lg:text-left">
                   <div className="flex items-center justify-center lg:justify-start gap-3 mb-3">
-                    <span className="text-[#997819] font-mono font-bold text-sm tracking-widest">
+                    <span className="text-[#D4AF37] font-mono font-bold text-sm tracking-widest">
                       {item.id}
                     </span>
                     <span className="w-8 h-[1px] bg-[#997819]/70" />
@@ -390,7 +390,7 @@ const HorizontalProcess = () => {
                       </div>
 
                       <div>
-                        <span className="text-[#997819] font-mono font-bold text-xs uppercase tracking-wider block mb-1">
+                        <span className="text-[#D4AF37] font-mono font-bold text-xs uppercase tracking-wider block mb-1">
                           Core Focus Area
                         </span>
                         <h4 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">

@@ -466,14 +466,12 @@ export default function Navbar() {
                     group
                     relative
                     flex
-                    flex-col
                     items-center
                     justify-center
-                    gap-0.5
+                    gap-1
                     h-[52px]
                     min-w-[64px]
-                    px-4
-                    py-2
+                    px-5
                     rounded-full
                     transition-all
                     duration-300
@@ -501,39 +499,7 @@ export default function Navbar() {
                     className={`
                       relative
                       z-10
-                      flex
-                      items-center
-                      justify-center
-                      h-[19px]
-                      gap-1
-                      transition-all
-                      duration-300
-                      ${
-                        isServicesActive || servicesOpen
-                          ? "text-[#12066a] scale-110"
-                          : "text-[#997819] group-hover:text-[#12066a]"
-                      }
-                    `}
-                  >
-                    <BriefcaseBusiness
-                      size={19}
-                      strokeWidth={isServicesActive || servicesOpen ? 2.2 : 1.8}
-                    />
-                    <ChevronDown
-                      size={11}
-                      className={`
-                        transition-transform
-                        duration-300
-                        ${servicesOpen ? "rotate-180" : ""}
-                      `}
-                    />
-                  </span>
-
-                  <span
-                    className={`
-                      relative
-                      z-10
-                      text-[11px]
+                      text-[12.5px]
                       font-bold
                       tracking-wide
                       whitespace-nowrap
@@ -542,12 +508,27 @@ export default function Navbar() {
                       ${
                         isServicesActive || servicesOpen
                           ? "text-[#12066a]"
-                          : "text-black/70 group-hover:text-[#12066a]/70"
+                          : "text-black/70 group-hover:text-[#12066a]"
                       }
                     `}
                   >
                     Services
                   </span>
+
+                  <ChevronDown
+                    size={13}
+                    className={`
+                      relative
+                      z-10
+                      transition-all
+                      duration-300
+                      ${
+                        isServicesActive || servicesOpen
+                          ? "text-[#12066a] rotate-180"
+                          : "text-black/50 group-hover:text-[#12066a]"
+                      }
+                    `}
+                  />
                 </button>
 
                 {/* =================================================
@@ -707,7 +688,7 @@ export default function Navbar() {
                                         ${
                                           isActive
                                             ? "bg-[#12066a] text-white shadow-[0_9px_24px_rgba(18,6,106,0.15)]"
-                                            : "text-black/75 hover:bg-white hover:text-[#12066a]"
+                                            : "text-black/65 hover:bg-white hover:text-[#12066a]"
                                         }
                                       `}
                                   >
@@ -774,11 +755,11 @@ export default function Navbar() {
                                             mt-1
                                             text-[8px]
                                             uppercase
-                                            tracking-normal
+                                            tracking-[0.10em]
                                             ${
                                               isActive
-                                                ? "text-white/65"
-                                                : "text-black/90"
+                                                ? "text-white/45"
+                                                : "text-black/30"
                                             }
                                           `}
                                       >
@@ -841,7 +822,7 @@ export default function Navbar() {
                                   block
                                   mt-1
                                   text-[8px]
-                                  text-black
+                                  text-black/30
                                 "
                               >
                                 Explore our full consultancy offering
@@ -1433,13 +1414,10 @@ export default function Navbar() {
 
                 <div className="border-t border-black/[0.08]">
                   {navigation.slice(0, 3).map((item) => {
-                    const Icon = item.icon;
-
                     return (
                       <MobileLink
                         key={item.href}
                         item={item}
-                        Icon={Icon}
                         isActive={currentPath === normalizePath(item.href)}
                         onClick={closeMobile}
                       />
@@ -1461,21 +1439,6 @@ export default function Navbar() {
                       py-4
                     "
                   >
-                    <span
-                      className="
-                        w-9
-                        h-9
-                        rounded-xl
-                        flex
-                        items-center
-                        justify-center
-                        bg-[#12066a]
-                        text-white
-                      "
-                    >
-                      <BriefcaseBusiness size={16} strokeWidth={1.7} />
-                    </span>
-
                     <span
                       className="
                         flex-1
@@ -1712,13 +1675,10 @@ export default function Navbar() {
 
                 <div>
                   {navigation.slice(3).map((item) => {
-                    const Icon = item.icon;
-
                     return (
                       <MobileLink
                         key={item.href}
                         item={item}
-                        Icon={Icon}
                         isActive={currentPath === normalizePath(item.href)}
                         onClick={closeMobile}
                       />
@@ -1818,8 +1778,6 @@ export default function Navbar() {
 ========================================================= */
 
 function PremiumNavLink({ item, isActive }) {
-  const Icon = item.icon;
-
   return (
     <Link
       href={item.href}
@@ -1827,14 +1785,11 @@ function PremiumNavLink({ item, isActive }) {
         group
         relative
         flex
-        flex-col
         items-center
         justify-center
-        gap-0.5
         h-[52px]
         min-w-[64px]
-        px-4
-        py-2
+        px-5
         rounded-full
         overflow-hidden
         transition-colors
@@ -1866,35 +1821,18 @@ function PremiumNavLink({ item, isActive }) {
         "
       />
 
-      {/* Icon */}
-      <span
-        className="
-          relative
-          z-10
-          flex
-          items-center
-          justify-center
-          h-[19px]
-          transition-all
-          duration-300
-          text-[#997819] group-hover:text-[#12066a]
-        "
-      >
-        <Icon size={19} strokeWidth={1.8} fill="none" />
-      </span>
-
       {/* Label */}
       <span
         className="
           relative
           z-10
-          text-[11px]
+          text-[12.5px]
           font-bold
           tracking-wide
           whitespace-nowrap
           transition-colors
           duration-300
-          text-black/70 group-hover:text-[#12066a]/70
+          text-black/70 group-hover:text-[#12066a]
         "
       >
         {item.label}
@@ -1907,7 +1845,7 @@ function PremiumNavLink({ item, isActive }) {
    MOBILE LINK
 ========================================================= */
 
-function MobileLink({ item, Icon, isActive, onClick }) {
+function MobileLink({ item, isActive, onClick }) {
   return (
     <Link
       href={item.href}
@@ -1916,32 +1854,11 @@ function MobileLink({ item, Icon, isActive, onClick }) {
         group
         flex
         items-center
-        gap-4
         py-4
         border-b
         border-black/[0.08]
       "
     >
-      <span
-        className={`
-          w-9
-          h-9
-          rounded-xl
-          flex
-          items-center
-          justify-center
-          transition-all
-          duration-300
-          ${
-            isActive
-              ? "bg-[#12066a] text-white"
-              : "bg-[#12066a]/[0.05] text-[#12066a] group-hover:bg-[#12066a] group-hover:text-white"
-          }
-        `}
-      >
-        <Icon size={16} strokeWidth={1.7} />
-      </span>
-
       <span
         className={`
           flex-1

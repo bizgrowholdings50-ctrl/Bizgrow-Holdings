@@ -16,6 +16,15 @@ import OurClients from "@/components/OurClients";
 import JsonLd from "@/components/JsonLd";
 import { organizationSchema } from "@/lib/jsonSchemas";
 import ServicesFaq from "@/components/ServicesFaq";
+import {
+  ShieldCheck,
+  Award,
+  FileText,
+  Lock,
+  Play,
+  Pause,
+  ArrowDown,
+} from "lucide-react";
 
 const steps = [
   {
@@ -78,6 +87,58 @@ const reviews = [
     name: "Denzil Fernandes",
     role: "Director, Jehovah Jireh Security Services Ltd",
     text: "Bizgrow has been helpful since day one until the last They did their level best in completing my process going out of limit I'm very thankful and grateful for their support and hard work It looked so difficult in beginning but because of their excellent service I was able to",
+  },
+];
+
+// Sections data with integrated icons
+const sections = [
+  {
+    id: "01",
+    tag: "Security Standards",
+    title: "Security Accreditation",
+    description:
+      "Build credibility, strengthen your operational compliance and meet recognised UK security benchmarks.",
+    bgImage: "/bff32405515f5c8002a7bed0ada4c092.jpg",
+    highlightText: "SIA ACS & Vetting Compliance",
+    icon: ShieldCheck,
+    details:
+      "Comprehensive framework alignment designed to elevate private security operational trust and credentials across the UK market.",
+  },
+  {
+    id: "02",
+    tag: "Quality Frameworks",
+    title: "Quality & Management",
+    description:
+      "Implement structured management systems that improve consistency, corporate performance, and business confidence.",
+    bgImage: "/Quality-Management.jpg",
+    highlightText: "ISO 9001, 14001 & 45001",
+    icon: Award,
+    details:
+      "Drive organisational excellence, environmental responsibility, and robust occupational safety standards systematically.",
+  },
+  {
+    id: "03",
+    tag: "Contractor Compliance",
+    title: "Health & Safety",
+    description:
+      "Strengthen contractor credentials and prepare your organisation for elite, verified UK safety accreditations.",
+    bgImage: "/Healt & Safety.jpg",
+    highlightText: "CHAS, SafeContractor & Constructionline",
+    icon: FileText,
+    details:
+      "Seamless documentation and audit readiness to clear pre-qualification barriers and secure high-value contracts.",
+  },
+  {
+    id: "04",
+    tag: "Digital Protection",
+    title: "Cyber Security",
+    description:
+      "Demonstrate rigorous digital resilience and ensure your organisation protects sensitive data against modern threats.",
+    bgImage: "/Cyber-Security.jpg",
+    highlightText: "Cyber Essentials & Plus",
+    icon: Lock,
+    details:
+      "Independent technical verification and security controls that provide instant assurance to your enterprise clients.",
   },
 ];
 
@@ -159,113 +220,21 @@ export default function HomePage() {
         {/* 4. HORIZONTAL SERVICES (GSAP PINNED SECTION) */}
         <HorizontalServices />
 
-        {/* 3 Our Approach */}
-        <section className="py-14 px-6">
-          <div className="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row gap-16 items-center">
-            {/* Image Section */}
-            <FadeIn direction="left" className="relative w-full lg:w-1/2">
-              <div className="aspect-square relative rounded-[3rem] overflow-hidden shadow-2xl">
-                <Image
-                  src="/our-approach-home.jpg"
-                  alt="Our Approach - BizGrow Holdings Ltd"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              {/* Experience Badge */}
-              <div className="absolute -bottom-10 right-10 bg-[#997819] p-8 rounded-[2rem] text-white hidden md:block shadow-xl">
-                <div className="text-4xl font-black">13+</div>
-                <div className="text-xs uppercase font-bold tracking-widest">
-                  Years Experience
-                </div>
-              </div>
-            </FadeIn>
-
-            {/* Content Section */}
-            <FadeIn direction="right" className="w-full lg:w-1/2">
-              <h1 className="text-4xl md:text-5xl font-black text-[#12066a] leading-tight">
-                Our
-                <span className="text-[#997819]"> Approach</span>
-              </h1>
-              <div className="mt-8 space-y-6 text-zinc-600 leading-relaxed font-medium">
-                <p>
-                  At BizGrow Holdings, we believe true corporate resilience goes
-                  beyond standard paperwork. We partner closely with your
-                  leadership team to evaluate operational baselines and
-                  long-term goals, embedding regulatory{" "}
-                  <Link
-                    href="/compliance-consultancies/"
-                    className="text-[#997819] font-bold"
-                  >
-                    compliance
-                  </Link>{" "}
-                  deep into your company culture.
-                </p>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
-                  {[
-                    {
-                      title: "Consultative Partnership",
-                      desc: "Working hand-in-hand with management.",
-                    },
-                    {
-                      title: "Tailored Frameworks",
-                      desc: "Designed specifically for UK standards.",
-                    },
-                    {
-                      title: "Culture of Quality",
-                      desc: "Embedding QMS into daily operations.",
-                    },
-                    {
-                      title: "Risk Mitigation",
-                      desc: "Proactive identification of compliance gaps.",
-                    },
-                  ].map((item, i) => (
-                    <div
-                      key={i}
-                      className="bg-[#12066a]/[0.03] border border-[#12066a]/10 p-5 rounded-2xl"
-                    >
-                      <h4 className="text-[#12066a] font-black text-base mb-1">
-                        {item.title}
-                      </h4>
-                      <p className="text-zinc-500 text-xs leading-relaxed">
-                        {item.desc}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-
-                <p className="font-bold text-black pt-2">
-                  Your corporate growth is our core goal, and absolute
-                  compliance is just the beginning.
-                </p>
-              </div>
-            </FadeIn>
-          </div>
-        </section>
+      
 
         {/* Our Process */}
-        <section className="py-20 md:py-28 bg-[#12066a] relative overflow-hidden">
-          {/* Decorative Background Image */}
-          <Image
-            src="/experts-home.jpg"
-            alt="BizGrow operational excellence roadmap"
-            fill
-            className="object-cover hidden md:block opacity-40"
-          />
-          <div className="hidden md:block absolute inset-0 bg-[#12066a]/90 backdrop-blur-[2px]" />
-
+        <section className="py-20 md:py-28 bg-white relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-6 relative z-10">
             {/* Section Heading */}
             <div className="text-center max-w-2xl mx-auto mb-16 md:mb-20">
               <span className="text-[#997819] font-black uppercase tracking-[0.3em] text-xs">
-                How It Works
+                Our Approach
               </span>
-              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-white mt-3 mb-4">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#12066a] mt-3 mb-4">
                 A Proven Methodology From Zero To{" "}
                 <span className="text-[#997819]">Audit-Ready</span>
               </h2>
-              <p className="text-blue-100/70 text-sm sm:text-base font-medium">
+              <p className="text-zinc-600 text-sm sm:text-base font-medium">
                 A proven, step-by-step methodology that takes you from zero to
                 audit-ready with one team managing every stage.
               </p>
@@ -274,27 +243,36 @@ export default function HomePage() {
             {/* Steps Horizontal Flow Layout */}
             <div className="relative">
               {/* Connecting Line for Desktop */}
-              <div className="hidden lg:block absolute top-[40px] left-[10%] right-[10%] h-0.5 bg-white/10 z-0" />
+              <div className="hidden lg:block absolute top-[40px] left-[10%] right-[10%] h-0.5 bg-slate-200 z-0" />
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
-                {steps.map((step, i) => (
-                  <FadeIn key={i} delay={i * 0.15} direction="up">
-                    <div className="flex flex-col items-center text-center group">
-                      {/* Number Box */}
-                      <div className="w-20 h-20 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-2xl font-black text-[#997819] group-hover:bg-[#997819] group-hover:text-white group-hover:border-[#997819] transition-all duration-500 shadow-lg mb-6 relative">
-                        {step.num}
-                      </div>
+                {steps.map((step, i) => {
+                  const StepIcon =
+                    [ShieldCheck, Award, FileText, Lock][i] || ShieldCheck;
+                  return (
+                    <FadeIn key={i} delay={i * 0.15} direction="up">
+                      <div className="flex flex-col items-center text-center group bg-slate-50 border border-slate-200/80 rounded-[2.5rem] p-8 shadow-lg hover:shadow-xl hover:border-[#997819]/40 transition-all duration-300 relative overflow-hidden">
+                        {/* Top-Right Corner Number Badge */}
+                        <div className="absolute top-5 right-5 w-11 h-11 rounded-full bg-[#12066a] text-[#D4AF37] flex items-center justify-center font-black text-xs shadow-md z-20">
+                          {step.num}
+                        </div>
 
-                      {/* Content */}
-                      <h3 className="text-lg sm:text-xl font-bold text-white mb-2 tracking-tight">
-                        {step.title}
-                      </h3>
-                      <p className="text-white/90 text-sm leading-relaxed font-light">
-                        {step.desc}
-                      </p>
-                    </div>
-                  </FadeIn>
-                ))}
+                        {/* Centered Box Icon */}
+                        <div className="w-16 h-16 rounded-2xl bg-white border border-slate-200 flex items-center justify-center text-[#997819] group-hover:bg-[#12066a] group-hover:text-[#D4AF37] group-hover:border-[#12066a] transition-all duration-500 shadow-sm mb-6 relative z-10">
+                          <StepIcon className="w-8 h-8" />
+                        </div>
+
+                        {/* Content */}
+                        <h3 className="text-lg sm:text-xl font-bold text-[#12066a] mb-2 tracking-tight relative z-10">
+                          {step.title}
+                        </h3>
+                        <p className="text-zinc-600 text-sm leading-relaxed font-light relative z-10">
+                          {step.desc}
+                        </p>
+                      </div>
+                    </FadeIn>
+                  );
+                })}
               </div>
             </div>
           </div>

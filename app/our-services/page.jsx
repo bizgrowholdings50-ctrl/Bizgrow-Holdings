@@ -157,19 +157,19 @@ const ServicesPage = () => {
           </FadeIn>
         </div>
 
-        <div className="max-w-7xl mx-auto px-6 relative z-20 w-full">
+        <div className="max-w-7xl mx-auto px-6 relative text-center z-20 w-full">
           <FadeIn direction="right">
-            <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs md:text-sm">
+            <span className="text-[#D4AF37]  font-black uppercase tracking-[0.4em] text-xs md:text-sm">
               Advancing Compliance
             </span>
-            <h1 className="text-4xl md:text-7xl font-black text-white mt-6 leading-[1.1]">
-              Advancing Compliance Standards for
-              <span className="text-[#997819]">
+            <h1 className="text-4xl md:text-7xl  font-black text-white mt-6 leading-[1.1]">
+              Advancing Compliance Standards <br/> for
+              <span className="text-[#D4AF37]">
                 {" "}
-                UK <br /> Organisations
+                UK  Organisations
               </span>
             </h1>
-            <p className="mt-6 text-white/80 text-lg md:text-xl max-w-2xl font-medium leading-relaxed">
+            <p className="mt-6 text-white/80 mx-auto text-lg md:text-xl max-w-2xl font-medium leading-relaxed">
               Our team provides expert-led ISO certification support and
               security-focused accreditations, helping your business meet
               regulatory requirements and scale with confidence.
