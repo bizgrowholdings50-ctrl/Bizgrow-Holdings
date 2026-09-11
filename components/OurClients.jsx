@@ -139,7 +139,6 @@ function wrap(min, max, v) {
 
 function ClientsMarquee({ clients, baseVelocity = 2 }) {
   const baseX = useMotionValue(0);
-  const hoveredCard = useRef(false);
   const directionFactor = useRef(1);
 
   const { scrollY } = useScroll();
@@ -158,8 +157,6 @@ function ClientsMarquee({ clients, baseVelocity = 2 }) {
   const x = useTransform(baseX, (v) => `${wrap(-25, 0, v)}%`);
 
   useAnimationFrame((t, delta) => {
-    if (hoveredCard.current) return;
-
     const velocity = velocityFactor.get();
     let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
 
@@ -187,12 +184,6 @@ function ClientsMarquee({ clients, baseVelocity = 2 }) {
         {[...clients, ...clients, ...clients, ...clients].map((client, idx) => (
           <div
             key={idx}
-            onMouseEnter={() => {
-              hoveredCard.current = true;
-            }}
-            onMouseLeave={() => {
-              hoveredCard.current = false;
-            }}
             className="group relative flex items-center justify-center
                        h-28 w-48 shrink-0 rounded-2xl bg-white border border-white/20
                        shadow-[0_4px_20px_rgba(0,0,0,0.15)]
