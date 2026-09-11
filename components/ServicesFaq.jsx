@@ -128,48 +128,46 @@ const handleSubscribe = async () => {
           ))}
         </div>
 
-        {/* Still Have Questions / Newsletter Box */}
-        <div className="max-w-5xl mx-auto">
-          <div className="bg-[#12066a] rounded-3xl p-8 md:p-14 relative overflow-hidden shadow-2xl shadow-[#12066a]/20 flex flex-col items-center text-center">
-            
-            <div className="absolute -top-24 -left-24 w-72 h-72 bg-[#997819]/20 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-24 -right-24 w-72 h-72 bg-[#997819]/10 rounded-full blur-3xl pointer-events-none" />
+       
+{/* Still Have Questions / Newsletter Box */}
+<div className="max-w-5xl mx-auto">
+  <div className="rounded-3xl p-8 md:p-14 relative overflow-hidden bg-white flex flex-col items-center text-center">
 
-            <h3 className="text-white text-3xl md:text-4xl lg:text-5xl font-black tracking-tight mb-4 normal-case relative z-10">
-              Still Have Questions?
-            </h3>
+    <h3 className="text-[#12066a] text-3xl md:text-4xl lg:text-5xl font-black tracking-tight mb-6 normal-case relative z-10">
+      Still Have Questions?
+    </h3>
 
-            <p className="text-white/80 text-sm md:text-base max-w-xl mx-auto mb-10 leading-relaxed relative z-10">
-              Subscribe to our newsletter for compliance tips and industry updates.
-            </p>
+    <div className="w-full max-w-2xl flex flex-col sm:flex-row items-center gap-3 relative z-10">
+      <input
+        type="email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="Subscribe to our newsletter for compliance tips and industry updates."
+        className="w-full flex-1 bg-white border border-gray-300 rounded-xl px-6 py-4 text-[#12066a] placeholder-gray-500 text-sm focus:outline-none focus:border-[#997819] transition-all"
+      />
 
-            <div className="w-full max-w-2xl flex flex-col sm:flex-row items-center gap-3 relative z-10">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Subscribe for news, updates and exclusive offers"
-                className="w-full flex-1 bg-transparent border border-white/40 rounded-xl px-6 py-4 text-white placeholder-white/60 text-sm focus:outline-none focus:border-[#997819] transition-all"
-              />
-              
-              <button
-                type="button"
-                onClick={handleSubscribe}
-                disabled={loading}
-                className="w-full sm:w-auto bg-[#997819] hover:bg-[#806314] text-white font-bold px-8 py-4 rounded-xl text-xs uppercase tracking-widest transition-all shadow-lg shrink-0 disabled:opacity-50 cursor-pointer"
-              >
-                {loading ? "Subscribing..." : "Subscribe"}
-              </button>
-            </div>
+      <button
+        type="button"
+        onClick={handleSubscribe}
+        disabled={loading}
+        className="w-full sm:w-auto bg-[#997819] hover:bg-[#806314] text-white font-bold px-8 py-4 rounded-xl text-xs uppercase tracking-widest transition-all shrink-0 disabled:opacity-50 cursor-pointer"
+      >
+        {loading ? "Subscribing..." : "Subscribe"}
+      </button>
+    </div>
 
-            {message && (
-              <p className={`mt-4 text-sm font-medium relative z-10 ${message.type === "success" ? "text-green-400" : "text-red-400"}`}>
-                {message.text}
-              </p>
-            )}
+    {message && (
+      <p
+        className={`mt-4 text-sm font-medium relative z-10 ${
+          message.type === "success" ? "text-green-600" : "text-red-600"
+        }`}
+      >
+        {message.text}
+      </p>
+    )}
 
-          </div>
-        </div>
+  </div>
+</div>
 
       </div>
     </section>
