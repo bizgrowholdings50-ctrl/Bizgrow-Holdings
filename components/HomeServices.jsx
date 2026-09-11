@@ -14,6 +14,7 @@ import {
   ShieldAlert,
   Zap,
   BarChart3,
+  ArrowUpRight,
 } from "lucide-react";
 
 const ServicesGrid = () => {
@@ -135,10 +136,11 @@ const ServicesGrid = () => {
   return (
     <section className="bg-slate-50 py-24 px-6">
       <div className="max-w-7xl mx-auto">
+
         {/* Heading */}
         <div className="text-center mb-16">
           <h2 className="text-[#12066a] text-3xl md:text-5xl lg:text-6xl font-black tracking-tight mt-3 mb-4">
-            Services We  <span className="text-[#997819]">Provide</span>
+            Services We <span className="text-[#997819]">Provide</span>
           </h2>
 
           <p className="text-slate-600 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
@@ -169,6 +171,7 @@ const ServicesGrid = () => {
 
                 {/* Content */}
                 <div className="relative z-10 p-7">
+
                   {/* Top row */}
                   <div className="flex items-center justify-between mb-5">
                     <div className="w-11 h-11 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-[#997819] group-hover:bg-[#997819]/15 group-hover:border-[#997819]/60 transition-all duration-300">
@@ -189,6 +192,18 @@ const ServicesGrid = () => {
                   <p className="text-white/70 text-sm leading-relaxed">
                     {item.desc}
                   </p>
+
+                  {/* Read More */}
+                  <div className="mt-5 flex items-center">
+                    <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/20 bg-white/10 backdrop-blur-sm text-white text-xs font-semibold tracking-wide transition-all duration-300 md:opacity-0 md:translate-y-2 md:group-hover:opacity-100 md:group-hover:translate-y-0 hover:bg-[#997819] hover:border-[#997819]">
+                      Read More
+                      <ArrowUpRight
+                        size={14}
+                        className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      />
+                    </span>
+                  </div>
+
                 </div>
               </a>
             );
