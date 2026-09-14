@@ -36,6 +36,7 @@ import {
   ScanEye,
   Menu,
   X,
+  ShieldCheckIcon,
 } from "lucide-react";
 
 /* =========================================================
@@ -79,6 +80,13 @@ const categories = [
         href: "/our-services/bs-10800",
         icon: Globe,
       },
+      {
+        title: "BS 10119 Compliance",
+        description: "Code of practice for labour provision and supply chain integrity in the UK security sector.",
+        href: "/our-services/bs-10119",
+        icon: ShieldCheckIcon,
+      },
+
       {
         title: "NASDU",
         description: "Compliance support for security dog operations.",
@@ -1616,7 +1624,10 @@ export default function Navbar() {
                                                   group-hover:bg-[#12066a] group-hover:text-white
                                                 "
                                               >
-                                                <ServiceIcon size={16} strokeWidth={2} />
+                                                <ServiceIcon
+                                                  size={16}
+                                                  strokeWidth={2}
+                                                />
                                               </span>
 
                                               <span className="flex-1 font-semibold leading-tight">

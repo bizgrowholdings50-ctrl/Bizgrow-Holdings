@@ -18,6 +18,7 @@ import { organizationSchema } from "@/lib/jsonSchemas";
 import ServicesFaq from "@/components/ServicesFaq";
 import { ShieldCheck, Award, FileText, Lock } from "lucide-react";
 import HomeServices from "@/components/HomeServices";
+import NewsletterBox from "@/components/NewsletterBox";
 
 const steps = [
   {
@@ -291,6 +292,9 @@ export default function HomePage() {
         <OurClients />
 
         <ServicesFaq faqs={homeFaqs} title="Frequently Asked Questions" />
+
+        {/* Newsletter Section Component */}
+        <NewsletterBox />
 
         {/* 8 CTA Section with Background Parallax & Watermark */}
         <section className="py-20 px-6 bg-white overflow-hidden">

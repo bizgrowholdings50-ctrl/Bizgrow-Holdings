@@ -1,6 +1,7 @@
 import React from "react";
 import DiscountCard from "@/components/DiscountCard";
 import FadeIn from "@/components/MotionWrapper";
+import { Tag } from "lucide-react";
 
 export const metadata = {
   title: "Discount Offers - BizGrow Holdings Ltd, UK",
@@ -8,44 +9,7 @@ export const metadata = {
     "Unlock exclusive business discount offers with BizGrow Holdings. Save on certifications, compliance, and growth services for UK companies.",
 };
 const offersData = [
-  {
-    id: "EASTER-2026",
-    title: "Cleberating 15 years in industry",
-    image: "/offer 1.webp", // Aapki flyer image ka path
-    discount: "",
-    price: "350", // Flyer ke mutabiq starting price
-    shortDesc:
-      "To celebrate our 15 years in industry, Bizgrow Holdings Ltd is offering certifications 𝐬𝐭𝐚𝐫𝐭𝐢𝐧𝐠 𝐟𝐫𝐨𝐦 £𝟑𝟓𝟎 𝐩𝐞𝐫 𝐦𝐨𝐧𝐭𝐡 on",
-    fullDetail: `Attention UK Security & Construction Companies!
 
-To celebrate our 15 years in industry, we are offering certifications 𝐬𝐭𝐚𝐫𝐭𝐢𝐧𝐠 𝐟𝐫𝐨𝐦 £𝟑𝟓𝟎 𝐩𝐞𝐫 𝐦𝐨𝐧𝐭𝐡 on:
-
-⚫ 𝐀𝐂𝐒
-⚫ 𝐂𝐎𝐏 𝟏𝟏𝟗
-⚫ 𝐈𝐒𝐎
-⚫ Chas
-⚫ 𝐂𝐨𝐧𝐬𝐭𝐫𝐮𝐜𝐭𝐢𝐨𝐧𝐥𝐢𝐧𝐞
-⚫ 𝐒𝐚𝐟𝐞𝐂𝐨𝐧𝐭𝐫𝐚𝐜𝐭𝐨𝐫, 𝐍𝐀𝐒𝐃𝐔 , SMAS
-
-No accreditation = no contracts.
-
-Don’t risk losing business, get compliant and contract-ready today!
-
-𝐖𝐡𝐲 𝐂𝐡𝐨𝐨𝐬𝐞 𝐔𝐬?
-
-◾ Expert UK-based consultants
-◾ Step-by-step accreditation support
-◾ Proven track record with UK businesses
-
-𝐃𝐨𝐧’𝐭 𝐦𝐢𝐬𝐬 𝐨𝐮𝐭, 𝐬𝐭𝐚𝐫𝐭 𝐲𝐨𝐮𝐫 𝐜𝐞𝐫𝐭𝐢𝐟𝐢𝐜𝐚𝐭𝐢𝐨𝐧 𝐩𝐫𝐨𝐜𝐞𝐬𝐬 𝐭𝐨𝐝𝐚𝐲.
-`,
-    // sections: [
-    //   {
-    //     heading: "What's Included",
-    //     items: ["ACS Support", "ISO Certification", "COP 119 Compliance" ,"ConstructionLine" , "SafeContractor + Nasdu"]
-    //   }
-    // ]
-  },
 ];
 
 const DiscountPage = () => {
@@ -84,11 +48,29 @@ const DiscountPage = () => {
       {/* 🔹 OFFERS GRID */}
       <section className="py-24 -mt-12">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-12">
-            {offersData.map((offer, index) => (
-              <DiscountCard key={index} offer={offer} />
-            ))}
-          </div>
+          {offersData.length > 0 ? (
+            <div className="grid lg:grid-cols-2 gap-12">
+              {offersData.map((offer, index) => (
+                <DiscountCard key={index} offer={offer} />
+              ))}
+            </div>
+          ) : (
+            <FadeIn direction="up">
+              <div className="max-w-xl mx-auto text-center bg-white rounded-[3rem] border border-zinc-100 shadow-xl px-10 py-16">
+                <div className="w-16 h-16 mx-auto rounded-2xl bg-[#12066a]/5 flex items-center justify-center mb-6">
+                  <Tag className="text-[#997819]" size={28} />
+                </div>
+                <h3 className="text-[#12066a] text-2xl md:text-3xl font-black uppercase tracking-tighter mb-3">
+                  No Active Offers Right Now
+                </h3>
+                <p className="text-zinc-500 font-medium leading-relaxed">
+                  We don't have any discount offers running at the moment.
+                  Check back soon, or get in touch with our team to hear
+                  about upcoming deals first.
+                </p>
+              </div>
+            </FadeIn>
+          )}
         </div>
       </section>
 
