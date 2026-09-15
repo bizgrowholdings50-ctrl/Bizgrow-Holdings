@@ -82,7 +82,8 @@ const categories = [
       },
       {
         title: "BS 10119 Compliance",
-        description: "Code of practice for labour provision and supply chain integrity in the UK security sector.",
+        description:
+          "Code of practice for labour provision and supply chain integrity in the UK security sector.",
         href: "/our-services/bs-10119",
         icon: ShieldCheckIcon,
       },
@@ -502,7 +503,10 @@ export default function Navbar() {
                       "
                     />
                   )}
-
+                  <Link
+                    href="/our-services"
+                    className="inline-flex items-center"
+                  >
                   <span
                     className={`
                       relative
@@ -522,6 +526,7 @@ export default function Navbar() {
                   >
                     Services
                   </span>
+                  </Link>
 
                   <ChevronDown
                     size={13}

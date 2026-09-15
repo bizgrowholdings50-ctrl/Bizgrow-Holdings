@@ -13,7 +13,7 @@ export default function Template({ children }) {
     if (path === "/") {
       return {
         title: "BizGrow",
-        subtitle: "Holdings",
+        subtitle: "",
         bg: "/growth-s.jpg",
       };
     }
@@ -255,7 +255,7 @@ export default function Template({ children }) {
     // ==========================================
     if (path.includes("testimonials")) {
       return {
-        title: "Client",
+        title: "",
         subtitle: "Reviews",
         bg: "/reviews-bg.jpg",
       };
@@ -315,7 +315,7 @@ export default function Template({ children }) {
     if (path.includes("training-moments")) {
       return {
         title: "Training",
-        subtitle: "Moments",
+        subtitle: "",
        
       };
     }

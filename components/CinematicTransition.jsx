@@ -1,12 +1,12 @@
 // components/CinematicTransition.jsx
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 
 export default function CinematicTransition({
   title = "BizGrow",
-  subtitle = "Holdings",
+  subtitle = "",
   bgImage,
   bgVideo,
   onComplete,
@@ -28,7 +28,7 @@ export default function CinematicTransition({
 
   const calculatedFontSize = getFontSize(fullText);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const tl = gsap.timeline({
       onComplete: () => {
         if (onComplete) onComplete();
@@ -46,13 +46,13 @@ export default function CinematicTransition({
 
     tl.to(maskTextRef.current, {
       scale: 1,
-      duration: 0.4,
+      duration: 0.2,
       ease: "power2.out",
     })
       .to({}, { duration: 0.1 })
       .to(maskTextRef.current, {
         scale: 50,
-        duration: 0.8,
+        duration: 0.7,
         ease: "power3.inOut",
       })
       .set(containerRef.current, { opacity: 0, display: "none" });
@@ -64,6 +64,10 @@ export default function CinematicTransition({
     <div
       ref={containerRef}
       className="fixed inset-0 z-[9999] overflow-hidden pointer-events-none"
+      // 🔹 JERK FIX: reload/first-paint par overlay default HIDDEN rahega (opacity 0),
+      // jab tak JS (useLayoutEffect) synchronously ise "opacity:1" na kar de.
+      // Animation ka koi step/value/origin nahi chera — sirf visibility gate hai.
+      style={{ opacity: 0 }}
     >
       <svg
         viewBox="0 0 1600 500"
@@ -81,7 +85,7 @@ export default function CinematicTransition({
           >
             {/* White area = Dark Blue Overlay visible */}
             <rect x="0" y="0" width="1600" height="500" fill="white" />
-            
+
             {/* Pure Black Text = Pure Cutout Hole (Auto Dynamic Font Size) */}
             <text
               ref={maskTextRef}
