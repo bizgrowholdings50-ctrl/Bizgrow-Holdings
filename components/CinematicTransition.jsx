@@ -14,6 +14,20 @@ export default function CinematicTransition({
   const containerRef = useRef(null);
   const maskTextRef = useRef(null);
 
+  // 🔹 Dynamic Font-Size Logic (Character count ke hisab se text fit hoga)
+  const fullText = `${title} ${subtitle}`.trim();
+
+  const getFontSize = (text) => {
+    const len = text.length;
+    if (len > 30) return "50";
+    if (len > 22) return "65";
+    if (len > 16) return "80";
+    if (len > 12) return "95";
+    return "110";
+  };
+
+  const calculatedFontSize = getFontSize(fullText);
+
   useEffect(() => {
     const tl = gsap.timeline({
       onComplete: () => {
@@ -23,7 +37,7 @@ export default function CinematicTransition({
 
     gsap.set(containerRef.current, { opacity: 1, display: "block" });
 
-    // Text cutout start se hi opacity: 1 rahega taake peeche wala page foran visible rahe
+    // Exact original setup & animation (No positional changes)
     gsap.set(maskTextRef.current, {
       transformOrigin: "50% 50%",
       scale: 0.7,
@@ -36,7 +50,6 @@ export default function CinematicTransition({
       ease: "power2.out",
     })
       .to({}, { duration: 0.1 })
-      // Zoom through hole — smoothly reveals the page behind
       .to(maskTextRef.current, {
         scale: 50,
         duration: 0.8,
@@ -66,8 +79,10 @@ export default function CinematicTransition({
             width="1600"
             height="500"
           >
-            {/* White area = Overlay visible | Black text = Transparent hole showing page behind */}
+            {/* White area = Dark Blue Overlay visible */}
             <rect x="0" y="0" width="1600" height="500" fill="white" />
+            
+            {/* Pure Black Text = Pure Cutout Hole (Auto Dynamic Font Size) */}
             <text
               ref={maskTextRef}
               x="800"
@@ -75,18 +90,20 @@ export default function CinematicTransition({
               textAnchor="middle"
               fontFamily="ui-sans-serif, system-ui, sans-serif"
               fontWeight="900"
-              fontSize="100"
-              letterSpacing="-4"
+              fontSize={calculatedFontSize}
+              letterSpacing="-2"
               fill="black"
-              stroke="white"      
-              strokeWidth="4"     
               style={{ textTransform: "uppercase" }}
             >
-              {title} {subtitle}
+              {fullText}
             </text>
           </mask>
         </defs>
 
+        {/* 🔹 Base Layer: Whole Screen Par Mild White Lighting Tint */}
+        <rect x="0" y="0" width="1600" height="500" fill="#ffffff" fillOpacity="0.25" />
+
+        {/* Masked Blue Overlay */}
         <g mask="url(#wordRevealMask)">
           {bgVideo && (
             <foreignObject x="0" y="0" width="1600" height="500">
@@ -110,7 +127,7 @@ export default function CinematicTransition({
               width="1600"
               height="500"
               preserveAspectRatio="xMidYMid slice"
-              style={{ filter: "brightness(0.2)" }}
+              style={{ filter: "brightness(0.5)" }}
             />
           )}
           <rect

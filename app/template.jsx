@@ -231,7 +231,8 @@ export default function Template({ children }) {
     const pageHeroes = [
       ["compliance-consultancies", "Compliance", "Consultancies", "/compliance-hero-bg.jpg"],
       ["corporate-training-and-coaching", "Corporate", "Training", "/training-hero.jpg"],
-      ["customer-services", "Customer", "Services", "/customer-hero.webp"],
+      ["certificate-verification-validate-bizgrow-certification", "Certificate", "Verification", "/verify-hero.jpg"],
+      ["customer-services", "Customer", "Support", "/customer-hero.webp"],
       ["faqs", "Frequently Asked", "Questions", "/faq-hero.jpg"],
       ["internal-audit", "Internal Audit", "Services", "/audit-hero.jpg"],
       ["our-mission", "Our", "Mission", "/our-mission.webp"],
@@ -240,7 +241,7 @@ export default function Template({ children }) {
       ["discount-offers", "Discount", "Offers", "/discount_offer1.jpg"],
       ["privacy-policy", "Privacy", "Policy", "/h.png"],
       ["terms-and-conditions", "Terms", "Conditions", "/h.png"],
-      ["uks-private-security-directory", "Private Security", "Directory", "/private-security-hero.jpg"],
+      ["uks-private-security-directory", "Private Security", "", "/private-security-hero.jpg"],
     ];
 
     const matchedPage = pageHeroes.find(([slug]) => path.includes(slug));
