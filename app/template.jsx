@@ -1,19 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import CinematicTransition from "@/components/CinematicTransition";
 
 export default function Template({ children }) {
   const pathname = usePathname();
-  const [introFinished, setIntroFinished] = useState(false);
-
-  /*
-   * Reset the transition whenever the route changes.
-   */
-  useEffect(() => {
-    setIntroFinished(false);
-  }, [pathname]);
 
   const getTransitionDetails = (path) => {
     // ==========================================
@@ -23,7 +14,7 @@ export default function Template({ children }) {
       return {
         title: "BizGrow",
         subtitle: "Holdings",
-        bg: "/bizgrow-hero-home.jpg",
+        bg: "/growth-s.jpg",
       };
     }
 
@@ -34,7 +25,7 @@ export default function Template({ children }) {
       return {
         title: "IT",
         subtitle: "Services",
-        bg: "/service-it.jpg",
+        bg: "/it-hero.jpg",
       };
     }
 
@@ -45,7 +36,7 @@ export default function Template({ children }) {
       return {
         title: "SIA ACS",
         subtitle: "Accreditation",
-        bg: "/Bizgrow-SIA.jpg",
+        bg: "/sia-acs-hero.jpg",
       };
     }
 
@@ -55,6 +46,7 @@ export default function Template({ children }) {
     if (
       path.includes("cop-119") ||
       path.includes("nasdu") ||
+      path.includes("bs-10119") ||
       path.includes("bs7858") ||
       path.includes("bs-7499") ||
       path.includes("bs-10800")
@@ -72,16 +64,22 @@ export default function Template({ children }) {
           bg: "/Who.jpg",
         },
 
+        "bs-10119": {
+          title: "BS 10119",
+          subtitle: "Security Management",
+          bg: "/bs10119-h.jpg",
+        },
+
         bs7858: {
           title: "BS 7858",
           subtitle: "Screening",
-          bg: "/Bizgrow-BS7858.jpg",
+          bg: "/bs7858-hero.webp",
         },
 
         "bs-7499": {
           title: "BS 7499",
           subtitle: "Security Services",
-          bg: "/Bizgrow-BS7499.jpg",
+          bg: "/guarding-hero.jpg",
         },
 
         "bs-10800": {
@@ -223,8 +221,32 @@ export default function Template({ children }) {
       return {
         title: "About",
         subtitle: "BizGrow",
-        bg: "/growth-s.jpg",
+        bg: "/about-hero.webp",
       };
+    }
+
+    // ==========================================
+    // PRIMARY CONTENT PAGES
+    // ==========================================
+    const pageHeroes = [
+      ["compliance-consultancies", "Compliance", "Consultancies", "/compliance-hero-bg.jpg"],
+      ["corporate-training-and-coaching", "Corporate", "Training", "/training-hero.jpg"],
+      ["customer-services", "Customer", "Services", "/customer-hero.webp"],
+      ["faqs", "Frequently Asked", "Questions", "/faq-hero.jpg"],
+      ["internal-audit", "Internal Audit", "Services", "/audit-hero.jpg"],
+      ["our-mission", "Our", "Mission", "/our-mission.webp"],
+      ["private-security-startup", "Private Security", "Startup", "/security-startup-hero.jpg"],
+      ["qms-software", "QMS Software", "Solutions", "/qms-bg.jpg"],
+      ["discount-offers", "Discount", "Offers", "/discount_offer1.jpg"],
+      ["privacy-policy", "Privacy", "Policy", "/h.png"],
+      ["terms-and-conditions", "Terms", "Conditions", "/h.png"],
+      ["uks-private-security-directory", "Private Security", "Directory", "/private-security-hero.jpg"],
+    ];
+
+    const matchedPage = pageHeroes.find(([slug]) => path.includes(slug));
+    if (matchedPage) {
+      const [, title, subtitle, bg] = matchedPage;
+      return { title, subtitle, bg };
     }
 
     // ==========================================
@@ -234,7 +256,7 @@ export default function Template({ children }) {
       return {
         title: "Client",
         subtitle: "Reviews",
-        bg: "/images/testimonials-bg.jpg",
+        bg: "/reviews-bg.jpg",
       };
     }
 
@@ -249,7 +271,7 @@ export default function Template({ children }) {
       return {
         title: "Insights",
         subtitle: "& Advice",
-        bg: "/images/blog-bg.jpg",
+        
       };
     }
 
@@ -260,7 +282,7 @@ export default function Template({ children }) {
       return {
         title: "Get In",
         subtitle: "Touch",
-        bg: "/images/contact-bg.jpg",
+        bg: "/10 Ways.jpg",
       };
     }
 
@@ -271,7 +293,29 @@ export default function Template({ children }) {
       return {
         title: "Referral",
         subtitle: "Programme",
-        bg: "/images/referral-bg.jpg",
+        bg: "/pkg-hero-1.jpg",
+      };
+    }
+
+    // ==========================================
+    // SERVICES LANDING PAGE
+    // ==========================================
+    if (path === "/our-services" || path === "/our-services/") {
+      return {
+        title: "Our",
+        subtitle: "Services",
+        bg: "/h.png",
+      };
+    }
+
+    // ==========================================
+    // TRAINING MOMENTS
+    // ==========================================
+    if (path.includes("training-moments")) {
+      return {
+        title: "Training",
+        subtitle: "Moments",
+        bg: "/w2.webp",
       };
     }
 
@@ -318,23 +362,14 @@ export default function Template({ children }) {
 
   return (
     <div key={pathname}>
-      {!introFinished && (
-        <CinematicTransition
-          key={pathname}
-          title={title}
-          subtitle={subtitle}
-          bgImage={bg}
-          onComplete={() => setIntroFinished(true)}
-        />
-      )}
+      <CinematicTransition
+        key={pathname}
+        title={title}
+        subtitle={subtitle}
+        bgImage={bg}
+      />
 
-      <div
-        className={`transition-opacity duration-700 ${
-          introFinished ? "opacity-100" : "opacity-0"
-        }`}
-      >
-        {children}
-      </div>
+      {children}
     </div>
   );
 }

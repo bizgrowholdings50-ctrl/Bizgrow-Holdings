@@ -23,11 +23,7 @@ export const metadata = {
 };
 
 const stats = [
-  {
-    icon: <CalendarDays size={26} />,
-    value: "30 June 2026",
-    label: "Publication date of BS 10119",
-  },
+ 
   {
     icon: <Layers size={26} />,
     value: "Security + Events",
@@ -35,7 +31,7 @@ const stats = [
   },
   {
     icon: <ListChecks size={26} />,
-    value: "7",
+    value: "7 Key Requirements",
     label: "Area's assessors check under BS 10119",
   },
   {
@@ -155,7 +151,7 @@ const BS10119Page = () => {
       <section className="relative z-30 px-6 -mt-20 md:-mt-24">
         <div className="max-w-7xl mx-auto">
           <FadeIn direction="up">
-            <div className="bg-white rounded-[2.5rem] shadow-2xl border border-zinc-100 grid grid-cols-2 md:grid-cols-4 divide-x divide-y md:divide-y-0 divide-zinc-100">
+            <div className="bg-white rounded-[2.5rem] shadow-2xl border border-zinc-100 grid grid-cols-2 md:grid-cols-3 divide-x divide-y md:divide-y-0 divide-zinc-100">
               {stats.map((s, i) => (
                 <div
                   key={i}
@@ -181,7 +177,7 @@ const BS10119Page = () => {
           <FadeIn direction="up">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-none">
-                Why This Certificate Matters
+                Why This   <span className="text-[#997819]">Certificate Matters</span> 
               </h2>
             </div>
           </FadeIn>
@@ -288,7 +284,7 @@ const BS10119Page = () => {
           <div className="text-center mb-16">
             <FadeIn direction="up">
               <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-none">
-                What Assessors Check
+                What Assessors <span className="text-[#997819]">Check</span>
               </h2>
             </FadeIn>
           </div>

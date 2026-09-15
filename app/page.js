@@ -29,7 +29,7 @@ const steps = [
   },
   {
     num: "02",
-    title: "Build the Strategy",
+    title: "QMS Setup & Documentation",
     desc: "We set up your documentation and QMS portal, walk you through a clear step-by-step process, and train you on assessment documents.",
     icon: ShieldCheck,
   },

@@ -66,7 +66,7 @@ const NewsletterBox = () => {
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            placeholder="Subscribe to our newsletter for compliance tips and industry updates."
+            placeholder="Enter Your Email & Subscribe to our newsletter."
             className="w-full flex-1 bg-white border border-gray-300 rounded-xl px-6 py-4 text-[#12066a] placeholder-gray-500 text-sm focus:outline-none focus:border-[#997819] transition-all"
           />
 
