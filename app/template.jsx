@@ -315,7 +315,7 @@ export default function Template({ children }) {
       return {
         title: "Training",
         subtitle: "Moments",
-        bg: "/w2.webp",
+       
       };
     }
 
