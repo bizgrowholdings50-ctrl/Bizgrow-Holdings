@@ -587,7 +587,7 @@ const SIAACSPage = () => {
 
           {/* Process */}
           <div className="relative">
-            {/* Desktop connecting line */}
+            {/* Desktop connecting lines */}
             <div className="absolute left-[8%] right-[8%] top-[35px] hidden h-px bg-[#12066a]/15 lg:block" />
 
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
