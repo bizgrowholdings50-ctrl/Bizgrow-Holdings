@@ -1,8 +1,11 @@
 // components/CinematicTransition.jsx
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
+
+// 🔹 Module-level flag: Hard reload par reset ho jata hai, client-side navigation par persist rehta hai
+let hasAppLoaded = false;
 
 export default function CinematicTransition({
   title = "BizGrow",
@@ -14,21 +17,24 @@ export default function CinematicTransition({
   const containerRef = useRef(null);
   const maskTextRef = useRef(null);
 
-  // 🔹 Dynamic Font-Size Logic (Character count ke hisab se text fit hoga)
-  const fullText = `${title} ${subtitle}`.trim();
-
-  const getFontSize = (text) => {
-    const len = text.length;
-    if (len > 30) return "50";
-    if (len > 22) return "65";
-    if (len > 16) return "80";
-    if (len > 12) return "95";
-    return "110";
-  };
-
-  const calculatedFontSize = getFontSize(fullText);
+  const [isMobile, setIsMobile] = useState(false);
 
   useLayoutEffect(() => {
+    // 🔹 Agar yeh pehli dafa load ya hard reload huwa hai, toh animation skip kar do
+    if (!hasAppLoaded) {
+      hasAppLoaded = true;
+      if (containerRef.current) {
+        gsap.set(containerRef.current, { display: "none", opacity: 0 });
+      }
+      if (onComplete) onComplete();
+      return;
+    }
+
+    // 🔹 Next.js client-side navigation par animation chalegi
+    if (typeof window !== "undefined") {
+      setIsMobile(window.innerWidth < 768);
+    }
+
     const tl = gsap.timeline({
       onComplete: () => {
         if (onComplete) onComplete();
@@ -37,7 +43,6 @@ export default function CinematicTransition({
 
     gsap.set(containerRef.current, { opacity: 1, display: "block" });
 
-    // Exact original setup & animation (No positional changes)
     gsap.set(maskTextRef.current, {
       transformOrigin: "50% 50%",
       scale: 0.7,
@@ -60,13 +65,32 @@ export default function CinematicTransition({
     return () => tl.kill();
   }, [onComplete]);
 
+  const fullText = `${title} ${subtitle}`.trim();
+
+  const getFontSize = (text, mobile) => {
+    const len = text.length;
+    if (mobile) {
+      if (len > 30) return "16";
+      if (len > 22) return "20";
+      if (len > 16) return "22";
+      if (len > 12) return "24";
+      return "28";
+    } else {
+      if (len > 30) return "50";
+      if (len > 22) return "65";
+      if (len > 16) return "80";
+      if (len > 12) return "95";
+      return "110";
+    }
+  };
+
+  const calculatedFontSize = getFontSize(fullText, isMobile);
+  const textYCoordinate = isMobile ? "250" : "280";
+
   return (
     <div
       ref={containerRef}
       className="fixed inset-0 z-[9999] overflow-hidden pointer-events-none"
-      // 🔹 JERK FIX: reload/first-paint par overlay default HIDDEN rahega (opacity 0),
-      // jab tak JS (useLayoutEffect) synchronously ise "opacity:1" na kar de.
-      // Animation ka koi step/value/origin nahi chera — sirf visibility gate hai.
       style={{ opacity: 0 }}
     >
       <svg
@@ -83,14 +107,11 @@ export default function CinematicTransition({
             width="1600"
             height="500"
           >
-            {/* White area = Dark Blue Overlay visible */}
             <rect x="0" y="0" width="1600" height="500" fill="white" />
-
-            {/* Pure Black Text = Pure Cutout Hole (Auto Dynamic Font Size) */}
             <text
               ref={maskTextRef}
               x="800"
-              y="280"
+              y={textYCoordinate}
               textAnchor="middle"
               fontFamily="ui-sans-serif, system-ui, sans-serif"
               fontWeight="900"
@@ -104,10 +125,8 @@ export default function CinematicTransition({
           </mask>
         </defs>
 
-        {/* 🔹 Base Layer: Whole Screen Par Mild White Lighting Tint */}
         <rect x="0" y="0" width="1600" height="500" fill="#ffffff" fillOpacity="0.25" />
 
-        {/* Masked Blue Overlay */}
         <g mask="url(#wordRevealMask)">
           {bgVideo && (
             <foreignObject x="0" y="0" width="1600" height="500">

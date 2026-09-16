@@ -23,7 +23,6 @@ export const metadata = {
 };
 
 const stats = [
- 
   {
     icon: <Layers size={26} />,
     value: "Security + Events",
@@ -31,13 +30,13 @@ const stats = [
   },
   {
     icon: <ListChecks size={26} />,
-    value: "7 Key Requirements",
-    label: "Area's assessors check under BS 10119",
+    value: "Criteria",
+    label: "7 Key Area's assessors check under BS 10119",
   },
   {
     icon: <Clock size={26} />,
-    value: "1 to 3",
-    label: "months typical preparation before assessment",
+    value: "Prepration",
+    label: "1 to 3 months typical preparation before assessment",
   },
 ];
 
@@ -53,10 +52,6 @@ const whoNeedsThis = [
   {
     t: "Businesses bidding for tenders",
     icon: <FileCheck size={30} />,
-  },
-  {
-    t: "Principal contractors",
-    icon: <Landmark size={30} />,
   },
 ];
 
@@ -79,6 +74,7 @@ const bs10119Data = [
     q: "How does BS 10119 relate to COP119?",
     a: "COP119 is the code of practice that first set out structured requirements for labour supply into the security sector, and BS 10119 is the formal British Standard developed to give that code a more universally recognised, accredited footing. Businesses already working towards COP119 are well placed to move towards BS 10119, since both cover the same core areas of vetting, payroll, and supply-chain management.",
   },
+
   {
     q: "What documents are required for BS 10119 compliance?",
     a: "BS 10119 compliance requires documented evidence of worker screening and vetting, verified SIA licensing where applicable, right-to-work checks, and PAYE payroll records that meet Working Time Regulations. You will also need written supply-chain and subcontractor management procedures, contractual documentation between labour providers and end users, and policies covering ethical recruitment and worker welfare, all kept current and ready for audit.",
@@ -177,7 +173,8 @@ const BS10119Page = () => {
           <FadeIn direction="up">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-none">
-                Why This   <span className="text-[#997819]">Certificate Matters</span> 
+                Why This{" "}
+                <span className="text-[#997819]">Certificate Matters</span>
               </h2>
             </div>
           </FadeIn>
@@ -220,11 +217,11 @@ const BS10119Page = () => {
             <div className="space-y-6 text-zinc-600 text-lg leading-relaxed font-medium max-w-3xl mx-auto">
               <p>
                 Here's the real issue: ABC Security delivers the contract to
-                their client, but they didn't hire, screening & vetting or train those 30
-                extra guards XYZ Labour did. So if something goes wrong, like an
-                unlicensed guard or a missing background check, it's ABC
-                Security's reputation and contract at risk, even though XYZ
-                Labour made the mistake.
+                their client, but they didn't hire, screening & vetting or train
+                those 30 extra guards XYZ Labour did. So if something goes
+                wrong, like an unlicensed guard or a missing background check,
+                it's ABC Security's reputation and contract at risk, even though
+                XYZ Labour made the mistake.
               </p>
             </div>
 
@@ -258,7 +255,7 @@ const BS10119Page = () => {
             </FadeIn>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {whoNeedsThis.map((item, i) => (
               <FadeIn key={i} direction="up" delay={i * 0.15}>
                 <div className="relative group p-8 h-full rounded-[2.5rem] border border-white/10 bg-white/5 backdrop-blur-md overflow-hidden transition-all duration-700 shadow-2xl">
@@ -307,6 +304,191 @@ const BS10119Page = () => {
         </div>
       </section>
 
+      {/* =========================================================
+    3. HOW WE WORK WITH YOU
+========================================================= */}
+      <section className="relative overflow-hidden bg-[#f8f8fa] py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-6">
+          {/* Heading */}
+          <div className="text-center mb-20">
+            <FadeIn direction="up">
+              <div className="flex items-center justify-center gap-4 w-fit mx-auto mb-4">
+                <span className="w-10 h-0.5 bg-[#997819]" />
+                <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs">
+                  OUR PROCESS
+                </span>
+                <span className="w-10 h-0.5 bg-[#997819]" />
+              </div>
+
+              <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter">
+                How We Work <span className="text-[#997819]">With You</span>
+              </h2>
+            </FadeIn>
+          </div>
+
+          {/* Process Grid */}
+          <div className="relative">
+            {/* Desktop connecting line */}
+            <div className="absolute left-[8%] right-[8%] top-[35px] hidden h-px bg-[#12066a]/15 lg:block" />
+
+            <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+              {[
+                {
+                  number: "01",
+                  title: "Scoping",
+                  text: "We check whether BS 10119 applies to your business and to which roles across your labour supply.",
+                },
+                {
+                  number: "02",
+                  title: "Gap Analysis",
+                  text: "We compare your current screening, training, and documentation against BS 10119, gap by gap.",
+                },
+                {
+                  number: "03",
+                  title: "Implementation",
+                  text: "We build the policies, procedures, and evidence your business needs, with clear guidance for your staff.",
+                },
+                {
+                  number: "04",
+                  title: "Final Handover",
+                  text: "We hand you a system that works in practice, one your team can run, maintain, and evidence going forward.",
+                },
+              ].map((step) => (
+                <div key={step.number} className="group relative">
+                  {/* Step number */}
+                  <div className="relative z-10 mb-7 flex h-[70px] w-[70px] items-center justify-center rounded-full border border-[#997819]/50 bg-[#f8f8fa] font-serif text-xl font-bold text-[#12066a] transition-all duration-300 group-hover:border-[#997819] group-hover:bg-[#12066a] group-hover:text-white">
+                    {step.number}
+                  </div>
+
+                  {/* Content */}
+                  <div className="border-l-2 border-[#12066a]/10 pl-6 transition-colors duration-300 group-hover:border-[#997819]">
+                    <h3 className="mb-3 text-xl font-semibold tracking-tight text-[#12066a]">
+                      {step.title}
+                    </h3>
+
+                    <p className="text-[15px] leading-7 text-slate-600">
+                      {step.text}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Bottom CTA strip */}
+          <div className="mt-14 flex flex-col gap-5 rounded-2xl bg-[#12066a] px-7 py-6 md:mt-20 md:flex-row md:items-center md:justify-between md:px-9">
+            <div>
+              <p className="text-lg font-semibold text-white">
+                Ready to align your labor supply with BS 10119 standards?
+              </p>
+
+              <p className="mt-1 text-sm text-white/65">
+                Get expert guidance from initial scoping through final handover.
+              </p>
+            </div>
+
+            <a
+              href="/contact-us"
+              className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#997819] px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:bg-[#997819]/90 hover:gap-3"
+            >
+              Get Started
+              <ArrowRight size={17} />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* 🔹 BS 10119 to COP 119 */}
+      <section className="max-w-7xl mx-auto px-6 py-20 bg-white text-slate-900 border-y border-slate-200 relative overflow-hidden">
+        {/* Subtle Background Glow/Gradient Accent */}
+        <div className="absolute -top-24 -right-24 w-96 h-96 bg-[#997819]/5 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center relative z-10">
+          {/* Left Content Side */}
+          <div className="lg:col-span-7 space-y-6">
+            <FadeIn direction="up">
+              <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-[#12066a]/5 border border-[#12066a]/10 text-[#12066a] text-xs font-semibold tracking-wider uppercase">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#997819] animate-pulse"></span>
+                <span>Transition Protocol & Certification</span>
+              </div>
+            </FadeIn>
+
+            <FadeIn direction="up" delay={0.1}>
+              <h2 className="text-3xl md:text-5xl font-extrabold text-[#12066a] tracking-tight leading-tight mt-4">
+                Does BS 10119{" "}
+                <span className="text-[#997819]">Automatically</span> Replace
+                COP 119?
+              </h2>
+            </FadeIn>
+
+            <FadeIn direction="up" delay={0.2}>
+              <p className="text-slate-600 text-base md:text-lg leading-relaxed font-normal">
+                BS 10119 doesn’t automatically replace COP 119. If you already
+                hold a COP 119 certificate, it doesn’t just switch over to BS
+                10119 on its own. You’ll need to contact your certification body
+                directly and ask exactly how your transition will work, and what
+                steps you need to take.
+              </p>
+            </FadeIn>
+
+            {/* Blog Link / High-End CTA Action */}
+            <FadeIn direction="up" delay={0.3}>
+              <div className="pt-3">
+                <Link
+                  href="/bs-10119-vs-cop-119/"
+                  className="inline-flex items-center space-x-3 text-[#997819] font-semibold hover:text-[#12066a] transition-all group"
+                >
+                  <span className="border-b border-[#997819]/40 pb-0.5 group-hover:border-[#12066a]">
+                    Understand BS 10119 to COP 119
+                  </span>
+                  <span className="transform group-hover:translate-x-1.5 transition-transform text-lg">
+                    →
+                  </span>
+                </Link>
+              </div>
+            </FadeIn>
+          </div>
+
+          {/* Right Visual Comparison Card Side */}
+          <div className="lg:col-span-5 flex items-center justify-center space-x-3 sm:space-x-4">
+            <FadeIn direction="right" delay={0.2}>
+              <div className="flex items-center space-x-3 sm:space-x-4 w-full">
+                {/* Legacy Card */}
+                <div className="bg-slate-50 border border-slate-200 p-6 rounded-2xl shadow-sm text-center w-1/2 space-y-3 relative overflow-hidden group hover:border-slate-300 transition-colors">
+                  <span className="text-[10px] tracking-widest uppercase font-bold text-slate-500 block">
+                    Legacy Schemes
+                  </span>
+                  <div className="text-base sm:text-lg font-bold text-slate-800 leading-tight">
+                    COP 119
+                  </div>
+                  <p className="text-xs text-slate-500 pt-1">
+                    Review migration path
+                  </p>
+                </div>
+
+                {/* Glowing Arrow Indicator */}
+                <div className="text-[#997819] font-bold text-xl flex items-center justify-center p-2.5 rounded-full bg-[#997819]/10 border border-[#997819]/20 shadow-inner">
+                  →
+                </div>
+
+                {/* Current Standard Card */}
+                <div className="bg-gradient-to-br from-[#12066a] via-[#1a0b8a] to-[#12066a] text-white p-6 rounded-2xl shadow-xl text-center w-1/2 space-y-3 border border-[#997819]/40 relative overflow-hidden group hover:border-[#997819] transition-colors">
+                  <span className="text-[10px] tracking-widest uppercase font-semibold text-white block">
+                    Current Standard
+                  </span>
+                  <div className="text-base sm:text-lg font-extrabold text-white leading-tight tracking-wide">
+                    BS 10119:2026
+                  </div>
+                  <p className="text-[11px] text-slate-200 pt-1">
+                    Active from June 2026
+                  </p>
+                </div>
+              </div>
+            </FadeIn>
+          </div>
+        </div>
+      </section>
+      {/* FAQs*/}
       <ServicesFaq
         faqs={bs10119Data}
         title={

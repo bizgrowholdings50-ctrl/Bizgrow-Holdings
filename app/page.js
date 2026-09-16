@@ -19,6 +19,7 @@ import ServicesFaq from "@/components/ServicesFaq";
 import { ShieldCheck, Award, FileText, Lock } from "lucide-react";
 import HomeServices from "@/components/HomeServices";
 import NewsletterBox from "@/components/NewsletterBox";
+import LusionCardGrid from "@/components/LusionCardGrid";
 
 const steps = [
   {
@@ -283,6 +284,9 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+        
+
+        
 
         {/* 6. TESTIMONIALS */}
 

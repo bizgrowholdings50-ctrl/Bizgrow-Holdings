@@ -1,5 +1,7 @@
+// components/ServicesGrid.jsx
 "use client";
 
+import { useRouter } from "next/navigation";
 import {
   ShieldCheck,
   Award,
@@ -18,6 +20,8 @@ import {
 } from "lucide-react";
 
 const ServicesGrid = () => {
+  const router = useRouter();
+
   const services = [
     {
       title: "SIA ACS Support",
@@ -136,7 +140,6 @@ const ServicesGrid = () => {
   return (
     <section className="bg-slate-50 py-24 px-6">
       <div className="max-w-7xl mx-auto">
-
         {/* Heading */}
         <div className="text-center mb-16">
           <h2 className="text-[#12066a] text-3xl md:text-5xl lg:text-6xl font-black tracking-tight mt-3 mb-4">
@@ -150,14 +153,14 @@ const ServicesGrid = () => {
           </p>
         </div>
 
-        {/* Services */}
+        {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((item, index) => {
             return (
-              <a
+              <div
                 key={item.title}
-                href={item.href}
-                className="group relative min-h-[390px] rounded-[2rem] overflow-hidden flex flex-col justify-end hover:-translate-y-1.5 hover:shadow-[0_25px_60px_-20px_rgba(18,6,106,0.4)] transition-all duration-500"
+                onClick={() => router.push(item.href)}
+                className="group relative min-h-[390px] rounded-[2rem] overflow-hidden flex flex-col justify-end hover:-translate-y-1.5 hover:shadow-[0_25px_60px_-20px_rgba(18,6,106,0.4)] transition-all duration-500 cursor-pointer"
               >
                 {/* Background Image */}
                 <img
@@ -171,7 +174,6 @@ const ServicesGrid = () => {
 
                 {/* Content */}
                 <div className="relative z-10 p-7">
-
                   {/* Top row */}
                   <div className="flex items-center justify-between mb-5">
                     <div className="w-11 h-11 rounded-xl bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-[#997819] group-hover:bg-[#997819]/15 group-hover:border-[#997819]/60 transition-all duration-300">
@@ -203,9 +205,8 @@ const ServicesGrid = () => {
                       />
                     </span>
                   </div>
-
                 </div>
-              </a>
+              </div>
             );
           })}
         </div>
