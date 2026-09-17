@@ -77,12 +77,12 @@ const BS7499Page = () => {
             <FadeIn direction="right" delay={0.2}>
               <h1 className="text-5xl md:text-7xl font-black text-white mt-6 leading-[1.1] tracking-tighter uppercase">
                 BS 7499 <br />
-                <span className="text-[#997819]">OPERATIONS.</span>
+                <span className="text-[#997819]">Code of Practice.</span>
               </h1>
             </FadeIn>
 
             <FadeIn direction="right" delay={0.4}>
-              <p className="mt-10 text-blue-100/60 text-lg md:text-xl max-w-2xl leading-relaxed font-medium italic">
+              <p className="mt-10 text-blue-100/80 text-lg md:text-xl max-w-2xl leading-relaxed font-medium ">
                 "The British Standard for professional static guarding services
                 establishes best practices for the management and delivery of
                 manned security operations."

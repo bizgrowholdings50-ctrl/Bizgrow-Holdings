@@ -193,7 +193,7 @@ export async function POST(req) {
               ${isNewReferralDiscount ? "New Referral Client — 5% Discount Request" : isReferralSubmission ? "Referral Network Submission" : "New Business Inquiry"}
             </h2>
             <p style="font-size: 16px; border-bottom: 1px solid #eee; padding-bottom: 10px;">
-              A new lead has been submitted through the <strong>BizGrow Holdings</strong> portal route.
+              A new lead has been submitted through the <strong>BizGrow Holdings</strong>.
             </p>
             
             <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
@@ -257,7 +257,7 @@ export async function POST(req) {
         `,
       }),
 
-      // 2. CLIENT THANK YOU EMAIL (Auto-Responder Template)
+      // 2. CLIENT THANK YOU EMAIL (Dynamic Conditional Template)
       resend.emails.send({
         from: "BizGrow Holdings <sales@bizgrow-holdings.net>",
         to: [sanitizedEmail],
@@ -265,133 +265,70 @@ export async function POST(req) {
           isReferralSubmission || isNewReferralDiscount
             ? `We’ve Received Your Referral Request – BizGrow Holdings`
             : `Thank you for contacting BizGrow Holdings!`,
-        html: `
-  <div style="
-    font-family: Arial, Helvetica, sans-serif;
-    max-width: 600px;
-    margin: 0 auto;
-    border: 1px solid #e0e0e0;
-    padding: 30px;
-    border-radius: 12px;
-    color: #333333;
-    background-color: #ffffff;
-  ">
-
-    <h2 style="
-      color: #12066a;
-      margin-top: 0;
-      margin-bottom: 20px;
-      font-size: 24px;
-    ">
+        html:
+          isReferralSubmission || isNewReferralDiscount
+            ? `
+  <div style="font-family: Arial, Helvetica, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; padding: 30px; border-radius: 12px; color: #333333; background-color: #ffffff;">
+    <h2 style="color: #12066a; margin-top: 0; margin-bottom: 20px; font-size: 24px;">
       Thank you, ${sanitizedName}!
     </h2>
-
-    <p style="
-      font-size: 15px;
-      line-height: 1.6;
-      margin: 0 0 18px;
-    ">
+    <p style="font-size: 15px; line-height: 1.6; margin: 0 0 18px;">
       We’ve received your service request through the BizGrow Referral Program.
     </p>
-
-    <p style="
-      font-size: 15px;
-      line-height: 1.6;
-      margin: 0 0 20px;
-    ">
+    <p style="font-size: 15px; line-height: 1.6; margin: 0 0 20px;">
       Our team will review your requirements and contact you shortly to discuss the next steps.
     </p>
-
-    <div style="
-      background: #fffbeb;
-      border: 1px solid #fde68a;
-      padding: 15px;
-      border-radius: 8px;
-      margin: 20px 0;
-    ">
-      <p style="
-        margin: 0;
-        color: #333333;
-        font-size: 14px;
-        line-height: 1.6;
-      ">
+    <div style="background: #fffbeb; border: 1px solid #fde68a; padding: 15px; border-radius: 8px; margin: 20px 0;">
+      <p style="margin: 0; color: #333333; font-size: 14px; line-height: 1.6;">
         🎁 <strong>Referral Benefit:</strong> A <strong>5% referral discount</strong> will be applied to your approved request.
       </p>
     </div>
-
-    <div style="
-      background: #f0fdf4;
-      border: 1px solid #bbf7d0;
-      padding: 15px;
-      border-radius: 8px;
-      margin: 20px 0;
-    ">
-      <p style="
-        margin: 0;
-        color: #333333;
-        font-size: 14px;
-        line-height: 1.6;
-      ">
+    <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 15px; border-radius: 8px; margin: 20px 0;">
+      <p style="margin: 0; color: #333333; font-size: 14px; line-height: 1.6;">
         🤝 <strong>Referred By:</strong> ${referrerName || "Unknown Referrer"}
       </p>
     </div>
-
-    <div style="
-      background: #f9fafb;
-      padding: 15px;
-      border-radius: 8px;
-      margin-top: 20px;
-      border-top: 3px solid #12066a;
-    ">
-      <h4 style="
-        margin-top: 0;
-        margin-bottom: 10px;
-        color: #12066a;
-        font-size: 16px;
-      ">
-        What’s Next?
-      </h4>
-
-      <ul style="
-        margin: 0;
-        padding-left: 20px;
-        line-height: 1.6;
-        font-size: 14px;
-        color: #555555;
-      ">
+    <div style="background: #f9fafb; padding: 15px; border-radius: 8px; margin-top: 20px; border-top: 3px solid #12066a;">
+      <h4 style="margin-top: 0; margin-bottom: 10px; color: #12066a; font-size: 16px;">What’s Next?</h4>
+      <ul style="margin: 0; padding-left: 20px; line-height: 1.6; font-size: 14px; color: #555555;">
         <li>Our consultant will review your requirements.</li>
         <li>We’ll contact you by email or phone within <strong>24 business hours</strong>.</li>
       </ul>
     </div>
-
-    <p style="
-      font-size: 14px;
-      line-height: 1.6;
-      margin-top: 25px;
-    ">
+    <p style="font-size: 14px; line-height: 1.6; margin-top: 25px;">
       If you have any questions or additional information to share, simply reply to this email.
     </p>
-
     <br />
-
-    <p style="
-      margin-bottom: 5px;
-      font-size: 14px;
-    ">
-      Best regards,
-    </p>
-
-    <p style="
-      margin-top: 0;
-      font-weight: bold;
-      color: #12066a;
-      font-size: 16px;
-    ">
-      BizGrow Holdings Team
-    </p>
-
+    <p style="margin-bottom: 5px; font-size: 14px;">Best regards,</p>
+    <p style="margin-top: 0; font-weight: bold; color: #12066a; font-size: 16px;">BizGrow Holdings Team</p>
   </div>
-`,
+            `
+            : `
+  <div style="font-family: Arial, Helvetica, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e0e0e0; padding: 30px; border-radius: 12px; color: #333333; background-color: #ffffff;">
+    <h2 style="color: #12066a; margin-top: 0; margin-bottom: 20px; font-size: 24px;">
+      Thank you, ${sanitizedName}!
+    </h2>
+    <p style="font-size: 15px; line-height: 1.6; margin: 0 0 18px;">
+      We have received your inquiry regarding <strong>${sanitizedService}</strong>.
+    </p>
+    <p style="font-size: 15px; line-height: 1.6; margin: 0 0 20px;">
+      Our team is reviewing your message and will reach out to you shortly.
+    </p>
+    <div style="background: #f9fafb; padding: 15px; border-radius: 8px; margin-top: 20px; border-top: 3px solid #12066a;">
+      <h4 style="margin-top: 0; margin-bottom: 10px; color: #12066a; font-size: 16px;">What’s Next?</h4>
+      <ul style="margin: 0; padding-left: 20px; line-height: 1.6; font-size: 14px; color: #555555;">
+        <li>Our consultant will look into your specific requirements.</li>
+        <li>We will get in touch via email or phone within <strong>24 business hours</strong>.</li>
+      </ul>
+    </div>
+    <p style="font-size: 14px; line-height: 1.6; margin-top: 25px;">
+      If you need to share any additional details in the meantime, feel free to reply directly to this email.
+    </p>
+    <br />
+    <p style="margin-bottom: 5px; font-size: 14px;">Best regards,</p>
+    <p style="margin-top: 0; font-weight: bold; color: #12066a; font-size: 16px;">BizGrow Holdings Team</p>
+  </div>
+            `,
       }),
     ]);
 
