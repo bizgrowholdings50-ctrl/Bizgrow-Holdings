@@ -605,7 +605,7 @@ const SIAACSPage = () => {
                 {
                   number: "03",
                   title: "Internal Audit",
-                  text: "We run aInternal  audit under real conditions, so nothing catches you off guard.",
+                  text: "We run Internal  audit under real conditions, so nothing catches you off guard.",
                 },
                 {
                   number: "04",
