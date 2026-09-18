@@ -27,7 +27,7 @@ const securityHeaders = [
     key: "Permissions-Policy",
     value: "camera=(), microphone=(), geolocation=(), xr-spatial-tracking=*",
   },
- {
+  {
     key: "Content-Security-Policy",
     value:
       "default-src 'self'; " +
@@ -40,7 +40,7 @@ const securityHeaders = [
       "frame-src 'self' https://www.google.com https://challenges.cloudflare.com blob:; " +
       "base-uri 'self'; " +
       "form-action 'self';",
-  }
+  },
 ];
 const nextConfig = {
   trailingSlash: true,
@@ -96,6 +96,12 @@ const nextConfig = {
         source:
           "/top-security-companies-trusted-protection-for-every-business/",
         destination: "/top-security-companies/",
+        permanent: true,
+      },
+      {
+        source:
+          "/is-your-security-business-losing-work-without-constructionline",
+        destination: "/security-business-losing-work-without-constructionline",
         permanent: true,
       },
       {
