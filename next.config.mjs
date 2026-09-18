@@ -105,6 +105,327 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: "/the-future-of-security-compliance-begins-with-cop-119/",
+        destination: "/future-of-security-compliance-cop-119/",
+        permanent: true,
+      },
+      {
+        source: "/future-of-security-compliance/",
+        destination: "/future-of-security-compliance-cop-119/",
+        permanent: true,
+      },
+      {
+        source: "/Pages/",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/en/",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/Content/",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/cgi-bin/",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/pages/index",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/PAGE/",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/main.html",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/background-checks-key-checks-employers-must-take/",
+        destination: "/close-protection-officer-uk/",
+        permanent: true,
+      },
+      {
+        source: "/index.php",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source:
+          "/cop119-compliance-guide-for-uk-security-businesses-requirements-and-benefits/",
+        destination: "/cop119-compliance-guide/",
+        permanent: true,
+      },
+      {
+        source: "/Page/",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/comments/feed/",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/shop/page/2",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/blog",
+        destination: "/blogs/",
+        permanent: true,
+      },
+      {
+        source: "/shop/page/5",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/check-order/",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/product/procomil-spray",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/product-category/aphrodisiac",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/product/2h2d-black-gold",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/cart",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source:
+          "/the-importance-of-background-checks-protect-your-business-and-reputation/",
+        destination:
+          "/bs-7858-screening-and-vetting-standards-requirements-process/",
+        permanent: true,
+      },
+      {
+        source: "/what-is-integrated-management-system-ims/",
+        destination: "/difference-between-iso-9001-iso-14001-and-iso45001/",
+        permanent: true,
+      },
+      {
+        source: "/what-is-integrated-",
+        destination: "/what-is-a-sheq-management-system/",
+        permanent: true,
+      },
+      {
+        source: "/what-is-difference-",
+        destination: "/difference-between-iso-9001-iso-14001-and-iso45001/",
+        permanent: true,
+      },
+      {
+        source:
+          "/what-is-difference-between-iso-18001-ohsas-and-iso-450012018/",
+        destination: "/difference-between-iso-9001-iso-14001-and-iso45001/",
+        permanent: true,
+      },
+      {
+        source: "/iso-9001-and-food-sector/",
+        destination: "/who-really-qualifies-for-iso-9001-in-2026-in-the-uk/",
+        permanent: true,
+      },
+      {
+        source: "/product/kamagra-oral-jelly",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/product/vigrx-plus",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/product-category/:path*",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/product/:path*",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/shop/:path*",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/product-category/:path*",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/risk-assessment-and-hazard-identification-in-iso-45001/",
+        destination: "/what-is-a-risk-assessment/",
+        permanent: true,
+      },
+      {
+        source: "/about",
+        destination: "/about-us/",
+        permanent: true,
+      },
+      {
+        source: "/search/:path*",
+        destination: "/",
+        permanent: true,
+      },
+       {
+        source: "/tag/:path*",
+        destination: "/",
+        permanent: true,
+      },
+       {
+        source: "/category/:path*",
+        destination: "/",
+        permanent: true,
+      },
+    {
+        source: '/wp-:path(.*)',
+        destination: '/',
+        permanent: true,
+      },
+       {
+        source: '/items:path(.*)',
+        destination: '/',
+        permanent: true,
+      },
+      
+      {
+        source: '/favicon.ico',
+        destination: '/',
+        permanent: true,
+      },
+       {
+        source: '/nasdu/',
+        destination: '/our-services/nasdu/',
+        permanent: true,
+      },
+       {
+        source: '/smas-accreditation/',
+        destination: '/our-services/smas-accreditation/',
+        permanent: true,
+      },
+      {
+        source: '/our-services/internal-audit/',
+        destination: '/internal-audit/',
+        permanent: true,
+      },
+       {
+        source: '/the-business-benefits-of-becoming-an-sia-approved-contractor/',
+        destination: '/business-benefits-of-becoming-an-sia-approved-contractor/',
+        permanent: true,
+      },
+       {
+        source: '/compliance-consultancies/bs7858-screening-vetting/',
+        destination: '/bs7858-screening-vetting/',
+        permanent: true,
+      },
+       {
+        source: '/compliance-consultancies/iso-14001/',
+        destination: '/our-services/iso-14001/',
+        permanent: true,
+      },
+      {
+        source: '/compliance-consultancies/chas-scheme/',
+        destination: '/our-services/chas-scheme/',
+        permanent: true,
+      },
+      {
+        source: '/constructionline/',
+        destination: '/our-services/constructionline/',
+        permanent: true,
+      },
+       {
+        source: '/web-and-digital-marketing-solutions/',
+        destination: '/',
+        permanent: true,
+      },
+       {
+        source: '/compliance-consultancies/internal-audit/',
+        destination: '/internal-audit/',
+        permanent: true,
+      },
+       {
+        source: '/how-cop-119-helps-security-businesses-maintain-high-standards-in-the-uk/',
+        destination: '/cop-119-helps-security-businesses-maintain-high-standards/',
+        permanent: true,
+      },
+       {
+        source: '/compliance-consultancies/bs-10800/',
+        destination: '/our-services/bs-10800/',
+        permanent: true,
+      },
+       {
+        source: '/cyber-essentials/',
+        destination: '/our-services/cyber-essentials/',
+        permanent: true,
+      },
+       {
+        source: '/the-complete-guide-to-acs-accreditation-for-security-businesses-in-the-uk/',
+        destination: '/acs-accreditation-for-security-businesses/',
+        permanent: true,
+      },
+      {
+        source: '/smas/',
+        destination: "/our-services/smas-accreditation/",
+        permanent: true,
+      },
+      {
+        source: '/careers/',
+        destination: '/',
+        permanent: true,
+      },
+      {
+        source: '/the-role-of-iso-14001-environmental-management-system-in-chemical-industries/',
+        destination: '/clauses-of-iso-14001/',
+        permanent: true,
+      },
+      {
+        source: '/sheq-management-system-safety-health-environment-and-quality-explained',
+        destination: '/what-is-a-sheq-management-system/',
+        permanent: true,
+      },
+      {
+        source: "/refund-policy/",
+        destination: "/terms-and-conditions/",
+        permanent: true,
+      },
+      {
+        source: "/refund_returns/",
+        destination: "/terms-and-conditions/",
+        permanent: true,
+      },
+      {
+        source: "/2022/1/",
+        destination: "/",
+        permanent: true,
+      },
+
+      {
         source: "/why-iso-9001-matters-for-uk-business-quality-and-growth",
         destination: "/iso-9001-matters-for-uk-business/",
         permanent: true,
