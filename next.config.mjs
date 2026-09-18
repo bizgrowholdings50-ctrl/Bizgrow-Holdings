@@ -313,6 +313,7 @@ const nextConfig = {
         destination: '/',
         permanent: true,
       },
+    
       
       {
         source: '/favicon.ico',
@@ -359,6 +360,12 @@ const nextConfig = {
         destination: '/our-services/constructionline/',
         permanent: true,
       },
+       {
+        source: '/everything-you-need-to-know-about-getting-acs-approval-from-the-sia/',
+        destination: '/getting-acs-approval-from-the-sia/',
+        permanent: true,
+      },
+
        {
         source: '/web-and-digital-marketing-solutions/',
         destination: '/',
