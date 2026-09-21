@@ -485,7 +485,7 @@ const nextConfig = {
       },
       {
         source:
-          "/cop119-compliance-guide-for-uk-security-businesses-requirements-and-benefits/  ",
+          "/cop119-compliance-guide-for-uk-security-businesses-requirements-and-benefits/",
         destination: "/cop119-compliance-guide/",
         permanent: true,
       },

@@ -18,12 +18,12 @@ const ServicesFaq = ({ faqs = [], title = "FAQs" }) => {
   const jsonLdSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    "mainEntity": faqs.map((faq) => ({
+    mainEntity: faqs.map((faq) => ({
       "@type": "Question",
-      "name": faq.q,
-      "acceptedAnswer": {
+      name: faq.q,
+      acceptedAnswer: {
         "@type": "Answer",
-        "text": faq.a,
+        text: faq.a,
       },
     })),
   };
@@ -46,39 +46,38 @@ const ServicesFaq = ({ faqs = [], title = "FAQs" }) => {
 
         <div className="max-w-4xl mx-auto space-y-4 mb-20">
           {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className="bg-white border border-zinc-200 rounded-2xl overflow-hidden shadow-sm transition-all duration-300"
-            >
-              <button
-                onClick={() => toggleFaq(index)}
-                className="w-full flex justify-between items-center p-6 text-left focus:outline-none group"
-                type="button"
-              >
-                <h3 className="text-lg md:text-xl font-bold text-[#12066a] group-hover:text-[#997819] transition-colors">
-                  {faq.q}
-                </h3>
-                <ChevronDown
-                  className={`w-6 h-6 text-[#997819] transition-transform duration-300 flex-shrink-0 ml-4 ${
-                    openIndex === index ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
+            <FadeIn key={index} direction="up" delay={0.08 * (index + 1)}>
+              <div className="bg-white border border-zinc-200 rounded-2xl overflow-hidden shadow-sm transition-all duration-300">
+                <button
+                  onClick={() => toggleFaq(index)}
+                  className="w-full flex justify-between items-center p-6 text-left focus:outline-none group"
+                  type="button"
+                >
+                  <h3 className="text-lg md:text-xl font-bold text-[#12066a] group-hover:text-[#997819] transition-colors">
+                    {faq.q}
+                  </h3>
+                  <ChevronDown
+                    className={`w-6 h-6 text-[#997819] transition-transform duration-300 flex-shrink-0 ml-4 ${
+                      openIndex === index ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
 
-              <div
-                className={`overflow-hidden transition-all duration-300 ${
-                  openIndex === index ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
-                }`}
-              >
-                <div className="p-6 pt-0 text-zinc-600 font-medium leading-relaxed border-t border-zinc-100 mt-2">
-                  {faq.a}
+                <div
+                  className={`overflow-hidden transition-all duration-300 ${
+                    openIndex === index
+                      ? "max-h-[500px] opacity-100"
+                      : "max-h-0 opacity-0"
+                  }`}
+                >
+                  <div className="p-6 pt-0 text-zinc-600 font-medium leading-relaxed border-t border-zinc-100 mt-2">
+                    {faq.a}
+                  </div>
                 </div>
               </div>
-            </div>
+            </FadeIn>
           ))}
         </div>
-
-        
       </div>
     </section>
   );
