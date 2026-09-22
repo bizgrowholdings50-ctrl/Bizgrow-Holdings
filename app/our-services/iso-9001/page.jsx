@@ -23,79 +23,94 @@ export const metadata = {
 const iso9001Data = [
   {
     q: "What are the key benefits of achieving ISO 9001 certification?",
-    a: "The key benefits of achieving ISO 9001 certification include building trust with clients, improving your chances of winning public-sector tenders, and demonstrating that your business adheres to an internationally recognised quality management system. It also helps improve efficiency, reduce errors, and support continual improvement. "
+    a: "The key benefits of achieving ISO 9001 certification include building trust with clients, improving your chances of winning public-sector tenders, and demonstrating that your business adheres to an internationally recognised quality management system. It also helps improve efficiency, reduce errors, and support continual improvement. ",
   },
   {
     q: "What are the essential steps to prepare for an ISO 9001 audit?",
-    a: "Start with a gap analysis to identify where your current processes and documentation fall short of ISO 9001 requirements, then build or update all policies, procedures, and records accordingly. Conduct a full internal audit before the external assessment to make sure every clause is properly evidenced and that your team understands their responsibilities. Ensure your management review is recent, all corrective actions are closed out, and your quality objectives are documented and measurable."
+    a: "Start with a gap analysis to identify where your current processes and documentation fall short of ISO 9001 requirements, then build or update all policies, procedures, and records accordingly. Conduct a full internal audit before the external assessment to make sure every clause is properly evidenced and that your team understands their responsibilities. Ensure your management review is recent, all corrective actions are closed out, and your quality objectives are documented and measurable.",
   },
   {
     q: "How to get ISO 9001 certification in the UK?",
-    a: "Begin with a gap analysis, then build your quality management system, including a quality policy, process documentation, objectives, and records, before running it for a sufficient period. Once operational, conduct an internal audit and management review, then engage a UKAS-accredited certification body for the formal two-stage external audit. BizGrow Holdings supports UK businesses through every stage of this process, from initial preparation through to successful certification."
+    a: "Begin with a gap analysis, then build your quality management system, including a quality policy, process documentation, objectives, and records, before running it for a sufficient period. Once operational, conduct an internal audit and management review, then engage a UKAS-accredited certification body for the formal two-stage external audit. BizGrow Holdings supports UK businesses through every stage of this process, from initial preparation through to successful certification.",
   },
   {
     q: "Is getting ISO 9001 certification worth it?",
-    a: "Yes, for most UK businesses, ISO 9001 delivers clear commercial value by opening doors to tenders, frameworks, and clients that require it as a minimum standard. It improves internal efficiency, reduces costly errors, and gives clients confidence in your ability to deliver consistently. Businesses that invest in ISO 9001 consistently report stronger customer retention and a more competitive market position."
-  }
+    a: "Yes, for most UK businesses, ISO 9001 delivers clear commercial value by opening doors to tenders, frameworks, and clients that require it as a minimum standard. It improves internal efficiency, reduces costly errors, and gives clients confidence in your ability to deliver consistently. Businesses that invest in ISO 9001 consistently report stronger customer retention and a more competitive market position.",
+  },
 ];
 const ISO9001Page = () => {
   return (
     <main className="bg-white text-zinc-900 overflow-hidden">
       {/* 🔹 1. HERO SECTION (Custom Scales) */}
-      <section className="relative h-screen w-full flex items-center overflow-hidden">
+      <section className="relative h-screen w-full flex items-center  overflow-hidden bg-black">
+        {/* Background Image & Overlay */}
         <div className="absolute inset-0 z-0">
           <Image
             src="/iso-9001-hero.jpg"
             alt="ISO 9001 Certification"
             fill
-            className="object-cover"
+            className="object-cover scale-105"
             priority
           />
-          <div className="absolute inset-0 bg-black/70" />
+          <div className="absolute inset-0 bg-black/85" />
         </div>
 
-        {/* Step 2: Watermark Text (Requested Scale: 15rem) */}
-        <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none select-none z-10">
-          <h2 className="text-[10rem] md:text-[15rem] font-black text-white/[0.04] leading-none uppercase tracking-tighter">
+        {/* Watermark Text */}
+        <div className="absolute inset-0 flex items-center justify-center  overflow-hidden pointer-events-none select-none z-10">
+          <h2 className="text-[25vw] md:text-[15rem] font-black text-white/[0.03] leading-none uppercase tracking-tighter">
             BIZGROW
           </h2>
         </div>
 
-        {/* Step 3: Content (Requested Scale: 7xl) */}
-        <div className="max-w-7xl mx-auto px-6 relative z-20 w-full pt-20">
-          <div className="max-w-4xl">
-            <FadeIn direction="right" duration="0.4">
-              <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs md:text-sm">
+        {/* Main Content */}
+        <div className="max-w-7xl mx-auto px-6 relative text-center  z-20 w-full pt-20">
+          <div className="max-w-4xl mx-auto flex flex-col items-center">
+            {/* Eyebrow Tag */}
+            <FadeIn direction="up" duration="0.4">
+              <div className="flex items-center justify-center gap-5">
+                <span className="h-[0.5] w-16 bg-[#997819]" />
+              <span className="text-[#EAB308] font-black uppercase tracking-[0.3em] md:tracking-[0.4em] text-xs md:text-sm">
                 Quality Management System
               </span>
+               <span className="h-[0.5] w-16 bg-[#997819]" />
+              </div>
             </FadeIn>
 
-            <FadeIn direction="right" duration="0.6">
-              <h1 className="text-5xl md:text-7xl font-black text-white mt-6 leading-[1.1] tracking-tighter">
+            {/* Main Heading */}
+            <FadeIn direction="up" duration="0.6">
+              <h1 className="text-4xl sm:text-5xl md:text-7xl font-black text-white mt-6 leading-[1.1] tracking-tighter">
                 ISO 9001
-                <span className="text-[#997819]"> Strategic</span> Excellence.
+                <span className="text-[#EAB308]"> Strategic</span> Excellence.
               </h1>
             </FadeIn>
 
-            <FadeIn direction="right" duration="0.8">
-              <p className="mt-10 text-blue-100/60 text-xl md:text-xl max-w-2xl leading-relaxed font-medium italic">
-                "Not just a certificate, but a blueprint for operational
-                efficiency and customer satisfaction."
+            {/* Description Paragraph */}
+            <FadeIn direction="up" duration="0.8">
+              <p className="mt-6 md:mt-8 text-blue-100 mx-auto  text-base md:text-xl max-w-2xl leading-relaxed font-medium">
+                "Quality shouldn’t be a matter of luck. ISO 9001 is the
+                international standard that turns good intentions into a working
+                system, giving your business the structure to deliver consistent
+                results, strengthen client trust, and stand out when it matters
+                most."
               </p>
             </FadeIn>
 
-            <FadeIn direction="right" duration="1.0">
-              <Link href="/contact-us">
-                <button className="relative z-10 bg-[#997819] text-white px-16 py-6 my-4 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-3xl">
-                  Book a Consultation
-                </button>
-              </Link>
+            {/* Call to Action Button */}
+            <FadeIn direction="up" duration="1.0">
+              <div className="mt-8">
+                <Link
+                  href="/contact-us"
+                  className="inline-flex items-center justify-center bg-[#997819] text-white px-12 py-5 rounded-full font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] hover:scale-105 active:scale-95 transition-all duration-300 shadow-2xl"
+                >
+                  Book a Free Consultation
+                </Link>
+              </div>
             </FadeIn>
           </div>
         </div>
       </section>
 
-      {/* 🔹 2. UNIQUE SECTION: THE PILLAR GRID (Asymmetric Layout) */}
+      {/* 🔹 2. UNIQUE SECTION: THE PILLAR GRID (Asymmetric Layout)
       <section className="py-22 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row gap-16 items-start">
@@ -173,7 +188,7 @@ const ISO9001Page = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* 🔹 3. MARKET AUTHORITY & GROWTH */}
       <section className="py-12 bg-white relative overflow-hidden">
@@ -181,13 +196,13 @@ const ISO9001Page = () => {
 
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
-            <FadeIn direction="left">
+            <FadeIn direction="right">
               <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs mb-4 block">
                 Market Leadership
               </span>
-              <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-normal leading-[1] mb-8">
-                Why ISO 9001 is <br />
-                <span className="text-[#997819]">Essential </span>
+              <h2 className="text-4xl md:text-5xl font-black text-[#12066a] tracking-normal leading-[1] mb-8">
+                Why ISO 9001 is
+                <span className="text-[#997819] ml-2">Essential </span>
                 for UK Businesses Today.
               </h2>
 
@@ -240,7 +255,7 @@ const ISO9001Page = () => {
               </div>
             </FadeIn>
 
-            <FadeIn direction="right">
+            <FadeIn direction="left">
               <div className="p-2 bg-zinc-100 rounded-[3.5rem]">
                 <div className="bg-[#12066a] rounded-[3rem] p-12 text-center relative overflow-hidden">
                   <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#997819] to-transparent opacity-50" />
@@ -284,142 +299,143 @@ const ISO9001Page = () => {
       </section>
 
       {/* 🔹 4. OUR IMPLEMENTATION JOURNEY */}
-      <section className="py-12 bg-white">
+      <section className="py-12 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-5xl font-black text-[#12066a] tracking-tighter ">
-              From Assessment to ISO 9001{" "}
-              <span className="text-[#997819]">Certification.</span>
-            </h2>
-          </div>
+          {/* Section Header */}
+          <FadeIn direction="up" duration="0.4">
+            <div className="text-center mb-16">
+              <span className="text-[#997819] font-black uppercase tracking-[0.3em] text-xs">
+                Step-by-Step Process
+              </span>
+              <h2 className="text-4xl md:text-5xl font-black text-[#12066a] tracking-tighter mt-3">
+                From Assessment to ISO 9001{" "}
+                <span className="text-[#997819]">Certification.</span>
+              </h2>
+            </div>
+          </FadeIn>
 
-          <div className="grid md:grid-cols-4 gap-4">
+          {/* Journey Cards Grid */}
+          <div className="grid md:grid-cols-4 gap-6">
             {[
               {
                 n: "01",
-                t: "Business Context Review",
-                d: "We review your organisation, sector needs, and current practices to align your system with UK quality requirements.",
+                t: "Assess & Plan",
+                d: "We assess your business, find gaps, review your paperwork, and create a clear action plan.",
               },
               {
                 n: "02",
-                t: "Process & System Alignment",
-                d: (
-                  <>
-                    Core processes are refined to improve efficiency and meet{" "}
-                    <Link
-                      href="https://bizgrow-holdings.com/why-iso-9001-matters-for-uk-business-quality-and-growth/"
-                      className="text-[#997819] font-bold"
-                    >
-                      ISO 9001
-                    </Link>{" "}
-                    standards without operational disruption.
-                  </>
-                ),
+                t: "QMS Setup & Documentation",
+                d: "We set up your QMS and documentation, guide you step by step, and train you on key documents.",
               },
               {
                 n: "03",
-                t: "Internal Audit & Readiness Check",
-                d: "Your system is checked against ISO 9001 to fix gaps before the certification audit.",
+                t: "Audit & Certification",
+                d: "We conduct an internal audit, fix gaps, and support you through the external audit.",
               },
               {
                 n: "04",
-                t: "Certification & Audit Support",
-                d: "We guide you through the external audit and support you until ISO 9001 certification is achieved.",
+                t: "Ongoing Support & Growth",
+                d: "Get a dedicated project manager plus 12 months of ongoing support and guidance.",
               },
             ].map((step, i) => (
-              <div
-                key={i}
-                className="p-8 bg-zinc-50 rounded-[2rem] border border-zinc-100 hover:bg-[#12066a] group transition-all duration-500"
-              >
-                <span className="text-5xl font-black text-[#997819]/60 group-hover:text-[#997819] transition-colors">
-                  {step.n}
-                </span>
-                <h3 className="text-xl font-black text-[#12066a] group-hover:text-white mt-6 mb-3">
-                  {step.t}
-                </h3>
-                <p className="text-zinc-500 group-hover:text-blue-100/60 text-sm font-medium leading-relaxed">
-                  {step.d}
-                </p>
-              </div>
+              <FadeIn key={i} direction="up" duration={0.5 + i * 0.1}>
+                <div className="p-8 bg-zinc-50 rounded-[2rem] border border-zinc-100 hover:bg-[#12066a] group transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#12066a]/20 cursor-pointer h-full">
+                  <span className="text-5xl font-black text-[#997819]/60 group-hover:text-[#EAB308] transition-colors">
+                    {step.n}
+                  </span>
+                  <h3 className="text-xl font-black text-[#12066a] group-hover:text-white mt-6 mb-3 tracking-tight">
+                    {step.t}
+                  </h3>
+                  <p className="text-zinc-500 group-hover:text-blue-100/70 text-sm font-medium leading-relaxed">
+                    {step.d}
+                  </p>
+                </div>
+              </FadeIn>
             ))}
           </div>
         </div>
       </section>
 
       {/* 🔹 5. DETAILED DOCUMENTATION CHECKLIST */}
-      <section className="py-4 md:py-12 bg-white">
-        <div className="max-w-7xl mx-auto px-6 border-t border-zinc-100 pt-24">
-          <div className="flex flex-col lg:flex-row gap-16 items-center">
-            <div className="lg:w-1/2">
-              <FadeIn direction="right">
-                <h2 className="text-4xl md:text-5xl font-black text-[#12066a] tracking-tight mb-6 uppercase">
-                  Essential QMS <br />{" "}
-                  <span className="text-[#997819]">Documentation</span>
-                </h2>
-                <p className="text-zinc-500 font-medium mb-10 max-w-md">
-                  We design and implement a structured{" "}
-                  <Link
-                    href="https://bizgrow-holdings.com/is-iso-9001-the-secret-to-consistent-quality-and-client-trust/"
-                    className="text-[#997819] font-bold"
+     <section className="py-14  bg-white">
+      <div className="max-w-7xl mx-auto px-6 border-t border-zinc-100 pt-24">
+        <div className="flex flex-col lg:flex-row gap-16 items-center">
+          
+          {/* Left Side: Text and Checklist */}
+          <div className="lg:w-1/2">
+            <FadeIn direction="right">
+              <h2 className="text-4xl md:text-5xl font-black text-[#12066a] tracking-tight mb-6">
+                Essential QMS <br />{" "}
+                <span className="text-[#997819]">Documentation</span>
+              </h2>
+              <p className="text-zinc-500 font-medium mb-10 max-w-md">
+                We design and implement a structured{" "}
+                <Link
+                  href="https://bizgrow-holdings.com/is-iso-9001-the-secret-to-consistent-quality-and-client-trust/"
+                  className="text-[#997819] font-bold"
+                >
+                  ISO 9001
+                </Link>{" "}
+                Quality Management System tailored to your UK business
+                operations, covering all mandatory documentation required for
+                certification:
+              </p>
+
+              <div className="grid sm:grid-cols-1 gap-4">
+                {[
+                  "Quality Policy & Measurable Objectives",
+                  "Documented Procedures & SOPs",
+                  "Management Review & Performance Records",
+                  "Non-Conformity, Corrective & Preventive Actions",
+                  "Approved Supplier & Contractor Assessments",
+                  "Staff Competency & Training Records",
+                ].map((doc, idx) => (
+                  <div
+                    key={idx}
+                    className="flex items-center gap-4 p-4 bg-zinc-50 rounded-2xl font-black text-[10px] uppercase tracking-widest border-l-4 border-[#997819] hover:bg-zinc-100 transition-colors"
                   >
-                    ISO 9001
-                  </Link>{" "}
-                  Quality Management System tailored to your UK business
-                  operations, covering all mandatory documentation required for
-                  certification:
-                </p>
-
-                <div className="grid sm:grid-cols-1 gap-4">
-                  {[
-                    "Quality Policy & Measurable Objectives",
-                    "Documented Procedures & SOPs",
-                    "Management Review & Performance Records",
-                    "Non-Conformity, Corrective & Preventive Actions",
-                    "Approved Supplier & Contractor Assessments",
-                    "Staff Competency & Training Records",
-                  ].map((doc, idx) => (
-                    <div
-                      key={idx}
-                      className="flex items-center gap-4 p-4 bg-zinc-50 rounded-2xl font-black text-[10px] uppercase tracking-widest border-l-4 border-[#997819] hover:bg-zinc-100 transition-colors"
-                    >
-                      <CheckCircle2
-                        size={16}
-                        className="text-[#997819] shrink-0"
-                      />
-                      {doc}
-                    </div>
-                  ))}
-                </div>
-              </FadeIn>
-            </div>
-
-            <div className="lg:w-1/2 relative">
-              <FadeIn direction="left">
-                <div className="relative rounded-[3rem] overflow-hidden shadow-2xl border-[12px] border-zinc-50">
-                  <Image
-                    src="/QMS.jpg"
-                    alt="ISO 9001 QMS - BizGrow Holdings Ltd"
-                    width={600}
-                    height={700}
-                    className="object-cover hover:scale-105 h-90 md:h-150 transition-transform duration-700"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#12066a]/20 to-transparent" />
-                </div>
-
-                <div className="absolute -bottom-6 -left-6 bg-[#997819] p-8 rounded-[2rem] text-white shadow-xl hidden md:block">
-                  <p className="text-3xl font-black leading-none">100%</p>
-                  <p className="text-[10px] uppercase font-bold tracking-tighter opacity-80">
-                    Audit Ready Docs
-                  </p>
-                </div>
-              </FadeIn>
-            </div>
+                    <CheckCircle2
+                      size={16}
+                      className="text-[#997819] shrink-0"
+                    />
+                    {doc}
+                  </div>
+                ))}
+              </div>
+            </FadeIn>
           </div>
+
+          {/* Right Side: Image with Floating Badge (Fixed Padding for No Cutting) */}
+          <div className="lg:w-1/2 relative pb-10 pl-6">
+            
+              <div className="relative rounded-[3rem] overflow-hidden shadow-2xl border-[12px] border-zinc-50">
+                <Image
+                  src="/QMS.jpg"
+                  alt="ISO 9001 QMS - BizGrow Holdings Ltd"
+                  width={600}
+                  height={700}
+                  className="w-full object-cover h-[380px] md:h-[550px] hover:scale-105 transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#12066a]/20 to-transparent" />
+              </div>
+
+              {/* Floating Badge safely positioned inside the padded relative parent */}
+              <div className="absolute -bottom-2 left-2 bg-[#997819] p-6 md:p-8 rounded-[2rem] text-white shadow-2xl hidden md:block z-20">
+                <p className="text-3xl font-black leading-none">100%</p>
+                <p className="text-[10px] uppercase font-bold tracking-tighter opacity-90 mt-1">
+                  Audit Ready Docs
+                </p>
+              </div>
+          
+          </div>
+
         </div>
-      </section>
+      </div>
+    </section>
 
       {/* 🔹 6. TECHNICAL METRICS SECTION */}
-      <section className="py-22 bg-[#12066a] relative overflow-hidden">
+      <section className="py-14 bg-[#12066a] relative overflow-hidden">
+        {/* Background Image with Fixed Attachment */}
         <div
           className="absolute inset-0 z-0 opacity-20"
           style={{
@@ -434,43 +450,56 @@ const ISO9001Page = () => {
 
         <div className="max-w-7xl mx-auto px-6 relative z-20">
           <div className="grid md:grid-cols-2 gap-20 items-center">
+            {/* Left Side: Animated Cards Grid */}
             <div className="relative order-2 md:order-1">
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-[#997819] h-64 rounded-[3rem] p-8 flex flex-col justify-end shadow-2xl">
-                  <span className="text-4xl font-black text-white">98%</span>
-                  <p className="text-white text-xs font-bold uppercase tracking-widest mt-2">
-                    Success Rate
-                  </p>
-                </div>
-                <div className="bg-white h-64 rounded-[3rem] p-8 flex flex-col justify-end border border-white/10 shadow-2xl">
-                  <BarChart3 className="text-[#997819] mb-4" size={40} />
-                  <p className="text-[#997819] font-bold">
-                    Operational Data Focus
-                  </p>
-                </div>
+                <FadeIn direction="up" duration="0.4">
+                  <div className="bg-[#997819] h-64 rounded-[3rem] p-8 flex flex-col justify-end shadow-2xl hover:scale-105 transition-transform duration-500">
+                    <span className="text-4xl font-black text-white">98%</span>
+                    <p className="text-white text-xs font-bold uppercase tracking-widest mt-2">
+                      Success Rate
+                    </p>
+                  </div>
+                </FadeIn>
+
+                <FadeIn direction="up" duration="0.6">
+                  <div className="bg-white h-64 rounded-[3rem] p-8 flex flex-col justify-end border border-white/10 shadow-2xl hover:scale-105 transition-transform duration-500">
+                    <BarChart3 className="text-[#997819] mb-4" size={40} />
+                    <p className="text-[#997819] font-bold">
+                      Operational Data Focus
+                    </p>
+                  </div>
+                </FadeIn>
               </div>
             </div>
 
+            {/* Right Side: Animated Heading & Checklist */}
             <div className="order-1 md:order-2">
-              <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter mb-8 leading-[0.9]">
-                Data Driven <br />{" "}
-                <span className="text-[#997819]">Compliance.</span>
-              </h2>
+              <FadeIn direction="right" duration="0.5">
+                <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter mb-8 leading-[0.9]">
+                  Data Driven <br />{" "}
+                  <span className="text-[#997819]">Compliance.</span>
+                </h2>
+              </FadeIn>
+
               <div className="space-y-6">
                 {[
                   "Annex SL High-Level Structure",
                   "Plan-Do-Check-Act (PDCA) Cycle",
                   "Leadership Commitment Training",
                 ].map((point, idx) => (
-                  <div
+                  <FadeIn
                     key={idx}
-                    className="flex items-center gap-4 text-blue-100/70 font-bold group cursor-default"
+                    direction="right"
+                    duration={0.6 + idx * 0.15}
                   >
-                    <CheckCircle2 className="text-[#997819] group-hover:scale-125 transition-transform" />
-                    <span className="group-hover:text-white transition-colors">
-                      {point}
-                    </span>
-                  </div>
+                    <div className="flex items-center gap-4 text-blue-100/70 font-bold group cursor-default">
+                      <CheckCircle2 className="text-[#997819] group-hover:scale-125 transition-transform" />
+                      <span className="group-hover:text-white transition-colors">
+                        {point}
+                      </span>
+                    </div>
+                  </FadeIn>
                 ))}
               </div>
             </div>
@@ -478,7 +507,7 @@ const ISO9001Page = () => {
         </div>
       </section>
 
- <ServicesFaq
+      <ServicesFaq
         faqs={iso9001Data}
         title={
           <>
@@ -488,7 +517,7 @@ const ISO9001Page = () => {
         subtitle="Questions & Answers"
       />
       {/* 🔹 7. CTA (With Signature Design) */}
-      <section className="py-24 bg-white">
+      <section className="py-14 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div
             className="p-12 md:p-24 rounded-[4rem] bg-[#12066a] relative overflow-hidden group shadow-2xl"
@@ -499,21 +528,41 @@ const ISO9001Page = () => {
               backgroundAttachment: "fixed",
             }}
           >
-            <div className="absolute inset-0 bg-[#12066a]/60 z-0" />
-            <div className="relative z-10 text-center flex flex-col items-center">
-              <h2 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-none mb-10">
-                Ready for the <br />{" "}
-                <span className="text-[#997819]">Next Level?</span>
-              </h2>
-              <Link
-                href="/contact-us"
-                className="relative group/btn overflow-hidden inline-flex items-center justify-center bg-[#997819] text-white px-6 md:px-16 py-6 rounded-2xl font-black uppercase tracking-[0.3em] text-xs transition-all duration-500 shadow-3xl active:scale-95"
-              >
-                <span className="relative z-40 transition-colors duration-500 group-hover/btn:text-[#12066a]">
-                  Get ISO 9001 Certified
+            <div className="absolute inset-0 bg-black/80 backdrop-blur-[2px] z-0" />
+
+            <div className="relative z-10 text-center flex flex-col items-center max-w-3xl mx-auto">
+              <FadeIn direction="up" duration="0.4">
+                <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs md:text-sm mb-4 inline-block">
+                  Start Your Compliance Journey
                 </span>
-                <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
-              </Link>
+              </FadeIn>
+
+              <FadeIn direction="up" duration="0.6">
+                <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter leading-tight mb-6">
+                  Let's Get Your Business{" "}
+                  <span className="text-[#997819]">ISO 9001 Certified.</span>
+                </h2>
+              </FadeIn>
+
+              <FadeIn direction="up" duration="0.8">
+                <p className="text-blue-100 text-base md:text-xl mx-auto font-normal leading-relaxed mb-10 max-w-2xl">
+                  No complicated paperwork or stress. We handle the heavy
+                  lifting, guide you step-by-step, and help you unlock new
+                  business opportunities with complete confidence.
+                </p>
+              </FadeIn>
+
+              <FadeIn direction="up" duration="1.0">
+                <Link
+                  href="/contact-us"
+                  className="relative group/btn overflow-hidden inline-flex items-center justify-center bg-[#997819] text-white px-10 md:px-16 py-6 rounded-full font-black uppercase tracking-[0.3em] text-xs transition-all duration-500 shadow-2xl active:scale-95"
+                >
+                  <span className="relative z-40 transition-colors duration-500 group-hover/btn:text-[#12066a]">
+                    Get ISO 9001 Certified
+                  </span>
+                  <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
+                </Link>
+              </FadeIn>
             </div>
           </div>
         </div>

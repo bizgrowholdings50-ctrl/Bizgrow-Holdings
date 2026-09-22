@@ -16,9 +16,9 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#12066a] text-white pt-20 pb-10 px-6">
+    <footer className="bg-[#12066a] text-white pt-12 md:pt-24 pb-10 px-4 md:px-6">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-12 md:mb-16">
           {/* Column 1: Brand & About */}
           <div className="space-y-6">
             <Image
@@ -34,7 +34,7 @@ export default function Footer() {
               industry-standard certifications, and compliance excellence. Your
               growth is our mission.
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-4 flex-wrap">
               {[
                 {
                   icon: <FaFacebookF />,
@@ -65,9 +65,9 @@ export default function Footer() {
                 <a
                   key={i}
                   href={social.href}
-                  target="_blank" // 👈 New tab ke liye
-                  rel="noopener noreferrer" // 👈 Security ke liye
-                  aria-label={social.label} // 👈 Report Accessibility Fix
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
                   className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center hover:bg-[#997819] hover:scale-110 transition-all duration-300"
                 >
                   {social.icon}
@@ -78,10 +78,10 @@ export default function Footer() {
 
           {/* Column 2: Quick Links */}
           <div>
-            <h3 className="text-[#EAB308] font-black uppercase tracking-widest text-sm mb-8">
+            <h3 className="text-[#EAB308] font-black uppercase tracking-widest text-sm mb-6 md:mb-8">
               Navigation
             </h3>
-            <ul className="space-y-4">
+            <ul className="space-y-3 md:space-y-4">
               {[
                 "Home",
                 "About Us",
@@ -97,8 +97,8 @@ export default function Footer() {
                       item === "Home"
                         ? "/"
                         : `/${item.toLowerCase().replace(" ", "-")}`
-                    } // 👈 Home fix
-                    className="text-blue-100/70 hover:text-white hover:pl-2 transition-all duration-300  flex items-center gap-2"
+                    }
+                    className="text-blue-100/70 hover:text-white hover:pl-2 transition-all duration-300 flex items-center gap-2 text-sm"
                   >
                     <span className="w-1.5 h-1.5 rounded-full bg-[#EAB308]" />{" "}
                     {item}
@@ -110,10 +110,10 @@ export default function Footer() {
 
           {/* Column 3: Top Services / Pages */}
           <div>
-            <h3 className="text-[#EAB308] font-black uppercase tracking-widest text-sm mb-8">
+            <h3 className="text-[#EAB308] font-black uppercase tracking-widest text-sm mb-6 md:mb-8">
               Certifications & Solutions
             </h3>
-            <ul className="space-y-4 text-sm">
+            <ul className="space-y-3 md:space-y-4 text-sm">
               {[
                 {
                   name: "UK’s Private Security Directory",
@@ -127,7 +127,6 @@ export default function Footer() {
                   name: "Private Security Startup",
                   link: "/private-security-startup",
                 },
-
                 { name: "QMS Software", link: "/qms-software" },
                 { name: "Internal Audit", link: "/internal-audit" },
                 { name: "Discount Offers", link: "/discount-offers" },
@@ -155,7 +154,7 @@ export default function Footer() {
 
           {/* Column 4: Contact Info */}
           <div>
-            <h3 className="text-[#EAB308] font-black uppercase tracking-widest text-sm mb-8">
+            <h3 className="text-[#EAB308] font-black uppercase tracking-widest text-sm mb-6 md:mb-8">
               Get In Touch
             </h3>
             <div className="space-y-6">
@@ -178,8 +177,8 @@ export default function Footer() {
                   <p className="text-xs text-[#EAB308] font-bold uppercase">
                     Emails
                   </p>
-                  <p className="text-sm">info@bizgrow-holdings.co.uk</p>
-                  <p className="text-sm">sales@bizgrow-holdings.net</p>
+                  <p className="text-sm break-all">info@bizgrow-holdings.co.uk</p>
+                  <p className="text-sm break-all">sales@bizgrow-holdings.net</p>
                 </div>
               </div>
               <div className="flex gap-4 items-start">
@@ -190,7 +189,7 @@ export default function Footer() {
                   <p className="text-xs text-[#EAB308] font-bold uppercase">
                     Location
                   </p>
-                  <p className="text-sm italic">
+                  <p className="text-sm">
                     CEME Campus, Marsh Way, RM13 8EU
                   </p>
                 </div>
@@ -200,9 +199,9 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-10 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-white font-medium">
+        <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white font-medium text-center md:text-left">
           <p>© {currentYear} BizGrow Holdings. All Rights Reserved.</p>
-          <div className="flex gap-8">
+          <div className="flex gap-6 md:gap-8 md:mr-30">
             <Link
               href="/privacy-policy"
               className="hover:text-white text-zinc-200 transition-colors"

@@ -701,7 +701,7 @@ export default function Navbar() {
                                         ${
                                           isActive
                                             ? "bg-[#12066a] text-white shadow-[0_9px_24px_rgba(18,6,106,0.15)]"
-                                            : "text-black/65 hover:bg-white hover:text-[#12066a]"
+                                            : "text-black/85 hover:bg-white hover:text-[#12066a]"
                                         }
                                       `}
                                   >
@@ -749,7 +749,7 @@ export default function Navbar() {
                                       <span
                                         className={`
                                             block
-                                            text-[11.5px]
+                                            text-[13px]
                                             font-bold
                                             leading-tight
                                             ${
@@ -766,13 +766,13 @@ export default function Navbar() {
                                         className={`
                                             block
                                             mt-1
-                                            text-[8px]
-                                            uppercase
-                                            tracking-[0.10em]
+                                            text-[9px]
+                                            tracking-normal
+                                          
                                             ${
                                               isActive
                                                 ? "text-white/45"
-                                                : "text-black/30"
+                                                : "text-black"
                                             }
                                           `}
                                       >
@@ -962,7 +962,7 @@ export default function Navbar() {
                                       max-w-[490px]
                                       text-[11.5px]
                                       leading-[1.65]
-                                      text-black/60
+                                      text-black/70
                                     "
                                   >
                                     {selectedCategory.description}
@@ -1096,7 +1096,7 @@ export default function Navbar() {
                                               mt-1
                                               text-[11px]
                                               leading-[1.5]
-                                              text-black/55
+                                              text-black/75
                                               group-hover:text-black/65
                                               transition-colors
                                             "

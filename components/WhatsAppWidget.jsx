@@ -23,7 +23,7 @@ const WhatsAppWidget = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-6 right-6 z-[9999] flex flex-col items-end gap-3 group">
+    <div className="fixed bottom-20 right-6 z-[9999] flex flex-col items-end gap-3 group">
       
       {/* Floating Label */}
       <div className="bg-white text-gray-800 py-2 px-4 rounded-xl shadow-lg border border-gray-100 mb-1 scale-0 group-hover:scale-100 origin-bottom-right transition-all duration-300 font-montserrat text-sm font-medium">
