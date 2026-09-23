@@ -235,7 +235,7 @@ const DiscountWelcomePopup = () => {
                       className="font-black uppercase tracking-[0.25em] text-[9px]"
                       style={{ color: GOLD_LIGHT }}
                     >
-                      BizGrow Discount Offer!
+                      Limited Discount Offer!
                     </span>
                   </motion.div>
 
