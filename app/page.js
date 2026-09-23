@@ -22,6 +22,7 @@ import NewsletterBox from "@/components/NewsletterBox";
 
 
 
+
 const steps = [
   {
     num: "01",
