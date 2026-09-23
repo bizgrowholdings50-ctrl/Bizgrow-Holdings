@@ -22,20 +22,20 @@ export const metadata = {
 const iso14001Data = [
   {
     q: "What are the common challenges when implementing ISO 14001?",
-    a: "Many businesses struggle to identify and document all environmental aspects and impacts relevant to their specific operations, which is one of the most technically demanding parts of the standard. Keeping legal compliance registers up to date with all relevant environmental legislation is another common challenge, particularly for businesses operating across multiple sites. Staff engagement can also be difficult, since ISO 14001 requires evidence that environmental responsibilities are actively managed at all levels."
+    a: "Many businesses struggle to identify and document all environmental aspects and impacts relevant to their specific operations, which is one of the most technically demanding parts of the standard. Keeping legal compliance registers up to date with all relevant environmental legislation is another common challenge, particularly for businesses operating across multiple sites. Staff engagement can also be difficult, since ISO 14001 requires evidence that environmental responsibilities are actively managed at all levels.",
   },
   {
     q: "How to get ISO 14001 certification?",
-    a: "Start with a gap analysis, then develop an environmental policy, aspects and impacts register, legal compliance register, and documented objectives before running your management system for a sufficient period. Once operational and evidenced, conduct an internal audit and management review, then engage a UKAS-accredited certification body for the formal external assessment. BizGrow Holdings provides hands-on ISO 14001 support for UK businesses from initial preparation through to successful certification."
+    a: "Start with a gap analysis, then develop an environmental policy, aspects and impacts register, legal compliance register, and documented objectives before running your management system for a sufficient period. Once operational and evidenced, conduct an internal audit and management review, then engage a UKAS-accredited certification body for the formal external assessment. BizGrow Holdings provides hands-on ISO 14001 support for UK businesses from initial preparation through to successful certification.",
   },
   {
     q: "What documents are required for ISO 14001 certification?",
-    a: "You will need a signed environmental policy, an environmental aspects and impacts register, a legal compliance register listing all applicable environmental legislation, and documented objectives and improvement targets. Supporting documents include operational control procedures, emergency preparedness plans, internal audit records, and management review minutes. All documents must be current, regularly maintained, and specific to your business rather than copied generic templates."
+    a: "You will need a signed environmental policy, an environmental aspects and impacts register, a legal compliance register listing all applicable environmental legislation, and documented objectives and improvement targets. Supporting documents include operational control procedures, emergency preparedness plans, internal audit records, and management review minutes. All documents must be current, regularly maintained, and specific to your business rather than copied generic templates.",
   },
   {
     q: "Can an ISO 14001 consultant help with certification and compliance?",
-    a: "Yes, a specialist ISO 14001 consultant significantly improves your chances of passing first time by guiding you through requirements, building the right documentation, and preparing your team for the external audit. They identify gaps in your current environmental management approach that you might not notice alone, saving time and avoiding costly mistakes. BizGrow Holdings provides expert ISO 14001 consultancy covering everything from gap analysis and documentation through to full audit support."
-  }
+    a: "Yes, a specialist ISO 14001 consultant significantly improves your chances of passing first time by guiding you through requirements, building the right documentation, and preparing your team for the external audit. They identify gaps in your current environmental management approach that you might not notice alone, saving time and avoiding costly mistakes. BizGrow Holdings provides expert ISO 14001 consultancy covering everything from gap analysis and documentation through to full audit support.",
+  },
 ];
 
 const ISO14001Page = () => {
@@ -51,7 +51,7 @@ const ISO14001Page = () => {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-black/70" />
+          <div className="absolute inset-0 bg-black/80" />
         </div>
 
         <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none select-none z-10">
@@ -70,30 +70,25 @@ const ISO14001Page = () => {
 
             <FadeIn direction="right" duration="0.6">
               <h1 className="text-5xl md:text-6xl font-black text-white mt-2 md:mt-6 leading-[1.1] tracking-tighter">
-                ISO 14001 <br />
-                <span className="text-[#997819]">
-                  Environmental Management System (EMS)
+                ISO 14001
+                <span className="text-[#997819] ml-2">
+                  Environmental <br /> Management System (EMS)
                 </span>
               </h1>
             </FadeIn>
 
             <FadeIn direction="right" duration="0.8">
-              <p className="mt-10 text-blue-100/60 text-xl md:text-xl max-w-2xl leading-relaxed font-medium">
-                "ISO 14001 certification with{" "}
-                <Link
-                  href="https://bizgrow-holdings.com/"
-                  className="text-[#997819] font-bold"
-                >
-                  BizGrow Holdings
-                </Link>{" "}
-                enhances credibility, supports tender opportunities, and shows
-                commitment to environmental responsibility."
+              <p className="mt-10 text-blue-100 text-xl md:text-xl max-w-2xl leading-relaxed font-medium">
+                The international standard that shows how your business manages
+                waste, resources, and environmental risk, turning good
+                intentions into real proof, stronger client trust, and better
+                tender chances.
               </p>
             </FadeIn>
 
-             <FadeIn direction="right" duration="1.0">
+            <FadeIn direction="right" duration="1.0">
               <Link href="/contact-us">
-                <button className="relative z-10 bg-[#997819] text-white px-16 py-6 my-4 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-3xl">
+                <button className="relative z-10 bg-[#997819] text-white px-16 py-6 my-4 rounded-full font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-3xl">
                   Book a Consultation
                 </button>
               </Link>
@@ -199,7 +194,7 @@ const ISO14001Page = () => {
         </div>
       </section>
 
-      {/* 🚀 NEW SECTION: ISO 14001 Certification Process */}
+      {/* 🚀 3 NEW SECTION: ISO 14001 Certification Process */}
       <section className="py-22 bg-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -209,7 +204,7 @@ const ISO14001Page = () => {
                 <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs mb-4 block">
                   How it works
                 </span>
-                <h2 className="text-5xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-tight mb-8">
+                <h2 className="text-5xl font-black text-[#12066a] tracking-tighter leading-tight mb-8">
                   ISO 14001 <br />
                   <span className="text-[#997819]">Certification Process.</span>
                 </h2>
@@ -309,7 +304,7 @@ const ISO14001Page = () => {
           </div>
         </div>
       </section>
-      {/* 🔹 3. FEATURE SPLIT (Refined) */}
+      {/* 🔹 4. FEATURE SPLIT (Refined) */}
       <section className="py-24 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col lg:flex-row-reverse gap-20 items-center">
@@ -317,12 +312,12 @@ const ISO14001Page = () => {
               <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs mb-4 block">
                 Authority
               </span>
-              <h2 className="text-5xl md:text-7xl font-black text-[#12066a] tracking-tighter leading-none mb-8">
+              <h2 className="text-5xl font-black text-[#12066a] tracking-tighter leading-none mb-8">
                 Supply Chain <br />{" "}
                 <span className="text-[#997819]">Advantage.</span>
               </h2>
               <div className="border-l-8 border-[#997819] pl-8 py-4">
-                <p className="text-xl text-zinc-600 font-bold italic leading-relaxed">
+                <p className="text-xl text-zinc-600 font-bold  leading-relaxed">
                   "Many UK contractors now require{" "}
                   <Link
                     href="/iso-14001-requirements"
@@ -349,7 +344,7 @@ const ISO14001Page = () => {
             </div>
 
             <div className="lg:w-1/2 relative">
-              <div className="w-full relative aspect-square bg-[#12066a] rounded-[4rem] overflow-hidden rotate-3 hover:rotate-0 transition-transform duration-700 shadow-2xl">
+              <div className="w-full relative aspect-video bg-[#12066a] rounded-[4rem] overflow-hidden rotate-3 hover:rotate-0 transition-transform duration-700 shadow-2xl">
                 <Image
                   src="/supply-chain.jpg"
                   fill
@@ -363,15 +358,15 @@ const ISO14001Page = () => {
         </div>
       </section>
 
-      {/* 🔹 4. DOCUMENTATION (Corrected Heading Hierarchy) */}
+      {/* 🔹 5. DOCUMENTATION (Corrected Heading Hierarchy) */}
       <section className="py-32 bg-[#12066a] text-white rounded-[5rem] mx-4 my-10 shadow-inner">
         <div className="max-w-7xl mx-auto px-10">
-          <div className="mb-16 text-center lg:text-left">
-            <h2 className="text-4xl md:text-6xl font-black tracking-tighter">
+          <div className="mb-16 text-center">
+            <h2 className="text-4xl md:text-5xl font-black tracking-tighter">
               What’s Included in{" "}
               <span className="text-[#997819]">ISO 14001?</span>
             </h2>
-            <p className="my-4 text-blue-100/60 max-w-2xl">
+            <p className="my-4 text-blue-100/80 mx-auto max-w-2xl">
               The framework enables UK businesses to manage and improve
               environmental performance through these core pillars:
             </p>
@@ -399,7 +394,7 @@ const ISO14001Page = () => {
         </div>
       </section>
 
- <ServicesFaq
+      <ServicesFaq
         faqs={iso14001Data}
         title={
           <>
@@ -409,7 +404,7 @@ const ISO14001Page = () => {
         subtitle="Questions & Answers"
       />
 
-      {/* 🔹 5. CTA SECTION (With Compulsory Background Image) */}
+      {/* 🔹 6. CTA SECTION (With Compulsory Background Image) */}
       <section className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="relative group overflow-hidden rounded-[3.5rem] p-10 md:p-24 shadow-2xl flex flex-col items-center text-center">
@@ -427,23 +422,23 @@ const ISO14001Page = () => {
               <div className="absolute inset-0 bg-[#12066a]/70 mix-blend-multiply z-10" />
 
               {/* Gradient to ensure text is readable but image is still visible */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#12066a] via-[#12066a]/40 to-transparent z-20" />
+              <div className="absolute inset-0 bg-linear-to-t from-[#12066a] via-[#12066a]/40 to-transparent z-20" />
             </div>
 
             <div className="relative z-10 w-full max-w-4xl flex flex-col items-center">
               <FadeIn direction="up">
-                <span className="inline-block text-[#997819] font-black uppercase tracking-[0.5em] text-[10px] md:text-xs bg-white/5 px-6 py-2 rounded-full border border-white/10 mb-10">
+                <span className="inline-block text-white font-black uppercase tracking-[0.5em] text-[10px] md:text-xs bg-white/5 px-6 py-2 rounded-full border border-white/10 mb-10">
                   Global Sustainability Standard
                 </span>
 
-                <h2 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-[0.85] mb-8">
+                <h2 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-[1.1] mb-8">
                   Ready to Strengthen Your <br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#997819] to-[#d4af37] inline-block mt-2">
                     Environmental Strategy?
                   </span>
                 </h2>
 
-                <p className="text-blue-100/60 text-lg md:text-xl font-medium max-w-2xl mx-auto leading-relaxed mb-12">
+                <p className="text-blue-100/80 text-lg md:text-xl font-medium max-w-2xl mx-auto leading-relaxed mb-12">
                   Our ISO 14001 consultancy supports UK businesses in reducing
                   environmental risk, improving operational efficiency, and
                   strengthening tender competitiveness
@@ -454,7 +449,7 @@ const ISO14001Page = () => {
               <div className="flex flex-col sm:flex-row gap-4 w-full justify-center items-center">
                 <FadeIn direction="up" delay={0.2}>
                   <Link href="/contact">
-                    <button className="relative group/btn overflow-hidden w-full sm:w-64 bg-[#997819] text-white px-8 py-5 rounded-2xl font-black uppercase tracking-[0.25em] text-[10px] transition-all duration-500 hover:shadow-[0_20px_40px_rgba(153,120,25,0.4)]">
+                    <button className="relative group/btn overflow-hidden w-full sm:w-64 bg-[#997819] text-white px-8 py-5 rounded-full font-black uppercase tracking-[0.25em] text-[10px] transition-all duration-500 hover:shadow-[0_20px_40px_rgba(153,120,25,0.4)]">
                       <span className="relative z-10 group-hover/btn:text-[#12066a] transition-colors duration-500">
                         Start your ISO 14001 journey today
                       </span>

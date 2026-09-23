@@ -140,7 +140,7 @@ const ContactPage = async ({ searchParams }) => {
 
                   <div className="space-y-10">
                     {[
-                      { icon: <Phone size={22} />, label: "Call Us", val: "07898 205035" },
+                      { icon: <Phone size={22} />, label: "Call Us", val: "02080904209" },
                       { icon: <Mail size={22} />, label: "Email", val: "info@bizgrow-holdings.co.uk" },
                       { icon: <MapPin size={22} />, label: "Location", val: "London, UK " },
                     ].map((item, i) => (
