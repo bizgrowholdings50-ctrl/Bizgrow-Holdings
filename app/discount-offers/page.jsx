@@ -17,7 +17,7 @@ const offersData = [
     image: "/SSIP Bundle offer 2026.png",
     discount: "25",
     price: "799",
-    fullDetail: "One bundle. Four accreditations — CHAS, SMAS, SafeContractor & Constructionline. Everything you need to win tenders and prove your site is safe.",
+    fullDetail: "One bundle. Four accreditations CHAS, SMAS, SafeContractor & Constructionline. Everything you need to win tenders and prove your site is safe.",
     sections: [
       {
         heading: "What’s Included",
