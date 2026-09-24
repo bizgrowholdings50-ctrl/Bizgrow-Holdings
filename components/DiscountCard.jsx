@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { ArrowRight, X, CheckCircle, Loader2 } from "lucide-react";
 import FadeIn from "./MotionWrapper";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 
 const DiscountCard = ({ offer }) => {
   const [isDetailOpen, setIsDetailOpen] = useState(false);
@@ -11,12 +12,23 @@ const DiscountCard = ({ offer }) => {
   const [submitted, setSubmitted] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
+  const searchParams = useSearchParams();
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     company: "",
   });
+
+  // 🔹 Read URL Query and Open Modal automatically
+  useEffect(() => {
+    const shouldOpenClaim = searchParams?.get("openClaim") === "true";
+    
+    if (shouldOpenClaim) {
+      setIsClaimOpen(true);
+    }
+  }, [searchParams]);
 
   // 🔹 LENIS & MAIN SCROLL LOCK
   useEffect(() => {

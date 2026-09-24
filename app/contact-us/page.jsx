@@ -197,12 +197,7 @@ const ContactPage = async ({ searchParams }) => {
                 className="rounded-[2rem] md:rounded-[3rem]"
               />
               <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white/20 to-transparent pointer-events-none" />
-              <div className="absolute top-8 left-8 bg-white/90 backdrop-blur-md px-6 py-3 rounded-2xl shadow-lg border border-slate-100 flex items-center gap-3">
-                <div className="w-2 h-2 bg-[#997819] rounded-full animate-ping" />
-                <span className="text-[10px] font-black uppercase tracking-widest text-[#12066a]">
-                  Our Office
-                </span>
-              </div>
+             
             </div>
           </section>
         )}

@@ -4,6 +4,8 @@ import FadeIn from "@/components/MotionWrapper";
 
 import { Tag } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Discount Offers - BizGrow Holdings Ltd, UK",
   description:
