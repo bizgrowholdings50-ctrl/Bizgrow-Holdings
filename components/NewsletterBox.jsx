@@ -74,7 +74,7 @@ const NewsletterBox = () => {
             type="button"
             onClick={handleSubscribe}
             disabled={loading}
-            className="w-full sm:w-auto bg-[#997819] hover:bg-[#806314] text-white font-bold px-8 py-4 rounded-xl text-xs uppercase tracking-widest transition-all shrink-0 disabled:opacity-50 cursor-pointer"
+            className="w-full sm:w-auto bg-[#7a6014] hover:bg-[#997819] text-white font-bold px-8 py-4 rounded-xl text-xs uppercase tracking-widest transition-all shrink-0 disabled:opacity-50 cursor-pointer"
           >
             {loading ? "Subscribing..." : "Subscribe"}
           </button>

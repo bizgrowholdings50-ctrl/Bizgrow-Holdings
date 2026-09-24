@@ -9,23 +9,22 @@ const reviews = [
   {
     name: "Keyur Kachhadiya",
     role: "Immaculate & Co. Ltd",
-    logo: "/immaculate.jpg", // Update path as per your public folder structure
+    logo: "/immaculate.jpg",
     text: "We had an excellent experience with BIZGrow Holding during our COP119 audit. Their team was professional, efficient, and highly knowledgeable, making the entire process smooth and well-structured. The guidance provided was invaluable, and their attention to detail ensured a thorough assessment. We highly recommend their services to any business looking for reliable audit and accreditation support.",
   },
   {
     name: "Shehzad Nazir",
     role: "Director, Progressive Group Services Ltd",
-    logo: "/PGS logo.jpg", // Update path as per your public folder structure
+    logo: "/PGS logo.jpg",
     text: "We've worked with Bizgrow Holdings Ltd for over two years and their support has been outstanding. They have successfully guided us through two ACS audits and COP119 compliance, providing expert advice and practical solutions throughout.Professional, knowledgeable, and always responsive. I would highly recommend Bizgrow Holdings Ltd to any security company looking for compliance and business support",
   },
   {
     name: "Denzil Fernandes",
     role: "Director, Jehovah Jireh Security Services Ltd",
-    logo: "/jehovah-logo.jpg", // Update path as per your public folder structure
+    logo: "/jehovah-logo.jpg",
     text: "Bizgrow has been helpful since day one until the last They did their level best in completing my process going out of limit I'm very thankful and grateful for their support and hard work It looked so difficult in beginning but because of their excellent service I was able to",
   },
 ];
-
 
 export default function HomeTestimonial() {
   const [active, setActive] = useState(0);
@@ -155,21 +154,25 @@ export default function HomeTestimonial() {
         })}
       </div>
 
-      
-
-      {/* Slider Dots */}
-      <div className="flex justify-center gap-2">
+      {/* Slider Dots (Fixed Touch Target Accessibility) */}
+      <div className="flex justify-center items-center gap-1">
         {reviews.map((_, i) => (
           <button
             key={i}
+            type="button"
             onClick={() => setActive(i)}
             aria-label={`Show testimonial ${i + 1}`}
-            className={`h-1.5 rounded-full transition-all duration-300 ${
-              i === active ? "w-8 bg-[#997819]" : "w-1.5 bg-zinc-200"
-            }`}
-          />
+            className="p-3 inline-flex items-center justify-center cursor-pointer focus:outline-none"
+          >
+            <span
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                i === active ? "w-8 bg-[#997819]" : "w-1.5 bg-[#12066a]"
+              }`}
+            />
+          </button>
         ))}
       </div>
+
       {/* View All Testimonials Button */}
       <div className="w-full flex justify-center mt-10">
         <Link
@@ -180,7 +183,6 @@ export default function HomeTestimonial() {
           <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
         </Link>
       </div>
-      
     </div>
   );
 }
