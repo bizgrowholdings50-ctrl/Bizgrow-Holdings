@@ -260,7 +260,7 @@ const DiscountWelcomePopup = () => {
                     variants={itemVariants}
                     className="text-white/50 text-xs sm:text-sm font-medium leading-relaxed mb-6"
                   >
-                  Save on Health & Safety Compliance Bundles. Get SSIP-ready with <span className="text-[#997819] font-bold">CHAS</span>, <span className="text-[#997819] font-bold" >SMAS</span>, <span className="text-[#997819] font-bold" >SafeContractor</span> &<span className="text-[#997819] font-bold" >Constructionline</span>.
+                  Save on Health & Safety Compliance Bundles. Get SSIP-ready with <span className="text-[#997819] font-bold">CHAS</span>, <span className="text-[#997819] font-bold" >SMAS</span>, <span className="text-[#997819] font-bold" >SafeContractor</span> & <span className="text-[#997819] font-bold" >Constructionline</span>.
                   </motion.p>
 
                   {/* CTA: shine sweep + hover lift + tap feedback */}
