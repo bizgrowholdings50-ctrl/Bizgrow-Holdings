@@ -395,7 +395,7 @@ const CHASSchemePage = () => {
               },
               {
                 n: "02",
-                t: "H&S DOCUMENTATION PREPARATION",
+                t: "Documentation & Evidence",
                 d: (
                   <>
                     Develop and update required policies,{" "}
