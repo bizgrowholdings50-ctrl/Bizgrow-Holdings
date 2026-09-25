@@ -17,10 +17,16 @@ import Image from "next/image";
 import Link from "next/link";
 import FadeIn from "@/components/MotionWrapper";
 
+import { createOpenGraph } from "@/lib/openGraphMetadata";
+
 export const metadata = {
   title: "Compliance Consultancies UK | BizGrow Holdings Ltd",
   description:
     "Expert compliance consultancies for UK security businesses. Achieve ISO, ACS & win more contracts with BizGrow Holdings.",
+  openGraph: createOpenGraph(
+    "/compliance-consultancies/",
+    "/compliance-hero-bg.jpg",
+  ),
 };
 
 const ComplianceConsultancyPage = () => {

@@ -13,10 +13,16 @@ import {
 import Link from "next/link";
 import ServicesFaq from "@/components/ServicesFaq";
 
+import { createOpenGraph } from "@/lib/openGraphMetadata";
+
 export const metadata = {
   title: "ISO 14001 Certification UK | Environmental Management System",
   description:
     "Achieve ISO 14001 Certification with BizGrow Holdings, helping UK businesses stay compliant, reduce impact, and strengthen sustainability.",
+  openGraph: createOpenGraph(
+    "/our-services/iso-14001/",
+    "/iso-14001-hero.jpg",
+  ),
 };
 
 const iso14001Data = [

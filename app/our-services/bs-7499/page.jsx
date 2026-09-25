@@ -18,10 +18,13 @@ import {
 import Link from "next/link";
 import ServicesFaq from "@/components/ServicesFaq";
 
+import { createOpenGraph } from "@/lib/openGraphMetadata";
+
 export const metadata = {
   title: "BS 7499 Certification for Static Guarding | BizGrow Holdings",
   description:
     "Get BS 7499 certification for static guarding services in the UK. BizGrow Holdings helps security companies achieve full compliance.",
+  openGraph: createOpenGraph("/our-services/bs-7499/", "/Bizgrow-BS7499.jpg"),
 };
 
 const bs7499Data = [

@@ -3,12 +3,15 @@ import React from "react";
 import FadeIn from "@/components/MotionWrapper";
 import { Mail, Phone, MapPin, ChevronRight, ShieldCheck } from "lucide-react";
 
+import { createOpenGraph } from "@/lib/openGraphMetadata";
+
 export const metadata = {
   title: "Terms and Conditions | BizGrow Holdings Ltd",
   description: "Read the Terms and Conditions of BizGrow Holdings Ltd covering website use, consultancy services, data protection, and UK legal compliance.",
   alternates: {
     canonical: "https://bizgrow-holdings.com/terms/",
   },
+  openGraph: createOpenGraph("/terms-and-conditions/", "/h.png"),
 };
 
 const TermsConditions = () => {

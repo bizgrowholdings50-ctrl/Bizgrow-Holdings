@@ -14,10 +14,16 @@ import {
 import Link from "next/link";
 import ServicesFaq from "@/components/ServicesFaq";
 
+import { createOpenGraph } from "@/lib/openGraphMetadata";
+
 export const metadata = {
   title: "ISO 9001 Certification UK | BizGrow Holdings",
   description:
     "Achieve ISO 9001 certification with BizGrow Holdings. Expert guidance, audits & compliance support for UK businesses.",
+  openGraph: createOpenGraph(
+    "/our-services/iso-9001/",
+    "/iso-9001-hero.jpg",
+  ),
 };
 
 const iso9001Data = [

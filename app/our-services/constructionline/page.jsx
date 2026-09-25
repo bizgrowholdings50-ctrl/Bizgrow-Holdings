@@ -15,10 +15,16 @@ import {
 import Link from "next/link";
 import ServicesFaq from "@/components/ServicesFaq";
 
+import { createOpenGraph } from "@/lib/openGraphMetadata";
+
 export const metadata = {
   title: "ConstructionLine Certification Consultant | BizGrow Holdings",
   description:
     "Get ConstructionLine Certification with BizGrow Holdings Ltd. Build Trust, Win Contracts, and Grow your UK Construction Business",
+  openGraph: createOpenGraph(
+    "/our-services/constructionline/",
+    "/constructionline-service.jpg",
+  ),
 };
 
 const constructionlineData = [

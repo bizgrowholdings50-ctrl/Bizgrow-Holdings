@@ -15,10 +15,16 @@ import {
 import Link from "next/link";
 import ServicesFaq from "@/components/ServicesFaq";
 
+import { createOpenGraph } from "@/lib/openGraphMetadata";
+
 export const metadata = {
   title: "Get SafeContractor Certified: Health & Safety UK Standards",
   description:
     "Get SafeContractor certified and ensure your UK business meets top health & safety standards, boosting credibility and opportunities.",
+  openGraph: createOpenGraph(
+    "/our-services/safe-contractor/",
+    "/safe-contractor-hero.jpg",
+  ),
 };
 
 

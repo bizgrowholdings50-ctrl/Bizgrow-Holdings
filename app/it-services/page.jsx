@@ -21,10 +21,13 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
+import { createOpenGraph } from "@/lib/openGraphMetadata";
+
 export const metadata = {
   title: "Managed IT Services UK | Cyber Security & IT Support",
   description:
     "Secure managed IT services, cyber security, Microsoft 365 & IT support solutions for UK businesses and organisations.",
+  openGraph: createOpenGraph("/it-services/", "/it-hero.jpg"),
 };
 
 const ITServicesPage = () => {

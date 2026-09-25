@@ -12,10 +12,13 @@ import {
 import FadeIn from "@/components/MotionWrapper";
 import Link from "next/link";
 
+import { createOpenGraph } from "@/lib/openGraphMetadata";
+
 export const metadata = {
   title: "Internal Audit Services UK – BizGrow Holdings Ltd",
   description:
     "Enhance compliance, reduce risk, and improve controls with expert internal audit services tailored to UK businesses across all sectors.",
+  openGraph: createOpenGraph("/internal-audit/", "/audit-hero.jpg"),
 };
 const InternalAuditPage = () => {
   return (

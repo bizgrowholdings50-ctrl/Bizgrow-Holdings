@@ -13,10 +13,16 @@ import {
 import Link from "next/link";
 import ServicesFaq from "@/components/ServicesFaq";
 
+import { createOpenGraph } from "@/lib/openGraphMetadata";
+
 export const metadata = {
   title: "ISO 45001 Certification UK | Health & Safety Compliance",
   description:
     "Secure your UK business with ISO 45001 certification from BizGrow Holdings. Streamline safety, stay compliant, and impress auditors.",
+  openGraph: createOpenGraph(
+    "/our-services/iso-45001/",
+    "/iso-45001-hero.jpg",
+  ),
 };
 
 const iso45001Data = [

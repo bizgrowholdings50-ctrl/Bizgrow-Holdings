@@ -12,10 +12,16 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
+import { createOpenGraph } from "@/lib/openGraphMetadata";
+
 export const metadata = {
   title: "COP119 Compliance | BizGrow Holdings Ltd UK Experts",
   description:
     "BizGrow Holdings Ltd provides expert COP119 compliance support, documentation & audit guidance to confidently meet UK standards.",
+  openGraph: createOpenGraph(
+    "/our-services/cop-119-labour-provision/",
+    "/cop-119-hero.jpg",
+  ),
 };
 
 const cop119Data = [

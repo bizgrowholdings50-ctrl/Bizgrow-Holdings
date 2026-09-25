@@ -10,10 +10,13 @@ import {
   ArrowRight,
 } from "lucide-react";
 import Link from "next/link";
+import { createOpenGraph } from "@/lib/openGraphMetadata";
+
 export const metadata = {
   title: "QMS Software by BizGrow Holdings Ltd, UK",
   description:
     "Simplify ISO compliance with BizGrow QMS software. Manage audits, documents, and quality systems for UK businesses.",
+  openGraph: createOpenGraph("/qms-software/", "/qms-bg.jpg"),
 };
 
 const QMSPage = () => {

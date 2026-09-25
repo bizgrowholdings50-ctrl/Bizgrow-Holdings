@@ -10,7 +10,6 @@ import CustomCursor from "@/components/Cursor";
 import EndorsalScript from "@/components/EndorsalScript";
 import WhatsAppWidget from "@/components/WhatsAppWidget";
 import ReferralTracker from "@/components/ReferralTracker";
-// 🚀 Next.js ka built-in Script tag import kiya
 import Script from "next/script";
 import ComplianceChat from "@/components/ComplianceChat";
 import AlertAnnouncementBar from "@/components/AlertPopup";
@@ -88,7 +87,7 @@ export default function RootLayout({ children }) {
         {isProduction && <Analytics />}
         {isProduction && <SpeedInsights />}
         {isProduction && <EndorsalScript />}
-        
+
         {/* 🚀 Microsoft Clarity Bulletproof Script - Sirf production par load hoga */}
         {isProduction && (
           <Script id="microsoft-clarity" strategy="afterInteractive">
@@ -103,18 +102,17 @@ export default function RootLayout({ children }) {
         )}
 
         <ReferralTracker />
-        
+
         <CustomCursor />
         {/* Keep this ancestor overflow-visible so descendant position: sticky uses the page scroll context. */}
         <div className="relative w-full">
-        <Navbar />
-        <SmoothScroll>{children}</SmoothScroll>
-        <Footer />
-         </div>
+          <Navbar />
+          <SmoothScroll>{children}</SmoothScroll>
+          <Footer />
+        </div>
         {/* <ComplianceChat /> */}
-        <WhatsAppWidget /> 
+        <WhatsAppWidget />
         <DiscountWelcomePopup />
-       
       </body>
     </html>
   );

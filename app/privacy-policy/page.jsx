@@ -3,12 +3,15 @@ import React from "react";
 import FadeIn from "@/components/MotionWrapper";
 import { Mail, Phone, MapPin, ChevronRight, ShieldCheck, Lock } from "lucide-react";
 
+import { createOpenGraph } from "@/lib/openGraphMetadata";
+
 export const metadata = {
   title: "Privacy Policy | BizGrow Holdings Ltd",
   description: "Learn how BizGrow Holdings Ltd protects your data. Our Privacy Policy explains data collection and protection for UK security businesses.",
   alternates: {
     canonical: "https://bizgrow-holdings.com/privacy-policy/",
   },
+  openGraph: createOpenGraph("/privacy-policy/", "/h.png"),
 };
 
 const PrivacyPolicy = () => {

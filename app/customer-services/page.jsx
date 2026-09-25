@@ -14,10 +14,13 @@ import FadeIn from "@/components/MotionWrapper";
 import Link from "next/link";
 
 // 📝 ON-PAGE SEO DATA
+import { createOpenGraph } from "@/lib/openGraphMetadata";
+
 export const metadata = {
   title: "Customer Services for Security Businesses | BizGrow Holdings",
   description:
     "Expert customer service for UK security businesses. BizGrow Holdings delivers support in compliance, ISO, ACS, training, and business growth.",
+  openGraph: createOpenGraph("/customer-services/", "/customer-hero.webp"),
 };
 
 const CustomerServicePage = () => {

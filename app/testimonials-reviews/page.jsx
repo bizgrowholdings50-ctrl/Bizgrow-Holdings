@@ -4,9 +4,15 @@ import FadeIn from "@/components/MotionWrapper";
 import VideoTestimonials from "@/components/VideoTestimonials";
 import TextTestimonials from "@/components/TextTestimonials";
 
+import { createOpenGraph } from "@/lib/openGraphMetadata";
+
 export const metadata = {
   title: "BizGrow Holdings Reviews | Client Testimonials & Success Stories",
   description: "Read BizGrow Holdings client testimonials and reviews. Explore real success stories, results, and trusted compliance services.",
+  openGraph: createOpenGraph(
+    "/testimonials-reviews/",
+    "/reviews-bg.jpg",
+  ),
 };
 
 const TestimonialsPage = () => {

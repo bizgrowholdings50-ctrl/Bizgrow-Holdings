@@ -18,6 +18,20 @@ export const metadata = {
   title: "About Us | BizGrow Holdings Ltd, UK Experts",
   description:
     "BizGrow Holdings, UK experts in compliance and certification, supports security businesses to achieve trusted industry standards.",
+  openGraph: {
+    type: "website",
+    locale: "en_GB",
+    url: "https://bizgrow-holdings.com/about-us/",
+    siteName: "BizGrow Holdings",
+    images: [
+      {
+        url: "/about-hero.webp",
+        width: 1200,
+        height: 630,
+        alt: "About BizGrow Holdings",
+      },
+    ],
+  },
 };
 
 export default function AboutUs() {

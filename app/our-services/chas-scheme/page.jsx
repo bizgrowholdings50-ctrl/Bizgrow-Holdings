@@ -14,10 +14,13 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
+import { createOpenGraph } from "@/lib/openGraphMetadata";
+
 export const metadata = {
   title: "CHAS Scheme | BizGrow Holdings | Health & Safety Approval",
   description:
     "Achieve CHAS Scheme approval with BizGrow Holdings. We help UK businesses meet compliance, health, & safety standards with ease.",
+  openGraph: createOpenGraph("/our-services/chas-scheme/", "/chas-hero.jpg"),
 };
 
 const chasData = [

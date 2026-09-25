@@ -13,10 +13,16 @@ import {
 import Link from "next/link";
 import ServicesFaq from "@/components/ServicesFaq";
 
+import { createOpenGraph } from "@/lib/openGraphMetadata";
+
 export const metadata = {
   title: "Cyber Essentials Certification | BizGrow Holdings UK",
   description:
     "Get Cyber Essentials certification in the UK with BizGrow Holdings. Protect your business from cyber threats and build client trust.",
+  openGraph: createOpenGraph(
+    "/our-services/cyber-essentials/",
+    "/cyber-hero.jpg",
+  ),
 };
 
 const cyberEssentialsData = [

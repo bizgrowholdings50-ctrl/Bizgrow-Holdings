@@ -14,10 +14,16 @@ import {
   ClipboardList,
 } from "lucide-react";
 
+import { createOpenGraph } from "@/lib/openGraphMetadata";
+
 export const metadata = {
   title: "Private Security Startup Support | BizGrow Holdings",
   description:
     "Launch and scale your UK security business with BizGrow Holdings. Expert compliance, certification, and growth support.",
+  openGraph: createOpenGraph(
+    "/private-security-startup/",
+    "/security-startup-hero.jpg",
+  ),
 };
 
 const SecurityStartupPage = () => {

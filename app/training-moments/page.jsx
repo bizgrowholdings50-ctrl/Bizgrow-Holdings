@@ -2,6 +2,7 @@ import React from "react";
 import { ArrowRight, Award, GraduationCap, MapPin } from "lucide-react";
 import Image from "next/image";
 import FadeIn from "@/components/MotionWrapper";
+import { createOpenGraph } from "@/lib/openGraphMetadata";
 const galleryItems = [
   {
     id: 1,
@@ -51,6 +52,7 @@ export const metadata = {
   title: "BizGrow Training Moments: Compliance & Growth Simplified",
   description:
     "BizGrow’s expert-led training helps business owners achieve compliance, streamline systems & scale for real growth.",
+  openGraph: createOpenGraph("/training-moments/", "/training-hero.jpg"),
 };
 const TrainingMoments = () => {
   return (

@@ -6,10 +6,13 @@ import { Tag } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 
+import { createOpenGraph } from "@/lib/openGraphMetadata";
+
 export const metadata = {
   title: "Discount Offers - BizGrow Holdings Ltd, UK",
   description:
     "Unlock exclusive business discount offers with BizGrow Holdings. Save on certifications, compliance, and growth services for UK companies.",
+  openGraph: createOpenGraph("/discount-offers/", "/discount_offer1.jpg"),
 };
 
 const offersData = [

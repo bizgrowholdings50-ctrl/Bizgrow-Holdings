@@ -11,10 +11,13 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
+import { createOpenGraph } from "@/lib/openGraphMetadata";
+
 export const metadata = {
   title: "Our Mission | Supporting Compliance & Business Growth UK",
   description:
     "Helping businesses achieve compliance, certifications & sustainable growth with expert guidance from BizGrow Holdings.",
+  openGraph: createOpenGraph("/our-mission/", "/our-mission.webp"),
 };
 
 const MissionPage = () => {

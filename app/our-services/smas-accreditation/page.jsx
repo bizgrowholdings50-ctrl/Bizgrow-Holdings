@@ -15,10 +15,16 @@ import {
 import Link from "next/link";
 import ServicesFaq from "@/components/ServicesFaq";
 
+import { createOpenGraph } from "@/lib/openGraphMetadata";
+
 export const metadata = {
   title: "SMAS Accreditation UK | Fast SSIP Approval – BizGrow Holdings",
   description:
     "Get SMAS accreditation in the UK fast. BizGrow handles SSIP compliance, audits, and policies so you can win more contracts easily.",
+  openGraph: createOpenGraph(
+    "/our-services/smas-accreditation/",
+    "/smas-hero.jpg",
+  ),
 };
 
 const smasData = [

@@ -32,10 +32,16 @@ const cyberEssentialsPlusData = [
     a: "The benefits of Cyber Essentials Plus include independently verified proof of strong cybersecurity controls, boosting client and stakeholder confidence. It helps secure larger contracts, especially in government and regulated industries. It also reduces the risk of costly data breaches and cyberattacks.",
   },
 ];
+import { createOpenGraph } from "@/lib/openGraphMetadata";
+
 export const metadata = {
   title: "Cyber Essentials Plus Certification UK | BizGrow Holdings ltd",
   description:
     "Get Cyber Essentials Plus certified in the UK. Expert consultancy, technical audit support, and proven cyber security compliance.",
+  openGraph: createOpenGraph(
+    "/our-services/cyber-essentials-plus/",
+    "/cyber-plus-hero-org.jpg",
+  ),
 };
 
 const CyberEssentialsPlusPage = () => {

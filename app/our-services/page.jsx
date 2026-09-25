@@ -21,10 +21,13 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
+import { createOpenGraph } from "@/lib/openGraphMetadata";
+
 export const metadata = {
   title: "Our Services - BizGrow Holdings ltd",
   description:
     "BizGrow Holdings helps UK businesses achieve ISO, ACS, & compliance certifications with expert guidance for sustainable growth and success.",
+  openGraph: createOpenGraph("/our-services/", "/service-security.jpg"),
 };
 const ServicesPage = () => {
   const services = [

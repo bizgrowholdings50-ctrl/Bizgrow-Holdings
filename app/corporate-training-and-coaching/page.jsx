@@ -13,10 +13,16 @@ import {
 } from "lucide-react";
 import FadeIn from "@/components/MotionWrapper"; // Assuming you have this component
 import Link from "next/link";
+import { createOpenGraph } from "@/lib/openGraphMetadata";
+
 export const metadata = {
   title: "Corporate Training & Coaching Services | BizGrow Holdings UK",
   description:
     "BizGrow Holdings offers expert corporate training & coaching services, empowering UK security businesses with growth and compliance success.",
+  openGraph: createOpenGraph(
+    "/corporate-training-and-coaching/",
+    "/training-hero.jpg",
+  ),
 };
 const TrainingCoachingPage = () => {
   return (

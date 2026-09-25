@@ -16,10 +16,13 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
+import { createOpenGraph } from "@/lib/openGraphMetadata";
+
 export const metadata = {
   title: "BS 10119 Compliance | BizGrow Holdings Ltd UK Experts",
   description:
     "BizGrow Holdings Ltd provides expert BS 10119 compliance support, documentation & audit guidance to confidently meet UK labour provision standards.",
+  openGraph: createOpenGraph("/our-services/bs-10119/", "/bs10119-h.jpg"),
 };
 
 const stats = [

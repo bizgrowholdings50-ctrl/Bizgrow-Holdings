@@ -18,10 +18,16 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
+import { createOpenGraph } from "@/lib/openGraphMetadata";
+
 export const metadata = {
   title: "UK Private Security Directory | Trusted & Verified Companies",
   description:
     "UK Private Security Directory to find trusted, compliant companies offering guarding, patrols, events & CCTV services..",
+  openGraph: createOpenGraph(
+    "/uks-private-security-directory/",
+    "/private-directory.jpg",
+  ),
 };
 
 const MarketingSolutionsPage = () => {

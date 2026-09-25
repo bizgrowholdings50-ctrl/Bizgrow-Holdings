@@ -5,10 +5,13 @@ import { contactPageSchema } from "@/lib/jsonSchemas";
 import ContactForm from "@/components/ContactForm";
 import { Mail, Phone, MapPin, Globe } from "lucide-react";
 
+import { createOpenGraph } from "@/lib/openGraphMetadata";
+
 export const metadata = {
   title: "Contact Us | Security Business UK | BizGrow Holdings Ltd",
   description:
     "Contact Us with BizGrow Holdings for Expert Support in Compliance, ACS, ISO, and Business Growth Services for UK Security Businesses.",
+  openGraph: createOpenGraph("/contact-us/", "/customer-hero.webp"),
 };
 
 const ContactPage = async ({ searchParams }) => {

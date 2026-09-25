@@ -19,10 +19,13 @@ import {
 import Link from "next/link";
 import ServicesFaq from "@/components/ServicesFaq";
 
+import { createOpenGraph } from "@/lib/openGraphMetadata";
+
 export const metadata = {
   title: "BS 10800 Certification Services | Business Support UK",
   description:
     "BizGrow Holdings helps UK businesses achieve BS 10800 certification to strengthen business continuity and improve audit readiness.",
+  openGraph: createOpenGraph("/our-services/bs-10800/", "/bs10800-hero.jpg"),
 };
 
 const bs10800Data = [

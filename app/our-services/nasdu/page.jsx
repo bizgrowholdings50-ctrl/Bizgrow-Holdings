@@ -40,10 +40,13 @@ const nasduData = [
   },
 ];
 
+import { createOpenGraph } from "@/lib/openGraphMetadata";
+
 export const metadata = {
   title: "NASDU Certification for UK Security Dog Companies",
   description:
     "Get NASDU certified with BizGrow Holdings. Meet UK security dog standards, improve credibility, win contracts & stay compliant.",
+  openGraph: createOpenGraph("/our-services/nasdu/", "/nasdu-hero.jpg"),
 };
 
 const NASDUPage = () => {

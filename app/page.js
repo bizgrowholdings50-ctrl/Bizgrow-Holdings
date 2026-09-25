@@ -147,6 +147,20 @@ export const metadata = {
   title: "BizGrow Holdings | Security Business Growth & Compliance",
   description:
     "BizGrow Holdings helps UK security businesses achieve ISO & ACS compliance, win contracts, and grow with expert guidance and strategies.",
+  openGraph: {
+    type: "website",
+    locale: "en_GB",
+    url: "https://bizgrow-holdings.com/",
+    siteName: "BizGrow Holdings",
+    images: [
+      {
+        url: "/bizgrow-hero-home.jpg",
+        width: 1200,
+        height: 630,
+        alt: "BizGrow Holdings - Security Business Growth and Compliance",
+      },
+    ],
+  },
 };
 
 export default function HomePage() {

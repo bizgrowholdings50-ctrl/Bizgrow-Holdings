@@ -16,10 +16,16 @@ import {
 import Link from "next/link";
 import ServicesFaq from "@/components/ServicesFaq";
 
+import { createOpenGraph } from "@/lib/openGraphMetadata";
+
 export const metadata = {
   title: "BS7858 Screening & Vetting | BizGrow Holdings UK",
   description:
     "Learn the BS7858 screening process for security staff. Ensure compliance, build trust, and protect your business with professional vetting.",
+  openGraph: createOpenGraph(
+    "/our-services/bs7858-screening-vetting/",
+    "/bs7858-hero.webp",
+  ),
 };
 
 const bs7858Data = [
