@@ -1672,3 +1672,1266 @@ requestAnimationFrame(draw); requestAnimationFrame(cursorLoop); runPreloader();
     ring scales 1.16× and the word "Enter" fades in over the portal.
 [ ] No scrollbars at any size; layout holds at 375px, 768px and 1440px wide.
 [ ] Zero console errors; no external libraries.
+
+
+Build a **premium cinematic single-page immersive space experience** called **“Cosmos Interface — Planet Jumping”**.
+
+The visual direction should feel like a high-end experimental digital studio website: minimal, cinematic, atmospheric, editorial, futuristic, smooth, and extremely polished.
+
+Do NOT create a generic space website.
+
+The experience should feel like an interactive **planet-navigation portal**, where the user starts on Mars and can travel through:
+
+**Mars → Earth → Venus**
+
+The interaction quality is the priority. Every transition should feel intentional, fluid, cinematic, and expensive.
+
+==================================================
+
+1. TECHNICAL REQUIREMENTS
+   ==================================================
+
+Create a **single self-contained HTML file**.
+
+Requirements:
+
+* One `.html` file only
+* Inline `<style>`
+* Inline `<script>`
+* No build step
+* No React
+* No Next.js
+* No Three.js
+* No GSAP
+* No Framer Motion
+* No external JS libraries
+* No external CSS libraries
+* Canvas API + vanilla JavaScript only
+* Must work by opening the HTML file directly in a browser
+* No scrollbars
+* Full viewport
+* Responsive
+* Must work at:
+
+  * 375px
+  * 768px
+  * 1440px
+* Avoid console errors
+* Do not replace or invent the supplied assets
+
+The implementation must prioritize performance and smooth animation.
+
+==================================================
+2. EXACT REMOTE ASSETS
+======================
+
+Use these exact URLs.
+
+BASE:
+
+https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P
+
+MARS_BACKGROUND:
+
+https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/3c83091e-4046-4fd6-adbb-2edb728be79a.mp4
+
+TO_EARTH:
+
+https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/fc3ded42-e845-41f3-a830-5cab512d79cd.mp4
+
+TO_VENUS:
+
+https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/b30f64d9-1637-477a-83df-d0fc6461a422.mp4
+
+TO_MARS:
+
+https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/5fc5651c-3b5d-4171-b507-87f7e635d1b4.mp4
+
+MERCURY_IMAGE:
+
+https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/d6fb8b6b-c15e-4aaa-9cf7-45bbb5e33372.jpg
+
+LOGO:
+
+https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/eb7e0f53-50cd-4af5-abc4-8b9a52cdc01b.svg
+
+Every `<video>` must have:
+
+muted
+playsinline
+preload="auto"
+
+Do NOT use the HTML `autoplay` attribute.
+
+Playback must be controlled through JavaScript.
+
+==================================================
+3. TYPOGRAPHY
+=============
+
+Declare these font families with `@font-face` so local font files can be used if available:
+
+"SF Pro"
+weight 400
+
+"SF Pro"
+weight 700
+
+"SF Pro Thin"
+weight 100
+
+"Aalto"
+weight 400
+
+Fallbacks:
+
+SF Pro:
+Arial, sans-serif
+
+SF Pro Thin:
+SF Pro, Arial, sans-serif
+
+Aalto:
+Arial Narrow, sans-serif
+
+Aalto must ONLY be used for the giant planet title.
+
+Root:
+
+font-family: "SF Pro", Arial, sans-serif;
+color: #fff;
+background: #090807;
+font-synthesis: none;
+
+==================================================
+4. OVERALL VISUAL LANGUAGE
+==========================
+
+Use:
+
+* black / near-black background
+* white typography
+* subtle translucent glass UI
+* cinematic video backgrounds
+* soft blur
+* subtle gradients
+* restrained borders
+* no excessive glow
+* no neon cyberpunk styling
+* no stars overlay
+* no generic sci-fi decorations
+* no unnecessary cards
+* no excessive shadows
+
+The visual hierarchy should be:
+
+1. Full-screen planet footage
+2. Giant planet name
+3. Central portal
+4. Minimal navigation
+5. Planet index
+6. Small factual information
+7. Custom cursor
+
+The design should feel closer to an **award-winning experimental agency site** than a traditional astronomy website.
+
+==================================================
+5. INITIAL EXPERIENCE
+=====================
+
+The page starts completely black.
+
+A Mars approach video plays as the cinematic preloader.
+
+During the preloader:
+
+* video fills viewport
+* logo is centered
+* percentage counter is bottom-center
+* counter starts at 0%
+* percentage follows video playback
+* video sequence lasts approximately 3 seconds
+
+The logo must then smoothly fly from the center to the top-left header position.
+
+The counter should blur upward and disappear.
+
+The Mars background should remain underneath the main experience.
+
+==================================================
+6. PRELOADER
+============
+
+DOM:
+
+<div class="preloader" id="preloader">
+  <video id="preloader-video"></video>
+  <div class="preloader-shade"></div>
+</div>
+
+Floating logo:
+
+<img id="floating-logo">
+
+Counter:
+
+<div id="preloader-count">
+  <span id="preloader-value">0</span>
+  <span>%</span>
+</div>
+
+When metadata becomes available:
+
+video.playbackRate =
+Math.max(0.25, video.duration / 3)
+
+Then call:
+
+video.play()
+
+On every animation frame:
+
+percentage =
+Math.round(video.currentTime / video.duration * 100)
+
+When the video ends:
+
+* force percentage to 100
+* animate counter upward with blur
+* dock logo to top-left
+* mark preloader as background
+* add `preload-complete` to body
+* start main experience
+
+The logo movement should use:
+
+cubic-bezier(.16,1,.3,1)
+
+and last approximately 2 seconds.
+
+==================================================
+7. MAIN SCREEN
+==============
+
+After preload:
+
+The Mars background fills the viewport.
+
+Top-right:
+
+Navigation pill:
+
+About
+Explore
+Planets
+
+with About active.
+
+Next to it:
+
+Menu
+
+Use translucent white glass styling.
+
+Left side:
+
+vertical planet list:
+
+Mercury
+Venus
+Earth
+Mars
+Jupiter
+Saturn
+Uranus
+Neptune
+
+Mars is active.
+
+The active planet:
+
+* becomes slightly larger
+* becomes bold
+* receives a 16px white circular indicator
+
+Center:
+
+portal heading:
+
+Next: [03] Earth
+
+Below it:
+
+large invisible interaction area representing a rounded portal window.
+
+Bottom:
+
+giant:
+
+MARS
+
+Use the Aalto font.
+
+Beside/below the giant title:
+
+four factual rows.
+
+==================================================
+8. EXACT PLANET DATA
+====================
+
+planets:
+
+Mercury
+Venus
+Earth
+Mars
+Jupiter
+Saturn
+Uranus
+Neptune
+
+Mars:
+
+name: Mars
+next: Earth
+number: [03]
+
+facts:
+
+Distance:
+About 228 million km (1.5 astronomical units).
+
+Year:
+One Martian year is equal to 687 Earth days.
+
+Temperature:
+Around -60 °C, dropping to -125 °C at the poles in winter.
+
+Atmosphere:
+Very thin, consisting of 95% carbon dioxide, with frequent dust storms.
+
+Earth:
+
+name: Earth
+next: Venus
+number: [02]
+
+facts:
+
+Distance:
+149.6 million km from the Sun.
+
+Year:
+365.25 Earth days.
+
+Temperature:
+Average surface temperature around 15 °C.
+
+Atmosphere:
+Mostly nitrogen and oxygen, supporting life and liquid water.
+
+Venus:
+
+name: Venus
+next: Mercury
+number: [06]
+
+facts:
+
+Distance:
+108.2 million km from the Sun.
+
+Year:
+225 Earth days.
+
+Temperature:
+Around 465 °C — the hottest planet in the Solar System.
+
+Atmosphere:
+Extremely dense, mostly carbon dioxide, with clouds of sulfuric acid.
+
+Venus is terminal.
+
+Clicking the Venus portal must do nothing.
+
+==================================================
+9. CANVAS PORTAL — CORE INTERACTION
+===================================
+
+This is the most important part.
+
+Do NOT simply put a border-radius on a video element.
+
+Create a full-screen fixed canvas:
+
+#portal-canvas
+
+The canvas should render a rounded rectangle mask.
+
+The actual video/image elements must remain invisible.
+
+The canvas samples the media and displays it through the portal shape.
+
+The footage must remain **screen locked**.
+
+This means:
+
+When the portal moves or tilts:
+
+the image underneath does NOT move with the portal.
+
+The portal behaves like a physical window looking through to a stationary cinematic scene.
+
+This creates a fake-3D parallax effect.
+
+==================================================
+10. CANVAS RESOLUTION
+=====================
+
+On resize:
+
+d =
+Math.min(devicePixelRatio || 1, 2)
+
+canvas.width =
+innerWidth * d
+
+canvas.height =
+innerHeight * d
+
+CSS size:
+
+innerWidth
+innerHeight
+
+Then:
+
+ctx.setTransform(d,0,0,d,0,0)
+
+Do this for both:
+
+#portal-canvas
+#scene-canvas
+
+==================================================
+11. COVER DRAWING
+=================
+
+Create:
+
+drawCover(media)
+
+Determine:
+
+media.videoWidth
+media.videoHeight
+
+or:
+
+media.naturalWidth
+media.naturalHeight
+
+Use cover scaling:
+
+scale =
+Math.max(
+innerWidth / mediaWidth,
+innerHeight / mediaHeight
+)
+
+Then center the media.
+
+The media must always fill the entire viewport.
+
+==================================================
+12. PORTAL SHAPE
+================
+
+Portal dimensions:
+
+width:
+min(320px,31vw)
+
+aspect ratio:
+
+320 / 350
+
+Default radius:
+
+90px
+
+The portal is centered approximately at:
+
+50% horizontal
+50% vertical
+
+with:
+
+translate(-50%,-54%)
+
+Create the rounded rectangle manually with sampled points.
+
+For each corner:
+
+10 steps.
+
+Use approximately 44 points total.
+
+Corner arcs:
+
+[w/2-r, -h/2+r, -PI/2, 0]
+
+[w/2-r, h/2-r, 0, PI/2]
+
+[-w/2+r, h/2-r, PI/2, PI]
+
+[-w/2+r, -h/2+r, PI, PI*1.5]
+
+==================================================
+13. FAKE 3D PROJECTION
+======================
+
+Use focal length:
+
+850
+
+Given:
+
+rx
+ry
+
+Convert to radians.
+
+Projection:
+
+xx = x * cos(ay)
+
+yy = y * cos(ax)
+
+z = x * sin(ay) - y * sin(ax)
+
+p = 850 / (850 + z)
+
+screenX =
+cx + xx * p
+
+screenY =
+cy + yy * p
+
+This creates the fake 3D perspective.
+
+==================================================
+14. POINTER TILT
+================
+
+On pointer movement:
+
+targetY =
+(clientX / innerWidth - .5) * 37.4
+
+targetX =
+(clientY / innerHeight - .5) * -33
+
+Maximum approximate rotation:
+
+Y:
+±18.7°
+
+X:
+±16.5°
+
+Do NOT snap.
+
+Smooth toward target every animation frame.
+
+Use:
+
+rotX +=
+(targetX - rotX) *
+Math.min(1, dt * .009)
+
+rotY +=
+(targetY - rotY) *
+Math.min(1, dt * .009)
+
+Clamp frame delta to 40ms.
+
+On pointerleave:
+
+targetX = 0
+targetY = 0
+
+On touch devices:
+
+keep rotation at zero.
+
+==================================================
+15. PORTAL OPENING
+==================
+
+At initial state:
+
+maskScale = 0
+
+Then animate:
+
+maskScale:
+
+0 → 1
+
+over:
+
+1050ms
+
+using:
+
+t < .5
+? 4*t*t*t
+: 1 - Math.pow(-2*t+2,3)/2
+
+As the mask opens:
+
+center moves toward viewport center
+
+width expands from portal width to viewport width
+
+height expands from portal height to viewport height
+
+corner radius:
+
+90 * (1-e) * scale
+
+rotation:
+
+rx * (1-e)
+ry * (1-e)
+
+At e = 1:
+
+rotation = 0
+radius = 0
+portal fills viewport
+
+==================================================
+16. SHADE
+=========
+
+The bottom of the viewport should have:
+
+linear gradient
+
+starting around:
+
+52% viewport height
+
+from transparent
+
+to:
+
+rgba(0,0,0,.88)
+
+The shade covers the lower 48%.
+
+==================================================
+17. MARS → EARTH TRANSITION
+===========================
+
+When the portal is clicked:
+
+If busy:
+
+do nothing.
+
+If current planet is Venus:
+
+do nothing.
+
+Otherwise:
+
+busy = true
+
+reset tilt targets to zero.
+
+Determine next:
+
+Mars → Earth
+
+Earth → Venus
+
+Load the current state's portal video into:
+
+#transition-video
+
+Wait for:
+
+canplaythrough
+
+OR
+
+error
+
+OR
+
+1600ms timeout
+
+Then:
+
+remove loading classes
+
+add:
+
+is-transitioning
+
+Set:
+
+currentTime = 0
+
+playbackRate = 1.3
+
+canvasOpacity = 1
+
+transitionActive = true
+
+play video.
+
+==================================================
+18. TRANSITION MASK
+===================
+
+Animate:
+
+expansion:
+
+0 → 1
+
+over:
+
+1100ms
+
+using the same easeInOutCubic function.
+
+During this:
+
+* chrome fades away
+* portal grows
+* portal becomes full screen
+* radius collapses
+* tilt disappears
+* transition video becomes the canvas media
+
+The effect should feel like the user is physically entering the portal.
+
+==================================================
+19. FREEZE FINAL FRAME
+======================
+
+When transition video ends:
+
+Create a frozen frame.
+
+Clear:
+
+#scene-canvas
+
+Draw the final video frame into it using cover mode.
+
+Then:
+
+current =
+next planet
+
+render()
+
+Wait two animation frames.
+
+Then:
+
+transitionActive = false
+
+expansion = 0
+
+maskScale = 0
+
+canvasOpacity = 1
+
+Remove:
+
+is-transitioning
+is-committing
+
+Reveal the new planet's portal again.
+
+==================================================
+20. STATE REVEAL
+================
+
+When switching planet:
+
+retrigger:
+
+.mask-revealing
+
+by:
+
+remove class
+force reflow using offsetWidth
+add class
+
+Then animate:
+
+maskScale:
+
+0 → 1
+
+over:
+
+1050ms
+
+After approximately 100ms:
+
+reveal the planet content.
+
+==================================================
+21. PLANET SWITCH ANIMATION
+===========================
+
+Planet list should re-render.
+
+On every state switch:
+
+remove:
+
+is-switching
+
+force reflow:
+
+void element.offsetWidth
+
+then add:
+
+is-switching
+
+Each planet row should animate in from:
+
+translateX(-8px)
+
+with slight opacity change.
+
+Stagger:
+
+.02s
+.05s
+.08s
+.11s
+.14s
+.17s
+.20s
+.23s
+
+Active planet dot should animate from scale 0 to 1.
+
+==================================================
+22. CONTENT ANIMATION
+=====================
+
+Planet title:
+
+starts:
+
+opacity 0
+blur 12px
+translate(-32px,42px)
+
+ends:
+
+opacity 1
+blur 0
+translate(-32px,0)
+
+Duration:
+
+1.05s
+
+Facts:
+
+start:
+
+opacity 0
+blur 7px
+translateY(18px)
+
+end:
+
+opacity 1
+blur 0
+translateY(0)
+
+Duration:
+
+.72s
+
+Delays:
+
+fact 1:
+.52s
+
+fact 2:
+.68s
+
+fact 3:
+.84s
+
+fact 4:
+1s
+
+==================================================
+23. CUSTOM CURSOR
+=================
+
+Hide the browser cursor:
+
+html,
+body,
+button,
+a,
+.portal {
+cursor:none!important;
+}
+
+Create:
+
+.custom-cursor
+
+with:
+
+12px white dot
+
+36px translucent circular ring
+
+The cursor follows using interpolation:
+
+position +=
+(target - position) * .2
+
+The cursor appears after first pointer movement.
+
+When pointer leaves document:
+
+hide it.
+
+When hovering over portal:
+
+scale ring:
+
+1.16
+
+and display:
+
+Enter
+
+under the cursor.
+
+Use smooth transitions.
+
+==================================================
+24. RESPONSIVE
+==============
+
+At max-width 900px:
+
+hide navigation pill
+
+portal:
+
+min(300px,48vw)
+
+title:
+
+clamp(105px,24vw,190px)
+
+facts width:
+
+43vw
+
+fact first column:
+
+110px
+
+planet list:
+
+14px
+
+active:
+
+16px
+
+At max-width 640px:
+
+hide planet list
+
+portal:
+
+min(260px,66vw)
+
+top:
+
+44%
+
+content:
+
+left 18px
+right 18px
+bottom 18px
+
+title:
+
+clamp(98px,30vw,160px)
+
+facts:
+
+100% width
+
+font-size:
+
+13px
+
+fact columns:
+
+92px 1fr
+
+portal heading:
+
+14px
+
+portal heading strong:
+
+16px
+
+menu:
+
+38px height
+
+portal radius:
+
+70px
+
+==================================================
+25. EXACT DOM IDS
+=================
+
+Use these IDs exactly:
+
+preloader
+preloader-video
+preloader-count
+preloader-value
+floating-logo
+scene-canvas
+portal-canvas
+portal
+portal-video
+portal-image
+next-number
+next-name
+planet-title
+facts
+transition-video
+
+Classes:
+
+experience
+backgrounds
+background
+preloader
+preloader-shade
+floating-logo
+preloader-count
+shade
+header
+chrome
+header-actions
+nav
+menu
+planet-list
+planet-item
+portal-wrap
+portal-heading
+portal
+portal-canvas
+planet-content
+fact
+transition-layer
+loading
+custom-cursor
+cursor-orbit
+cursor-dot
+cursor-label
+
+==================================================
+26. EXACT STARTUP ORDER
+=======================
+
+At the very end of the JavaScript:
+
+1. Pause and rewind every background video.
+2. resizeCanvas()
+3. render()
+4. requestAnimationFrame(draw)
+5. requestAnimationFrame(cursorLoop)
+6. runPreloader()
+
+Do not change this order.
+
+==================================================
+27. ACCESSIBILITY
+=================
+
+Use:
+
+aria-hidden="true"
+
+for purely visual canvases.
+
+Portal button must have:
+
+aria-label="Travel to Earth"
+
+and update dynamically.
+
+Preloader:
+
+aria-label="Loading Mars"
+
+Planet facts:
+
+use semantic:
+
+<dl>
+<div class="fact">
+<dt>...</dt>
+<dd>...</dd>
+</div>
+</dl>
+
+==================================================
+28. PERFORMANCE
+===============
+
+Do NOT:
+
+* continuously create DOM nodes during animation
+* use setInterval for animation
+* use expensive filters every frame
+* redraw unnecessary layers
+* use huge canvas resolution above 2x DPR
+* load external libraries
+* create WebGL unless absolutely necessary
+
+Use requestAnimationFrame.
+
+Clamp animation delta to 40ms.
+
+Keep the portal canvas fixed to the viewport.
+
+==================================================
+29. IMPORTANT MEDIA BEHAVIOUR
+=============================
+
+The portal's media elements are NOT visually displayed directly.
+
+These:
+
+#portal-video
+#portal-image
+
+must be hidden/invisible.
+
+They exist only as media sources.
+
+The canvas is responsible for rendering them.
+
+This is critical.
+
+The portal is a moving window over a stationary full-screen cinematic image/video.
+
+Do NOT implement the portal as a transformed video element.
+
+==================================================
+30. VENUS TERMINAL STATE
+========================
+
+When the user reaches Venus:
+
+Title:
+
+VENUS
+
+Next:
+
+Next: [06] Mercury
+
+The portal should show the Mercury still image.
+
+No transition video should be used for the Venus portal.
+
+Clicking it must do nothing.
+
+Do not set busy state.
+
+Do not animate.
+
+==================================================
+31. ERROR HANDLING
+==================
+
+All media playback must gracefully handle:
+
+* autoplay/play rejection
+* loading error
+* missing metadata
+* slow network
+* transition timeout
+
+If the preloader video cannot play:
+
+finish the preloader gracefully.
+
+If transition loading fails:
+
+still complete the transition after timeout rather than leaving the page permanently locked.
+
+Never leave:
+
+busy = true
+
+after an error.
+
+==================================================
+32. FINAL QUALITY BAR
+=====================
+
+The final result should NOT look like a coding demo.
+
+It should look like a premium interactive studio experiment.
+
+Priorities:
+
+1. Cinematic transitions
+2. Smooth portal movement
+3. Screen-locked media parallax
+4. Elegant typography
+5. Minimal interface
+6. Strong spatial hierarchy
+7. Responsive behaviour
+8. No visual glitches
+9. No console errors
+10. No unnecessary UI
+
+Do not add extra sections, cards, buttons, stars, particles, gradients, or decorative elements that are not specified.
+
+Preserve the exact minimalist composition.
+
+Return the **complete working HTML file**, not snippets, not pseudocode, and not an explanation.
+
+Everything must be contained inside one HTML file.
