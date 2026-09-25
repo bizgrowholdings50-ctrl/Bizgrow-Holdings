@@ -32,6 +32,9 @@ export const metadata = {
   title: "SIA ACS Certification | BizGrow Holdings Ltd",
   description:
     "Achieve SIA ACS certification with BizGrow Holdings. Elevate your UK security business with Compliance, Trusted Standards, & Excellence.",
+  alternates: {
+    canonical: "https://bizgrow-holdings.com/our-services/sia-acs/",
+  },
   openGraph: {
     type: "website",
     locale: "en_GB",

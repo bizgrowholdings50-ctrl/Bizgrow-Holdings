@@ -52,6 +52,9 @@ export const metadata = {
   title: "BizGrow Blogs | Compliance, Certification & Growth Tips",
   description:
     "Learn how to achieve compliance, secure certifications & scale your business with expert advice from BizGrow Holdings.",
+  alternates: {
+    canonical: "https://bizgrow-holdings.com/blogs/",
+  },
 };
 
 export default async function BlogPage({ params }) {

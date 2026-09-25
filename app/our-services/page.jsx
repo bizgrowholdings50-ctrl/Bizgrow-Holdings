@@ -27,6 +27,9 @@ export const metadata = {
   title: "Our Services - BizGrow Holdings ltd",
   description:
     "BizGrow Holdings helps UK businesses achieve ISO, ACS, & compliance certifications with expert guidance for sustainable growth and success.",
+  alternates: {
+    canonical: "https://bizgrow-holdings.com/our-services/",
+  },
   openGraph: createOpenGraph("/our-services/", "/service-security.jpg"),
 };
 const ServicesPage = () => {

@@ -7,6 +7,9 @@ export const metadata = {
   title: "FAQs on ACS, ISO, CHAS & Compliance | BizGrow Holdings UK",
   description:
     "Explore BizGrow Holdings FAQs for Clear Answers on ACS, ISO, CHAS, and Compliance to Support your UK Security Business Growth",
+  alternates: {
+    canonical: "https://bizgrow-holdings.com/faqs/",
+  },
   openGraph: {
     type: "website",
     locale: "en_GB",

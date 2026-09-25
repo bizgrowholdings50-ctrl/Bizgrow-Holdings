@@ -9,6 +9,9 @@ import { createOpenGraph } from "@/lib/openGraphMetadata";
 export const metadata = {
   title: "BizGrow Holdings Reviews | Client Testimonials & Success Stories",
   description: "Read BizGrow Holdings client testimonials and reviews. Explore real success stories, results, and trusted compliance services.",
+  alternates: {
+    canonical: "https://bizgrow-holdings.com/testimonials-reviews/",
+  },
   openGraph: createOpenGraph(
     "/testimonials-reviews/",
     "/reviews-bg.jpg",

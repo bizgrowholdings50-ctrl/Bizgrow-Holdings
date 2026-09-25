@@ -17,6 +17,9 @@ export const metadata = {
   title: "Our Mission | Supporting Compliance & Business Growth UK",
   description:
     "Helping businesses achieve compliance, certifications & sustainable growth with expert guidance from BizGrow Holdings.",
+  alternates: {
+    canonical: "https://bizgrow-holdings.com/our-mission/",
+  },
   openGraph: createOpenGraph("/our-mission/", "/our-mission.webp"),
 };
 
