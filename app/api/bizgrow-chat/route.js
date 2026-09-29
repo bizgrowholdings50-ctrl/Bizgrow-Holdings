@@ -499,7 +499,7 @@ GENERAL KNOWLEDGE FALLBACK:
 
 - When both BizGrow-specific information and reliable general knowledge are available, use the BizGrow content for BizGrow-specific claims and general knowledge to add useful context without contradicting the source.
 
-- Always finish the answer cleanly; never cut off mid-sentence.`,
+- Always finish the answer cleanly; never cut off mid-sentence`,
     };
 
     const requestMessages = [systemPrompt];
