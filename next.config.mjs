@@ -35,6 +35,7 @@ const securityHeaders = [
       "style-src 'self' 'unsafe-inline' https://cdn.endorsal.io https://fonts.googleapis.com; " +
       "img-src 'self' https://cms.bizgrow-holdings.com https://cdn.endorsal.io https://*.cloudfront.net https://www.google.com https://lh3.googleusercontent.com https://www.google-analytics.com https://*.google-analytics.com https://c.bing.com data: blob:; " +
       "font-src 'self' https://fonts.gstatic.com data:; " +
+      "media-src 'self' blob:; " +
       // 🔹 FIX: connect-src mein wss:// domains add kar diye hain
       "connect-src 'self' https://cdn.endorsal.io https://*.endorsal.io https://va.vercel-scripts.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://*.clarity.ms https://*.supabase.co https://*.supabase.in wss://*.supabase.co wss://*.supabase.in https://c.bing.com; " +
       "frame-src 'self' https://www.google.com https://challenges.cloudflare.com blob:; " +

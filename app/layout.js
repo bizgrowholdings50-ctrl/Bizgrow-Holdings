@@ -13,6 +13,7 @@ import ReferralTracker from "@/components/ReferralTracker";
 import Script from "next/script";
 import ComplianceChat from "@/components/ComplianceChat";
 import AlertAnnouncementBar from "@/components/AlertPopup";
+import BizGrowAssistant from "@/components/BizGrowAssistant";
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -112,6 +113,7 @@ export default function RootLayout({ children }) {
         </div>
         {/* <ComplianceChat /> */}
         <WhatsAppWidget />
+        <BizGrowAssistant />
         <DiscountWelcomePopup />
       </body>
     </html>

@@ -28,6 +28,36 @@ h1, h2, h3, h4, h5, h6 ,span {
 .animate-marquee {
   animation: marquee 40s linear infinite;
 }
+
+.assistant-voice-wave {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  height: 34px;
+}
+
+.assistant-voice-wave__bar {
+  width: 3px;
+  height: 5px;
+  border-radius: 9999px;
+  background: linear-gradient(to top, #22d3ee, #818cf8);
+  box-shadow: 0 0 8px rgb(34 211 238 / 60%);
+  animation: assistant-voice-wave 650ms ease-in-out infinite;
+  animation-delay: var(--wave-delay);
+}
+
+@keyframes assistant-voice-wave {
+  0%, 100% { height: 5px; opacity: 0.65; }
+  50% { height: var(--wave-peak); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .assistant-voice-wave__bar {
+    animation: none;
+    height: var(--wave-peak);
+  }
+}
 /* Saare paragraphs (p) ke liye clean aur readable Inter style */
 p {
   font-family: var(--font-inter), var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
@@ -167,4 +197,9 @@ div.blog-content-flow a,
     display: table !important;
     white-space: normal !important;
   }
+}
+
+@keyframes wave-slide {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
