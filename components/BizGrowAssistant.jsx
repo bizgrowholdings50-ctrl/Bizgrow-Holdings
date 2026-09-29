@@ -668,31 +668,35 @@ export default function BizGrowAssistant() {
               speakText(welcomeText, 0);
             }
           }}
-          className="fixed bottom-13 left-9 z-50 bg-slate-950/90 hover:bg-slate-900 text-white p-2.5 pr-5 rounded-full shadow-[0_10px_30px_rgba(6,182,212,0.3)] flex items-center gap-3.5 transition-all duration-300 transform hover:scale-105 font-medium cursor-pointer border border-cyan-500/40 hover:border-cyan-400 backdrop-blur-2xl group"
+          className="group fixed bottom-6 left-6 z-50 h-16 w-16 hover:w-[190px] rounded-full bg-slate-950/95 text-white border border-cyan-500/40 hover:border-cyan-400 shadow-[0_10px_35px_rgba(6,182,212,0.28)] backdrop-blur-2xl flex items-center overflow-hidden transition-[width,border-color,box-shadow] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] cursor-pointer"
+          aria-label="Open BizGrow AI Assistant"
         >
-          {/* Avatar Container with Sound Wave / Pulse Effect */}
-          <div className="relative w-10 h-10 rounded-full flex items-center justify-center shrink-0">
-            {/* Outer Sound Wave Rings */}
-            <span className="absolute inset-0 rounded-full bg-cyan-400/30 animate-ping"></span>
-            <span className="absolute -inset-1 rounded-full border border-cyan-400/50 animate-pulse"></span>
+          {/* Robot */}
+          <div className="relative w-16 h-16 shrink-0 flex items-center justify-center">
+            {/* Soft glow */}
+            <span className="absolute inset-1 rounded-full bg-cyan-400/20 blur-md opacity-70 group-hover:opacity-100 transition-opacity duration-500" />
 
-            {/* Robot Image Frame */}
-            <div className="relative w-10 h-10 rounded-full overflow-hidden border border-cyan-400/80 bg-slate-900 shadow-inner">
+            {/* Pulse ring */}
+            <span className="absolute inset-0 rounded-full border border-cyan-400/30 animate-pulse" />
+
+            {/* Robot image */}
+            <div className="relative w-12 h-12 rounded-full overflow-hidden border border-cyan-400/80 bg-slate-900 shadow-[0_0_18px_rgba(34,211,238,0.35)] transition-transform duration-500 ease-out group-hover:scale-105">
               <img
-                src="/BizGrow-Ai - Copy.png" // Yahan apni robot image ka public path dein
+                src="/BizGrow-Ai - Copy.png"
                 alt="BizGrow AI Robot"
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                className="w-full h-full object-cover"
               />
             </div>
           </div>
 
-          {/* Button Label */}
-          <div className="flex flex-col text-left">
+          {/* Hover Content */}
+          <div className="flex flex-col text-left whitespace-nowrap opacity-0 -translate-x-3 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-400 ease-out pr-5">
             <span className="text-xs font-semibold tracking-wide text-white flex items-center gap-1.5">
-              BizGrow AI{" "}
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              BizGrow AI
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
             </span>
-            <span className="text-[10px] text-cyan-400/90 font-medium">
+
+            <span className="text-[10px] text-cyan-400/90 font-medium mt-0.5">
               Compliance Assistant
             </span>
           </div>
