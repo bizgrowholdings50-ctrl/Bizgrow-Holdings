@@ -25,7 +25,7 @@ export default function BizGrowAssistant() {
   const ttsAbortControllerRef = useRef(null);
   const latestSpeechRef = useRef(null);
   const welcomeText =
-    "Hello and a warm welcome to BizGrow Holdings. I am your dedicated AI compliance consultant. How may I assist you with our Health & Safety accreditations, ISO standards, or digital solutions today?";
+    "Hello and a warm welcome to BizGrow Holdings. I am your dedicated AI compliance assistant. How may I assist you with your compliance queries?";
 
   useEffect(() => {
     if (!("speechSynthesis" in window)) return;
