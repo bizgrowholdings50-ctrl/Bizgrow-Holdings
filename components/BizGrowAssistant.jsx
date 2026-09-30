@@ -52,7 +52,9 @@ export default function BizGrowAssistant() {
         setMicStatus("blocked");
       } else {
         setMicStatus((current) => (current === "blocked" ? "idle" : current));
-        setMicNotice((current) => (current?.type === "blocked" ? null : current));
+        setMicNotice((current) =>
+          current?.type === "blocked" ? null : current,
+        );
       }
     };
 
@@ -87,6 +89,18 @@ export default function BizGrowAssistant() {
       });
     }
   }, [messages, loading, speechProgress?.visibleLength, micNotice]);
+  // Automatically scroll to bottom ONLY when a new user message is added
+  useEffect(() => {
+    const lastMessage = messages[messages.length - 1];
+    if (lastMessage && lastMessage.role === "user") {
+      if (messagesContainerRef.current) {
+        messagesContainerRef.current.scrollTo({
+          top: messagesContainerRef.current.scrollHeight,
+          behavior: "smooth",
+        });
+      }
+    }
+  }, [messages]);
 
   // Markdown symbols hatane ke liye
   const cleanText = (text) => {
@@ -739,8 +753,9 @@ export default function BizGrowAssistant() {
     // 2) Browser TTS / muted: poora text, word-by-word fade reveal
     if (revealState?.messageIndex === index) {
       const parts = messageText.split(/(\s+)/);
-      const wordCount = parts.filter((part) => part && !/^\s+$/.test(part))
-        .length;
+      const wordCount = parts.filter(
+        (part) => part && !/^\s+$/.test(part),
+      ).length;
       // Total reveal ~1.4 second se zyada nahi lagna chahiye
       const step = Math.min(40, 1400 / Math.max(1, wordCount));
       let wordIndex = 0;
@@ -773,7 +788,7 @@ export default function BizGrowAssistant() {
   const micIsOff = micStatus === "blocked" || micStatus === "unavailable";
 
   return (
-    <div className="fixed bottom-6 left-6 z-50 font-sans">
+    <div className="fixed bottom-6 left-6 z-50 font-sans  ">
       <style jsx global>{`
         .organic-wave {
           animation: organicWave 2.8s ease-in-out infinite;
@@ -781,15 +796,42 @@ export default function BizGrowAssistant() {
         }
 
         @keyframes organicWave {
-          0% { transform: scaleY(0.55) translateY(2px); opacity: 0.55; }
-          12% { transform: scaleY(1.05) translateY(-1px); opacity: 0.9; }
-          25% { transform: scaleY(0.7) translateY(1px); opacity: 0.7; }
-          39% { transform: scaleY(1.25) translateY(-2px); opacity: 1; }
-          52% { transform: scaleY(0.45) translateY(2px); opacity: 0.5; }
-          66% { transform: scaleY(0.9) translateY(-1px); opacity: 0.85; }
-          78% { transform: scaleY(1.35) translateY(-2px); opacity: 1; }
-          90% { transform: scaleY(0.65) translateY(1px); opacity: 0.65; }
-          100% { transform: scaleY(0.55) translateY(2px); opacity: 0.55; }
+          0% {
+            transform: scaleY(0.55) translateY(2px);
+            opacity: 0.55;
+          }
+          12% {
+            transform: scaleY(1.05) translateY(-1px);
+            opacity: 0.9;
+          }
+          25% {
+            transform: scaleY(0.7) translateY(1px);
+            opacity: 0.7;
+          }
+          39% {
+            transform: scaleY(1.25) translateY(-2px);
+            opacity: 1;
+          }
+          52% {
+            transform: scaleY(0.45) translateY(2px);
+            opacity: 0.5;
+          }
+          66% {
+            transform: scaleY(0.9) translateY(-1px);
+            opacity: 0.85;
+          }
+          78% {
+            transform: scaleY(1.35) translateY(-2px);
+            opacity: 1;
+          }
+          90% {
+            transform: scaleY(0.65) translateY(1px);
+            opacity: 0.65;
+          }
+          100% {
+            transform: scaleY(0.55) translateY(2px);
+            opacity: 0.55;
+          }
         }
 
         .bizgrow-reveal-word {
@@ -820,7 +862,7 @@ export default function BizGrowAssistant() {
               speakText(welcomeText, 0);
             }
           }}
-          className="group fixed bottom-6 left-6 z-50 h-16 w-16 hover:w-[190px] rounded-full bg-slate-950/95 text-white border border-cyan-500/40 hover:border-cyan-400 shadow-[0_10px_35px_rgba(6,182,212,0.28)] backdrop-blur-2xl flex items-center overflow-hidden transition-[width,border-color,box-shadow] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] cursor-pointer"
+          className="group fixed bottom-2 left-6 z-50 h-16 w-16 hover:w-[190px] rounded-full bg-slate-950/95 text-white border border-cyan-500/40 hover:border-cyan-400 shadow-[0_10px_35px_rgba(6,182,212,0.28)] backdrop-blur-2xl flex items-center overflow-hidden transition-[width,border-color,box-shadow] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] cursor-pointer"
           aria-label="Open BizGrow AI Assistant"
         >
           {/* Robot */}
@@ -856,263 +898,267 @@ export default function BizGrowAssistant() {
       )}
 
       {isOpen && (
-        <div
-          style={{ height: "min(490px, calc(100dvh - 2rem))" }}
-          className="w-[370px] sm:w-[420px] min-h-0 bg-slate-950/95 text-slate-100 border border-slate-800 rounded-[32px] shadow-2xl flex flex-col overflow-hidden backdrop-blur-2xl animate-in fade-in slide-in-from-bottom-5 duration-300"
-        >
-          {/* Header with Glowing Orb */}
-          <div className="relative pt-4 pb-3 px-5 flex flex-col items-center bg-gradient-to-b from-slate-900/80 to-transparent border-b border-slate-800/60 shrink-0">
-            {/* Top Action Controls Row */}
-            <div className="w-full flex items-center justify-between mb-2">
-              <button
-                onClick={() => {
-                  setIsMuted(!isMuted);
-                  if (!isMuted) stopCurrentSpeech();
-                }}
-                className={`px-2.5 py-1 rounded-full text-[11px] transition cursor-pointer border backdrop-blur-md ${
-                  isMuted
-                    ? "bg-red-500/10 border-red-500/30 text-red-300"
-                    : "bg-slate-800/60 border-slate-700 text-slate-300 hover:bg-slate-800"
-                }`}
-              >
-                {isMuted ? "🔇 Muted" : "🔊 Sound On"}
-              </button>
-
-              <div className="flex items-center gap-2">
-                {latestSpeechRef.current && !isSpeaking && isMuted && (
-                  <button
-                    type="button"
-                    onClick={() => {
-                      const lastSpeech = latestSpeechRef.current;
-                      if (!lastSpeech) return;
-                      setIsMuted(false);
-                      speakText(
-                        lastSpeech.text,
-                        lastSpeech.messageIndex,
-                        true,
-                        lastSpeech.spokenText,
-                      );
-                    }}
-                    className="flex items-center gap-1 text-[11px] text-slate-300 hover:text-white transition cursor-pointer"
-                    title="Listen again"
-                  >
-                    <Play className="w-3 h-3" aria-hidden="true" />
-                    Listen again
-                  </button>
-                )}
-
+        <div className="fixed inset-x-4 bottom-6 z-50 flex justify-center md:justify-start">
+          <div
+            style={{ height: "min(490px, calc(100dvh - 2rem))" }}
+            className="w-full max-w-[400px] min-h-0 bg-slate-950/95 text-slate-100 border border-slate-800 rounded-[32px] shadow-2xl flex flex-col overflow-hidden backdrop-blur-2xl animate-in fade-in slide-in-from-bottom-5 duration-300"
+          >
+            {/* Header with Glowing Orb */}
+            <div className="relative pt-4 pb-3 px-5 flex flex-col items-center bg-gradient-to-b from-slate-900/80 to-transparent border-b border-slate-800/60 shrink-0">
+              {/* Top Action Controls Row */}
+              <div className="w-full flex items-center justify-between -mb-3">
                 <button
                   onClick={() => {
-                    stopCurrentSpeech();
-                    setIsOpen(false);
+                    setIsMuted(!isMuted);
+                    if (!isMuted) stopCurrentSpeech();
                   }}
-                  className="text-slate-400 hover:text-white font-bold text-lg px-1.5 leading-none cursor-pointer transition"
-                  aria-label="Close"
+                  className={`px-2.5 py-1 rounded-full text-[11px] transition cursor-pointer border backdrop-blur-md ${
+                    isMuted
+                      ? "bg-red-500/10 border-red-500/30 text-red-300"
+                      : "bg-slate-800/60 border-slate-700 text-slate-300 hover:bg-slate-800"
+                  }`}
                 >
-                  &times;
+                  {isMuted ? "🔇 Muted" : "🔊 Sound On"}
                 </button>
-              </div>
-            </div>
-            {/* ================= AI ROBOT + ORGANIC VOICE WAVE ================= */}
-            <div className="relative w-14 h-14 flex items-center justify-center my-1">
-              {isSpeaking && (
-                <div className="absolute inset-x-[-32px] top-1/2 -translate-y-1/2 h-14 z-0 pointer-events-none">
-                  <svg
-                    viewBox="0 0 220 56"
-                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[220px] h-14 overflow-visible"
-                  >
-                    {/* Soft Glow */}
-                    <path
-                      d="
-            M0 28
-            C10 28 15 20 25 28
-            C35 36 42 14 52 25
-            C62 36 70 42 80 27
-            C90 12 98 20 108 28
-            C118 36 125 39 135 25
-            C145 11 153 18 162 29
-            C171 40 180 31 190 25
-            C200 19 207 28 220 28
-          "
-                      fill="none"
-                      stroke="rgba(34,211,238,0.32)"
-                      strokeWidth="7"
-                      strokeLinecap="round"
-                      className="blur-[5px]"
-                    />
 
-                    {/* Main Organic Wave */}
-                    <path
-                      d="
-            M0 28
-            C10 28 15 20 25 28
-            C35 36 42 14 52 25
-            C62 36 70 42 80 27
-            C90 12 98 20 108 28
-            C118 36 125 39 135 25
-            C145 11 153 18 162 29
-            C171 40 180 31 190 25
-            C200 19 207 28 220 28
-          "
-                      fill="none"
-                      stroke="rgb(103,232,249)"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      className="organic-wave"
-                    />
-                  </svg>
+                <div className="flex items-center gap-2">
+                  {latestSpeechRef.current && !isSpeaking && isMuted && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const lastSpeech = latestSpeechRef.current;
+                        if (!lastSpeech) return;
+                        setIsMuted(false);
+                        speakText(
+                          lastSpeech.text,
+                          lastSpeech.messageIndex,
+                          true,
+                          lastSpeech.spokenText,
+                        );
+                      }}
+                      className="flex items-center gap-1 text-[11px] text-slate-300 hover:text-white transition cursor-pointer"
+                      title="Listen again"
+                    >
+                      <Play className="w-3 h-3" aria-hidden="true" />
+                      Listen again
+                    </button>
+                  )}
+
+                  <button
+                    onClick={() => {
+                      stopCurrentSpeech();
+                      setIsOpen(false);
+                    }}
+                    className="text-slate-400 hover:text-white font-bold text-lg px-1.5 leading-none cursor-pointer transition"
+                    aria-label="Close"
+                  >
+                    &times;
+                  </button>
+                </div>
+              </div>
+              {/* ================= AI ROBOT + ORGANIC VOICE WAVE ================= */}
+              <div className="relative w-14 h-14 flex items-center justify-center my-1">
+                {isSpeaking && (
+                  <div className="absolute inset-x-[-32px] top-1/2 -translate-y-1/2 h-14 z-0 pointer-events-none">
+                    <svg
+                      viewBox="0 0 220 56"
+                      className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[220px] h-14 overflow-visible"
+                    >
+                      {/* Soft Glow */}
+                      <path
+                        d="
+              M0 28
+              C10 28 15 20 25 28
+              C35 36 42 14 52 25
+              C62 36 70 42 80 27
+              C90 12 98 20 108 28
+              C118 36 125 39 135 25
+              C145 11 153 18 162 29
+              C171 40 180 31 190 25
+              C200 19 207 28 220 28
+            "
+                        fill="none"
+                        stroke="rgba(34,211,238,0.32)"
+                        strokeWidth="7"
+                        strokeLinecap="round"
+                        className="blur-[5px]"
+                      />
+
+                      {/* Main Organic Wave */}
+                      <path
+                        d="
+              M0 28
+              C10 28 15 20 25 28
+              C35 36 42 14 52 25
+              C62 36 70 42 80 27
+              C90 12 98 20 108 28
+              C118 36 125 39 135 25
+              C145 11 153 18 162 29
+              C171 40 180 31 190 25
+              C200 19 207 28 220 28
+            "
+                        fill="none"
+                        stroke="rgb(103,232,249)"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        className="organic-wave"
+                      />
+                    </svg>
+                  </div>
+                )}
+
+                {/* ================= ROBOT ================= */}
+                <div
+                  className={`
+        relative z-10
+        w-14 h-14
+        rounded-full
+        overflow-hidden
+        border-2
+        bg-slate-900
+        flex items-center justify-center
+        transition-all duration-300
+        ${
+          isSpeaking
+            ? "border-cyan-300 shadow-[0_0_22px_rgba(34,211,238,0.8)]"
+            : "border-cyan-400/80 shadow-lg shadow-cyan-500/40"
+        }
+      `}
+                >
+                  <img
+                    src="/BizGrow-Ai - Copy.png"
+                    alt="BizGrow AI Assistant"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </div>
+
+              <h3 className="font-semibold text-xs tracking-wide text-white mt-1">
+                BizGrow AI
+              </h3>
+              <p className="text-[11px] text-cyan-400/90 font-medium tracking-wide">
+                {isSpeaking
+                  ? "Speaking response..."
+                  : isListening
+                    ? "Listening to your voice..."
+                    : micIsOff
+                      ? "Microphone is off"
+                      : "How can I help you today?"}
+              </p>
+            </div>
+
+            {/* Messages Area with Hidden Scrollbar */}
+            <div
+              ref={messagesContainerRef}
+              data-lenis-prevent
+              className="min-h-0 flex-1 p-4 overflow-y-auto overscroll-y-contain touch-pan-y space-y-3 bg-transparent text-sm [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+            >
+              {messages.map((msg, index) => (
+                <div
+                  key={index}
+                  className={`p-3.5 rounded-2xl leading-relaxed max-w-[88%] text-[13px] tracking-wide whitespace-pre-line break-words shadow-sm ${
+                    msg.role === "user"
+                      ? "bg-gradient-to-r from-cyan-600 to-indigo-600 text-white ml-auto rounded-br-xs font-normal shadow-cyan-900/20"
+                      : "bg-slate-900/90 border border-slate-800 text-slate-200 mr-auto rounded-bl-xs backdrop-blur-md"
+                  }`}
+                >
+                  {renderMessageContent(msg, index)}
+                </div>
+              ))}
+
+              {loading && (
+                <div className="bg-slate-900/80 border border-slate-800 text-slate-400 p-3.5 rounded-2xl mr-auto max-w-[85%] rounded-bl-xs flex items-center gap-2 backdrop-blur-md">
+                  <div className="w-2 h-2 rounded-full bg-cyan-400 animate-bounce"></div>
+                  <div className="w-2 h-2 rounded-full bg-indigo-400 animate-bounce [animation-delay:0.2s]"></div>
+                  <div className="w-2 h-2 rounded-full bg-blue-400 animate-bounce [animation-delay:0.4s]"></div>
+                  <span className="text-xs text-slate-300 ml-1 font-medium">
+                    Analyzing compliance data...
+                  </span>
                 </div>
               )}
 
-              {/* ================= ROBOT ================= */}
-              <div
-                className={`
-      relative z-10
-      w-14 h-14
-      rounded-full
-      overflow-hidden
-      border-2
-      bg-slate-900
-      flex items-center justify-center
-      transition-all duration-300
-      ${
-        isSpeaking
-          ? "border-cyan-300 shadow-[0_0_22px_rgba(34,211,238,0.8)]"
-          : "border-cyan-400/80 shadow-lg shadow-cyan-500/40"
-      }
-    `}
-              >
-                <img
-                  src="/BizGrow-Ai - Copy.png"
-                  alt="BizGrow AI Assistant"
-                  className="w-full h-full object-cover"
-                />
-              </div>
+              {micNotice && (
+                <div className="flex items-start gap-2.5 text-xs text-red-200 font-medium p-3 bg-red-950/30 border border-red-500/30 rounded-xl">
+                  <MicOff
+                    className="w-4 h-4 mt-0.5 shrink-0 text-red-300"
+                    aria-hidden="true"
+                  />
+                  <span className="flex-1 leading-relaxed">
+                    {micNotice.text}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setMicNotice(null)}
+                    className="text-red-300 hover:text-white cursor-pointer leading-none text-base"
+                    aria-label="Dismiss"
+                  >
+                    &times;
+                  </button>
+                </div>
+              )}
+
+              {isListening && (
+                <div className="flex items-center justify-center gap-2 text-xs text-cyan-300 font-medium py-2 bg-cyan-950/40 border border-cyan-800/50 rounded-xl animate-pulse">
+                  <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-ping"></span>
+                  Listening... Speak now
+                </div>
+              )}
             </div>
 
-            <h3 className="font-semibold text-xs tracking-wide text-white mt-1">
-              BizGrow AI
-            </h3>
-            <p className="text-[11px] text-cyan-400/90 font-medium tracking-wide">
-              {isSpeaking
-                ? "Speaking response..."
-                : isListening
-                  ? "Listening to your voice..."
-                  : micIsOff
-                    ? "Microphone is off"
-                    : "How can I help you today?"}
-            </p>
-          </div>
-
-          {/* Messages Area */}
-          <div
-            ref={messagesContainerRef}
-            data-lenis-prevent
-            className="min-h-0 flex-1 p-4 overflow-y-auto overscroll-y-contain touch-pan-y space-y-3 bg-transparent text-sm"
-          >
-            {messages.map((msg, index) => (
-              <div
-                key={index}
-                className={`p-3.5 rounded-2xl leading-relaxed max-w-[88%] text-[13px] tracking-wide whitespace-pre-line break-words shadow-sm ${
-                  msg.role === "user"
-                    ? "bg-gradient-to-r from-cyan-600 to-indigo-600 text-white ml-auto rounded-br-xs font-normal shadow-cyan-900/20"
-                    : "bg-slate-900/90 border border-slate-800 text-slate-200 mr-auto rounded-bl-xs backdrop-blur-md"
+            {/* Input Bar */}
+            <div className="p-3 bg-slate-900/60 border-t border-slate-800/80 flex items-center gap-2.5 backdrop-blur-xl shrink-0">
+              <button
+                type="button"
+                onClick={startListening}
+                className={`relative p-3 rounded-2xl transition cursor-pointer border backdrop-blur-md ${
+                  isListening
+                    ? "bg-emerald-500 text-white border-emerald-400 shadow-lg shadow-emerald-500/30"
+                    : micIsOff
+                      ? "bg-red-500/10 text-red-400 border-red-500/40 hover:bg-red-500/20"
+                      : "bg-slate-800/80 text-red-400 border-slate-700 hover:bg-slate-800"
                 }`}
+                title={
+                  isListening
+                    ? "Mute microphone"
+                    : micIsOff
+                      ? "Microphone is off - tap to try again"
+                      : "Unmute microphone (tap to speak)"
+                }
+                aria-label={
+                  isListening ? "Mute microphone" : "Unmute microphone"
+                }
+                aria-pressed={isListening}
               >
-                {renderMessageContent(msg, index)}
-              </div>
-            ))}
+                {isListening && (
+                  <span
+                    className="absolute inset-0 rounded-2xl border-2 border-emerald-300/60 animate-ping"
+                    aria-hidden="true"
+                  />
+                )}
+                {isListening ? (
+                  <Mic className="relative w-4 h-4" aria-hidden="true" />
+                ) : (
+                  <MicOff className="relative w-4 h-4" aria-hidden="true" />
+                )}
+              </button>
 
-            {loading && (
-              <div className="bg-slate-900/80 border border-slate-800 text-slate-400 p-3.5 rounded-2xl mr-auto max-w-[85%] rounded-bl-xs flex items-center gap-2 backdrop-blur-md">
-                <div className="w-2 h-2 rounded-full bg-cyan-400 animate-bounce"></div>
-                <div className="w-2 h-2 rounded-full bg-indigo-400 animate-bounce [animation-delay:0.2s]"></div>
-                <div className="w-2 h-2 rounded-full bg-blue-400 animate-bounce [animation-delay:0.4s]"></div>
-                <span className="text-xs text-slate-300 ml-1 font-medium">
-                  Analyzing compliance data...
-                </span>
-              </div>
-            )}
+              <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={(e) => e.key === "Enter" && handleSendMessage(input)}
+                placeholder="Ask anything..."
+                className="flex-1 bg-slate-950/80 border border-slate-800 rounded-2xl px-4 py-3 text-xs focus:outline-none focus:border-cyan-500 text-white placeholder-slate-500 font-medium transition shadow-inner"
+              />
 
-            {micNotice && (
-              <div className="flex items-start gap-2.5 text-xs text-red-200 font-medium p-3 bg-red-950/30 border border-red-500/30 rounded-xl">
-                <MicOff
-                  className="w-4 h-4 mt-0.5 shrink-0 text-red-300"
-                  aria-hidden="true"
-                />
-                <span className="flex-1 leading-relaxed">{micNotice.text}</span>
-                <button
-                  type="button"
-                  onClick={() => setMicNotice(null)}
-                  className="text-red-300 hover:text-white cursor-pointer leading-none text-base"
-                  aria-label="Dismiss"
-                >
-                  &times;
-                </button>
-              </div>
-            )}
-
-            {isListening && (
-              <div className="flex items-center justify-center gap-2 text-xs text-cyan-300 font-medium py-2 bg-cyan-950/40 border border-cyan-800/50 rounded-xl animate-pulse">
-                <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-ping"></span>
-                Listening... Speak now
-              </div>
-            )}
-          </div>
-
-          {/* Input Bar */}
-          <div className="p-3 bg-slate-900/60 border-t border-slate-800/80 flex items-center gap-2.5 backdrop-blur-xl shrink-0">
-            <button
-              type="button"
-              onClick={startListening}
-              className={`relative p-3 rounded-2xl transition cursor-pointer border backdrop-blur-md ${
-                isListening
-                  ? "bg-emerald-500 text-white border-emerald-400 shadow-lg shadow-emerald-500/30"
-                  : micIsOff
-                    ? "bg-red-500/10 text-red-400 border-red-500/40 hover:bg-red-500/20"
-                    : "bg-slate-800/80 text-red-400 border-slate-700 hover:bg-slate-800"
-              }`}
-              title={
-                isListening
-                  ? "Mute microphone"
-                  : micIsOff
-                    ? "Microphone is off - tap to try again"
-                    : "Unmute microphone (tap to speak)"
-              }
-              aria-label={
-                isListening ? "Mute microphone" : "Unmute microphone"
-              }
-              aria-pressed={isListening}
-            >
-              {isListening && (
-                <span
-                  className="absolute inset-0 rounded-2xl border-2 border-emerald-300/60 animate-ping"
-                  aria-hidden="true"
-                />
-              )}
-              {isListening ? (
-                <Mic className="relative w-4 h-4" aria-hidden="true" />
-              ) : (
-                <MicOff className="relative w-4 h-4" aria-hidden="true" />
-              )}
-            </button>
-
-            <input
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleSendMessage(input)}
-              placeholder="Ask anything..."
-              className="flex-1 bg-slate-950/80 border border-slate-800 rounded-2xl px-4 py-3 text-xs focus:outline-none focus:border-cyan-500 text-white placeholder-slate-500 font-medium transition shadow-inner"
-            />
-
-            <button
-              type="button"
-              onClick={() => handleSendMessage(input)}
-              className="bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-600 hover:to-indigo-700 text-white px-4 py-3 rounded-2xl text-xs font-semibold transition shadow-md shadow-indigo-900/30 cursor-pointer"
-            >
-              Send
-            </button>
+              <button
+                type="button"
+                onClick={() => handleSendMessage(input)}
+                className="bg-gradient-to-r from-cyan-500 to-indigo-600 hover:from-cyan-600 hover:to-indigo-700 text-white px-4 py-3 rounded-2xl text-xs font-semibold transition shadow-md shadow-indigo-900/30 cursor-pointer"
+              >
+                Send
+              </button>
+            </div>
           </div>
         </div>
       )}

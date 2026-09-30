@@ -76,7 +76,7 @@ const SMASPage = () => {
 
               {/* 2. Heading */}
               <FadeIn direction="up" duration="0.8" delay="0.2">
-                <h1 className="text-6xl md:text-7xl font-black text-white leading-[1.05] tracking-tighter drop-shadow-md">
+                <h1 className="text-4xl md:text-6xl font-black text-white leading-[1.05] tracking-tighter drop-shadow-md">
                   SMAS Workforce <br />
                   <span className="text-[#997819]"> Accreditation.</span>
                 </h1>
@@ -108,7 +108,7 @@ const SMASPage = () => {
       </section>
 
       {/* 🔹 2. VALUE PROPOSITION (Clean Trio with Staggered Scroll Animations) */}
-      <section className="py-24 bg-zinc-50 border-b border-zinc-100">
+      <section className="py-14 bg-zinc-50 border-b border-zinc-100">
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12">
           {[
             {
@@ -263,8 +263,8 @@ const SMASPage = () => {
         </div>
       </section> */}
 
- {/* 🔹 5. THE PROCESS (Left-Aligned Steps with Scroll Animations) */}
-      <section className="py-24 bg-white">
+      {/* 🔹 5. THE PROCESS (Left-Aligned Steps with Scroll Animations) */}
+      <section className="py-14 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             {/* Steps on the Left */}
@@ -353,36 +353,9 @@ const SMASPage = () => {
           </div>
         </div>
       </section>
-      {/* 🔹 4. DATA BAR (Impact Metrics with Scroll Animations) */}
-      <section className="py-20 bg-[#12066a] mx-6 rounded-[3rem] relative overflow-hidden shadow-2xl border border-white/10">
-        {/* Subtle background glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#997819]/10 rounded-full blur-3xl pointer-events-none" />
-
-        <div className="max-w-7xl mx-auto px-10 grid grid-cols-2 md:grid-cols-4 gap-10 relative z-10">
-          {[
-            { n: "100%", t: "Pass Rate" },
-            { n: "5 Days", t: "Avg. Turnaround" },
-            { n: "500+", t: "Firms Audited" },
-            { n: "£0", t: "Hidden Fees" },
-          ].map((stat, i) => (
-            <FadeIn key={i} direction="up" duration="0.8" delay={0.15 * i}>
-              <div className="text-center group p-4 rounded-2xl transition-all duration-300 hover:bg-white/5">
-                <span className="text-5xl md:text-6xl font-black text-white block mb-2 tracking-tighter group-hover:text-[#997819] transition-colors duration-300">
-                  {stat.n}
-                </span>
-                <span className="text-[#997819] font-black uppercase text-[10px] tracking-widest">
-                  {stat.t}
-                </span>
-              </div>
-            </FadeIn>
-          ))}
-        </div>
-      </section>
-
-     
 
       {/* 🔹6 New Section: WHO NEEDS SMAS (Target Audience Grid with Scroll Animations) */}
-      <section className="py-24 bg-zinc-50 overflow-hidden">
+      <section className="py-14 bg-zinc-50 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           {/* 1. Centered Heading & Description Section with Animation */}
           <div className="flex flex-col items-center text-center mb-20">
@@ -485,9 +458,8 @@ const SMASPage = () => {
         </div>
       </section>
 
-      
       {/* 🔹 3. THE COMPLIANCE GRID (Refined Card Layout with Scroll Animations) */}
-      <section className="py-24 bg-white">
+      <section className="py-14 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           {/* Heading aur Description Section with Animation */}
           <div className="flex flex-col items-center text-center mb-20">
@@ -534,7 +506,7 @@ const SMASPage = () => {
         </div>
       </section>
       {/* 🔹 New Section: HOW BIZGROW HELPS (Strategy Section with Scroll Animations) */}
-      <section className="py-24 bg-white relative overflow-hidden">
+      <section className="py-14 bg-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
             {/* Left Side: Content with Animation */}

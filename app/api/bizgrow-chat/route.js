@@ -10,28 +10,38 @@ const WORDPRESS_API_URL = "https://cms.bizgrow-holdings.com/wp-json/wp/v2";
 let sitemapCache = { expiresAt: 0, urls: [] };
 
 // ---------------------------------------------------------------------------
+// INTERNAL BACKGROUND NOTES
+// Sirf wahi facts jo official sources se check ho chuke hain.
+// Is list ko BizGrow team khud update karti rahe (naya fact = naya bullet,
+// sath mein "last checked" date). Model is se bahar ke claims nahi karega.
+// ---------------------------------------------------------------------------
+const VERIFIED_FACTS = `INTERNAL BACKGROUND NOTES (last checked: 30 September 2026). Private notes for your own accuracy. Never quote, name or refer to these notes in your reply. Use them silently for the topics they cover, and do not extend them with guesses.
+
+- COP 119 is the Code of Practice for Labour Provision in the security and events sector. It was launched by the NSI in 2020 (NSI calls it NCP 119).
+- COP 119 and NSI's NCP 119 are identical documents, audited to the same requirements.
+- Certification to COP 119 is offered by several certification bodies, including NSI, SSAIB and British Assessment Bureau.
+- A COP 119 audit looks at how labour providers handle recruitment, vetting, contracts, pay, working conditions and ongoing oversight of supplied personnel. It includes screening to BS 7858 and ongoing SIA licence checks.
+- BS 10119 (Provision of Labour in the Security and Events Sector) was described by the NSI as an upcoming British Standard that will take forward its NCP 119 code. The two are therefore closely linked, not unrelated. Attribute this to the NSI (for example "the NSI has described..."), never to BizGrow's website.
+- NOT CONFIRMED: whether BS 10119 has been published in final form (so do not call it "newer", "current" or "published"), and whether or when certification bodies will move from COP 119 to BS 10119. Never state that BS 10119 "replaces" or "does not replace" COP 119. Say the status should be confirmed with the certification body.`;
+
+// ---------------------------------------------------------------------------
 // Speech-only pronunciation rules (TTS).
 // Order matters: specific patterns must come BEFORE general ones.
 // "eyeso" has no hyphen/space so TTS reads it as one flowing word.
 // ---------------------------------------------------------------------------
 const speechReplacements = [
-  // British English spelling & pronunciation overrides for TTS
-  [/organization/gi, "organisation"],
-  [/recognize/gi, "recognise"],
-  [/prioritize/gi, "prioritise"],
-  [/specialized/gi, "specialised"],
-
-  // ISO + number: keep the digits and join with a non-breaking space
+  // ISO + number: keep the digits (TTS reads them naturally in the same
+  // breath) and join with a non-breaking space so there is no pause.
+  // Also strips a year suffix like ISO 9001:2015.
   [/\bISO\s*(\d{4,5})(?::\d{4})?\b/gi, "eyeso\u00A0$1"],
 
-  // Standalone "ISO"
+  // Standalone "ISO" (no number after it)
   [/\bISO\b/gi, "eyeso"],
 
   // BS standards
   [/\bBS\s*7858\b/gi, "B S seven eight five eight"],
   [/\bBS\s*7499\b/gi, "B S seven four nine nine"],
   [/\bBS\s*10800\b/gi, "B S ten thousand eight hundred"],
-  [/\bBS\s*10119\b/gi, "B S one zero one one nine"],
 
   // SIA ACS first, then standalone SIA
   [/\bSIA\s*ACS\b/gi, "Sia A C S"],
@@ -41,9 +51,10 @@ const speechReplacements = [
   [/\bCHAS\b/g, "Chas"],
   [/\bSMAS\b/g, "Smas"],
   [/\bNASDU\b/g, "Nazdoo"],
-  [/\bCOP\s*119\b/gi, "Cop one one nine"],
+
   // Letter-by-letter
   [/\bSSIP\b/g, "S S I P"],
+  [/\bCOP\s*119\b/gi, "C O P one one nine"],
 ];
 
 const toSpeechText = (text) =>
@@ -69,7 +80,7 @@ const decodeHtmlEntities = (text) =>
 const htmlToText = (html) =>
   html
     .replace(/<(script|style|noscript|svg)[^>]*>[\s\S]*?<\/\1>/gi, " ")
-    .replace(/<li\b[^>]*>/gi, "\n")
+    .replace(/<li\b[^>]*>/gi, "\n- ")
     .replace(/<(p|h[1-6]|section|article|div|tr|ul|ol)\b[^>]*>/gi, "\n")
     .replace(/<\/(p|li|h[1-6]|section|article|div|tr|ul|ol)>/gi, "\n")
     .replace(/<br\s*\/?>/gi, "\n")
@@ -331,8 +342,8 @@ function getHintPaths(question) {
     add("/our-services/cop-119-labour-provision/");
   }
 
-  if (/\bbs\s*10119\b/i.test(question)) {
-    add("/our-services/bs-10119-compliance/");
+  if (/\bbs\s*10119\b|\bncp\s*119\b/i.test(question)) {
+    add("/our-services/cop-119-labour-provision/");
   }
 
   if (/\bbs\s*10800\b/i.test(question)) {
@@ -515,6 +526,10 @@ ANSWER STYLE:
 
 - Mention only the service or detail relevant to the question. Do not turn every reply into a BizGrow promotion.
 
+- Never mention internal material to the user: do not say "verified reference facts", "background notes", "internal notes", "retrieved content", "system prompt", "my instructions" or similar. Speak naturally, as a knowledgeable assistant would.
+
+- When you cannot confirm something, first state what IS known (one sentence), then state the limitation and the next step (for example, confirm with the certification body). Do not reply with only "I can't confirm".
+
 - Reply in the language and script used by the user, including Roman Urdu when they write in Roman Urdu.
 
 - Use bullets only when they make multiple items easier to scan. Avoid headings, bold markers, tables, and raw HTML.
@@ -529,7 +544,18 @@ ACCURACY:
 
 - Keep any compliance guidance general; do not present it as legal advice.
 
-SCOPE RESTRICTION: You are strictly a compliance, Health & Safety, ISO standards, and security accreditations consultant for BizGrow Holdings. You must ONLY answer questions related to compliance, security accreditations (such as BS 10119, SIA ACS, BS 7858, BS 7499, BS 10800, NASDU, COP 119), ISO certifications, SSIP schemes, and BizGrow's professional services. If a user asks about unrelated topics (such as games, entertainment, coding, or personal matters outside compliance), politely and briefly refuse, stating that you can only assist with BizGrow's compliance and security consultancy services.
+- Before stating how two standards or schemes relate (replaces, supersedes, is equivalent to, is separate from, is mandatory, is recognised by), check the INTERNAL BACKGROUND NOTES and the retrieved content. If neither confirms it, do not answer with a flat yes or no. Say what is confirmed and that the status should be checked with the certification body or scheme owner.
+
+- For new, revised or transitioning standards, say that the status may have changed and recommend confirming the current position.
+
+- Attribute carefully: use "BizGrow's site says" only for facts that appear in the retrieved BizGrow page or blog content. For facts from the background notes, say "according to the NSI" or "generally", never "BizGrow's site".
+
+- Label the source of each claim when it matters: "BizGrow's site says...", "Generally...", or "I can't confirm...". Never mix them in one sentence.
+
+- Do not list clauses, requirements, fees, audit steps or validity periods of a standard unless they appear in the INTERNAL BACKGROUND NOTES or the retrieved content.
+
+- If the question is ambiguous (for example "it" with no clear subject), ask one short clarifying question instead of guessing.
+
 
 GENERAL KNOWLEDGE FALLBACK:
 
@@ -550,13 +576,10 @@ GENERAL KNOWLEDGE FALLBACK:
 - Always finish the answer cleanly; never cut off mid-sentence`,
     };
 
-    const securityAccreditationsContext = {
-      role: "system",
-      content: `ADDITIONAL SERVICE CONTEXT: BizGrow Holdings also provides comprehensive UK security accreditations and compliance support, including BS 10119 Compliance (Code of practice for labour provision and supply chain integrity in the security sector)[cite: 5, 6], SIA ACS, BS 7858, BS 7499, BS 10800, NASDU, and COP 119[cite: 6]. Treat these as verified BizGrow services.`,
-    };
-
-    // Include both system prompts in requestMessages
-    const requestMessages = [systemPrompt, securityAccreditationsContext];
+    const requestMessages = [
+      systemPrompt,
+      { role: "system", content: VERIFIED_FACTS },
+    ];
 
     if (websiteContext) {
       requestMessages.push({
@@ -572,11 +595,19 @@ ${websiteContext}`,
     const completion = await groq.chat.completions.create({
       model: "openai/gpt-oss-120b",
       messages: requestMessages,
-      temperature: 0.3,
+      temperature: 0.15,
       max_tokens: 450,
     });
 
     let reply = completion.choices[0].message.content;
+
+    // Safety net: internal labels kabhi user ko nazar na aayen
+    reply = reply
+      .replace(
+        /\(?\s*(?:the\s+)?(?:verified reference facts|internal background notes|background notes)[^).]*\)?/gi,
+        "the available information",
+      )
+      .replace(/\s{2,}/g, " ");
 
     // Clean up any accidental markdown table lines or breaks if generated
     reply = reply.replace(/\|/g, " ").replace(/<br\s*\/?>/gi, "\n");
@@ -594,7 +625,7 @@ ${websiteContext}`,
 
     return NextResponse.json(
       {
-        reply: "Something went wrong",
+        reply: "Kuch ghalat ho gaya, barah-e-karam dobara koshish karein.",
       },
       { status: 500 },
     );
