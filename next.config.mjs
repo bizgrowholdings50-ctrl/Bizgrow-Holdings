@@ -25,7 +25,8 @@ const securityHeaders = [
   // 🚀 FIX 2: Corrected Permissions-Policy format (Removed parser error)
   {
     key: "Permissions-Policy",
-    value: "camera=(), microphone=(), geolocation=(), xr-spatial-tracking=*",
+    value:
+      "camera=(), microphone=(self), geolocation=(), xr-spatial-tracking=*",
   },
   {
     key: "Content-Security-Policy",
@@ -294,127 +295,134 @@ const nextConfig = {
         destination: "/",
         permanent: true,
       },
-       {
+      {
         source: "/tag/:path*",
         destination: "/",
         permanent: true,
       },
-       {
+      {
         source: "/category/:path*",
         destination: "/",
         permanent: true,
       },
-    {
-        source: '/wp-:path(.*)',
-        destination: '/',
-        permanent: true,
-      },
-       {
-        source: '/items:path(.*)',
-        destination: '/',
-        permanent: true,
-      },
-    
-      
       {
-        source: '/favicon.ico',
-        destination: '/',
-        permanent: true,
-      },
-       {
-        source: '/nasdu/',
-        destination: '/our-services/nasdu/',
-        permanent: true,
-      },
-       {
-        source: '/smas-accreditation/',
-        destination: '/our-services/smas-accreditation/',
+        source: "/wp-:path(.*)",
+        destination: "/",
         permanent: true,
       },
       {
-        source: '/our-services/internal-audit/',
-        destination: '/internal-audit/',
-        permanent: true,
-      },
-       {
-        source: '/the-business-benefits-of-becoming-an-sia-approved-contractor/',
-        destination: '/business-benefits-of-becoming-an-sia-approved-contractor/',
-        permanent: true,
-      },
-       {
-        source: '/compliance-consultancies/bs7858-screening-vetting/',
-        destination: '/bs7858-screening-vetting/',
-        permanent: true,
-      },
-       {
-        source: '/compliance-consultancies/iso-14001/',
-        destination: '/our-services/iso-14001/',
-        permanent: true,
-      },
-      {
-        source: '/compliance-consultancies/chas-scheme/',
-        destination: '/our-services/chas-scheme/',
-        permanent: true,
-      },
-      {
-        source: '/constructionline/',
-        destination: '/our-services/constructionline/',
-        permanent: true,
-      },
-       {
-        source: '/everything-you-need-to-know-about-getting-acs-approval-from-the-sia/',
-        destination: '/getting-acs-approval-from-the-sia/',
+        source: "/items:path(.*)",
+        destination: "/",
         permanent: true,
       },
 
-       {
-        source: '/web-and-digital-marketing-solutions/',
-        destination: '/',
-        permanent: true,
-      },
-       {
-        source: '/compliance-consultancies/internal-audit/',
-        destination: '/internal-audit/',
-        permanent: true,
-      },
-       {
-        source: '/how-cop-119-helps-security-businesses-maintain-high-standards-in-the-uk/',
-        destination: '/cop-119-helps-security-businesses-maintain-high-standards/',
-        permanent: true,
-      },
-       {
-        source: '/compliance-consultancies/bs-10800/',
-        destination: '/our-services/bs-10800/',
-        permanent: true,
-      },
-       {
-        source: '/cyber-essentials/',
-        destination: '/our-services/cyber-essentials/',
-        permanent: true,
-      },
-       {
-        source: '/the-complete-guide-to-acs-accreditation-for-security-businesses-in-the-uk/',
-        destination: '/acs-accreditation-for-security-businesses/',
+      {
+        source: "/favicon.ico",
+        destination: "/",
         permanent: true,
       },
       {
-        source: '/smas/',
+        source: "/nasdu/",
+        destination: "/our-services/nasdu/",
+        permanent: true,
+      },
+      {
+        source: "/smas-accreditation/",
         destination: "/our-services/smas-accreditation/",
         permanent: true,
       },
       {
-        source: '/careers/',
-        destination: '/',
+        source: "/our-services/internal-audit/",
+        destination: "/internal-audit/",
         permanent: true,
       },
       {
-        source: '/the-role-of-iso-14001-environmental-management-system-in-chemical-industries/',
-        destination: '/clauses-of-iso-14001/',
+        source:
+          "/the-business-benefits-of-becoming-an-sia-approved-contractor/",
+        destination:
+          "/business-benefits-of-becoming-an-sia-approved-contractor/",
         permanent: true,
       },
       {
-        source: '/sheq-management-system-safety-health-environment-and-quality-explained',
-        destination: '/what-is-a-sheq-management-system/',
+        source: "/compliance-consultancies/bs7858-screening-vetting/",
+        destination: "/bs7858-screening-vetting/",
+        permanent: true,
+      },
+      {
+        source: "/compliance-consultancies/iso-14001/",
+        destination: "/our-services/iso-14001/",
+        permanent: true,
+      },
+      {
+        source: "/compliance-consultancies/chas-scheme/",
+        destination: "/our-services/chas-scheme/",
+        permanent: true,
+      },
+      {
+        source: "/constructionline/",
+        destination: "/our-services/constructionline/",
+        permanent: true,
+      },
+      {
+        source:
+          "/everything-you-need-to-know-about-getting-acs-approval-from-the-sia/",
+        destination: "/getting-acs-approval-from-the-sia/",
+        permanent: true,
+      },
+
+      {
+        source: "/web-and-digital-marketing-solutions/",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/compliance-consultancies/internal-audit/",
+        destination: "/internal-audit/",
+        permanent: true,
+      },
+      {
+        source:
+          "/how-cop-119-helps-security-businesses-maintain-high-standards-in-the-uk/",
+        destination:
+          "/cop-119-helps-security-businesses-maintain-high-standards/",
+        permanent: true,
+      },
+      {
+        source: "/compliance-consultancies/bs-10800/",
+        destination: "/our-services/bs-10800/",
+        permanent: true,
+      },
+      {
+        source: "/cyber-essentials/",
+        destination: "/our-services/cyber-essentials/",
+        permanent: true,
+      },
+      {
+        source:
+          "/the-complete-guide-to-acs-accreditation-for-security-businesses-in-the-uk/",
+        destination: "/acs-accreditation-for-security-businesses/",
+        permanent: true,
+      },
+      {
+        source: "/smas/",
+        destination: "/our-services/smas-accreditation/",
+        permanent: true,
+      },
+      {
+        source: "/careers/",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source:
+          "/the-role-of-iso-14001-environmental-management-system-in-chemical-industries/",
+        destination: "/clauses-of-iso-14001/",
+        permanent: true,
+      },
+      {
+        source:
+          "/sheq-management-system-safety-health-environment-and-quality-explained",
+        destination: "/what-is-a-sheq-management-system/",
         permanent: true,
       },
       {

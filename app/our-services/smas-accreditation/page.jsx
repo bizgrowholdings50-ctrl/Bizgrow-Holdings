@@ -30,25 +30,25 @@ export const metadata = {
 const smasData = [
   {
     q: "What are the benefits of SMAS accreditation?",
-    a: "The benefits of SMAS accreditation include proving your business meets recognised UK health and safety standards, building trust with clients, and improving your chances of winning contracts. It also reduces repeated pre-qualification assessments and provides a fast-track route to other SSIP schemes such as CHAS and SafeContractor. "
+    a: "The benefits of SMAS accreditation include proving your business meets recognised UK health and safety standards, building trust with clients, and improving your chances of winning contracts. It also reduces repeated pre-qualification assessments and provides a fast-track route to other SSIP schemes such as CHAS and SafeContractor. ",
   },
   {
     q: "What does SMAS stand for?",
-    a: "SMAS stands for Safety Management Advisory Service. It is a UK-based health and safety accreditation body and a recognised member of the Safety Schemes in Procurement (SSIP) forum, which means its certificate is accepted by a wide range of public and private sector buyers as evidence of health and safety competence. SMAS assesses businesses against SSIP core criteria aligned with the Health and Safety Executive's standards, covering policies, risk assessments, training records, insurance, and management systems."
+    a: "SMAS stands for Safety Management Advisory Service. It is a UK-based health and safety accreditation body and a recognised member of the Safety Schemes in Procurement (SSIP) forum, which means its certificate is accepted by a wide range of public and private sector buyers as evidence of health and safety competence. SMAS assesses businesses against SSIP core criteria aligned with the Health and Safety Executive's standards, covering policies, risk assessments, training records, insurance, and management systems.",
   },
   {
     q: "What are the common reasons a SMAS application is rejected?",
-    a: "The most common reasons a SMAS application is rejected include an unsigned or outdated health and safety policy, generic risk assessments, and missing training records or insurance certificates. Incomplete documentation or failing to demonstrate proper health and safety arrangements can also delay or result in rejection of the application. "
+    a: "The most common reasons a SMAS application is rejected include an unsigned or outdated health and safety policy, generic risk assessments, and missing training records or insurance certificates. Incomplete documentation or failing to demonstrate proper health and safety arrangements can also delay or result in rejection of the application. ",
   },
   {
     q: "How to get SMAS accreditation?",
-    a: "Start by gathering all required health and safety documents, including a current signed policy, relevant risk assessments and method statements, staff training records, and valid insurance certificates. Register on the SMAS portal, complete the health and safety assessment questionnaire, and submit your documentation for review by a qualified SMAS assessor. "
-  }
+    a: "Start by gathering all required health and safety documents, including a current signed policy, relevant risk assessments and method statements, staff training records, and valid insurance certificates. Register on the SMAS portal, complete the health and safety assessment questionnaire, and submit your documentation for review by a qualified SMAS assessor. ",
+  },
 ];
 const SMASPage = () => {
   return (
     <main className="bg-white text-zinc-900 overflow-hidden font-sans">
-      {/* 🔹 1. HERO SECTION (Speed & Compliance Vibe) */}
+      {/* 🔹 1. HERO SECTION (Speed & Compliance Vibe with Upward Stagger Animations) */}
       <section className="relative min-h-screen w-full flex items-center overflow-hidden bg-[#12066a]">
         <div className="absolute inset-0 z-0">
           <Image
@@ -63,44 +63,51 @@ const SMASPage = () => {
 
         <div className="max-w-7xl mx-auto px-6 relative z-20 w-full pt-20">
           <div className="max-w-4xl">
-            <FadeIn direction="right">
-              <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full mb-8">
-                <Zap className="text-yellow-400 animate-pulse" size={16} />
-                <span className="text-white font-black uppercase tracking-[0.3em] text-[10px]">
-                  Fast-Track SSIP Accreditation
-                </span>
-              </div>
+            <div className="flex flex-col items-start text-left">
+              {/* 1. SSIP Badge */}
+              <FadeIn direction="up" duration="0.6">
+                <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/20 px-4 py-2 rounded-full mb-8">
+                  <div className="bg-yellow-400 w-2 h-2 rounded-full animate-pulse" />
+                  <span className="text-white font-black uppercase tracking-[0.3em] text-[10px]">
+                    SSIP Standard
+                  </span>
+                </div>
+              </FadeIn>
 
-              <h1 className="text-6xl md:text-7xl font-black text-white leading-[0.85] tracking-tighter">
-                SMAS WORKSAFE<br />
-                <span className="text-[#997819]"> Accreditation.</span>
-              </h1>
+              {/* 2. Heading */}
+              <FadeIn direction="up" duration="0.8" delay="0.2">
+                <h1 className="text-6xl md:text-7xl font-black text-white leading-[1.05] tracking-tighter drop-shadow-md">
+                  SMAS Workforce <br />
+                  <span className="text-[#997819]"> Accreditation.</span>
+                </h1>
+              </FadeIn>
 
-              <p className="mt-10 text-blue-100/60 text-xl  q max-w-2xl font-medium leading-relaxed italic">
-                Achieve{" "}
-                <Link
-                  href="https://bizgrow-holdings.com/rules-requirements-for-ssip/"
-                  className="text-[#997819] font-bold"
-                >
-                  SSIP recognition
-                </Link>{" "}
-                with SMAS Worksafe faster. <Link href="/">BizGrow Holdings</Link> handles your full
-                Health & Safety assessment while you focus on winning contracts
-                in Uk.
-              </p>
-            </FadeIn>
-             <FadeIn direction="right" duration="1.0">
-              <Link href="/contact-us">
-                <button className="relative z-10 bg-[#997819] text-white px-16 py-6 my-4 rounded-2xl font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-3xl">
-                  Book a Consultation
-                </button>
-              </Link>
-            </FadeIn>
+              {/* 3. Paragraph */}
+              <FadeIn direction="up" duration="0.9" delay="0.4">
+                <p className="mt-6 text-blue-100 text-lg max-w-2xl leading-relaxed font-medium drop-shadow">
+                  SMAS Worksafe is a UK health and safety accreditation that
+                  proves your business meets recognised safety standards. As an
+                  SSIP member scheme, it is accepted by main contractors, public
+                  bodies, and other buyers when they choose their suppliers.
+                </p>
+              </FadeIn>
+
+              {/* 4. CTA Button */}
+              <FadeIn direction="up" duration="1.0" delay="0.6">
+                <div className="mt-8">
+                  <Link href="/contact-us">
+                    <button className="relative z-10 bg-[#997819] text-white px-16 py-6 rounded-full font-black uppercase tracking-[0.3em] text-xs hover:bg-white hover:text-[#12066a] transition-all duration-500 shadow-2xl cursor-pointer">
+                      Book a Consultation
+                    </button>
+                  </Link>
+                </div>
+              </FadeIn>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 🔹 2. VALUE PROPOSITION (Clean Trio) */}
+      {/* 🔹 2. VALUE PROPOSITION (Clean Trio with Staggered Scroll Animations) */}
       <section className="py-24 bg-zinc-50 border-b border-zinc-100">
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12">
           {[
@@ -120,23 +127,22 @@ const SMASPage = () => {
               icon: <FileBadge />,
             },
           ].map((item, i) => (
-            <div
-              key={i}
-              className="flex flex-col items-center text-center group"
-            >
-              <div className="w-16 h-16 bg-white rounded-3xl shadow-sm flex items-center justify-center text-[#997819] mb-6 group-hover:bg-[#12066a] group-hover:text-white transition-all duration-500">
-                {item.icon}
+            <FadeIn key={i} direction="up" duration="0.8" delay={0.2 * i}>
+              <div className="flex flex-col items-center text-center group h-full p-6 rounded-3xl transition-all duration-500 hover:bg-white hover:shadow-xl hover:shadow-zinc-200/50">
+                <div className="w-16 h-16 bg-white rounded-3xl shadow-sm flex items-center justify-center text-[#997819] mb-6 group-hover:bg-[#12066a] group-hover:text-white transition-all duration-500">
+                  {item.icon}
+                </div>
+                <h2 className="text-xl font-black text-[#12066a] uppercase mb-3">
+                  {item.t}
+                </h2>
+                <p className="text-zinc-500 text-sm font-medium">{item.d}</p>
               </div>
-              <h2 className="text-xl font-black text-[#12066a] uppercase mb-3">
-                {item.t}
-              </h2>
-              <p className="text-zinc-500 text-sm font-medium">{item.d}</p>
-            </div>
+            </FadeIn>
           ))}
         </div>
       </section>
 
-      {/* 🔹 3 New Section. WHY IT MATTERS (Blueprint Split Layout) */}
+      {/* 🔹 3 New Section. WHY IT MATTERS (Blueprint Split Layout)
       <section className="py-22 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col-reverse lg:flex-row items-center gap-24">
@@ -162,90 +168,83 @@ const SMASPage = () => {
                 Need It
               </h2>
               <p className="py-4">
-                SMAS <Link href="https://bizgrow-holdings.com/how-to-get-smas-accreditation/" className="text-[#997819] font-bold" >(Safety Management Advisory Services)</Link> Accreditation is a
-                UK-recognised health and safety certification designed to assess
-                whether a contractor meets required H&S standards. It is widely
-                accepted across the construction, facilities management,
-                maintenance, and service sectors.
+                SMAS{" "}
+                <Link
+                  href="https://bizgrow-holdings.com/how-to-get-smas-accreditation/"
+                  className="text-[#997819] font-bold"
+                >
+                  (Safety Management Advisory Services)
+                </Link>{" "}
+                Accreditation is a UK-recognised health and safety certification
+                designed to assess whether a contractor meets required H&S
+                standards. It is widely accepted across the construction,
+                facilities management, maintenance, and service sectors.
               </p>
               <p className="py-4">
                 UK contractors need SMAS accreditation because many main
                 contractors, developers, and site managers require proof of
-                health and safety <Link href="https://bizgrow-holdings.com/compliance-consultancies/" className="text-[#997819] font-bold">compliance</Link> before allowing suppliers or
-                subcontractors onto the site. SMAS helps demonstrate that a
-                business has the correct policies, <Link href="https://bizgrow-holdings.com/site-specific-risk-assessment/" className="text-[#997819] font-bold">risk assessments</Link>, and safety
-                procedures in place, reducing risk and improving credibility.
+                health and safety{" "}
+                <Link
+                  href="https://bizgrow-holdings.com/compliance-consultancies/"
+                  className="text-[#997819] font-bold"
+                >
+                  compliance
+                </Link>{" "}
+                before allowing suppliers or subcontractors onto the site. SMAS
+                helps demonstrate that a business has the correct policies,{" "}
+                <Link
+                  href="https://bizgrow-holdings.com/site-specific-risk-assessment/"
+                  className="text-[#997819] font-bold"
+                >
+                  risk assessments
+                </Link>
+                , and safety procedures in place, reducing risk and improving
+                credibility.
               </p>
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
-      {/* 🔹 4. THE COMPLIANCE GRID (Refined Card Layout) */}
-      <section className="py-12 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          {/* Heading aur Description Section: In 3 classes ko change kiya hai */}
-          <div className="flex flex-col items-center text-center mb-20">
-            <h2 className="text-5xl md:text-7xl font-black text-[#12066a] tracking-tighter leading-none uppercase">
-              Full <span className="text-[#997819]">Audit</span> Coverage.
-            </h2>
-            {/* max-w-md ko hata kar margin top add kiya hai balance ke liye */}
-            <p className="text-zinc-400 max-w-2xl font-medium mt-6 italic">
-              We ensure your business meets all 12 core elements of the <Link href="https://bizgrow-holdings.com/what-is-ssip-accreditation/" className="text-[#997819] font-bold mr-1">SSIP</Link>
-              threshold standard.
-            </p>
-          </div>
-
-          {/* Grid remains the same */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[
-              "H&S Policy & Arrangements",
-              "Risk Assessments",
-              "COSHH Assessments",
-              "Training & Supervision",
-              "Sub-contractor Management",
-              "Accident Reporting",
-            ].map((text, i) => (
-              <div
-                key={i}
-                className="p-8 border border-zinc-100 rounded-[2rem] hover:bg-zinc-50 transition-colors flex items-center gap-6 group"
-              >
-                <CheckCircle2 className="text-zinc-200 group-hover:text-[#997819] transition-colors" />
-                <span className="font-bold text-[#12066a] uppercase text-sm tracking-tight">
-                  {text}
-                </span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 🔹5 New Section. WHY IT MATTERS (Blueprint Split Layout) */}
+      {/* 🔹5 New Section. WHY IT MATTERS (Blueprint Split Layout)
       <section className="py-22 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col lg:flex-row items-center gap-24">
             <div className="lg:w-1/2">
-              <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs mb-6">
+              <span className="text-[#997819] font-bold uppercase tracking-[0.2em] text-xs mb-6">
                 Market Authority
               </span>
-              <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-none ">
+              <h2 className="text-4xl md:text-5xl font-black text-[#12066a] tracking-tighter leading-none ">
                 How SMAS Helps You
                 <span className="text-[#997819]"> Win More Tenders </span> &
                 Site Approvals
               </h2>
               <p className="py-4">
                 SMAS accreditation strengthens pre-qualification submissions for
-                tenders by proving compliance with recognised <Link href="https://bizgrow-holdings.com/key-components-of-health-and-safety-policy/" className="text-[#997819] font-bold">UK health and
-                safety</Link> standards. Many tender portals and procurement teams
-                accept SMAS as evidence of competence, reducing the need to
-                complete multiple safety questionnaires.
+                tenders by proving compliance with recognised{" "}
+                <Link
+                  href="https://bizgrow-holdings.com/key-components-of-health-and-safety-policy/"
+                  className="text-[#997819] font-bold"
+                >
+                  UK health and safety
+                </Link>{" "}
+                standards. Many tender portals and procurement teams accept SMAS
+                as evidence of competence, reducing the need to complete
+                multiple safety questionnaires.
               </p>
               <p className="py-4">
-                For site approvals, <Link href="https://bizgrow-holdings.com/smas-accreditation-requirements-in-the-uk/" className="text-[#997819] font-bold">SMAS</Link> speeds up onboarding by showing that
-                your business already meets baseline safety requirements. This
-                makes it easier to gain approval from principal contractors,
-                local authorities, and commercial clients, improving access to
-                more tender opportunities and projects.
+                For site approvals,{" "}
+                <Link
+                  href="https://bizgrow-holdings.com/smas-accreditation-requirements-in-the-uk/"
+                  className="text-[#997819] font-bold"
+                >
+                  SMAS
+                </Link>{" "}
+                speeds up onboarding by showing that your business already meets
+                baseline safety requirements. This makes it easier to gain
+                approval from principal contractors, local authorities, and
+                commercial clients, improving access to more tender
+                opportunities and projects.
               </p>
             </div>
             <div className="lg:w-1/2 relative">
@@ -262,135 +261,157 @@ const SMASPage = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
-      {/* 🔹 4. DATA BAR (Impact Metrics) */}
-      <section className="py-20 bg-[#12066a] mx-6 rounded-[3rem]">
-        <div className="max-w-7xl mx-auto px-10 grid md:grid-cols-4 gap-10">
+ {/* 🔹 5. THE PROCESS (Left-Aligned Steps with Scroll Animations) */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-20 items-center">
+            {/* Steps on the Left */}
+            <div>
+              <FadeIn direction="up" duration="0.6">
+                <h2 className="text-3xl md:text-5xl font-black text-[#12066a] tracking-tighter leading-none mb-6">
+                  Key Benefits of
+                  <span className="text-[#997819] ml-3">
+                    SMAS Accreditation
+                  </span>
+                  <span className="ml-2">for Your Business</span>
+                </h2>
+                <p className="mb-8 text-zinc-600 font-medium">
+                  SMAS accreditation offers several practical benefits for UK
+                  businesses:
+                </p>
+              </FadeIn>
+
+              <div className="space-y-8">
+                {[
+                  {
+                    t: "Improves credibility with clients and contractors",
+                    d: "Demonstrates high standards of health and safety competence to prospective partners.",
+                  },
+                  {
+                    t: "Supports compliance with UK health and safety regulations",
+                    d: "Aligns your internal procedures directly with current statutory requirements.",
+                  },
+                  {
+                    t: "Reduces repeated paperwork during tender submissions",
+                    d: "Avoids repetitive safety questionnaires across different contractor platforms.",
+                  },
+                  {
+                    t: "Increases acceptance on construction and commercial sites",
+                    d: "Meets primary contractor prequalification criteria effortlessly across the UK.",
+                  },
+                ].map((step, i) => (
+                  <FadeIn
+                    key={i}
+                    direction="up"
+                    duration="0.8"
+                    delay={0.15 * i}
+                  >
+                    <div className="flex gap-8 group">
+                      <span className="text-4xl font-black text-zinc-300 group-hover:text-[#997819] transition-colors shrink-0">
+                        0{i + 1}
+                      </span>
+                      <div>
+                        <h3 className="font-black text-[#12066a] text-lg mb-2 group-hover:text-[#997819] transition-colors">
+                          {step.t}
+                        </h3>
+                        <p className="text-zinc-500 text-sm font-medium leading-relaxed">
+                          {step.d}
+                        </p>
+                      </div>
+                    </div>
+                  </FadeIn>
+                ))}
+              </div>
+            </div>
+
+            {/* Visual on the Right with Animation */}
+            <div className="relative h-[500px] bg-zinc-900 rounded-[4rem] overflow-hidden group">
+              <FadeIn direction="up" duration="0.9" delay="0.2">
+                <div className="relative h-[500px] w-full overflow-hidden rounded-[4rem]">
+                  <Image
+                    src="/smas-process.jpg"
+                    fill
+                    className="object-cover opacity-60 group-hover:scale-105 transition-transform duration-[2s]"
+                    alt="Key Benefits of SMAS - BizGrow Holdings Ltd"
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="p-10 bg-white/95 backdrop-blur-md shadow-2xl rounded-[2.5rem] flex flex-col items-center border border-white/20">
+                      <ClipboardList
+                        className="text-[#997819] mb-4"
+                        size={48}
+                      />
+                      <span className="text-[#12066a] font-black uppercase tracking-widest text-xs">
+                        Ready for Audit
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </FadeIn>
+            </div>
+          </div>
+        </div>
+      </section>
+      {/* 🔹 4. DATA BAR (Impact Metrics with Scroll Animations) */}
+      <section className="py-20 bg-[#12066a] mx-6 rounded-[3rem] relative overflow-hidden shadow-2xl border border-white/10">
+        {/* Subtle background glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-[#997819]/10 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-10 grid grid-cols-2 md:grid-cols-4 gap-10 relative z-10">
           {[
             { n: "100%", t: "Pass Rate" },
             { n: "5 Days", t: "Avg. Turnaround" },
             { n: "500+", t: "Firms Audited" },
             { n: "£0", t: "Hidden Fees" },
           ].map((stat, i) => (
-            <div key={i} className="text-center">
-              <span className="text-5xl font-black text-white block mb-2 tracking-tighter">
-                {stat.n}
-              </span>
-              <span className="text-[#997819] font-black uppercase text-[10px] tracking-widest">
-                {stat.t}
-              </span>
-            </div>
+            <FadeIn key={i} direction="up" duration="0.8" delay={0.15 * i}>
+              <div className="text-center group p-4 rounded-2xl transition-all duration-300 hover:bg-white/5">
+                <span className="text-5xl md:text-6xl font-black text-white block mb-2 tracking-tighter group-hover:text-[#997819] transition-colors duration-300">
+                  {stat.n}
+                </span>
+                <span className="text-[#997819] font-black uppercase text-[10px] tracking-widest">
+                  {stat.t}
+                </span>
+              </div>
+            </FadeIn>
           ))}
         </div>
       </section>
 
-      {/* 🔹 5. THE PROCESS (Left-Aligned Steps) */}
-      <section className="py-22 bg-white">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-20 items-center">
-            {/* Steps on the Left */}
-            <div>
-              <h2 className="text-3xl md:text-5xl font-black text-[#12066a] tracking-tighter leading-none mb-6 uppercase">
-                Key Benefits of <br  />{" "}
-                <span className="text-[#997819]">SMAS Accreditation </span>for
-                Your Business
-              </h2>
-              <p className="mb-6">
-                SMAS accreditation offers several practical benefits for UK
-                businesses:
-              </p>
-              <div className="space-y-8">
-                {[
-                  {
-                    t: "Improves credibility with clients and contractors",
-                  },
-                  {
-                    t: "Supports compliance with UK health and safety regulations",
-                  },
-                  {
-                    t: "Reduces repeated paperwork during tender submissions",
-                  },
-                  {
-                    t: "Increases acceptance on construction and commercial sites",
-                  },
-                ].map((step, i) => (
-                  <div key={i} className="flex gap-8 group">
-                    <span className="text-4xl font-black text-zinc-300 group-hover:text-[#997819] transition-colors">
-                      0{i + 1}
-                    </span>
-                    <div>
-                      <h3 className="font-black text-[#12066a] uppercase text-lg mb-2">
-                        {step.t}
-                      </h3>
-                      <p className="text-zinc-500 text-sm font-medium leading-relaxed max-w-sm">
-                        {step.d}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-            {/* Visual on the Right */}
-            <div className="relative h-150  bg-zinc-900 rounded-[4rem] overflow-hidden group">
-              <Image
-                src="/smas-process.jpg"
-                fill
-                className="object-cover opacity-60 group-hover:scale-105 transition-transform duration-[2s]"
-                alt="Key Benefits of SMAS - BizGrow Holdings Ltd"
-              />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="p-10 bg-white shadow-2xl rounded-[2.5rem] flex flex-col items-center">
-                  <ClipboardList className="text-[#997819] mb-4" size={48} />
-                  <span className="text-[#12066a] font-black uppercase tracking-widest text-xs">
-                    Ready for Audit
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+     
 
-      {/* 🔹 6. SSIP LOGO STRIP (Trust) */}
-      <section className="py-16 bg-zinc-50 border-y border-zinc-100 overflow-hidden">
+      {/* 🔹6 New Section: WHO NEEDS SMAS (Target Audience Grid with Scroll Animations) */}
+      <section className="py-24 bg-zinc-50 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-wrap justify-center gap-12 opacity-40 grayscale">
-            {/* Replace with actual SSIP member logos if available */}
-            <span className="font-black text-xl italic uppercase tracking-tighter">
-              CHAS Registered
-            </span>
-            <span className="font-black text-xl italic uppercase tracking-tighter">
-              SafeContractor
-            </span>
-            <span className="font-black text-xl italic uppercase tracking-tighter">
-              Constructionline
-            </span>
-          </div>
-        </div>
-      </section>
-
-      {/* 🔹 New Section: WHO NEEDS SMAS (Target Audience Grid) */}
-      <section className="py-22 bg-zinc-50 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6">
-          {/* 1. Centered Heading & Description Section */}
+          {/* 1. Centered Heading & Description Section with Animation */}
           <div className="flex flex-col items-center text-center mb-20">
-            <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs mb-6">
-              Industry Standards
-            </span>
-            <h2 className="text-4xl md:text-7xl font-black text-[#12066a] tracking-tighter leading-none uppercase">
-              Who Needs <br />
-              <span className="text-[#997819]">SMAS Certification?</span>
-            </h2>
-            <p className="text-zinc-400 max-w-2xl font-medium mt-8 italic leading-relaxed">
-              Any organisation required to show health and safety compliance
-              during tendering or site access can benefit from <Link href="https://bizgrow-holdings.com/what-is-smas-accreditation/" className="text-[#997819] font-bold">SMAS
-              accreditation</Link>, especially those working under principal
-              contractors.
-            </p>
+            <FadeIn direction="up" duration="0.6">
+              <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs mb-6 block">
+                Industry Standards
+              </span>
+              <h2 className="text-4xl md:text-7xl font-black text-[#12066a] tracking-tighter leading-none">
+                Who Needs <br />
+                <span className="text-[#997819]">SMAS Certification?</span>
+              </h2>
+            </FadeIn>
+
+            <FadeIn direction="up" duration="0.7" delay="0.15">
+              <p className="text-zinc-700 max-w-2xl font-medium mt-8 text-center mx-auto leading-relaxed">
+                Any organisation required to show health and safety compliance
+                during tendering or site access can benefit from{" "}
+                <Link
+                  href="https://bizgrow-holdings.com/what-is-smas-accreditation/"
+                  className="text-[#997819] font-bold hover:underline"
+                >
+                  SMAS accreditation
+                </Link>
+                , especially those working under principal contractors.
+              </p>
+            </FadeIn>
           </div>
 
-          {/* 2. Grid Cards Section (Perfect as requested) */}
+          {/* 2. Grid Cards Section with Staggered Scroll Animations */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
@@ -434,20 +455,26 @@ const SMASPage = () => {
                 icon: <CheckCircle2 size={32} />,
               },
             ].map((item, i) => (
-              <div
+              <FadeIn
                 key={i}
-                className="group p-8 bg-white border border-zinc-200 rounded-[2.5rem] hover:bg-[#12066a] transition-all duration-500"
+                direction="up"
+                duration="0.8"
+                delay={0.08 * (i % 4)}
               >
-                <div className="text-[#997819] group-hover:text-white mb-6 transition-colors duration-500">
-                  {item.icon}
+                <div className="group p-8 bg-white border border-zinc-200/80 rounded-[2.5rem] hover:bg-[#12066a] hover:border-[#12066a] shadow-sm hover:shadow-xl transition-all duration-500 h-full flex flex-col justify-between">
+                  <div>
+                    <div className="text-[#997819] group-hover:text-white mb-6 transition-colors duration-500">
+                      {item.icon}
+                    </div>
+                    <h3 className="text-xl font-black text-[#12066a] group-hover:text-white uppercase mb-3 transition-colors duration-500">
+                      {item.title}
+                    </h3>
+                    <p className="text-zinc-500 group-hover:text-zinc-300 text-sm font-medium leading-relaxed transition-colors duration-500">
+                      {item.desc}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="text-xl font-black text-[#12066a] group-hover:text-white uppercase mb-3 transition-colors duration-500">
-                  {item.title}
-                </h3>
-                <p className="text-zinc-400 group-hover:text-zinc-300 text-sm font-medium leading-relaxed transition-colors duration-500">
-                  {item.desc}
-                </p>
-              </div>
+              </FadeIn>
             ))}
           </div>
 
@@ -457,39 +484,110 @@ const SMASPage = () => {
           </div>
         </div>
       </section>
-      {/* 🔹 New Section: HOW BIZGROW HELPS (Strategy Section) */}
-      <section className="py-12 bg-white relative overflow-hidden">
+
+      
+      {/* 🔹 3. THE COMPLIANCE GRID (Refined Card Layout with Scroll Animations) */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-6">
+          {/* Heading aur Description Section with Animation */}
+          <div className="flex flex-col items-center text-center mb-20">
+            <FadeIn direction="up" duration="0.6">
+              <h2 className="text-5xl md:text-7xl font-black text-[#12066a] tracking-tighter leading-none">
+                What Assessors <span className="text-[#997819]">Look</span> For.
+              </h2>
+            </FadeIn>
+
+            <FadeIn direction="up" duration="0.7" delay="0.15">
+              <p className="text-zinc-700 max-w-2xl font-medium mt-6 mx-auto text-center">
+                We ensure your business meets all 12 core elements of the{" "}
+                <Link
+                  href="https://bizgrow-holdings.com/what-is-ssip-accreditation/"
+                  className="text-[#997819] font-bold mr-1 hover:underline"
+                >
+                  SSIP
+                </Link>
+                threshold standard.
+              </p>
+            </FadeIn>
+          </div>
+
+          {/* Grid with Staggered Scroll Animations */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              "H&S Policy & Arrangements",
+              "Risk Assessments",
+              "COSHH Assessments",
+              "Training & Supervision",
+              "Sub-contractor Management",
+              "Accident Reporting",
+            ].map((text, i) => (
+              <FadeIn key={i} direction="up" duration="0.8" delay={0.1 * i}>
+                <div className="p-8 border border-zinc-100 rounded-[2rem] bg-slate-50/50 hover:bg-white hover:border-[#997819]/30 hover:shadow-lg transition-all duration-300 flex items-center gap-6 group h-full">
+                  <CheckCircle2 className="text-zinc-300 group-hover:text-[#997819] transition-colors shrink-0" />
+                  <span className="font-bold text-[#12066a] uppercase text-sm tracking-tight">
+                    {text}
+                  </span>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+      {/* 🔹 New Section: HOW BIZGROW HELPS (Strategy Section with Scroll Animations) */}
+      <section className="py-24 bg-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-20 items-center">
-            {/* Left Side: Content */}
+            {/* Left Side: Content with Animation */}
             <div className="relative z-10">
-              <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs mb-6">
-                Our Strategy
-              </span>
-              <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-none mb-10 uppercase">
-                How BizGrow Helps You Get <br />
-                <span className="text-[#997819]">SMAS Approved Faster</span>
-              </h2>
-              <p className="text-zinc-600 text-lg font-medium leading-relaxed mb-8">
-                BizGrow Holdings supports UK businesses by simplifying the SMAS
-                accreditation process. We act as your dedicated compliance
-                partner, ensuring every document is audit-ready from day one.
-              </p>
+              <FadeIn direction="up" duration="0.6">
+                <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs mb-6 ml-1 block">
+                  Our Strategy
+                </span>
+                <h2 className="text-4xl md:text-5xl font-black text-[#12066a] tracking-tighter leading-none mb-10">
+                  How BizGrow Helps You Get
+                  <span className="text-[#997819] block mt-2">
+                    SMAS Approved Faster
+                  </span>
+                </h2>
+              </FadeIn>
 
-              <div className="p-8 bg-zinc-50 rounded-[2.5rem] border-l-4 border-[#997819]">
-                <p className="text-[#12066a] font-bold italic">
-                  "We focus on identifying gaps and aligning policies with SMAS
-                  requirements so you can avoid delays and rejections."
+              <FadeIn direction="up" duration="0.7" delay="0.15">
+                <p className="text-zinc-600 text-lg font-medium leading-relaxed mb-8">
+                  BizGrow Holdings supports UK businesses by simplifying the
+                  SMAS accreditation process. We act as your dedicated
+                  compliance partner, ensuring every document is audit-ready
+                  from day one.
                 </p>
-              </div>
+              </FadeIn>
+
+              <FadeIn direction="up" duration="0.8" delay="0.3">
+                <div className="p-8 bg-zinc-50 rounded-[2.5rem] border-l-4 border-[#997819] shadow-sm">
+                  <p className="text-[#12066a] font-bold italic">
+                    "We focus on identifying gaps and aligning policies with
+                    SMAS requirements so you can avoid delays and rejections."
+                  </p>
+                </div>
+              </FadeIn>
             </div>
 
-            {/* Right Side: Feature list with icons */}
+            {/* Right Side: Feature list with Staggered Scroll Animations */}
             <div className="grid gap-4">
               {[
                 {
                   title: "Document Review",
-                  desc: <>Full <Link href="https://bizgrow-holdings.com/our-services/internal-audit/" className="text-[#997819] font-bold">audit</Link> of your existing health and safety documents to identify missing links.</>,
+                  desc: (
+                    <>
+                      Full{" "}
+                      <Link
+                        href="https://bizgrow-holdings.com/our-services/internal-audit/"
+                        className="text-[#997819] font-bold hover:underline"
+                      >
+                        audit
+                      </Link>{" "}
+                      of your existing health and safety documents to identify
+                      missing links.
+                    </>
+                  ),
                   icon: <ClipboardList className="text-[#997819]" />,
                 },
                 {
@@ -508,22 +606,21 @@ const SMASPage = () => {
                   icon: <Zap className="text-[#997819]" />,
                 },
               ].map((item, i) => (
-                <div
-                  key={i}
-                  className="p-6 border border-zinc-100 rounded-3xl flex gap-6 items-start hover:shadow-xl hover:shadow-zinc-200/50 transition-all duration-500 bg-white group"
-                >
-                  <div className="w-12 h-12 rounded-2xl bg-zinc-50 flex items-center justify-center shrink-0 group-hover:bg-[#12066a] group-hover:text-white transition-colors duration-500">
-                    {item.icon}
+                <FadeIn key={i} direction="up" duration="0.8" delay={0.15 * i}>
+                  <div className="p-6 border border-zinc-100 rounded-3xl flex gap-6 items-start hover:shadow-xl hover:shadow-zinc-200/50 hover:border-[#997819]/30 transition-all duration-500 bg-white group h-full">
+                    <div className="w-12 h-12 rounded-2xl bg-zinc-50 flex items-center justify-center shrink-0 group-hover:bg-[#12066a] group-hover:text-white transition-colors duration-500">
+                      {item.icon}
+                    </div>
+                    <div>
+                      <p className="font-black text-[#12066a] uppercase text-sm mb-1 group-hover:text-[#997819] transition-colors">
+                        {item.title}
+                      </p>
+                      <p className="text-zinc-500 text-xs font-medium leading-relaxed">
+                        {item.desc}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-black text-[#12066a] uppercase text-sm mb-1">
-                      {item.title}
-                    </p>
-                    <p className="text-zinc-500 text-xs font-medium leading-relaxed">
-                      {item.desc}
-                    </p>
-                  </div>
-                </div>
+                </FadeIn>
               ))}
             </div>
           </div>
@@ -552,16 +649,16 @@ const SMASPage = () => {
                 className="absolute inset-0 bg-cover bg-center bg-no-repeat md:bg-fixed transition-transform duration-300 "
                 style={{ backgroundImage: "url('/smas-cta.jpg')" }}
               />
-              <div className="absolute inset-0 bg-[#12066a]/40 mix-blend-multiply z-10" />
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[#12066a]/40 to-[#12066a] z-20" />
+              <div className="absolute inset-0 bg-[#12066a]/60 mix-blend-multiply z-10" />
+              <div className="absolute inset-0 bg-linear-to-b from-transparent via-[#12066a]/40 to-[#12066a] z-20" />
             </div>
 
             <div className="relative z-30 w-full max-w-4xl flex flex-col items-center">
               <FadeIn direction="up">
-                <span className="inline-block text-[#997819] font-black uppercase tracking-[0.5em] text-[10px] bg-white/5 px-6 py-2 rounded-full border border-white/10 mb-10">
+                <span className="inline-block text-white font-black uppercase tracking-[0.5em] text-[10px] bg-white/5 px-6 py-2 rounded-full border border-white/10 mb-10">
                   Accreditation Guaranteed
                 </span>
-                <h2 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-[0.85] mb-8 uppercase">
+                <h2 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-[0.85] mb-8 ">
                   Fast-Track <br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-b from-[#997819] to-[#d4af37] inline-block mt-2">
                     Your Success.
@@ -572,12 +669,12 @@ const SMASPage = () => {
               <div className="flex flex-col sm:flex-row gap-4 w-full justify-center items-center mt-4">
                 <FadeIn direction="up" delay={0.2}>
                   <Link href="/contact-us">
-                  <button className="relative group/btn overflow-hidden w-full sm:w-64 bg-[#997819] text-white px-8 py-5 rounded-2xl font-black uppercase tracking-[0.25em] text-[10px] transition-all duration-500">
-                    <span className="relative z-40 group-hover/btn:text-[#12066a] transition-colors duration-500">
-                      Get Your SMAS Badge
-                    </span>
-                    <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
-                  </button>
+                    <button className="relative group/btn overflow-hidden w-full sm:w-64 bg-[#997819] text-white px-8 py-5 rounded-2xl font-black uppercase tracking-[0.25em] text-[10px] transition-all duration-500">
+                      <span className="relative z-40 group-hover/btn:text-[#12066a] transition-colors duration-500">
+                        Get Your SMAS Badge
+                      </span>
+                      <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
+                    </button>
                   </Link>
                 </FadeIn>
               </div>

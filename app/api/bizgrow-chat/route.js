@@ -9,6 +9,49 @@ const WORDPRESS_API_URL = "https://cms.bizgrow-holdings.com/wp-json/wp/v2";
 
 let sitemapCache = { expiresAt: 0, urls: [] };
 
+// ---------------------------------------------------------------------------
+// Speech-only pronunciation rules (TTS).
+// Order matters: specific patterns must come BEFORE general ones.
+// "eyeso" has no hyphen/space so TTS reads it as one flowing word.
+// ---------------------------------------------------------------------------
+const speechReplacements = [
+  // British English spelling & pronunciation overrides for TTS
+  [/organization/gi, "organisation"],
+  [/recognize/gi, "recognise"],
+  [/prioritize/gi, "prioritise"],
+  [/specialized/gi, "specialised"],
+
+  // ISO + number: keep the digits and join with a non-breaking space
+  [/\bISO\s*(\d{4,5})(?::\d{4})?\b/gi, "eyeso\u00A0$1"],
+
+  // Standalone "ISO"
+  [/\bISO\b/gi, "eyeso"],
+
+  // BS standards
+  [/\bBS\s*7858\b/gi, "B S seven eight five eight"],
+  [/\bBS\s*7499\b/gi, "B S seven four nine nine"],
+  [/\bBS\s*10800\b/gi, "B S ten thousand eight hundred"],
+  [/\bBS\s*10119\b/gi, "B S one zero one one nine"],
+
+  // SIA ACS first, then standalone SIA
+  [/\bSIA\s*ACS\b/gi, "Sia A C S"],
+  [/\bSIA\b/g, "Sia"],
+
+  // Schemes that should be read as a word
+  [/\bCHAS\b/g, "Chas"],
+  [/\bSMAS\b/g, "Smas"],
+  [/\bNASDU\b/g, "Nazdoo"],
+  [/\bCOP\s*119\b/gi, "Cop one one nine"],
+  // Letter-by-letter
+  [/\bSSIP\b/g, "S S I P"],
+];
+
+const toSpeechText = (text) =>
+  speechReplacements.reduce(
+    (out, [pattern, spoken]) => out.replace(pattern, spoken),
+    text,
+  );
+
 const decodeHtmlEntities = (text) =>
   text
     .replace(/&nbsp;/gi, " ")
@@ -26,7 +69,7 @@ const decodeHtmlEntities = (text) =>
 const htmlToText = (html) =>
   html
     .replace(/<(script|style|noscript|svg)[^>]*>[\s\S]*?<\/\1>/gi, " ")
-    .replace(/<li\b[^>]*>/gi, "\n- ")
+    .replace(/<li\b[^>]*>/gi, "\n")
     .replace(/<(p|h[1-6]|section|article|div|tr|ul|ol)\b[^>]*>/gi, "\n")
     .replace(/<\/(p|li|h[1-6]|section|article|div|tr|ul|ol)>/gi, "\n")
     .replace(/<br\s*\/?>/gi, "\n")
@@ -288,6 +331,10 @@ function getHintPaths(question) {
     add("/our-services/cop-119-labour-provision/");
   }
 
+  if (/\bbs\s*10119\b/i.test(question)) {
+    add("/our-services/bs-10119-compliance/");
+  }
+
   if (/\bbs\s*10800\b/i.test(question)) {
     add("/our-services/bs-10800/");
   }
@@ -482,6 +529,7 @@ ACCURACY:
 
 - Keep any compliance guidance general; do not present it as legal advice.
 
+SCOPE RESTRICTION: You are strictly a compliance, Health & Safety, ISO standards, and security accreditations consultant for BizGrow Holdings. You must ONLY answer questions related to compliance, security accreditations (such as BS 10119, SIA ACS, BS 7858, BS 7499, BS 10800, NASDU, COP 119), ISO certifications, SSIP schemes, and BizGrow's professional services. If a user asks about unrelated topics (such as games, entertainment, coding, or personal matters outside compliance), politely and briefly refuse, stating that you can only assist with BizGrow's compliance and security consultancy services.
 
 GENERAL KNOWLEDGE FALLBACK:
 
@@ -502,7 +550,13 @@ GENERAL KNOWLEDGE FALLBACK:
 - Always finish the answer cleanly; never cut off mid-sentence`,
     };
 
-    const requestMessages = [systemPrompt];
+    const securityAccreditationsContext = {
+      role: "system",
+      content: `ADDITIONAL SERVICE CONTEXT: BizGrow Holdings also provides comprehensive UK security accreditations and compliance support, including BS 10119 Compliance (Code of practice for labour provision and supply chain integrity in the security sector)[cite: 5, 6], SIA ACS, BS 7858, BS 7499, BS 10800, NASDU, and COP 119[cite: 6]. Treat these as verified BizGrow services.`,
+    };
+
+    // Include both system prompts in requestMessages
+    const requestMessages = [systemPrompt, securityAccreditationsContext];
 
     if (websiteContext) {
       requestMessages.push({
@@ -529,16 +583,7 @@ ${websiteContext}`,
 
     // Speech-only pronunciation text.
     // The visible "reply" remains completely unchanged.
-    const speechText = reply
-      .replace(/\bISO\s*9001\b/gi, "I S O nine thousand one")
-      .replace(/\bISO\s*14001\b/gi, "I S O fourteen thousand one")
-      .replace(/\bISO\s*45001\b/gi, "I S O forty-five thousand one")
-      .replace(/\bISO\s*27001\b/gi, "I S O twenty-seven thousand one")
-      .replace(/\bBS\s*7858\b/gi, "B S seven eight five eight")
-      .replace(/\bBS\s*7499\b/gi, "B S seven four nine nine")
-      .replace(/\bBS\s*10800\b/gi, "B S ten thousand eight hundred")
-      .replace(/\bSIA\s*ACS\b/gi, "S I A A C S")
-      .replace(/\bCOP\s*119\b/gi, "C O P one one nine");
+    const speechText = toSpeechText(reply);
 
     return NextResponse.json({
       reply,
@@ -549,7 +594,7 @@ ${websiteContext}`,
 
     return NextResponse.json(
       {
-        reply: "Kuch ghalat ho gaya, barah-e-karam dobara koshish karein.",
+        reply: "Something went wrong",
       },
       { status: 500 },
     );
