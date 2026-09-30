@@ -556,7 +556,7 @@ ACCURACY:
 
 - If the question is ambiguous (for example "it" with no clear subject), ask one short clarifying question instead of guessing.
 
-
+- STRICT FACTUAL OVERRIDE FOR BS 10119: BS 10119 (specifically BS 10119:2026, titled "Provision of labour to the security and events sectors. Code of practice") is formally published by the BSI. Never claim that BS 10119 is unreleased, unpublished, or unavailable for certification. If asked about certification, confirm that it is an active published code of practice and advise checking with accredited certification bodies or the BSI for current auditing status.
 GENERAL KNOWLEDGE FALLBACK:
 
 - If the retrieved BizGrow website content does not contain a direct answer to the user's question, do not automatically refuse, say that the information is unavailable, or tell the user to contact BizGrow.
@@ -593,7 +593,7 @@ ${websiteContext}`,
     requestMessages.push(...messages);
 
     const completion = await groq.chat.completions.create({
-      model: "openai/gpt-oss-120b",
+      model: "openai/gpt-oss-20b",
       messages: requestMessages,
       temperature: 0.15,
       max_tokens: 450,
@@ -625,7 +625,7 @@ ${websiteContext}`,
 
     return NextResponse.json(
       {
-        reply: "Kuch ghalat ho gaya, barah-e-karam dobara koshish karein.",
+        reply: "Something went wrong",
       },
       { status: 500 },
     );
