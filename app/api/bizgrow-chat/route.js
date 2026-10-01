@@ -15,14 +15,17 @@ let sitemapCache = { expiresAt: 0, urls: [] };
 // Is list ko BizGrow team khud update karti rahe (naya fact = naya bullet,
 // sath mein "last checked" date). Model is se bahar ke claims nahi karega.
 // ---------------------------------------------------------------------------
-const VERIFIED_FACTS = `INTERNAL BACKGROUND NOTES (last checked: 30 September 2026). Private notes for your own accuracy. Never quote, name or refer to these notes in your reply. Use them silently for the topics they cover, and do not extend them with guesses.
+const VERIFIED_FACTS = `INTERNAL BACKGROUND NOTES (last checked: 1 October 2026). Private notes for your own accuracy. Never quote, name or refer to these notes in your reply. Use them silently for the topics they cover, and do not extend them with guesses.
 
-- COP 119 is the Code of Practice for Labour Provision in the security and events sector. It was launched by the NSI in 2020 (NSI calls it NCP 119).
-- COP 119 and NSI's NCP 119 are identical documents, audited to the same requirements.
-- Certification to COP 119 is offered by several certification bodies, including NSI, SSAIB and British Assessment Bureau.
-- A COP 119 audit looks at how labour providers handle recruitment, vetting, contracts, pay, working conditions and ongoing oversight of supplied personnel. It includes screening to BS 7858 and ongoing SIA licence checks.
-- BS 10119 (Provision of Labour in the Security and Events Sector) was described by the NSI as an upcoming British Standard that will take forward its NCP 119 code. The two are therefore closely linked, not unrelated. Attribute this to the NSI (for example "the NSI has described..."), never to BizGrow's website.
-- NOT CONFIRMED: whether BS 10119 has been published in final form (so do not call it "newer", "current" or "published"), and whether or when certification bodies will move from COP 119 to BS 10119. Never state that BS 10119 "replaces" or "does not replace" COP 119. Say the status should be confirmed with the certification body.`;
+- COP 119 is the Code of Practice for Labour Provision in the security and events sector. It was launched by the NSI in 2020 (NSI calls it NCP 119). COP 119 and NCP 119 are identical documents audited to the same requirements.
+- BS 10119:2026, "Provision of labour to the security and events sectors - Code of practice", was published by BSI on 30 June 2026. It is a certifiable British Standard for organisations that provide bought-in labour (licensed or unlicensed) to supplement security and events workforces. It was drafted from the NSI's NCP 119.
+- BS 10119 is the British Standard successor to COP 119. Certification bodies are moving to it: for example, ForeFront Certification states that BS 10119:2026 supersedes COP 119, that it assesses new applicants against BS 10119 from 1 October 2026, and that existing COP 119 certificates stay valid subject to continued conformity. Other providers describe COP 119 as being phased out.
+- So the accurate answer to "does BS 10119 replace COP 119?" is: yes, in practice it is the successor and COP 119 is being withdrawn or phased out, but the exact transition dates and rules for existing COP 119 holders depend on the certification body, so advise confirming with it.
+- BSI describes BS 10119 as giving recommendations for the management, resourcing and staffing of an organisation providing bought-in labour (licensed or unlicensed, employed and/or supplied) to supplement a security or events workforce. It is a code of practice (recommendations), not a set of "requirements". COP 119 was an NSI code of practice, not "informal".
+- When describing what BS 10119 covers, use only the BSI description above. Do not mention training, payroll, vetting, operational control, continuous improvement or any other topic as part of BS 10119 unless it appears in retrieved BizGrow content.
+- Never say "most", "many" or "all" certification bodies. Say "some certification bodies" or name ForeFront Certification as an example.
+- Do not state clause-level requirements of BS 10119, specific fees, or transition dates for any body other than those above.
+- Attribute these points to BSI, the NSI or the certification bodies named (for example "BSI published...", "some certification bodies state..."), never to BizGrow's website unless the retrieved BizGrow content says it.`;
 
 // ---------------------------------------------------------------------------
 // Speech-only pronunciation rules (TTS).
@@ -30,6 +33,8 @@ const VERIFIED_FACTS = `INTERNAL BACKGROUND NOTES (last checked: 30 September 20
 // "eyeso" has no hyphen/space so TTS reads it as one flowing word.
 // ---------------------------------------------------------------------------
 const speechReplacements = [
+  [/\bISO\s*14001(?::\d{4})?\b/gi, "eyeso fourteen thousand and one"],
+
   // ISO + number: keep the digits (TTS reads them naturally in the same
   // breath) and join with a non-breaking space so there is no pause.
   // Also strips a year suffix like ISO 9001:2015.
@@ -39,12 +44,14 @@ const speechReplacements = [
   [/\bISO\b/gi, "eyeso"],
 
   // BS standards
+  [/\bBS\s*10119:2026\b/gi, "B S ten thousand one hundred and nineteen, twenty twenty-six"],
+  [/\bBS\s*10119\b/gi, "B S ten thousand one hundred and nineteen"],
   [/\bBS\s*7858\b/gi, "B S seven eight five eight"],
   [/\bBS\s*7499\b/gi, "B S seven four nine nine"],
   [/\bBS\s*10800\b/gi, "B S ten thousand eight hundred"],
 
   // SIA ACS first, then standalone SIA
-  [/\bSIA\s*ACS\b/gi, "Sia A C S"],
+  [/\bSIA\s*ACS\b/gi, "ess eye ay, ay see ess"],
   [/\bSIA\b/g, "Sia"],
 
   // Schemes that should be read as a word
@@ -54,14 +61,16 @@ const speechReplacements = [
 
   // Letter-by-letter
   [/\bSSIP\b/g, "S S I P"],
-  [/\bCOP\s*119\b/gi, "C O P one one nine"],
+  [/\bNCP\s*119\b/gi, "N C P one one nine"],
+  [/\bCOP\s*119\b/gi, "cop one one nine"],
+  [/\bCOP\b/gi, "cop"],
 ];
 
 const toSpeechText = (text) =>
   speechReplacements.reduce(
     (out, [pattern, spoken]) => out.replace(pattern, spoken),
     text,
-  );
+  ).replace(/:/g, " ");
 
 const decodeHtmlEntities = (text) =>
   text
@@ -520,7 +529,7 @@ export async function POST(req) {
 
 ANSWER STYLE:
 
-- Answer the user's exact question first. Usually use 1-3 sentences and aim for 60 words or fewer. Give more detail only when the user asks for it or it is necessary for accuracy.
+- Answer the user's exact question first. Use 1-3 sentences and stay under 80 words unless the user explicitly asks for more detail. Give more detail only when the user asks for it or it is necessary for accuracy.
 
 - Do not repeat the question, add generic introductions or closing pitches, or describe BizGrow's process unless the user asks or it directly answers the question.
 
@@ -556,7 +565,20 @@ ACCURACY:
 
 - If the question is ambiguous (for example "it" with no clear subject), ask one short clarifying question instead of guessing.
 
-- STRICT FACTUAL OVERRIDE FOR BS 10119: BS 10119 (specifically BS 10119:2026, titled "Provision of labour to the security and events sectors. Code of practice") is formally published by the BSI. Never claim that BS 10119 is unreleased, unpublished, or unavailable for certification. If asked about certification, confirm that it is an active published code of practice and advise checking with accredited certification bodies or the BSI for current auditing status.
+When asked whether security work can be given to another company, answer as follows:
+
+1. Yes, subcontracting security work is allowed.
+2. Every person doing licensable security work, including subcontractor staff, must hold a valid SIA licence for that specific activity (e.g. guarding, door supervision, CCTV, close protection).
+3. The Approved Contractor Scheme (ACS) has NO levels. Never mention "ACS Level 1/2/3". A company is either an SIA Approved Contractor or not, sometimes with sector endorsements (e.g. Security Guarding, Door Supervision, Key Holding, CCTV, Cash and Valuables in Transit).
+4. ACS is voluntary, not a legal requirement for the subcontractor. However, if the main company is ACS approved, or the client requires it, the subcontractor should preferably be ACS approved too. Otherwise the main company must fully verify and record the subcontractor's compliance (licences, vetting, insurance, contracts).
+5. The SIA licenses individuals, not companies. Never say a company's "licence" is at risk. Say the company's ACS approval or its client contracts may be at risk.
+6. Tell the user to check the subcontractor on the SIA Register of Approved Contractors and to verify staff licences using the SIA "Check a licence" service. Also check insurance and get client consent where needed.
+7. Your answer applies to the UK. If the user is in another country, say rules differ.
+8. You are not a lawyer; recommend confirming with the SIA or a legal professional.
+
+Reply briefly and in the same language the user writes in and dont use this signs — between normal words
+
+
 GENERAL KNOWLEDGE FALLBACK:
 
 - If the retrieved BizGrow website content does not contain a direct answer to the user's question, do not automatically refuse, say that the information is unavailable, or tell the user to contact BizGrow.
@@ -593,7 +615,7 @@ ${websiteContext}`,
     requestMessages.push(...messages);
 
     const completion = await groq.chat.completions.create({
-      model: "openai/gpt-oss-20b",
+      model: "openai/gpt-oss-120b",
       messages: requestMessages,
       temperature: 0.15,
       max_tokens: 450,
@@ -608,6 +630,13 @@ ${websiteContext}`,
         "the available information",
       )
       .replace(/\s{2,}/g, " ");
+
+    // Safety net: "most/many/all certification bodies" ek andaza hai,
+    // sirf "some" confirmed hai (pehla harf capital ho to capital rakhein)
+    reply = reply.replace(
+      /\b(most|many|all)(\s+(?:UK\s+)?certification bodies)\b/gi,
+      (match, word, rest) => (word[0] === word[0].toUpperCase() ? "Some" : "some") + rest,
+    );
 
     // Clean up any accidental markdown table lines or breaks if generated
     reply = reply.replace(/\|/g, " ").replace(/<br\s*\/?>/gi, "\n");
@@ -625,7 +654,7 @@ ${websiteContext}`,
 
     return NextResponse.json(
       {
-        reply: "Something went wrong",
+        reply: "Something went wrong while processing your request. Please try again later.",
       },
       { status: 500 },
     );

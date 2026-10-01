@@ -19,7 +19,7 @@ export default function BizGrowAssistant() {
   const [micNotice, setMicNotice] = useState(null);
   const recognitionRef = useRef(null);
   const messagesContainerRef = useRef(null);
-  const speechVoicesRef = useRef([]);
+
   const audioRef = useRef(null);
   const audioUrlRef = useRef(null);
   const speechRequestIdRef = useRef(0);
@@ -27,19 +27,6 @@ export default function BizGrowAssistant() {
   const latestSpeechRef = useRef(null);
   const welcomeText =
     "Hello and a warm welcome to BizGrow Holdings. I am your dedicated AI compliance assistant. How may I assist you with your compliance queries?";
-
-  useEffect(() => {
-    if (!("speechSynthesis" in window)) return;
-
-    const updateVoices = () => {
-      speechVoicesRef.current = window.speechSynthesis.getVoices();
-    };
-
-    updateVoices();
-    window.speechSynthesis.addEventListener("voiceschanged", updateVoices);
-    return () =>
-      window.speechSynthesis.removeEventListener("voiceschanged", updateVoices);
-  }, []);
 
   // Browser ki mic permission ko live track karo
   useEffect(() => {
@@ -150,44 +137,175 @@ export default function BizGrowAssistant() {
 
   // Browser TTS: sirf awaz chalti hai. Text sync nahi hota,
   // poora text animated reveal ke saath dikhaya jata hai.
-  const speakWithBrowser = (spokenText, requestId, messageIndex) => {
-    // Typing sync band, poora text animation ke saath reveal karo
-    setSpeechProgress(null);
+  const speakWithGeneratedVoice = async (
+    spokenText,
+    requestId,
+    messageIndex,
+    signal,
+  ) => {
+    if (!spokenText?.trim()) return;
+
+    let audio;
+    let audioUrl;
+    let reader;
+    const releaseAudio = () => {
+      if (audioRef.current === audio) {
+        audioRef.current = null;
+      }
+
+      if (audioUrl) {
+        URL.revokeObjectURL(audioUrl);
+        if (audioUrlRef.current === audioUrl) {
+          audioUrlRef.current = null;
+        }
+        audioUrl = null;
+      }
+    };
+    const createAudio = (source) => {
+      audioUrl = URL.createObjectURL(source);
+      audioUrlRef.current = audioUrl;
+      audio = new Audio(audioUrl);
+      audioRef.current = audio;
+
+      audio.onplay = () => {
+        if (requestId === speechRequestIdRef.current) {
+          setIsSpeaking(true);
+        }
+      };
+
+      audio.onended = () => {
+        if (requestId === speechRequestIdRef.current) {
+          setIsSpeaking(false);
+          setRevealState(null);
+        }
+        releaseAudio();
+      };
+
+      audio.onerror = () => {
+        if (requestId === speechRequestIdRef.current) {
+          setIsSpeaking(false);
+        }
+        releaseAudio();
+        console.error("Generated voice playback failed");
+      };
+
+      return audio;
+    };
+
     if (messageIndex != null) {
+      setSpeechProgress(null);
       setRevealState({ messageIndex, id: requestId });
     }
 
-    if (!("speechSynthesis" in window)) {
-      if (requestId === speechRequestIdRef.current) setIsSpeaking(false);
-      return;
+    try {
+      const res = await fetch("/api/generate-voice", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          text: spokenText,
+        }),
+        signal,
+      });
+
+      if (!res.ok) {
+        let errorMessage = `Voice generation failed with status ${res.status}`;
+
+        try {
+          const errorData = await res.json();
+          if (errorData?.error) {
+            errorMessage = errorData.error;
+          }
+        } catch {}
+
+        throw new Error(errorMessage);
+      }
+
+      if (requestId !== speechRequestIdRef.current || signal.aborted) {
+        await res.body?.cancel();
+        return;
+      }
+
+      if (
+        res.body &&
+        typeof MediaSource !== "undefined" &&
+        MediaSource.isTypeSupported("audio/mpeg")
+      ) {
+        const mediaSource = new MediaSource();
+        const sourceOpen = new Promise((resolve, reject) => {
+          mediaSource.addEventListener("sourceopen", resolve, { once: true });
+          mediaSource.addEventListener(
+            "error",
+            () => reject(new Error("Unable to open MP3 stream")),
+            { once: true },
+          );
+        });
+        const streamedAudio = createAudio(mediaSource);
+
+        await sourceOpen;
+        const sourceBuffer = mediaSource.addSourceBuffer("audio/mpeg");
+        reader = res.body.getReader();
+        let playbackPromise;
+
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+
+          await new Promise((resolve, reject) => {
+            const onError = () => reject(new Error("Unable to decode MP3 stream"));
+            sourceBuffer.addEventListener(
+              "updateend",
+              () => {
+                sourceBuffer.removeEventListener("error", onError);
+                resolve();
+              },
+              { once: true },
+            );
+            sourceBuffer.addEventListener("error", onError, { once: true });
+            sourceBuffer.appendBuffer(value);
+          });
+
+          if (!playbackPromise) {
+            playbackPromise = streamedAudio.play();
+            playbackPromise.catch(() => {});
+          }
+        }
+
+        reader = null;
+        if (!playbackPromise) {
+          throw new Error("Voice generation returned empty audio");
+        }
+        if (mediaSource.readyState === "open") {
+          mediaSource.endOfStream();
+        }
+        await playbackPromise;
+        return;
+      }
+
+      const audioBlob = await res.blob();
+      if (!audioBlob.size) {
+        throw new Error("Voice generation returned empty audio");
+      }
+
+      await createAudio(audioBlob).play();
+    } catch (error) {
+      await reader?.cancel().catch(() => {});
+      if (audio) {
+        audio.pause();
+        audio.removeAttribute("src");
+        audio.load();
+      }
+      releaseAudio();
+
+      if (error?.name === "AbortError") return;
+
+      console.error("Generated voice error:", error);
+
+      if (requestId === speechRequestIdRef.current) {
+        setIsSpeaking(false);
+      }
     }
-
-    const utterance = new SpeechSynthesisUtterance(spokenText);
-    utterance.lang = "en-GB";
-    utterance.pitch = 1.0;
-    utterance.rate = 1.0;
-
-    const voices = speechVoicesRef.current.length
-      ? speechVoicesRef.current
-      : window.speechSynthesis.getVoices();
-    const ukVoices = voices.filter((voice) => /^en[-_]gb$/i.test(voice.lang));
-    const ukVoice =
-      ukVoices.find((voice) => voice.localService) ||
-      ukVoices[0] ||
-      voices.find((voice) => /british|united kingdom/i.test(voice.name));
-    if (ukVoice) utterance.voice = ukVoice;
-
-    utterance.onstart = () => {
-      if (requestId === speechRequestIdRef.current) setIsSpeaking(true);
-    };
-    const finishSpeech = () => {
-      if (requestId === speechRequestIdRef.current) setIsSpeaking(false);
-    };
-    utterance.onend = finishSpeech;
-    utterance.onerror = finishSpeech;
-
-    window.speechSynthesis.cancel();
-    window.speechSynthesis.speak(utterance);
   };
 
   const playElevenLabsResponse = async (
@@ -430,23 +548,30 @@ export default function BizGrowAssistant() {
     speechRequestIdRef.current += 1;
     ttsAbortControllerRef.current?.abort();
     ttsAbortControllerRef.current = null;
-    if ("speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-    }
+    const stopCurrentSpeech = () => {
+      speechRequestIdRef.current += 1;
+      ttsAbortControllerRef.current?.abort();
+      ttsAbortControllerRef.current = null;
+
+      stopCurrentAudio();
+
+      setIsSpeaking(false);
+      setSpeechProgress(null);
+      setRevealState(null);
+    };
     stopCurrentAudio();
     setIsSpeaking(false);
     setSpeechProgress(null);
   };
 
-  // Unmount par speech band karein
   useEffect(() => {
-    return () => {
-      if ("speechSynthesis" in window) window.speechSynthesis.cancel();
-      recognitionRef.current?.abort?.();
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  return () => {
+    recognitionRef.current?.abort?.();
+    stopCurrentAudio();
+  };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+}, []);
   // text = screen wala text, spokenText = awaz wala text (pronunciation fix ke saath)
   const speakText = async (
     text,
@@ -456,83 +581,59 @@ export default function BizGrowAssistant() {
   ) => {
     if (!text?.trim()) return;
 
-    latestSpeechRef.current = { text, spokenText, messageIndex };
+    latestSpeechRef.current = {
+      text,
+      spokenText,
+      messageIndex,
+    };
 
-    // Mute: awaz nahi, lekin text animated reveal ke saath dikhao
+    // Mute: awaz nahi, lekin existing animated reveal same rahe
     if (isMuted && !forcePlay) {
       setSpeechProgress(null);
+
       if (messageIndex != null) {
         setRevealState({
           messageIndex,
           id: `muted-${Date.now()}`,
         });
       }
+
       return;
     }
 
     const requestId = ++speechRequestIdRef.current;
+
     ttsAbortControllerRef.current?.abort();
+
     const controller = new AbortController();
     ttsAbortControllerRef.current = controller;
 
-    if ("speechSynthesis" in window) {
-      window.speechSynthesis.cancel();
-    }
     stopCurrentAudio();
 
-    const plainText = cleanText(text);
     const plainSpoken = cleanText(spokenText || text);
 
-    // ElevenLabs ka jawab aane tak text chupa rahe (typing sync ke liye)
     if (messageIndex != null) {
-      setRevealState(null);
-      setSpeechProgress({ requestId, messageIndex, visibleLength: 0 });
+      setSpeechProgress(null);
+      setRevealState({
+        messageIndex,
+        id: requestId,
+      });
     }
-
-    let fallbackStarted = false;
-    const fallbackToBrowser = (error) => {
-      if (
-        fallbackStarted ||
-        requestId !== speechRequestIdRef.current ||
-        controller.signal.aborted
-      )
-        return;
-      fallbackStarted = true;
-      if (error)
-        console.warn(
-          "ElevenLabs playback failed; using browser speech:",
-          error,
-        );
-      stopCurrentAudio();
-      speakWithBrowser(plainSpoken, requestId, messageIndex);
-    };
 
     try {
       setIsSpeaking(true);
 
-      const res = await fetch("/api/tts/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: plainSpoken }),
-        signal: controller.signal,
-      });
-
-      if (requestId !== speechRequestIdRef.current || controller.signal.aborted)
-        return;
-      if (!res.ok) {
-        throw new Error(`TTS request failed with status ${res.status}`);
-      }
-
-      await playElevenLabsResponse(
-        res,
-        controller.signal,
+      await speakWithGeneratedVoice(
+        plainSpoken,
         requestId,
         messageIndex,
-        plainText,
-        plainSpoken,
+        controller.signal,
       );
     } catch (err) {
-      fallbackToBrowser(err);
+      if (err?.name !== "AbortError") {
+        console.error("Voice playback failed:", err);
+        setIsSpeaking(false);
+      }
     } finally {
       if (ttsAbortControllerRef.current === controller) {
         ttsAbortControllerRef.current = null;
