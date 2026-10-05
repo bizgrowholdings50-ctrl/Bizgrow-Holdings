@@ -661,7 +661,9 @@ export default function BizGrowAssistant() {
       });
 
       const data = await response.json();
-      const botReply = data.reply || "I am processing your request.";
+      const botReply =
+        data.reply ||
+        "Sorry, I couldn't generate an answer just now. Please try again.";
       // Awaz ke liye pronunciation-fixed text (API se aata hai)
       const botSpeech = data.speechText || botReply;
       const assistantMessageIndex = newMessages.length;
