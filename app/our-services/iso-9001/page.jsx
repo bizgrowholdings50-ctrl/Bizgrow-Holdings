@@ -33,15 +33,15 @@ const iso9001Data = [
   },
   {
     q: "What are the essential steps to prepare for an ISO 9001 audit?",
-    a: "Start with a gap analysis to identify where your current processes and documentation fall short of ISO 9001 requirements, then build or update all policies, procedures, and records accordingly. Conduct a full internal audit before the external assessment to make sure every clause is properly evidenced and that your team understands their responsibilities. Ensure your management review is recent, all corrective actions are closed out, and your quality objectives are documented and measurable.",
+    a: "Start with a gap analysis to find where your processes and records fall short of ISO 9001. Update your policies and procedures, then run a full internal audit before the external one. Make sure your management review is recent, corrective actions are closed and your quality objectives are measurable.",
   },
   {
     q: "How to get ISO 9001 certification in the UK?",
-    a: "Begin with a gap analysis, then build your quality management system, including a quality policy, process documentation, objectives, and records, before running it for a sufficient period. Once operational, conduct an internal audit and management review, then engage a UKAS-accredited certification body for the formal two-stage external audit. BizGrow Holdings supports UK businesses through every stage of this process, from initial preparation through to successful certification.",
+    a: "Do a gap analysis and build your quality management system. Run an internal audit and management review. Then book a UKAS-accredited certification body for the two-stage audit. BizGrow Holdings supports you at every stage.",
   },
   {
     q: "Is getting ISO 9001 certification worth it?",
-    a: "Yes, for most UK businesses, ISO 9001 delivers clear commercial value by opening doors to tenders, frameworks, and clients that require it as a minimum standard. It improves internal efficiency, reduces costly errors, and gives clients confidence in your ability to deliver consistently. Businesses that invest in ISO 9001 consistently report stronger customer retention and a more competitive market position.",
+    a: "Yes, for most UK businesses. It helps you qualify for tenders and clients that require it. It also improves efficiency, reduces errors and builds client confidence.",
   },
 ];
 const ISO9001Page = () => {

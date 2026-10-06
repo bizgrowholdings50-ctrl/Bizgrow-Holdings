@@ -27,20 +27,20 @@ export const metadata = {
 
 const iso45001Data = [
   {
-    q: "What are the key benefits of implementing ISO 45001 certification?",
-    a: "The key benefits of implementing ISO 45001 certification include demonstrating that your business has a structured, proactive approach to protecting the health and safety of workers and reducing the risk of accidents, injuries, and costly legal claims. It is increasingly required by large clients, principal contractors, and public-sector buyers as evidence of strong occupational health and safety management. It also improves staff morale, reduces absenteeism, and creates a safer working environment by identifying and controlling workplace hazards before they cause harm. ",
+    q: "What is ISO 45001?",
+    a: "ISO 45001 is the international standard for occupational health and safety management. It helps you reduce workplace accidents and manage risks. UK businesses use it to show clients they take safety seriously.",
   },
   {
-    q: "What are the main requirements of ISO 45001?",
-    a: "The main requirements include a signed occupational health and safety policy, a documented hazard identification and risk assessment process, a legal compliance obligations register, defined safety objectives and targets, evidence of worker consultation and participation, emergency preparedness plans, and incident investigation procedures. The standard also requires competence records for all relevant staff, internal audit records, and management review minutes demonstrating that the system is being actively monitored and continuously improved. All requirements must be evidenced through documented information that is kept current and available for auditor review.",
+    q: "Do UK businesses need ISO 45001?",
+    a: "Not by law. However, you must still follow UK health and safety law. Many tenders and larger clients ask for ISO 45001, so certification can help you win work.",
   },
   {
-    q: "What is ISO 45001 and why is it important?",
-    a: "ISO 45001 is the international standard for occupational health and safety management systems, published in 2018 to replace the previous OHSAS 18001 standard. It helps businesses of all sizes build a proactive, systematic approach to identifying and controlling workplace hazards before they result in injuries, ill health, or fatalities. It is particularly important for UK businesses in high-risk sectors such as construction, security, manufacturing, and facilities management, where health and safety failures carry serious legal, financial, and reputational consequences.",
+    q: "How do you get ISO 45001 certification?",
+    a: "Do a gap analysis and build your health and safety management system. Run an internal audit, then book a UKAS-accredited certification body for the external audit.",
   },
   {
-    q: "What are common mistakes businesses make when implementing ISO 45001?",
-    a: "One of the most common mistakes is treating ISO 45001 as a paper exercise rather than embedding it into real day-to-day operations, which results in documentation that looks complete but does not reflect how the business actually manages safety on the ground. Many businesses also fail to demonstrate genuine worker consultation, which is a specific and auditable requirement of the standard that assessors check carefully. Inadequate hazard identification, incomplete legal compliance registers, and missing evidence of management review are also frequent non-conformances that delay certification or result in failed audits.",
+    q: "What documents are required for ISO 45001 certification?",
+    a: "You need a health and safety policy, a risk and hazard register and a legal compliance register. You also need objectives, emergency plans, internal audit records and management review minutes.",
   },
 ];
 const ISO45001Page = () => {

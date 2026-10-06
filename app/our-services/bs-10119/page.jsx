@@ -71,7 +71,7 @@ const assessorChecks = [
 const bs10119Data = [
   {
     q: "What is BS 10119?",
-    a: "BS 10119 is a British Standard code of practice covering the provision of labour to the security and events sectors. It was developed by the British Standards Institution to formalise the operational, screening, and supply-chain requirements that labour providers to the security industry are expected to meet, building on the framework already established by COP119.",
+    a: "BS 10119 is a British Standard code of practice covering the provision of labour to the security and events sectors. It was developed by the British Standards Institution to formalise the operational, screening, and supply-chain requirements that labour providers to the security industry.",
   },
   {
     q: "How does BS 10119 relate to COP119?",
@@ -80,7 +80,7 @@ const bs10119Data = [
 
   {
     q: "What documents are required for BS 10119 compliance?",
-    a: "BS 10119 compliance requires documented evidence of worker screening and vetting, verified SIA licensing where applicable, right-to-work checks, and PAYE payroll records that meet Working Time Regulations. You will also need written supply-chain and subcontractor management procedures, contractual documentation between labour providers and end users, and policies covering ethical recruitment and worker welfare, all kept current and ready for audit.",
+    a: "You need records of worker screening, right-to-work checks and SIA licence checks where relevant. You also need payroll records, written subcontractor procedures, contracts with end users and worker welfare policies. Keep them current and ready for audit.",
   },
   {
     q: "What are the benefits of achieving BS 10119 compliance?",

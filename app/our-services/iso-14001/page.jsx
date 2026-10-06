@@ -27,20 +27,20 @@ export const metadata = {
 
 const iso14001Data = [
   {
-    q: "What are the common challenges when implementing ISO 14001?",
-    a: "Many businesses struggle to identify and document all environmental aspects and impacts relevant to their specific operations, which is one of the most technically demanding parts of the standard. Keeping legal compliance registers up to date with all relevant environmental legislation is another common challenge, particularly for businesses operating across multiple sites. Staff engagement can also be difficult, since ISO 14001 requires evidence that environmental responsibilities are actively managed at all levels.",
-  },
-  {
     q: "How to get ISO 14001 certification?",
-    a: "Start with a gap analysis, then develop an environmental policy, aspects and impacts register, legal compliance register, and documented objectives before running your management system for a sufficient period. Once operational and evidenced, conduct an internal audit and management review, then engage a UKAS-accredited certification body for the formal external assessment. BizGrow Holdings provides hands-on ISO 14001 support for UK businesses from initial preparation through to successful certification.",
+    a: "Do a gap analysis and build your environmental management system. Run an internal audit, then book a UKAS-accredited certification body. BizGrow Holdings supports UK businesses throughout.",
   },
   {
-    q: "What documents are required for ISO 14001 certification?",
-    a: "You will need a signed environmental policy, an environmental aspects and impacts register, a legal compliance register listing all applicable environmental legislation, and documented objectives and improvement targets. Supporting documents include operational control procedures, emergency preparedness plans, internal audit records, and management review minutes. All documents must be current, regularly maintained, and specific to your business rather than copied generic templates.",
+    q: "How long does ISO 14001 certification take?",
+    a: "It depends on your business size and how ready you are. Most UK businesses need several months to build and run their system. Then a certification body audits you in two stages.",
   },
   {
-    q: "Can an ISO 14001 consultant help with certification and compliance?",
-    a: "Yes, a specialist ISO 14001 consultant significantly improves your chances of passing first time by guiding you through requirements, building the right documentation, and preparing your team for the external audit. They identify gaps in your current environmental management approach that you might not notice alone, saving time and avoiding costly mistakes. BizGrow Holdings provides expert ISO 14001 consultancy covering everything from gap analysis and documentation through to full audit support.",
+    q: "Does a small business need ISO 14001?",
+    a: "Not by law. However, many clients and tenders ask for it. If you want to win that work, certification can help.",
+  },
+  {
+    q: "Is ISO 14001 certification worth it?",
+    a: "Yes, for most UK businesses that bid for tenders or work with larger clients. It shows you manage your environmental impact and legal duties. It can also cut waste and reduce risk.",
   },
 ];
 

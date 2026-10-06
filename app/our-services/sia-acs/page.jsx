@@ -58,7 +58,7 @@ const siaAcsData = [
   },
   {
     q: "What is the SIA Approved Contractor Scheme (ACS)?",
-    a: "The SIA Approved Contractor Scheme is a voluntary quality standard for private security companies in the UK, managed by the Security Industry Authority. It assesses businesses against 78 achievement indicators covering staff vetting, training, health and safety, financial management, and operational procedures. Achieving ACS approval places your company on the official SIA register, which is checked by clients, government buyers, and large procurement teams before awarding security contracts.",
+    a: "A recognised quality standard for UK private security companies, run by the Security Industry Authority. It shows your business meets recognised standards in staff checks, training, and daily operations, backed by real proof, not just paperwork.",
   },
   {
     q: "What are the benefits of becoming an SIA-approved contractor?",
@@ -66,7 +66,11 @@ const siaAcsData = [
   },
   {
     q: "What documents are required for an SIA ACS assessment?",
-    a: "You will need a signed health and safety policy, staff vetting records confirming BS 7858 screening, SIA licence records for all operational staff and directors, training and competence evidence, financial accounts, and a quality management policy. You will also need documented operational procedures, complaint handling systems, and evidence of regular management reviews. All documents must be current, properly maintained, and specific to your actual business operations rather than generic templates.",
+    a: "You need evidence from the SIA's ACS self-assessment workbook. This usually includes director and staff SIA licence records, screening files (often BS 7858), training records, contracts, insurance, financial records and company policies. Your assessing body will confirm the exact list.",
+  },
+    {
+    q: "Is the ACS fee refundable if my application gets rejected?",
+    a: "No. The ACS application fee is generally non-refundable if your application is rejected, so you should make sure your business meets the SIA’s eligibility requirements before applying.",
   },
 ];
 
