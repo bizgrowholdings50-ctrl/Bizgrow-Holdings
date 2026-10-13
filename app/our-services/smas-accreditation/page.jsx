@@ -29,20 +29,20 @@ export const metadata = {
 
 const smasData = [
   {
-    q: "What are the benefits of SMAS accreditation?",
-    a: "The benefits of SMAS accreditation include proving your business meets recognised UK health and safety standards, building trust with clients, and improving your chances of winning contracts. It also reduces repeated pre-qualification assessments and provides a fast-track route to other SSIP schemes such as CHAS and SafeContractor. ",
+    q: "What is SMAS Worksafe?",
+    a: "SMAS Worksafe is a UK scheme that checks contractors' health and safety. It is run by Sypol and is recognised by many clients.",
   },
   {
-    q: "What does SMAS stand for?",
-    a: "SMAS stands for Safety Management Advisory Service. It is a UK-based health and safety accreditation body and a recognised member of the Safety Schemes in Procurement (SSIP) forum, which means its certificate is accepted by a wide range of public and private sector buyers as evidence of health and safety competence. SMAS assesses businesses against SSIP core criteria aligned with the Health and Safety Executive's standards, covering policies, risk assessments, training records, insurance, and management systems.",
+    q: "Do UK businesses need SMAS Worksafe?",
+    a: "Not by law. However, some clients and main contractors ask for it before awarding work.",
   },
   {
-    q: "What are the common reasons a SMAS application is rejected?",
-    a: "The most common reasons a SMAS application is rejected include an unsigned or outdated health and safety policy, generic risk assessments, and missing training records or insurance certificates. Incomplete documentation or failing to demonstrate proper health and safety arrangements can also delay or result in rejection of the application. ",
+    q: "How do you get SMAS Worksafe accreditation?",
+    a: "Register on the SMAS website and complete the online assessment with your documents. An assessor reviews it and you renew yearly.",
   },
   {
-    q: "How to get SMAS accreditation?",
-    a: "Start by gathering all required health and safety documents, including a current signed policy, relevant risk assessments and method statements, staff training records, and valid insurance certificates. Register on the SMAS portal, complete the health and safety assessment questionnaire, and submit your documentation for review by a qualified SMAS assessor. ",
+    q: "What documents are required for SMAS Worksafe?",
+    a: "You need an H&S policy, risk assessments and method statements (RAMS), training records and valid insurance certificates.",
   },
 ];
 const SMASPage = () => {

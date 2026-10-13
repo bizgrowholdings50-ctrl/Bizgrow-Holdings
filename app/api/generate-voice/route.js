@@ -1,49 +1,35 @@
-import { Readable } from "node:stream";
 import { NextResponse } from "next/server";
-import { MsEdgeTTS, OUTPUT_FORMAT } from "msedge-tts";
 
 export const runtime = "nodejs";
 
-const escapeXml = (text) =>
-  text.replace(/[&<>"']/g, (character) =>
-    ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&apos;",
-    })[character],
-  );
-
-export async function POST(request) {
+export async function POST(req) {
   try {
-    const body = await request.json();
-    const { text } = body;
+    const { text } = await req.json();
 
-    if (!text || typeof text !== "string") {
-      return NextResponse.json(
-        {
-          success: false,
-          error: "Text is required",
-        },
-        { status: 400 }
-      );
+    if (!text || typeof text !== "string" || !text.trim()) {
+      return NextResponse.json({ error: "Text is required" }, { status: 400 });
     }
 
-    console.log("Generating voice for:", text.slice(0, 100));
+    const sanitizedText = text.trim().slice(0, 200);
+    const encodedText = encodeURIComponent(sanitizedText);
+    
+    // Google Translate TTS Endpoint (100% stable, free, no 500 errors)
+    const googleTTSUrl = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodedText}&tl=en-gb&client=tw-ob`;
 
-    const tts = new MsEdgeTTS();
+    const response = await fetch(googleTTSUrl, {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+      },
+    });
 
-    await tts.setMetadata(
-      "en-GB-RyanNeural",
-      OUTPUT_FORMAT.AUDIO_24KHZ_48KBITRATE_MONO_MP3
-    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch audio stream");
+    }
 
-    const { audioStream } = tts.toStream(escapeXml(text));
+    const arrayBuffer = await response.arrayBuffer();
 
-    audioStream.once("close", () => tts.close());
-
-    return new Response(Readable.toWeb(audioStream), {
+    return new Response(Buffer.from(arrayBuffer), {
       status: 200,
       headers: {
         "Content-Type": "audio/mpeg",
@@ -52,15 +38,8 @@ export async function POST(request) {
     });
   } catch (error) {
     console.error("Voice generation error:", error);
-
     return NextResponse.json(
-      {
-        success: false,
-        error:
-          error instanceof Error
-            ? error.message
-            : "Voice generation failed",
-      },
+      { success: false, error: error.message || "Voice generation failed" },
       { status: 500 }
     );
   }

@@ -1,58 +1,67 @@
-import { NextResponse } from 'next/server';
+import { Readable } from "node:stream";
+import { NextResponse } from "next/server";
+import { MsEdgeTTS, OUTPUT_FORMAT } from "msedge-tts";
 
-export const runtime = 'nodejs';
+export const runtime = "nodejs";
 
-export async function POST(req) {
+const escapeXml = (text) =>
+  text.replace(/[&<>"']/g, (character) =>
+    ({
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&apos;",
+    })[character],
+  );
+
+export async function POST(request) {
   try {
-    const { text } = await req.json();
+    const body = await request.json();
+    const { text } = body;
 
-    if (typeof text !== 'string' || !text.trim()) {
-      return NextResponse.json({ error: "Text is required" }, { status: 400 });
+    if (!text || typeof text !== "string") {
+      return NextResponse.json(
+        { success: false, error: "Text is required" },
+        { status: 400 }
+      );
     }
 
-    const apiKey = process.env.ELEVENLABS_API_KEY;
-    if (!apiKey) {
-      return NextResponse.json({ error: "API key missing in environment variables" }, { status: 500 });
-    }
+    // Initialize MsEdgeTTS
+    const tts = new MsEdgeTTS();
 
-    // Professional British Male Voice ID (George / Brian)
-    const voiceId = "Xb7hH8MSUJpSbSDYk0k2"; 
+    // High quality UK Male Neural Voice
+    await tts.setMetadata(
+      "en-GB-RyanNeural",
+      OUTPUT_FORMAT.AUDIO_24KHZ_48KBITRATE_MONO_MP3
+    );
 
-    const response = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voiceId}/stream/with-timestamps?optimize_streaming_latency=3`, {
-      method: "POST",
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-        "xi-api-key": apiKey
-      },
-      body: JSON.stringify({
-        text: text.trim(),
-        model_id: "eleven_multilingual_v2",
-        voice_settings: {
-          stability: 0.7,
-          similarity_boost: 0.8
-        }
-      }),
-      signal: req.signal
-    });
+    const { audioStream } = tts.toStream(escapeXml(text));
 
-    if (!response.ok) {
-      const errorData = await response.text();
-      return NextResponse.json({ error: errorData }, { status: response.status });
-    }
-
-    if (!response.body) {
-      return NextResponse.json({ error: "ElevenLabs returned an empty audio response" }, { status: 502 });
-    }
-
-    return new NextResponse(response.body, {
-      headers: {
-        "Content-Type": response.headers.get("content-type") || "application/x-ndjson",
-        "Cache-Control": "no-store"
+    audioStream.once("close", () => {
+      try {
+        tts.close();
+      } catch (e) {
+        // Safe close
       }
     });
 
-  } catch (err) {
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    return new Response(Readable.toWeb(audioStream), {
+      status: 200,
+      headers: {
+        "Content-Type": "audio/mpeg",
+        "Cache-Control": "no-store",
+      },
+    });
+  } catch (error) {
+    console.error("Voice generation error:", error);
+
+    return NextResponse.json(
+      {
+        success: false,
+        error: error instanceof Error ? error.message : "Voice generation failed",
+      },
+      { status: 500 }
+    );
   }
 }

@@ -115,6 +115,9 @@ export default function RootLayout({ children }) {
         <WhatsAppWidget />
         <BizGrowAssistant />
         <DiscountWelcomePopup />
+
+
+        
       </body>
     </html>
   );

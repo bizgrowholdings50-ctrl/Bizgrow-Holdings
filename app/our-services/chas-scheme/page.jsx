@@ -26,20 +26,20 @@ export const metadata = {
 
 const chasData = [
   {
-    q: "How to get CHAS certification in the UK?",
-    a: "To get CHAS certification, you must register on the CHAS portal, complete a health and safety assessment questionnaire, and submit supporting evidence including your health and safety policy, risk assessments, training records, and valid insurance certificates. A CHAS assessor reviews your submission and may request additional information before making a decision.",
+    q: "What is CHAS?",
+    a: "CHAS is a UK scheme that checks contractors' health and safety standards. Many councils and main contractors often ask for it first.",
   },
   {
-    q: "How do I apply for CHAS accreditation?",
-    a: "Start by registering your business on the CHAS online portal and selecting the appropriate membership level for your business size and sector. Complete the assessment questionnaire covering health and safety management, risk assessments, training, and insurance, then upload all required supporting documents. Once submitted, a CHAS assessor reviews everything and contacts you if further evidence is needed before issuing your certificate.",
+    q: "Do UK businesses need CHAS?",
+    a: "Not by law. However, many clients require it before you can bid on new projects.",
   },
   {
-    q: "What are the common reasons a CHAS application is rejected?",
-    a: "The most common reasons include an unsigned or outdated health and safety policy, risk assessments that are clearly generic and not relevant to your actual work activities, and insurance certificates that have expired or show insufficient levels of cover. Missing training records, no evidence of accident reporting procedures, and failure to demonstrate access to a competent health and safety adviser are also frequent causes of rejection.",
+    q: "How do you get CHAS accreditation?",
+    a: "Register on chas.co.uk, complete the online H&S questionnaire, and upload all your documents. Wait for assessor approval and renew every year.",
   },
   {
-    q: "What are the benefits of CHAS accreditation for contractors?",
-    a: "The benefits of CHAS accreditation include proving your business meets recognised UK health and safety standards and improving your chances of winning public and private sector contracts. It also strengthens your health and safety systems, builds client confidence, and reduces the need for repeated pre-qualification questionnaires.",
+    q: "What documents are required for CHAS?",
+    a: "You need an H&S policy, risk assessments and method statements (RAMS), staff training records and your valid insurance certificates.",
   },
 ];
 const CHASSchemePage = () => {

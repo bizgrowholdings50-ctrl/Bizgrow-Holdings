@@ -147,7 +147,7 @@ export default function BizGrowAssistant() {
 
     let audio;
     let audioUrl;
-    let reader;
+
     const releaseAudio = () => {
       if (audioRef.current === audio) {
         audioRef.current = null;
@@ -161,11 +161,15 @@ export default function BizGrowAssistant() {
         audioUrl = null;
       }
     };
-    const createAudio = (source) => {
-      audioUrl = URL.createObjectURL(source);
+
+    const createAudio = (blob) => {
+      audioUrl = URL.createObjectURL(blob);
       audioUrlRef.current = audioUrl;
       audio = new Audio(audioUrl);
       audioRef.current = audio;
+
+      // Make the voice faster & energetic (1.2x speed)
+      audio.playbackRate = 1.2;
 
       audio.onplay = () => {
         if (requestId === speechRequestIdRef.current) {
@@ -211,75 +215,16 @@ export default function BizGrowAssistant() {
 
       if (!res.ok) {
         let errorMessage = `Voice generation failed with status ${res.status}`;
-
         try {
           const errorData = await res.json();
           if (errorData?.error) {
             errorMessage = errorData.error;
           }
         } catch {}
-
         throw new Error(errorMessage);
       }
 
       if (requestId !== speechRequestIdRef.current || signal.aborted) {
-        await res.body?.cancel();
-        return;
-      }
-
-      if (
-        res.body &&
-        typeof MediaSource !== "undefined" &&
-        MediaSource.isTypeSupported("audio/mpeg")
-      ) {
-        const mediaSource = new MediaSource();
-        const sourceOpen = new Promise((resolve, reject) => {
-          mediaSource.addEventListener("sourceopen", resolve, { once: true });
-          mediaSource.addEventListener(
-            "error",
-            () => reject(new Error("Unable to open MP3 stream")),
-            { once: true },
-          );
-        });
-        const streamedAudio = createAudio(mediaSource);
-
-        await sourceOpen;
-        const sourceBuffer = mediaSource.addSourceBuffer("audio/mpeg");
-        reader = res.body.getReader();
-        let playbackPromise;
-
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) break;
-
-          await new Promise((resolve, reject) => {
-            const onError = () => reject(new Error("Unable to decode MP3 stream"));
-            sourceBuffer.addEventListener(
-              "updateend",
-              () => {
-                sourceBuffer.removeEventListener("error", onError);
-                resolve();
-              },
-              { once: true },
-            );
-            sourceBuffer.addEventListener("error", onError, { once: true });
-            sourceBuffer.appendBuffer(value);
-          });
-
-          if (!playbackPromise) {
-            playbackPromise = streamedAudio.play();
-            playbackPromise.catch(() => {});
-          }
-        }
-
-        reader = null;
-        if (!playbackPromise) {
-          throw new Error("Voice generation returned empty audio");
-        }
-        if (mediaSource.readyState === "open") {
-          mediaSource.endOfStream();
-        }
-        await playbackPromise;
         return;
       }
 
@@ -288,9 +233,9 @@ export default function BizGrowAssistant() {
         throw new Error("Voice generation returned empty audio");
       }
 
-      await createAudio(audioBlob).play();
+      const audioElement = createAudio(audioBlob);
+      await audioElement.play();
     } catch (error) {
-      await reader?.cancel().catch(() => {});
       if (audio) {
         audio.pause();
         audio.removeAttribute("src");
@@ -298,7 +243,7 @@ export default function BizGrowAssistant() {
       }
       releaseAudio();
 
-      if (error?.name === "AbortError") return;
+      if (error?.name === "AbortError" || signal?.aborted) return;
 
       console.error("Generated voice error:", error);
 
@@ -329,6 +274,8 @@ export default function BizGrowAssistant() {
     const mediaSource = new MediaSource();
     const audioUrl = URL.createObjectURL(mediaSource);
     const audio = new Audio(audioUrl);
+    audio.playbackRate = 1.25; // 18% Faster & Energetic tone
+    audio.play();
     const alignmentEntries = [];
     let characterOffset = 0;
     let previousAlignmentEnd = 0;
@@ -565,13 +512,13 @@ export default function BizGrowAssistant() {
   };
 
   useEffect(() => {
-  return () => {
-    recognitionRef.current?.abort?.();
-    stopCurrentAudio();
-  };
+    return () => {
+      recognitionRef.current?.abort?.();
+      stopCurrentAudio();
+    };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-}, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   // text = screen wala text, spokenText = awaz wala text (pronunciation fix ke saath)
   const speakText = async (
     text,

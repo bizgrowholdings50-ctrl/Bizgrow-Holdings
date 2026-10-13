@@ -29,20 +29,20 @@ export const metadata = {
 
 const safeContractorData = [
   {
-    q: "How do I apply for SafeContractor accreditation?",
-    a: "Register your business on the SafeContractor portal, complete the health and safety assessment questionnaire, and upload your supporting documents, including your health and safety policy, risk assessments, training records, and insurance certificates. A SafeContractor assessor reviews your submission and may request further evidence before making a decision. Ensuring all documents are up to date and business-specific before submission significantly reduces delays.",
+    q: "What is SafeContractor?",
+    a: "SafeContractor is a UK accreditation scheme that assesses contractors' health and safety. It is run by Alcumus Group, a large UK company.",
   },
   {
-    q: "Who needs SafeContractor accreditation in the UK?",
-    a: "Any UK business working as a contractor or subcontractor in construction, facilities management, security, cleaning, or maintenance should consider SafeContractor accreditation. Many local authorities, NHS trusts, and large private sector companies require it before adding a supplier to their approved lists. Without it, businesses can be excluded from tenders before their capability is even considered.",
+    q: "Do UK businesses need SafeContractor?",
+    a: "Not by law. However, some clients and main contractors often ask for it before awarding work.",
   },
   {
-    q: "How to check if a contractor is certified as safe in the UK?",
-    a: "You can verify a contractor's SafeContractor status directly through the SafeContractor online portal by searching their business name or registration number. The result confirms whether their accreditation is currently active, expired, or suspended. Buyers and procurement teams should always carry out this check before engaging any contractor.",
+    q: "How do you get SafeContractor accreditation?",
+    a: "Register on the SafeContractor website and submit the online assessment with all your documents. An assessor then reviews it and you renew every year.",
   },
   {
-    q: "How to get SafeContractor accreditation?",
-    a: "Gather all required health and safety documentation, including a signed policy, relevant risk assessments, staff training records, and valid insurance certificates, then register on the SafeContractor portal and submit everything for assessor review. Many UK businesses use a compliance consultant like BizGrow Holdings to prepare documents properly and avoid common mistakes. This approach significantly improves the chances of passing the first time without unnecessary delays.",
+    q: "What documents are required for SafeContractor?",
+    a: "You need an H&S policy, risk assessments and method statements (RAMS), staff training records and your valid insurance certificates.",
   },
 ];
 const SafeContractorPage = () => {
