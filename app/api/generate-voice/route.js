@@ -4,27 +4,76 @@ export const runtime = "nodejs";
 
 export async function POST(req) {
   try {
-    const { text } = await req.json();
+    const body = await req.json().catch(() => ({}));
+    const text = body?.text;
 
     if (!text || typeof text !== "string" || !text.trim()) {
       return NextResponse.json({ error: "Text is required" }, { status: 400 });
     }
 
-    const sanitizedText = text.trim().slice(0, 200);
-    const encodedText = encodeURIComponent(sanitizedText);
-    
-    // Google Translate TTS Endpoint (100% stable, free, no 500 errors)
-    const googleTTSUrl = `https://translate.google.com/translate_tts?ie=UTF-8&q=${encodedText}&tl=en-gb&client=tw-ob`;
+    const keys = [
+      process.env.ELEVENLABS_API_KEY_1,
+      process.env.ELEVENLABS_API_KEY_2,
+    ].filter(Boolean);
 
-    const response = await fetch(googleTTSUrl, {
-      headers: {
-        "User-Agent":
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
-      },
-    });
+    if (keys.length === 0) {
+      console.error("CRITICAL: No ElevenLabs API keys found in .env.local!");
+      return NextResponse.json(
+        { error: "No API keys configured on server" },
+        { status: 500 }
+      );
+    }
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch audio stream");
+    const sanitizedText = text.trim().slice(0, 3000);
+
+    // FREE PLAN SAFE VOICE ID (Sarah - Natural & Energetic)
+    const voiceId = "EXAVITQu4vr4xnSDxMaL"; 
+
+    let response = null;
+    let lastErrorDetails = "";
+
+    for (let i = 0; i < keys.length; i++) {
+      const apiKey = keys[i];
+      try {
+        response = await fetch(
+          `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`,
+          {
+            method: "POST",
+            headers: {
+              "Accept": "audio/mpeg",
+              "Content-Type": "application/json",
+              "xi-api-key": apiKey,
+            },
+            body: JSON.stringify({
+              text: sanitizedText,
+              model_id: "eleven_flash_v2_5", 
+              voice_settings: {
+                stability: 0.5,
+                similarity_boost: 0.75,
+              },
+            }),
+          }
+        );
+
+        if (response.ok) {
+          console.log(`ElevenLabs voice generated successfully using Key #${i + 1}`);
+          break;
+        }
+
+        const errText = await response.text();
+        console.warn(`ElevenLabs Key #${i + 1} failed with status ${response.status}:`, errText);
+        lastErrorDetails = errText;
+      } catch (fetchErr) {
+        console.warn(`Network error with Key #${i + 1}:`, fetchErr.message);
+        lastErrorDetails = fetchErr.message;
+      }
+    }
+
+    if (!response || !response.ok) {
+      return NextResponse.json(
+        { error: "All ElevenLabs API keys failed", details: lastErrorDetails },
+        { status: 500 }
+      );
     }
 
     const arrayBuffer = await response.arrayBuffer();
@@ -36,10 +85,10 @@ export async function POST(req) {
         "Cache-Control": "no-store",
       },
     });
-  } catch (error) {
-    console.error("Voice generation error:", error);
+  } catch (err) {
+    console.error("Fatal error in generate-voice route:", err);
     return NextResponse.json(
-      { success: false, error: error.message || "Voice generation failed" },
+      { error: err.message || "Internal Server Error" },
       { status: 500 }
     );
   }

@@ -137,121 +137,55 @@ export default function BizGrowAssistant() {
 
   // Browser TTS: sirf awaz chalti hai. Text sync nahi hota,
   // poora text animated reveal ke saath dikhaya jata hai.
-  const speakWithGeneratedVoice = async (
-    spokenText,
-    requestId,
-    messageIndex,
-    signal,
-  ) => {
-    if (!spokenText?.trim()) return;
-
-    let audio;
-    let audioUrl;
-
-    const releaseAudio = () => {
-      if (audioRef.current === audio) {
-        audioRef.current = null;
-      }
-
-      if (audioUrl) {
-        URL.revokeObjectURL(audioUrl);
-        if (audioUrlRef.current === audioUrl) {
-          audioUrlRef.current = null;
-        }
-        audioUrl = null;
-      }
-    };
-
-    const createAudio = (blob) => {
-      audioUrl = URL.createObjectURL(blob);
-      audioUrlRef.current = audioUrl;
-      audio = new Audio(audioUrl);
-      audioRef.current = audio;
-
-      // Make the voice faster & energetic (1.2x speed)
-      audio.playbackRate = 1.2;
-
-      audio.onplay = () => {
-        if (requestId === speechRequestIdRef.current) {
-          setIsSpeaking(true);
-        }
-      };
-
-      audio.onended = () => {
-        if (requestId === speechRequestIdRef.current) {
-          setIsSpeaking(false);
-          setRevealState(null);
-        }
-        releaseAudio();
-      };
-
-      audio.onerror = () => {
-        if (requestId === speechRequestIdRef.current) {
-          setIsSpeaking(false);
-        }
-        releaseAudio();
-        console.error("Generated voice playback failed");
-      };
-
-      return audio;
-    };
-
-    if (messageIndex != null) {
-      setSpeechProgress(null);
-      setRevealState({ messageIndex, id: requestId });
-    }
-
+const speakWithGeneratedVoice = async (text, requestId, messageIndex, signal) => {
+  return new Promise(async (resolve, reject) => {
     try {
       const res = await fetch("/api/generate-voice", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          text: spokenText,
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text }),
         signal,
       });
 
       if (!res.ok) {
-        let errorMessage = `Voice generation failed with status ${res.status}`;
-        try {
-          const errorData = await res.json();
-          if (errorData?.error) {
-            errorMessage = errorData.error;
-          }
-        } catch {}
-        throw new Error(errorMessage);
+        throw new Error("Voice API request failed");
       }
 
-      if (requestId !== speechRequestIdRef.current || signal.aborted) {
-        return;
-      }
+      const blob = await res.blob();
+      const audioUrl = URL.createObjectURL(blob);
+      const audio = new Audio(audioUrl);
 
-      const audioBlob = await res.blob();
-      if (!audioBlob.size) {
-        throw new Error("Voice generation returned empty audio");
-      }
-
-      const audioElement = createAudio(audioBlob);
-      await audioElement.play();
-    } catch (error) {
-      if (audio) {
+      // Agar user conversation beech mein rok de ya naya message bheje
+      const abortHandler = () => {
         audio.pause();
-        audio.removeAttribute("src");
-        audio.load();
-      }
-      releaseAudio();
-
-      if (error?.name === "AbortError" || signal?.aborted) return;
-
-      console.error("Generated voice error:", error);
-
-      if (requestId === speechRequestIdRef.current) {
         setIsSpeaking(false);
-      }
+        const err = new Error("Aborted");
+        err.name = "AbortError";
+        reject(err);
+      };
+
+      signal?.addEventListener("abort", abortHandler, { once: true });
+
+      audio.onended = () => {
+        signal?.removeEventListener("abort", abortHandler);
+        setIsSpeaking(false);
+        resolve();
+      };
+
+      audio.onerror = (e) => {
+        signal?.removeEventListener("abort", abortHandler);
+        setIsSpeaking(false);
+        reject(e);
+      };
+
+      setIsSpeaking(true);
+      await audio.play();
+    } catch (err) {
+      setIsSpeaking(false);
+      reject(err);
     }
-  };
+  });
+};
 
   const playElevenLabsResponse = async (
     response,
@@ -968,7 +902,7 @@ export default function BizGrowAssistant() {
                       : "bg-slate-800/60 border-slate-700 text-slate-300 hover:bg-slate-800"
                   }`}
                 >
-                  {isMuted ? "🔇 Muted" : "🔊 Sound On"}
+                  {isMuted ? "🔇 Unmute" : "🔊 Mute"}
                 </button>
 
                 <div className="flex items-center gap-2">
