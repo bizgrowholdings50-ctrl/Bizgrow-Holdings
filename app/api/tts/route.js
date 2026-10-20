@@ -1,67 +1,81 @@
-import { Readable } from "node:stream";
 import { NextResponse } from "next/server";
-import { MsEdgeTTS, OUTPUT_FORMAT } from "msedge-tts";
 
 export const runtime = "nodejs";
 
-const escapeXml = (text) =>
-  text.replace(/[&<>"']/g, (character) =>
-    ({
-      "&": "&amp;",
-      "<": "&lt;",
-      ">": "&gt;",
-      '"': "&quot;",
-      "'": "&apos;",
-    })[character],
-  );
-
-export async function POST(request) {
+export async function POST(req) {
   try {
-    const body = await request.json();
-    const { text } = body;
+    const body = await req.json().catch(() => ({}));
+    const text = body?.text;
 
-    if (!text || typeof text !== "string") {
+    if (!text || typeof text !== "string" || !text.trim()) {
+      return NextResponse.json({ error: "Text is required" }, { status: 400 });
+    }
+
+    const keys = [
+      process.env.ELEVENLABS_API_KEY_1,
+      process.env.ELEVENLABS_API_KEY_2,
+    ].filter(Boolean);
+
+    if (keys.length === 0) {
+      return NextResponse.json({ error: "No API keys configured" }, { status: 500 });
+    }
+
+    // Poora lamba text allow karne ke liye limit barha di hai
+    const sanitizedText = text.trim().slice(0, 3000);
+    const voiceId = "EXAVITQu4vr4xnSDxMaL"; // Sarah Voice (Free Plan Supported)
+
+    let response = null;
+    let lastErrorDetails = "";
+
+    for (let i = 0; i < keys.length; i++) {
+      const apiKey = keys[i];
+      try {
+        response = await fetch(
+          `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`,
+          {
+            method: "POST",
+            headers: {
+              "Accept": "audio/mpeg",
+              "Content-Type": "application/json",
+              "xi-api-key": apiKey,
+            },
+            body: JSON.stringify({
+              text: sanitizedText,
+              model_id: "eleven_flash_v2_5",
+              voice_settings: {
+                stability: 0.5,
+                similarity_boost: 0.75,
+              },
+            }),
+          }
+        );
+
+        if (response.ok) break;
+
+        const errText = await response.text();
+        lastErrorDetails = errText;
+      } catch (fetchErr) {
+        lastErrorDetails = fetchErr.message;
+      }
+    }
+
+    if (!response || !response.ok) {
       return NextResponse.json(
-        { success: false, error: "Text is required" },
-        { status: 400 }
+        { error: "All keys failed", details: lastErrorDetails },
+        { status: 500 }
       );
     }
 
-    // Initialize MsEdgeTTS
-    const tts = new MsEdgeTTS();
+    const arrayBuffer = await response.arrayBuffer();
 
-    // High quality UK Male Neural Voice
-    await tts.setMetadata(
-      "en-GB-RyanNeural",
-      OUTPUT_FORMAT.AUDIO_24KHZ_48KBITRATE_MONO_MP3
-    );
-
-    const { audioStream } = tts.toStream(escapeXml(text));
-
-    audioStream.once("close", () => {
-      try {
-        tts.close();
-      } catch (e) {
-        // Safe close
-      }
-    });
-
-    return new Response(Readable.toWeb(audioStream), {
+    return new Response(Buffer.from(arrayBuffer), {
       status: 200,
       headers: {
         "Content-Type": "audio/mpeg",
         "Cache-Control": "no-store",
       },
     });
-  } catch (error) {
-    console.error("Voice generation error:", error);
-
-    return NextResponse.json(
-      {
-        success: false,
-        error: error instanceof Error ? error.message : "Voice generation failed",
-      },
-      { status: 500 }
-    );
+  } catch (err) {
+    return NextResponse.json({ error: err.message }, { status: 500 });
   }
 }
