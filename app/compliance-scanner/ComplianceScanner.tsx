@@ -338,7 +338,7 @@ export default function ComplianceScanner() {
               href={`mailto:sales@bizgrow-holdings.net?subject=${emailSubject}&body=${emailBody}`}
               className="inline-flex items-center justify-center rounded-xl bg-[#997818] px-6 py-4 text-center text-sm font-bold text-white shadow-lg transition hover:bg-[#b08a25] focus:outline-none focus:ring-4 focus:ring-[#997818]/30"
             >
-              Contact us for any query
+             Book Your Free Gap Review Call
             </a>
           </div>
         </section>
