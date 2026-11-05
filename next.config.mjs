@@ -17,28 +17,29 @@ const securityHeaders = [
     key: "Referrer-Policy",
     value: "origin-when-cross-origin",
   },
-  // 🚀 FIX 1: Cross-Origin-Opener-Policy (COOP) header added for Lighthouse pass
   {
     key: "Cross-Origin-Opener-Policy",
     value: "same-origin",
   },
-  // 🚀 FIX 2: Corrected Permissions-Policy format (Removed parser error)
   {
     key: "Permissions-Policy",
     value:
       "camera=(), microphone=(self), geolocation=(), xr-spatial-tracking=*",
   },
- {
+  {
     key: "Content-Security-Policy",
     value:
       "default-src 'self'; " +
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:8000 https://challenges.cloudflare.com https://va.vercel-scripts.com https://cdn.endorsal.io https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms https://*.clarity.ms; " +
+      // 🚀 FIX: Added https://static.scoreapp.com to script-src
+      "script-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:8000 https://challenges.cloudflare.com https://va.vercel-scripts.com https://cdn.endorsal.io https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms https://*.clarity.ms https://static.scoreapp.com; " +
       "style-src 'self' 'unsafe-inline' https://cdn.endorsal.io https://fonts.googleapis.com; " +
       "img-src 'self' https://cms.bizgrow-holdings.com https://cdn.endorsal.io https://*.cloudfront.net https://www.google.com https://lh3.googleusercontent.com https://www.google-analytics.com https://*.google-analytics.com https://c.bing.com data: blob:; " +
       "font-src 'self' https://fonts.gstatic.com data:; " +
       "media-src 'self' blob:; " +
-      "connect-src 'self' http://localhost:8000 ws://localhost:8000 https://cdn.endorsal.io https://*.endorsal.io https://va.vercel-scripts.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://*.clarity.ms https://*.supabase.co https://*.supabase.in wss://*.supabase.co wss://*.supabase.in https://c.bing.com; " +
-      "frame-src 'self' https://www.google.com https://challenges.cloudflare.com blob:; " +
+      // 🚀 FIX: Added https://*.scoreapp.com to connect-src (for API/data fetching)
+      "connect-src 'self' http://localhost:8000 ws://localhost:8000 https://cdn.endorsal.io https://*.endorsal.io https://va.vercel-scripts.com https://www.google-analytics.com https://*.google-analytics.com https://*.analytics.google.com https://*.clarity.ms https://*.supabase.co https://*.supabase.in wss://*.supabase.co wss://*.supabase.in https://c.bing.com https://*.scoreapp.com; " +
+      // 🚀 FIX: Added https://*.scoreapp.com to frame-src
+      "frame-src 'self' https://www.google.com https://challenges.cloudflare.com https://*.scoreapp.com blob:; " +
       "base-uri 'self'; " +
       "form-action 'self';",
   },

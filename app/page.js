@@ -20,9 +20,6 @@ import { ShieldCheck, Award, FileText, Lock } from "lucide-react";
 import HomeServices from "@/components/HomeServices";
 import NewsletterBox from "@/components/NewsletterBox";
 
-
-
-
 const steps = [
   {
     num: "01",
@@ -231,8 +228,6 @@ export default function HomePage() {
           </div>
         </section>
 
-
-
         {/* 4. SERVICES (GSAP PINNED SECTION) */}
         <HomeServices />
 
@@ -305,9 +300,6 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-        
-
-        
 
         {/* 6. TESTIMONIALS */}
 
@@ -351,27 +343,26 @@ export default function HomePage() {
               <div className="text-center lg:text-left max-w-2xl">
                 {/* SEO FIX: Use <h2> if <h1> is already used in Hero, or keep <h2> for hierarchy */}
                 <h2 className="text-[32px] md:text-6xl text-center font-black text-white leading-tight">
-                  Let’s Get Your Business{" "}
-                  <span className="text-[#D4AF37]">Audit-Ready Today.</span>
+                  How Ready Is Your Organisation? Check Your{" "}
+                  <span className="text-[#D4AF37]">Compliance Health</span> in Minutes
                 </h2>
                 <p className="text-blue-100/80 text-center mt-6 text-sm md:text-lg font-medium">
-                  Our compliance experts support UK organisations with SIA ACS
-                  approval, ISO certifications, and structured growth strategies
-                  designed to deliver measurable results. Build audit-ready
-                  systems. Win contracts. Operate with confidence.
+                  Find out in minutes how prepared your organisation is for
+                  Compliance. Our Health Check Score shows where you stand,
+                  which areas need attention and what to do next.
                 </p>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-6 w-full lg:w-auto">
                 {/* ACCESSIBILITY FIX: Added aria-label for clear context */}
                 <Link
-                  href="/contact-us"
-                  aria-label="Book a free consultation with our compliance experts"
+                  href="/compliance-scanner/"
+                  aria-label="Take the free Assessment by contacting BizGrow Holdings"
                   className="relative group/btn overflow-hidden inline-flex items-center justify-center gap-3 bg-white text-[#12066a] px-8 py-5 rounded-2xl font-black uppercase tracking-widest text-xs transition-all duration-500 shadow-lg active:scale-95"
                 >
                   {/* Yahan humne text color ko hover par dark blue rakha hai taake contrast hamesha high rahe */}
                   <span className="relative z-40 flex items-center gap-3 transition-colors duration-500 group-hover/btn:text-white">
-                    Book Free Consultation
+                    Take the free Assessment
                     <ArrowRight className="group-hover/btn:translate-x-2 transition-transform duration-500" />
                   </span>
 
@@ -379,7 +370,7 @@ export default function HomePage() {
                   <div className="absolute inset-0 bg-[#997819] translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
                 </Link>
 
-                {/* ACCESSIBILITY FIX: Added aria-label and descriptive text */}
+                {/* ACCESSIBILITY FIX: Added aria-label and descriptive text
                 <a
                   href="tel:+447898205035"
                   aria-label="Call BizGrow Holdings at +44 7898205035"
@@ -389,7 +380,7 @@ export default function HomePage() {
                     <PhoneCall size={18} /> +44 7898205035
                   </span>
                   <div className="absolute inset-0 bg-white -translate-x-full group-hover/phone:translate-x-0 transition-transform duration-500 ease-out z-40" />
-                </a>
+                </a> */}
               </div>
             </div>
           </div>

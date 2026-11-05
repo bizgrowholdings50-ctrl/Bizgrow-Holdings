@@ -355,7 +355,7 @@ export default function Template({ children }) {
     return {
       title: words[0] || "BizGrow",
       subtitle: words.slice(1).join(" ") || "Excellence",
-      bg: "/images/default-bg.jpg",
+      bg: "/service-security.jpg",
     };
   };
 
