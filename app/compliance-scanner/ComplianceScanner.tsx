@@ -152,7 +152,7 @@ export default function ComplianceScanner() {
         body: JSON.stringify({ lead, answers, totalScore: overall, categoryResults, riskStatus: risk.label })
       });
       const data = await response.json();
-      if (!response.ok) throw new Error(data.message || "We could not save your assessment.");
+      if (!response.ok || !data.success) throw new Error(data.message || "We could not save your assessment.");
       setResultsSubmitted(true);
       setStep(assessmentCategories.length + 1);
     } catch (error) {

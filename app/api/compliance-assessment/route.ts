@@ -64,7 +64,17 @@ export async function POST(request: Request) {
     });
     if (insertError) throw insertError;
 
-    if (!process.env.RESEND_API_KEY) throw new Error("Resend configuration is missing.");
+    if (!process.env.RESEND_API_KEY) {
+      console.warn("Resend configuration is missing; assessment saved without email delivery.");
+      return NextResponse.json({
+        success: true,
+        saved: true,
+        emailSent: false,
+        message: "Assessment saved, but email delivery is not configured.",
+        totalScore: score,
+        riskStatus: status,
+      });
+    }
     const resend = new Resend(process.env.RESEND_API_KEY);
     const from = "BizGrow Holdings <sales@bizgrow-holdings.net>";
     const safeName = escapeHtml(lead.fullName);
@@ -108,6 +118,15 @@ export async function POST(request: Request) {
     return NextResponse.json({ success: true, saved: true, emailSent: true, totalScore: score, riskStatus: status });
   } catch (error) {
     console.error("Compliance assessment API error", error);
-    return NextResponse.json({ success: false, message: "Unable to save the assessment. Please try again." }, { status: 500 });
+    const details = error && typeof error === "object" && "message" in error
+      ? String(error.message)
+      : error instanceof Error
+        ? error.message
+        : "Unknown API error";
+    return NextResponse.json({
+      success: false,
+      message: `Unable to save the assessment: ${details}`,
+      details,
+    }, { status: 500 });
   }
 }
