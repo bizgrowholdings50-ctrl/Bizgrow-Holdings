@@ -202,7 +202,7 @@ const DiscountCard = ({ offer }) => {
 
               {/* FOOTER */}
               <div className="flex shrink-0 items-center justify-between gap-5 border-t border-zinc-100 bg-zinc-50 p-6 md:p-8">
-                <div>
+                {/* <div>
                   <p className="text-[10px] font-black text-zinc-400 uppercase tracking-widest mb-1">
                     Starting Price
                   </p>
@@ -212,13 +212,13 @@ const DiscountCard = ({ offer }) => {
                       /Month
                     </span>
                   </p>
-                </div>
+                </div> */}
                 <button
                   onClick={() => {
                     setIsDetailOpen(false);
                     setIsClaimOpen(true);
                   }}
-                  className="bg-[#12066a] text-white px-8 py-4 rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-[#997819] transition-all shadow-lg flex items-center justify-center gap-3 cursor-pointer"
+                  className="bg-[#12066a] text-white px-8 py-4 ml-5 rounded-2xl font-black uppercase tracking-widest text-[10px] hover:bg-[#997819] transition-all shadow-lg flex items-center justify-center gap-3 cursor-pointer"
                 >
                   Claim Offer <ArrowRight size={16} />
                 </button>

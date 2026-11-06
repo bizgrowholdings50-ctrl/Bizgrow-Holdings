@@ -12,64 +12,63 @@ export const metadata = {
   title: "Discount Offers - BizGrow Holdings Ltd, UK",
   description:
     "Unlock exclusive business discount offers with BizGrow Holdings. Save on certifications, compliance, and growth services for UK companies.",
-  openGraph: createOpenGraph("/discount-offers/", "/discount_offer1.jpg"),
+  openGraph: createOpenGraph("/discount-offers/", "/11 11 sale offer.webp"),
 };
 
 const offersData = [
   {
-    title: "Health & Safety Compliance Bundle",
-    shortDesc: "Get SSIP-ready fast with 4 essential accreditations in one go.",
-    image: "/SSIP Bundle offer 2026.png",
+    title: "BS 10119 & ISO Compliance Support",
+    shortDesc: "Get expert BS 10119 and ISO compliance support with 25% OFF.",
+    image: "/11 11 sale offer.webp",
     discount: "25",
     price: "799",
-    fullDetail: "One bundle. Four accreditations CHAS, SMAS, SafeContractor & Constructionline. Everything you need to win tenders and prove your site is safe.",
+    fullDetail:
+      "BS 10119 & ISO Compliance Support, now 25% OFF!\n\nMake your business compliant and credible before the offer closes. To claim your discount, send us a message saying BIZGROW1111\n\n Valid until 11 November\nDon’t wait. Message us today and claim your 25% OFF.",
     sections: [
       {
         heading: "What’s Included",
         items: [
-          "Support for CHAS, SMAS, SafeContractor & Constructionline",
-          "Health & Safety Policy & Risk Assessments",
-          "RAMS Preparation",
-          "PQQ Support"
-        ]
+          "BS 10119 compliance support",
+          "ISO compliance assessment and guidance",
+          "Policies, procedures and implementation support",
+          "Documentation review and audit readiness support",
+        ],
       },
       {
         heading: "Why It Matters",
         items: [
-          "Unlock more tenders & contracts",
-          "One process, four accreditations",
-          "Faster than applying separately",
-          "Trusted by clients & principal contractors"
-        ]
-      }
-    ]
-  }
+          "Build a credible and compliant business",
+          "Reduce compliance gaps and implementation risks",
+          "Prepare confidently for certification audits",
+          "Improve client, tender and regulatory confidence",
+        ],
+      },
+    ],
+  },
 ];
 
 const DiscountPage = () => {
   return (
     <div className="bg-zinc-50 min-h-screen">
-    
-
       {/* 🔹 HERO SECTION */}
-      <section className="relative py-20 md:py-40 bg-[#12066a] overflow-hidden flex items-center justify-center min-h-[60vh] md:min-h-[70vh]">
+      <section className="relative py-20 md:h-screen bg-[#12066a] overflow-hidden flex items-center justify-center min-h-[60vh] md:min-h-[70vh]">
         <div className="absolute inset-0 opacity-10 bg-[url('/images/pattern.png')] bg-cover bg-center pointer-events-none" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] sm:w-[500px] h-[300px] sm:h-[500px] bg-[#997819]/15 rounded-full blur-[80px] sm:blur-[130px] pointer-events-none animate-pulse duration-[4s]" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center flex flex-col items-center justify-center">
           <FadeIn direction="up">
             <h1 className="text-4xl sm:text-7xl font-black text-white tracking-tighter leading-[1.1] sm:leading-none mb-8 max-w-5xl">
-              Act Fast 
-              <span className="text-[#997819] ml-2">
-                Discounts <br/> Won't Last Forever
+              <span className="block text-[#997819]">
+                BS 10119 &amp; ISO Compliance Support
               </span>
+              <span className="block mt-2 text-white">Now 25% OFF!</span>
             </h1>
           </FadeIn>
 
           <FadeIn direction="up" delay={0.15}>
             <div className="inline-flex items-center justify-center px-5 sm:px-8 py-2.5 sm:py-3 bg-white/5 border border-white/10 rounded-full backdrop-blur-md max-w-[90vw] sm:max-w-full">
               <p className="text-white/80 font-bold tracking-[0.1em] sm:tracking-widest uppercase text-[10px] sm:text-xs whitespace-nowrap sm:whitespace-normal overflow-hidden text-ellipsis">
-                Limited Time Offer | Don't Miss Out
+                Make Your Business Compliant and Credible
               </p>
             </div>
           </FadeIn>
@@ -95,9 +94,9 @@ const DiscountPage = () => {
                   No Active Offers Right Now
                 </h3>
                 <p className="text-zinc-500 font-medium leading-relaxed">
-                  We don't have any discount offers running at the moment.
-                  Check back soon, or get in touch with our team to hear
-                  about upcoming deals first.
+                  We don't have any discount offers running at the moment. Check
+                  back soon, or get in touch with our team to hear about
+                  upcoming deals first.
                 </p>
               </div>
             </FadeIn>
@@ -114,9 +113,7 @@ const DiscountPage = () => {
             </p>
             <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
               <div className="text-center">
-                <p className="text-[#12066a] font-black text-lg">
-                  02080904209
-                </p>
+                <p className="text-[#12066a] font-black text-lg">02080904209</p>
                 <p className="text-zinc-500 text-xs font-medium uppercase">
                   Call Us Now
                 </p>

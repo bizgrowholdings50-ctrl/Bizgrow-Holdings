@@ -87,6 +87,7 @@ export default function Footer() {
                 "About Us",
                 "Our Mission",
                 "Our Services",
+                "IT Solutions",
                 "Blogs",
                 "Contact Us",
                 "FAQs",
@@ -96,7 +97,9 @@ export default function Footer() {
                     href={
                       item === "Home"
                         ? "/"
-                        : `/${item.toLowerCase().replace(" ", "-")}`
+                        : item === "IT Solutions"
+                          ? "/it-services"
+                          : `/${item.toLowerCase().replace(" ", "-")}`
                     }
                     className="text-blue-100/70 hover:text-white hover:pl-2 transition-all duration-300 flex items-center gap-2 text-sm"
                   >

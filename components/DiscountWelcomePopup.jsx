@@ -61,42 +61,11 @@ const itemVariants = {
 };
 
 /* =========================================================
-   COUNT UP
-========================================================= */
-
-function useCountUp(target, start, duration = 900) {
-  const [value, setValue] = useState(0);
-
-  useEffect(() => {
-    if (!start) return;
-
-    let raf;
-    let startTime;
-
-    const tick = (t) => {
-      if (!startTime) startTime = t;
-      const progress = Math.min(1, (t - startTime) / duration);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setValue(Math.round(eased * target));
-      if (progress < 1) {
-        raf = requestAnimationFrame(tick);
-      }
-    };
-
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [start, target, duration]);
-
-  return value;
-}
-
-/* =========================================================
    MAIN COMPONENT
 ========================================================= */
 
 const DiscountWelcomePopup = () => {
   const [showWelcomePopup, setShowWelcomePopup] = useState(false);
-  const [numberStarted, setNumberStarted] = useState(false);
   
   // 180 = BACK, 0 = FRONT
   const [cardRotation, setCardRotation] = useState(180);
@@ -215,17 +184,12 @@ const DiscountWelcomePopup = () => {
       setCardRotation(0);
     }, 1000);
 
-    const countTimer = setTimeout(() => {
-      setNumberStarted(true);
-    }, 2200);
-
     const finishTimer = setTimeout(() => {
       setIntroFinished(true);
     }, 3500);
 
     return () => {
       clearTimeout(flipTimer);
-      clearTimeout(countTimer);
       clearTimeout(finishTimer);
     };
   }, [showWelcomePopup]);
@@ -273,8 +237,6 @@ const DiscountWelcomePopup = () => {
     setCardRotation((current) => (current === 0 ? 180 : 0));
   };
 
-  const percent = useCountUp(25, numberStarted, 1000);
-
   return (
     <AnimatePresence>
       {showWelcomePopup && (
@@ -291,9 +253,9 @@ const DiscountWelcomePopup = () => {
             rotateY,
             transformPerspective: 1400,
           }}
-          className="fixed bottom-6 right-6 left-6 sm:left-auto sm:max-w-md z-[10000]"
+          className="fixed bottom-4 right-4 left-4 sm:left-auto sm:max-w-[420px] z-[10000]"
         >
-          <div className="relative w-full" style={{ perspective: "1800px" }}>
+          <div className="relative w-full" style={{ perspective: "1700px" }}>
             <motion.div
               initial={{ rotateY: 180 }}
               onClick={handleCardFlip}
@@ -325,7 +287,7 @@ const DiscountWelcomePopup = () => {
                     }}
                   />
                   <div
-                    className="relative rounded-[2.15rem] p-6 sm:p-8 overflow-hidden shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)]"
+                    className="relative rounded-[2.15rem] p-5 sm:p-6 overflow-hidden shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)]"
                     style={{ backgroundColor: NAVY_DEEP }}
                   >
                     <motion.div
@@ -389,7 +351,7 @@ const DiscountWelcomePopup = () => {
                             stiffness: 300,
                             damping: 14,
                           }}
-                          className="w-12 h-12 rounded-2xl flex items-center justify-center"
+                          className="w-10 h-10 rounded-xl flex items-center justify-center"
                           style={{
                             background: `linear-gradient(135deg, ${GOLD}40, ${GOLD}08)`,
                             border: `1px solid ${GOLD}55`,
@@ -409,52 +371,33 @@ const DiscountWelcomePopup = () => {
                             className="font-black uppercase tracking-[0.25em] text-[9px]"
                             style={{ color: GOLD_LIGHT }}
                           >
-                            Limited Discount Offer!
+                            𝟏𝟏.𝟏𝟏 𝐒𝐀𝐋𝐄
                           </span>
                         </motion.div>
 
                         <motion.h3
                           variants={itemVariants}
-                          className="text-lg sm:text-2xl font-black uppercase tracking-tight leading-snug mb-2 text-white"
+                          className="text-lg sm:text-2xl font-black uppercase tracking-tight leading-[1.18] mb-2"
                         >
-                          Get{" "}
                           <span
-                            className="bg-clip-text text-transparent bg-[length:200%_auto] animate-[goldShift_4s_linear_infinite]"
-                            style={{
-                              backgroundImage: `linear-gradient(90deg, ${GOLD_LIGHT}, ${GOLD}, ${GOLD_LIGHT})`,
-                            }}
+                            className="block text-white"
                           >
-                            {percent}% Off
-                          </span>{" "}
-                          Compliance Bundles
+                            BS 10119 &amp; ISO
+                          </span>
+                          <span className="block text-[#997819]">COMPLIANCE</span>
+                          <span className="block bg-clip-text text-transparent" style={{ backgroundImage: `linear-gradient(90deg, ${GOLD_LIGHT}, #fff2a8)` }}>
+                            SUPPORT, NOW 25% OFF!
+                          </span>
                         </motion.h3>
 
-                        <motion.p
-                          variants={itemVariants}
-                          className="text-white/50 text-xs sm:text-sm font-medium leading-relaxed mb-6"
-                        >
-                          Save on Health & Safety Compliance Bundles. Get
-                          SSIP-ready with{" "}
-                          <span className="text-[#997819] font-bold">CHAS</span>
-                          ,{" "}
-                          <span className="text-[#997819] font-bold">SMAS</span>
-                          ,{" "}
-                          <span className="text-[#997819] font-bold">
-                            SafeContractor
-                          </span>{" "}
-                          &{" "}
-                          <span className="text-[#997819] font-bold">
-                            Constructionline
-                          </span>
-                          .
-                        </motion.p>
+                     
 
                         <motion.button
                           variants={itemVariants}
                           onClick={handleLearnMoreNavigation}
                           whileHover={{ scale: 1.04 }}
                           whileTap={{ scale: 0.97 }}
-                          className="relative inline-flex items-center justify-center gap-2.5 py-3.5 px-7 font-black uppercase tracking-widest text-[11px] rounded-xl overflow-hidden group cursor-pointer"
+                          className="relative inline-flex mt-3 items-center justify-center gap-2.5 py-3 px-7 font-black uppercase tracking-widest text-[11px] rounded-xl overflow-hidden group cursor-pointer"
                           style={{
                             backgroundColor: GOLD,
                             boxShadow: `0 10px 30px -8px ${GOLD}99`,
@@ -496,7 +439,7 @@ const DiscountWelcomePopup = () => {
                     }}
                   />
                   <div
-                    className="relative h-full min-h-[250px] rounded-[2.15rem] overflow-hidden shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)]"
+                    className="relative h-full min-h-[220px] rounded-[2.15rem] overflow-hidden shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)]"
                     style={{
                       background: `
                         radial-gradient(circle at 20% 20%, ${GOLD}16, transparent 30%),
@@ -519,7 +462,7 @@ const DiscountWelcomePopup = () => {
                       className="absolute -top-20 -right-20 w-52 h-52 rounded-full blur-3xl"
                       style={{ backgroundColor: `${GOLD}18` }}
                     />
-                    <div className="relative z-10 h-full min-h-[250px] flex flex-col justify-between p-7 sm:p-8">
+                    <div className="relative z-10 h-full min-h-[220px] flex flex-col justify-between p-5 sm:p-6">
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-2.5">
                           <div
@@ -558,40 +501,35 @@ const DiscountWelcomePopup = () => {
                           }}
                         />
                       </div>
-                      <div className="flex items-end justify-between gap-6">
-                        <div>
-                          <p className="text-[9px] uppercase tracking-[0.3em] font-bold text-[#997819] mb-2">
-                            Exclusive
-                          </p>
-                          <p className="text-xl sm:text-2xl font-black uppercase tracking-tight text-white">
-                            Compliance
-                          </p>
-                          <p
-                            className="text-xl sm:text-2xl font-black uppercase tracking-tight"
-                            style={{ color: GOLD_LIGHT }}
+                      <div>
+                        <p className="text-[9px] uppercase tracking-[0.3em] font-bold text-[#997819] mb-2">
+                          𝟏𝟏.𝟏𝟏 𝐒𝐀𝐋𝐄
+                        </p>
+                        <h3 className="text-lg sm:text-2xl font-black uppercase tracking-tight leading-[1.18]">
+                          <span className="block text-white">BS 10119 &amp; ISO COMPLIANCE</span>
+                          
+                          <span
+                            className="block bg-clip-text text-transparent"
+                            style={{
+                              backgroundImage: `linear-gradient(90deg, ${GOLD_LIGHT}, #fff2a8)`,
+                            }}
                           >
-                            Savings
-                          </p>
-                        </div>
-                        <div className="text-right">
-                          <div
-                            className="text-4xl font-black leading-none"
-                            style={{ color: GOLD_LIGHT }}
-                          >
-                            25%
-                          </div>
-                          <p className="text-[11px] uppercase tracking-[0.25em] font-black text-[#997819] mt-1">
-                            Discount
-                          </p>
+                            SUPPORT, NOW 25% OFF!
+                          </span>
+                        </h3>
+                        <div className="mt-3 max-w-md text-xs text-white/70 leading-relaxed">
+                        
+                          
+                         
                         </div>
                       </div>
 
-                      <div className="mt-5">
+                      <div className="mt-0">
                         <motion.button
                           onClick={handleClaimNavigation}
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
-                          className="w-full flex items-center justify-center gap-2 py-3 mb-4 rounded-xl font-black uppercase tracking-widest text-[11px] transition-colors duration-300 cursor-pointer"
+                          className="flex items-center justify-center gap-2 py-3 px-3 rounded-xl font-black uppercase tracking-widest text-[11px] transition-colors duration-300 cursor-pointer"
                           style={{
                             backgroundColor: GOLD_LIGHT,
                             color: NAVY_DEEP,
@@ -602,17 +540,7 @@ const DiscountWelcomePopup = () => {
                           <ArrowRight size={14} />
                         </motion.button>
 
-                        <div className="flex items-center justify-between">
-                          <span className="text-[8px] uppercase tracking-[0.2em] text-white/60">
-                            Tap card to flip back
-                          </span>
-                          <span
-                            className="text-[9px] uppercase tracking-[0.2em]"
-                            style={{ color: `${GOLD_LIGHT}` }}
-                          >
-                            BizGrow
-                          </span>
-                        </div>
+                    
                       </div>
                     </div>
                   </div>

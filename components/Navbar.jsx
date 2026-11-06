@@ -9,7 +9,6 @@ import { AnimatePresence, motion, LayoutGroup } from "framer-motion";
 import {
   Home,
   UserRound,
-  MonitorCog,
   BriefcaseBusiness,
   GraduationCap,
   MessageSquareQuote,
@@ -213,11 +212,6 @@ const navigation = [
     label: "About",
     href: "/about-us",
     icon: UserRound,
-  },
-  {
-    label: "IT Solutions",
-    href: "/it-services",
-    icon: MonitorCog,
   },
   {
     label: "Workshop Training",
@@ -1167,11 +1161,6 @@ export default function Navbar() {
               <PremiumNavLink
                 item={navigation[4]}
                 isActive={pathname === navigation[4].href}
-              />
-
-              <PremiumNavLink
-                item={navigation[5]}
-                isActive={pathname === navigation[5].href}
               />
             </div>
           </div>
