@@ -66,6 +66,7 @@ const itemVariants = {
 
 const DiscountWelcomePopup = () => {
   const [showWelcomePopup, setShowWelcomePopup] = useState(false);
+  const [isPopupHovered, setIsPopupHovered] = useState(false);
   
   // 180 = BACK, 0 = FRONT
   const [cardRotation, setCardRotation] = useState(180);
@@ -195,6 +196,19 @@ const DiscountWelcomePopup = () => {
   }, [showWelcomePopup]);
 
   /* =========================================================
+     AUTO CLOSE AFTER INACTIVITY
+  ========================================================= */
+  useEffect(() => {
+    if (!showWelcomePopup || isPopupHovered) return;
+
+    const inactivityTimer = setTimeout(() => {
+      setShowWelcomePopup(false);
+    }, 6500);
+
+    return () => clearTimeout(inactivityTimer);
+  }, [showWelcomePopup, isPopupHovered]);
+
+  /* =========================================================
      MOUSE MOVEMENT & CLOSE / NAVIGATION
   ========================================================= */
   const handlePointerMove = (e) => {
@@ -207,6 +221,7 @@ const DiscountWelcomePopup = () => {
   const handlePointerLeave = () => {
     mx.set(0);
     my.set(0);
+    setIsPopupHovered(false);
   };
 
   const dismissPopup = () => {
@@ -247,6 +262,9 @@ const DiscountWelcomePopup = () => {
           animate="visible"
           exit="exit"
           onPointerMove={handlePointerMove}
+          onPointerEnter={(event) => {
+            if (event.pointerType === "mouse") setIsPopupHovered(true);
+          }}
           onPointerLeave={handlePointerLeave}
           style={{
             rotateX,
