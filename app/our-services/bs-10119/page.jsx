@@ -77,7 +77,6 @@ const bs10119Data = [
     q: "How does BS 10119 relate to COP119?",
     a: "COP119 is the code of practice that first set out structured requirements for labour supply into the security sector, and BS 10119 is the formal British Standard developed to give that code a more universally recognised, accredited footing. Businesses already working towards COP119 are well placed to move towards BS 10119, since both cover the same core areas of vetting, payroll, and supply-chain management.",
   },
-
   {
     q: "What documents are required for BS 10119 compliance?",
     a: "You need records of worker screening, right-to-work checks and SIA licence checks where relevant. You also need payroll records, written subcontractor procedures, contracts with end users and worker welfare policies. Keep them current and ready for audit.",
@@ -238,6 +237,8 @@ const BS10119Page = () => {
         </div>
       </section>
 
+    
+
       {/* 🔹 4. WHO NEEDS THIS */}
       <section className="relative py-28 overflow-hidden">
         <div
@@ -303,6 +304,54 @@ const BS10119Page = () => {
                 </div>
               </FadeIn>
             ))}
+          </div>
+        </div>
+      </section>
+
+        {/* 🔹 NEW: FREE READINESS ASSESSMENT SCORECARD SECTION */}
+      <section className="py-24 bg-[#12066a] relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#997819_1px,transparent_1px)] [background-size:16px_16px] pointer-events-none" />
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div className="lg:col-span-6 space-y-6">
+              <FadeIn direction="up">
+                <span className="text-[#997819] font-bold uppercase tracking-[0.3em] text-xs">
+                  BS10119 Free Assessment
+                </span>
+                <h2 className="text-3xl md:text-5xl font-black text-white mt-3 tracking-tighter leading-tight">
+                  Would Your Labour Supply Stand Up To A <span className="text-[#997819]">BS10119</span> Standard?
+                </h2>
+                <p className="text-blue-100/80 text-base md:text-lg leading-relaxed pt-2">
+                  Take your BS10119 Readiness Assessment. Answer a few questions to identify strengths, weaknesses, and priority fixes in your quality management system.
+                </p>
+                <p className="text-blue-100/80 text-sm md:text-base font-medium">
+                  Your BS10119 Readiness Assessment report will arrive instantly. <span className="text-[#997819] font-bold">It’s absolutely FREE.</span>
+                </p>
+                <div className="pt-4">
+                  <a
+                    href="https://assessment.bs10119.co.uk/bs10119-score"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center bg-[#997819] hover:bg-[#997819] text-white px-10 py-5 rounded-2xl font-black uppercase tracking-wider text-xs shadow-2xl transition-all duration-300 transform hover:-translate-y-0.5"
+                  >
+                    Discover Your BS10119 Readiness Score
+                  </a>
+                </div>
+              </FadeIn>
+            </div>
+            <div className="lg:col-span-6">
+              <FadeIn direction="right" delay={0.2}>
+                <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-white/10 bg-black/40">
+                  <Image
+                    src="/bs10119-score.png"
+                    alt="BS10119 Scorecard Preview"
+                    width={800}
+                    height={500}
+                    className="w-full h-auto object-cover"
+                  />
+                </div>
+              </FadeIn>
+            </div>
           </div>
         </div>
       </section>
@@ -491,6 +540,7 @@ const BS10119Page = () => {
           </div>
         </div>
       </section>
+
       {/* FAQs*/}
       <ServicesFaq
         faqs={bs10119Data}
@@ -528,18 +578,17 @@ const BS10119Page = () => {
               </p>
 
               <div className="flex flex-col md:flex-row items-center justify-center gap-6">
-                <Link
-                  href="/contact-us"
-                  className="relative group/btn overflow-hidden inline-flex items-center justify-center px-12 py-6 bg-[#997819] text-white font-black uppercase tracking-widest text-[10px] rounded-2xl transition-all duration-500 shadow-2xl active:scale-95"
+                <a
+                  href="https://assessment.bs10119.co.uk/bs10119-score"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-12 py-6 bg-[#997819] text-white font-black uppercase tracking-widest text-[10px] rounded-2xl transition-colors duration-300 hover:bg-[#b08d24] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#997819] shadow-2xl"
                 >
-                  <span className="relative z-40 transition-colors duration-500 group-hover/btn:text-[#12066a]">
-                    Get Started Today
-                  </span>
-                  <div className="absolute inset-0 bg-white translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
-                </Link>
-                <Link href="/bs-10119-for-uk-security/">
+                  Take Free Assessment
+                </a>
+                <Link href="/contact-us/">
                   <button className="px-12 py-6 bg-transparent border border-white/20 text-white font-black uppercase tracking-widest text-[10px] rounded-2xl hover:bg-white/10 transition-all active:scale-95">
-                    Lean More About BS 10119
+                    Get Started Today
                   </button>
                 </Link>
               </div>

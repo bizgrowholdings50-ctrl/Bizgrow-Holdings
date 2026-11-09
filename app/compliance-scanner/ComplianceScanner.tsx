@@ -3,6 +3,7 @@
 import { FormEvent, useEffect, useMemo, useState } from "react";
 import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
 import { assessmentCategories, getRiskStatus } from "./complianceAssessment";
+import GapReviewBooking from "./GapReviewBooking";
 
 type Lead = { fullName: string; companyName: string; email: string; phone: string };
 type Answers = Record<string, number>;
@@ -86,6 +87,7 @@ export default function ComplianceScanner() {
   const [submitError, setSubmitError] = useState("");
   const [resultsSubmitted, setResultsSubmitted] = useState(false);
   const [questionIndex, setQuestionIndex] = useState(0);
+  const [bookingOpen, setBookingOpen] = useState(false);
 
   useEffect(() => {
     const heading = document.getElementById("compliance-scanner-heading");
@@ -202,7 +204,6 @@ export default function ComplianceScanner() {
   const emailBody = encodeURIComponent(
     `Hello BizGrow Holdings team,\n\nI have completed the compliance assessment.\n\nName: ${lead.fullName}\nCompany: ${lead.companyName}\nEmail: ${lead.email}\nPhone: ${lead.phone}\nOverall score: ${overall}%\nRisk status: ${risk.label}\n\nPlease contact me about improving our compliance position.\n`
   );
-
   if (step === 0) {
     return (
       <div className="mx-auto max-w-3xl rounded-3xl border border-slate-200 bg-white p-6 shadow-xl shadow-slate-200/50 sm:p-10">
@@ -334,14 +335,23 @@ export default function ComplianceScanner() {
                 ))}
               </div>
             </div>
-            <a
-              href={`mailto:sales@bizgrow-holdings.net?subject=${emailSubject}&body=${emailBody}`}
+            <button
+              type="button"
+              onClick={() => setBookingOpen(true)}
               className="inline-flex items-center justify-center rounded-xl bg-[#997818] px-6 py-4 text-center text-sm font-bold text-white shadow-lg transition hover:bg-[#b08a25] focus:outline-none focus:ring-4 focus:ring-[#997818]/30"
             >
              Book Your Free Gap Review Call
-            </a>
+            </button>
           </div>
         </section>
+        <GapReviewBooking
+          open={bookingOpen}
+          onClose={() => setBookingOpen(false)}
+          lead={lead}
+          assessmentScore={overall}
+          riskStatus={risk.label}
+          answers={answers}
+        />
         <button
           type="button"
           onClick={() => {
