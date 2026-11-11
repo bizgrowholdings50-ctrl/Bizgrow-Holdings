@@ -32,7 +32,7 @@ const QMSPage = () => {
             <span className="text-[#997819] font-black uppercase tracking-[0.5em] text-xs md:text-sm mb-6 inline-block bg-white/5 px-6 py-2.5 rounded-full backdrop-blur-md border border-white/10">
               UK-Based
             </span>
-            <h1 className="text-4xl md:text-6xl font-black text-white tracking-tighter leading-[0.95] italic mb-8 uppercase">
+            <h1 className="text-4xl md:text-6xl font-black text-white tracking-tighter leading-[0.95]  mb-8 uppercase">
               QMS Software Solutions <br />
               <span className="text-[#997819]">by BizGrow Holdings</span>
             </h1>
@@ -93,8 +93,8 @@ const QMSPage = () => {
             {/* 📝 CONTENT SIDE: Desktop pe Order 2, Mobile pe Order 1 */}
             <div className="order-1 lg:order-2 flex flex-col">
               <FadeIn direction="left">
-                <h2 className="text-[#12066a] text-4xl md:text-6xl font-black tracking-tighter leading-[0.9] mb-10">
-                  What is QMS Software & <br />
+                <h2 className="text-[#12066a] text-4xl md:text-5xl font-black tracking-tighter leading-[0.9] mb-10">
+                  What is QMS Software & 
                   <span className="text-[#997819] font-light">
                     Why UK Businesses Need It
                   </span>
@@ -170,7 +170,7 @@ const QMSPage = () => {
 
         <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
           <FadeIn direction="up">
-            <h2 className="text-3xl md:text-6xl font-black tracking-tighter text-center mb-20 italic uppercase">
+            <h2 className="text-3xl md:text-5xl font-black tracking-tighter text-center mb-20">
               Common Quality &{" "}
               <span className="text-[#997819]">
                 Compliance Challenges in UK Businesses
@@ -234,7 +234,7 @@ const QMSPage = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
             <FadeIn direction="up">
-              <h2 className="text-[#12066a] text-4xl md:text-7xl font-black tracking-tighter mb-6">
+              <h2 className="text-[#12066a] text-4xl md:text-5xl font-black tracking-tighter mb-6">
                 Key Features of{" "}
                 <span className="text-[#997819]">BizGrow QMS Software</span> for
                 UK Companies
@@ -304,7 +304,7 @@ const QMSPage = () => {
           <div className="bg-[#12066a] rounded-[4rem] overflow-hidden flex flex-col lg:flex-row shadow-2xl">
             <div className="lg:w-1/2 p-12 md:p-20 text-white">
               <FadeIn direction="left">
-                <h2 className="text-4xl font-black italic mb-8 uppercase">
+                <h2 className="text-4xl font-black  mb-8">
                   Who Needs{" "}
                   <span className="text-[#997819]">
                     QMS Software in the UK?
@@ -346,7 +346,7 @@ const QMSPage = () => {
             </div>
             <div className="lg:w-1/2 bg-white p-12 md:p-20 border-l border-slate-100">
               <FadeIn direction="right">
-                <h2 className="text-[#12066a] text-4xl font-black italic mb-8 uppercase">
+                <h2 className="text-[#12066a] text-4xl font-black mb-8">
                   Why Choose{" "}
                   <span className="text-[#997819]">
                     BizGrow for QMS Software in the UK
@@ -408,7 +408,7 @@ const QMSPage = () => {
             {/* Content Container (z-index ensure karega text upar rahe) */}
             <div className="relative z-10 flex flex-col items-center">
               <FadeIn direction="up">
-                <h2 className="text-3xl md:text-6xl font-black text-white tracking-tighter leading-none mb-10 uppercase">
+                <h2 className="text-3xl md:text-5xl font-black text-white tracking-tighter leading-none mb-10">
                   Get Started with{" "}
                   <span className="text-[#997819]">BizGrow QMS Software</span>{" "}
                   in the UK

@@ -52,7 +52,7 @@ const MarketingSolutionsPage = () => {
                 TRUSTED SECURITY NETWORK
               </span>
             </div>
-            <h1 className="text-5xl md:text-7xl font-black text-white leading-[0.95] tracking-tighter uppercase">
+            <h1 className="text-5xl md:text-7xl font-black text-white leading-[0.95] tracking-tighter ">
               UK’S PRIVATE <br />
               <span className="text-[#997819]">SECURITY DIRECTORY.</span>
             </h1>
@@ -190,12 +190,12 @@ const MarketingSolutionsPage = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-20 items-start">
             <div>
-              <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-[0.9] uppercase mb-6">
+              <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-[0.9]  mb-6">
                 Why Use the UK’s <br />
                 <span className="text-[#997819]">
-                  Private Security Directory
+                  Private Security Directory ?
                 </span>{" "}
-                ?
+               
               </h2>
               <p className="mb-3">
                 Finding the right security provider can be challenging. Our
@@ -276,8 +276,8 @@ const MarketingSolutionsPage = () => {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-24">
-            <h2 className="text-5xl font-black text-[#12066a] uppercase">
-              The <span className="text-[#997819]">Pillars</span> of TRUST
+            <h2 className="text-5xl font-black text-[#12066a] ">
+              The <span className="text-[#997819]">Pillars</span> of Trust
             </h2>
           </div>
 
@@ -344,9 +344,9 @@ const MarketingSolutionsPage = () => {
                 <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs mb-4 block">
                   Maximising Value
                 </span>
-                <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-tight mb-8 uppercase">
-                  Key Benefits of <br />
-                  <span className="text-[#997819]">The Directory.</span>
+                <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-tight mb-8 ">
+                  Key Benefits of 
+                  <span className="text-[#997819] ml-4">The Directory.</span>
                 </h2>
                 <p className="text-zinc-600 font-medium leading-relaxed mb-10 text-lg">
                   The UK’s Private Security Directory helps businesses and
@@ -414,9 +414,9 @@ const MarketingSolutionsPage = () => {
         <div className="max-w-7xl mx-auto px-6">
           {/* Header Section */}
           <div className="flex flex-col items-center mb-12 md:mb-16 gap-4 md:gap-8">
-            <h2 className="text-4xl md:text-7xl text-center font-black text-white uppercase tracking-tighter leading-[0.9]">
-              Industries We <br />
-              <span className="text-[#997819]">SERVE.</span>
+            <h2 className="text-4xl md:text-7xl text-center font-black text-white  tracking-tighter leading-[0.9]">
+              Industries We 
+              <span className="text-[#997819] ml-4">Serve.</span>
             </h2>
             <p className="text-blue-100/50 max-w-xl text-center text-sm md:text-lg leading-relaxed">
               Connecting businesses with trusted and compliant private{" "}
@@ -479,8 +479,8 @@ const MarketingSolutionsPage = () => {
                 </span>
 
                 <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter leading-[0.9] mb-8 uppercase">
-                  Get Listed <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#997819] to-[#d4af37] inline-block mt-2">
+                  Get Listed 
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r ml-2 from-[#997819] to-[#d4af37] inline-block mt-2">
                     Today
                   </span>
                 </h2>

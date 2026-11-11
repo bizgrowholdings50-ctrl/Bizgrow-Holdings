@@ -87,7 +87,7 @@ const CustomerServicePage = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-20 items-start">
             <div>
-              <h2 className="text-4xl md:text-6xl  font-black text-[#12066a] uppercase tracking-tighter leading-none mb-10">
+              <h2 className="text-4xl md:text-6xl  font-black text-[#12066a] tracking-tighter leading-none mb-10">
                 Our Approach to
                 <span className="text-[#997819]"> Customer Care</span>
               </h2>
@@ -229,7 +229,7 @@ const CustomerServicePage = () => {
 
         <div className="max-w-7xl mx-auto px-6 relative z-20">
           <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-7xl font-black text-white uppercase tracking-tighter leading-none">
+            <h2 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-none">
               How We <span className="text-[#997819]">Can Help</span>
             </h2>
             <p className="text-blue-100/60 mt-6 max-w-2xl mx-auto">
@@ -322,7 +322,7 @@ const CustomerServicePage = () => {
 
           <div className="mt-24 text-center">
             <div className="inline-block p-1 bg-gradient-to-r from-[#997819] to-transparent rounded-full mb-6" />
-            <blockquote className="text-2xl md:text-5xl font-black text-white italic uppercase tracking-tighter max-w-5xl mx-auto leading-tight">
+            <blockquote className="text-2xl md:text-4xl font-black text-white  uppercase tracking-tighter max-w-5xl mx-auto leading-tight">
               “We make your compliance and business growth journey{" "}
               <span className="text-[#997819]">
                 seamless, professional, and stress-free.
@@ -337,7 +337,7 @@ const CustomerServicePage = () => {
       <section className="py-32 bg-white">
         <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-12 gap-20">
           <div className="lg:col-span-5">
-            <h3 className="text-4xl md:text-5xl font-black text-[#12066a] uppercase mb-10 tracking-tighter leading-none">
+            <h3 className="text-4xl md:text-5xl font-black text-[#12066a]  mb-10 tracking-tighter leading-none">
               Communication <br />{" "}
               <span className="text-[#997819]">That Works For You</span>
             </h3>
@@ -413,10 +413,10 @@ const CustomerServicePage = () => {
             }}
           />
           <div className="relative z-10">
-            <h2 className="text-5xl md:text-7xl font-black text-white mb-10 tracking-tighter uppercase leading-[0.9]">
+            <h2 className="text-5xl md:text-6xl font-black text-white mb-10 tracking-tighter  leading-[0.9]">
               Get expert UK <br />
-              <span className="text-[#997819]">compliance support</span> <br />
-              <span className="text-white">today</span>
+              <span className="text-[#997819]">compliance support</span> 
+              <span className="text-white ml-3">today</span>
             </h2>
             <Link
               href="/contact-us"

@@ -38,7 +38,7 @@ const InternalAuditPage = () => {
 
         <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
           <FadeIn direction="up">
-            <span className="inline-block mt-14 text-[#997819] font-black uppercase tracking-[0.5em] text-[10px] bg-white/5 px-6 py-2 rounded-full border border-white/10 mb-8">
+            <span className="inline-block mt-14 text-[#997819] font-black  tracking-[0.5em] text-[10px] bg-white/5 px-6 py-2 rounded-full border border-white/10 mb-8">
               Stay Compliant
             </span>
             <h1 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-[0.85] mb-8">
@@ -61,7 +61,7 @@ const InternalAuditPage = () => {
             </p>
             <Link
               href="/contact-us"
-              className="relative group/btn overflow-hidden inline-flex items-center justify-center bg-[#997819] text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-xs transition-all duration-500 shadow-2xl active:scale-95"
+              className="relative group/btn overflow-hidden inline-flex items-center justify-center bg-[#997819] text-white px-10 py-5 rounded-2xl font-black  tracking-widest text-xs transition-all duration-500 shadow-2xl active:scale-95"
             >
               {/* Layer 1: The Text (Top Layer) */}
               <span className="relative z-40 transition-colors duration-500 group-hover/btn:text-[#12066a]">
@@ -81,7 +81,7 @@ const InternalAuditPage = () => {
           <div className="flex flex-col lg:flex-row items-center gap-20">
             <div className="lg:w-1/2">
               <FadeIn direction="left">
-                <h2 className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs mb-6">
+                <h2 className="text-[#997819] font-black  tracking-[0.4em] text-xs mb-6">
                   Introduction
                 </h2>
                 <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-none mb-8">
@@ -107,7 +107,7 @@ const InternalAuditPage = () => {
                     </Link>
                     , ensuring operations run effectively.
                   </p>
-                  <p className="font-medium text-[#12066a]">
+                  <p className=" text-zinc-700">
                     It plays a vital role in helping businesses stay compliant
                     with{" "}
                     <Link
@@ -155,10 +155,10 @@ const InternalAuditPage = () => {
             {/* ⬅️ Left: Content & Heading */}
             <div className="lg:col-span-5">
               <FadeIn direction="left">
-                <h2 className="text-[#997819] font-black uppercase tracking-[0.4em] text-[10px] mb-4">
+                <h2 className="text-[#997819] font-black  tracking-[0.4em] text-[10px] mb-4">
                   Strategic Assurance
                 </h2>
-                <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-[0.99] mb-8 uppercase">
+                <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-[0.99] mb-8 ">
                   Why Internal Audit
                   <span className="text-[#997819]"> is Important</span>
                 </h2>
@@ -198,7 +198,7 @@ const InternalAuditPage = () => {
                     </p>
                   </div>
                   <div className="mt-8 pt-6 border-t border-zinc-200 group-hover:border-white/10">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-[#997819] group-hover:text-white">
+                    <span className="text-[10px] font-black  tracking-widest text-[#997819] group-hover:text-white">
                       Proactive Protection
                     </span>
                   </div>
@@ -207,15 +207,15 @@ const InternalAuditPage = () => {
 
               {/* Card 2: Confidence & Control */}
               <FadeIn direction="up" delay={0.2}>
-                <div className="group p-8 bg-white border border-zinc-100 rounded-[3rem] hover:bg-[#997819] transition-all duration-700 h-full flex flex-col justify-between shadow-xl hover:shadow-2xl hover:-translate-y-2">
+                <div className="group p-8 bg-white border border-zinc-100 rounded-[3rem]  transition-all duration-700 h-full flex flex-col justify-between shadow-xl hover:shadow-2xl hover:-translate-y-2">
                   <div>
-                    <div className="w-14 h-14 bg-[#12066a] rounded-2xl flex items-center justify-center mb-8 shadow-lg group-hover:bg-white transition-colors duration-500">
+                    <div className="w-14 h-14 bg-[#12066a] rounded-2xl flex items-center justify-center mb-8 shadow-lg  transition-colors duration-500">
                       <BarChart3
-                        className="text-white group-hover:text-[#997819] transition-colors"
+                        className="text-white transition-colors"
                         size={28}
                       />
                     </div>
-                    <p className="text-[#12066a] group-hover:text-white leading-relaxed font-bold text-lg">
+                    <p className="text-[#12066a] leading-relaxed font-bold text-lg">
                       By conducting regular{" "}
                       <Link
                         href="https://bizgrow-holdings.com/difference-between-internal-audit-and-external-audit/"
@@ -235,7 +235,7 @@ const InternalAuditPage = () => {
                     </p>
                   </div>
                   <div className="mt-8 pt-6 border-t border-zinc-100 group-hover:border-white/20">
-                    <span className="text-[10px] font-black uppercase tracking-widest text-zinc-400 group-hover:text-white">
+                    <span className="text-[10px] font-black  tracking-widest text-zinc-400 ">
                       Operational Excellence
                     </span>
                   </div>
@@ -261,7 +261,7 @@ const InternalAuditPage = () => {
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center mb-20">
             <FadeIn direction="up">
-              <h2 className="text-4xl md:text-7xl font-black text-white tracking-tighter mb-6 uppercase">
+              <h2 className="text-4xl md:text-7xl font-black text-white tracking-tighter mb-6 ">
                 Advantages of{" "}
                 <span className="text-[#997819]">Internal Audit</span>
               </h2>
@@ -326,7 +326,7 @@ const InternalAuditPage = () => {
                     </div>
 
                     {/* Title: Starts White, turns Navy on Hover */}
-                    <h3 className="text-xl font-black text-white  mb-4 uppercase tracking-tight transition-colors duration-500">
+                    <h3 className="text-xl font-black text-white  mb-4  tracking-tight transition-colors duration-500">
                       {item.t}
                     </h3>
 
@@ -351,7 +351,7 @@ const InternalAuditPage = () => {
           <div className="grid lg:grid-cols-2 gap-20">
             {/* Procedure */}
             <div>
-              <h2 className="text-4xl font-black text-[#12066a] mb-8 uppercase tracking-tighter">
+              <h2 className="text-4xl font-black text-[#12066a] mb-8  tracking-tighter">
                 Audit Procedure
               </h2>
               <p className="text-zinc-600 mb-8">
@@ -376,7 +376,7 @@ const InternalAuditPage = () => {
                     <div className="w-8 h-8 rounded-full bg-[#12066a] text-white flex items-center justify-center font-bold text-xs">
                       {i + 1}
                     </div>
-                    <span className="font-bold text-[#12066a] uppercase text-sm tracking-widest">
+                    <span className="font-bold text-[#12066a]  text-sm tracking-widest">
                       {step}
                     </span>
                   </div>
@@ -387,7 +387,7 @@ const InternalAuditPage = () => {
             {/* Why Choose Us */}
             <div className="bg-[#12066a] p-12 rounded-[4rem] text-white relative overflow-hidden">
               <div className="relative z-10">
-                <h2 className="text-4xl font-black mb-10 uppercase tracking-tighter">
+                <h2 className="text-4xl font-black mb-10  tracking-tighter">
                   Why Choose Us
                 </h2>
                 <div className="space-y-8">
@@ -423,7 +423,7 @@ const InternalAuditPage = () => {
                     <div key={i} className="flex gap-6 group">
                       <ArrowRight className="text-[#997819] shrink-0 group-hover:translate-x-2 transition-transform" />
                       <div>
-                        <h3 className="font-black uppercase tracking-widest text-sm mb-1">
+                        <h3 className="font-black  tracking-widest text-sm mb-1">
                           {item.t}
                         </h3>
                         <p className="text-blue-100/50 text-sm">{item.d}</p>
@@ -456,7 +456,7 @@ const InternalAuditPage = () => {
             {/* Content Layer */}
             <div className="relative z-10 w-full max-w-3xl mx-auto">
               <FadeIn direction="up">
-                <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-6 md:mb-8 tracking-tighter uppercase leading-tight sm:leading-none">
+                <h2 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-6 md:mb-8 tracking-tighter  leading-tight sm:leading-none">
                   Ready to <span className="text-[#997819]">Get Started?</span>
                 </h2>
               </FadeIn>
@@ -471,7 +471,7 @@ const InternalAuditPage = () => {
               <FadeIn direction="up" delay={0.2}>
                 <Link
                   href="https://bizgrow-holdings.com/contact-us/"
-                  className="group/btn relative overflow-hidden inline-flex items-center justify-center bg-[#997819] text-white w-full sm:w-auto px-6 sm:px-12 md:px-16 py-4 sm:py-5 md:py-6 rounded-xl sm:rounded-2xl font-black uppercase tracking-[0.15em] sm:tracking-[0.3em] text-[10px] sm:text-xs transition-all duration-500 shadow-2xl active:scale-95 text-center"
+                  className="group/btn relative overflow-hidden inline-flex items-center justify-center bg-[#997819] text-white w-full sm:w-auto px-6 sm:px-12 md:px-16 py-4 sm:py-5 md:py-6 rounded-xl sm:rounded-2xl font-black  tracking-[0.15em] sm:tracking-[0.3em] text-[10px] sm:text-xs transition-all duration-500 shadow-2xl active:scale-95 text-center"
                 >
                   {/* Layer 1: The Text (Top Layer) */}
                   <span className="relative z-40 transition-colors duration-500 group-hover/btn:text-[#12066a]">

@@ -112,7 +112,7 @@ const TrainingMoments = () => {
 
             <p className="text-zinc-600 text-base md:text-lg leading-relaxed">
               With over{" "}
-              <span className="text-[#12066a] font-bold underline decoration-[#997819] decoration-2 underline-offset-4">
+              <span className="text-[#12066a] font-bold">
                 13 years of dedicated experience
               </span>{" "}
               in compliance and consultancy,{" "}

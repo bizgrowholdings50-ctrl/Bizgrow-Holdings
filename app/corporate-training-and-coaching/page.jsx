@@ -54,7 +54,7 @@ const TrainingCoachingPage = () => {
                   </span>
                 </div>
 
-                <h1 className="text-5xl font-black text-white tracking-tighter leading-[1] uppercase">
+                <h1 className="text-5xl font-black text-white tracking-tighter leading-[1] ">
                   Corporate Training & <br />
                   <span className="text-[#997819]">
                     Coaching Solutions for Security Businesses
@@ -111,7 +111,7 @@ const TrainingCoachingPage = () => {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <FadeIn direction="up">
-            <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-[0.9] mb-6 uppercase">
+            <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-[0.9] mb-6 ">
               Why Training & Coaching is <br />
               <span className="text-[#997819]">
                 Essential for Your Business.
@@ -182,8 +182,8 @@ const TrainingCoachingPage = () => {
       <section className="py-24 bg-zinc-50 border-t border-zinc-200">
         <div className="max-w-7xl mx-auto px-6 text-center">
           <div className="mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-[#12066a] uppercase tracking-tighter mb-4">
-              Our Corporate <br />{" "}
+            <h2 className="text-4xl md:text-5xl font-black text-[#12066a]  tracking-tighter mb-4">
+              Our Corporate {" "}
               <span className="text-[#997819]">Training Solutions</span>
             </h2>
             <p className="text-zinc-500 font-bold text-sm uppercase tracking-widest max-w-2xl mx-auto">
@@ -276,7 +276,7 @@ const TrainingCoachingPage = () => {
             {/* Content Layer (z-20) */}
             <div className="relative z-20">
               <FadeIn direction="up">
-                <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter uppercase mb-6 leading-none">
+                <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter  mb-6 leading-none">
                   Our Coaching{" "}
                   <span className="text-[#997819]">Methodology</span>
                 </h2>
@@ -364,9 +364,9 @@ const TrainingCoachingPage = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <FadeIn direction="up">
-              <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter uppercase leading-none mb-6">
-                Key Benefits <br />
-                <span className="text-[#997819]">
+              <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter  leading-none mb-6">
+                Key Benefits 
+                <span className="text-[#997819] ml-3">
                   of Our Training & Coaching
                 </span>
               </h2>
@@ -438,7 +438,7 @@ const TrainingCoachingPage = () => {
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center mb-24">
             <FadeIn direction="up">
-              <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-[#997819] uppercase leading-none">
+              <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-white  leading-none">
                 Our Process
               </h2>
               <p className="text-zinc-400 mt-4 font-bold uppercase tracking-widest text-xs">
@@ -500,7 +500,7 @@ const TrainingCoachingPage = () => {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Left Side: Main Text */}
             <FadeIn direction="left">
-              <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter uppercase leading-[0.9] mb-6">
+              <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter  leading-[0.9] mb-6">
                 Why Choose <br />
                 <span className="text-[#997819]">BizGrow Holdings?</span>
               </h2>
@@ -611,7 +611,7 @@ const TrainingCoachingPage = () => {
 
             <div className="relative z-20">
               <FadeIn direction="up">
-                <h3 className="text-3xl md:text-6xl font-black mb-8 tracking-tighter uppercase leading-none">
+                <h3 className="text-3xl md:text-6xl font-black mb-8 tracking-tighter  leading-none">
                   Get Started with Expert <br />{" "}
                   <span className="text-[#997819]">
                     Training & Coaching Today

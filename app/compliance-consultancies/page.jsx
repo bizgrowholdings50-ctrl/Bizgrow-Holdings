@@ -74,7 +74,7 @@ const ComplianceConsultancyPage = () => {
       <section className="py-24 border-b border-zinc-100">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <div>
-            <h2 className="text-[#12066a] text-4xl md:text-5xl font-black uppercase tracking-tighter mb-8">
+            <h2 className="text-[#12066a] text-4xl md:text-6xl font-black  tracking-tighter mb-8">
               Expert Guidance for <br className="hidden md:block"/>{" "}
               <span className="text-[#997819]">Regulated Excellence.</span>
             </h2>
@@ -136,18 +136,18 @@ const ComplianceConsultancyPage = () => {
         <div className="absolute top-0 right-0 w-96 h-96 bg-[#997819]/10 blur-[120px] rounded-full translate-x-1/2 -translate-y-1/2" />
 
         <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-8 gap-16 items-start">
             {/* Left Side: Heading */}
             <div className="lg:col-span-5">
               <FadeIn direction="right">
                 <span className="text-[#997819] font-black uppercase tracking-[0.3em] text-xs mb-4 block">
                   Strategic Necessity
                 </span>
-                <h2 className="text-white text-4xl md:text-5xl font-black uppercase tracking-tighter leading-[0.9]">
-                  Why Compliance <br  />
-                  <span className="text-[#997819]">Is Important.</span>
+                <h2 className="text-white text-4xl md:text-6xl font-black  tracking-tighter leading-[0.9]">
+                  Why Compliance 
+                  <span className="text-[#997819] ml-3">Is Important.</span>
                 </h2>
-                <div className="h-1 w-20 bg-[#997819] mt-8" />
+               
               </FadeIn>
             </div>
 
@@ -212,7 +212,7 @@ const ComplianceConsultancyPage = () => {
       <section className="py-24 bg-zinc-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
-            <h2 className="text-[#12066a] text-4xl md:text-6xl font-black uppercase tracking-tighter">
+            <h2 className="text-[#12066a] text-4xl md:text-6xl font-black  tracking-tighter">
               Our Strategic <span className="text-[#997819]">Services</span>
             </h2>
           </div>
@@ -269,18 +269,18 @@ const ComplianceConsultancyPage = () => {
       <section className="py-24 bg-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           {/* Section Header */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end mb-20">
+          <div className="grid grid-cols-1 gap-4 items-end mb-20">
             <FadeIn direction="right">
               <span className="text-[#997819] font-black uppercase tracking-[0.3em] text-xs mb-4 block">
                 The BizGrow Advantage
               </span>
-              <h2 className="text-[#12066a] text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[0.9] italic">
-                Benefits of <br />
-                <span className="text-[#997819]">Working With Us.</span>
+              <h2 className="text-[#12066a] text-4xl md:text-5xl font-black  tracking-tighter leading-[0.9] ">
+                Benefits of 
+                <span className="text-[#997819] ml-4">Working With Us.</span>
               </h2>
             </FadeIn>
             <FadeIn direction="left" delay={0.2}>
-              <p className="text-zinc-500 text-lg md:text-xl font-medium leading-relaxed border-l-4 border-zinc-100 pl-6">
+              <p className="text-zinc-500 text-lg md:text-xl font-medium leading-relaxed ">
                 Partnering with{" "}
                 <Link href="/" className="text-[#997819] font-bold">
                   BizGrow Holdings
@@ -369,9 +369,9 @@ const ComplianceConsultancyPage = () => {
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <div>
-              <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none mb-10">
-                STRENGTHENING <br />{" "}
-                <span className="text-[#997819]">REPUTATION.</span>
+              <h2 className="text-4xl md:text-6xl font-black  tracking-tighter leading-none mb-10">
+                Strengthening 
+                <span className="text-[#997819] ml-2">Reputation</span>
               </h2>
               <div className="space-y-6">
                 {[
@@ -481,13 +481,13 @@ const ComplianceConsultancyPage = () => {
                 <span className="text-[#997819] font-black uppercase tracking-[0.3em] text-xs mb-4 block">
                   The Strategic Choice
                 </span>
-                <h2 className="text-[#12066a] text-4xl md:text-6xl font-black uppercase tracking-tighter leading-[0.9] mb-10 italic">
-                  Why Choose <br />
-                  <span className="text-[#997819]">BizGrow Holdings.</span>
+                <h2 className="text-[#12066a] text-4xl md:text-6xl font-black  tracking-tighter leading-[0.9] mb-10">
+                  Why Choose 
+                  <span className="text-[#997819] ml-3">BizGrow Holdings.</span>
                 </h2>
 
                 <div className="space-y-8">
-                  <p className="text-zinc-700 text-xl md:text-2xl font-bold leading-relaxed italic border-l-8 border-[#997819] pl-8">
+                  <p className="text-zinc-700 text-xl font-bold leading-relaxed  border-l-5 border-[#997819] pl-8">
                     BizGrow Holdings stands out as a trusted compliance
                     consultancy for UK security companies, offering
                     industry-specific expertise and a results-driven approach.
@@ -525,9 +525,9 @@ const ComplianceConsultancyPage = () => {
       {/* 🔹 FINAL CALL TO ACTION */}
       <section className="py-32 bg-white text-center">
         <div className="max-w-4xl mx-auto px-6">
-          <h2 className="text-4xl md:text-6xl font-black text-[#12066a] uppercase tracking-tighter mb-10 leading-none">
-            Ready to Achieve <br />{" "}
-            <span className="text-[#997819]">Excellence?</span>
+          <h2 className="text-4xl md:text-6xl font-black text-[#12066a]  tracking-tighter mb-10 leading-none">
+            Ready to Achieve 
+            <span className="text-[#997819] ml-2">Excellence?</span>
           </h2>
           <Link
             href="/contact-us"

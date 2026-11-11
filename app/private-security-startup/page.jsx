@@ -108,8 +108,8 @@ const SecurityStartupPage = () => {
               </div>
             </div>
             <div className="order-1 lg:order-2">
-              <h2 className="text-4xl md:text-5xl font-black text-[#12066a] uppercase tracking-tighter mb-8 leading-normnal">
-                Building a Foundation <br />{" "}
+              <h2 className="text-4xl md:text-5xl font-black text-[#12066a]  tracking-tighter mb-8 leading-normnal">
+                Building a Foundation {" "}
                 <span className="text-[#997819]">for Credibility.</span>
               </h2>
               <p className="text-zinc-600 text-lg mb-6 leading-relaxed">
@@ -126,7 +126,7 @@ const SecurityStartupPage = () => {
                 systems, many new security businesses struggle to gain
                 credibility or win contracts.
               </p>
-              <p className="text-[#12066a] font-bold text-lg mb-8 italic">
+              <p className="text-[#12066a] font-bold text-lg mb-8 ">
                 At{" "}
                 <Link href="/" className="text-[#997819]">
                   BizGrow Holdings
@@ -158,7 +158,7 @@ const SecurityStartupPage = () => {
       <section className="py-24 bg-zinc-50 border-y border-zinc-100">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
-            <h2 className="text-[#12066a] text-4xl md:text-5xl font-black uppercase tracking-tighter">
+            <h2 className="text-[#12066a] text-4xl md:text-6xl font-black  tracking-tighter">
               Advantages Our{" "}
               <span className="text-[#997819]">Clients Gain</span>
             </h2>
@@ -235,7 +235,7 @@ const SecurityStartupPage = () => {
       {/* 🔹 4. IDEAL FOR (Who Should Start) */}
       <section className="py-24 bg-white">
         <div className="max-w-5xl mx-auto px-6 text-center">
-          <h2 className="text-[#12066a] text-4xl md:text-5xl font-black uppercase tracking-tighter mb-8">
+          <h2 className="text-[#12066a] text-4xl md:text-6xl font-black  tracking-tighter mb-8">
             Who Should Start a <br />
             <span className="text-[#997819]">Private Security Startup?</span>
           </h2>
@@ -278,8 +278,8 @@ const SecurityStartupPage = () => {
       <section className="py-24 bg-[#12066a] text-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-20">
-            <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter leading-none">
-              Our Step-By-Step <br />{" "}
+            <h2 className="text-4xl md:text-6xl font-black  tracking-tighter leading-none">
+              Our Step-By-Step{" "}
               <span className="text-[#997819]">Consultancy Process.</span>
             </h2>
           </div>
@@ -372,7 +372,7 @@ const SecurityStartupPage = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="bg-white rounded-[4rem] p-10 md:p-20 text-[#12066a] flex flex-col lg:flex-row gap-16 border border-[#12066a] items-center">
             <div className="lg:w-1/2">
-              <h2 className="text-4xl md:text-5xl font-black uppercase tracking-tighter mb-8">
+              <h2 className="text-4xl md:text-5xl font-black  tracking-tighter mb-8">
                 Why Startups Choose{" "}
                 <span className="text-[#997819]">BizGrow.</span>
               </h2>
@@ -385,7 +385,7 @@ const SecurityStartupPage = () => {
                 ].map((li, idx) => (
                   <li key={idx} className="flex gap-4 items-start">
                     <CheckCircle2 className="text-[#997819] w-6 h-6 shrink-0" />
-                    <span className="text-zinc-400 font-medium leading-relaxed">
+                    <span className="text-zinc-600 font-medium leading-relaxed">
                       {li}
                     </span>
                   </li>
