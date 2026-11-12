@@ -15,6 +15,7 @@ import ComplianceChat from "@/components/ComplianceChat";
 import AlertAnnouncementBar from "@/components/AlertPopup";
 import BizGrowAssistant from "@/components/BizGrowAssistant";
 import ScorecardSideCta from "@/components/ScorecardSideCta";
+import BS10119ReadinessPopup from "@/components/BS10119ReadinessPopup";
 
 const isProduction = process.env.NODE_ENV === "production";
 
@@ -140,7 +141,8 @@ export default function RootLayout({ children }) {
         <WhatsAppWidget />
         <ScorecardSideCta />
         <BizGrowAssistant />
-        <DiscountWelcomePopup />
+        <BS10119ReadinessPopup />
+        {/* <DiscountWelcomePopup /> */}
 
 
         

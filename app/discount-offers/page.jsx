@@ -16,35 +16,7 @@ export const metadata = {
 };
 
 const offersData = [
-  {
-    title: "BS 10119 & ISO Compliance Support",
-    shortDesc: "Get expert BS 10119 and ISO compliance support with 25% OFF.",
-    image: "/11 11 sale offer.webp",
-    discount: "25",
-    price: "799",
-    fullDetail:
-      "BS 10119 & ISO Compliance Support, now 25% OFF!\n\nMake your business compliant and credible before the offer closes. To claim your discount, send us a message saying BIZGROW1111\n\n Valid until 11 November\nDon’t wait. Message us today and claim your 25% OFF.",
-    sections: [
-      {
-        heading: "What’s Included",
-        items: [
-          "BS 10119 compliance support",
-          "ISO compliance assessment and guidance",
-          "Policies, procedures and implementation support",
-          "Documentation review and audit readiness support",
-        ],
-      },
-      {
-        heading: "Why It Matters",
-        items: [
-          "Build a credible and compliant business",
-          "Reduce compliance gaps and implementation risks",
-          "Prepare confidently for certification audits",
-          "Improve client, tender and regulatory confidence",
-        ],
-      },
-    ],
-  },
+ 
 ];
 
 const DiscountPage = () => {
