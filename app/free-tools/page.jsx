@@ -301,7 +301,7 @@ export default function FreeToolsPage() {
             href="/contact-us"
             className="inline-flex min-h-13 w-full items-center justify-center gap-3 rounded-xl bg-[#997819] px-7 py-3.5 text-xs font-bold uppercase tracking-[0.1em] text-white shadow-lg transition hover:bg-[#b18d25] sm:w-auto"
           >
-            Review Report With an Expert <ArrowRight size={17} />
+            Talk to an Expert <ArrowRight size={17} />
           </Link>
           <a
             href="tel:+447898205035"
