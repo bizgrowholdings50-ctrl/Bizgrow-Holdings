@@ -586,9 +586,9 @@ const BS10119Page = () => {
                 >
                   Take Free Assessment
                 </a>
-                <Link href="/contact-us/">
+                <Link href="/how-security-firms-can-check-bs-10119-eligibility-for-free/">
                   <button className="px-12 py-6 bg-transparent border border-white/20 text-white font-black uppercase tracking-widest text-[10px] rounded-2xl hover:bg-white/10 transition-all active:scale-95">
-                    Get Started Today
+                    Learn More
                   </button>
                 </Link>
               </div>
