@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, ArrowUpRight, Check, PhoneCall } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Check } from "lucide-react";
 import FadeIn from "@/components/MotionWrapper";
 import FreeToolsFaq from "@/components/FreeToolsFaq";
 import ToolInfoModal from "@/components/ScannerInfoModal";
@@ -131,7 +131,7 @@ export default function FreeToolsPage() {
             {/* Sub-headline */}
             <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-slate-200/90 sm:text-xl sm:leading-8">
               Benchmark your website&apos;s regulatory posture and evaluate your
-              BS 10119 operational readiness in minutes—100% free, instant
+              BS 10119 operational readiness in minutes 100% free, instant
               insights, zero friction.
             </p>
           </FadeIn>
@@ -281,35 +281,28 @@ export default function FreeToolsPage() {
     <div className="relative mx-auto max-w-4xl">
       <FadeIn direction="up" duration={0.7}>
         <p className="text-xs font-bold uppercase tracking-[0.24em] text-[#e2c05b] sm:text-sm">
-          Close Your Compliance Gaps
+          BIZGROW ADVISORY SERVICES
         </p>
       </FadeIn>
       <FadeIn direction="up" delay={0.12} duration={0.7}>
         <h2 className="mt-4 text-3xl font-bold  leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
-          Need Help Fixing What Your{" "}
-          <span className="text-[#d5ad2f]">Scan Revealed?</span>
+          Turn Regulatory Complexities Into{" "}
+          <span className="text-[#d5ad2f]">Business Strength</span>
         </h2>
       </FadeIn>
       <FadeIn direction="up" delay={0.24} duration={0.7}>
         <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-white/80 sm:text-base">
-          Our UK compliance specialists can review your diagnostic report, resolve hidden digital or BS 10119 risks, and build a bulletproof regulatory framework for your business.
+          Partner with BizGrow Holdings to implement robust digital and operational standards tailored to UK regulations.
         </p>
       </FadeIn>
       <FadeIn direction="up" delay={0.36} duration={0.7}>
-        <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
+        <div className="mt-8 flex items-center justify-center">
           <Link
             href="/contact-us"
             className="inline-flex min-h-13 w-full items-center justify-center gap-3 rounded-xl bg-[#997819] px-7 py-3.5 text-xs font-bold uppercase tracking-[0.1em] text-white shadow-lg transition hover:bg-[#b18d25] sm:w-auto"
           >
             Talk to an Expert <ArrowRight size={17} />
           </Link>
-          <a
-            href="tel:+447898205035"
-            className="inline-flex min-h-13 w-full items-center justify-center gap-3 rounded-xl border border-white/25 bg-black/20 px-6 py-3.5 text-xs font-bold tracking-[0.08em] text-white backdrop-blur-sm transition hover:border-[#d5ad2f] hover:bg-black/35 sm:w-auto"
-          >
-            <PhoneCall size={15} className="text-[#d5ad2f]" />
-            +44 7898 205035
-          </a>
         </div>
       </FadeIn>
     </div>
