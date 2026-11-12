@@ -1151,6 +1151,11 @@ export default function Navbar() {
                 </AnimatePresence>
               </div>
 
+              <PremiumNavLink
+                item={{ label: "Free Tools", href: "/free-tools", icon: ShieldCheck }}
+                isActive={pathname?.startsWith("/free-tools")}
+              />
+
               {/* REMAINING NAV */}
 
               <PremiumNavLink
@@ -1675,6 +1680,12 @@ export default function Navbar() {
                     )}
                   </AnimatePresence>
                 </div>
+
+                <MobileLink
+                  item={{ label: "Free Tools", href: "/free-tools", icon: ShieldCheck }}
+                  isActive={currentPath === "/free-tools"}
+                  onClick={closeMobile}
+                />
 
                 {/* REMAINING NAV */}
 

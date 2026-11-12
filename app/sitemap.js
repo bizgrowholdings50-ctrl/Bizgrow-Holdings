@@ -33,6 +33,8 @@ export default async function sitemap() {
     { url: `${baseUrl}/blogs`, lastModified: new Date(), changeFrequency: 'weekly', priority: 0.8 },
     { url: `${baseUrl}/contact-us`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${baseUrl}/faqs`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.5 },
+    { url: `${baseUrl}/free-tools`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${baseUrl}/free-tools/compliance-scanner`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.8 },
 
     // Compliance & ISO Services
     { url: `${baseUrl}/our-services/sia-acs`, lastModified: new Date(), changeFrequency: 'monthly', priority: 0.9 },
