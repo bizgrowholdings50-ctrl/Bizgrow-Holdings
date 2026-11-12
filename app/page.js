@@ -357,17 +357,13 @@ export default function HomePage() {
                 {/* ACCESSIBILITY FIX: Added aria-label for clear context */}
                 <Link
                   href="/compliance-scanner/"
-                  aria-label="Take the free Assessment by contacting BizGrow Holdings"
-                  className="relative group/btn overflow-hidden inline-flex items-center justify-center gap-3 bg-white text-[#12066a] px-8 py-5 rounded-2xl font-black uppercase tracking-widest text-xs transition-all duration-500 shadow-lg active:scale-95"
+                  aria-label="Take the free compliance assessment"
+                  className="group/btn inline-flex items-center justify-center gap-3 rounded-2xl bg-white px-8 py-5 text-xs font-black uppercase tracking-widest text-[#12066a] shadow-lg transition-colors duration-300 ease-out hover:bg-[#997819] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4AF37] focus-visible:ring-offset-2 focus-visible:ring-offset-[#12066a] active:scale-[0.99]"
                 >
-                  {/* Yahan humne text color ko hover par dark blue rakha hai taake contrast hamesha high rahe */}
-                  <span className="relative z-40 flex items-center gap-3 transition-colors duration-500 group-hover/btn:text-white">
+                  <span className="flex items-center gap-3">
                     Take the free Assessment
-                    <ArrowRight className="group-hover/btn:translate-x-2 transition-transform duration-500" />
+                    <ArrowRight className="transition-transform duration-300 ease-out group-hover/btn:translate-x-1" />
                   </span>
-
-                  {/* Hover background color white hi rakha hai kyunke wo dark blue text ke sath perfect dikhta hai */}
-                  <div className="absolute inset-0 bg-[#997819] translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500 ease-out z-30" />
                 </Link>
 
                 {/* ACCESSIBILITY FIX: Added aria-label and descriptive text
