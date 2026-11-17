@@ -59,6 +59,7 @@ const NASDUPage = () => {
             src="/Who.jpg"
             alt="Nasdu certification - BizGrow Holdings Ltd"
             fill
+            sizes="100vw"
             className="object-cover opacity-50  transition-all duration-[2s]"
             priority
           />
@@ -464,6 +465,7 @@ const NASDUPage = () => {
             <Image
               src="/nasdu-discipline.jpg"
               fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
               className="object-cover"
               alt="NASDU Supports UK Security Standards"
             />

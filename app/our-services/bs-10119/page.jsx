@@ -101,6 +101,7 @@ const BS10119Page = () => {
             src="/bs10119-h.jpg"
             alt="BS 10119 Compliance"
             fill
+            sizes="100vw"
             className="object-cover"
             priority
           />
@@ -347,6 +348,7 @@ const BS10119Page = () => {
                     alt="BS10119 Scorecard Preview"
                     width={800}
                     height={500}
+                    sizes="(min-width: 1024px) 50vw, calc(100vw - 48px)"
                     className="w-full h-auto object-cover"
                   />
                 </div>

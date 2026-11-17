@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { Play, Mic, MicOff } from "lucide-react";
+import Image from "next/image";
 
 export default function BizGrowAssistant() {
   const [isOpen, setIsOpen] = useState(false);
@@ -859,9 +860,12 @@ const speakWithGeneratedVoice = async (text, requestId, messageIndex, signal) =>
 
             {/* Robot image */}
             <div className="relative w-12 h-12 rounded-full overflow-hidden border border-cyan-400/80 bg-slate-900 shadow-[0_0_18px_rgba(34,211,238,0.35)] transition-transform duration-500 ease-out group-hover:scale-105">
-              <img
+              <Image
                 src="/BizGrow-Ai - Copy.png"
                 alt="BizGrow AI Robot"
+                width={335}
+                height={286}
+                sizes="48px"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -1009,9 +1013,12 @@ const speakWithGeneratedVoice = async (text, requestId, messageIndex, signal) =>
         }
       `}
                 >
-                  <img
+                  <Image
                     src="/BizGrow-Ai - Copy.png"
                     alt="BizGrow AI Assistant"
+                    width={335}
+                    height={286}
+                    sizes="56px"
                     className="w-full h-full object-cover"
                   />
                 </div>

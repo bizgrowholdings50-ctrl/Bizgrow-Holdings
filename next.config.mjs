@@ -46,7 +46,11 @@ const securityHeaders = [
 ];
 const nextConfig = {
   trailingSlash: true,
+  experimental: {
+    inlineCss: true,
+  },
   images: {
+    formats: ["image/avif", "image/webp"],
     remotePatterns: [
       {
         protocol: "https",

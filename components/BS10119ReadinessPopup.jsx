@@ -114,7 +114,6 @@ export default function BS10119ReadinessPopup() {
                   fill
                   sizes="(max-width: 768px) 100vw, 320px"
                   className="object-cover"
-                  priority
                 />
               </div>
 

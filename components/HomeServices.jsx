@@ -2,6 +2,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 import {
   ShieldCheck,
   Award,
@@ -163,9 +164,11 @@ const ServicesGrid = () => {
                 className="group relative min-h-[390px] rounded-[2rem] overflow-hidden flex flex-col justify-end hover:-translate-y-1.5 hover:shadow-[0_25px_60px_-20px_rgba(18,6,106,0.4)] transition-all duration-500 cursor-pointer"
               >
                 {/* Background Image */}
-                <img
+                <Image
                   src={item.bgImage}
                   alt={item.title}
+                  fill
+                  sizes="(min-width: 1280px) 290px, (min-width: 1024px) calc(25vw - 30px), (min-width: 768px) calc(50vw - 36px), calc(100vw - 48px)"
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
 

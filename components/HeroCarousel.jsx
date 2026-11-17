@@ -87,7 +87,7 @@ export default function HeroCarousel() {
                 src={slide.image}
                 alt={slide.alt}
                 fill
-                priority={index <= 1}
+                priority={index === 0}
                 fetchPriority={index === 0 ? "high" : "low"}
                 quality={75}
                 sizes="100vw"

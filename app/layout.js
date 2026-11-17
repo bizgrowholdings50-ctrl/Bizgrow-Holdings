@@ -68,21 +68,20 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        {/* Pure HTML Script Method - Browser isay lazmi execute karega */}
-        <script
-          async
-          src="https://www.googletagmanager.com/gtag/js?id=G-FFG6DVXKQX"
-        ></script>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
+        <Script id="google-analytics" strategy="lazyOnload">
+          {`
               window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-FFG6DVXKQX');
-            `,
-          }}
-        />
+              window.gtag = window.gtag || function(){window.dataLayer.push(arguments);};
+              window.gtag('js', new Date());
+              window.gtag('config', 'G-FFG6DVXKQX');
+              (function() {
+                var script = document.createElement('script');
+                script.async = true;
+                script.src = 'https://www.googletagmanager.com/gtag/js?id=G-FFG6DVXKQX';
+                document.head.appendChild(script);
+              })();
+          `}
+        </Script>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased `}
@@ -91,7 +90,7 @@ export default function RootLayout({ children }) {
         {isProduction && <SpeedInsights />}
         {isProduction && <EndorsalScript />}
 
-        <Script id="meta-pixel" strategy="afterInteractive">
+        <Script id="meta-pixel" strategy="lazyOnload">
           {`
             !function(f,b,e,v,n,t,s)
             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -117,7 +116,7 @@ export default function RootLayout({ children }) {
 
         {/* 🚀 Microsoft Clarity Bulletproof Script - Sirf production par load hoga */}
         {isProduction && (
-          <Script id="microsoft-clarity" strategy="afterInteractive">
+          <Script id="microsoft-clarity" strategy="lazyOnload">
             {`
               (function(c,l,a,r,i,t,y){
                   c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
