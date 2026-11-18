@@ -139,7 +139,10 @@ const BS10800Page = () => {
               </h2>
 
               <p className="text-slate-600 text-base leading-relaxed">
-                BS 10800 helps security companies put clear systems in place for
+                <Link href="/what-is-bs-10800-in-the-uk-2026/" className="text-[#997819] font-bold underline">
+                  BS 10800
+                </Link>{" "}
+                helps security companies put clear systems in place for
                 managing disruption. It can help businesses maintain continuous
                 service, clear responsibilities, proper records, and effective
                 recovery, even when something goes wrong.

@@ -58,9 +58,9 @@ const ITServicesPage = () => {
                 </span>
               </div>
 
-              <h1 className="text-5xl md:text-8xl font-black text-white leading-[0.85] tracking-tighter uppercase">
-                IT Services <br />
-                <span className="text-[#997819]">& Solutions.</span>
+              <h1 className="text-5xl md:text-7xl font-black text-white leading-[0.85] tracking-tighter ">
+                IT Services 
+                <span className="text-[#997819] ml-2">& Solutions.</span>
               </h1>
 
               <p className="mt-10 text-blue-100/70 text-xl max-w-3xl font-medium leading-relaxed italic">
@@ -80,7 +80,7 @@ const ITServicesPage = () => {
               <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs mb-3 block">
                 Core Pillars
               </span>
-              <h2 className="text-4xl font-black text-[#12066a] uppercase">
+              <h2 className="text-5xl font-black text-[#12066a] ">
                 Why Choose BizGrow?
               </h2>
             </FadeIn>
@@ -159,7 +159,7 @@ const ITServicesPage = () => {
                 <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs mb-6 block">
                   Equipment Supply & Procurement
                 </span>
-                <h2 className="text-5xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-none uppercase">
+                <h2 className="text-5xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-none ">
                   Trusted Business <br />
                   <span className="text-[#997819]">Hardware Partner</span>
                 </h2>
@@ -203,7 +203,7 @@ const ITServicesPage = () => {
               <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs mb-3 block">
                 IT Equipment We Supply
               </span>
-              <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter uppercase">
+              <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter">
                 Hardware &{" "}
                 <span className="text-[#997819]">Tech Directory</span>
               </h2>
@@ -222,7 +222,7 @@ const ITServicesPage = () => {
                 <div className="text-[#997819] mb-4">
                   <Laptop size={28} />
                 </div>
-                <h3 className="font-black text-[#12066a] text-lg uppercase mb-4 border-b pb-2 border-zinc-100">
+                <h3 className="font-black text-[#12066a] text-lg  mb-4 border-b pb-2 border-zinc-100">
                   Business Devices & Hardware
                 </h3>
                 <ul className="space-y-2 text-zinc-500 text-sm font-medium">
@@ -247,7 +247,7 @@ const ITServicesPage = () => {
                 <div className="text-[#997819] mb-4">
                   <ShieldCheck size={28} />
                 </div>
-                <h3 className="font-black text-[#12066a] text-lg uppercase mb-4 border-b pb-2 border-zinc-100">
+                <h3 className="font-black text-[#12066a] text-lg  mb-4 border-b pb-2 border-zinc-100">
                   Security & Access Solutions
                 </h3>
                 <ul className="space-y-2 text-zinc-500 text-sm font-medium">
@@ -268,7 +268,7 @@ const ITServicesPage = () => {
                 <div className="text-[#997819] mb-4">
                   <Wrench size={28} />
                 </div>
-                <h3 className="font-black text-[#12066a] text-lg uppercase mb-4 border-b pb-2 border-zinc-100">
+                <h3 className="font-black text-[#12066a] text-lg  mb-4 border-b pb-2 border-zinc-100">
                   Office & Operational Technology
                 </h3>
                 <ul className="space-y-2 text-zinc-500 text-sm font-medium">
@@ -291,7 +291,7 @@ const ITServicesPage = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col items-center text-center mb-16">
             <FadeIn direction="up">
-              <h2 className="text-5xl md:text-7xl font-black text-[#12066a] tracking-tighter leading-none uppercase">
+              <h2 className="text-5xl  font-black text-[#12066a] tracking-tighter leading-none ">
                 Fully Managed <span className="text-[#997819]">IT Support</span>
               </h2>
               <p className="text-zinc-500 max-w-4xl mx-auto font-medium mt-6 text-sm md:text-[15px]">
@@ -324,7 +324,7 @@ const ITServicesPage = () => {
                 <FadeIn direction="up" delay={(i % 3) * 0.05}>
                   <div className="p-6 border border-zinc-100 rounded-[2rem] hover:bg-zinc-50 transition-colors flex items-center gap-6 group h-full">
                     <CheckCircle2 className="text-zinc-200 group-hover:text-[#997819] transition-colors shrink-0" />
-                    <span className="font-bold text-[#12066a] uppercase text-xs tracking-tight">
+                    <span className="font-bold text-[#12066a]  text-sm tracking-tight">
                       {text}
                     </span>
                   </div>
@@ -344,7 +344,7 @@ const ITServicesPage = () => {
                 <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs mb-6 block">
                   Cloud Ecosystems
                 </span>
-                <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-none uppercase">
+                <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-none ">
                   Microsoft 365 <br />
                   <span className="text-[#997819]">& Cloud Solutions</span>
                 </h2>
@@ -417,7 +417,7 @@ const ITServicesPage = () => {
             <React.Fragment key={i}>
               <FadeIn direction="up" delay={i * 0.1}>
                 <div className="text-center">
-                  <span className="text-4xl font-black text-white block mb-2 tracking-tighter uppercase">
+                  <span className="text-4xl font-black text-white block mb-2 tracking-tighter ">
                     {stat.n}
                   </span>
                   <span className="text-[#997819] font-black uppercase text-[10px] tracking-widest">
@@ -439,7 +439,7 @@ const ITServicesPage = () => {
                 <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs mb-6 block">
                   Cyber Essentials Support & Compliance
                 </span>
-                <h2 className="text-4xl md:text-5xl font-black text-[#12066a] tracking-tighter leading-none mb-6 uppercase">
+                <h2 className="text-4xl md:text-5xl font-black text-[#12066a] tracking-tighter leading-none mb-6 ">
                   Strengthening UK <br />
                   <span className="text-[#997819]">Cyber Resilience</span>
                 </h2>
@@ -512,7 +512,7 @@ const ITServicesPage = () => {
           {/* Endpoint protection side */}
           <FadeIn direction="right">
             <div className="bg-white p-8 rounded-[2.5rem] border border-zinc-200/60 shadow-sm h-full">
-              <h3 className="font-black text-xl uppercase mb-3 text-[#997819]">
+              <h3 className="font-black text-xl  mb-3 text-[#997819]">
                 Managed Endpoint & Device Security
               </h3>
               <p className="text-zinc-500 text-sm mb-6 font-medium leading-relaxed">
@@ -545,7 +545,7 @@ const ITServicesPage = () => {
           {/* Backup / Business continuity side */}
           <FadeIn direction="left">
             <div className="bg-white p-8 rounded-[2.5rem] border border-zinc-200/60 shadow-sm h-full">
-              <h3 className="font-black text-xl uppercase mb-3 text-[#997819]">
+              <h3 className="font-black text-xl  mb-3 text-[#997819]">
                 M365 Backup & Continuity
               </h3>
               <p className="text-zinc-500 text-sm mb-6 font-medium leading-relaxed">
@@ -587,11 +587,11 @@ const ITServicesPage = () => {
                 <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs mb-4 block">
                   Sector Alignment
                 </span>
-                <h2 className="text-4xl font-black text-[#12066a] tracking-tighter uppercase leading-tight">
-                  Public Sector <br />
-                  <span className="text-[#997819]">IT Services</span>
+                <h2 className="text-4xl font-black text-[#12066a] tracking-tighter  leading-tight">
+                  Public Sector 
+                  <span className="text-[#997819] ml-2">IT Services</span>
                 </h2>
-                <p className="text-zinc-500 font-medium text-sm mt-4 leading-relaxed">
+                <p className="text-zinc-500 font-medium text-md mt-4 leading-relaxed">
                   BizGrow works with councils, public sector organisations,
                   SMEs, academic institutions, educational providers, and
                   community organisations requiring secure, responsive, and
@@ -605,7 +605,7 @@ const ITServicesPage = () => {
 
             <div className="lg:col-span-2 bg-zinc-50 p-8 rounded-[2.5rem] border border-zinc-100">
               <FadeIn direction="left">
-                <h3 className="font-black text-xs uppercase tracking-widest text-[#12066a] mb-6">
+                <h3 className="font-black text-lg  tracking-widest text-[#12066a] mb-6">
                   Public Sector Support Capabilities:
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm font-bold text-[#12066a]">
@@ -626,7 +626,7 @@ const ITServicesPage = () => {
                       className="flex items-center gap-3 bg-white p-3 rounded-xl border border-zinc-200/50"
                     >
                       <CheckCircle2 size={16} className="text-[#997819]" />
-                      <span className="uppercase text-xs">{cap}</span>
+                      <span className=" text-xs">{cap}</span>
                     </div>
                   ))}
                 </div>
@@ -641,7 +641,7 @@ const ITServicesPage = () => {
 
           <div className="border-t border-zinc-100 pt-16">
             <FadeIn direction="up">
-              <h3 className="text-center text-3xl font-black text-[#12066a] uppercase mb-12">
+              <h3 className="text-center text-4xl font-black text-[#12066a]  mb-12">
                 Industries We Support
               </h3>
             </FadeIn>
@@ -694,7 +694,7 @@ const ITServicesPage = () => {
                       <div className="text-[#997819] group-hover:text-white mb-6 transition-colors duration-500">
                         {item.icon}
                       </div>
-                      <h3 className="text-base font-black text-[#12066a] group-hover:text-white uppercase mb-3 transition-colors duration-500">
+                      <h3 className="text-base font-black text-[#12066a] group-hover:text-white  mb-3 transition-colors duration-500">
                         {item.title}
                       </h3>
                       <p className="text-zinc-500 group-hover:text-zinc-200 text-xs font-medium leading-relaxed transition-colors duration-500">
@@ -714,7 +714,7 @@ const ITServicesPage = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="max-w-3xl mx-auto text-center mb-10">
             <FadeIn direction="up">
-              <h3 className="text-3xl font-black text-[#12066a] uppercase">
+              <h3 className="text-3xl font-black text-[#12066a] ">
                 Example Managed IT Service Provision
               </h3>
               <p className="text-xs text-zinc-500 mt-2">
@@ -769,7 +769,7 @@ const ITServicesPage = () => {
                   Ethical Commitments
                 </span>
                 {/* Heading choti ki hai mobile ke liye */}
-                <h2 className="text-3xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-[1.1] mb-6 md:mb-10 uppercase">
+                <h2 className="text-5xl  font-black text-[#12066a] tracking-tighter leading-[1.1] mb-6 md:mb-10 ">
                   Affordable, Professional <br />
                   <span className="text-[#997819]">& Ethical IT Solutions</span>
                 </h2>
@@ -804,7 +804,7 @@ const ITServicesPage = () => {
                 <span className="text-[#997819] font-black uppercase tracking-[0.2em] text-[10px] block mb-4">
                   Partner With Us Today
                 </span>
-                <h3 className="text-2xl md:text-4xl font-black uppercase tracking-tight mb-4 leading-tight">
+                <h3 className="text-2xl md:text-4xl font-black  tracking-tight mb-4 leading-tight">
                   Ready to Secure Your Infrastructure?
                 </h3>
                 <p className="text-blue-100/70 text-sm font-medium mb-8 leading-relaxed break-words">

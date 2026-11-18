@@ -68,7 +68,7 @@ const siaAcsData = [
     q: "What documents are required for an SIA ACS assessment?",
     a: "You need evidence from the SIA's ACS self-assessment workbook. This usually includes director and staff SIA licence records, screening files (often BS 7858), training records, contracts, insurance, financial records and company policies. Your assessing body will confirm the exact list.",
   },
-    {
+  {
     q: "Is the ACS fee refundable if my application gets rejected?",
     a: "No. The ACS application fee is generally non-refundable if your application is rejected, so you should make sure your business meets the SIA’s eligibility requirements before applying.",
   },
@@ -134,8 +134,14 @@ const SIAACSPage = () => {
 
             <FadeIn direction="right" duration="0.8">
               <p className="mt-8 text-blue-100/80 text-lg  max-w-2xl leading-relaxed font-medium">
-                A recognised quality standard for UK private security companies,
-                run by the Security Industry Authority. It shows your business
+                A recognised quality standard for{" "}
+                <Link
+                  href="/uks-private-security-directory/"
+                  className="text-[#D4AF37] font-bold underline"
+                >
+                  UK private security companies
+                </Link>{" "}
+                , run by the Security Industry Authority. It shows your business
                 meets recognised standards in staff checks, training, and daily
                 operations, backed by real proof, not just paperwork.
               </p>
@@ -274,7 +280,7 @@ const SIAACSPage = () => {
             {[
               {
                 t: "More Trust",
-                d: "Proof that your staff, systems, and training meet a real national standard",
+                d: <>Proof that your staff, systems, and <Link href="/training-moments/" className="text-[#D4AF37] font-bold underline">training</Link> meet a real national standard</>,
               },
               {
                 t: "Bigger Contracts",
@@ -340,7 +346,7 @@ const SIAACSPage = () => {
                 tag: "PRIMARY TARGET",
                 icon: Building2,
                 title: "Security Companies",
-                desc: "Security companies going for Approved Contractor status to establish market leadership and compliance trust.",
+                desc: <><Link href="/what-is-the-sia-acs-score/" className="text-[#997819] font-bold underline">Security companies</Link> going for Approved Contractor status to establish market leadership and compliance trust.</>,
               },
               {
                 tag: "TENDER & BIDDING",

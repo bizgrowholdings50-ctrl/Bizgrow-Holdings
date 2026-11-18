@@ -12,7 +12,7 @@ export const metadata = {
   title: "Discount Offers - BizGrow Holdings Ltd, UK",
   description:
     "Unlock exclusive business discount offers with BizGrow Holdings. Save on certifications, compliance, and growth services for UK companies.",
-  openGraph: createOpenGraph("/discount-offers/", "/11 11 sale offer.webp"),
+  openGraph: createOpenGraph("/discount-offers/", "/discount_offer1.jpg"),
 };
 
 const offersData = [
@@ -30,17 +30,17 @@ const DiscountPage = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center flex flex-col items-center justify-center">
           <FadeIn direction="up">
             <h1 className="text-4xl sm:text-7xl font-black text-white tracking-tighter leading-[1.1] sm:leading-none mb-8 max-w-5xl">
-              <span className="block text-[#997819]">
-                BS 10119 &amp; ISO Compliance Support
+              <span className="text-[#997819]">
+                Exclusive Discount
               </span>
-              <span className="block mt-2 text-white">Now 25% OFF!</span>
+              <span className="mt-2 ml-2 text-white">Offers</span>
             </h1>
           </FadeIn>
 
           <FadeIn direction="up" delay={0.15}>
             <div className="inline-flex items-center justify-center px-5 sm:px-8 py-2.5 sm:py-3 bg-white/5 border border-white/10 rounded-full backdrop-blur-md max-w-[90vw] sm:max-w-full">
               <p className="text-white/80 font-bold tracking-[0.1em] sm:tracking-widest uppercase text-[10px] sm:text-xs whitespace-nowrap sm:whitespace-normal overflow-hidden text-ellipsis">
-                Make Your Business Compliant and Credible
+                Save on Expert Compliance &amp; Business Services
               </p>
             </div>
           </FadeIn>

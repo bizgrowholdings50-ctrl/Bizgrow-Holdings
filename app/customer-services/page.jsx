@@ -41,7 +41,7 @@ const CustomerServicePage = () => {
 
         <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
           <FadeIn direction="up">
-            <span className="inline-block text-[#997819] font-black uppercase tracking-[0.5em] text-[10px] bg-white/5 px-6 py-2 rounded-full border border-white/10 mb-8">
+            <span className="inline-block text-white font-black uppercase tracking-[0.5em] text-[10px] bg-white/5 px-6 py-2 rounded-full border border-white/10 mb-8">
               Stay Compliant
             </span>
             <h1 className="text-5xl md:text-7xl font-black text-white tracking-tighter leading-[0.85] mb-8">
@@ -68,7 +68,7 @@ const CustomerServicePage = () => {
             </p>
             <Link
               href="/contact-us"
-              className="relative group/btn overflow-hidden inline-flex items-center justify-center bg-[#997819] text-white px-10 py-5 rounded-2xl font-black uppercase tracking-widest text-xs transition-all duration-500 shadow-2xl active:scale-95"
+              className="relative group/btn overflow-hidden inline-flex w-full max-w-[320px] sm:w-auto items-center justify-center bg-[#997819] text-white px-5 sm:px-10 py-5 rounded-2xl font-black uppercase tracking-[0.12em] sm:tracking-widest text-[10px] sm:text-xs text-center whitespace-nowrap transition-all duration-500 shadow-2xl active:scale-95 cursor-pointer"
             >
               {/* Layer 1: The Text (Top Layer) */}
               <span className="relative z-40 transition-colors duration-500 group-hover/btn:text-[#12066a]">
@@ -403,8 +403,8 @@ const CustomerServicePage = () => {
       </section>
 
       {/* 🔹 5. FINAL CTA (Cyber Parallax) */}
-      <section className="pb-32 px-6">
-        <div className="max-w-7xl mx-auto relative group overflow-hidden rounded-[5rem] p-16 md:p-32 bg-[#12066a] text-center flex flex-col items-center shadow-3xl shadow-[#12066a]/50">
+      <section className="pb-20 sm:pb-32 px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto relative group overflow-hidden rounded-[2.5rem] sm:rounded-[5rem] p-8 sm:p-16 md:p-32 bg-[#12066a] text-center flex flex-col items-center shadow-3xl shadow-[#12066a]/50">
           <div
             className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat bg-fixed opacity-30  transition-transform duration-1000"
             style={{
@@ -413,14 +413,14 @@ const CustomerServicePage = () => {
             }}
           />
           <div className="relative z-10">
-            <h2 className="text-5xl md:text-6xl font-black text-white mb-10 tracking-tighter  leading-[0.9]">
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-8 sm:mb-10 tracking-tighter leading-[0.95]">
               Get expert UK <br />
               <span className="text-[#997819]">compliance support</span> 
               <span className="text-white ml-3">today</span>
             </h2>
             <Link
               href="/contact-us"
-              className="relative group/btn overflow-hidden inline-flex items-center justify-center gap-4 bg-[#997819] text-white px-16 py-7 rounded-2xl font-black uppercase tracking-[0.3em] text-xs transition-all duration-500 shadow-2xl active:scale-95 mx-auto"
+              className="relative group/btn overflow-hidden inline-flex w-full max-w-[320px] sm:w-auto items-center justify-center gap-3 sm:gap-4 bg-[#997819] text-white px-5 sm:px-12 md:px-16 py-5 sm:py-7 rounded-2xl font-black uppercase tracking-[0.15em] sm:tracking-[0.3em] text-[10px] sm:text-xs text-center whitespace-nowrap transition-all duration-500 shadow-2xl active:scale-95 mx-auto cursor-pointer"
             >
               {/* Layer 1: Text & Icon (Top Layer) */}
               <span className="relative z-40 flex items-center gap-4 transition-colors duration-500 group-hover/btn:text-[#12066a]">

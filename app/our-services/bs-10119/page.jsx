@@ -128,7 +128,7 @@ const BS10119Page = () => {
 
             <FadeIn direction="right" duration="0.8">
               <p className="mt-8 text-blue-100/80 text-lg md:text-lg max-w-2xl leading-relaxed font-medium">
-                A new British Standard for UK security companies that supply
+                A new British Standard for <Link href="/bizgrow-holdings-helps-security-companies/" className="text-[#997819] font-bold underline">UK security companies</Link> that supply
                 labour. It helps ensure every worker is properly recruited,
                 screened, and deployed with real evidence behind it, not just
                 paperwork.
@@ -477,7 +477,7 @@ const BS10119Page = () => {
 
             <FadeIn direction="up" delay={0.2}>
               <p className="text-slate-600 text-base md:text-lg leading-relaxed font-normal">
-                BS 10119 doesn’t automatically replace COP 119. If you already
+                BS 10119 doesn’t automatically replace <Link href="/our-services/cop-119-labour-provision/" className="text-[#997819] font-bold underline">COP 119</Link>. If you already
                 hold a COP 119 certificate, it doesn’t just switch over to BS
                 10119 on its own. You’ll need to contact your certification body
                 directly and ask exactly how your transition will work, and what

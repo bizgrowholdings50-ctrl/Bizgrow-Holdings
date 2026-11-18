@@ -293,7 +293,10 @@ const ISO45001Page = () => {
                 <p className="text-zinc-600 font-medium text-lg leading-relaxed mb-10">
                   For UK businesses especially in high-risk sectors like
                   cleaning, security, and facilities management, having a
-                  certified framework is essential. ISO 45001 ensures your
+                  certified framework is essential. <Link href="/iso-45001-certification/" className="text-[#997819] font-bold underline">
+                    ISO 45001
+                  </Link>{" "}
+                  ensures your
                   operations meet strict UK health and safety standards while
                   safeguarding staff across multiple sites.
                 </p>

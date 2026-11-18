@@ -49,7 +49,7 @@ const TrainingCoachingPage = () => {
               <div className="space-y-6 mt-10">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-[2px] bg-[#997819]"></div>
-                  <span className="text-[#997819]  font-black  uppercase tracking-[0.3em] text-[10px] md:text-xs">
+                  <span className="text-white  font-black  uppercase tracking-[0.3em] text-[10px] md:text-xs">
                     WHO WE ARE
                   </span>
                 </div>

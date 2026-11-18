@@ -53,8 +53,8 @@ const MarketingSolutionsPage = () => {
               </span>
             </div>
             <h1 className="text-5xl md:text-7xl font-black text-white leading-[0.95] tracking-tighter ">
-              UK’S PRIVATE <br />
-              <span className="text-[#997819]">SECURITY DIRECTORY.</span>
+              UK’S Private <br />
+              <span className="text-[#997819]">Security Directory.</span>
             </h1>
             <p className="mt-10 text-blue-100/60 text-xl md:text-xl max-w-2xl font-medium leading-relaxed">
               Find trusted and compliant{" "}
@@ -390,7 +390,7 @@ const MarketingSolutionsPage = () => {
               ].map((benefit, i) => (
                 <FadeIn key={i} direction="left" delay={i * 0.1}>
                   <div className="bg-white p-8 rounded-3xl border border-zinc-200 flex items-start gap-6 hover:shadow-xl hover:shadow-zinc-200/50 transition-all group">
-                    <div className="w-12 h-12 bg-[#12066a] text-[#997819] rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
+                    <div className="w-12 h-12 bg-[#12066a] text-white rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
                       {benefit.icon}
                     </div>
                     <div>
@@ -474,11 +474,11 @@ const MarketingSolutionsPage = () => {
 
             <div className="relative z-30 w-full max-w-4xl flex flex-col items-center">
               <FadeIn direction="up">
-                <span className="inline-block text-[#997819] font-black uppercase tracking-[0.5em] text-[10px] bg-white/5 px-6 py-2 rounded-full border border-white/10 mb-10 backdrop-blur-sm">
+                <span className="inline-block text-white font-black uppercase tracking-[0.5em] text-[10px] bg-white/5 px-6 py-2 rounded-full border border-white/10 mb-10 backdrop-blur-sm">
                   Ready to Scale?
                 </span>
 
-                <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter leading-[0.9] mb-8 uppercase">
+                <h2 className="text-5xl md:text-7xl font-black text-white tracking-tighter leading-[0.9] mb-8">
                   Get Listed 
                   <span className="text-transparent bg-clip-text bg-gradient-to-r ml-2 from-[#997819] to-[#d4af37] inline-block mt-2">
                     Today

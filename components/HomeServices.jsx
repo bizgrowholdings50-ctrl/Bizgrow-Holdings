@@ -148,7 +148,7 @@ const ServicesGrid = () => {
           </h2>
 
           <p className="text-slate-600 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
-            We help businesses turn compliance from a burden into an advantage —
+            We help businesses turn compliance from a burden into an advantage 
             with services built for real audits and certifications, not just
             paperwork.
           </p>

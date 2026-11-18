@@ -130,8 +130,11 @@ export default function FreeToolsPage() {
           <FadeIn direction="up" delay={0.24} duration={0.7}>
             {/* Sub-headline */}
             <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-slate-200/90 sm:text-xl sm:leading-8">
-              Benchmark your website&apos;s regulatory posture and evaluate your
-              BS 10119 operational readiness in minutes 100% free, instant
+              Benchmark your website&apos;s regulatory posture and evaluate your {" "}
+              <Link  href="/our-services/bs-10119/" className="text-[#D4AF37] font-bold underline">
+                BS 10119
+              </Link> {" "}
+              operational readiness in minutes 100% free, instant
               insights, zero friction.
             </p>
           </FadeIn>

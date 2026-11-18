@@ -30,19 +30,19 @@ const steps = [
   {
     num: "02",
     title: "QMS Setup & Documentation",
-    desc: "We set up your documentation and QMS portal, walk you through a clear step-by-step process, and train you on assessment documents.",
+    desc: <>We set up your documentation and <Link href="/qms-software/" className="text-[#D4AF37] font-bold underline">QMS portal</Link>, walk you through a clear step-by-step process, and train you on assessment documents.</>,
     icon: ShieldCheck,
   },
   {
     num: "03",
     title: "Audit & Certification",
-    desc: "We run your internal audit first to catch anything early, then stand by you through the external audit with fast-track guidance.",
+    desc: <>We run your <Link href="/internal-audit/" className="text-[#D4AF37] font-bold underline">internal audit</Link> first to catch anything early, then stand by you through the external audit with fast-track guidance.</>,
     icon: CheckCircle2,
   },
   {
     num: "04",
     title: "Ongoing Support & Growth",
-    desc: "Get a dedicated project manager and 12 months of reliable customer support and advice to help you keep improving.",
+    desc: <>Get a dedicated project manager and 12 months of reliable <Link href="/customer-services/" className="text-[#D4AF37] font-bold underline">customer support</Link> and advice to help you keep improving.</>,
     icon: Trophy,
   },
 ];
@@ -50,7 +50,7 @@ const steps = [
 const homeFaqs = [
   {
     q: "How is Bizgrow different from a regular compliance consultant?",
-    a: "We plan across certifications from the start, so paperwork built for one standard carries into the next — instead of starting from scratch every time.",
+    a: "We plan across certifications from the start, so paperwork built for one standard carries into the next instead of starting from scratch every time.",
   },
   {
     q: "Which certifications do you help with?",
@@ -59,7 +59,7 @@ const homeFaqs = [
 
   {
     q: "Do you help with staff vetting too?",
-    a: "Yes — full BS 7858 vetting support, from documentation to ongoing file maintenance.",
+    a: "Yes full BS 7858 vetting support, from documentation to ongoing file maintenance.",
   },
   {
     q: "Do you only help with first-time certification, or renewals too?",
@@ -305,7 +305,7 @@ export default function HomePage() {
 
         <HomeTestimonial />
 
-        {/* 7. CLIENTS SECTION — Premium Marquee */}
+        {/* 7. CLIENTS SECTION Premium Marquee */}
         <OurClients />
 
         <ServicesFaq faqs={homeFaqs} title="Frequently Asked Questions" />
@@ -344,7 +344,8 @@ export default function HomePage() {
                 {/* SEO FIX: Use <h2> if <h1> is already used in Hero, or keep <h2> for hierarchy */}
                 <h2 className="text-[32px] md:text-6xl text-center font-black text-white leading-tight">
                   How Ready Is Your Organisation? Check Your{" "}
-                  <span className="text-[#D4AF37]">Compliance Health</span> in Minutes
+                  <span className="text-[#D4AF37]">Compliance Health</span> in
+                  Minutes
                 </h2>
                 <p className="text-blue-100/80 text-center mt-6 text-sm md:text-lg font-medium">
                   Find out in minutes how prepared your organisation is for

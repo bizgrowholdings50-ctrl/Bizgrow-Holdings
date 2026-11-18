@@ -10,8 +10,14 @@ const slides = [
     alt: "Business meeting in a modern office",
     eyebrow: "Compliance Doesn’t Have to Be Complicated",
     heading: "Leading Security Compliance Experts In the UK",
-    subheading:
-      "We support private security, construction, and cleaning companies in getting SIA ACS, ISO, and other industry certifications. Our practical systems help you pass audits with confidence and stay compliant for years to come.",
+    subheading: (
+      <>
+        We support private security, construction, and <Link href="/why-iso-certification-matters/" className="text-[#D4AF37] font-bold underline">cleaning companies</Link> in
+        getting SIA ACS , ISO , and other industry certifications. Our practical
+        systems help you pass audits with confidence and stay compliant for
+        years to come.
+      </>
+    ),
     buttonText: "Explore Security Compliance",
     buttonLink: "/contact-us/",
   },
@@ -20,18 +26,23 @@ const slides = [
     alt: "Team collaboration around a whiteboard",
     eyebrow: "SIA ACS • ISO • INDUSTRY ACCREDITATIONS",
     heading: "Every Standard You Need, Handled Properly",
-    subheading:
-      "SIA ACS preparation, ISO 9001, ISO 14001, ISO 45001, BS 10119, BS 7858, and SafeContractor all managed by one expert team, in a way that suits your business.",
+    subheading: (
+      <>
+        SIA ACS preparation, ISO 9001 , ISO 14001 , ISO 45001 , BS 10119 , BS
+        7858 , and SafeContractor all managed by one expert team, in a way that
+        suits your business.
+      </>
+    ),
     buttonText: "Explore Our Certification",
     buttonLink: "/our-services/",
   },
   {
-    image: "/leadings.jpg", 
-    alt: "Laptop showing business analytics", 
+    image: "/leadings.jpg",
+    alt: "Laptop showing business analytics",
     eyebrow: "AUDIT READINESS • COMPLIANCE • BUSINESS GROWTH",
     heading: "13+ Years of Certification Success",
     subheading:
-      "Helping security companies build audit-ready systems, strengthen compliance and meet the standards required to compete for bigger contracts.",
+      <>Helping <Link href="/bizgrow-holdings-helps-security-companies/" className="text-[#D4AF37] font-bold underline">security companies</Link> build audit-ready systems, strengthen compliance and meet the standards required to compete for bigger contracts.</>,
     buttonText: "Explore Training & Insights",
     buttonLink: "/training-moments/",
   },

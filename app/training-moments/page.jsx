@@ -3,6 +3,7 @@ import { ArrowRight, Award, GraduationCap, MapPin } from "lucide-react";
 import Image from "next/image";
 import FadeIn from "@/components/MotionWrapper";
 import { createOpenGraph } from "@/lib/openGraphMetadata";
+import Link from "next/link";
 const galleryItems = [
   {
     id: 1,
@@ -116,7 +117,9 @@ const TrainingMoments = () => {
                 13 years of dedicated experience
               </span>{" "}
               in compliance and consultancy,{" "}
-              <span className="text-[#997819] font-black">Dr. Javed Iqbal</span>{" "}
+              <Link href="https://www.facebook.com/DrJIqbal80" target="_blank" className="text-[#997819] underline font-black">
+                Dr. Javed Iqbal
+              </Link>{" "}
               has earned a reputation as a trusted advisor for businesses aiming
               to meet and exceed industry standards. He partners with both
               security companies and construction businesses to simplify complex

@@ -77,13 +77,13 @@ const CyberEssentialsPlusPage = () => {
 
             <FadeIn direction="right" duration="0.6">
               <h1 className="text-4xl md:text-7xl font-black text-white mt-6 leading-[1.1] tracking-tighter">
-                CYBER ESSENTIALS <br />
-                <span className="text-[#997819]">PLUS</span> CERTIFIED SUPPORT.
+                Cyber Essentials <br />
+                <span className="text-[#997819]">Plus</span> Certified Support.
               </h1>
             </FadeIn>
 
             <FadeIn direction="right" duration="0.8">
-              <p className="mt-10 text-blue-100/70 text-xl md:text-2xl max-w-2xl leading-relaxed font-medium italic">
+              <p className="mt-10 text-blue-100/80 text-xl md:text-xl max-w-2xl leading-relaxed font-medium italic">
                 "We help UK businesses prepare for Cyber Essentials Plus from
                 gap analysis and remediation to{" "}
                 <Link
@@ -112,9 +112,9 @@ const CyberEssentialsPlusPage = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col lg:flex-row gap-16 items-start">
             <div className="lg:w-1/3 sticky top-32">
-              <h2 className="text-5xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-none uppercase">
-                WHY Cyber Essentials <br />
-                <span className="text-[#997819]">PLUS?</span>
+              <h2 className="text-5xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-none ">
+                Why Cyber Essentials
+                <span className="text-[#997819] ml-1">Plus?</span>
               </h2>
               <p className="mt-8 text-zinc-500 font-medium text-lg leading-relaxed">
                 Unlike standard Cyber Essentials, which is based on
@@ -166,7 +166,7 @@ const CyberEssentialsPlusPage = () => {
                   } transition-all hover:scale-[1.02] duration-500`}
                 >
                   <div className="mb-6 text-[#997819]">{item.icon}</div>
-                  <h3 className="text-2xl font-black mb-4 tracking-tight uppercase italic">
+                  <h3 className="text-2xl font-black mb-4 tracking-tight">
                     {item.t}
                   </h3>
                   <p
@@ -194,7 +194,7 @@ const CyberEssentialsPlusPage = () => {
               <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs mb-4 block">
                 The Certification Pathway
               </span>
-              <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-none uppercase ">
+              <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-none  ">
                 How to Become <br />
                 <span className="text-[#997819] not-italic">
                   Cyber Essentials Plus Certified.
@@ -250,7 +250,7 @@ const CyberEssentialsPlusPage = () => {
                       {item.step.split(" ")[1]}
                     </div>
 
-                    <h3 className="text-lg font-black text-[#12066a] uppercase tracking-tight mb-4 leading-tight min-h-[50px]">
+                    <h3 className="text-lg font-black text-[#12066a]  tracking-tight leading-tight min-h-[50px]">
                       {item.title}
                     </h3>
 
@@ -274,7 +274,7 @@ const CyberEssentialsPlusPage = () => {
       <section className="py-22 bg-zinc-50">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-16">
-            <h2 className="text-4xl md:text-5xl  font-black text-[#12066a] tracking-normal uppercase">
+            <h2 className="text-4xl md:text-5xl  font-black text-[#12066a] tracking-normal ">
               Benefits of <span className="text-[#997819]">Cyber</span>
               <span className="text-[#997819]"> Essentials Plus</span>{" "}
               Certification
@@ -303,7 +303,7 @@ const CyberEssentialsPlusPage = () => {
                     className="text-[#997819] group-hover:text-white"
                   />
                 </div>
-                <span className="font-black text-[#12066a] uppercase text-sm tracking-tight">
+                <span className="font-black text-[#12066a]  text-sm tracking-tight">
                   {item}
                 </span>
               </div>
@@ -315,7 +315,7 @@ const CyberEssentialsPlusPage = () => {
       {/* 🔹 4. THE ROADMAP (Horizontal Journey) */}
       <section className="py-22 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-4xl md:text-5xl pb-10 text-center font-black text-[#12066a] tracking-normal uppercase">
+          <h2 className="text-4xl md:text-5xl pb-10 text-center font-black text-[#12066a] tracking-normal ">
             Why Choose <span className="text-[#997819]">BizGrow Holdings?</span>
           </h2>
           <p className="text-center md:mx-48 pb-10">
@@ -365,7 +365,7 @@ const CyberEssentialsPlusPage = () => {
                 <span className="text-5xl font-black text-white/10 group-hover:text-white/30 transition-colors">
                   {step.n}
                 </span>
-                <h3 className="text-xl font-black text-[#997819] group-hover:text-white mt-8 mb-4 uppercase tracking-tighter">
+                <h3 className="text-xl font-black text-white mt-8 mb-4  tracking-tighter">
                   {step.t}
                 </h3>
                 <p className="text-blue-100/60 group-hover:text-white/80 text-sm font-medium leading-relaxed">
@@ -383,9 +383,9 @@ const CyberEssentialsPlusPage = () => {
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="grid md:grid-cols-2 gap-20 items-center">
             <div>
-              <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter mb-8 leading-[0.9] uppercase">
-                Strengthen Your <br className="hidden lg:block" />{" "}
-                <span className="text-[#997819]">Cyber Security.</span>
+              <h2 className="text-4xl md:text-5xl font-black text-white tracking-tighter mb-8 leading-[0.9] ">
+                Strengthen Your 
+                <span className="text-[#997819] ml-2">Cyber Security.</span>
               </h2>
               <p className="text-blue-100/60 font-medium text-lg italic mb-10 border-l-4 border-[#997819] pl-6">
                 "Cyber Essentials sets the standard. Cyber Essentials Plus
@@ -439,11 +439,11 @@ const CyberEssentialsPlusPage = () => {
             {/* Background Pattern Fix Applied */}
             <div className="absolute inset-0 bg-[url('/cyber-plus-cta.jpg')] bg-no-repeat bg-cover bg-fixed bg-center opacity-50 pointer-events-none" />
 
-            <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter leading-none mb-3 uppercase relative z-10">
-              UPGRADE TO <br />{" "}
+            <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter leading-none mb-3  relative z-10">
+              Upgrade To <br />{" "}
               <span className="text-[#997819]">Cyber Essentials Plus.</span>
             </h2>
-            <p className="text-white mb-3">
+            <p className="text-white mb-3 max-w-2xl">
               Strengthen your organisation’s security posture, build client
               trust, and demonstrate verified cyber resilience.
             </p>

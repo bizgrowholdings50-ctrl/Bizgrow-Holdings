@@ -49,11 +49,11 @@ const ComplianceConsultancyPage = () => {
             <span className="text-[#997819] mt-10 font-bold uppercase tracking-[0.4em] text-sm mb-6 block">
               Strategic Industry Alignment
             </span>
-            <h1 className="text-white text-5xl md:text-7xl font-black uppercase tracking-tighter leading-[0.9] mb-8">
-              Compliance <br />{" "}
+            <h1 className="text-white text-5xl md:text-7xl font-black  tracking-tighter leading-[0.9] mb-8">
+              Compliance {" "}
               <span className="text-[#997819]">Consultancies.</span>
             </h1>
-            <p className="text-blue-100/70 text-lg md:text-xl max-w-2xl font-medium leading-relaxed">
+            <p className="text-blue-100/70 text-lg  max-w-2xl font-medium leading-relaxed">
               Navigating UK security industry regulations with expert precision.
               We help organisations achieve compliance, implement structured
               systems, strengthen operational control, and secure more

@@ -115,7 +115,10 @@ const BS7499Page = () => {
             </FadeIn>
             <FadeIn direction="right" delay={0.2}>
               <p className="text-zinc-500 font-medium text-lg leading-relaxed">
-                BS 7499 helps security companies put clear systems in place for
+                <Link href="/what-is-bs-7499-a-complete-guide/" className="text-[#997819] font-bold underline">
+                  BS 7499
+                </Link>{" "}
+                helps security companies put clear systems in place for
                 managing static guarding services. It can help businesses
                 maintain consistent procedures, clear responsibilities, proper
                 records and effective supervision.
@@ -337,7 +340,7 @@ const BS7499Page = () => {
                 </h2>
                 <p className="text-zinc-600 font-medium text-lg leading-relaxed mb-8">
                   Achieving BS 7499 certification strengthens the credibility
-                  and operational standards of your security company. We provide
+                  and operational standards of your <Link href="/bizgrow-holdings-helps-security-companies/" className="text-[#997819] font-bold underline">security company</Link>. We provide
                   expert guidance to help organisations implement the necessary
                   processes for compliant static guarding operations.
                 </p>

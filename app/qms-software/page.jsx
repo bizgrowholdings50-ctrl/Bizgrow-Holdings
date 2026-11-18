@@ -32,11 +32,11 @@ const QMSPage = () => {
             <span className="text-[#997819] font-black uppercase tracking-[0.5em] text-xs md:text-sm mb-6 inline-block bg-white/5 px-6 py-2.5 rounded-full backdrop-blur-md border border-white/10">
               UK-Based
             </span>
-            <h1 className="text-4xl md:text-6xl font-black text-white tracking-tighter leading-[0.95]  mb-8 uppercase">
+            <h1 className="text-4xl md:text-6xl font-black text-white tracking-tighter leading-[0.95]  mb-8">
               QMS Software Solutions <br />
               <span className="text-[#997819]">by BizGrow Holdings</span>
             </h1>
-            <p className="text-blue-100/70 text-lg md:text-xl max-w-2xl font-medium leading-relaxed mb-10">
+            <p className="text-blue-100/70 text-lg max-w-2xl font-medium leading-relaxed mb-10">
               Empowering UK businesses with a smart, centralised QMS solution to
               streamline{" "}
               <Link

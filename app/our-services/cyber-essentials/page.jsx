@@ -76,8 +76,8 @@ const CyberEssentialsPage = () => {
 
             <FadeIn direction="right" duration="0.6">
               <h1 className="text-5xl md:text-7xl font-black text-white mt-6 leading-[1.1] tracking-tighter">
-                CYBER <br />
-                <span className="text-[#997819]"> ESSENTIALS</span>
+                Cyber 
+                <span className="text-[#997819]"> Essentials</span>
               </h1>
             </FadeIn>
 
@@ -106,9 +106,9 @@ const CyberEssentialsPage = () => {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row gap-16 items-start">
             <div className="md:w-1/3 sticky top-32">
-              <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-normal leading-nomral uppercase">
-                TECHNICAL <br />
-                <span className="text-[#997819]">CONTROLS </span>
+              <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-normal leading-nomral ">
+                Technical {""}
+                <span className="text-[#997819]">Controls</span>
               </h2>
               <p className="mt-8 text-zinc-500 font-medium text-lg leading-relaxed">
                 To achieve{" "}
@@ -155,7 +155,7 @@ const CyberEssentialsPage = () => {
                   } transition-transform hover:-translate-y-2 duration-500`}
                 >
                   <div className="mb-6 text-[#997819]">{item.icon}</div>
-                  <h3 className="text-2xl font-black mb-4 tracking-tight italic uppercase">
+                  <h3 className="text-2xl font-black mb-4 tracking-tight  ">
                     {item.t}
                   </h3>
                   <p
@@ -181,8 +181,8 @@ const CyberEssentialsPage = () => {
               <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs mb-4 block">
                 UK Security Businesses
               </span>
-              <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-[0.9] mb-8 uppercase">
-                Benefits of <br />{" "}
+              <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter leading-[0.9] mb-8 ">
+                Benefits of {" "}
                 <span className="text-[#997819]">Cyber Essentials </span>
               </h2>
               <div className="space-y-8 italic">
@@ -203,7 +203,7 @@ const CyberEssentialsPage = () => {
             <FadeIn direction="right">
               <div className="p-2 bg-zinc-100 rounded-[3.5rem]">
                 <div className="bg-[#12066a] rounded-[3rem] p-12 text-center relative overflow-hidden">
-                  <h3 className="text-white font-black text-2xl mb-10 tracking-tight italic uppercase">
+                  <h3 className="text-white font-black text-2xl mb-10 tracking-tight">
                     The Advantage
                   </h3>
                   <div className="space-y-6">
@@ -233,7 +233,7 @@ const CyberEssentialsPage = () => {
       <section className="py-14 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-20">
-            <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter uppercase">
+            <h2 className="text-4xl md:text-6xl font-black text-[#12066a] tracking-tighter ">
               Cyber Essentials{" "}
               <span className="text-[#997819]">Certification Process.</span>
             </h2>
@@ -273,7 +273,7 @@ const CyberEssentialsPage = () => {
                 <span className="text-5xl font-black text-[#997819]/20 group-hover:text-[#997819] transition-colors">
                   {step.n}
                 </span>
-                <h3 className="text-xl font-black text-[#12066a] group-hover:text-white mt-6 mb-3 uppercase tracking-tighter">
+                <h3 className="text-xl font-black text-[#12066a] group-hover:text-white mt-6 mb-3  tracking-tighter">
                   {step.t}
                 </h3>
                 <p className="text-zinc-500 group-hover:text-blue-100/60 text-sm font-medium">
@@ -291,8 +291,8 @@ const CyberEssentialsPage = () => {
           <div className="flex flex-col lg:flex-row gap-16 items-center">
             <div className="lg:w-1/2">
               <FadeIn direction="right">
-                <h3 className="text-5xl font-black text-[#12066a] tracking-tight mb-6 uppercase">
-                  Technical <br />{" "}
+                <h3 className="text-5xl font-black text-[#12066a] tracking-tight mb-6 ">
+                  Technical {" "}
                   <span className="text-[#997819]">Readiness</span>
                 </h3>
                 <p className="pb-5">
@@ -348,7 +348,7 @@ const CyberEssentialsPage = () => {
       {/* 🔹 6. CYBER METRICS (Parallax Background) */}
       <section className="py-24 bg-[#12066a] relative overflow-hidden">
         <div
-          className="absolute inset-0 z-0 opacity-50"
+          className="absolute inset-0 z-0 opacity-35"
           style={{
             backgroundImage: 'url("/cyber-bg.jpg")',
             backgroundSize: "cover",
@@ -373,11 +373,11 @@ const CyberEssentialsPage = () => {
               </div>
             </div>
             <div>
-              <h3 className="text-4xl md:text-6xl font-black text-white tracking-tighter mb-8 leading-[0.9] uppercase">
-                STRENGTHEN YOUR <br />{" "}
-                <span className="text-[#997819]">CYBER SECURITY</span>
+              <h3 className="text-4xl md:text-6xl font-black text-white tracking-tighter mb-8 leading-[0.9] ">
+                Strengthen Your <br />{" "}
+                <span className="text-[#997819]">Cyber Security</span>
               </h3>
-              <p className="text-blue-100/60 font-medium text-lg italic">
+              <p className="text-blue-100/80 font-medium text-lg italic">
                 We don’t just support your Cyber Essentials certification; we
                 help protect your business from real-world cyber threats with
                 practical, long-term security solutions.
@@ -399,7 +399,7 @@ const CyberEssentialsPage = () => {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="p-12 md:p-24 rounded-[4rem] bg-[#12066a] relative overflow-hidden group shadow-2xl text-center flex flex-col items-center">
-            <h2 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-none mb-10 uppercase relative z-10">
+            <h2 className="text-4xl md:text-7xl font-black text-white tracking-tighter leading-none mb-10  relative z-10">
               Get Cyber Essentials with <br />{" "}
               <span className="text-[#997819]">BizGrow Holdings</span>
             </h2>

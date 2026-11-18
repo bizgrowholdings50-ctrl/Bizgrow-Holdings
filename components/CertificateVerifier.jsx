@@ -361,11 +361,11 @@ export default function CertificateVerifier() {
         </div>
         <div className="max-w-7xl mx-auto px-6 relative z-20 w-full text-center">
           <FadeIn direction="up">
-            <span className="text-[#997819] font-black uppercase tracking-[0.4em] text-xs">
+            <span className="text-white font-black uppercase tracking-[0.4em] text-xs">
               Official Portal
             </span>
-            <h1 className="text-4xl md:text-7xl font-black text-white mt-6 uppercase">
-              Certificate <br />{" "}
+            <h1 className="text-4xl md:text-7xl font-black text-white mt-6 ">
+              Certificate {" "}
               <span className="text-[#997819]">Verification</span>
             </h1>
           </FadeIn>
@@ -491,7 +491,7 @@ export default function CertificateVerifier() {
       <section className="py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <div>
-            <h2 className="text-4xl font-black text-[#12066a] uppercase leading-none">
+            <h2 className="text-4xl font-black text-[#12066a]  leading-none">
               Why verify <span className="text-[#997819]">Compliance?</span>
             </h2>
             <p className="mt-6 text-zinc-500 font-medium leading-relaxed">
@@ -553,7 +553,7 @@ export default function CertificateVerifier() {
       <section className="pb-24 px-6">
         <div className="max-w-7xl mx-auto bg-[#12066a] p-12 md:rounded-full rounded-[3rem] flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="text-center md:text-left">
-            <h2 className="text-white text-2xl font-black uppercase">
+            <h2 className="text-white text-2xl font-black ">
               Need Support?
             </h2>
             <p className="text-white/50 text-xs tracking-widest uppercase">
