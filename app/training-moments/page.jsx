@@ -71,7 +71,7 @@ const TrainingMoments = () => {
             <source src="/video/workshop-optimized.mp4" type="video/mp4" />
           </video>
           {/* Rich Overlay for better contrast */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#12066a]/60 via-[#12066a]/20 to-[#12066a]" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#12066a]/80 via-[#12066a]/40 to-[#12066a]" />
         </div>
 
         <div className="relative z-10 max-w-5xl mx-auto px-6 text-center text-white">
@@ -83,9 +83,9 @@ const TrainingMoments = () => {
               </span>
             </div>
 
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black uppercase tracking-tighter leading-[0.9] mb-6">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-[0.9] mb-6">
               Workshop Training{" "}
-              <span className="text-[#997819] italic block md:inline">
+              <span className="text-[#997819]  block md:inline">
                 Moments
               </span>
             </h1>
@@ -106,7 +106,7 @@ const TrainingMoments = () => {
               </h2>
             </div>
 
-            <p className="text-zinc-500 text-lg md:text-xl font-medium leading-relaxed italic">
+            <p className="text-zinc-500 text-lg md:text-xl font-medium leading-relaxed ">
               "Compliance is not just a certificate; it's the operational DNA of
               a secure organisation."
             </p>
@@ -148,7 +148,7 @@ const TrainingMoments = () => {
             {/* 📸 Background Image Layer */}
             <div className="absolute inset-0 z-0">
               <Image
-                src="/sir.jpg"
+                src="/sir-javed-iqbal.jpg"
                 alt="Dr. Javed Iqbal"
                 fill // 👈 Iske liye parent (div) 'relative' hona chahiye
                 className="object-cover object-top opacity-50 group-hover:grayscale-0 group-hover:opacity-60 transition-all duration-1000 group-hover:scale-105"
@@ -181,11 +181,12 @@ const TrainingMoments = () => {
               <span className="text-[#997819] font-black text-[10px] tracking-[0.4em] uppercase">
                 Visual Archives
               </span>
+               <div className="w-10 h-[2px] bg-[#997819]" />
             </div>
 
-            <h2 className="text-4xl text-center md:text-6xl font-black text-[#12066a] uppercase tracking-tighter leading-none mb-8">
+            <h2 className="text-4xl text-center md:text-6xl font-black text-[#12066a]  tracking-tighter leading-none mb-8">
               Inside Our{" "}
-              <span className="text-[#997819] italic">Sessions.</span>
+              <span className="text-[#997819] ">Sessions.</span>
             </h2>
           </FadeIn>
         </div>
